@@ -1,5 +1,4 @@
-Ratatouille (Jan 18, 2006 prototype)
-[![Build Status]][actions] ![Progress] ![DOL Progress] ![RELs Progress] [![Discord Badge]][discord]
+Ratatouille (Jan 18, 2006 prototype) <!--[![Build Status]][actions] ![Progress] ![DOL Progress] ![RELs Progress]--> [![Discord Badge]][discord]
 =============
 
 <!--
@@ -28,8 +27,8 @@ URL encoded then appended to: https://img.shields.io/endpoint?label=RELs&url=
 <!--
 Replace with your Discord server's ID and invite URL.
 -->
-[Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
-[discord]: https://discord.gg/hKx3FJJgrV
+[Discord Badge]: https://img.shields.io/discord/829152115322257436?color=%237289DA&logo=discord&logoColor=%23FFFFFF
+[discord]: https://discord.gg/dVbGFdYU6A
 
 A work-in-progress decompilation of [Ratatouille (Jan 18, 2006 prototype)](https://hiddenpalace.org/Disney-Pixar_Ratatouille_(Jan_18,_2006_prototype)).
 
@@ -106,7 +105,7 @@ Building
   python configure.py -v VERSION
   ```
   Replace "VERSION" with DEBUG, RELEASE, MASTERDEBUG, or MASTER.
-  
+
 - Build:
 
   ```sh
