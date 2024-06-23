@@ -928,6 +928,26 @@ def generate_build_ninja(
             inputs="dol_apply",
         )
         n.newline()
+    
+    if config.version == "DEBUG":
+        dol_elf_name = "ratsgc_d"
+    elif config.version == "RELEASE":
+        dol_elf_name = "ratsgc_r"
+    elif config.version == "MASTERDEBUG":
+        dol_elf_name = "ratsgc_md"
+    elif config.version == "MASTER":
+        dol_elf_name = "ratsgc_m"
+    
+    orig_elf_path = Path(f"orig/RELSAB/files/{dol_elf_name}.elf")
+    orig_dol_path = Path(f"orig/RELSAB/{dol_elf_name}.dol")
+    n.comment("Build original DOL")
+    n.build(
+        inputs=orig_elf_path,
+        outputs=orig_dol_path,
+        rule="elf2dol",
+        implicit=dtk,
+    )
+    n.newline()
 
     ###
     # Split DOL
@@ -944,7 +964,7 @@ def generate_build_ninja(
         inputs=config.config_path,
         outputs=build_config_path,
         rule="split",
-        implicit=dtk,
+        implicit=[dtk, orig_dol_path],
         variables={"out_dir": build_path},
     )
     n.newline()

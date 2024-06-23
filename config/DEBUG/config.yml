@@ -1,0 +1,8 @@
+# See config.example.yml for documentation.
+object: orig/RELSAB/ratsgc_d.dol
+hash: 7f88dc05c525fa9f7a0b5b5dc1233a27239dea99
+symbols: config/DEBUG/symbols.txt
+splits: config/DEBUG/splits.txt
+symbols_known: true
+fill_gaps: false
+ldscript_template: config/DEBUG/ldscript.tpl

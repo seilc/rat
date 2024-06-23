@@ -1,0 +1,8 @@
+# See config.example.yml for documentation.
+object: orig/RELSAB/ratsgc_md.dol
+hash: 9d3c43ec8f350c47fddcf7ffe4377ec6ea2fb332
+symbols: config/MASTERDEBUG/symbols.txt
+splits: config/MASTERDEBUG/splits.txt
+symbols_known: true
+fill_gaps: false
+ldscript_template: config/MASTERDEBUG/ldscript.tpl
