@@ -541,7 +541,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xHudImage.cpp"),
             Object(NonMatching, "rt/Engine/Game/zReactiveAnimation.cpp"),
             Object(NonMatching, "rt/Engine/Game/zDust.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xProjectedTexture.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xProjectedTexture.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSpotlight.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPickup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCGroup.cpp"),
