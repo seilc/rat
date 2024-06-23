@@ -327,7 +327,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xCM.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCollide.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCollideFast.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xColor.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xColor.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCounter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCutscene.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xDebug.cpp"),
