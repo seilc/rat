@@ -1,7 +1,7 @@
 #ifndef XVEC3_H
 #define XVEC3_H
 
-#include "types.h"
+#include "xMath.h"
 
 #include <rwcore.h>
 
@@ -15,6 +15,8 @@ union xVec3
         F32 z;
     };
     F32 a[3];
+
+    void Sub(const xVec3& a, const xVec3& b);
 };
 
 #endif

@@ -637,7 +637,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNavigationMesh.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemPop.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xOneLiner.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xSpringy.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xSpringy.cpp"),
             Object(NonMatching, "rt/Engine/Game/zConversation.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemBurrowKickup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomVolume.cpp"),
