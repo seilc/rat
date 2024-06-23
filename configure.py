@@ -221,6 +221,9 @@ cflags_rat_base = [
     '-pragma "cpp_extensions on"',
     "-sym on",
     "-inline off",
+    "-i src/rt/Engine/Core/gc",
+    "-i src/rt/Engine/Core/x",
+    "-i src/rt/Engine/Game",
 ]
 cflags_rat_d = [
     *cflags_rat_base,
@@ -372,7 +375,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xParGroup.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xParMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xParSys.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xPartition.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xPartition.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xpkrsvc.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xPtankPool.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xQuickCull.cpp"),
