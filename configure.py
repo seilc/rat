@@ -224,6 +224,7 @@ cflags_rat_base = [
     "-i src/rt/Engine/Core/gc",
     "-i src/rt/Engine/Core/x",
     "-i src/rt/Engine/Game",
+    "-i include/rwsdk",
 ]
 cflags_rat_d = [
     *cflags_rat_base,
@@ -316,7 +317,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xCam.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCamFollow.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCamSupport.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xClimate.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xClimate.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xClumpColl.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCM.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCollide.cpp"),
