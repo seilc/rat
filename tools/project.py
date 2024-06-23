@@ -939,7 +939,7 @@ def generate_build_ninja(
         dol_elf_name = "ratsgc_m"
     
     orig_elf_path = Path(f"orig/RELSAB/files/{dol_elf_name}.elf")
-    orig_dol_path = Path(f"orig/RELSAB/{dol_elf_name}.dol")
+    orig_dol_path = Path(f"{build_path}/orig/{dol_elf_name}.dol")
     n.comment("Build original DOL")
     n.build(
         inputs=orig_elf_path,

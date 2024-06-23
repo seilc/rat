@@ -1,5 +1,4 @@
-# See config.example.yml for documentation.
-object: orig/RELSAB/ratsgc_m.dol
+object: build/MASTER/orig/ratsgc_m.dol
 hash: 674613ef86a955fa6a661d027e80adaf192b24f2
 symbols: config/MASTER/symbols.txt
 splits: config/MASTER/splits.txt
