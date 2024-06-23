@@ -5,3 +5,9 @@ splits: config/RELEASE/splits.txt
 symbols_known: true
 fill_gaps: false
 ldscript_template: config/RELEASE/ldscript.tpl
+
+block_relocations:
+- target: 0x80808040
+- target: 0x80808080
+- target: 0x80808081
+- target: 0x808080FF
