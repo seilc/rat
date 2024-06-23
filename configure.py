@@ -357,7 +357,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xLight.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xLightKit.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMath.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xMath2.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xMath2.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMath3.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMemMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xModel.cpp"),
