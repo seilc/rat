@@ -418,7 +418,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xUpdateCull.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xutil.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xVec3.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xVolume.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xVolume.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iAnimSKB.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iAsync.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iCutscene.cpp"),

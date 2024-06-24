@@ -14,6 +14,25 @@ struct xBox
     xVec3 lower;
 };
 
+struct xBBox
+{
+    xVec3 center;
+    xBox box;
+};
+
+struct xSphere
+{
+    xVec3 center;
+    F32 r;
+};
+
+struct xCylinder
+{
+    xVec3 center;
+    F32 r;
+    F32 h;
+};
+
 struct xMat3x3
 {
     xVec3 right;

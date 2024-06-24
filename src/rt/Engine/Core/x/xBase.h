@@ -18,4 +18,11 @@ struct xBase
     xBaseEventCallback eventFunc;
 };
 
+struct xSerial;
+
+void xBaseInit(xBase* xb, const xBaseAsset* asset);
+void xBaseSave(xBase* ent, xSerial* s);
+void xBaseLoad(xBase* ent, xSerial* s);
+void xBaseReset(xBase* xb, xBaseAsset* asset);
+
 #endif
