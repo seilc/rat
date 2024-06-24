@@ -104,7 +104,7 @@ Building
   ```sh
   python configure.py -v VERSION
   ```
-  Replace "VERSION" with DEBUG, RELEASE, MASTERDEBUG, or MASTER.
+  Replace `VERSION` with `DEBUG`, `RELEASE`, `MASTERDEBUG`, or `MASTER`.
 
 - Build:
 
