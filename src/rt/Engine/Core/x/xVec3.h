@@ -20,4 +20,8 @@ struct xVec3
     void Sub(const xVec3& a, const xVec3& b);
 };
 
+F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
+
+#include "xVec3Inlines.h"
+
 #endif

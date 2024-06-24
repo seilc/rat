@@ -1,6 +1,7 @@
 #ifndef XMATH3_H
 #define XMATH3_H
 
+#include "iMath3.h"
 #include "xVec3.h"
 
 struct xVec4
@@ -31,6 +32,28 @@ struct xCylinder
     xVec3 center;
     F32 r;
     F32 h;
+};
+
+#define XRAY3_USE_MAX (1<<11)
+
+struct xRay3
+{
+    xVec3 origin;
+    xVec3 dir;
+    F32 min_t;
+    F32 max_t;
+    S32 flags;
+};
+
+struct xIsect
+{
+    U32 flags;
+    F32 penned;
+    F32 contained;
+    F32 lapped;
+    xVec3 point;
+    xVec3 norm;
+    F32 dist;
 };
 
 struct xMat3x3
