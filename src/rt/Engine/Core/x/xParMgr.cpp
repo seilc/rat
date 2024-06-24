@@ -3,6 +3,7 @@
 #include "xPar.h"
 #include "iParMgr.h"
 #include "xDebug.h"
+#include "xOutputMgr.h"
 
 #include "decomp.h"
 

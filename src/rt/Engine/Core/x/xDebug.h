@@ -2,7 +2,6 @@
 #define XDEBUG_H
 
 #include "iDebug.h"
-#include "xOutputMgr.h"
 
 enum en_VERBOSE_MSGLEVEL
 {

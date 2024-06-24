@@ -2,6 +2,7 @@
 
 #include "xMemMgr.h"
 #include "xDebug.h"
+#include "xOutputMgr.h"
 
 #include "decomp.h"
 
