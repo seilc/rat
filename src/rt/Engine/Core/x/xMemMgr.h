@@ -106,6 +106,36 @@ enum xMemStaticType
     eMemStaticType_0, // unknown
 };
 
+extern U32 gActiveHeap;
+
+#if defined(DEBUG) || defined(RELEASE)
+#define xMEMGROWALLOC(size, tag) xMemGrowAlloc(gActiveHeap, (size), (tag))
+#else
+#define xMEMGROWALLOC(size, tag) xMemGrowAlloc(gActiveHeap, (size))
+#endif
+
+#if defined(DEBUG)
+#define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag), (assetID), __FILE__, __FUNCTION__, (line))
+#elif defined(RELEASE)
+#define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag))
+#else
+#define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align))
+#endif
+
+#if defined(DEBUG) || defined(RELEASE)
+void* xMemGrowAlloc(U32 heapID, U32 size, U32 tag);
+#else
+void* xMemGrowAlloc(U32 heapID, U32 size);
+#endif
+
+#if defined(DEBUG)
+void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag, U32 assetID, const char* file, const char* func, S32 line);
+#elif defined(RELEASE)
+void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag);
+#else
+void* xMemAlloc(U32 heapID, U32 size, S32 align);
+#endif
+
 void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID = 0);
 
 #endif

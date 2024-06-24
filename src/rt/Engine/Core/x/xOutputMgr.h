@@ -30,6 +30,9 @@ if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= x
 S32 xOutGetSev();
 S32 xOutEnabled(char* name);
 S32 xOutTrumps(char* name, xOutSeverity usersev);
+void xOutInfo(char* name, const char* fmt, ...);
+#else
+#define xOutInfo(name, fmt, ...)
 #endif
 
 #endif
