@@ -29,8 +29,10 @@ void xParMgrKillAllParticles()
 {
 }
 
+#ifdef DEBUGRELEASE
 DECOMP_FORCEACTIVE(xParMgr_cpp, "numFrames >= 0");
 DECOMP_FORCEACTIVE(xParMgr_cpp, "%s");
+#endif
 
 void xParMgrUpdate(F32 elapsedTime)
 {

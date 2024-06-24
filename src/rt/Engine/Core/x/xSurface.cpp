@@ -24,7 +24,10 @@ void xSurfaceInit(U16 num_surfs)
     }
 }
 
+#ifdef DEBUGRELEASE
 DECOMP_FORCEACTIVE(xSurface_cpp, "dflt");
+#endif
+
 DECOMP_FORCEASSIGNOP(xSurface_cpp, xBase);
 
 void xSurfaceExit()
