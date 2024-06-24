@@ -14,6 +14,7 @@
 #define DECOMP_FORCEACTIVE(module, ...)
 #define DECOMP_FORCELITERAL(module, x)
 #define DECOMP_FORCEDTOR(module, cls)
+#define DECOMP_FORCEASSIGNOP(module, cls)
 #define DECOMP_INLINE
 #define DECOMP_DONT_INLINE
 // Compile with matching hacks.
@@ -39,6 +40,13 @@
     void CONCAT(FORCEDTOR##module##cls, __LINE__)(void) { \
         cls dummy; \
         dummy.~cls(); \
+    }
+
+// Force reference assignment operator
+#define DECOMP_FORCEASSIGNOP(module, cls) \
+    void CONCAT(FORCEASSIGNOP##module##cls, __LINE__)(void) { \
+        cls dummy; \
+        dummy = dummy; \
     }
 #define DECOMP_INLINE inline
 #define DECOMP_DONT_INLINE __attribute__((never_inline))
