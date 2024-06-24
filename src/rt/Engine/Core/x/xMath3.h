@@ -3,6 +3,12 @@
 
 #include "xVec3.h"
 
+struct xBox
+{
+    xVec3 upper;
+    xVec3 lower;
+};
+
 struct xMat3x3
 {
     xVec3 right;

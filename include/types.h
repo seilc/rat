@@ -1,6 +1,10 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#if defined(DEBUG) || defined(RELEASE)
+#define DEBUGRELEASE
+#endif
+
 typedef signed char S8;
 typedef signed short S16;
 typedef signed int S32;
