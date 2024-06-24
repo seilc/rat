@@ -34,4 +34,6 @@ typedef double F64;
 #define ALIGN(a)
 #endif
 
+#define FORCEENUMSIZEINT ((S32)((~((U32)0))>>1))
+
 #endif

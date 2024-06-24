@@ -230,6 +230,7 @@ cflags_rat_base = [
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Math/Include",
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+    "-i include/dolphin",
 ]
 cflags_rat_d = [
     *cflags_rat_base,
@@ -379,7 +380,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xParEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xParEmitterType.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xParGroup.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xParMgr.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xParMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xParSys.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPartition.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xpkrsvc.cpp"),

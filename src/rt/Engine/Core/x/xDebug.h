@@ -2,6 +2,7 @@
 #define XDEBUG_H
 
 #include "iDebug.h"
+#include "xOutputMgr.h"
 
 #ifdef DEBUGRELEASE
 #define xASSERT(line, cond)                                                                       \
