@@ -1,17 +1,11 @@
 #include "xTimestamp.h"
 
+#include "decomp.h"
+
 #ifdef DEBUG
 #define BUILDNUM "129"
 #else
 #define BUILDNUM "135"
-#endif
-
-#ifdef DEBUG
-#define __DATE__ "Jan 11 2006"
-#define __TIME__ "00:29:14"
-#else
-#define __DATE__ "Jan 18 2006"
-#define __TIME__ "15:52:40"
 #endif
 
 char timestamp[] =
