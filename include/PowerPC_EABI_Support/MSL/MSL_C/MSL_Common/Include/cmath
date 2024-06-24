@@ -1,0 +1,10 @@
+#ifndef _MSL_CMATH
+#define _MSL_CMATH
+
+namespace std {
+
+float floorf(float);
+
+}
+
+#endif

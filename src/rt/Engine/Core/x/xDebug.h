@@ -14,8 +14,19 @@ do {                                                                            
         if (xDebugBoing()) iDebugBreak();                                                         \
     }                                                                                             \
 } while (0)
+
+#define xASSERTMSG(line, cond, msg)                                                               \
+do {                                                                                              \
+    if (!(cond)) {                                                                                \
+        xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                 \
+        xDebug_assert2(msg);                                                                      \
+        xDebugStackTrace();                                                                       \
+        if (xDebugBoing()) iDebugBreak();                                                         \
+    }                                                                                             \
+} while (0);
 #else
 #define xASSERT(line, cond)
+#define xASSERTMSG(line, cond, msg)
 #endif
 
 #ifdef DEBUGRELEASE
