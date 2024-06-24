@@ -13,8 +13,8 @@ struct basic_rect
 {
     T x, y, w, h;
 
-    static const basic_rect m_Null;
-    static const basic_rect m_Unit;
+    static const basic_rect<F32> m_Null;
+    static const basic_rect<F32> m_Unit;
 };
 
 extern const xVec2 g_O2;
