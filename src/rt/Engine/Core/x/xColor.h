@@ -48,8 +48,10 @@ extern const xColor g_LAVENDER;
 extern const xColor g_PINK;
 extern const xColor g_CHARTREUSE;
 
+#ifdef DEBUG
 extern xColor g_COLOR_TRYME;
 extern xColor g_COLOR_TRYME2;
 extern xColor g_COLOR_TRYME3;
+#endif
 
 #endif

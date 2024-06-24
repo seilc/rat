@@ -31,6 +31,8 @@ const xColor g_LAVENDER         = { 200, 105, 229, 255 };
 const xColor g_PINK             = { 255, 128, 255, 255 };
 const xColor g_CHARTREUSE       = { 127, 255, 0, 255 };
 
+#ifdef DEBUG
 xColor g_COLOR_TRYME            = { 255, 255, 255, 255 };
 xColor g_COLOR_TRYME2           = { 255, 32, 0, 255 };
 xColor g_COLOR_TRYME3           = { 255, 255, 255, 255 };
+#endif
