@@ -5,14 +5,17 @@
 
 #include <rwcore.h>
 
-union xVec3
+struct xVec3
 {
-    RwV3d m_RwV3d;
-    struct
+    union
     {
-        F32 x, y, z;
+        RwV3d m_RwV3d;
+        struct
+        {
+            F32 x, y, z;
+        };
+        F32 a[3];
     };
-    F32 a[3];
 
     void Sub(const xVec3& a, const xVec3& b);
 };

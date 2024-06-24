@@ -5,13 +5,16 @@
 
 #include <rwcore.h>
 
-typedef union xColor_tag
+typedef struct xColor_tag
 {
-    struct
+    union
     {
-        U8 r, g, b, a;
+        struct
+        {
+            U8 r, g, b, a;
+        };
+        RwRGBA rgba;
     };
-    RwRGBA rgba;
 } xColor;
 
 extern const xColor g_RED;
