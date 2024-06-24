@@ -1,6 +1,8 @@
 #ifndef _MSL_STRING_H
 #define _MSL_STRING_H
 
+#include <size_t.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

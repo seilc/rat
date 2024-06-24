@@ -28,4 +28,10 @@ typedef double F64;
 #define NULL 0L
 #endif
 
+#ifdef __MWERKS__
+#define ALIGN(a) __attribute__ ((aligned(a)))
+#else
+#define ALIGN(a)
+#endif
+
 #endif

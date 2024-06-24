@@ -3,6 +3,11 @@
 
 #include "xVec3.h"
 
+struct xVec4
+{
+    F32 x, y, z, w;
+};
+
 struct xBox
 {
     xVec3 upper;
@@ -17,13 +22,13 @@ struct xMat3x3
     U32 pad1;
     xVec3 at;
     U32 pad2;
-};
+} ALIGN(16);
 
 struct xMat4x3 : xMat3x3
 {
     xVec3 pos;
     U32 pad3;
-};
+} ALIGN(16);
 
 extern xMat4x3 g_I3;
 

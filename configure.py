@@ -582,7 +582,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xModelWarp.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCombo.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFrozoneIce.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xRenderBuffer.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xRenderBuffer.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXFireTrail.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXEnergySystem.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomSysMessage.cpp"),
