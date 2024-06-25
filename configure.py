@@ -260,6 +260,7 @@ cflags_rat_m = [
     "-opt level=4, peep, space",
     "-sdata 64",
     "-sdata2 64",
+    "-sym off",
 ]
 cflags_rat_list = [
     cflags_rat_d,
