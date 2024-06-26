@@ -12,7 +12,7 @@
 #endif
 
 #ifdef DEBUGRELEASE
-static void iDebugBreak()
+static inline void iDebugBreak()
 {
     asm { opword 0 }
 }

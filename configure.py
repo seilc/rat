@@ -319,7 +319,7 @@ config.libs = [
         "host": True,
         "objects": [
             Object(NonMatching, "rt/Engine/Core/x/xAnim.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xBase.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xBase.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xbinio.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xBound.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCam.cpp"),
