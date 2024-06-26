@@ -231,6 +231,7 @@ cflags_rat_base = [
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
     "-i include/dolphin",
+    "-i include/bink",
 ]
 cflags_rat_d = [
     *cflags_rat_base,

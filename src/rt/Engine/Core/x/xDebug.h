@@ -73,12 +73,14 @@ do {                                                                            
 #endif
 
 void xDebugValidateFailed();
+void xprintf(const char* fmt, ...);
 
 #ifdef DEBUGRELEASE
 void DBprintf(en_VERBOSE_MSGLEVEL msglvl, const char* fmt, ...);
 void xDebug_assert2_info(const char* func, const char* file, U32 line, const char* expr);
 void xDebug_assert2(const char* fmt, ...);
 U32 xDebugBoing();
+S32 xDebugModeGet();
 void xDebugStackTrace();
 #endif
 

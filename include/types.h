@@ -5,6 +5,46 @@
 #define DEBUGRELEASE
 #endif
 
+#ifdef S8
+#undef S8
+#endif
+
+#ifdef S16
+#undef S16
+#endif
+
+#ifdef S32
+#undef S32
+#endif
+
+#ifdef S64
+#undef S64
+#endif
+
+#ifdef U8
+#undef U8
+#endif
+
+#ifdef U16
+#undef U16
+#endif
+
+#ifdef U32
+#undef U32
+#endif
+
+#ifdef U64
+#undef U64
+#endif
+
+#ifdef F32
+#undef F32
+#endif
+
+#ifdef F64
+#undef F64
+#endif
+
 typedef signed char S8;
 typedef signed short S16;
 typedef signed int S32;
