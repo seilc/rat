@@ -156,6 +156,7 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag);
 void* xMemAlloc(U32 heapID, U32 size, S32 align);
 #endif
 
-void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID = 0);
+void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID);
+void* operator new[](size_t size, xMemStaticType, U32 tag, U32 assetID);
 
 #endif

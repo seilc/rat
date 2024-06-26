@@ -556,7 +556,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNPCGroup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zThrowableSystem.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUIController.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xLightVolume.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xLightVolume.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustom.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUIIncredibles.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMemoryManager.cpp"),

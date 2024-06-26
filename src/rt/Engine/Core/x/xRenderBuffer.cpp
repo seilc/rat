@@ -26,5 +26,5 @@ void xRenderBufferInit()
         gRenderBuffer.m_vertex_2d[i] = nullVert;
     }
 
-    gQuadBuffer = new (eMemStaticType_0, eMemMgrTag_RenderBuffer) i2dQuadBuffer(gRenderBuffer.m_vertex_2d, IRENDER_NUM_VERTEX_2D);
+    gQuadBuffer = new (eMemStaticType_0, eMemMgrTag_RenderBuffer, 0) i2dQuadBuffer(gRenderBuffer.m_vertex_2d, IRENDER_NUM_VERTEX_2D);
 }
