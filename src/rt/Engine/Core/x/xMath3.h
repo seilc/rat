@@ -72,6 +72,18 @@ struct xMat4x3 : xMat3x3
     U32 pad3;
 } ALIGN(16);
 
+struct xQuat
+{
+    xVec3 v;
+    F32 s;
+};
+
+struct xRot
+{
+    xVec3 axis;
+    F32 angle;
+};
+
 extern xMat4x3 g_I3;
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)

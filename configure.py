@@ -223,7 +223,7 @@ cflags_rat_base = [
     "-inline off",
     "-i src/rt/Engine/Core/gc",
     "-i src/rt/Engine/Core/x",
-    #"-i src/rt/Engine/Game",
+    "-i src/rt/Engine/Game",
     "-i include/rwsdk",
     "-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",

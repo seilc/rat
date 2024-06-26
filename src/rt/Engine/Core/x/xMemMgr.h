@@ -5,6 +5,26 @@
 
 #include <stddef.h>
 
+struct xMemPool;
+typedef void(*xMemPoolInitCallback)(xMemPool*, void*);
+
+struct xMemPool
+{
+    void* FreeList;
+    U16 NextOffset;
+    U16 Flags;
+    void* UsedList;
+    xMemPoolInitCallback InitCB;
+    void* Buffer;
+    U16 Size;
+    U16 NumRealloc;
+    U32 Total;
+#ifdef DEBUG
+    U16 Allocated;
+    U16 Pad0;
+#endif
+};
+
 enum eMemMgrTag
 {
     eMemMgrTag_2D,
