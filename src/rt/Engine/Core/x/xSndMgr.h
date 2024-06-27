@@ -19,4 +19,6 @@ void xSndMgrStopSounds(S16 eSoundCategory, bool bSkipPaused, bool bInReset);
 void xSndMgrPauseSounds(S16 eSoundCategory, bool bPaused, bool bPauseFutureSoundsOfThisType);
 F32 xSndMixerGetOutputVolume(S16 eSoundCategory);
 
+bool xSndMgrIsDialogPlaying();
+
 #endif

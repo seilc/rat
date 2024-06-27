@@ -56,6 +56,8 @@ do {                                                                            
 #define xASSERTFMT(line, cond, fmt, ...)
 #endif
 
+typedef void(*xDebugModeCallback)();
+
 void xDebugValidateFailed();
 void xprintf(const char* fmt, ...);
 
@@ -64,6 +66,11 @@ void DBprintf(en_VERBOSE_MSGLEVEL msglvl, const char* fmt, ...);
 void xDebug_assert2_info(const char* func, const char* file, U32 line, const char* expr);
 void xDebug_assert2(const char* fmt, ...);
 U32 xDebugBoing();
+#endif
+
+S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func);
+
+#ifdef DEBUGRELEASE
 S32 xDebugModeGet();
 void xDebugStackTrace();
 #endif

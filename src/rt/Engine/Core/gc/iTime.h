@@ -5,4 +5,6 @@
 
 typedef S64 iTime;
 
+F32 iTimeGetGame();
+
 #endif
