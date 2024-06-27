@@ -181,7 +181,6 @@ cflags_base = [
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
     f"-i build/{config.version}/include",
-    f"-DVERSION={version_num}",
 ]
 
 # Debug flags
@@ -229,7 +228,7 @@ cflags_rat_base = [
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Math/Include",
     #"-i include/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+    "-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
     "-i include/dolphin",
     "-i include/bink",
 ]
@@ -358,7 +357,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xHud.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xHudFontMeter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xHudMeter.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xHudModel.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xHudModel.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xHudUnitMeter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xIni.cpp"),
             Object(Equivalent, "rt/Engine/Core/x/xJaw.cpp"),

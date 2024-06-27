@@ -64,4 +64,7 @@ struct xModelPool
     xModelInstance* List;
 };
 
+void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
+void xModelEval(xModelInstance* modelInst);
+
 #endif
