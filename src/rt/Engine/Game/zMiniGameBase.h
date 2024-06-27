@@ -14,7 +14,7 @@ enum eMiniGameState
     GAMESTATE_GAME_END
 };
 
-struct zMiniGameBase : xBase
+class zMiniGameBase : public xBase
 {
 protected:
     ezMiniGameTypes gameType;

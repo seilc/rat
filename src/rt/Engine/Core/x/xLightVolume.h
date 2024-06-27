@@ -5,8 +5,9 @@
 
 #include <rpworld.h>
 
-struct xLightVolume
+class xLightVolume
 {
+public:
     static void scene_enter();
     static void scene_exit();
     static void reset_all();

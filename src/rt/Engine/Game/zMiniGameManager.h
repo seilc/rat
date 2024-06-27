@@ -4,7 +4,7 @@
 #include "zLightWeight.h"
 #include "zMiniGameBase.h"
 
-struct zMiniGameManager : zLightweightSystemBase
+class zMiniGameManager : public zLightweightSystemBase
 {
 private:
     zMiniGameBase* currentGame;

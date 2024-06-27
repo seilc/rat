@@ -86,8 +86,9 @@ struct motive
     bool inverse;
 };
 
-struct widget
+class widget
 {
+public:
     struct
     {
         bool visible;

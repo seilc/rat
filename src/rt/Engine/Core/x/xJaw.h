@@ -21,8 +21,9 @@ struct xJawHeader
     xJawFlags flags;
 };
 
-struct xJawData
+class xJawData
 {
+public:
     static xJawData* Find(U32 soundID);
 
     xJawSpeaker GetIndex(S32 index, F32& value);

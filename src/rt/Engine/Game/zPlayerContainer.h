@@ -5,7 +5,7 @@
 
 struct zPlayer;
 
-struct zPlayerContainer
+class zPlayerContainer
 {
 private:
     zPlayer* playerArray[4];

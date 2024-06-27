@@ -3,8 +3,9 @@
 
 #include "xMath2.h"
 
-struct xSpacePartitionTree2D
+class xSpacePartitionTree2D
 {
+public:
     union entry_data
     {
         entry_data* next_free_entry;

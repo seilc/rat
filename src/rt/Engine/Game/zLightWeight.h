@@ -3,8 +3,9 @@
 
 #include "types.h"
 
-struct zLightweightSystemBase
+class zLightweightSystemBase
 {
+public:
     void* __vptr; // TEMP
 };
 

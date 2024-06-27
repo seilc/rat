@@ -7,8 +7,9 @@ namespace xhud {
 
 struct model_asset;
 
-struct model_widget : widget
+class model_widget : public widget
 {
+public:
     struct widget_chunk;
 
     U32 mid;

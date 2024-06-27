@@ -4,8 +4,9 @@
 #include "xBase.h"
 #include "xVolumeAsset.h"
 
-struct xVolume : xBase
+class xVolume : public xBase
 {
+public:
     xVolumeAsset* asset;
 
     void Init(xVolumeAsset* asset);

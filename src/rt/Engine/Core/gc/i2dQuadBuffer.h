@@ -5,8 +5,9 @@
 
 #include <rwcore.h>
 
-struct i2dQuadBuffer
+class i2dQuadBuffer
 {
+public:
     i2dQuadBuffer(RwIm2DVertex* verts, U16 vertexCount)
     {
         vertsUsed = 0;

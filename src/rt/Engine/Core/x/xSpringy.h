@@ -3,14 +3,15 @@
 
 #include "xVec3.h"
 
-struct xSpringy
+class xSpringy
 {
 protected:
     F32 mResponse;
 };
 
-struct xSpringyVec3 : xSpringy
+class xSpringyVec3 : public xSpringy
 {
+public:
     void Update(F32 dt);
     
 protected:

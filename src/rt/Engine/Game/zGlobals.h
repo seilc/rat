@@ -38,7 +38,7 @@ enum zGlobalDemoType
 
 struct zAssetPickupTable;
 struct zCutsceneMgr;
-struct zEconomics;
+class zEconomics;
 
 struct zGlobals : xGlobals
 {

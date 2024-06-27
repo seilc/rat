@@ -13,7 +13,7 @@
 struct xCamGroup;
 struct xCamScreen;
 struct zScene;
-struct xDebugLink;
+class xDebugLink;
 
 enum sceDemoEndReason
 {
