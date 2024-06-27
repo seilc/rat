@@ -143,6 +143,12 @@ extern U32 gActiveHeap;
 #endif
 
 #if defined(DEBUG) || defined(RELEASE)
+U32 xMemMgrGenericMallocGetTag();
+void xMemMgrGenericMallocTally(U32 size, U32 tag);
+void xMemMgrGenericMallocRemove(U32 size, U32 tag);
+#endif
+
+#if defined(DEBUG) || defined(RELEASE)
 void* xMemGrowAlloc(U32 heapID, U32 size, U32 tag);
 #else
 void* xMemGrowAlloc(U32 heapID, U32 size);

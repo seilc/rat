@@ -559,7 +559,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zUICustom.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUIIncredibles.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMemoryManager.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xMemoryManagerFixed.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xMemoryManagerFixed.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMemoryManagerGeneral.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleGenerator.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleLocator.cpp"),
