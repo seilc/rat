@@ -17,8 +17,8 @@ do {                                                                            
 #define xMEMORYMANAGERASSERT(line, cond)
 #endif
 
-#define xMEMORYOPT_ALIGN_MASK 0x3C
-#define xMEMORYOPT_ALIGN_SHIFT 2
+static const U32 xMEMORYOPT_ALIGN_MASK = 0x3C;
+static const U32 xMEMORYOPT_ALIGN_SHIFT = 2;
 
 class xMemoryManager
 {

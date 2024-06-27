@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 extern void* memset(void*, int, size_t);
+extern size_t strlen(const char*);
 extern int stricmp(const char*, const char*);
 
 #ifdef __cplusplus

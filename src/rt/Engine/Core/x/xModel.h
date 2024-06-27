@@ -1,6 +1,7 @@
 #ifndef XMODEL_H
 #define XMODEL_H
 
+#include "iModel.h"
 #include "xAnim.h"
 #include "xModelBucket.h"
 #include "xLightKit.h"

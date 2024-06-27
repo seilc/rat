@@ -36,36 +36,20 @@ do {                                                                            
 #define xVALIDATE(line, cond)
 #endif
 
-#ifdef DEBUGRELEASE  
-#define xASSERT(line, cond)                                                                       \
+#ifdef DEBUGRELEASE
+#define _xASSERT(line, cond, ...)                                                                 \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
         xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                 \
-        xDebug_assert2("%s", #cond);                                                              \
-        xDebugStackTrace();                                                                       \
-        if (xDebugBoing()) iDebugBreak();                                                         \
-    }                                                                                             \
-} while (0)
-
-#define xASSERTMSG(line, cond, msg)                                                               \
-do {                                                                                              \
-    if (!(cond)) {                                                                                \
-        xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                 \
-        xDebug_assert2(msg);                                                                      \
+        xDebug_assert2(__VA_ARGS__);                                                              \
         xDebugStackTrace();                                                                       \
         if (xDebugBoing()) iDebugBreak();                                                         \
     }                                                                                             \
 } while (0);
 
-#define xASSERTFMT(line, cond, fmt, ...)                                                          \
-do {                                                                                              \
-    if (!(cond)) {                                                                                \
-        xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                 \
-        xDebug_assert2(fmt, __VA_ARGS__);                                                         \
-        xDebugStackTrace();                                                                       \
-        if (xDebugBoing()) iDebugBreak();                                                         \
-    }                                                                                             \
-} while (0);
+#define xASSERT(line, cond) _xASSERT(line, cond, "%s", #cond)
+#define xASSERTMSG(line, cond, msg) _xASSERT(line, cond, msg)
+#define xASSERTFMT(line, cond, fmt, ...) _xASSERT(line, cond, fmt, __VA_ARGS__)
 #else
 #define xASSERT(line, cond)
 #define xASSERTMSG(line, cond, msg)
