@@ -591,7 +591,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/iARAMTmp.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSparkEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zToss.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xIM.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xIM.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleCustom.cpp"),
             Object(NonMatching, "rt/Engine/Game/zShrapnelEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSmashRing.cpp"),

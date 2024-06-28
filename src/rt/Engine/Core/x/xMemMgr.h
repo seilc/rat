@@ -1,7 +1,8 @@
 #ifndef XMEMMGR_H
 #define XMEMMGR_H
 
-#include "types.h"
+#include "iMemMgr.h"
+#include "xDebug.h"
 
 #include <stddef.h>
 
@@ -142,6 +143,14 @@ extern U32 gActiveHeap;
 #define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align))
 #endif
 
+#if defined(DEBUG)
+#define xMEMPUSHTEMP(amt, unknown, line) xMemPushTemp((amt), (unknown), __FILE__, __FUNCTION__, (line))
+#else
+#define xMEMPUSHTEMP(amt, unknown, line) xMemPushTemp((amt))
+#endif
+
+#define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
+
 #if defined(DEBUG) || defined(RELEASE)
 U32 xMemMgrGenericMallocGetTag();
 void xMemMgrGenericMallocTally(U32 size, U32 tag);
@@ -160,6 +169,22 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag, U32 assetID, const cha
 void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag);
 #else
 void* xMemAlloc(U32 heapID, U32 size, S32 align);
+#endif
+
+#if defined(DEBUG)
+inline void* xMemPushTemp(U32 amt, U32, const char* file, const char* func, S32 line)
+{
+    void* ptr = iMemPushTemp(amt);
+    xASSERTFMT(391, ptr, "for %d bytes from %s, in %s line %d", amt, func, file, line);
+    return ptr;
+}
+#else
+inline void* xMemPushTemp(U32 amt)
+{
+    void* ptr = iMemPushTemp(amt);
+    xASSERT(425, ptr);
+    return ptr;
+}
 #endif
 
 void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID);
