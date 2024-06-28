@@ -5,6 +5,7 @@
 #include "xDynAsset.h"
 #include "xModel.h"
 #include "xColor.h"
+#include "xDebug.h"
 
 #include <stddef.h>
 
@@ -137,6 +138,13 @@ private:
 
 xModelInstance* load_model(U32 id);
 void render_model(xModelInstance& m, const render_context& rc);
+
+#ifndef NON_MATCHING
+inline void __xhud_unused()
+{
+    xASSERTALWAYS(0);
+}
+#endif
 
 }
 

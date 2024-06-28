@@ -25,6 +25,24 @@ struct model_asset : asset
     static const char* type_name() { return "hud:model"; }
 };
 
+struct meter_asset : asset
+{
+    F32 start_value;
+    F32 min_value;
+    F32 max_value;
+    F32 increment_time;
+    F32 decrement_time;
+    struct
+    {
+        U32 start_increment;
+        U32 increment;
+        U32 start_decrement;
+        U32 decrement;
+    } sound;
+
+    static const char* type_name() { return "hud:meter"; }
+};
+
 #define XHUD_CHECK_ASSET(line, asset, T)                                                          \
 do {                                                                                              \
     xASSERTFMT((line), (asset).version == T::VERSION,                                             \

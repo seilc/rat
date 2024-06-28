@@ -37,23 +37,45 @@ do {                                                                            
 #endif
 
 #ifdef DEBUGRELEASE
-#define _xASSERT(line, cond, ...)                                                                 \
+#define _xASSERTFAIL(line, cond, ...)                                                             \
+do {                                                                                              \
+    xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                     \
+    xDebug_assert2(__VA_ARGS__);                                                                  \
+    xDebugStackTrace();                                                                           \
+    if (xDebugBoing()) iDebugBreak();                                                             \
+} while (0)
+
+#define xASSERT(line, cond)                                                                       \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                 \
-        xDebug_assert2(__VA_ARGS__);                                                              \
-        xDebugStackTrace();                                                                       \
-        if (xDebugBoing()) iDebugBreak();                                                         \
+        _xASSERTFAIL(line, cond, "%s", #cond);                                                    \
     }                                                                                             \
-} while (0);
+} while (0)
 
-#define xASSERT(line, cond) _xASSERT(line, cond, "%s", #cond)
-#define xASSERTMSG(line, cond, msg) _xASSERT(line, cond, msg)
-#define xASSERTFMT(line, cond, fmt, ...) _xASSERT(line, cond, fmt, __VA_ARGS__)
+#define xASSERTMSG(line, cond, msg)                                                               \
+do {                                                                                              \
+    if (!(cond)) {                                                                                \
+        _xASSERTFAIL(line, cond, msg);                                                            \
+    }                                                                                             \
+} while (0)
+
+#define xASSERTFMT(line, cond, fmt, ...)                                                          \
+do {                                                                                              \
+    if (!(cond)) {                                                                                \
+        _xASSERTFAIL(line, cond, fmt, __VA_ARGS__);                                               \
+    }                                                                                             \
+} while (0)
+
+#define xASSERTALWAYS(line) _xASSERTFAIL(line, *always*, "%s", "*always*")
+#define xASSERTALWAYSMSG(line, msg) _xASSERTFAIL(line, *always*, msg)
+#define xASSERTALWAYSFMT(line, fmt, ...) _xASSERTFAIL(line, *always*, fmt, __VA_ARGS__)
 #else
 #define xASSERT(line, cond)
 #define xASSERTMSG(line, cond, msg)
 #define xASSERTFMT(line, cond, fmt, ...)
+#define xASSERTALWAYS(line)
+#define xASSERTALWAYSMSG(line, msg)
+#define xASSERTALWAYSFMT(line, fmt, ...)
 #endif
 
 typedef void(*xDebugModeCallback)();
