@@ -3,4 +3,14 @@
 
 #include <size_t.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern int sprintf(char*, const char*, ...);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

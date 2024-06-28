@@ -12,6 +12,7 @@
 namespace xhud {
 
 struct render_context;
+struct font_context;
 struct motive;
 struct motive_node;
 struct asset;
@@ -26,6 +27,19 @@ struct render_context
     F32 g;
     F32 b;
     F32 a;
+};
+
+struct font_context
+{
+    U32 id;
+    S32 justify;
+    F32 w;
+    F32 h;
+    F32 space;
+    F32 drop_x;
+    F32 drop_y;
+    xColor c;
+    xColor drop_c;
 };
 
 struct motive

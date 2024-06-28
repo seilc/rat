@@ -22,6 +22,17 @@ public:
     basic_rect<F32> clip;
 
     static xfont create(U32 id, F32 width, F32 height, F32 space, xColor color, const basic_rect<F32>& clip, xColor shadowColor, F32 shadowOffsetX, F32 shadowOffsetY);
+
+    void start_render() const;
+    void stop_render() const;
+    void irender(const char* text, F32 x, F32 y) const;
+
+    void render(const char* text, F32 x, F32 y) const
+    {
+        start_render();
+        irender(text, x, y);
+        stop_render();
+    }
 };
 
 class xtextbox

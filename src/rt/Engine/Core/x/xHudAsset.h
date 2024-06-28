@@ -1,12 +1,11 @@
 #ifndef XHUDASSET_H
 #define XHUDASSET_H
 
+#include "xHud.h"
 #include "xDynAsset.h"
-#include "xMath3.h"
 #include "xString.h"
 #include "xstransvc.h"
 #include "xLinkAsset.h"
-#include "xDebug.h"
 
 namespace xhud {
 
@@ -41,6 +40,15 @@ struct meter_asset : asset
     } sound;
 
     static const char* type_name() { return "hud:meter"; }
+};
+
+struct font_meter_asset : meter_asset
+{
+    static const U16 VERSION = 2;
+
+    font_context font;
+
+    static const char* type_name() { return "hud:meter:font"; }
 };
 
 #define XHUD_CHECK_ASSET(line, asset, T)                                                          \
