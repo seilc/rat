@@ -373,7 +373,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xMorph.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMovePoint.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xNavigationMeshAsset.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xordarray.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xordarray.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xOutputMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xPad.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPar.cpp"),

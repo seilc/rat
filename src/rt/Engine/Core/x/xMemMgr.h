@@ -144,9 +144,9 @@ extern U32 gActiveHeap;
 #endif
 
 #if defined(DEBUG)
-#define xMEMPUSHTEMP(amt, unknown, line) xMemPushTemp((amt), (unknown), __FILE__, __FUNCTION__, (line))
+#define xMEMPUSHTEMP(amt, assetID, line) xMemPushTemp((amt), (assetID), __FILE__, __FUNCTION__, (line))
 #else
-#define xMEMPUSHTEMP(amt, unknown, line) xMemPushTemp((amt))
+#define xMEMPUSHTEMP(amt, assetID, line) xMemPushTemp((amt))
 #endif
 
 #define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
