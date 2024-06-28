@@ -12,5 +12,7 @@ struct substr
 };
 
 U32 xStrHash(const char* str);
+char* xStrTok(char* string, const char* control, char** nextoken);
+S32 xStricmp(const char* string1, const char* string2);
 
 #endif

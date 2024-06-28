@@ -10,7 +10,9 @@ extern "C" {
 extern void* memset(void*, int, size_t);
 extern void* memcpy(void*, const void*, size_t);
 extern size_t strlen(const char*);
+extern char* strncpy(char*, const char*, size_t);
 extern int stricmp(const char*, const char*);
+extern char* strstr(const char*, const char*);
 
 #ifdef __cplusplus
 }

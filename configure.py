@@ -359,7 +359,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xHudMeter.cpp"),
             Object(Matching, "rt/Engine/Core/x/xHudModel.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xHudUnitMeter.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xIni.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xIni.cpp"),
             Object(Equivalent, "rt/Engine/Core/x/xJaw.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xJSP.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xLight.cpp"),
