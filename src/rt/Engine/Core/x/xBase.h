@@ -25,6 +25,7 @@ struct xBase
 #define k_XBASE_IS_VALID ((U16)(1 << 2))
 #define k_XBASE_IS_VISIBLE_IN_CUTSCENES ((U16)(1 << 3))
 #define k_XBASE_RECEIVES_SHADOWS ((U16)(1 << 4))
+#define k_XBASE_UNK_0x80 ((U16)(1 << 7))
 
 // Present in assert strings
 #define k_XBASE_IS_ENTITY ((U16)(1 << 5))

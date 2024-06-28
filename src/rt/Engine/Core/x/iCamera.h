@@ -6,5 +6,6 @@
 extern F32 sCameraNearClip;
 
 void iCameraSetFogParams(iFogParams* fp, F32 time);
+RwCamera* RwCameraBeginUpdateWrapper(RwCamera* camera);
 
 #endif

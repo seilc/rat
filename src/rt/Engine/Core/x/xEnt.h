@@ -125,4 +125,6 @@ struct xEnt : xBase
     void* user_data;
 };
 
+U32 xEntIsVisible(const xEnt* ent);
+
 #endif

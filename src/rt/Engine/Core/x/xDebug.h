@@ -99,6 +99,15 @@ do {                                                                            
         _xASSERTFAIL(line, *once only*, fmt, __VA_ARGS__);                                        \
     }                                                                                             \
 } while (0)
+
+#define xASSERTDESIGNMSG(line, cond, msg)                                                         \
+do {                                                                                              \
+    static bool already_asserted = false;                                                         \
+    if (!already_asserted && !(cond)) {                                                           \
+        already_asserted = true;                                                                  \
+        _xASSERTFAIL(line, cond, msg);                                                            \
+    }                                                                                             \
+} while (0)
 #else
 #define xASSERT(line, cond)
 #define xASSERTMSG(line, cond, msg)
@@ -107,6 +116,7 @@ do {                                                                            
 #define xASSERTALWAYSMSG(line, msg)
 #define xASSERTALWAYSFMT(line, fmt, ...)
 #define xASSERTONCEFMT(line, fmt, ...)
+#define xASSERTDESIGNMSG(line, cond, msg)
 #endif
 
 typedef void(*xDebugModeCallback)();

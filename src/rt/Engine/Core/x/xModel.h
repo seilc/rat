@@ -67,5 +67,11 @@ struct xModelPool
 
 void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
 void xModelEval(xModelInstance* modelInst);
+S32 xModelCullSingle(xModelInstance* minst);
+
+#ifdef DEBUGRELEASE
+bool xModelRenderLogEnabled();
+void xModelRenderLogSetEntity(xEnt* ent);
+#endif
 
 #endif
