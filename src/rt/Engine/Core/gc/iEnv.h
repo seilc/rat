@@ -38,4 +38,12 @@ struct iEnv
     U16 numTransparent;
 };
 
+void iEnvLoadBegin(iEnv* env, S32 dataType, S32 count);
+bool iEnvLoadJSP(iEnv* env, U32 aid, const void* data, U32, S32 dataType, S32 index);
+void iEnvLoadEnd(iEnv* env, S32 dataType);
+void iEnvFree(iEnv* env);
+void iEnvDefaultLighting(iEnv*);
+void iEnvSetup(iEnv* env);
+void iEnvRender(iEnv* env, bool alpha);
+
 #endif

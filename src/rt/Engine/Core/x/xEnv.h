@@ -11,4 +11,16 @@ struct xEnv
     xLightKit* lightKit;
 };
 
+extern xEnv* gCurXEnv;
+
+#ifdef DEBUGRELEASE
+extern bool debugNoJspsRendering;
+#endif
+
+void xEnvLoadJSPList(xEnv* env, S32 dataType);
+void xEnvSetup(xEnv* env);
+void xEnvFree(xEnv* env);
+void xEnvRender(xEnv* env, bool alpha);
+void xEnvResetJSPVisibilities(xEnv* env);
+
 #endif

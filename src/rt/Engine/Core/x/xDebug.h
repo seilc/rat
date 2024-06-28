@@ -90,6 +90,15 @@ do {                                                                            
 #define xASSERTALWAYS(line) _xASSERTFAIL(line, *always*, "%s", "*always*")
 #define xASSERTALWAYSMSG(line, msg) _xASSERTFAIL(line, *always*, msg)
 #define xASSERTALWAYSFMT(line, fmt, ...) _xASSERTFAIL(line, *always*, fmt, __VA_ARGS__)
+
+#define xASSERTONCEFMT(line, fmt, ...)                                                            \
+do {                                                                                              \
+    static bool done = false;                                                                     \
+    if (!done) {                                                                                  \
+        done = true;                                                                              \
+        _xASSERTFAIL(line, *once only*, fmt, __VA_ARGS__);                                        \
+    }                                                                                             \
+} while (0)
 #else
 #define xASSERT(line, cond)
 #define xASSERTMSG(line, cond, msg)
@@ -97,6 +106,7 @@ do {                                                                            
 #define xASSERTALWAYS(line)
 #define xASSERTALWAYSMSG(line, msg)
 #define xASSERTALWAYSFMT(line, fmt, ...)
+#define xASSERTONCEFMT(line, fmt, ...)
 #endif
 
 typedef void(*xDebugModeCallback)();

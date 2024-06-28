@@ -71,15 +71,16 @@ struct tweak_info
     };
 };
 
-#ifdef DEBUGRELEASE
-void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags);
-void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);
-#else
+#ifndef DEBUGRELEASE
 inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags)
 {
 }
+
+void xDebugRemoveTweak(const char* name);
+#else
+void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);
+void xDebugRemoveTweak(const char* name);
 #endif
-
-
 
 #endif
