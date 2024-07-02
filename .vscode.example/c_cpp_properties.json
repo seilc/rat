@@ -3,7 +3,12 @@
         {
             "name": "Debug",
             "includePath": [
-                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/bink",
+                "${workspaceFolder}/include/dolphin",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+                "${workspaceFolder}/include/rwsdk",
                 "${workspaceFolder}/src/**"
             ],
             "defines": [
@@ -25,7 +30,12 @@
         {
             "name": "Release",
             "includePath": [
-                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/bink",
+                "${workspaceFolder}/include/dolphin",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+                "${workspaceFolder}/include/rwsdk",
                 "${workspaceFolder}/src/**"
             ],
             "defines": [
@@ -46,7 +56,12 @@
         {
             "name": "MasterDebug",
             "includePath": [
-                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/bink",
+                "${workspaceFolder}/include/dolphin",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+                "${workspaceFolder}/include/rwsdk",
                 "${workspaceFolder}/src/**"
             ],
             "defines": [
@@ -67,7 +82,12 @@
         {
             "name": "Master",
             "includePath": [
-                "${workspaceFolder}/include/**",
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/bink",
+                "${workspaceFolder}/include/dolphin",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+                "${workspaceFolder}/include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+                "${workspaceFolder}/include/rwsdk",
                 "${workspaceFolder}/src/**"
             ],
             "defines": [
