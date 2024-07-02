@@ -3,6 +3,7 @@
 
 #include "types.h"
 
+U32 xrand_RandomInt32();
 F32 xrand_RandomFloat();
 
 #endif

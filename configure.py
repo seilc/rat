@@ -412,7 +412,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xSurface.cpp"),
             Object(Matching, "rt/Engine/Core/x/xTextAsset.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xTextureManager.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xTimer.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xTimer.cpp"),
             Object(Matching, "rt/Engine/Core/x/xTimestamp.cpp"),
             Object(Matching, "rt/Engine/Core/x/xTransient.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xTRC.cpp"),
