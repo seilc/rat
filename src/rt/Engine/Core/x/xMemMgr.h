@@ -187,7 +187,14 @@ inline void* xMemPushTemp(U32 amt)
 }
 #endif
 
-void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID);
-void* operator new[](size_t size, xMemStaticType, U32 tag, U32 assetID);
+inline void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID)
+{
+    return xMEMALLOC(size, 0, tag, assetID, 650);
+}
+
+inline void* operator new[](size_t size, xMemStaticType, U32 tag, U32 assetID)
+{
+    return xMEMALLOC(size, 0, tag, assetID, 655);
+}
 
 #endif

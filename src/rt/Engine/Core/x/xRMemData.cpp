@@ -4,8 +4,6 @@
 #include "xDebug.h"
 #include "xOutputMgr.h"
 
-#include "decomp.h"
-
 #include <string.h>
 
 #ifdef DEBUG
@@ -66,28 +64,23 @@ void RyzMemData::operator delete(void*)
 {
 }
 
-#ifdef DEBUGRELEASE
-    #ifdef DEBUG
-        DECOMP_FORCEACTIVE(xRMemData_cpp, "%s(%d) : (Unexpected) in '%s'\n");
-        DECOMP_FORCEACTIVE(xRMemData_cpp, "%s(%d) : (Don't be shy) in '%s'\n");
-    #endif
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "!user");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "Already owned - share ok?");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "growuser");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "Need owner");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "!this->ptr");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "Init of grow context while still in use");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->user && this->ptr");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "RMemGrow (0x%08X [0x%08X]) base 0x%08X start\n");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "growuser && (growuser == this->user_last)");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "Under New Mgmt?");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->ptr_last");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "Resume has bad last info");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "RMemGrow (0x%08X [0x%08X]) base 0x%08X resume\n");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "RMemGrow (0x%08X [0x%08X]) base 0x%08X end\n");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->flg_grow & (1<<0)");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->flg_grow & RMEM_GROW_ENABLED");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->amt==32");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->amt==RMEM_GROWSTUB_SIZE");
-    DECOMP_FORCEACTIVE(xRMemData_cpp, "this->ptr");
+#ifndef NON_MATCHING
+void RyzMemGrow::__unused()
+{
+    xBase* growuser = NULL;
+    xVALIDATEMSG(0, 0, "Unexpected");
+    xVALIDATEMSG(0, 0, "Don't be shy");
+    xASSERTMSG(0, !user, "Already owned - share ok?");
+    xASSERTMSG(0, growuser, "Need owner");
+    xASSERTMSG(0, !this->ptr, "Init of grow context while still in use");
+    xASSERT(0, this->user && this->ptr);
+    xOutInfo("RyzMemData", "RMemGrow (0x%08X [0x%08X]) base 0x%08X start\n", 0);
+    xASSERTMSG(0, growuser && (growuser == this->user_last), "Under New Mgmt?");
+    xASSERTMSG(0, this->ptr_last, "Resume has bad last info");
+    xOutInfo("RyzMemData", "RMemGrow (0x%08X [0x%08X]) base 0x%08X resume\n", 0);
+    xOutInfo("RyzMemData", "RMemGrow (0x%08X [0x%08X]) base 0x%08X end\n", 0);
+    xASSERT(0, this->flg_grow & RMEM_GROW_ENABLED);
+    xASSERT(0, this->amt==RMEM_GROWSTUB_SIZE);
+    xASSERT(0, this->ptr);
+}
 #endif

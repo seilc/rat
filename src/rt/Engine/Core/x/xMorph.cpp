@@ -3,8 +3,6 @@
 #include "xDebug.h"
 #include "iModel.h"
 
-#include "decomp.h"
-
 #include <string.h>
 
 #define xMAGIC(a, b, c, d) ((((U32)a) << 0) | (((U32)b) << 8) | (((U32)c) << 16) | (((U32)d) << 24))

@@ -3,8 +3,6 @@
 #include "xMemMgr.h"
 #include "xDebug.h"
 
-#include "decomp.h"
-
 static xSurface* surfs;
 static U16 nsurfs;
 
@@ -24,11 +22,14 @@ void xSurfaceInit(U16 num_surfs)
     }
 }
 
-#ifdef DEBUGRELEASE
-DECOMP_FORCEACTIVE(xSurface_cpp, "dflt");
+#ifndef NON_MATCHING
+void xSurfaceInit(U16 n, const xSurface* s)
+{
+    U32 dflt = 0;
+    xASSERT(0, dflt);
+    surfs[n] = *s;
+}
 #endif
-
-DECOMP_FORCEASSIGNOP(xSurface_cpp, xBase);
 
 void xSurfaceExit()
 {

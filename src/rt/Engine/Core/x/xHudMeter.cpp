@@ -4,8 +4,6 @@
 #include "xDebugTweak.h"
 #include "xSndMgr.h"
 
-#include "decomp.h"
-
 namespace xhud {
 
 namespace {
@@ -95,6 +93,11 @@ void meter_widget::updater(F32 dt)
     }
 }
 
-DECOMP_FORCEACTIVE(xHudMeter_cpp, __xhud_unused);
+#ifndef NON_MATCHING
+static void __unused()
+{
+    __xhud_unused();
+}
+#endif
 
 }

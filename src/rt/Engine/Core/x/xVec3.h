@@ -17,6 +17,7 @@ struct xVec3
         F32 a[3];
     };
 
+    xVec3& assign(F32 x, F32 y, F32 z);
     void Sub(const xVec3& a, const xVec3& b);
 };
 

@@ -20,6 +20,10 @@ struct RyzMemGrow
 {
     S32 IsEnabled() { return flg_grow & RMEM_GROW_ENABLED; }
 
+#ifndef NON_MATCHING
+    void __unused();
+#endif
+
 protected:
     S32 flg_grow;
     S32 amt;

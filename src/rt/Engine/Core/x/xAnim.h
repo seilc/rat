@@ -176,4 +176,7 @@ struct xAnimPlay
     xAnimBeforeAnimMatricesCallback BeforeAnimMatrices;
 };
 
+xAnimTable* xAnimTableNew(const char* name, U32 userFlags);
+xAnimState* xAnimTableNewState(xAnimTable* table, const char* name, U32 flags, U32 userFlags, F32 speed, F32* boneBlend, F32* timeSnap, F32 fadeRecip, U16* fadeOffset, void* callbackData, xAnimBeforeEnterCallback beforeEnter, xAnimStateCallback stateCallback, xAnimBeforeAnimMatricesCallback beforeAnimMatrices);
+
 #endif

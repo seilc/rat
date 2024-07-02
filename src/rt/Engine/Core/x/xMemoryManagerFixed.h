@@ -6,9 +6,18 @@
 class xMemoryManagerFixed : public xMemoryManager
 {
 public:
+    enum UseAbsoluteSizeType
+    {
+        UseAbsoluteSize
+    };
+
 #ifdef DEBUGRELEASE
     void SetOrigSize(void* pointer, U32 size) const;
     U32 GetOrigSize(void* pointer) const;
+#endif
+
+#ifndef NON_MATCHING
+    void Init(void*, U32, U32, UseAbsoluteSizeType, bool);
 #endif
 
     void Init(void* start, U32 elements, U32 elementSize);

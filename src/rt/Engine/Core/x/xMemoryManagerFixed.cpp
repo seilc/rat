@@ -4,14 +4,6 @@
 #include "xMemMgr.h"
 #include "xMemory.h"
 
-#include <decomp.h>
-
-#ifdef DEBUGRELEASE
-DECOMP_FORCEACTIVE(xMemoryManagerFixed_cpp, "assert: %d (%s#%d)\n");
-DECOMP_FORCEACTIVE(xMemoryManagerFixed_cpp, "elementSize > 0 && elementSize >= sizeof(FixedHeader)");
-DECOMP_FORCEACTIVE(xMemoryManagerFixed_cpp, "xMemoryManagerFixed.cpp");
-#endif
-
 #ifdef DEBUGRELEASE
 inline U8 ConvertToFixedSizeEnum(U32 size)
 {
@@ -39,6 +31,13 @@ U32 xMemoryManagerFixed::GetOrigSize(void* pointer) const
     case 4: return 48;
     }
     return 0;
+}
+#endif
+
+#ifndef NON_MATCHING
+void xMemoryManagerFixed::Init(void*, U32, U32 elementSize, UseAbsoluteSizeType, bool)
+{
+    xMEMORYMANAGERASSERT(0, elementSize > 0 && elementSize >= sizeof(FixedHeader));
 }
 #endif
 

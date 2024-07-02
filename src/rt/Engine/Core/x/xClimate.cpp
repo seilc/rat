@@ -2,6 +2,9 @@
 
 #include "xMath3.h"
 
-#include "decomp.h"
-
-DECOMP_FORCEACTIVE(xClimate_cpp, xMat3x3Identity);
+#ifndef NON_MATCHING
+static void __unused()
+{
+    xMat3x3Identity(NULL);
+}
+#endif

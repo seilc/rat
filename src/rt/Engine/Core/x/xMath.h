@@ -6,6 +6,7 @@
 #define EPSILON 1e-5f
 
 #define xabs(x) iabs(x)
+#define xeq(a,b,e) (xabs((a) - (b)) <= (e))
 #define xfeq0(x) (((x) >= -EPSILON) && ((x) <= EPSILON))
 
 F32 xDampSpringCoeff(F32 dt, F32 k);
