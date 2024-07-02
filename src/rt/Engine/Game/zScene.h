@@ -49,4 +49,6 @@ struct zScene : xScene
     bool enableDrawing;
 };
 
+xBase* zSceneFindObject(U32 gameID);
+
 #endif
