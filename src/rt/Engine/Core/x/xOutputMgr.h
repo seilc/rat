@@ -17,10 +17,10 @@ enum xOutSeverity
 #ifdef DEBUGRELEASE
 #define xTRACEFUNCTION(line, name)                                                                  \
 do {                                                                                                \
-if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= xOutSevInfo)) {      \
-    iprintf("~~ entering %s in %s(%d)", __FUNCTION__, __FILE__, (line));                            \
-    iprintf("\n");                                                                                  \
-}                                                                                                   \
+    if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= xOutSevInfo)) {  \
+        iprintf("~~ entering %s in %s(%d)", __FUNCTION__, __FILE__, (line));                        \
+        iprintf("\n");                                                                              \
+    }                                                                                               \
 } while (0)
 
 void xOutSetSev(S32 sev);

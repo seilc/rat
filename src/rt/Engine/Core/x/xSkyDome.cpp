@@ -105,7 +105,7 @@ void xSkyDome_Render()
             }
 
             if (!xModelCullSingle(ent->model)) {
-#ifdef RWDEBUG
+#ifdef DEBUG
                 if (xModelRenderLogEnabled()) {
                     xModelRenderLogSetEntity(ent);
                 }

@@ -613,7 +613,7 @@ public:
         head = index;
     }
 
-    void* tier_queue_allocator::get_block(size_t at) const
+    void* get_block(size_t at) const
     {
         xASSERT(870, at < _max_blocks);
         return blocks[at].data;
