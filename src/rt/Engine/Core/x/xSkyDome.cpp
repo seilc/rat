@@ -1,10 +1,18 @@
 #include "xSkyDome.h"
 
-#include "xSkyDomeInfo.h"
 #include "zBase.h"
 #include "zEvent.h"
 #include "iCamera.h"
 #include "zRenderState.h"
+
+struct SkyDomeInfo
+{
+    xEnt* ent;
+    S32 sortorder;
+    S32 lockXZ;
+    S32 lockY;
+    S32 zReadWrite;
+};
 
 #define MAX_SKYDOME_OBJECTS 16
 
@@ -105,7 +113,7 @@ void xSkyDome_Render()
             }
 
             if (!xModelCullSingle(ent->model)) {
-#ifdef DEBUG
+#ifdef DEBUGRELEASE
                 if (xModelRenderLogEnabled()) {
                     xModelRenderLogSetEntity(ent);
                 }

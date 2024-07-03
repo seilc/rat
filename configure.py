@@ -400,7 +400,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xserializer.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xShadow.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xShadowSimple.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xSkyDome.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xSkyDome.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSndMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSoundFX.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSpacePartitionTree.cpp"),
