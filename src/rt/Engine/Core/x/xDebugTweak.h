@@ -71,6 +71,10 @@ struct tweak_info
     };
 };
 
+#ifdef DEBUGRELEASE
+void* xDebugTweak_StaticAlloc(U32 size);
+#endif
+
 #ifndef DEBUGRELEASE
 inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags)
 {

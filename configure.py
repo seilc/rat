@@ -579,7 +579,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zJSPExtraData.cpp"),
             Object(NonMatching, "rt/Engine/Game/zRubbleGenerator.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleFXCommon.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/containers.cpp"),
+            Object(Matching, "rt/Engine/Core/x/containers.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Core/x/xFunctionGenerator.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xModelWarp.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCombo.cpp"),
