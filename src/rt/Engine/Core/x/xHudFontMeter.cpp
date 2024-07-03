@@ -9,7 +9,7 @@ namespace xhud {
     
 void font_meter_widget::load(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    XHUD_CHECK_ASSET(14, asset, font_meter_asset);
+    xDynAssetValidate(14, asset, font_meter_asset);
 
     init_base(data, asset, sizeof(widget_chunk));
 
