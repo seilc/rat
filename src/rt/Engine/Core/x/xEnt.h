@@ -125,6 +125,12 @@ struct xEnt : xBase
     void* user_data;
 };
 
+inline xVec3* xEntGetPos(const xEnt* ent)
+{
+    xASSERT(1078, ent->model);
+    return &xModelGetFrame(ent->model)->pos;
+}
+
 U32 xEntIsVisible(const xEnt* ent);
 
 #endif

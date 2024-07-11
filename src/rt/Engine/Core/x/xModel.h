@@ -74,4 +74,11 @@ bool xModelRenderLogEnabled();
 void xModelRenderLogSetEntity(xEnt* ent);
 #endif
 
+inline xMat4x3* xModelGetFrame(xModelInstance* model)
+{
+    xASSERT(855, model);
+    xASSERT(856, model->Mat);
+    return (xMat4x3*)model->Mat;
+}
+
 #endif

@@ -14,4 +14,10 @@
 F32 xDampSpringCoeff(F32 dt, F32 k);
 void xDampSpring(F32& s, F32& v, F32 dt, F32 k, F32 e);
 
+F32 xexp(F32 x);
+
+#ifndef DEBUG
+#include "xMathInlines.h"
+#endif
+
 #endif

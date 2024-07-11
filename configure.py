@@ -344,7 +344,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xEnv.cpp"),
             Object(Matching, "rt/Engine/Core/x/xEvent.cpp"),
             Object(Matching, "rt/Engine/Core/x/xFactory.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xFFX.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xFFX.cpp"),
             Object(Matching, "rt/Engine/Core/x/xFilter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xFMV.cpp"),
             Object(Matching, "rt/Engine/Core/x/xFog.cpp"),

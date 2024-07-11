@@ -13,4 +13,6 @@
 #define iabs(x) fabsf(x)
 #endif
 
+F32 isin(F32 f);
+
 #endif
