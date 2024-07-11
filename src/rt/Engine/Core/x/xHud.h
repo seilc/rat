@@ -127,6 +127,7 @@ public:
     static void init_base(xBase& data, const xBaseAsset& asset, size_t chunk_size);
 
     void destruct();
+    void presetup();
     void updater(F32 dt);
     bool visible() const;
 

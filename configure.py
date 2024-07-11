@@ -543,7 +543,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zInteraction.cpp"),
             Object(NonMatching, "rt/Engine/Game/zBomb.cpp"),
             Object(NonMatching, "rt/Engine/Game/zProgressScript.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xHudText.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xHudText.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Game/zFlameThrower.cpp"),
             Object(NonMatching, "rt/Engine/Game/zRocket.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xHudImage.cpp"),

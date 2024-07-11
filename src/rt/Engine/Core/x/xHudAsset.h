@@ -22,6 +22,16 @@ struct model_asset : asset
     static const char* type_name() { return "hud:model"; }
 };
 
+struct text_asset : asset
+{
+    static const U16 VERSION = 1;
+    
+    U32 text_box;
+    U32 text;
+
+    static const char* type_name() { return "hud:text"; }
+};
+
 struct meter_asset : asset
 {
     F32 start_value;

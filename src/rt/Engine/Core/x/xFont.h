@@ -101,6 +101,7 @@ public:
     const callback* cb;
     void* context;
 
+    static xtextbox create();
     static xtextbox create(const xfont& font, const basic_rect<F32>& bounds, U32 flags, F32 line_space, F32 tab_stop, F32 left_indent, F32 right_indent);
 
     void set_text(const char* text);
