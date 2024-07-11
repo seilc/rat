@@ -330,7 +330,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xCollide.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCollideFast.cpp"),
             Object(Matching, "rt/Engine/Core/x/xColor.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xCounter.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xCounter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCutscene.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xDebug.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xDebugGraph.cpp"),
