@@ -14,9 +14,26 @@ struct tweak_callback
     void(*on_stop_edit)(tweak_info&);
     void(*on_expand)(tweak_info&);
     void(*on_collapse)(tweak_info&);
-    void(*on_update)(tweak_info&);
+    void(*on_update)(const tweak_info&);
     void(*convert_mem_to_tweak)(tweak_info&, void*);
     void(*convert_tweak_to_mem)(tweak_info&, void*);
+
+    static tweak_callback create_update(void(*on_update)(const tweak_info&))
+    {
+        tweak_callback cb = {
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            NULL,
+            on_update,
+            NULL,
+            NULL
+        };
+        return cb;
+    }
 };
 
 struct tweak_info
@@ -81,10 +98,21 @@ inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, c
 }
 
 void xDebugRemoveTweak(const char* name);
+
+#define xTWEAKFLOAT(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
+#define xTWEAKBOOL(name, v, cb, context, flags)
+#define xTWEAKMESSAGE(name, message, cb, context, flags)
+#define xTWEAKREMOVE(name) xDebugRemoveTweak(name)
 #else
 void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddTweak(const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags);
 void xDebugRemoveTweak(const char* name);
+
+#define xTWEAKFLOAT(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
+#define xTWEAKBOOL(name, v, cb, context, flags) xDebugAddTweak(name, v, cb, context, flags)
+#define xTWEAKMESSAGE(name, message, cb, context, flags) xDebugAddTweak(name, message, cb, context, flags)
+#define xTWEAKREMOVE(name) xDebugRemoveTweak(name)
 #endif
 
 #endif

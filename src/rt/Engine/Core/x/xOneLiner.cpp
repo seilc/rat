@@ -118,10 +118,8 @@ void xOneLiner::UpdateSounds()
 
 void xOneLiner::TweaksInit()
 {
-#ifdef DEBUGRELEASE
-    xDebugAddTweak("Player|OneLiners|Ignore cycle time", &sDebugIgnoreTime, NULL, NULL, 0);
-    xDebugAddTweak("Player|OneLiners|Ignore probability", &sDebugIgnoreProb, NULL, NULL, 0);
-#endif
+    xTWEAKBOOL("Player|OneLiners|Ignore cycle time", &sDebugIgnoreTime, NULL, NULL, 0);
+    xTWEAKBOOL("Player|OneLiners|Ignore probability", &sDebugIgnoreProb, NULL, NULL, 0);
 }
 
 inline bool xOneLiner::NoInhibitions() const

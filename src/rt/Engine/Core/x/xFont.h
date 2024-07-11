@@ -89,6 +89,8 @@ public:
         basic_rect<F32> render_bounds;
         const callback* cb;
         const tag_type* tag;
+
+        void reset_flags() { *(U16*)&flag = 0; }
     };
 
     xfont font;
