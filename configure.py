@@ -363,7 +363,7 @@ config.libs = [
             Object(Equivalent, "rt/Engine/Core/x/xJaw.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xJSP.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xLight.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xLightKit.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xLightKit.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMath.cpp"),
             Object(Matching, "rt/Engine/Core/x/xMath2.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMath3.cpp"),
