@@ -1,8 +1,14 @@
 #include "xMemoryManagerFixed.h"
 
-#include "xDebug.h"
 #include "xMemMgr.h"
-#include "xMemory.h"
+
+#ifdef DEBUGRELEASE
+#define DoAllocate(size, options, file, function, line) DoAllocate(size, options, file, function, line)
+#define DoReallocate(pointer, size, options, file, function, line) DoReallocate(pointer, size, options, file, function, line)
+#else
+#define DoAllocate(size, options, file, function, line) DoAllocate(size, options)
+#define DoReallocate(pointer, size, options, file, function, line) DoReallocate(pointer, size, options)
+#endif
 
 #ifdef DEBUGRELEASE
 inline U8 ConvertToFixedSizeEnum(U32 size)
@@ -57,11 +63,7 @@ void xMemoryManagerFixed::Init(void* start, U32 elements, U32 elementSize)
     InitMemory();
 }
 
-#ifdef DEBUGRELEASE
 void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options, const char*, const char*, S32)
-#else
-void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options)
-#endif
 {
     xASSERT(108, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 2);
 
@@ -102,11 +104,7 @@ void xMemoryManagerFixed::DoFree(void* pointer)
 #endif
 }
 
-#ifdef DEBUGRELEASE
 void* xMemoryManagerFixed::DoReallocate(void* pointer, U32 size, U32, const char*, const char*, S32)
-#else
-void* xMemoryManagerFixed::DoReallocate(void* pointer, U32 size, U32)
-#endif
 {
     xASSERT(158, size <= elementSize);
     return pointer;

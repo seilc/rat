@@ -558,7 +558,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xLightVolume.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustom.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUIIncredibles.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xMemoryManager.cpp"),
+            Object(Equivalent, "rt/Engine/Core/x/xMemoryManager.cpp", extra_cflags=['-sym on']),
             Object(Matching, "rt/Engine/Core/x/xMemoryManagerFixed.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Core/x/xMemoryManagerGeneral.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleGenerator.cpp"),

@@ -10,6 +10,7 @@ extern "C" {
 
 extern int sprintf(char*, const char*, ...);
 extern int vsprintf(char* s, const char* format, va_list arg);
+extern int printf(const char*, ...);
 
 #ifdef __cplusplus
 }

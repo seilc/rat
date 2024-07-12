@@ -1,7 +1,7 @@
 #ifndef XMEMORYMANAGER_H
 #define XMEMORYMANAGER_H
 
-#include "types.h"
+#include "xMemory.h"
 
 #include <dolphin.h>
 
@@ -23,8 +23,43 @@ static const U32 xMEMORYOPT_ALIGN_SHIFT = 2;
 class xMemoryManager
 {
 public:
-    void DoInit(void* start, U32 size, bool debugging);
+    bool Owns(const void* pointer) const;
     void* GetArenaStart() const;
+
+    bool IsDebugging() const
+    {
+        return debugDataSize != 0;
+    }
+
+    U32 GetBlockSize(void* pointer) const;
+
+#ifndef NON_MATCHING
+    bool InActiveList(const void*, U32) const;
+#endif
+
+    bool IsValidPointer(const void* pointer) const;
+    void DumpActiveList() const;
+
+#ifndef NON_MATCHING
+    bool ValidateActiveList() const;
+#endif
+
+#ifdef DEBUGRELEASE
+    void* Allocate(U32 size, U32 options, const char* file, const char* function, S32 line);
+#else
+    void* Allocate(U32 size, U32 options);
+#endif
+
+    void Free(void* pointer);
+
+#ifdef DEBUGRELEASE
+    void* Reallocate(void* pointer, U32 size, U32 options, const char* file, const char* function, S32 line);
+#else
+    void* Reallocate(void* pointer, U32 size, U32 options);
+#endif
+
+protected:
+    void DoInit(void* start, U32 size, bool debugging);
 
 #ifdef DEBUGRELEASE
     virtual void* DoAllocate(U32 size, U32 options, const char*, const char*, S32) = 0;
@@ -51,6 +86,9 @@ public:
 private:
     struct DebugAllocationHeader
     {
+        static const U32 MAGIC = 0xDEADBEEF;
+        static const U32 NUM_MAGIC = 1;
+
         const char* file;
         S32 line;
         const char* function;
@@ -58,7 +96,15 @@ private:
         DebugAllocationHeader* prev;
         DebugAllocationHeader* next;
         xMemoryManager* manager;
-        U32 magic[1];
+        U32 magic[NUM_MAGIC];
+    };
+
+    struct DebugAllocationTrailer
+    {
+        static const U32 MAGIC = 0x31173D0D;
+        static const U32 NUM_MAGIC = 8;
+
+        U32 magic[NUM_MAGIC];
     };
 
     void* arenaStart;
@@ -77,6 +123,9 @@ private:
 #ifdef DEBUGRELEASE
     U32 debugOverhead;
 #endif
+
+    void* SetupDebugBlock(void* memory, U32 size, const char* file, const char* function, S32 line);
+    void* RemoveDebugBlock(void* memory, U32* size);
 };
 
 #endif

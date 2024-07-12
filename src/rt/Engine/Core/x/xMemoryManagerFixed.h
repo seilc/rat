@@ -22,6 +22,7 @@ public:
 
     void Init(void* start, U32 elements, U32 elementSize);
 
+protected:
 #ifdef DEBUGRELEASE
     virtual void* DoAllocate(U32 size, U32 options, const char*, const char*, S32);
 #else
@@ -38,8 +39,6 @@ public:
 
     virtual U32 DoGetBlockSize(void*) const;
 
-    void InitMemory();
-
 private:
     struct FixedHeader
     {
@@ -53,6 +52,8 @@ private:
     U32 allocatedElements;
     U8* origSizeList;
 #endif
+
+    void InitMemory();
 };
 
 #endif
