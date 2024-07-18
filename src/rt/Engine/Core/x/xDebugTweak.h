@@ -103,16 +103,39 @@ void xDebugRemoveTweak(const char* name);
 #define xTWEAKBOOL(name, v, cb, context, flags)
 #define xTWEAKMESSAGE(name, message, cb, context, flags)
 #define xTWEAKREMOVE(name) xDebugRemoveTweak(name)
+
+#define xAUTOTWEAKRANGE(prefix, name, v, vmin, vmax, cb, context, flags, process)
+#define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process)
 #else
 void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags);
+
+void _auto_tweak(const char* prefix, const char* name, S32* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
+void _auto_tweak(const char* prefix, const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
+void _auto_tweak(const char* prefix, const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags, bool process);
+
 void xDebugRemoveTweak(const char* name);
+
+template <class T, class T2>
+inline void _t_auto_tweak(const char* prefix, const char* name, T* v, T2 vmin, T2 vmax, const tweak_callback* cb, void* context, U32 flags, bool process)
+{
+    _auto_tweak(prefix, name, v, vmin, vmax, cb, context, flags, process);
+}
+
+template <>
+inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process)
+{
+    _auto_tweak(prefix, name, v, cb, context, flags, process);
+}
 
 #define xTWEAKFLOAT(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
 #define xTWEAKBOOL(name, v, cb, context, flags) xDebugAddTweak(name, v, cb, context, flags)
 #define xTWEAKMESSAGE(name, message, cb, context, flags) xDebugAddTweak(name, message, cb, context, flags)
 #define xTWEAKREMOVE(name) xDebugRemoveTweak(name)
+
+#define xAUTOTWEAKRANGE(prefix, name, v, vmin, vmax, cb, context, flags, process) _t_auto_tweak(prefix, name, v, vmin, vmax, cb, context, flags, process)
+#define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process) _t_auto_tweak(prefix, name, v, 0, 0, cb, context, flags, process)
 #endif
 
 #endif

@@ -68,6 +68,7 @@ struct xModelPool
 void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
 void xModelEval(xModelInstance* modelInst);
 S32 xModelCullSingle(xModelInstance* minst);
+RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
 
 #ifdef DEBUGRELEASE
 bool xModelRenderLogEnabled();

@@ -18,6 +18,8 @@ struct xVec3
     };
 
     xVec3& assign(F32 x, F32 y, F32 z);
+    xVec3& operator-=(const xVec3& v);
+    F32 up_normalize();
     void Sub(const xVec3& a, const xVec3& b);
 };
 

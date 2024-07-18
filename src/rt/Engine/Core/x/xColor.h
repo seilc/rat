@@ -17,6 +17,11 @@ typedef struct xColor_tag
     };
 } xColor;
 
+typedef struct _xFColor
+{
+    F32 r, g, b, a;
+} xFColor;
+
 extern const xColor g_RED;
 extern const xColor g_LIGHT_RED;
 extern const xColor g_GREEN;
