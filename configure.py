@@ -528,7 +528,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zSmoke.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSplash.cpp"),
             Object(NonMatching, "rt/Engine/Game/zIncrediSlam.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xScrPulseGlare.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xScrPulseGlare.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Game/zBehavior.cpp"),
             Object(NonMatching, "rt/Engine/Game/zWater.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTimeHandler.cpp"),

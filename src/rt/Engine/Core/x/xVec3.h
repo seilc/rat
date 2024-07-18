@@ -19,10 +19,14 @@ struct xVec3
 
     xVec3& assign(F32 x, F32 y, F32 z);
     xVec3& operator-=(const xVec3& v);
+    xVec3& operator*=(F32 f);
+    F32 dot(const xVec3& c) const;
     F32 up_normalize();
+    void AddScale(const xVec3& d, F32 s);
     void Sub(const xVec3& a, const xVec3& b);
 };
 
+F32 xVec3Normalize(xVec3* o, const xVec3* v);
 F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
 
 void xVec3AddTo(xVec3* a, const xVec3* b);
