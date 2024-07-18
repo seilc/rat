@@ -4,13 +4,13 @@
 #include "xDebug.h"
 
 template <class T>
-static inline T* xMEMADVANCE(T* base, S32 bytes)
+inline T* xMEMADVANCE(T* base, S32 bytes)
 {
     return (T*)((U8*)base + bytes);
 }
 
 template <class T>
-static inline T* xMEMADVANCE(T* base, U32 bytes)
+inline T* xMEMADVANCE(T* base, U32 bytes)
 {
     return (T*)((U8*)base + bytes);
 }
