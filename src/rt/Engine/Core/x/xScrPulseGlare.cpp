@@ -262,6 +262,7 @@ void xPulseGlareMgr::init()
 xPulseGlare* xPulseGlareMgr::get(U32 i)
 {
     xASSERT(0, !(i < 0 || i >= zMAX_PULSE_GLARES ));
+    return NULL;
 }
 
 void xPulseGlareMgr::update(F32 dt)

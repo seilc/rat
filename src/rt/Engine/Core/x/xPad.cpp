@@ -39,7 +39,7 @@ S32 xPadInit(S32 i)
 xPad* xPadEnable(S32 idx)
 {
     xPad* p = &mPad[idx];
-    iPadEnable(p, idx);
+    return iPadEnable(p, idx);
 }
 
 void xPadRumbleEnable(S32 idx, S32 enable)
