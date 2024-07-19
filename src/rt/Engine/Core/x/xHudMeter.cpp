@@ -35,9 +35,9 @@ meter_widget::meter_widget(const meter_asset& a)
     static bool registered = false;
     if (!registered) {
         registered = true;
-        xTWEAKFLOAT("Temp|HUD Meter Accel", &tweak_accel, 0.0f, 1e9f, NULL, NULL, 0);
-        xTWEAKFLOAT("Temp|HUD Meter Min Ping Time", &tweak_min_ping_time, 0.0f, 1.0f, NULL, NULL, 0);
-        xTWEAKFLOAT("Temp|HUD Meter Pitch Scale", &tweak_pitch_scale, -100000.0f, 100000.0f, NULL, NULL, 0);
+        xTWEAK("Temp|HUD Meter Accel", &tweak_accel, 0.0f, 1e9f, NULL, NULL, 0);
+        xTWEAK("Temp|HUD Meter Min Ping Time", &tweak_min_ping_time, 0.0f, 1.0f, NULL, NULL, 0);
+        xTWEAK("Temp|HUD Meter Pitch Scale", &tweak_pitch_scale, -100000.0f, 100000.0f, NULL, NULL, 0);
     }
 }
 

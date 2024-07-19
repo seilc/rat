@@ -85,6 +85,13 @@ struct xRot
     F32 angle;
 };
 
+class xPlane
+{
+public:
+    xVec3 norm;
+    F32 d;
+};
+
 extern xMat4x3 g_I3;
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
