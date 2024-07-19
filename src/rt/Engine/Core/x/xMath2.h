@@ -6,6 +6,10 @@
 struct xVec2
 {
     F32 x, y;
+
+    xVec2& assign(F32 x, F32 y);
+    xVec2& operator/=(F32 f);
+    F32 length() const;
 };
 
 template <class T>
