@@ -371,7 +371,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xModel.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xModelBucket.cpp"),
             Object(Matching, "rt/Engine/Core/x/xMorph.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xMovePoint.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xMovePoint.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xNavigationMeshAsset.cpp"),
             Object(Matching, "rt/Engine/Core/x/xordarray.cpp"),
             Object(Matching, "rt/Engine/Core/x/xOutputMgr.cpp"),

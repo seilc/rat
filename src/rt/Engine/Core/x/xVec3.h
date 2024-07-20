@@ -34,6 +34,7 @@ void xVec3Sub(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3SMul(xVec3* o, const xVec3* v, F32 s);
 void xVec3Cross(xVec3* o, const xVec3* a, const xVec3* b);
 F32 xVec3Length2(const xVec3* v);
+F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 
 #ifndef DEBUG
 #include "xVec3Inlines.h"

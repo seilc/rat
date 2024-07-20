@@ -16,6 +16,7 @@
 F32 xDampSpringCoeff(F32 dt, F32 k);
 void xDampSpring(F32& s, F32& v, F32 dt, F32 k, F32 e);
 
+F32 xsqrt(F32 x);
 F32 xexp(F32 x);
 F32 xasin(F32 x);
 F32 xatan2(F32 y, F32 x);
