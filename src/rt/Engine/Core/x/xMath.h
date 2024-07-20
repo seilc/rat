@@ -12,6 +12,7 @@
 #define xmin(a,b) ((a) < (b) ? (a) : (b))
 #define xmax(a,b) ((a) > (b) ? (a) : (b))
 #define xmax3(a,b,c) (xmax(xmax((a), (b)), (c)))
+#define xsqr(x) ((x) * (x))
 
 F32 xDampSpringCoeff(F32 dt, F32 k);
 void xDampSpring(F32& s, F32& v, F32 dt, F32 k, F32 e);

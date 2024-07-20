@@ -416,7 +416,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xTimestamp.cpp"),
             Object(Matching, "rt/Engine/Core/x/xTransient.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xTRC.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xUpdateCull.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xUpdateCull.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xutil.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xVec3.cpp"),
             Object(Matching, "rt/Engine/Core/x/xVolume.cpp"),

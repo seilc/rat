@@ -13,4 +13,7 @@ struct xGroup : xBase
     S32 flg_group;
 };
 
+U32 xGroupGetCount(xGroup* g);
+xBase* xGroupGetItemPtr(xGroup* g, U32 index);
+
 #endif
