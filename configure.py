@@ -389,7 +389,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xQuickCull.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xRand.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRegionSupport.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xRenderState.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xRenderState.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRMemData.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xRumbleEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xRumbleManager.cpp"),

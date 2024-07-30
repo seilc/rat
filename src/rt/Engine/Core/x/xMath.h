@@ -5,6 +5,7 @@
 
 #define EPSILON 1e-5f
 #define PI 3.14159265358979323846f
+#define HUGE 1e38f
 
 #define xabs(x) iabs(x)
 #define xeq(a,b,e) (xabs((a) - (b)) <= (e))
