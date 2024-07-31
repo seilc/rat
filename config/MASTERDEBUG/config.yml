@@ -5,3 +5,6 @@ splits: config/MASTERDEBUG/splits.txt
 symbols_known: true
 fill_gaps: false
 ldscript_template: config/MASTERDEBUG/ldscript.tpl
+
+block_relocations:
+- target: 0x803C533C

@@ -95,11 +95,11 @@ void xEnvRender(xEnv* env, bool alpha)
             char text[128];
             if (env->geom->jsp_visibilityCount[i] < 0) {
                 sprintf(text, "JSP '%s' had too many Decrements (once only assertion)", xSTAssetName(env->geom->jsp_aid[i]));
-                xASSERTONCEFMT(175, "%s", text);
+                xASSERTFAILONCEFMT(175, "%s", text);
             }
             if (env->geom->jsp_visibilityCount[i] > 4) {
                 sprintf(text, "JSP '%s' had suspiciously high Inc's\n (more than 4, missing Dec's?)", xSTAssetName(env->geom->jsp_aid[i]));
-                xASSERTONCEFMT(181, "%s", text);
+                xASSERTFAILONCEFMT(181, "%s", text);
             }
 #endif
         }

@@ -91,7 +91,16 @@ do {                                                                            
 #define xASSERTALWAYSMSG(line, msg) _xASSERTFAIL(line, *always*, msg)
 #define xASSERTALWAYSFMT(line, fmt, ...) _xASSERTFAIL(line, *always*, fmt, __VA_ARGS__)
 
-#define xASSERTONCEFMT(line, fmt, ...)                                                            \
+#define xASSERTONCE(line, cond)                                                                   \
+do {                                                                                              \
+    static bool done = false;                                                                     \
+    if (!done && !(cond)) {                                                                       \
+        xASSERTALWAYSFMT(line, "%s", #cond);                                                      \
+        done = true;                                                                              \
+    }                                                                                             \
+} while (0)
+
+#define xASSERTFAILONCEFMT(line, fmt, ...)                                                        \
 do {                                                                                              \
     static bool done = false;                                                                     \
     if (!done) {                                                                                  \
@@ -115,7 +124,8 @@ do {                                                                            
 #define xASSERTALWAYS(line)
 #define xASSERTALWAYSMSG(line, msg)
 #define xASSERTALWAYSFMT(line, fmt, ...)
-#define xASSERTONCEFMT(line, fmt, ...)
+#define xASSERTONCE(line, cond)
+#define xASSERTFAILONCEFMT(line, fmt, ...)
 #define xASSERTDESIGNMSG(line, cond, msg)
 #endif
 

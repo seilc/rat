@@ -5,3 +5,6 @@ splits: config/MASTER/splits.txt
 symbols_known: true
 fill_gaps: false
 ldscript_template: config/MASTER/ldscript.tpl
+
+block_relocations:
+- target: 0x803C3E1C
