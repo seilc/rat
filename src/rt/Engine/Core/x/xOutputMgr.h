@@ -43,11 +43,11 @@ void xOutBabble(char* name, const char* fmt, ...);
 #define xOutEnable(name)
 #define xOutEnabled 0
 #define xOutTrumps 0
-#define xOutCrit(name, fmt, ...)
-#define xOutErr(name, fmt, ...)
-#define xOutWarn(name, fmt, ...)
-#define xOutInfo(name, fmt, ...)
-#define xOutBabble(name, fmt, ...)
+#define xOutCrit(name, ...)
+#define xOutErr(name, ...)
+#define xOutWarn(name, ...)
+#define xOutInfo(name, ...)
+#define xOutBabble(name, ...)
 #endif
 
 #endif

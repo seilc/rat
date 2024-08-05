@@ -50,6 +50,7 @@ struct zScene : xScene
 };
 
 xBase* zSceneFindObject(U32 gameID);
+const char* zSceneGetName(xBase* b);
 U32 zScene_ScreenAdjustMode();
 
 #endif

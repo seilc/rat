@@ -131,6 +131,24 @@ inline xVec3* xEntGetPos(const xEnt* ent)
     return &xModelGetFrame(ent->model)->pos;
 }
 
+inline void xEntVisibilityCullOn(xEnt* ent)
+{
+    ent->flags |= (U8)0x4;
+    if (ent->visUpdate) {
+        ent->visUpdate(ent);
+    }
+}
+
+inline void xEntVisibilityCullOff(xEnt* ent)
+{
+    ent->flags &= (U8)~0x4;
+    if (ent->visUpdate) {
+        ent->visUpdate(ent);
+    }
+}
+
+void xEntShow(xEnt* ent);
+void xEntHide(xEnt* ent);
 U32 xEntIsVisible(const xEnt* ent);
 
 #endif

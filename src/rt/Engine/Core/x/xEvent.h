@@ -28,6 +28,8 @@ inline void zEntEvent(xBase* to, U32 toEvent)
     zEntEvent(NULL, 0, to, toEvent, NULL, NULL, 0, FE_NO);
 }
 
+void zEntEvent(xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID);
+
 inline void zEntEvent(xBase* to, U32 toEvent, const F32* toParam)
 {
     zEntEvent(NULL, 0, to, toEvent, toParam, NULL, 0, FE_NO);
