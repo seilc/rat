@@ -5,6 +5,7 @@
 #include "xDebug.h"
 
 #include <stddef.h>
+#include <new>
 
 struct xMemPool;
 typedef void(*xMemPoolInitCallback)(xMemPool*, void*);

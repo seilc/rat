@@ -2,7 +2,6 @@
 
 #include "xHudAsset.h"
 
-#include <new>
 #include <stdio.h>
 
 namespace xhud {

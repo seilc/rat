@@ -7,7 +7,6 @@
 #include "xDebugTweak.h"
 #include "xRand.h"
 
-#include <new>
 #include <string.h>
 
 bool xLightEffectIsValid(xBase* base)

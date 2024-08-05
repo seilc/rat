@@ -2,8 +2,6 @@
 
 #include "xHudAsset.h"
 
-#include <new>
-
 #ifndef NON_MATCHING
 xAnimTable* xHUDCreateAnimTable()
 {

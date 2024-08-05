@@ -7,7 +7,6 @@
 #include "zMain.h"
 #include "xScrFx.h"
 
-#include <new>
 #include <string.h>
 
 namespace xhud {
