@@ -18,7 +18,7 @@ namespace xhud {
 
 void model_widget::load(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate(40, asset, model_asset);
+    xDynAssetValidate(40, asset, model_asset, model_asset::type_name());
 
     init_base(data, asset, sizeof(widget_chunk));
 

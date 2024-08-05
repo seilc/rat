@@ -3,6 +3,8 @@
 
 #include "xDebug.h"
 
+F32 xrand_GenRandFloat();
+
 U16 xrand_RandomInt16();
 U32 xrand_RandomInt32();
 F32 xrand_RandomFloat();

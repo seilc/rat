@@ -606,7 +606,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zMeshNavigation.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMeshCollision.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMeshPosition.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xLightEffect.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xLightEffect.cpp"),
             Object(NonMatching, "rt/Engine/Game/zShowerSystem.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCPerception.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerInput.cpp"),

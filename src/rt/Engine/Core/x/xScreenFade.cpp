@@ -146,7 +146,7 @@ void xScreenFade::reset()
 
 void xScreenFade::load(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate(236, asset, xScreenFade::asset_type);
+    xDynAssetValidate(236, asset, xScreenFade::asset_type, xScreenFade::asset_type::type_name());
     ((xScreenFade&)data).load((xScreenFade::asset_type&)asset);
 }
 
