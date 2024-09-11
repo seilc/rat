@@ -13,6 +13,7 @@
 #define xmin(a,b) ((a) < (b) ? (a) : (b))
 #define xmax(a,b) ((a) > (b) ? (a) : (b))
 #define xmax3(a,b,c) (xmax(xmax((a), (b)), (c)))
+#define xclamp(x,a,b) ((x) < (a) ? (a) : ((x) > (b) ? (b) : (x)))
 #define xsqr(x) ((x) * (x))
 
 inline S32 log2ceil(S32 value)
