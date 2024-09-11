@@ -10,6 +10,11 @@ struct xVec4
     F32 x, y, z, w;
 };
 
+struct xFRect
+{
+    F32 x, y, w, h;
+};
+
 struct xBox
 {
     xVec3 upper;

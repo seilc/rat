@@ -537,7 +537,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xCollideSphereBox.cpp"),
             Object(NonMatching, "rt/Engine/Game/zReticle.cpp"),
             Object(NonMatching, "rt/Engine/Game/zGrass.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xFXCameraTexture.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xFXCameraTexture.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Core/x/xFXHighDynamicRange.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCollideSpherePolygonUnprocessed.cpp"),
             Object(NonMatching, "rt/Engine/Game/zInteraction.cpp"),

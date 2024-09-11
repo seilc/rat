@@ -15,6 +15,23 @@
 #define xmax3(a,b,c) (xmax(xmax((a), (b)), (c)))
 #define xsqr(x) ((x) * (x))
 
+inline S32 log2ceil(S32 value)
+{
+    S32 power = 0;
+
+    S32 v = value;
+    while (v > 1) {
+        v >>= 1;
+        power++;
+    }
+
+    if ((1 << power) < value) {
+        power++;
+    }
+
+    return power;
+}
+
 F32 xDampSpringCoeff(F32 dt, F32 k);
 void xDampSpring(F32& s, F32& v, F32 dt, F32 k, F32 e);
 
