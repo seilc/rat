@@ -596,7 +596,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zShrapnelEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSmashRing.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTransientModel.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/iCamera.cpp"),
+            Object(Matching, "rt/Engine/Core/x/iCamera.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Game/zNPCAsset.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXLightDust.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCBehavior.cpp"),

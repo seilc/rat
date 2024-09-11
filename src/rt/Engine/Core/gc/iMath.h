@@ -14,5 +14,6 @@
 #endif
 
 F32 isin(F32 f);
+F32 itan(F32 f);
 
 #endif

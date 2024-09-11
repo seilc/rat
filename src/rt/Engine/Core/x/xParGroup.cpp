@@ -12,6 +12,8 @@ xParGroup* sParGroupRegTable[REG_TABLE_MAX];
 static F32 sSortDistance = 0.0f;
 static U32 sSortID = 0;
 
+#define CLAMP(x,a,b) ((x) < (a) ? (a) : ((x) > (b) ? (b) : (x)))
+
 void xParGroupInit(xParGroup* ps)
 {
     xASSERT(41, ps);
@@ -158,19 +160,19 @@ void xParGroupAnimate(xParGroup* ps, F32 dt)
             continue;
         }
         
-        col = xclamp(i->m_cfl[0] + i->m_cvel[0] * dt, 0.0f, 255.0f);
+        col = CLAMP(i->m_cfl[0] + i->m_cvel[0] * dt, 0.0f, 255.0f);
         i->m_cfl[0] = col;
         i->m_c[0] = col;
 
-        col = xclamp(i->m_cfl[1] + i->m_cvel[1] * dt, 0.0f, 255.0f);
+        col = CLAMP(i->m_cfl[1] + i->m_cvel[1] * dt, 0.0f, 255.0f);
         i->m_cfl[1] = col;
         i->m_c[1] = col;
 
-        col = xclamp(i->m_cfl[2] + i->m_cvel[2] * dt, 0.0f, 255.0f);
+        col = CLAMP(i->m_cfl[2] + i->m_cvel[2] * dt, 0.0f, 255.0f);
         i->m_cfl[2] = col;
         i->m_c[2] = col;
 
-        col = xclamp(i->m_cfl[3] + i->m_cvel[3] * dt, 0.0f, 255.0f);
+        col = CLAMP(i->m_cfl[3] + i->m_cvel[3] * dt, 0.0f, 255.0f);
         i->m_cfl[3] = col;
         i->m_c[3] = col;
 

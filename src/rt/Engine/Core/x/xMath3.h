@@ -142,4 +142,6 @@ inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
     return xMat3x3MulScaleC(o, m, s->x, s->y, s->z);
 }
 
+void xMat4x3Copy(xMat4x3* o, const xMat4x3* m);
+
 #endif
