@@ -3,6 +3,12 @@
 
 #include "xQuickCull.h"
 
+#define k_XBOUNDTYPE_NONE 0
+#define k_XBOUNDTYPE_SPHERE 1
+#define k_XBOUNDTYPE_BOX 2
+#define k_XBOUNDTYPE_CYLINDER 3
+#define k_XBOUNDTYPE_OBB 4
+
 struct xBound
 {
     xQCData qcd;
@@ -16,5 +22,7 @@ struct xBound
     };
     xMat4x3* mat;
 };
+
+void xBoundGetBox(xBox& box, const xBound& bound);
 
 #endif

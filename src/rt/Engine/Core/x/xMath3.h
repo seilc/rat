@@ -15,6 +15,12 @@ struct xFRect
     F32 x, y, w, h;
 };
 
+struct xLine3
+{
+    xVec3 p1;
+    xVec3 p2;
+};
+
 struct xBox
 {
     xVec3 upper;
@@ -40,6 +46,7 @@ struct xCylinder
     F32 h;
 };
 
+#define XRAY3_USE_MIN (1<<10)
 #define XRAY3_USE_MAX (1<<11)
 
 struct xRay3
@@ -98,6 +105,8 @@ public:
 };
 
 extern xMat4x3 g_I3;
+
+void xBoxInitBoundOBB(xBox* o, const xBox* b, const xMat4x3* m);
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
 {
