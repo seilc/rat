@@ -25,7 +25,7 @@ public:
     zMeshCircle();
 
     void SetPosition(const xVec3& position);
-    xVec3& zMeshCircle::GetCenter() const;
+    xVec3& GetCenter() const;
 };
 
 #endif
