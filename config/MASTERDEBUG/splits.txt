@@ -7007,7 +7007,7 @@ rwsdk/plugin/skin2/gcn/skinmatfxgcn.c:
 rwsdk/plugin/skin2/gcn/skingcnm.c:
 	.text       start:0x8025B668 end:0x8025B850
 
-rwsdk/plugin/userdata/rpusrdat.c:
+rwsdk/plugin/userdata/release/rpusrdat.c:
 	.text       start:0x8025B850 end:0x8025CAA0
 	.sbss       start:0x803C4438 end:0x803C4478
 
@@ -7165,7 +7165,7 @@ rwsdk/tool/anim/rtanim.c:
 	.sbss       start:0x803C4510 end:0x803C4518
 	.sdata2     start:0x803CA128 end:0x803CA130
 
-rwsdk/tool/fsyst/rtfsmgr.c:
+rwsdk/tool/fsyst/release/rtfsmgr.c:
 	.text       start:0x80279CA8 end:0x8027A368
 	.bss        start:0x803BC830 end:0x803BC848
 	.sdata      start:0x803C0B38 end:0x803C0B50

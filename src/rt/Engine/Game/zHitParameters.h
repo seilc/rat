@@ -1,0 +1,110 @@
+#ifndef ZHITREACTION_H
+#define ZHITREACTION_H
+
+#include "types.h"
+
+enum zHitSource
+{
+    zHS_EVENT,
+    zHS_GENERAL,
+    zHS_EXPLOSION,
+    zHS_MELEE_HIGH,
+    zHS_MELEE_MID,
+    zHS_MELEE_LOW,
+    zHS_MELEE_BACK,
+    zHS_MELEE_DIZZY,
+    zHS_MELEE_MRI,
+    zHS_MELEE_FRO,
+    zHS_MELEE_NPC,
+    zHS_THROW,
+    zHS_PROJECTILE,
+    zHS_NUKE_MRI,
+    zHS_NUKE_FRO,
+    zHS_INCREDISLAM_LEVEL1,
+    zHS_INCREDISLAM_LEVEL2,
+    zHS_INCREDISLAM_LEVEL3,
+    zHS_ICE_GLIDE_LEVEL1,
+    zHS_ICE_GLIDE_LEVEL2,
+    zHS_ICE_GLIDE_LEVEL3,
+    zHS_DODGE_ROLL_LEVEL1,
+    zHS_DODGE_ROLL_LEVEL2,
+    zHS_DODGE_ROLL_LEVEL3,
+    zHS_GOO,
+    zHS_FIRE,
+    zHS_LASERBEAM,
+    zHS_LEDGE_UP,
+    zHS_MELEE_UP,
+    zHS_LASER,
+    zHS_ENERGY,
+    zHS_SURFACE,
+    zHS_WATER,
+    zHS_DEATHPLANE,
+    zHS_KNOCKBACK,
+    zHS_INFINITE_FALL,
+    zHS_INCREDISLAM_FALL_LEVEL1,
+    zHS_INCREDISLAM_FALL_LEVEL2,
+    zHS_INCREDISLAM_FALL_LEVEL3,
+    zHS_PUNCH_MRI_1_LEVEL1,
+    zHS_PUNCH_MRI_1_LEVEL2,
+    zHS_PUNCH_MRI_1_LEVEL3,
+    zHS_PUNCH_MRI_2_LEVEL1,
+    zHS_PUNCH_MRI_2_LEVEL2,
+    zHS_PUNCH_MRI_2_LEVEL3,
+    zHS_PUNCH_MRI_3_LEVEL1,
+    zHS_PUNCH_MRI_3_LEVEL2,
+    zHS_PUNCH_MRI_3_LEVEL3,
+    zHS_PUNCH_MRI_4_LEVEL1,
+    zHS_PUNCH_MRI_4_LEVEL2,
+    zHS_PUNCH_MRI_4_LEVEL3,
+    zHS_PUNCH_FRO_1_LEVEL1,
+    zHS_PUNCH_FRO_1_LEVEL2,
+    zHS_PUNCH_FRO_1_LEVEL3,
+    zHS_PUNCH_FRO_2_LEVEL1,
+    zHS_PUNCH_FRO_2_LEVEL2,
+    zHS_PUNCH_FRO_2_LEVEL3,
+    zHS_PUNCH_FRO_3_LEVEL1,
+    zHS_PUNCH_FRO_3_LEVEL2,
+    zHS_PUNCH_FRO_3_LEVEL3,
+    zHS_PUNCH_FRO_4_LEVEL1,
+    zHS_PUNCH_FRO_4_LEVEL2,
+    zHS_PUNCH_FRO_4_LEVEL3,
+    zHS_ENEMY_DAMAGE,
+    zHS_ENEMY_FLYBACK,
+    zHS_COUNT,
+    zHS_FORCE_INT = -1
+};
+
+enum zHitTarget
+{
+    zHT_GENERAL,
+    zHT_FRONT,
+    zHT_BACK,
+    zHT_LEFT,
+    zHT_RIGHT,
+    zHT_ENTITY,
+    zHT_ENV,
+    zHT_CRITICAL,
+    zHT_COUNT
+};
+
+enum ezHitReaction
+{
+    zHR_None,
+    zHR_Smash,
+    zHR_Damage,
+    zHR_FlyBack,
+    zHR_FlyBackFar,
+    zHR_FlyUp,
+    zHR_FlyIceGlide,
+    zHR_InstaThaw,
+    zHR_Total
+};
+
+enum ezHitReactionState
+{
+    zHRS_Normal,
+    zHRS_Frozen,
+    zHRS_Total
+};
+
+#endif

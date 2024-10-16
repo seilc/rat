@@ -181,10 +181,15 @@ cflags_base = [
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
     f"-i build/{config.version}/include",
+    "-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",
+    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Math/Include",
+    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
+    "-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
 ]
 
 # Debug flags
-if config.debug:
+if version_num == 0:
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
@@ -208,6 +213,110 @@ cflags_rel = [
     "-O4,p",
 ]
 
+# RenderWare flags
+cflags_rwcore_base = [
+    *cflags_base,
+    "-sym on",
+    "-DDOLPHIN",
+    "-DRW_USE_SPF",
+    "-DRWNOVECMULTFUNCS",
+    "-gccinc",
+    "-i include/dolphin",
+    "-i src/rwsdk/include/gcn",
+    "-i src/rwsdk/driver/common",
+    "-i src/rwsdk/driver/gcn",
+    "-i src/rwsdk/os/gcn",
+    "-i src/rwsdk/src",
+    "-i src/rwsdk/src/pipe/p2",
+    "-i src/rwsdk/src/pipe/p2/gcn",
+    "-i src/rwsdk/src/plcore",
+]
+cflags_rwcore_debug = [
+    *cflags_rwcore_base,
+    "-DRWDEBUG",
+    "-inline off",
+]
+cflags_rwcore_release = [
+    *cflags_rwcore_base,
+    "-O4,p",
+]
+cflags_rwcore_list = [
+    cflags_rwcore_debug,
+    cflags_rwcore_release,
+    cflags_rwcore_release,
+    cflags_rwcore_release,
+]
+cflags_rwcore = cflags_rwcore_list[version_num]
+
+cflags_rpcollis = [
+    "-i src/rwsdk/plugin/collis",
+    *cflags_rwcore,
+]
+cflags_rphanim = [
+    "-i src/rwsdk/plugin/hanim",
+    *cflags_rwcore,
+]
+cflags_rpmatfx = [
+    "-i src/rwsdk/plugin/matfx",
+    "-i src/rwsdk/plugin/matfx/gcn",
+    *cflags_rwcore,
+]
+cflags_rpptank = [
+    "-i src/rwsdk/plugin/ptank",
+    "-i src/rwsdk/plugin/ptank/gcn",
+    "-i src/rwsdk/plugin/ptank/generic",
+    *cflags_rwcore,
+]
+cflags_rpskinmatfx = [
+    "-i src/rwsdk/plugin/skin2",
+    "-i src/rwsdk/plugin/skin2/gcn",
+    *cflags_rwcore,
+]
+cflags_rpusrdat = [
+    "-i src/rwsdk/plugin/userdata",
+    *cflags_rwcore,
+]
+cflags_rpworld = [
+    "-i src/rwsdk/world",
+    "-i src/rwsdk/world/pipe",
+    "-i src/rwsdk/world/pipe/p2",
+    "-i src/rwsdk/world/pipe/p2/gcn",
+    *cflags_rwcore,
+]
+cflags_rtanim = [
+    "-i src/rwsdk/tool/anim",
+    *cflags_rwcore,
+]
+cflags_rtcharse = [
+    "-i src/rwsdk/tool/charse",
+    *cflags_rwcore,
+]
+cflags_rtfsyst = [
+    "-i src/rwsdk/tool/fsyst",
+    "-i src/rwsdk/tool/fsyst/gcn",
+    *cflags_rwcore,
+]
+cflags_rtintsec = [
+    "-i src/rwsdk/tool/intsec",
+    *cflags_rwcore,
+]
+cflags_rtquat = [
+    "-i src/rwsdk/tool/quat",
+    *cflags_rwcore,
+]
+cflags_rtskinsp = [
+    "-i src/rwsdk/tool/sknsplit",
+    *cflags_rwcore,
+]
+cflags_rtslerp = [
+    "-i src/rwsdk/tool/slerp",
+    *cflags_rwcore,
+]
+cflags_rttilerd = [
+    "-i src/rwsdk/tool/tilerd",
+    *cflags_rwcore,
+]
+
 # Game-specific flags
 cflags_rat_base = [
     *cflags_base,
@@ -223,12 +332,7 @@ cflags_rat_base = [
     "-i src/rt/Engine/Core/gc",
     "-i src/rt/Engine/Core/x",
     "-i src/rt/Engine/Game",
-    "-i include/rwsdk",
-    "-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Math/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
-    "-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+    "-i src/rwsdk/include/gcn",
     "-i include/dolphin",
     "-i include/bink",
 ]
@@ -284,11 +388,11 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     }
 
 # Helper function for RenderWare libraries
-def RenderWareLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
+def RenderWareLib(lib_name: str, cflags: List[str], objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
         "mw_version": "GC/2.5",
-        "cflags": cflags_base,
+        "cflags": cflags,
         "host": False,
         "objects": objects,
     }
@@ -1212,39 +1316,43 @@ config.libs = [
     },
     RenderWareLib(
         "rpcollis",
+        cflags_rpcollis,
         [
-            Object(NonMatching, "rwsdk/plugin/collis/ctdata.c"),
-            Object(NonMatching, "rwsdk/plugin/collis/ctquery.c"),
-            Object(NonMatching, "rwsdk/plugin/collis/colldata.c"),
-            Object(NonMatching, "rwsdk/plugin/collis/collquery.c"),
-            Object(NonMatching, "rwsdk/include/gcn/rpdbgerr_1.c"),
+            Object(Matching, "rwsdk/plugin/collis/ctdata.c"),
+            Object(Matching, "rwsdk/plugin/collis/ctquery.c"),
+            Object(Matching, "rwsdk/plugin/collis/colldata.c"),
+            Object(Matching, "rwsdk/plugin/collis/collquery.c"),
+            Object(Matching, "rwsdk/include/gcn/rpdbgerr_1.c"),
         ],
     ),
     RenderWareLib(
         "rphanim",
+        cflags_rphanim,
         [
-            Object(NonMatching, "rwsdk/plugin/hanim/stdkey.c"),
-            Object(NonMatching, "rwsdk/plugin/hanim/rphanim.c"),
+            Object(Matching, "rwsdk/plugin/hanim/stdkey.c"),
+            Object(Matching, "rwsdk/plugin/hanim/rphanim.c"),
         ],
     ),
     RenderWareLib(
         "rpmatfx",
+        cflags_rpmatfx,
         [
-            Object(NonMatching, "rwsdk/plugin/matfx/rpmatfx.c"),
+            Object(Matching, "rwsdk/plugin/matfx/rpmatfx.c"),
             Object(NonMatching, "rwsdk/plugin/matfx/gcn/effectPipesGcn.c"),
             Object(NonMatching, "rwsdk/plugin/matfx/gcn/multiTexGcnData.c"),
             Object(NonMatching, "rwsdk/plugin/matfx/gcn/multiTexGcnPipe.c"),
             Object(NonMatching, "rwsdk/plugin/matfx/gcn/multiTexGcn.c"),
             Object(NonMatching, "rwsdk/plugin/matfx/gcn/nbtGen.c"),
-            Object(NonMatching, "rwsdk/plugin/matfx/multiTex.c"),
-            Object(NonMatching, "rwsdk/plugin/matfx/multiTexEffect.c"),
-            Object(NonMatching, "rwsdk/include/gcn/rpdbgerr_2.c"),
+            Object(Matching, "rwsdk/plugin/matfx/multiTex.c"),
+            Object(Matching, "rwsdk/plugin/matfx/multiTexEffect.c"),
+            Object(Matching, "rwsdk/include/gcn/rpdbgerr_2.c"),
         ],
     ),
     RenderWareLib(
         "rpptank",
+        cflags_rpptank,
         [
-            Object(NonMatching, "rwsdk/plugin/ptank/rpptank.c"),
+            Object(Matching, "rwsdk/plugin/ptank/rpptank.c"),
             Object(NonMatching, "rwsdk/plugin/ptank/gcn/ptankgcn.c"),
             Object(NonMatching, "rwsdk/plugin/ptank/gcn/ptankgcncallbacks.c"),
             Object(NonMatching, "rwsdk/plugin/ptank/gcn/ptankgcnrender.c"),
@@ -1263,9 +1371,10 @@ config.libs = [
     ),
     RenderWareLib(
         "rpskinmatfx",
+        cflags_rpskinmatfx,
         [
-            Object(NonMatching, "rwsdk/plugin/skin2/bsplit.c"),
-            Object(NonMatching, "rwsdk/plugin/skin2/rpskin.c"),
+            Object(Matching, "rwsdk/plugin/skin2/bsplit.c"),
+            Object(Matching, "rwsdk/plugin/skin2/rpskin.c"),
             Object(NonMatching, "rwsdk/plugin/skin2/gcn/skingcn.c"),
             Object(NonMatching, "rwsdk/plugin/skin2/gcn/skinstream.c"),
             Object(NonMatching, "rwsdk/plugin/skin2/gcn/instance/instanceskin.c"),
@@ -1273,30 +1382,34 @@ config.libs = [
             Object(NonMatching, "rwsdk/plugin/skin2/gcn/skingcnasm.c"),
             Object(NonMatching, "rwsdk/plugin/skin2/gcn/skinmatfxgcn.c"),
             Object(NonMatching, "rwsdk/plugin/skin2/gcn/skingcnm.c"),
-            Object(NonMatching, "rwsdk/include/gcn/rpdbgerr_3.c"),
+            Object(Matching, "rwsdk/include/gcn/rpdbgerr_3.c"),
         ],
     ),
     RenderWareLib(
         "rpusrdat",
+        cflags_rpusrdat,
         [
-            Object(NonMatching, "rwsdk/plugin/userdata/rpusrdat.c"),
+            # Release seems to have an older version of rpusrdat for some reason.
+            Object(Matching, "rwsdk/plugin/userdata/debug/rpusrdat.c") if version_num == 0 else
+            Object(Matching, "rwsdk/plugin/userdata/release/rpusrdat.c"),
         ],
     ),
     RenderWareLib(
         "rpworld",
+        cflags_rpworld,
         [
-            Object(NonMatching, "rwsdk/world/babinwor.c"),
-            Object(NonMatching, "rwsdk/world/baclump.c"),
-            Object(NonMatching, "rwsdk/world/bageomet.c"),
-            Object(NonMatching, "rwsdk/world/balight.c"),
-            Object(NonMatching, "rwsdk/world/bamateri.c"),
-            Object(NonMatching, "rwsdk/world/bamatlst.c"),
-            Object(NonMatching, "rwsdk/world/bamesh.c"),
-            Object(NonMatching, "rwsdk/world/bameshop.c"),
-            Object(NonMatching, "rwsdk/world/basector.c"),
-            Object(NonMatching, "rwsdk/world/baworld.c"),
-            Object(NonMatching, "rwsdk/world/baworobj.c"),
-            Object(NonMatching, "rwsdk/world/pipe/p2/bapipew.c"),
+            Object(Matching, "rwsdk/world/babinwor.c"),
+            Object(Matching, "rwsdk/world/baclump.c"),
+            Object(Matching, "rwsdk/world/bageomet.c"),
+            Object(Matching, "rwsdk/world/balight.c"),
+            Object(Matching, "rwsdk/world/bamateri.c"),
+            Object(Matching, "rwsdk/world/bamatlst.c"),
+            Object(Matching, "rwsdk/world/bamesh.c"),
+            Object(Matching, "rwsdk/world/bameshop.c"),
+            Object(Matching, "rwsdk/world/basector.c"),
+            Object(Matching, "rwsdk/world/baworld.c"),
+            Object(Matching, "rwsdk/world/baworobj.c"),
+            Object(Matching, "rwsdk/world/pipe/p2/bapipew.c"),
             Object(NonMatching, "rwsdk/world/pipe/p2/gcn/gcpipe.c"),
             Object(NonMatching, "rwsdk/world/pipe/p2/gcn/vtxfmt.c"),
             Object(NonMatching, "rwsdk/world/pipe/p2/gcn/wrldpipe.c"),
@@ -1315,59 +1428,62 @@ config.libs = [
             Object(NonMatching, "rwsdk/world/pipe/p2/gcn/instance/vbuffer.c"),
             Object(NonMatching, "rwsdk/world/pipe/p2/gcn/instance/vtools.c"),
             Object(NonMatching, "rwsdk/world/pipe/p2/gcn/instance/vtxdesc.c"),
-            Object(NonMatching, "rwsdk/include/gcn/rpdbgerr_4.c"),
+            Object(Matching, "rwsdk/include/gcn/rpdbgerr_4.c"),
         ],
     ),
     RenderWareLib(
         "rtanim",
+        cflags_rtanim,
         [
-            Object(NonMatching, "rwsdk/tool/anim/rtanim.c"),
-            Object(NonMatching, "rwsdk/include/gcn/rpdbgerr_5.c"),
+            Object(Matching, "rwsdk/tool/anim/rtanim.c"),
+            Object(Matching, "rwsdk/include/gcn/rpdbgerr_5.c"),
         ],
     ),
     RenderWareLib(
         "rtcharse",
+        cflags_rtcharse,
         [
-            Object(NonMatching, "rwsdk/tool/charse/chrprint.c"),
-            Object(NonMatching, "rwsdk/tool/charse/rtcharse.c"),
-            Object(NonMatching, "rwsdk/include/gcn/rpdbgerr_6.c"),
+            Object(Matching, "rwsdk/tool/charse/chrprint.c"),
+            Object(Matching, "rwsdk/tool/charse/rtcharse.c"),
+            Object(Matching, "rwsdk/include/gcn/rpdbgerr_6.c"),
         ],
     ),
     RenderWareLib(
         "rwcore",
+        cflags_rwcore,
         [
-            Object(NonMatching, "rwsdk/src/plcore/babinary.c"),
-            Object(NonMatching, "rwsdk/src/plcore/bacolor.c"),
-            Object(NonMatching, "rwsdk/src/plcore/badebug.c"),
-            Object(NonMatching, "rwsdk/src/plcore/baerr.c"),
-            Object(NonMatching, "rwsdk/src/plcore/baimmedi.c"),
-            Object(NonMatching, "rwsdk/src/plcore/bamatrix.c"),
-            Object(NonMatching, "rwsdk/src/plcore/bamemory.c"),
-            Object(NonMatching, "rwsdk/src/plcore/baresour.c"),
-            Object(NonMatching, "rwsdk/src/plcore/bastream.c"),
-            Object(NonMatching, "rwsdk/src/plcore/batkbin.c"),
-            Object(NonMatching, "rwsdk/src/plcore/batkreg.c"),
-            Object(NonMatching, "rwsdk/src/plcore/bavector.c"),
-            Object(NonMatching, "rwsdk/src/plcore/resmem.c"),
-            Object(NonMatching, "rwsdk/src/plcore/rwdbgerr.c"),
-            Object(NonMatching, "rwsdk/src/plcore/rwgrp.c"),
-            Object(NonMatching, "rwsdk/src/plcore/rwstring.c"),
-            Object(NonMatching, "rwsdk/os/gcn/osintf.c"),
-            Object(NonMatching, "rwsdk/src/babbox.c"),
-            Object(NonMatching, "rwsdk/src/babincam.c"),
-            Object(NonMatching, "rwsdk/src/babinfrm.c"),
-            Object(NonMatching, "rwsdk/src/babintex.c"),
-            Object(NonMatching, "rwsdk/src/bacamera.c"),
-            Object(NonMatching, "rwsdk/src/badevice.c"),
-            Object(NonMatching, "rwsdk/src/baframe.c"),
-            Object(NonMatching, "rwsdk/src/baimage.c"),
-            Object(NonMatching, "rwsdk/src/baimras.c"),
-            Object(NonMatching, "rwsdk/src/baraster.c"),
-            Object(NonMatching, "rwsdk/src/baresamp.c"),
-            Object(NonMatching, "rwsdk/src/basync.c"),
-            Object(NonMatching, "rwsdk/src/batextur.c"),
-            Object(NonMatching, "rwsdk/src/batypehf.c"),
-            Object(NonMatching, "rwsdk/driver/common/palquant.c"),
+            Object(Matching, "rwsdk/src/plcore/babinary.c"),
+            Object(Matching, "rwsdk/src/plcore/bacolor.c"),
+            Object(Matching, "rwsdk/src/plcore/badebug.c"),
+            Object(Matching, "rwsdk/src/plcore/baerr.c"),
+            Object(Matching, "rwsdk/src/plcore/baimmedi.c"),
+            Object(Matching, "rwsdk/src/plcore/bamatrix.c"),
+            Object(Matching, "rwsdk/src/plcore/bamemory.c"),
+            Object(Matching, "rwsdk/src/plcore/baresour.c"),
+            Object(Matching, "rwsdk/src/plcore/bastream.c"),
+            Object(Matching, "rwsdk/src/plcore/batkbin.c"),
+            Object(Matching, "rwsdk/src/plcore/batkreg.c"),
+            Object(Matching, "rwsdk/src/plcore/bavector.c"),
+            Object(Matching, "rwsdk/src/plcore/resmem.c"),
+            Object(Matching, "rwsdk/src/plcore/rwdbgerr.c"),
+            Object(Matching, "rwsdk/src/plcore/rwgrp.c"),
+            Object(Matching, "rwsdk/src/plcore/rwstring.c"),
+            Object(Matching, "rwsdk/os/gcn/osintf.c"),
+            Object(Matching, "rwsdk/src/babbox.c"),
+            Object(Matching, "rwsdk/src/babincam.c"),
+            Object(Matching, "rwsdk/src/babinfrm.c"),
+            Object(Matching, "rwsdk/src/babintex.c"),
+            Object(Matching, "rwsdk/src/bacamera.c"),
+            Object(Matching, "rwsdk/src/badevice.c"),
+            Object(Matching, "rwsdk/src/baframe.c"),
+            Object(Matching, "rwsdk/src/baimage.c"),
+            Object(Matching, "rwsdk/src/baimras.c"),
+            Object(Matching, "rwsdk/src/baraster.c"),
+            Object(Matching, "rwsdk/src/baresamp.c"),
+            Object(Matching, "rwsdk/src/basync.c"),
+            Object(Matching, "rwsdk/src/batextur.c"),
+            Object(Matching, "rwsdk/src/batypehf.c"),
+            Object(Matching, "rwsdk/driver/common/palquant.c"),
             Object(NonMatching, "rwsdk/driver/gcn/dl2drend.c"),
             Object(NonMatching, "rwsdk/driver/gcn/dlconvrt.c"),
             Object(NonMatching, "rwsdk/driver/gcn/dldevice.c"),
@@ -1377,54 +1493,62 @@ config.libs = [
             Object(NonMatching, "rwsdk/driver/gcn/dltexdic.c"),
             Object(NonMatching, "rwsdk/driver/gcn/dltextur.c"),
             Object(NonMatching, "rwsdk/driver/gcn/dltoken.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/baim3d.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/bapipe.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2altmdl.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2core.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2define.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2dep.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2heap.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2renderstate.c"),
-            Object(NonMatching, "rwsdk/src/pipe/p2/p2resort.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/baim3d.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/bapipe.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2altmdl.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2core.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2define.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2dep.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2heap.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2renderstate.c"),
+            Object(Matching, "rwsdk/src/pipe/p2/p2resort.c"),
             Object(NonMatching, "rwsdk/src/pipe/p2/gcn/im3dpipe.c"),
             Object(NonMatching, "rwsdk/src/pipe/p2/gcn/nodeDolphinSubmitNoLight.c"),
         ],
     ),
     RenderWareLib(
         "rtfsyst",
+        cflags_rtfsyst,
         [
-            Object(NonMatching, "rwsdk/tool/fsyst/rtfsmgr.c"),
+            # Release seems to have a different (older?) version of rtfsyst for some reason.
+            Object(Matching, "rwsdk/tool/fsyst/debug/rtfsmgr.c") if version_num == 0 else
+            Object(Matching, "rwsdk/tool/fsyst/release/rtfsmgr.c"),
         ],
     ),
     RenderWareLib(
         "rtintsec",
+        cflags_rtintsec,
         [
-            Object(NonMatching, "rwsdk/tool/intsec/rtintsec.c"),
+            Object(Matching, "rwsdk/tool/intsec/rtintsec.c"),
         ],
     ),
     RenderWareLib(
         "rtquat",
+        cflags_rtquat,
         [
-            Object(NonMatching, "rwsdk/tool/quat/rtquat.c"),
+            Object(Matching, "rwsdk/tool/quat/rtquat.c"),
         ],
     ),
     RenderWareLib(
         "rtskinsp",
+        cflags_rtskinsp,
         [
-            Object(NonMatching, "rwsdk/tool/sknsplit/skinsplit.c"),
-            Object(NonMatching, "rwsdk/tool/sknsplit/rtskinsp.c"),
+            Object(Matching, "rwsdk/tool/sknsplit/skinsplit.c"),
+            Object(Matching, "rwsdk/tool/sknsplit/rtskinsp.c"),
         ],
     ),
     RenderWareLib(
         "rtslerp",
+        cflags_rtslerp,
         [
-            Object(NonMatching, "rwsdk/tool/slerp/rtslerp.c"),
+            Object(Matching, "rwsdk/tool/slerp/rtslerp.c"),
         ],
     ),
     RenderWareLib(
         "rttilerd",
+        cflags_rttilerd,
         [
-            Object(NonMatching, "rwsdk/tool/tilerd/rttilerd.c"),
+            Object(Matching, "rwsdk/tool/tilerd/rttilerd.c"),
         ],
     ),
     DolphinLib(

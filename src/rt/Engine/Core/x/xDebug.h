@@ -129,6 +129,22 @@ do {                                                                            
 #define xASSERTDESIGNMSG(line, cond, msg)
 #endif
 
+#define xFAILCOND(line, cond)                                                                     \
+do {                                                                                              \
+    if ((cond)) {                                                                                 \
+        xASSERTALWAYSFMT(line, "%s", #cond);                                                      \
+        return;                                                                                   \
+    }                                                                                             \
+} while (0)
+
+#define xFAILCONDV(line, cond, retval)                                                            \
+do {                                                                                              \
+    if ((cond)) {                                                                                 \
+        xASSERTALWAYSFMT(line, "%s", #cond);                                                      \
+        return (retval);                                                                          \
+    }                                                                                             \
+} while (0)
+
 typedef void(*xDebugModeCallback)();
 
 void xDebugValidateFailed();

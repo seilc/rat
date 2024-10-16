@@ -24,5 +24,6 @@ struct xBound
 };
 
 void xBoundGetBox(xBox& box, const xBound& bound);
+void xBoundGetCylinder(xCylinder& o, const xBound& bound);
 
 #endif

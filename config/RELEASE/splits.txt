@@ -8480,7 +8480,7 @@ rwsdk/plugin/skin2/gcn/skinmatfxgcn.c:
 rwsdk/plugin/skin2/gcn/skingcnm.c:
 	.text       start:0x80359ED0 end:0x8035A0B8
 
-rwsdk/plugin/userdata/rpusrdat.c:
+rwsdk/plugin/userdata/release/rpusrdat.c:
 	.text       start:0x8035A0B8 end:0x8035B308
 	.sbss       start:0x80C09DE8 end:0x80C09E28
 
@@ -8645,7 +8645,7 @@ rwsdk/tool/charse/rtcharse.c:
 	.text       start:0x80378518 end:0x803788D0
 	.rodata     start:0x80412A18 end:0x80412F70
 
-rwsdk/tool/fsyst/rtfsmgr.c:
+rwsdk/tool/fsyst/release/rtfsmgr.c:
 	.text       start:0x803788D0 end:0x80378F90
 	.bss        start:0x80BF95F0 end:0x80BF9608
 	.sdata      start:0x80C06CB0 end:0x80C06CC8

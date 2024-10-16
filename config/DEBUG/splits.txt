@@ -8404,7 +8404,7 @@ rwsdk/include/gcn/rpdbgerr_3.c:
 	.bss        start:0x80D5C308 end:0x80D5C508
 	.sdata      start:0x80D68460 end:0x80D68470
 
-rwsdk/plugin/userdata/rpusrdat.c:
+rwsdk/plugin/userdata/debug/rpusrdat.c:
 	.text       start:0x803FFCD0 end:0x80401A70
 	.rodata     start:0x804E9590 end:0x804E97C8
 	.data       start:0x80550058 end:0x80550278
@@ -9001,7 +9001,7 @@ rwsdk/src/pipe/p2/gcn/nodeDolphinSubmitNoLight.c:
 	.data       start:0x8055AFE0 end:0x8055B0E8
 	.sbss       start:0x80D6C468 end:0x80D6C470
 
-rwsdk/tool/fsyst/rtfsmgr.c:
+rwsdk/tool/fsyst/debug/rtfsmgr.c:
 	.text       start:0x8046B064 end:0x8046BA80
 	.rodata     start:0x804EF958 end:0x804EFA10
 	.data       start:0x8055B0E8 end:0x8055B298

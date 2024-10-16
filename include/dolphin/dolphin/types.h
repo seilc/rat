@@ -22,6 +22,10 @@ typedef double f64;
 typedef volatile f32 vf32;
 typedef volatile f64 vf64;
 
+#ifndef BOOL
+typedef int BOOL;
+#endif
+
 #ifdef __MWERKS__
 #define AT_ADDRESS(xyz) : (xyz)
 #else

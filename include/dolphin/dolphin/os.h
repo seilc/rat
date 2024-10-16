@@ -7,6 +7,9 @@
 extern "C" {
 #endif
 
+BOOL OSDisableInterrupts(void);
+BOOL OSEnableInterrupts(void);
+
 #define OS_CACHED_REGION_PREFIX 0x8000
 #define OS_UNCACHED_REGION_PREFIX 0xC000
 #define OS_PHYSICAL_MASK 0x3FFF

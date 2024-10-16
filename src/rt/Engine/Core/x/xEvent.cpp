@@ -71,10 +71,7 @@ void zEntEvent(U32 toID, U32 toEvent, F32 toParam0, F32 toParam1, F32 toParam2, 
 
 void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID, ForceEvent forceEvent)
 {
-    if (to == NULL) {
-        xASSERTALWAYSFMT(127, "%s", "to == NULL");
-        return;
-    }
+    xFAILCOND(127, to == NULL);
 
 #ifdef DEBUGRELEASE
     static const S32 MAX_REENTRANT_COUNT = 32;

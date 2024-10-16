@@ -131,6 +131,8 @@ inline xVec3* xEntGetPos(const xEnt* ent)
     return &xModelGetFrame(ent->model)->pos;
 }
 
+U32 xEntIsEnabled(const xEnt* ent);
+
 inline void xEntVisibilityCullOn(xEnt* ent)
 {
     ent->flags |= (U8)0x4;
