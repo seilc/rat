@@ -511,7 +511,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xSpline.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSplineAsset.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xstransvc.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xString.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xString.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSubTitles.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSurface.cpp"),
             Object(Matching, "rt/Engine/Core/x/xTextAsset.cpp"),

@@ -15,6 +15,15 @@ enum xOutSeverity
 };
 
 #ifdef DEBUGRELEASE
+#define xWARNINVALID(line, name, cond)                                                              \
+do {                                                                                                \
+    if (!(cond) && (xOutTrumps((name), xOutSevWarn) || xOutEnabled((name)) && xOutGetSev() >= xOutSevWarn)) {   \
+        iprintf(">>> INVALID:" #cond);                                                              \
+        iprintf(" in %s in %s(%d)", __FUNCTION__, __FILE__, (line));                                \
+        iprintf("\n");                                                                              \
+    }                                                                                               \
+} while (0)
+
 #define xTRACEFUNCTION(line, name)                                                                  \
 do {                                                                                                \
     if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= xOutSevInfo)) {  \
@@ -36,6 +45,7 @@ void xOutWarn(char* name, const char* fmt, ...);
 void xOutInfo(char* name, const char* fmt, ...);
 void xOutBabble(char* name, const char* fmt, ...);
 #else
+#define xWARNINVALID(line, name, cond)
 #define xTRACEFUNCTION(line, name)
 
 #define xOutSetSev(sev)
