@@ -144,8 +144,8 @@ static void __unused(st_XORDEREDARRAY* array, S32 idx, S32 i, S32 index, void* e
     xASSERT(0, index >= 0);
     xASSERT(0, index < array->max);
     xASSERT(0, elt == array->list[index]);
-    xVALIDATEMSG(0, 0, "XOrdRemove failed to locate element");
-    xVALIDATEMSG(0, 0, "Src:Tgt lists sizes differ ... proceeding anyway");
+    xVALIDATEM(0, 0, "XOrdRemove failed to locate element");
+    xVALIDATEM(0, 0, "Src:Tgt lists sizes differ ... proceeding anyway");
     xASSERT(0, ((src->cnt-1) < tgt->max));
     xWARN("Tgt list can't hold src");
     xASSERT(0, (!(tgt->cnt)));

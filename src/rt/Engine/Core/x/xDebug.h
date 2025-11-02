@@ -46,7 +46,7 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
-#define xVALIDATEMSG(line, cond, msg)                                                             \
+#define xVALIDATEM(line, cond, msg)                                                               \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
         _xVALIDATEFAIL(line, cond, msg);                                                          \
@@ -54,7 +54,7 @@ do {                                                                            
 } while (0)
 #else
 #define xVALIDATE(line, cond)
-#define xVALIDATEMSG(line, cond, msg)
+#define xVALIDATEM(line, cond, msg)
 #endif
 
 #ifdef DEBUGRELEASE
@@ -73,43 +73,35 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
-#define xASSERTMSG(line, cond, msg)                                                               \
+#define xASSERTM(line, cond, ...)                                                                 \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        _xASSERTFAIL(line, cond, msg);                                                            \
+        _xASSERTFAIL(line, ##cond, __VA_ARGS__);                                                  \
     }                                                                                             \
 } while (0)
 
-#define xASSERTFMT(line, cond, fmt, ...)                                                          \
-do {                                                                                              \
-    if (!(cond)) {                                                                                \
-        _xASSERTFAIL(line, cond, fmt, __VA_ARGS__);                                               \
-    }                                                                                             \
-} while (0)
+#define xFAIL(line) _xASSERTFAIL(line, *always*, "%s", "*always*")
+#define xFAILM(line, ...) _xASSERTFAIL(line, *always*, __VA_ARGS__)
 
-#define xASSERTALWAYS(line) _xASSERTFAIL(line, *always*, "%s", "*always*")
-#define xASSERTALWAYSMSG(line, msg) _xASSERTFAIL(line, *always*, msg)
-#define xASSERTALWAYSFMT(line, fmt, ...) _xASSERTFAIL(line, *always*, fmt, __VA_ARGS__)
-
-#define xASSERTONCE(line, cond)                                                                   \
-do {                                                                                              \
-    static bool done = false;                                                                     \
-    if (!done && !(cond)) {                                                                       \
-        xASSERTALWAYSFMT(line, "%s", #cond);                                                      \
-        done = true;                                                                              \
-    }                                                                                             \
-} while (0)
-
-#define xASSERTFAILONCEFMT(line, fmt, ...)                                                        \
+#define xFAIL_ONCE_M(line, ...)                                                                   \
 do {                                                                                              \
     static bool done = false;                                                                     \
     if (!done) {                                                                                  \
         done = true;                                                                              \
-        _xASSERTFAIL(line, *once only*, fmt, __VA_ARGS__);                                        \
+        _xASSERTFAIL(line, *once only*, __VA_ARGS__);                                             \
     }                                                                                             \
 } while (0)
 
-#define xASSERTDESIGNMSG(line, cond, msg)                                                         \
+#define xASSERT_ONCE(line, cond)                                                                  \
+do {                                                                                              \
+    static bool done = false;                                                                     \
+    if (!done && !(cond)) {                                                                       \
+        xFAILM(line, "%s", #cond);                                                                \
+        done = true;                                                                              \
+    }                                                                                             \
+} while (0)
+
+#define xASSERT_DESIGN_M(line, cond, msg)                                                         \
 do {                                                                                              \
     static bool already_asserted = false;                                                         \
     if (!already_asserted && !(cond)) {                                                           \
@@ -119,28 +111,26 @@ do {                                                                            
 } while (0)
 #else
 #define xASSERT(line, cond)
-#define xASSERTMSG(line, cond, msg)
-#define xASSERTFMT(line, cond, fmt, ...)
-#define xASSERTALWAYS(line)
-#define xASSERTALWAYSMSG(line, msg)
-#define xASSERTALWAYSFMT(line, fmt, ...)
-#define xASSERTONCE(line, cond)
-#define xASSERTFAILONCEFMT(line, fmt, ...)
-#define xASSERTDESIGNMSG(line, cond, msg)
+#define xASSERTM(line, cond, ...)
+#define xFAIL(line)
+#define xFAILM(line, ...)
+#define xFAIL_ONCE_M(line, fmt, ...)
+#define xASSERT_ONCE(line, cond)
+#define xASSERT_DESIGN_M(line, cond, msg)
 #endif
 
-#define xFAILCOND(line, cond)                                                                     \
+#define xFAIL_AND_RETURN_IF(line, cond)                                                                     \
 do {                                                                                              \
     if ((cond)) {                                                                                 \
-        xASSERTALWAYSFMT(line, "%s", #cond);                                                      \
+        xFAILM(line, "%s", #cond);                                                                \
         return;                                                                                   \
     }                                                                                             \
 } while (0)
 
-#define xFAILCONDV(line, cond, retval)                                                            \
+#define xFAIL_AND_RETURN_VALUE_IF(line, cond, retval)                                                            \
 do {                                                                                              \
     if ((cond)) {                                                                                 \
-        xASSERTALWAYSFMT(line, "%s", #cond);                                                      \
+        xFAILM(line, "%s", #cond);                                                                \
         return (retval);                                                                          \
     }                                                                                             \
 } while (0)

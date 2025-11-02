@@ -37,11 +37,11 @@ void xNavigationMeshAsset::RegisterEntity(U32 id)
     }
 
     xEnt* entity = (xEnt*)zSceneFindObject(id);
-    xFAILCOND(76, entity == NULL);
+    xFAIL_AND_RETURN_IF(76, entity == NULL);
     xASSERT(77, entity->baseFlags & k_XBASE_IS_ENTITY);
 
     if (entity->frame == 0) {
-        xASSERTFMT(82, entity->frame != 0,
+        xASSERTM(82, entity->frame != 0,
                    "Entity %s added to navigation mesh but it doesn't have a frame.  Maybe a bad Maya reference.",
                    xSceneID2Name(xglobals->sceneCur, entity->id));
         return;
@@ -122,7 +122,7 @@ zMeshCircle* xNavigationMeshAsset::FindMeshCircleForEnt(const xEnt* ent)
 
 void xNavigationMeshAsset::AddCircle(zMeshCircle* circle)
 {
-    xFAILCOND(200, circle == NULL);
+    xFAIL_AND_RETURN_IF(200, circle == NULL);
 
     if (circle->mesh != this) {
         circle->masterListNext = circleList;
@@ -133,8 +133,8 @@ void xNavigationMeshAsset::AddCircle(zMeshCircle* circle)
 
 bool xNavigationMeshAsset::RemoveCircle(zMeshCircle* circle)
 {
-    xFAILCONDV(219, circle == NULL, false);
-    xFAILCONDV(220, circle->mesh != this, false);
+    xFAIL_AND_RETURN_VALUE_IF(219, circle == NULL, false);
+    xFAIL_AND_RETURN_VALUE_IF(220, circle->mesh != this, false);
 
     zMeshCircle* currentCircle = circleList;
     zMeshCircle* prevCircle = NULL;
@@ -174,7 +174,7 @@ void xNavigationMeshAsset::SceneExit()
 
 zMeshCircle* xNavigationMeshAsset::GetFreeCircle()
 {
-    xASSERTMSG(279, sFreeCirclePool, "Running out of free mesh circles.  Increase pool size?");
+    xASSERTM(279, sFreeCirclePool, "Running out of free mesh circles.  Increase pool size?");
 
     if (sFreeCirclePool) {
         zMeshCircle* circle = sFreeCirclePool;
@@ -200,7 +200,7 @@ void xNavigationMeshAsset::ReleaseCircle(zMeshCircle* circle)
 U32 xNavigationMeshAsset::getId(const xNavigationMeshAssetSubMesh*, U32 subMeshId, U32 sub_mesh_shifted) const
 {
     static const U32 MAX_VERTICES_PER_SUB_MESH = 1;
-    xASSERTMSG(0, ((U32)0xFFFFFFFF) / (MAX_VERTICES_PER_SUB_MESH * MAX_VERTICES_PER_SUB_MESH ) > subMeshId,
+    xASSERTM(0, ((U32)0xFFFFFFFF) / (MAX_VERTICES_PER_SUB_MESH * MAX_VERTICES_PER_SUB_MESH ) > subMeshId,
                "We have hit the U32 limit and wrapped around the ID. This is bad because triangles will share IDs.");
     U32 id = subMeshId;
     xASSERT(0, id <= ( id + sub_mesh_shifted ));
@@ -232,7 +232,7 @@ S32 xNavigationMeshAssetSubMesh::getTriangle(const xVec3& point, S32 current_tri
         }
     }
     
-    xASSERTMSG(510, numTriangles >= 0 && numTriangles < MAX_TRIANGLES_PER_SUB_MESH,
+    xASSERTM(510, numTriangles >= 0 && numTriangles < MAX_TRIANGLES_PER_SUB_MESH,
                "Corrupted navigation mesh.  Invalid triangle count!");
     
     for (S32 i = 0; i < numTriangles; i++) {

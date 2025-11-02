@@ -213,7 +213,7 @@ void xLightEffectStrobe::UpdateEffect(xLight& light, F32 dt)
             xLightSetColor(&light, tasset->minColor, tasset->fadeDownTime);
             break;
         default:
-            xASSERTALWAYSFMT(244, "%s", "Unknown Strobe Stage");
+            xFAILM(244, "%s", "Unknown Strobe Stage");
             break;
         }
     }

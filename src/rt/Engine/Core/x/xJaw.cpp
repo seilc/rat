@@ -55,7 +55,7 @@ xJawSpeaker xJawData::Eval(F32 time, F32& jawValue)
     F32 nextFrameValue;
     xJawSpeaker thisFrameSpeaker;
 
-    xASSERTMSG(53, header.numSamples <= 65535, "The jaw header doesn't seem to be swapped... This will break");
+    xASSERTM(53, header.numSamples <= 65535, "The jaw header doesn't seem to be swapped... This will break");
     
     time *= 60.0f;
     idx = std::floorf(time);

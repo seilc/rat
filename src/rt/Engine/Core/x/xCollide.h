@@ -34,4 +34,6 @@ struct xCollis
     };
 };
 
+#define k_HIT_IT ((U32)(1 << 0))
+
 #endif

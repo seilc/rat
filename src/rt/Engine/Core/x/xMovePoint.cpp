@@ -73,7 +73,7 @@ void xMovePointSetup(xMovePoint* m, xScene* sc)
         xASSERT(117, m->nodes);
 
         m->nodes[idx] = (xMovePoint*)xSceneResolvID(sc, id[idx]);
-        xASSERTFMT(121, m->nodes[idx], "Move point ID %08X is not found!", id[idx]);
+        xASSERTM(121, m->nodes[idx], "Move point ID %08X is not found!", id[idx]);
 
         m->node_wt_sum += m->nodes[idx]->asset->wt;
         m->nodes[idx]->prev = m;

@@ -151,7 +151,7 @@ namespace {
         }
 
         F32 dot = g->dir.dot(cam_dir);
-        xASSERTMSG(137, dot <= 1.0f, " vectors are not normalized !!!");
+        xASSERTM(137, dot <= 1.0f, " vectors are not normalized !!!");
 
         if (g->flags & 0x10) {
             dot = 1.0f - dot;
@@ -286,7 +286,7 @@ void xPulseGlareMgr::render(const xMat4x3& mat)
 #ifndef NON_MATCHING
 void xScrFX_PulseGlaresAdd(RwRaster*)
 {
-    xASSERTMSG(0, 0, " GLARE Manager run out of available slots !");
+    xASSERTM(0, 0, " GLARE Manager run out of available slots !");
 
     S32 idx = -1;
     xASSERT(0, idx > -1);

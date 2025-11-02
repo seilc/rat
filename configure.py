@@ -495,7 +495,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xRegionSupport.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRenderState.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRMemData.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xRumbleEmitter.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xRumbleEmitter.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRumbleManager.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xsavegame.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xScene.cpp"),

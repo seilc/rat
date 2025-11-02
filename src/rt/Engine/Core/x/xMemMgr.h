@@ -176,7 +176,7 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align);
 inline void* xMemPushTemp(U32 amt, U32, const char* file, const char* func, S32 line)
 {
     void* ptr = iMemPushTemp(amt);
-    xASSERTFMT(391, ptr, "for %d bytes from %s, in %s line %d", amt, func, file, line);
+    xASSERTM(391, ptr, "for %d bytes from %s, in %s line %d", amt, func, file, line);
     return ptr;
 }
 #else

@@ -120,9 +120,9 @@ void xSkyDome_Render()
 #endif
 
                 if (useZBuf != sSkyList[i].zReadWrite) {
-                    xASSERTDESIGNMSG(202, i != 0 || !sSkyList[i].zReadWrite,
+                    xASSERT_DESIGN_M(202, i != 0 || !sSkyList[i].zReadWrite,
                                      "ART/DESIGN: Outermost SkyDome layer must have \"Set SkyDome\" parameter 4 set to 0!");
-                    xASSERTDESIGNMSG(204, !useZBuf,
+                    xASSERT_DESIGN_M(204, !useZBuf,
                                      "ART/DESIGN: Got a flat layer (parameter 4 = 0) layer after a non-flat layer");
                     useZBuf = sSkyList[i].zReadWrite;
                     if (useZBuf) {

@@ -39,7 +39,7 @@ void text_widget::setup()
     const text_asset& ta = *(text_asset*)a;
     ztextbox* ztb = (ztextbox*)zSceneFindObject(ta.text_box);
 
-    xASSERTFMT(35, ztb != 0, "HUD Text %s: Cannot find text-box %s", xSTAssetNameOrID((void*)a), xSTAssetNameOrID(ta.text_box));
+    xASSERTM(35, ztb != 0, "HUD Text %s: Cannot find text-box %s", xSTAssetNameOrID((void*)a), xSTAssetNameOrID(ta.text_box));
 
     if (ztb == 0) {
         tb = xtextbox::create();
@@ -54,7 +54,7 @@ void text_widget::setup()
         U32 len;
         const char* s = xTextFindString(ta.text, &len);
 
-        xASSERTFMT(50, s != 0, "HUD Text %s: Cannot find text %s", xSTAssetNameOrID((void*)a), xSTAssetNameOrID(ta.text));
+        xASSERTM(50, s != 0, "HUD Text %s: Cannot find text %s", xSTAssetNameOrID((void*)a), xSTAssetNameOrID(ta.text));
 
         if (s) {
             memcpy(text, s, len);
@@ -145,7 +145,7 @@ void text_widget::render()
 
 void text_widget::set_text(const char* intext)
 {
-    xASSERTMSG(133, (intext), "String is not set !");
+    xASSERTM(133, (intext), "String is not set !");
 
     size_t textchars = strlen(intext);
     size_t copychars = xmin(textchars, sizeof(text) - 1);

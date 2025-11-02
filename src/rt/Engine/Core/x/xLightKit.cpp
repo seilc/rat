@@ -124,7 +124,7 @@ xLightKit* xLightKit_Prepare(void* data)
 
     lkit->blended = FALSE;
 
-    xASSERTFMT(340, (numdir<=4)&&(numamb<=1), "ERROR:  Light kit with too many lights  %d dir, %d ambient!\n", numdir, numamb);
+    xASSERTM(340, (numdir<=4)&&(numamb<=1), "ERROR:  Light kit with too many lights  %d dir, %d ambient!\n", numdir, numamb);
 
     return lkit;
 }

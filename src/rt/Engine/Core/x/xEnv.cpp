@@ -27,7 +27,7 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
         env->geom = &env->ienv;
 
         S32 jsp_count = xSTAssetCountByType('JSP ');
-        xASSERTMSG(54, (jsp_count > 0), "No JSP's found in scene!");
+        xASSERTM(54, (jsp_count > 0), "No JSP's found in scene!");
 
         iEnvLoadBegin(env->geom, dataType, jsp_count / 2);
 
@@ -95,11 +95,11 @@ void xEnvRender(xEnv* env, bool alpha)
             char text[128];
             if (env->geom->jsp_visibilityCount[i] < 0) {
                 sprintf(text, "JSP '%s' had too many Decrements (once only assertion)", xSTAssetName(env->geom->jsp_aid[i]));
-                xASSERTFAILONCEFMT(175, "%s", text);
+                xFAIL_ONCE_M(175, "%s", text);
             }
             if (env->geom->jsp_visibilityCount[i] > 4) {
                 sprintf(text, "JSP '%s' had suspiciously high Inc's\n (more than 4, missing Dec's?)", xSTAssetName(env->geom->jsp_aid[i]));
-                xASSERTFAILONCEFMT(181, "%s", text);
+                xFAIL_ONCE_M(181, "%s", text);
             }
 #endif
         }

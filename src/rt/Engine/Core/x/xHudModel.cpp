@@ -30,7 +30,7 @@ model_widget::model_widget(const model_asset& a)
     , model(0)
 {
     model = xhud::load_model(mid);
-    xASSERTFMT(50, model != 0, "Could not load hud model: %s", xSTAssetNameOrID(mid));
+    xASSERTM(50, model != 0, "Could not load hud model: %s", xSTAssetNameOrID(mid));
 
     x_scale = 1.0f;
     y_scale = 1.0f;

@@ -13,10 +13,8 @@ struct xGroup : xBase
     S32 flg_group;
 };
 
-enum {
-    XGRP_FLG_HASWIDGET = (1<<1),
-    XGRP_FLG_HASASSET = (1<<2),
-};
+#define XGRP_FLG_HASWIDGET (1<<1)
+#define XGRP_FLG_HASASSET (1<<2)
 
 void xGroupInit(void* b, void* asset);
 void xGroupInit(xBase* b, xGroupAsset* asset);

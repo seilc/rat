@@ -14,14 +14,14 @@ struct xDynAsset : xBaseAsset
 
 #define xDynAssetValidate(line, asset, T, type_name)                                              \
 do {                                                                                              \
-    xASSERTFMT((line), (asset).version == T::VERSION,                                             \
+    xASSERTM((line), (asset).version == T::VERSION,                                             \
                "%s %s - Wrong version: %d (expected %d).  Get latest and repack.",                \
                type_name,                                                                         \
                xSTAssetName(&(asset)),                                                            \
                (asset).version,                                                                   \
                T::VERSION);                                                                       \
     size_t expected_asset_size = (asset).linkCount * sizeof(xLinkAsset) + sizeof(T);              \
-    xASSERTFMT((line), (asset_size) == expected_asset_size,                                       \
+    xASSERTM((line), (asset_size) == expected_asset_size,                                       \
                "%s %s - Wrong asset size: %d (expected %d).  Get latest and repack.",             \
                type_name,                                                                         \
                xSTAssetName(&(asset)),                                                            \

@@ -58,7 +58,7 @@ void xGroupSetup(xGroup* g)
     
     g->flg_group |= 0x1;
 
-    xASSERTFMT(99, ((XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET) & g->flg_group) != (
+    xASSERTM(99, ((XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET) & g->flg_group) != (
                      XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET),
                "ERROR:  Group 0x%08x  \"%s\" has both widgets and assets!\n",
                g->id, xSTAssetName(g->id));

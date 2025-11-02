@@ -803,7 +803,7 @@ public:
 
     bool get(S32 index)
     {
-        xASSERTFMT(1249, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
+        xASSERTM(1249, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
         S32 which_byte = index / 8;
         S32 which_bit = index % 8;
         return ((1<<which_bit) & bytes[which_byte]) != 0;
@@ -811,7 +811,7 @@ public:
 
     void set(S32 index, bool value)
     {
-        xASSERTFMT(1257, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
+        xASSERTM(1257, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
         S32 which_byte = index / 8;
         S32 which_bit = index % 8;
         if (value) {

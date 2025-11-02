@@ -71,14 +71,14 @@ void zEntEvent(U32 toID, U32 toEvent, F32 toParam0, F32 toParam1, F32 toParam2, 
 
 void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID, ForceEvent forceEvent)
 {
-    xFAILCOND(127, to == NULL);
+    xFAIL_AND_RETURN_IF(127, to == NULL);
 
 #ifdef DEBUGRELEASE
     static const S32 MAX_REENTRANT_COUNT = 32;
     static S32 reentrantCount = 0;
 
     reentrantCount++;
-    xASSERTMSG(134, reentrantCount < MAX_REENTRANT_COUNT, "Circular links detected!");
+    xASSERTM(134, reentrantCount < MAX_REENTRANT_COUNT, "Circular links detected!");
 
     zEventDebugLog(from, fromEvent, to, toEvent, toParam);
 
@@ -110,7 +110,7 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
     }
 
     if (xBaseIsEnabled(to) && to->linkCount) {
-        xASSERTFMT(209, to->link, "to %s", xSTAssetName(to));
+        xASSERTM(209, to->link, "to %s", xSTAssetName(to));
 
         const xLinkAsset* idx = to->link;
         for (S32 i = 0; i < to->linkCount; i++, idx++) {

@@ -83,7 +83,12 @@ public:
     virtual void ResetHealth();
     virtual bool NeedsHealth() const;
     virtual const xVec3& GetFloorNormal() const;
-    virtual bool IsFloorColliding() const;
+
+    virtual bool IsFloorColliding() const
+    {
+        return Get_floor_collision() && CollisionOn();
+    }
+
     virtual const xVec3* GetFloorPosition() const;
     virtual const char** GetBoneNames() const;
     virtual bool IsVisible() const;
@@ -92,6 +97,12 @@ public:
     virtual void GiveIncrediPower(S16, bool);
     virtual void TakeIncrediPower(F32);
     virtual bool IsSwimming() const;
+
+    bool CollisionOn() const
+    {
+        return Get_collisionOn();
+    }
+
     virtual bool FindShortestCollision(xSweptSphere& sws, U32& collisionFlags, S32 penby, bool);
     virtual void FindStaticCollisions(const xSphere** spheres, S32 numSpheres, const xVec3& initialDisplacement, const xVec3& validDepenetration);
     virtual xVec3 get_target();
@@ -99,6 +110,22 @@ public:
     virtual F32 StartScreenFadeAt();
     virtual F32 PredictY(F32 time) const;
     virtual bool IsInteractioning();
+
+    bool Get_humanPlayer() const
+    {
+        return (zPlayerFlags >> 18) & 0x1;
+    }
+
+    bool Get_floor_collision() const
+    {
+        return (zPlayerFlags >> 1) & 0x1;
+    }
+
+    bool Get_collisionOn() const
+    {
+        return (zPlayerFlags >> 3) & 0x1;
+    }
+
     virtual void SetEnemyIsNear(bool isit);
     virtual void EnemyKilled(zNPC::zNPCCommon* npc);
     virtual bool IsJumping() const = 0;

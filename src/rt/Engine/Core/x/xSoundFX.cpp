@@ -61,7 +61,7 @@ void xSoundFXInit(xSoundFX* t, xSoundFXAsset* asset)
 
 #ifdef DEBUGRELEASE
     if (xSndMgrIsLoopedStream(asset->soundAsset) && xSoundFXSendsDone(asset)) {
-        xASSERTALWAYSFMT(109, "SoundFX '%s' will never send DONE event because it loops", xSTAssetName(t->id));
+        xFAILM(109, "SoundFX '%s' will never send DONE event because it loops", xSTAssetName(t->id));
     }
 #endif
 
@@ -120,14 +120,14 @@ void xSoundFXEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
         break;
     case eEventPause:
         while (true) {
-            xASSERTALWAYSMSG(266, "SoundFX received pause event - event not implemented");
+            xFAILM(266, "SoundFX received pause event - event not implemented");
         }
         break;
     case eEventChangeVolume:
     {
         F32 destVolume = toParam[0];
         if (destVolume < 0.0f || destVolume > 1.0f) {
-            xASSERTALWAYSMSG(281, "SoundFX Change Volume event: Param1-destVolume needs to be between 0.0 and 1.0");
+            xFAILM(281, "SoundFX Change Volume event: Param1-destVolume needs to be between 0.0 and 1.0");
             if (destVolume < 0.0f) {
                 destVolume = 0.0f;
             } else if (destVolume > 1.0f) {
@@ -141,7 +141,7 @@ void xSoundFXEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
     {
         F32 startVolume = toParam[0];
         if (startVolume < 0.0f || startVolume > 1.0f) {
-            xASSERTALWAYSMSG(293, "SoundFX Change Volume event: Param1-startVolume needs to be between 0.0 and 1.0");
+            xFAILM(293, "SoundFX Change Volume event: Param1-startVolume needs to be between 0.0 and 1.0");
             if (startVolume < 0.0f) {
                 startVolume = 0.0f;
             } else if (startVolume > 1.0f) {
@@ -150,7 +150,7 @@ void xSoundFXEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
         }
         F32 destVolume = toParam[1];
         if (destVolume < 0.0f || destVolume > 1.0f) {
-            xASSERTALWAYSMSG(300, "SoundFX Change Volume event: Param2-destVolume needs to be between 0.0 and 1.0");
+            xFAILM(300, "SoundFX Change Volume event: Param2-destVolume needs to be between 0.0 and 1.0");
             if (destVolume < 0.0f) {
                 destVolume = 0.0f;
             } else if (destVolume > 1.0f) {
@@ -195,7 +195,7 @@ static bool xSoundFXEnsureFreeAudioStream(bool willingToStopMainGameMusic)
         return true;
     }
 
-    xASSERTALWAYSFMT(369, "%s", "No streamed voice available. Some audio may not play.");
+    xFAILM(369, "%s", "No streamed voice available. Some audio may not play.");
     return false;
 }
 
@@ -214,7 +214,7 @@ static void xSoundFXPlay(xSoundFX* t)
     if (xSoundFXIsAttached(t->asset)) {
         xEnt* ent = (xEnt*)zSceneFindObject(t->asset->attachID);
         if (!ent) {
-            xASSERTALWAYSFMT(394, "SoundFX '%s' can't find entity %X", xSTAssetName(t->id), t->asset->attachID);
+            xFAILM(394, "SoundFX '%s' can't find entity %X", xSTAssetName(t->id), t->asset->attachID);
         } else {
             sndFlags |= 0x800;
             t->sndHandle = xSndMgrPlay(t->asset->soundAsset, sndFlags, xEntGetPos(ent), NULL, ent, NULL, NULL);
