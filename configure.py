@@ -607,7 +607,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zScript.cpp"),
             Object(NonMatching, "rt/Engine/Game/zShrapnel.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSurface.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zSymbol.cpp"),
+            Object(Matching, "rt/Engine/Game/zSymbol.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTalkBox.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTaskBox.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTextBox.cpp"),
