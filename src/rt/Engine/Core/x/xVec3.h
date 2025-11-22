@@ -2,7 +2,6 @@
 #define XVEC3_H
 
 #include "xMath.h"
-#include "xDebug.h"
 
 #include <rwcore.h>
 
@@ -18,10 +17,17 @@ struct xVec3
         F32 a[3];
     };
 
+    static const xVec3 m_Null;
+    static const xVec3 m_Ones;
+    static const xVec3 m_UnitAxisX;
+    static const xVec3 m_UnitAxisY;
+    static const xVec3 m_UnitAxisZ;
+
     xVec3& assign(F32 x, F32 y, F32 z);
     xVec3& operator-=(const xVec3& v);
     xVec3& operator*=(F32 f);
     F32 dot(const xVec3& c) const;
+    F32 length2() const;
     F32 up_normalize();
     void AddScale(const xVec3& d, F32 s);
     void Sub(const xVec3& a, const xVec3& b);

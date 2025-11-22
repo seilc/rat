@@ -2,11 +2,9 @@
 #define XMATHINLINES_H
 
 #ifdef DEBUG
-#define INLINE
-#else
-#define INLINE inline
+#define inline
 #endif
 
-#undef INLINE
+#undef inline
 
 #endif
