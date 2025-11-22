@@ -15,6 +15,13 @@ INLINE void xVec3Cross(xVec3* o, const xVec3* a, const xVec3* b)
     o->z = a->x * b->y - b->x * a->y;
 }
 
+INLINE void xVec3Inv(xVec3& v)
+{
+    v.x = -v.x;
+    v.y = -v.y;
+    v.z = -v.z;
+}
+
 INLINE F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b)
 {
     F32 d;
