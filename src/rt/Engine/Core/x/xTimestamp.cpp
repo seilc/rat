@@ -1,11 +1,5 @@
 #include "xTimestamp.h"
 
-#ifdef DEBUG
-#define BUILDNUM "129"
-#else
-#define BUILDNUM "135"
-#endif
-
 char timestamp[] =
     "The Incredibles\n"
     "Build " BUILDNUM "\n"

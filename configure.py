@@ -339,6 +339,9 @@ cflags_rat_base = [
 cflags_rat_d = [
     *cflags_rat_base,
     "-DDEBUG",
+    r'-DBUILDNUM="\"129\""',
+    r'-D__DATE__="\"Jan 11 2006\""',
+    r'-D__TIME__="\"00:29:14\""',
     "-DRWDEBUG",
     "-opt peep, speed",
     "-sdata 20",
@@ -347,6 +350,9 @@ cflags_rat_d = [
 cflags_rat_r = [
     *cflags_rat_base,
     "-DRELEASE",
+    r'-DBUILDNUM="\"135\""',
+    r'-D__DATE__="\"Jan 18 2006\""',
+    r'-D__TIME__="\"15:52:40\""',
     "-opt level=4, peep, speed",
     "-sdata 24",
     "-sdata2 24",
