@@ -711,7 +711,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zMeshCollision.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMeshPosition.cpp"),
             Object(Matching, "rt/Engine/Core/x/xLightEffect.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zShowerSystem.cpp"),
+            Object(Matching, "rt/Engine/Game/zShowerSystem.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCPerception.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerInput.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerConstrainer.cpp"),
