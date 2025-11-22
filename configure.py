@@ -834,7 +834,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zHumanVehiclePlayerActions.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCBase.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCManager.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zNPCTypesIN2.cpp"),
+            Object(Matching, "rt/Engine/Game/zNPCTypesIN2.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCommonPlayerActionPushPull.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPushableObject.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompSteeringBasic.cpp"),
