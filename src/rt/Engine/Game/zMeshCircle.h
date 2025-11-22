@@ -3,6 +3,7 @@
 
 #include "xMath2.h"
 #include "xMath3.h"
+#include "zNPCTypes.h"
 
 struct xEnt;
 class xNavigationMeshAsset;
@@ -20,12 +21,39 @@ public:
     U32 npcActiveFlags;
     zMeshCircle* nextNearbyCircle;
 
-    bool IsActive(U32 npcType) const;
+    bool IsActive(U32 npcType) const
+    {
+        if (npcType >= eNPCType_CMG_PourNSwirl) {
+            return false;
+        }
 
-    zMeshCircle();
+        return (npcActiveFlags & (1 << npcType)) != 0;
+    }
 
-    void SetPosition(const xVec3& position);
-    xVec3& GetCenter() const;
+    zMeshCircle()
+    {
+        ownerEntity = NULL;
+        Reset();
+    }
+
+    void Reset()
+    {
+        mesh = NULL;
+        masterListNext = NULL;
+        nextNearbyCircle = NULL;
+        npcActiveFlags = 0xFFFF;
+    }
+
+    void SetPosition(const xVec3& position)
+    {
+        center = position;
+        center2.assign(position.x, position.z);
+    }
+
+    const xVec3& GetCenter() const
+    {
+        return center;
+    }
 };
 
 #endif

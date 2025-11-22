@@ -61,7 +61,7 @@ public:
     virtual bool CanTakeDamage();
     virtual bool CanBeInterruptedForIncidental();
     virtual F32 GetAIHelperHintSafeDistance();
-    virtual S32 GetNPCType();
+    virtual S32 GetNPCType() { return 0; }
     virtual U32 GetShadowBoneIndex();
     virtual S32 GetNukeBoneIndex();
     virtual void GetNukeBoneOffset(xVec3* offset);

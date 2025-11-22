@@ -78,7 +78,11 @@ public:
     virtual void StoreCheckPoint(const zPlayerCheckPoint& theCheckPoint);
     virtual void SetCamera();
     virtual void RenderEffects();
+
+#ifdef DEBUGRELEASE
     virtual void SetupTweaks();
+#endif
+
     virtual void GiveHealth(S32 hitPoints, bool from_pickup);
     virtual void ResetHealth();
     virtual bool NeedsHealth() const;

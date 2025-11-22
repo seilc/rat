@@ -114,7 +114,7 @@ do {                                                                            
 #define xASSERTM(line, cond, ...)
 #define xFAIL(line)
 #define xFAILM(line, ...)
-#define xFAIL_ONCE_M(line, fmt, ...)
+#define xFAIL_ONCE_M(line, ...)
 #define xASSERT_ONCE(line, cond)
 #define xASSERT_DESIGN_M(line, cond, msg)
 #endif

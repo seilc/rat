@@ -7,8 +7,13 @@
 
 static const U32 MAX_CIRCLES = 50;
 
-static const U8 NO_TRIANGLE = 0xFF;
-static const U32 MAX_TRIANGLES_PER_SUB_MESH = (NO_TRIANGLE-1);
+#if !defined(MASTER) && !defined(NON_MATCHING)
+static void __unused(F32& f, zMeshCircle* c, const xVec3& p)
+{
+    xMath2NearestPointOnLine(f, f, 1, 0, 0, 0, 0, 0);
+    c->SetPosition(p);
+}
+#endif
 
 namespace {
     zMeshCircle* sFreeCirclePool = NULL;
@@ -196,7 +201,7 @@ void xNavigationMeshAsset::ReleaseCircle(zMeshCircle* circle)
     sFreeCirclePool = circle;
 }
 
-#ifndef NONMATCHING
+#ifndef NON_MATCHING
 U32 xNavigationMeshAsset::getId(const xNavigationMeshAssetSubMesh*, U32 subMeshId, U32 sub_mesh_shifted) const
 {
     static const U32 MAX_VERTICES_PER_SUB_MESH = 1;
@@ -275,5 +280,46 @@ S32 xNavigationMeshAssetSubMesh::lookup_next(S32 source, S32 destination) const
     U32 byteIndex = (bitIndex >> 3);
     U32 bitShift = (bitIndex & 0x7);
 
-    return (portalLookup[byteIndex] >> bitShift) & 0x3;
+    return (U8)((portalLookup[byteIndex] >> bitShift) & 0x3);
+}
+
+bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, S32 triGuess, S32& subMeshIndex, S32& triIndex)
+{
+#ifndef NON_MATCHING
+    xMath2NearestPointOnLine;
+#endif
+
+    xFAIL_AND_RETURN_VALUE_IF(618, subMeshGuess < 0 || subMeshGuess >= numSubMeshes, false);
+    xFAIL_AND_RETURN_VALUE_IF(619, triGuess != NO_TRIANGLE && (triGuess < 0 || triGuess >= subMeshes[subMeshGuess].numTriangles), false);
+
+    for (subMeshIndex = 0; subMeshIndex < numSubMeshes; subMeshIndex++) {
+        xNavigationMeshAssetSubMesh* sub_mesh = &subMeshes[subMeshIndex];
+        S32 useGuessTriangle = (subMeshIndex == subMeshGuess) ? triGuess : NO_TRIANGLE;
+
+        triIndex = sub_mesh->getTriangle(position, useGuessTriangle);
+        if (triIndex != NO_TRIANGLE) {
+            return true;
+        }
+    }
+
+    triIndex = NO_TRIANGLE;
+    subMeshIndex = 0;
+    return false;
+}
+
+void xNavigationMeshAsset::CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex)
+{
+    xFAIL_AND_RETURN_IF(722, subMeshIndex < 0 || subMeshIndex >= numSubMeshes);
+
+    xNavigationMeshAssetSubMesh* subMesh = &subMeshes[subMeshIndex];
+
+    xFAIL_AND_RETURN_IF(727, triangleIndex < 0 || triangleIndex >= subMesh->numTriangles);
+    
+    for (S32 i = 0; i < subMesh->numExits; i++) {
+        if (triangleIndex == subMesh->exits[i].exitTriangleIndex) {
+            subMeshIndex = subMesh->exits[i].neighborMeshIndex;
+            triangleIndex = subMesh->exits[i].destTriangleIndex;
+            break;
+        }
+    }
 }

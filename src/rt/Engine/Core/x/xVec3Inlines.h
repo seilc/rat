@@ -2,12 +2,6 @@
 #define XVEC3INLINES_H
 
 #ifdef DEBUG
-#include "xVec3.h"
-#endif
-
-#include "xDebug.h"
-
-#ifdef DEBUG
 #define INLINE
 #else
 #define INLINE inline
@@ -47,5 +41,17 @@ INLINE F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b)
     }
     return d;
 }
+
+INLINE F32 xVec3Dist2(const xVec3* a, const xVec3* b)
+{
+    F32 d;
+    F32 dx__ = a->x - b->x;
+    F32 dy__ = a->y - b->y;
+    F32 dz__ = a->z - b->z;
+    d = dx__ * dx__ + dy__ * dy__ + dz__ * dz__;
+    return d;
+}
+
+#undef INLINE
 
 #endif

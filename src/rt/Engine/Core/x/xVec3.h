@@ -2,6 +2,7 @@
 #define XVEC3_H
 
 #include "xMath.h"
+#include "xDebug.h"
 
 #include <rwcore.h>
 

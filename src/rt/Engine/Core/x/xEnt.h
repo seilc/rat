@@ -131,7 +131,10 @@ inline xVec3* xEntGetPos(const xEnt* ent)
     return &xModelGetFrame(ent->model)->pos;
 }
 
-U32 xEntIsEnabled(const xEnt* ent);
+inline U32 xEntIsEnabled(const xEnt* ent)
+{
+    return xBaseIsEnabled(ent);
+}
 
 inline void xEntVisibilityCullOn(xEnt* ent)
 {

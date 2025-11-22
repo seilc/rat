@@ -47,6 +47,7 @@ void emitter_EventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
 
 namespace xRumble {
 
+#ifdef DEBUGRELEASE
 void effectAsset::AddTweaks(const char* prefix)
 {
     xAUTOTWEAKRANGE(prefix, "time", &time, 0, 100, NULL, NULL, 0, false);
@@ -58,6 +59,7 @@ void effectAsset::AddTweaks(const char* prefix)
     xAUTOTWEAKRANGE(prefix, "Screen Shake|Rot mag", &shakeRotationalMagnitude, 0, 100, NULL, NULL, 0, false);
     xAUTOTWEAKBOOL(prefix, "Screen Shake|shake Y axis", &shakeY, NULL, NULL, 0, false);
 }
+#endif
 
 F32 effectAsset::GetIntensity(F32 currentTime, F32 totalTime) const
 {
@@ -114,9 +116,12 @@ effect::effect(effectAsset* pAsset)
         link = (xLinkAsset*)((U8*)pAsset + sizeof(effectAsset));
     }
 
+#ifdef DEBUGRELEASE
     AddTweaks();
+#endif
 }
 
+#ifdef DEBUGRELEASE
 void effect::AddTweaks()
 {
     char prefix[256];
@@ -124,6 +129,7 @@ void effect::AddTweaks()
     
     pEffectAsset->AddTweaks(prefix);
 }
+#endif
 
 void boxEmitter::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 {
@@ -239,7 +245,7 @@ void sphericalEmitter::UpdatePosition(const xVec3& playerPos) const
     pAsset->position = playerPos;
 }
 
-#ifndef NONMATCHING
+#ifndef NON_MATCHING
 static void __unused(sphericalEmitterAsset* a)
 {
     *a = *a;

@@ -7,4 +7,6 @@
 #define INLINE inline
 #endif
 
+#undef INLINE
+
 #endif
