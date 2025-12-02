@@ -65,6 +65,13 @@ struct xModelPool
     xModelInstance* List;
 };
 
+struct xModelTag
+{
+    xVec3 v;
+    U32 matidx;
+    F32 wt[4];
+};
+
 void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
 void xModelEval(xModelInstance* modelInst);
 S32 xModelCullSingle(xModelInstance* minst);

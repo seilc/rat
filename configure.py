@@ -600,7 +600,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNPCNavigation.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCNavigationMesh.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParCmd.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zParEmitter.cpp"),
+            Object(Matching, "rt/Engine/Game/zParEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPendulum.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlatform.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayer.cpp"),
