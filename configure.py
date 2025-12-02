@@ -728,7 +728,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xCamTransition.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFrostEffect.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCCustomAV.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zFrozoneBlast.cpp"),
+            Object(Matching, "rt/Engine/Game/zFrozoneBlast.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemSnow.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXGlint.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemRain.cpp"),

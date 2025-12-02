@@ -14,6 +14,11 @@ inline U16 xrand_RandomInt16()
     return (U16)xrand_RandomInt32();
 }
 
+inline F32 xrand_RandomBipolarUnitFloat()
+{
+    return 2.0f * xrand_RandomFloat() - 1.0f;
+}
+
 inline U32 xrand_RandomChoice(U32 nChoice)
 {
     xASSERT(124, nChoice <= 0xffff);

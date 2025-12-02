@@ -1,4 +1,4 @@
-#include "zTrainCar.h"
+#include "xEnt.h"
 
 #ifndef NON_MATCHING
 static void __unused(xEnt* ent, xVec3& v)
