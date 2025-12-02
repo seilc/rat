@@ -878,7 +878,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zCompLogicRightArm.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCSpringBoard.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompLogicSpringBoard.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zModuleMgr_Registry.cpp"),
+            Object(Matching, "rt/Engine/Game/zModuleMgr_Registry.cpp"),
             Object(NonMatching, "rt/Engine/Game/zModuleExample.cpp"),
             Object(NonMatching, "rt/Engine/Game/zModuleMgr.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompParameters.cpp"),
