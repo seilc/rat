@@ -806,7 +806,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNPCProjectileMetalSheet.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCProjectileTrackingGrub.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCombat.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCombatAttack.cpp"),
+            Object(Matching, "rt/Engine/Game/zCombatAttack.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCombatEffects.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCombatSystem.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCineFX.cpp"),
