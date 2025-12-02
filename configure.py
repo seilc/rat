@@ -684,7 +684,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/water/texcache.c"),
             Object(NonMatching, "rt/Engine/Core/gc/water/texconv.c"),
             Object(NonMatching, "rt/Engine/Core/gc/water/textures.c"),
-            Object(NonMatching, "rt/Engine/Game/zEnergyStream.cpp"),
+            Object(Matching, "rt/Engine/Game/zEnergyStream.cpp", extra_cflags=['-sym on']),
             Object(Matching, "rt/Engine/Game/zWireFrameAsset.cpp"),
             Object(NonMatching, "rt/Engine/Game/zJSPExtraData.cpp"),
             Object(NonMatching, "rt/Engine/Game/zRubbleGenerator.cpp"),

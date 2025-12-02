@@ -745,7 +745,7 @@ public:
     T& back() { xASSERT(1055, !empty()); return *(end() - 1); }
     T& operator[](int i) { xASSERT(1057, (i >= 0) && (i < (int)_size)); return get_at(wrap_index(first + i)); }
 
-    iterator dummy_iterator()
+    static iterator dummy_iterator()
     {
         iterator it;
         it.it = 0;
