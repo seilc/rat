@@ -4,6 +4,7 @@
 #include "xDebug.h"
 
 struct zPlayer;
+struct xEnt;
 
 class zPlayerContainer
 {
@@ -15,6 +16,7 @@ public:
     }
 
     S32 size();
+    bool IsPlayer(xEnt* ptr);
 
 private:
     zPlayer* playerArray[4];

@@ -736,7 +736,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zVent.cpp"),
             Object(NonMatching, "rt/Engine/Game/zVentType.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCDodgeList.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zPlayerContainer.cpp"),
+            Object(Matching, "rt/Engine/Game/zPlayerContainer.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXGoo.cpp"),
             Object(NonMatching, "rt/Engine/Game/zGoo.cpp"),
             Object(NonMatching, "rt/Engine/Game/zScreenWarp.cpp"),
