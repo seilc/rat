@@ -20,4 +20,18 @@ protected:
     xVec3 mCurrent;
 };
 
+class xSpringyF32 : public xSpringy
+{
+protected:
+    F32 mVelocitySaveMax;
+    F32 mVelocityMax;
+    F32 mVelocity;
+    F32 mGoal;
+    F32 mCurrent;
+};
+
+class xSpringyAngle : public xSpringyF32
+{
+};
+
 #endif

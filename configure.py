@@ -860,7 +860,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zCompStateMachine.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomImageSlideshow.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomCheatsManager.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCompLogicSwarmMember.cpp"),
+            Object(Matching, "rt/Engine/Game/zCompLogicSwarmMember.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCWaiter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompLogicWaiter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCStirringPlayer.cpp"),
