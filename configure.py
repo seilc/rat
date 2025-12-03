@@ -721,7 +721,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNPCPerception.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerInput.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerConstrainer.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zNPCSquad.cpp"),
+            Object(Matching, "rt/Engine/Game/zNPCSquad.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCommonPlayerActions.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerAction.cpp"),
             Object(NonMatching, "rt/Engine/Game/zAnimCustom.cpp"),
