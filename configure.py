@@ -881,7 +881,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Game/zModuleMgr_Registry.cpp"),
             Object(NonMatching, "rt/Engine/Game/zModuleExample.cpp"),
             Object(NonMatching, "rt/Engine/Game/zModuleMgr.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCompParameters.cpp"),
+            Object(Matching, "rt/Engine/Game/zCompParameters.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMiniGameGrapeStomper.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMiniGameGrapeStomperPlayer.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMiniGamePufferoids.cpp"),
