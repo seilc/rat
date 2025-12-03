@@ -129,6 +129,7 @@ public:
     void destruct();
     void presetup();
     void updater(F32 dt);
+    void clear_motives();
     bool visible() const;
 
     virtual void destroy();

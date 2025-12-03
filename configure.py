@@ -692,7 +692,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/containers.cpp", extra_cflags=['-sym on']),
             Object(Matching, "rt/Engine/Core/x/xFunctionGenerator.cpp", extra_cflags=['-sym on']),
             Object(Matching, "rt/Engine/Core/x/xModelWarp.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCombo.cpp"),
+            Object(Matching, "rt/Engine/Game/zCombo.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFrozoneIce.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRenderBuffer.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Game/zFXFireTrail.cpp"),
