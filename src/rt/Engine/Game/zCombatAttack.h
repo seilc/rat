@@ -6,8 +6,9 @@
 struct zAnimCacheEntry;
 struct zShrapnelAsset;
 
-struct zCombatAttack
+class zCombatAttack
 {
+public:
     struct hitBoneInfo
     {
         U16 bone;

@@ -14,8 +14,9 @@ struct symbol_map
     xModelInstance* model;
 };
 
-struct symbol
+class symbol
 {
+public:
     static symbol_map* map;
 
     static void init();

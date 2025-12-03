@@ -3,7 +3,7 @@
 
 #include "xVec3.h"
 
-struct xCamSupportPath
+class xCamSupportPath
 {
 public:
     struct config
