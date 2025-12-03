@@ -14,6 +14,11 @@ private:
 
 class zPad
 {
+public:
+    static zPad* GetDebugPad();
+
+    bool Pressed(U32 button);
+
 private:
     U8 used;
     U8 enable;

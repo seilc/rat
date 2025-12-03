@@ -567,7 +567,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zCutsceneMgr.cpp"),
             Object(NonMatching, "rt/Engine/Game/zDestructible.cpp"),
             Object(NonMatching, "rt/Engine/Game/zDispatcher.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zEditorLink.cpp"),
+            Object(Matching, "rt/Engine/Game/zEditorLink.cpp"),
             Object(NonMatching, "rt/Engine/Game/zEGenerator.cpp"),
             Object(NonMatching, "rt/Engine/Game/zEnt.cpp"),
             Object(NonMatching, "rt/Engine/Game/zEntButton.cpp"),

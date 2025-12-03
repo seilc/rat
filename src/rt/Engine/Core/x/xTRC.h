@@ -27,6 +27,7 @@ typedef enum _tagTRCState
 
 bool xTRCPadFindFirst(S32& idx, TRCState state);
 S32 xTRCPadGetPadPort(S32 idx);
+U8 xTRCPadGetPadPort(S32& idx, TRCState state);
 void xTRCInit();
 
 #endif
