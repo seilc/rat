@@ -759,7 +759,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zParticleSystemBurrowKickup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomVolume.cpp"),
             Object(Matching, "rt/Engine/Game/zOneLinerSystem.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zUIUVs.cpp"),
+            Object(Equivalent, "rt/Engine/Game/zUIUVs.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCam2Player.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomStatsScreen.cpp"),
             Object(NonMatching, "rt/Engine/Game/zForceFieldEffect.cpp"),
