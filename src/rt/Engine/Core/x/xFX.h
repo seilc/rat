@@ -5,6 +5,9 @@
 #include "xColor.h"
 #include "containers.h"
 
+#include <rwcore.h>
+#include <rpworld.h>
+
 struct xFXRibbon
 {
 public:
@@ -99,5 +102,10 @@ private:
     debug_info* debug;
 #endif
 };
+
+void xFX_SceneEnter(RpWorld* world);
+void xFX_SceneExit(RpWorld*);
+void xFXUpdate(F32 dt);
+void xFXanimUV2PSetTexture(RwTexture* texture);
 
 #endif

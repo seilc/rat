@@ -579,7 +579,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zFire.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFlameEmitter.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFMV.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zFX.cpp"),
+            Object(Matching, "rt/Engine/Game/zFX.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXRibbonPool.cpp"),
             Object(NonMatching, "rt/Engine/Game/zGame.cpp"),
             Object(NonMatching, "rt/Engine/Game/zGameExtras.cpp"),
