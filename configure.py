@@ -912,7 +912,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNPCSwarmBug.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCSwarmOwl.cpp"),
             Object(NonMatching, "rt/Engine/Game/zComponentTypes.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zDebugTweakBranch.cpp"),
+            Object(Matching, "rt/Engine/Game/zDebugTweakBranch.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompCombat.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompSteeringGeneric.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCInstaKill.cpp"),
