@@ -617,7 +617,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zTalkBox.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTaskBox.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTextBox.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zTimer.cpp"),
+            Object(Matching, "rt/Engine/Game/zTimer.cpp"),
             Object(Matching, "rt/Engine/Game/zTrainCar.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTransient.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUI.cpp"),

@@ -49,8 +49,11 @@ struct zScene : xScene
     bool enableDrawing;
 };
 
+typedef xBase*(*zSceneCallback)(xBase*, zScene*, void*);
+
 xBase* zSceneFindObject(U32 gameID);
 const char* zSceneGetName(xBase* b);
+void zSceneForAllBase(zSceneCallback func, S32 baseType, void* data);
 U32 zScene_ScreenAdjustMode();
 
 #endif
