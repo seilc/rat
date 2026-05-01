@@ -901,7 +901,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zButtonMasherWidget.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCWalls.cpp"),
             Object(NonMatching, "rt/Engine/Game/zRaftTrack.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCompSteeringFlockingBrain.cpp"),
+            Object(Matching, "rt/Engine/Game/zCompSteeringFlockingBrain.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompLogicSimpleton.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCSimpleton.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCGate.cpp"),

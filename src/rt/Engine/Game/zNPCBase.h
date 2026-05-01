@@ -52,6 +52,7 @@ public:
     virtual void Load(eNPCType type, const xModelAssetInfo* modelAsset, zNPCAssetRATS* npcAsset, U32 npcAssetSize);
     virtual void Reset();
 
+    void GetChildren(zNPCBase** children, S32* number);
     zICompNPCEntity* GetEntityComponent();
     zICompSteering* GetSteeringComponent();
 

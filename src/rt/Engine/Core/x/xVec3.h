@@ -31,6 +31,8 @@ struct xVec3
     F32 up_normalize();
     void AddScale(const xVec3& d, F32 s);
     void Sub(const xVec3& a, const xVec3& b);
+    void Add(const xVec3& a);
+    void Scale(F32 scalar);
     F32 Distance2(const xVec3& other) const;
 };
 

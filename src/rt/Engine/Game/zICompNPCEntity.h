@@ -40,6 +40,10 @@ private:
     xVec3 oldAcc;
     U8 old_chkby;
     U8 accUpdated;
+
+public:
+    xVec3* GetPosition();
+    xVec3* GetHeading();
 };
 
 #endif
