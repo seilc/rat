@@ -664,7 +664,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zPickup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCGroup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zThrowableSystem.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zUIController.cpp"),
+            Object(Matching, "rt/Engine/Game/zUIController.cpp", extra_cflags=['-sym on']),
             Object(Matching, "rt/Engine/Core/x/xLightVolume.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustom.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUIIncredibles.cpp"),
