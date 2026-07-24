@@ -1,11 +1,11 @@
 #include "iAnim.h"
 
 #include "iAnimSKB.h"
-#include "types.h"
-#include "xMath.h"
 
 #include <rtslerp.h>
 #include <rwcore.h>
+
+#include <types.h>
 
 static unsigned char g_iAnim_workBufferData[0x4000];
 unsigned char* g_iAnim_workBuffer = g_iAnim_workBufferData;
