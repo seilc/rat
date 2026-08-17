@@ -107,6 +107,9 @@ public:
 extern xMat4x3 g_I3;
 
 void xBoxInitBoundOBB(xBox* o, const xBox* b, const xMat4x3* m);
+void xMat3x3GetEuler(const xMat3x3* m, xVec3* a);
+void xMat3x3RotY(xMat3x3* m, F32 t);
+void xMat3x3Mul(xMat3x3* o, const xMat3x3* a, const xMat3x3* b);
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
 {
@@ -143,5 +146,7 @@ inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
 }
 
 void xMat4x3Copy(xMat4x3* o, const xMat4x3* m);
+void xMat4x3ToWorld(xVec3* o, const xMat4x3* m, const xVec3* v);
+void xMat4x3ToLocal(xVec3* o, const xMat4x3* m, const xVec3* v);
 
 #endif

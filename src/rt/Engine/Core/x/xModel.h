@@ -74,6 +74,7 @@ struct xModelTag
 
 void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
 void xModelEval(xModelInstance* modelInst);
+void xModelAnimCollRefresh(const xModelInstance& cm);
 S32 xModelCullSingle(xModelInstance* minst);
 RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
 
@@ -88,5 +89,7 @@ inline xMat4x3* xModelGetFrame(xModelInstance* model)
     xASSERT(856, model->Mat);
     return (xMat4x3*)model->Mat;
 }
+
+bool xModelAnimCollDirty(const xModelInstance& m);
 
 #endif
