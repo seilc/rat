@@ -30,6 +30,9 @@ struct xEntFrame
     xVec3 vel;
     U32 mode;
     xVec3 dpos;
+
+    xVec3& getDpos() const;
+    xVec3& setDpos();
 };
 
 typedef void(*xEntCollisPostCallback)(xEnt*, xScene*, F32, xEntCollis*);
