@@ -100,6 +100,7 @@ void xDebugAddTweak(const char* name, U16* v, U16 vmin, U16 vmax, const tweak_ca
 void xDebugAddTweak(const char* name, U8* v, U8 vmin, U8 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddSelectTweak(const char* name, S8* v, const char** labels, const S8* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddSelectTweak(const char* name, U32* v, const char** labels, const U32* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddFlagTweak(const char* name, U32* v, U32 mask, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);

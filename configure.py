@@ -497,7 +497,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xParEmitterType.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParGroup.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParMgr.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xParSys.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xParSys.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPartition.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xpkrsvc.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xPtankPool.cpp"),

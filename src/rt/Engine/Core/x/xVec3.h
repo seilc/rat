@@ -36,7 +36,9 @@ struct xVec3
     void Sub(const xVec3& a, const xVec3& b);
     void Add(const xVec3& a);
     void Scale(F32 scalar);
+    void Scale(const xVec3& a, F32 scalar);
     F32 Distance2(const xVec3& other) const;
+    void Negate(const xVec3& a);
 };
 
 #define xVec3NormalizeMacro(o, v, outlen)                                                          \
