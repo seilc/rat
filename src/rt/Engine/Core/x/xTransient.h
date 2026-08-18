@@ -12,7 +12,7 @@ void scene_enter(const xBox& world_box);
 void scene_exit();
 void reset();
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void debug_update(F32 dt);
 void debug_render();
 #else

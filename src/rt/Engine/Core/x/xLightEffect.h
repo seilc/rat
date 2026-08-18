@@ -14,7 +14,7 @@ public:
     virtual void StopEffect(xLight& light, bool resetColor) = 0;
     virtual void UpdateEffect(xLight& light, F32 dt) = 0;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual const char* GetEffectName() { return "Unknown"; }
 #endif
 };
@@ -35,14 +35,14 @@ class xLightEffectFlicker : xLightEffectBase
 public:
     static void Init(xBase& data, xDynAsset& asset, size_t asset_size);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void InitDebugTweak();
 #endif
 
     virtual void StartEffect(xLight& light, bool resetEffect);
     virtual void StopEffect(xLight& light, bool resetColor);
     virtual void UpdateEffect(xLight& light, F32 dt);
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     char effectName[64];
     virtual const char* GetEffectName() { return effectName; }
 #endif
@@ -69,7 +69,7 @@ class xLightEffectStrobe : xLightEffectBase
 public:
     static void Init(xBase& data, xDynAsset& asset, size_t asset_size);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void InitDebugTweak();
 #endif
 
@@ -77,7 +77,7 @@ public:
     virtual void StopEffect(xLight& light, bool resetColor);
     virtual void UpdateEffect(xLight& light, F32 dt);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     char effectName[64];
     virtual const char* GetEffectName() { return effectName; }
 #endif

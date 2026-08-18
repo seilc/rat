@@ -3,6 +3,8 @@
 #include "xMemMgr.h"
 #include "xDebug.h"
 
+#include "decomp.h"
+
 #define MAX_ACTIVE 64
 
 struct xLightVolume::activity_type
@@ -47,7 +49,7 @@ bool xLightVolume::activate()
 {
     xASSERT(73, activity == 0);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     activity_type* act = activities;
     activity_type* end_act = act + activities_used;
 
@@ -94,11 +96,11 @@ void xLightVolume::render_atomic(RpAtomic*, xColor, bool, U32)
 {
 }
 
-#ifndef NON_MATCHING
-void xLightVolumeModel::render_single(xModelInstance* model, U32)
-{
-    xASSERT(0, model != 0);
-    xLightVolume::render_immediate(g_BLACK, false);
-    xMat3x3MulScale(NULL, NULL, NULL);
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "model != 0",
+    "xMath3.h",
+    "(o != 0) && (m != 0) && (s != 0)",
+    "(o != 0) && (m != 0)",
+    "xLightVolume.h",
+    "false &&\"Must implement for immediate-mode.\""
+)

@@ -2,15 +2,15 @@
 
 #include "xHudAsset.h"
 
-#ifndef NON_MATCHING
-xAnimTable* xHUDCreateAnimTable()
-{
-    xAnimTable* table = xAnimTableNew("xHUD", 0);
-    xASSERT(0, table);
-    xAnimTableNewState(table, "Idle01", 0, 0, 1.0f, 0, 0, 1.0f, 0, 0, 0, 0, 0);
-    return table;
-}
-#endif
+#include "decomp.h"
+
+DECOMP_FORCEACTIVE(
+    "xHUD",
+    DEBUG || RELEASE ? "xHudModel.cpp" : 0,
+    DEBUG || RELEASE ? "table" : 0,
+    DEBUG || RELEASE ? "%s" : 0,
+    "Idle01"
+)
 
 namespace xhud {
 

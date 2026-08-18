@@ -13,7 +13,7 @@ struct xEnv
 
 extern xEnv* gCurXEnv;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 extern bool debugNoJspsRendering;
 #endif
 

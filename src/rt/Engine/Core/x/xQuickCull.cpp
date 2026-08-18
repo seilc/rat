@@ -2,9 +2,11 @@
 
 #include "xBound.h"
 
+#include "decomp.h"
+
 xQCControl xqc_def_ctrl;
 
-#ifdef DEBUG
+#if DEBUG
 static U32 dbg_regs = 0;
 static U32 dbg_comps = 0;
 static U32 dbg_culls = 0;
@@ -55,7 +57,7 @@ S32 xQuickCullIsects(const xQCData* a, const xQCData* b)
     S32 result = !(a->xmin > b->xmax || a->ymin > b->ymax || a->zmin > b->zmax ||
                    b->xmin > a->xmax || b->ymin > a->ymax || b->zmin > a->zmax);
     
-#ifdef DEBUG
+#if DEBUG
     if (!result) {
         dbg_culls++;
     }
@@ -108,14 +110,7 @@ static void xQuickCullCellMerge(xQCData* o, const xQCData* a, const xQCData* b)
     o->zmax_dup = o->zmax;
 }
 
-#ifndef NON_MATCHING
-void xQuickCullForVec(xQCControl* ctrl, xQCData* q, const xVec3* v)
-{
-    xASSERT(0, ctrl);
-    xASSERT(0, q);
-    xASSERT(0, v);
-}
-#endif
+DECOMP_FORCEACTIVE("ctrl", "q", "v")
 
 void xQuickCullForLine(xQCControl* ctrl, xQCData* q, const xLine3* ln)
 {
@@ -252,7 +247,7 @@ void xQuickCullForEverything(xQCData* q)
     q->zmax_dup = 127;
 }
 
-#ifdef DEBUG
+#if DEBUG
 void xQuickCullDebugCB()
 {
     xprintf("world_min=<%.3f %.3f %.3f>\n",

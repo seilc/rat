@@ -20,7 +20,7 @@ enum en_VERBOSE_MSGLEVEL
     DBML_SPEW
 };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 #define xWARN(...) DBprintf(DBML_WARN, __VA_ARGS__)
 #define xVERBOSE(...) DBprintf(DBML_VDBG, __VA_ARGS__)
 #else
@@ -28,7 +28,7 @@ enum en_VERBOSE_MSGLEVEL
 #define xVERBOSE(...)
 #endif
 
-#ifdef DEBUG
+#if DEBUG
 #define _xVALIDATEFAIL(line, cond, msg)                                                           \
 do {                                                                                              \
     static S32 been_here;                                                                         \
@@ -57,7 +57,7 @@ do {                                                                            
 #define xVALIDATEM(line, cond, msg)
 #endif
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 #define _xASSERTFAIL(line, cond, ...)                                                             \
 do {                                                                                              \
     xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                     \
@@ -140,7 +140,7 @@ typedef void(*xDebugModeCallback)();
 void xDebugValidateFailed();
 void xprintf(const char* fmt, ...);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void DBprintf(en_VERBOSE_MSGLEVEL msglvl, const char* fmt, ...);
 void xDebug_assert2_info(const char* func, const char* file, U32 line, const char* expr);
 void xDebug_assert2(const char* fmt, ...);
@@ -149,7 +149,7 @@ U32 xDebugBoing();
 
 S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 S32 xDebugModeGet();
 void xDebugStackTrace();
 #endif

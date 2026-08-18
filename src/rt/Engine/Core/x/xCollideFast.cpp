@@ -3,6 +3,8 @@
 #include "xDebug.h"
 #include "xBound.h"
 
+#include "decomp.h"
+
 U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
 {
     xASSERT(26, r);
@@ -11,7 +13,7 @@ U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
     xVec3 diff;
     xVec3Sub(&diff, &r->origin, &s->center);
     
-#ifdef DEBUG
+#if DEBUG
     F32 a = xVec3Dot(&r->dir, &r->dir);
     xVALIDATE(33, xabs(a-1) < 1e-3f);
 #endif
@@ -44,19 +46,9 @@ U32 xRayHitsBoxFast(const xRay3* r, const xBox* b)
     return (isx.penned <= 0.0f || isx.contained <= 0.0f);
 }
 
-#ifndef NON_MATCHING
-U32 xRayHitsCylinderFast(const xRay3* r, const xCylinder* c)
-{
-    xASSERT(0, c);
-    return 0;
-}
-
-U32 xRayHitsBoundFast(const xRay3* r, const xBound* b)
-{
-    F32 ms = 0.0f;
-    xVALIDATE(0, xeq(ms*ms,xVec3Length2(&b->mat->up),1e-3f));
-    xVALIDATE(0, xeq(ms*ms,xVec3Length2(&b->mat->at),1e-3f));
-    xWARN("xRayHitsBoundFast: unsupported bound type %d\n");
-    return 0;
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "c",
+    DEBUG ? "%s(%d) : (xeq(ms*ms,xVec3Length2(&b->mat->up),1e-3f)) in '%s'\n" : 0,
+    DEBUG ? "%s(%d) : (xeq(ms*ms,xVec3Length2(&b->mat->at),1e-3f)) in '%s'\n" : 0,
+    "xRayHitsBoundFast: unsupported bound type %d\n"
+)

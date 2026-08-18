@@ -24,11 +24,6 @@ public:
     void begin_render(S32 clear_flags, U32 fbmsk_write, U32, F32 near_plane, F32 far_plane);
     void end_render();
     void render_background();
-
-#ifndef NON_MATCHING
-    void __unused();
-#endif
-
     void setup_subview(RwCamera* src_cam, const xFRect& src_rect, const xFRect& dst_rect);
     void get_subview(xMat4x3& ltm, xVec2& view_window, xVec2& view_offset, RwCamera* src_cam, const xFRect& src_rect, const xFRect& dst_rect) const;
 

@@ -4,6 +4,8 @@
 #include "xDebugTweak.h"
 #include "xSndMgr.h"
 
+#include "decomp.h"
+
 namespace xhud {
 
 namespace {
@@ -14,12 +16,7 @@ F32 tweak_pitch_scale = 0.01f;
 
 }
 
-#ifndef NON_MATCHING
-static void __unused(F32* x)
-{
-    *x = 1.0f;
-}
-#endif
+DECOMP_FORCEFLOAT(1.0f)
 
 meter_widget::meter_widget(const meter_asset& a)
     : widget(a)
@@ -93,11 +90,8 @@ void meter_widget::updater(F32 dt)
     }
 }
 
-#ifndef NON_MATCHING
-static void __unused()
-{
-    __xhud_unused();
-}
+#if DEBUG || RELEASE
+DECOMP_FORCEACTIVE("xHud.h", "*always*", "%s")
 #endif
 
 }

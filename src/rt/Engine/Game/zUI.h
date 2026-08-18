@@ -66,7 +66,7 @@ public:
     virtual void Unselect();
     virtual void Visible();
     virtual void Invisible();
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void DoAddTweaks(const char* baseName);
 #endif
 

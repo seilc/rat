@@ -1,8 +1,9 @@
 #include "xMemoryManagerFixed.h"
 
 #include "xMemMgr.h"
+#include "decomp.h"
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 #define DoAllocate(size, options, file, function, line) DoAllocate(size, options, file, function, line)
 #define DoReallocate(pointer, size, options, file, function, line) DoReallocate(pointer, size, options, file, function, line)
 #else
@@ -10,7 +11,7 @@
 #define DoReallocate(pointer, size, options, file, function, line) DoReallocate(pointer, size, options)
 #endif
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 inline U8 ConvertToFixedSizeEnum(U32 size)
 {
     if (size <= 4) return 1;
@@ -40,18 +41,17 @@ U32 xMemoryManagerFixed::GetOrigSize(void* pointer) const
 }
 #endif
 
-#ifndef NON_MATCHING
-void xMemoryManagerFixed::Init(void*, U32, U32 elementSize, UseAbsoluteSizeType, bool)
-{
-    xMEMORYMANAGERASSERT(0, elementSize > 0 && elementSize >= sizeof(FixedHeader));
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "assert: %d (%s#%d)\n",
+    "elementSize > 0 && elementSize >= sizeof(FixedHeader)",
+    "xMemoryManagerFixed.cpp"
+)
 
 void xMemoryManagerFixed::Init(void* start, U32 elements, U32 elementSize)
 {
     xMEMORYMANAGERASSERT(89, elementSize > 0 && elementSize >= sizeof(FixedHeader) && elements > 0);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     DoInit(start, elements * (elementSize + 1), false);
 #else
     DoInit(start, elements * elementSize, false);
@@ -75,7 +75,7 @@ void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options, const char*, const 
 
     freeList = freeList->next;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     allocatedElements++;
 
     if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {
@@ -95,7 +95,7 @@ void xMemoryManagerFixed::DoFree(void* pointer)
     header->next = freeList;
     this->freeList = header;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {
         xMemMgrGenericMallocRemove(elementSize, xMemMgrGenericMallocGetTag());
     }
@@ -126,7 +126,7 @@ void xMemoryManagerFixed::InitMemory()
     }
     cur->next = NULL;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     allocatedElements = 0;
     origSizeList = (U8*)xMEMADVANCE(cur, elementSize);
 #endif

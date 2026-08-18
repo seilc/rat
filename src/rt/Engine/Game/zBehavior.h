@@ -101,7 +101,7 @@ public:
     virtual void setAnimState(U32 new_stateID, F32 blend, F32 dest_time, xModelInstance* model);
     virtual bool hasAnimEnded(xModelInstance* model);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void debugDisplay();
     virtual void debugRender();
     virtual void addStaticTweaks();
@@ -115,7 +115,7 @@ protected:
         testFunc testFunction;
         behavior* changeToBehavior;
         testNode* next;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
         char* description;
 #endif
         F32 waitTime;
@@ -196,7 +196,7 @@ public:
     virtual void registerCollision(const SphereCollisionResults& scene_collide);
     virtual void RunDamageBehavior(behavior* dmgBehavior, zCombatDamageInfo& damageInfo);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void debugDisplay();
     virtual void debugRender();
     virtual void addTweaks(const char*);

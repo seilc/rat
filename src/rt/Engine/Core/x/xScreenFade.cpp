@@ -67,7 +67,7 @@ void xScreenFade::StartFade()
 
 void xScreenFade::update(F32 seconds)
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     if (xglobals->ForceCutscene) {
         state = eScreenFadeStateOff;
         return;

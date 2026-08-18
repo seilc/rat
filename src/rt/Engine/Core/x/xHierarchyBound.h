@@ -26,7 +26,7 @@ struct xHierarchyBound
     xHierarchyNode* nodes;
     U8 count;
     U8 maxCount;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     xHierarchTweakInfo tweakInfo;
 #endif
 };
@@ -44,7 +44,7 @@ void xHierarchyBoundInit(xHierarchyBound* bound, const xHierarchyBoundInitData* 
 void xHierarchyBoundDraw(const xHierarchyBound* bound, U8 mR, U8 mG, U8 mB, U8 mA, U8 sR, U8 sG, U8 sB, U8 sA, S8 hilight, U8 hR, U8 hG, U8 hB, U8 hA);
 bool xHierarchyBoundTest(const xHierarchyBound* bound, xSweptSphere* sphere, U16* boundUserData, S8* subsphere, bool skipMasterCheck);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void xHierarchyBoundAddDebugTweaks(xHierarchyBound* bound, const char* base, const char** boneNames, S32 boneCount);
 #else
 #define xHierarchyBoundAddDebugTweaks(bound, base, boneNames, boneCount)

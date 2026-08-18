@@ -10,7 +10,7 @@ typedef struct _xCounter : xBase
     S16 count;
     U8 state;
     U8 pad;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     char stats[72];
 #endif
 } xCounter;

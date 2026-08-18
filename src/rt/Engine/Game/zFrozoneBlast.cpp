@@ -1,10 +1,6 @@
 #include "xRand.h"
 
-#ifndef NON_MATCHING
-static void __unused()
-{
-    *(F32*)0 = 1.0f;
-    xrand_RandomBipolarUnitFloat();
-}
+#include "decomp.h"
 
-#endif
+DECOMP_FORCEFLOAT(1.0f)
+DECOMP_FORCEACTIVE(xrand_RandomBipolarUnitFloat)

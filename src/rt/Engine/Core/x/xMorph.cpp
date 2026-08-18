@@ -3,17 +3,19 @@
 #include "xDebug.h"
 #include "iModel.h"
 
+#include "decomp.h"
+
 #include <string.h>
 
 #define xMAGIC(a, b, c, d) ((((U32)a) << 0) | (((U32)b) << 8) | (((U32)c) << 16) | (((U32)d) << 24))
 
-#ifndef NON_MATCHING
-static void __unused(void* data)
-{
-    xASSERT(0, data);
-    xASSERT(0, *((U32*)data) == xMAGIC('M','P','H','1'));
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "xMorph.cpp",
+    "data",
+    "%s",
+    "*((U32*)data) == ((((U32)'M') << 0) | (((U32)'P') << 8) | (((U32)'H') << 16) | (((U32)'1') << 24))",
+    "*((U32*)data) == xMAGIC('M','P','H','1')"
+)
 
 xMorphSeqFile* xMorphSeqSetup(void* data, xMorphFindAssetCallback FindAssetCB)
 {

@@ -3,7 +3,7 @@
 
 #include "xMath3.h"
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void xDrawSetColor(U8 r, U8 g, U8 b, U8 a);
 void xDrawSphere(const xSphere* sph, U32 flags);
 #else

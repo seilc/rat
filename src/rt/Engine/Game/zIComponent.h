@@ -15,7 +15,7 @@ public:
     virtual S32 Initialize();
     virtual void Attached() = 0;
     virtual void Detached() = 0;
-#ifdef RELEASE
+#if RELEASE
     virtual void Reset() = 0;
 #endif
     virtual void AllAttached() = 0;

@@ -3,6 +3,8 @@
 #include "xDebug.h"
 #include "xMemMgr.h"
 
+#include "decomp.h"
+
 void XOrdInit(st_XORDEREDARRAY* array, S32 size, U32 memtag, S32 tempAlloc)
 {
     xVALIDATE(63, size>0);
@@ -133,24 +135,21 @@ void XOrdSort(st_XORDEREDARRAY* array, XOrdCompareCallback test)
     }
 }
 
-#ifndef NON_MATCHING
-static void __unused(st_XORDEREDARRAY* array, S32 idx, S32 i, S32 index, void* elt, st_XORDEREDARRAY* src, st_XORDEREDARRAY* tgt)
-{
-    xASSERT(0, idx>=0);
-    xASSERT(0, idx<array->cnt);
-    xWARN("XOrdArray: InsIdx exceeds array size\n");
-    xASSERT(0, array->cnt <= array->max);
-    xASSERT(0, i!=0);
-    xASSERT(0, index >= 0);
-    xASSERT(0, index < array->max);
-    xASSERT(0, elt == array->list[index]);
-    xVALIDATEM(0, 0, "XOrdRemove failed to locate element");
-    xVALIDATEM(0, 0, "Src:Tgt lists sizes differ ... proceeding anyway");
-    xASSERT(0, ((src->cnt-1) < tgt->max));
-    xWARN("Tgt list can't hold src");
-    xASSERT(0, (!(tgt->cnt)));
-    xWARN("Tgt list not empty ... just warning ... proceeding");
-    xASSERT(0, src != tgt);
-    xWARN("XOrdLocate: Failed to find first match\n");
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "idx>=0",
+    "idx<array->cnt",
+    "XOrdArray: InsIdx exceeds array size\n",
+    "array->cnt <= array->max",
+    "i!=0",
+    "index >= 0",
+    "index < array->max",
+    "elt == array->list[index]",
+    DEBUG ? "%s(%d) : (XOrdRemove failed to locate element) in '%s'\n" : 0,
+    DEBUG ? "%s(%d) : (Src:Tgt lists sizes differ ... proceeding anyway) in '%s'\n" : 0,
+    "((src->cnt-1) < tgt->max)",
+    "Tgt list can't hold src",
+    "(!(tgt->cnt))",
+    "Tgt list not empty ... just warning ... proceeding",
+    "src != tgt",
+    "XOrdLocate: Failed to find first match\n"
+)

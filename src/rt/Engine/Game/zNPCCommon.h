@@ -17,7 +17,7 @@ class zSwitchLever;
 struct xModelAssetParam;
 struct zNPCCombatInitData;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 struct zDebugStoredEvents
 {
     iTime storedTime;
@@ -136,7 +136,7 @@ public:
     virtual void debug_render();
     virtual void move();
     virtual F32 DistanceToPriorityTarget();
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void debug_display();
     virtual void add_tweaks(const char* prefix);
 #endif
@@ -171,7 +171,7 @@ public:
         U8 pad3 : 8;
         U8 old_chkby : 8;
     } commonFlags;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     zDebugStoredEvents storedEvents[8];
     zDebugStoredAnimChanges storedAnimChanges[8];
 #endif
@@ -208,7 +208,7 @@ public:
     xVec3 surroundedMoveTo;
     bool surroundedValid;
     xVec3 shakeModelDisp;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     F32 tweak_scale;
     xVec3 tweak_offset;
     const char* debug_name;
@@ -251,7 +251,7 @@ public:
     bool ourDeathHasBeenRegistered;
 
 // ???
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 protected:
 #endif
     F32 prevAlpha;

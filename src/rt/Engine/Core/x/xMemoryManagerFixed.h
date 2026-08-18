@@ -6,24 +6,15 @@
 class xMemoryManagerFixed : public xMemoryManager
 {
 public:
-    enum UseAbsoluteSizeType
-    {
-        UseAbsoluteSize
-    };
-
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void SetOrigSize(void* pointer, U32 size) const;
     U32 GetOrigSize(void* pointer) const;
-#endif
-
-#ifndef NON_MATCHING
-    void Init(void*, U32, U32, UseAbsoluteSizeType, bool);
 #endif
 
     void Init(void* start, U32 elements, U32 elementSize);
 
 protected:
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void* DoAllocate(U32 size, U32 options, const char*, const char*, S32);
 #else
     virtual void* DoAllocate(U32 size, U32 options);
@@ -31,7 +22,7 @@ protected:
 
     virtual void DoFree(void* pointer);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void* DoReallocate(void* pointer, U32 size, U32, const char*, const char*, S32);
 #else
     virtual void* DoReallocate(void* pointer, U32 size, U32);
@@ -48,7 +39,7 @@ private:
     FixedHeader* freeList;
     U32 elements;
     U32 elementSize;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U32 allocatedElements;
     U8* origSizeList;
 #endif

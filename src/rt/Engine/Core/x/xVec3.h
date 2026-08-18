@@ -77,7 +77,7 @@ void xVec3Inv(xVec3& v);
 F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 F32 xVec3Dist2(const xVec3* a, const xVec3* b);
 
-#ifndef DEBUG
+#if !DEBUG
 #include "xVec3Inlines.h"
 #endif
 

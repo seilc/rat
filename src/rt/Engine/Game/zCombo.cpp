@@ -2,30 +2,29 @@
 
 #include "xHudText.h"
 
+#include "decomp.h"
+
 static xhud::text_widget::widget_chunk* comboHUD = NULL;
 static bool sComboIsPaused = false;
 
 void zCombo_Add(F32 points, zComboType type)
 {
+    // Fakematch?
     S32 rewardLevel;
     rewardLevel = rewardLevel;
 }
 
-#ifndef NON_MATCHING
-static const char* __unused0[] = {
+DECOMP_FORCEACTIVE(
     "NumCombos",
     "ComboTimer",
     "ComboDisplayTime",
     "ComboFadeDir",
     "leftright",
     "updown",
-#ifdef DEBUG
-    "zCombo.cpp",
-#endif
+    DEBUG ? "zCombo.cpp" : 0,
     "Combo%02d",
-    "HUD_TEXT_COMBOMESSAGE",
-};
-#endif
+    "HUD_TEXT_COMBOMESSAGE"
+)
 
 void zCombo_Paused()
 {
@@ -41,12 +40,9 @@ void zCombo_Paused()
     }
 }
 
-#ifdef DEBUGRELEASE
-#ifndef NON_MATCHING
-static const char* __unused1[] = {
-#ifdef RELEASE
+#if DEBUG || RELEASE
+DECOMP_FORCEACTIVE(
     "zCombo.cpp",
-#endif
     "comboReward[i].textAsset",
     "You need to get latest MNUI and in.ini",
     "Player|Combo|\2combo add points",
@@ -62,7 +58,6 @@ static const char* __unused1[] = {
     "Player|Combo|\1comboCounterGraph|",
     "rewardLevel < comboNumRewards",
     "%s",
-    "rewardLevel > -1",
-};
-#endif
+    "rewardLevel > -1"
+)
 #endif

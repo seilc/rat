@@ -29,7 +29,7 @@ public:
     virtual void render();
     virtual void set_text(const char* intext);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual const char* category() { return "Text"; }
 #endif
 };

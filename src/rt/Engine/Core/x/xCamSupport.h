@@ -16,7 +16,7 @@ public:
 
     config cfg;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     S32 debug_flags;
 #endif
 
@@ -38,7 +38,7 @@ public:
     }
 
 private:
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     struct debug_context
     {
         char weight_text[256];

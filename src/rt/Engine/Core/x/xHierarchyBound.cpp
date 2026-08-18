@@ -3,12 +3,14 @@
 #include "xDebugTweak.h"
 #include "xDraw.h"
 
+#include "decomp.h"
+
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 namespace {
 
     U32 CountElements(const char** list)
@@ -213,7 +215,7 @@ bool xHierarchyBoundTest(const xHierarchyBound* bound, xSweptSphere* sphere, U16
     return false;
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void xHierarchyBoundAddDebugTweaks(xHierarchyBound* bound, const char* base, const char** boneNames, S32 boneCount)
 {
     static const tweak_callback master_tweaks = {
@@ -266,14 +268,10 @@ void xHierarchyBoundAddDebugTweaks(xHierarchyBound* bound, const char* base, con
         AddHierarchyTweak(base, bound, i);
     }
 }
-
-#ifndef NON_MATCHING
-static void __unused(U32 count, U32 extraSpheres)
-{
-    xASSERT(0, count+extraSpheres <= 255);
-
-    xTWEAK("%s|\1Count", (F32*)0, 0, 0, 0, 0, 0);
-    xTWEAK("%s|\1Max", (F32*)0, 0, 0, 0, 0, 0);
-}
 #endif
-#endif
+
+DECOMP_FORCEACTIVE(
+    "count+extraSpheres <= 255",
+    "%s|\1Count",
+    "%s|\1Max"
+)

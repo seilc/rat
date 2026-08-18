@@ -1,10 +1,6 @@
 #include "xFactory.h"
 
 #include "xRMemData.h"
+#include "decomp.h"
 
-#ifndef NON_MATCHING
-static void __unused(RyzMemGrow* a)
-{
-    a->IsEnabled();
-}
-#endif
+DECOMP_FORCEACTIVE(&RyzMemGrow::IsEnabled)

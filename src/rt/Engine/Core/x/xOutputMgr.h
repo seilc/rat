@@ -14,7 +14,7 @@ enum xOutSeverity
     xOutSevForce = FORCEENUMSIZEINT
 };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 #define xWARNINVALID(line, name, cond)                                                              \
 do {                                                                                                \
     if (!(cond) && (xOutTrumps((name), xOutSevWarn) || xOutEnabled((name)) && xOutGetSev() >= xOutSevWarn)) {   \

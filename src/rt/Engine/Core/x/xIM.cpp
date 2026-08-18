@@ -3,6 +3,8 @@
 #include "xDebug.h"
 #include "xMemMgr.h"
 
+#include "decomp.h"
+
 #include <rwcore.h>
 
 void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount)
@@ -34,28 +36,18 @@ void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount)
     context.format = format;
 }
 
-#ifndef NON_MATCHING
-void xIMLock(xIMLockContext&, xIMFormat, S32, const xIMLockParameters& params)
-{
-    xASSERT(0, params.cpos != 0);
-    xASSERT(0, params.cuv != 0);
-    xASSERT(0, params.ccolor != 0);
-}
-
-void xIMLock2(xIMLockContext& context1, xIMLockContext& context2, xIMFormat, S32, const xIMLockParameters& params1, const xIMLockParameters& params2)
-{
-    xASSERT(0, (params1.cpos != 0) && (((int)params1.cpos & 15) == 0));
-    xASSERT(0, (params1.cuv != 0) && (((int)params1.cuv & 15) == 0));
-    xASSERT(0, (params1.ccolor != 0) && (((int)params1.ccolor & 15) == 0));
-    xASSERT(0, (params2.cpos != 0) && (((int)params2.cpos & 15) == 0));
-    xASSERT(0, (params2.cuv != 0) && (((int)params2.cuv & 15) == 0));
-    xASSERT(0, (params2.ccolor != 0) && (((int)params2.ccolor & 15) == 0));
-
-    U8* data_buffer = NULL;
-    S32 alloc_qwords = 0;
-    xASSERT(0, ((U32)data_buffer - (U32)context1.data) == (alloc_qwords*16));
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "params.cpos != 0",
+    "params.cuv != 0",
+    "params.ccolor != 0",
+    "(params1.cpos != 0) && (((int)params1.cpos & 15) == 0)",
+    "(params1.cuv != 0) && (((int)params1.cuv & 15) == 0)",
+    "(params1.ccolor != 0) && (((int)params1.ccolor & 15) == 0)",
+    "(params2.cpos != 0) && (((int)params2.cpos & 15) == 0)",
+    "(params2.cuv != 0) && (((int)params2.cuv & 15) == 0)",
+    "(params2.ccolor != 0) && (((int)params2.ccolor & 15) == 0)",
+    "((U32)data_buffer - (U32)context1.data) == (alloc_qwords*16)"
+)
 
 void xIMUnlock(xIMLockContext& context)
 {

@@ -1,8 +1,5 @@
 #include "containers.h"
 
-#ifndef NON_MATCHING
-static void __unused(pool_list_base* p)
-{
-    p->clear();
-}
-#endif
+#include "decomp.h"
+
+DECOMP_FORCEACTIVE(&pool_list_base::clear)

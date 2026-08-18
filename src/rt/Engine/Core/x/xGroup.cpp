@@ -7,6 +7,8 @@
 #include "zNPCCoverPoint.h"
 #include "xOutputMgr.h"
 
+#include "decomp.h"
+
 void xGroupInit(void* b, void* asset)
 {
     xGroupInit((xBase*)b, (xGroupAsset*)asset);
@@ -199,13 +201,7 @@ U32 xGroupGetItem(xGroup* g, U32 index)
     return idx[index];
 }
 
-#ifndef NON_MATCHING
-void xGroupUpdate(xBase* to, xScene* sc, F32)
-{
-    xASSERT(0, to);
-    xASSERT(0, sc);
-}
-#endif
+DECOMP_FORCEACTIVE("to", "sc")
 
 U32 xGroupGetAny(xGroup* g)
 {
@@ -221,12 +217,7 @@ U32 xGroupGetAny(xGroup* g)
     return id;
 }
 
-#ifndef NON_MATCHING
-void xGroupGetAnyPtr(xGroup* g)
-{
-    xASSERT(0, g->ptr_last_index < g->asset->itemCount);
-}
-#endif
+DECOMP_FORCEACTIVE("g->ptr_last_index < g->asset->itemCount")
 
 xBase* xGroupGetAnyRandomPtr(xGroup* g)
 {

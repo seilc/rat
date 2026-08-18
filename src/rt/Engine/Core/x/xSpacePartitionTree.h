@@ -44,14 +44,14 @@ public:
         };
     };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     S32 total_cells_used;
 #endif
 
     void create(F32 minx, F32 miny, F32 maxx, F32 maxy, F32 min_width, F32 max_width, S32 max_entries);
     void clear();
     
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void debug_update(F32);
 #endif
 

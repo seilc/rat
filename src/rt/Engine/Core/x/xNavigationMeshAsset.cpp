@@ -5,14 +5,14 @@
 #include "xGlobals.h"
 #include "zNPCCommon.h"
 
+#include "decomp.h"
+
 static const U32 MAX_CIRCLES = 50;
 
-#if !defined(MASTER) && !defined(NON_MATCHING)
-static void __unused(F32& f, zMeshCircle* c, const xVec3& p)
-{
-    xMath2NearestPointOnLine(f, f, 1, 0, 0, 0, 0, 0);
-    c->SetPosition(p);
-}
+#if !MASTER
+DECOMP_FORCEFLOAT(1.0f)
+DECOMP_FORCEACTIVE(&zMeshCircle::SetPosition)
+DECOMP_FORCEACTIVE(xMath2NearestPointOnLine)
 #endif
 
 namespace {
@@ -201,17 +201,11 @@ void xNavigationMeshAsset::ReleaseCircle(zMeshCircle* circle)
     sFreeCirclePool = circle;
 }
 
-#ifndef NON_MATCHING
-U32 xNavigationMeshAsset::getId(const xNavigationMeshAssetSubMesh*, U32 subMeshId, U32 sub_mesh_shifted) const
-{
-    static const U32 MAX_VERTICES_PER_SUB_MESH = 1;
-    xASSERTM(0, ((U32)0xFFFFFFFF) / (MAX_VERTICES_PER_SUB_MESH * MAX_VERTICES_PER_SUB_MESH ) > subMeshId,
-               "We have hit the U32 limit and wrapped around the ID. This is bad because triangles will share IDs.");
-    U32 id = subMeshId;
-    xASSERT(0, id <= ( id + sub_mesh_shifted ));
-    return 0;
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "((U32)0xFFFFFFFF) / (MAX_VERTICES_PER_SUB_MESH * MAX_VERTICES_PER_SUB_MESH ) > subMeshId",
+    "We have hit the U32 limit and wrapped around the ID. This is bad because triangles will share IDs.",
+    "id <= ( id + sub_mesh_shifted )"
+)
 
 S32 xNavigationMeshAssetSubMesh::getTriangle(const xVec3& point, S32 current_triangle) const
 {
@@ -285,10 +279,6 @@ S32 xNavigationMeshAssetSubMesh::lookup_next(S32 source, S32 destination) const
 
 bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, S32 triGuess, S32& subMeshIndex, S32& triIndex)
 {
-#ifndef NON_MATCHING
-    xMath2NearestPointOnLine;
-#endif
-
     xFAIL_AND_RETURN_VALUE_IF(618, subMeshGuess < 0 || subMeshGuess >= numSubMeshes, false);
     xFAIL_AND_RETURN_VALUE_IF(619, triGuess != NO_TRIANGLE && (triGuess < 0 || triGuess >= subMeshes[subMeshGuess].numTriangles), false);
 
@@ -306,6 +296,8 @@ bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, 
     subMeshIndex = 0;
     return false;
 }
+
+DECOMP_FORCEACTIVE(xMath2NearestPointOnLine)
 
 void xNavigationMeshAsset::CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex)
 {

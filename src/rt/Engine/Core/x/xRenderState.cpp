@@ -32,7 +32,7 @@ void xRenderStateSetZBias(RwReal bias)
     if (!cam) return;
 
 // Fakematch?
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     static RwReal bias_scale = 0.005f;
 #else
     static const RwReal bias_scale = 0.005f;
@@ -103,7 +103,7 @@ void xRenderFixIMEnd()
 {
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 RwBool xRenderStateCheckBlendModes(RwBlendFunction desiredSrcBlend, RwBlendFunction desiredDestBlend)
 {
     RwBlendFunction currentSrcBlend, currentDestBlend;

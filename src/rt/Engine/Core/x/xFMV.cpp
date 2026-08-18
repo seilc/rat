@@ -64,7 +64,7 @@ RwTexture* xFMVGetTexture(MOVIE* pMovie, U16 looping, U16 freezeframed, U32 star
         BinkGoto(pMovie->hBink, startframe + 1, 0);
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     if (xDebugModeGet() == 18) {
         S32 frameSkipped = pMovie->hBink->FrameNum;
         xprintf("Time Code:       %02d:%02d:%02d:%02d\nFrame %d/%d\nSkipped %d\n",

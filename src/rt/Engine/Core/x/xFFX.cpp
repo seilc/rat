@@ -1,6 +1,7 @@
 #include "xFFX.h"
 
 #include "xDebug.h"
+#include "decomp.h"
 
 static U32 psize;
 static xFFX* pool;
@@ -57,12 +58,7 @@ S16 xFFXAddEffect(xEnt* ent, xFFX* f)
     return ent->num_ffx++;
 }
 
-#ifndef NON_MATCHING
-void xFFXRemoveEffectByIdx(xEnt* ent, U8 n)
-{
-    xASSERT(0, n < ent->num_ffx);
-}
-#endif
+DECOMP_FORCEACTIVE("n < ent->num_ffx")
 
 U32 xFFXRemoveEffectByFData(xEnt* ent, void* fdata)
 {
@@ -161,14 +157,21 @@ void xFFXShakeFree(xFFXShakeState* s)
     shake_alist = s;
 }
 
-#ifndef NON_MATCHING
-void xFFXRotMatchUpdateEnt(xEnt*, xScene*, F32 dt, void*)
-{
-    xASSERT(0, dt > 0);
-    iprintf("xFFXRotMatchUpdateEnt: ent has no collision!\n");
-    iprintf("xFFXRotMatchUpdateEnt: ent has no frame!\n");
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "dt > 0",
+    "xFFXRotMatchUpdateEnt: ent has no collision!\n",
+    "xFFXRotMatchUpdateEnt: ent has no frame!\n",
+    "rms->max_decl > edecl",
+    "fdecl > edecl",
+    "xEnt.h",
+    "ent->model",
+    "xModel.h",
+    "model",
+    "model->Mat",
+    RELEASE ? "xVec3Inlines.h" : 0,
+    RELEASE ? "o != a && o != b" : 0,
+    RELEASE ? "Sorry, but the input vector can't be the same as the output vector. You'll get the wrong answer" : 0
+)
 
 void xFFXRotMatchPoolInit(U32 num)
 {
@@ -184,15 +187,3 @@ void xFFXRotMatchPoolInit(U32 num)
 
     rot_match_alist = rot_match_pool + (rot_match_psize-1);
 }
-
-#ifndef NON_MATCHING
-void xFFXRotMatchFree(xFFXRotMatchState* rms)
-{
-    F32 edecl = 0;
-    F32 fdecl = 0;
-    xASSERT(0, rms->max_decl > edecl);
-    xASSERT(0, fdecl > edecl);
-    xVec3Cross(NULL, NULL, NULL);
-    xEntGetPos(NULL);
-}
-#endif

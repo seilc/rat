@@ -8,7 +8,7 @@
 
 xEnv* gCurXEnv;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 bool debugNoJspsRendering;
 #endif
 
@@ -19,7 +19,7 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
     
     xVERBOSE("... entering xEnvLoadJSPList ...\n");
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     xDebugRemoveTweak("Debugging Options|JSP Visibility");
 #endif
 
@@ -91,7 +91,7 @@ void xEnvRender(xEnv* env, bool alpha)
                 jspRenderCount++;
             }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
             char text[128];
             if (env->geom->jsp_visibilityCount[i] < 0) {
                 sprintf(text, "JSP '%s' had too many Decrements (once only assertion)", xSTAssetName(env->geom->jsp_aid[i]));

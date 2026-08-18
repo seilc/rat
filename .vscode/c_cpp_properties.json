@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "name": "Debug",
+            "defines": [
+                "DEBUG=1",
+                "RWDEBUG"
+            ]
+        },
+        {
+            "name": "Release",
+            "defines": [
+                "RELEASE=1"
+            ]
+        },
+        {
+            "name": "MasterDebug",
+            "defines": [
+                "MASTERDEBUG=1"
+            ]
+        },
+        {
+            "name": "Master",
+            "defines": [
+                "MASTER=1"
+            ]
+        }
+    ],
+    "version": 4
+}

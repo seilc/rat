@@ -4,6 +4,8 @@
 #include "xOutputMgr.h"
 #include "xMath.h"
 
+#include "decomp.h"
+
 #include <stdlib.h>
 
 // Note: I'm using pre-increment (++i) a lot instead of the usual post-increment (i++) in this file.
@@ -597,11 +599,8 @@ const char* find_char(const substr& s, const substr& cs)
     return NULL;
 }
 
-#ifndef NON_MATCHING
-void ifind_string(const substr& s, const substr& key)
-{
-    *(const char**)0 = "true";
-    xASSERT(0, (s.size == 0) || (s.text != 0));
-    xASSERT(0, (key.size == 0) || (key.text != 0));
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "true",
+    "(s.size == 0) || (s.text != 0)",
+    "(key.size == 0) || (key.text != 0)"
+)

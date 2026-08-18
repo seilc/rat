@@ -5,7 +5,6 @@
 #include "xDynAsset.h"
 #include "xModel.h"
 #include "xColor.h"
-#include "xDebug.h"
 
 #include <stddef.h>
 
@@ -141,7 +140,7 @@ public:
     virtual void render();
     virtual void dispatch(xBase* from, U32 event, const F32* argf, xBase* argw, U32 argwi);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual const char* category();
     virtual void add_tweaks(const char* type_prefix, const char* object_prefix);
 #endif
@@ -154,13 +153,6 @@ private:
 
 xModelInstance* load_model(U32 id);
 void render_model(xModelInstance& m, const render_context& rc);
-
-#ifndef NON_MATCHING
-inline void __xhud_unused()
-{
-    xFAIL(0);
-}
-#endif
 
 }
 

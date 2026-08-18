@@ -25,7 +25,7 @@ struct effectAsset : xDynAsset
     F32 shakeRotationalMagnitude;
     bool shakeY;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void AddTweaks(const char* prefix);
 #endif
 
@@ -54,7 +54,7 @@ struct effect : emitterBase
     
     effect(effectAsset* pAsset);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void AddTweaks();
 #endif
 };

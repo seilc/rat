@@ -9,7 +9,7 @@ enum ForceEvent
     FE_NO
 };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 extern char zEventLogBuf[20][256];
 #endif
 

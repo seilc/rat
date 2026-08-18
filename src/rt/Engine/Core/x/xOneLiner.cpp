@@ -8,14 +8,16 @@
 #include "xRand.h"
 #include "xSndMgr.h"
 
+#include "decomp.h"
+
 xOneLiner* xOneLiner::sDelayedSound;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 bool xOneLiner::sDebugIgnoreTime;
 bool xOneLiner::sDebugIgnoreProb;
 #endif
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 struct xRequestedSound
 {
     xOneLiner* mSound;
@@ -64,17 +66,10 @@ struct xSoundHistory
             mHistory[i].Display(false);
         }
     }
-
-#ifndef NON_MATCHING
-    void __unused(S32 maxCheck)
-    {
-        xASSERT(0, maxCheck == 0 || maxCheck == mNumSounds);
-    }
-#endif
 };
 #endif
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 static xSoundHistory sSndHistory;
 
 static void OneLinerDebugModeCB()
@@ -92,7 +87,7 @@ static void OneLinerDebugInit()
 void xOneLiner::SceneInit()
 {
     SceneReset();
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     OneLinerDebugInit();
     TweaksInit();
 #endif
@@ -105,7 +100,7 @@ void xOneLiner::SceneReset()
 
 void xOneLiner::UpdateSounds()
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     sSndHistory.Age();
 #endif
 
@@ -132,7 +127,7 @@ inline bool xOneLiner::NoInhibitions() const
 
 inline bool xOneLiner::IsProbable() const
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     if (sDebugIgnoreProb) return true;
 #endif
 
@@ -155,7 +150,7 @@ bool xOneLiner::PlaySoundCore()
             timeToPlay = mSoonestTimeToPlay + 45.0f * zUIIncrediblesGetGameProgress();
         }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
         if (timeNow >= timeToPlay || sDebugIgnoreTime) {
 #else
         if (timeNow >= timeToPlay) {
@@ -180,11 +175,8 @@ inline F32 xOneLiner::CalcTimeToWait() const
     return mCycleTime;
 }
 
-#ifdef DEBUGRELEASE
-#ifndef NON_MATCHING
-static void __unused()
-{
-    sSndHistory.__unused(0);
-}
-#endif
-#endif
+DECOMP_FORCEACTIVE(
+    "xOneLiner.cpp",
+    "maxCheck == 0 || maxCheck == mNumSounds",
+    "%s"
+)

@@ -108,7 +108,7 @@ public:
         clear();
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void tweak_init(size_t size)
     {
         xASSERT(183, size > 0);
@@ -337,24 +337,12 @@ public:
 
 protected:
     void push_front();
-#ifndef NON_MATCHING
-    void pop_front();
-#endif
     void push_back();
-#ifndef NON_MATCHING
-    void pop_back();
-#endif
     void create(S32 node_size, S32 max_size, U32 memtag, void* buffer);
     void reset(S32 node_size);
     node_base* insert(node_base* it);
     node_base* erase(node_base* it);
     node_base* erase(node_base* first, node_base* last);
-
-#ifdef DEBUGRELEASE
-#ifndef NON_MATCHING
-    void validate();
-#endif
-#endif
 
     node_base* alloc()
     {

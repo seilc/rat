@@ -78,7 +78,7 @@ void xModelAnimCollRefresh(const xModelInstance& cm);
 S32 xModelCullSingle(xModelInstance* minst);
 RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 bool xModelRenderLogEnabled();
 void xModelRenderLogSetEntity(xEnt* ent);
 #endif
