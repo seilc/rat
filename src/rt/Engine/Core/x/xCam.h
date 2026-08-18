@@ -5,6 +5,9 @@
 #include "xColor.h"
 #include "xPad.h"
 
+#include <rwcore.h>
+
+struct xCamGroup;
 struct xCamBlend;
 class xCamTransition;
 
@@ -128,6 +131,12 @@ private:
     S32 child_flags;
     S32 child_flags_mask;
     xCamBlend* blend_cam[4];
+};
+
+struct xCamScreen
+{
+    RwCamera* icam;
+    F32 fov;
 };
 
 class xCamBias

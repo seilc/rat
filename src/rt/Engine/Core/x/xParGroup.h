@@ -3,6 +3,9 @@
 
 #include "xPar.h"
 
+struct xParGroup;
+typedef void(*xParGroupRenderFunction)(void* data, xParGroup* ps);
+
 struct xParCmdTex;
 
 struct xParGroup
@@ -20,7 +23,7 @@ struct xParGroup
     U8 m_regidx;
     xParGroup* m_next;
     xParGroup* m_prev;
-    void(*draw)(void*, xParGroup*);
+    xParGroupRenderFunction draw;
     xParCmdTex* m_cmdTex;
 };
 
