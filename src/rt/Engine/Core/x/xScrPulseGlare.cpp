@@ -3,6 +3,8 @@
 #include "xRand.h"
 #include "xIM.h"
 
+#include "decomp.h"
+
 #include <cmath>
 
 #define zMAX_PULSE_GLARES 128
@@ -49,11 +51,6 @@ struct xPulseGlareMgr
 {
 public:
     void init();
-
-#ifndef NON_MATCHING
-    xPulseGlare* get(U32 i);
-#endif
-
     void update(F32 dt);
     void render(const xMat4x3& mat);
 
@@ -259,12 +256,6 @@ void xPulseGlareMgr::init()
     }
 }
 
-xPulseGlare* xPulseGlareMgr::get(U32 i)
-{
-    xASSERT(0, !(i < 0 || i >= zMAX_PULSE_GLARES ));
-    return NULL;
-}
-
 void xPulseGlareMgr::update(F32 dt)
 {
     for (S32 i = 0; i < zMAX_PULSE_GLARES; i++) {
@@ -283,16 +274,6 @@ void xPulseGlareMgr::render(const xMat4x3& mat)
     }
 }
 
-#ifndef NON_MATCHING
-void xScrFX_PulseGlaresAdd(RwRaster*)
-{
-    xASSERTM(0, 0, " GLARE Manager run out of available slots !");
-
-    S32 idx = -1;
-    xASSERT(0, idx > -1);
-}
-#endif
-
 void xScrFX_PulseGlaresRender(const xMat4x3& mat)
 {
     glare_mgr.render(mat);
@@ -308,34 +289,17 @@ void xScrFX_PulseGlaresReset()
     glare_mgr.init();
 }
 
-#ifndef NON_MATCHING
-void xScrFX_PulseGlaresUpdatePos(S32, xVec3* pos)
-{
-    xASSERT(0, pos);
-}
-
-void xScrFX_PulseGlaresUpdateDir(S32, xVec3* dir)
-{
-    xASSERT(0, dir);
-}
-
-void xScrFX_PulseGlaresUpdateSize(S32, F32 size)
-{
-    xASSERT(0, size > 0.0f);
-}
-
-void xScrFX_PulseGlaresSetScale(S32, F32 scale)
-{
-    xASSERT(0, scale > 0.0f);
-}
-
-void xScrFX_PulseGlaresSetLifetime(S32, F32 lifetime)
-{
-    xASSERT(0, lifetime > 0.0f);
-}
-
-void xScrFX_PulseGlaresSetFlag(S32 flag, S32, bool)
-{
-    xASSERT(0, flag > 0);
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "!(i < 0 || i >= 128 )",
+    "%s",
+    "!(i < 0 || i >= zMAX_PULSE_GLARES )",
+    "0",
+    " GLARE Manager run out of available slots !",
+    "idx > -1",
+    "pos",
+    "dir",
+    "size > 0.0f",
+    "scale > 0.0f",
+    "lifetime > 0.0f",
+    "flag > 0"
+)

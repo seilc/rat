@@ -91,28 +91,9 @@ struct tweak_info
     };
 };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void* xDebugTweak_StaticAlloc(U32 size);
-#endif
 
-#ifndef DEBUGRELEASE
-inline void xDebugAddTweak(const char* name, const U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
-inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
-inline void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags) {}
-
-void xDebugRemoveTweak(const char* name);
-
-#define xTWEAK(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
-#define xTWEAKSELECT(name, v, labels, values, labels_size, cb, context, flags)
-#define xTWEAKFLAG(name, v, mask, cb, context, flags)
-#define xTWEAKBRANCH(name, cb, context, flags)
-#define xTWEAKBOOL(name, v, cb, context, flags)
-#define xTWEAKMESSAGE(name, message, cb, context, flags)
-#define xTWEAKREMOVE(name) xDebugRemoveTweak(name)
-
-#define xAUTOTWEAKRANGE(prefix, name, v, vmin, vmax, cb, context, flags, process)
-#define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process)
-#else
 void xDebugAddTweak(const char* name, S8* v, S8 vmin, S8 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, U16* v, U16 vmin, U16 vmax, const tweak_callback* cb, void* context, U32 flags);
@@ -153,6 +134,23 @@ inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmi
 
 #define xAUTOTWEAKRANGE(prefix, name, v, vmin, vmax, cb, context, flags, process) _t_auto_tweak(prefix, name, v, vmin, vmax, cb, context, flags, process)
 #define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process) _t_auto_tweak(prefix, name, v, 0, 0, cb, context, flags, process)
+#else
+inline void xDebugAddTweak(const char* name, const U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
+inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
+inline void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags) {}
+
+void xDebugRemoveTweak(const char* name);
+
+#define xTWEAK(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
+#define xTWEAKSELECT(name, v, labels, values, labels_size, cb, context, flags)
+#define xTWEAKFLAG(name, v, mask, cb, context, flags)
+#define xTWEAKBRANCH(name, cb, context, flags)
+#define xTWEAKBOOL(name, v, cb, context, flags)
+#define xTWEAKMESSAGE(name, message, cb, context, flags)
+#define xTWEAKREMOVE(name) xDebugRemoveTweak(name)
+
+#define xAUTOTWEAKRANGE(prefix, name, v, vmin, vmax, cb, context, flags, process)
+#define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process)
 #endif
 
 #endif

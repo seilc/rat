@@ -1,0 +1,61 @@
+{
+    "[c]": {
+        "files.encoding": "utf8",
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[cpp]": {
+        "files.encoding": "utf8",
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/src/bink/bink",
+        "${workspaceFolder}/src/dolphin",
+        "${workspaceFolder}/src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+        "${workspaceFolder}/src/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+        "${workspaceFolder}/src/rwsdk/include/gcn",
+        "${workspaceFolder}/src/rwsdk/plugin/collis",
+        "${workspaceFolder}/src/rwsdk/plugin/hanim",
+        "${workspaceFolder}/src/rwsdk/plugin/matfx",
+        "${workspaceFolder}/src/rwsdk/plugin/ptank",
+        "${workspaceFolder}/src/rwsdk/plugin/skin2",
+        "${workspaceFolder}/src/rwsdk/plugin/toon",
+        "${workspaceFolder}/src/rwsdk/plugin/userdata",
+        "${workspaceFolder}/src/rt",
+        "${workspaceFolder}/src/rt/Engine/Core/gc",
+        "${workspaceFolder}/src/rt/Engine/Core/x",
+        "${workspaceFolder}/src/rt/Engine/Game",
+    ],
+    "C_Cpp.default.cStandard": "c99",
+    "C_Cpp.default.cppStandard": "c++98",
+    "C_Cpp.default.intelliSenseMode": "linux-clang-x86",
+    "C_Cpp.default.compilerPath": "",
+    "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+    "C_Cpp.default.browse.path": [
+        "${workspaceFolder}/src"
+    ],
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true,
+    "C_Cpp.default.defines": [
+        "DEBUG=0",
+        "RELEASE=0",
+        "MASTERDEBUG=0",
+        "MASTER=0"
+    ],
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.associations": {
+        "*.inc": "cpp"
+    },
+    "search.useIgnoreFiles": false,
+    "search.exclude": {
+        "build/*/config.json": true,
+        "build/**/*.MAP": true,
+        "build.ninja": true,
+        ".ninja_*": true,
+        "objdiff.json": true,
+        ".mypy_cache": true
+    }
+}

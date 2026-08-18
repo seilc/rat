@@ -7,7 +7,7 @@ RwCamera* RwCameraCreateWrapper();
 RwCamera* RwCameraBeginUpdateWrapper(RwCamera* camera);
 #define RwCameraBeginUpdate RwCameraBeginUpdateWrapper
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void RwRenderStateSetWrapper(RwRenderState state, void* value);
 #define RwRenderStateSet RwRenderStateSetWrapper
 

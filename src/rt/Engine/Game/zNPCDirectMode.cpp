@@ -1,9 +1,5 @@
 #include "xCamSupport.h"
 
-#ifndef NON_MATCHING
-static void __unused(xCamSupportPath* p)
-{
-    p->size();
-    p->total_distance();
-}
-#endif
+#include "decomp.h"
+
+DECOMP_FORCEACTIVE(&xCamSupportPath::size, &xCamSupportPath::total_distance)

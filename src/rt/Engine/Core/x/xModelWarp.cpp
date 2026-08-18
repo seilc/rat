@@ -4,6 +4,8 @@
 #include "xDebugTweak.h"
 #include "xModel.h"
 
+#include "decomp.h"
+
 namespace {
 
     struct render_context
@@ -23,7 +25,7 @@ namespace {
 
         xFColor default_color = { 1, 1, 1, 1 };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
         namespace debug {
 
             S32 render_texture = -1;
@@ -41,7 +43,7 @@ namespace {
             xAUTOTWEAKRANGE(prefix, "default_color \2g", &default_color.g, 0.0f, 2.0f, NULL, NULL, 0, false);
             xAUTOTWEAKRANGE(prefix, "default_color \3b", &default_color.b, 0.0f, 2.0f, NULL, NULL, 0, false);
             xAUTOTWEAKRANGE(prefix, "default_color a", &default_color.a, 0.0f, 2.0f, NULL, NULL, 0, false);
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
             xAUTOTWEAKRANGE(prefix, "debug::render_texture", &debug::render_texture, -1, MAX_ACTIVE, NULL, NULL, 0, true);
             xAUTOTWEAKRANGE(prefix, "debug::render_bound", &debug::render_bound, -1, MAX_ACTIVE, NULL, NULL, 0, true);
             xAUTOTWEAKRANGE(prefix, "debug::render_rect", &debug::render_rect, -1, MAX_ACTIVE, NULL, NULL, 0, true);
@@ -101,7 +103,7 @@ void xModelWarpSceneEnter()
 
     tweak::add_tweaks();
 
-#ifdef DEBUG
+#if DEBUG
     U32 test_atomic_id = xStrHash("00_test_torus");
     RpAtomic* test_atomic = xModelFindAtomic(test_atomic_id, NULL);
     if (test_atomic) {
@@ -163,13 +165,7 @@ void xModelWarpSetEffect(RpAtomic* atomic, const xBox* box, const xFColor* color
     }
 }
 
-#ifndef NON_MATCHING
-void xModelWarpRemoveEffect(RpAtomic* atomic)
-{
-    render_context* context = get_render_context(atomic);
-    xASSERT(0, context != 0);
-}
-#endif
+DECOMP_FORCEACTIVE("context != 0")
 
 void xModelWarpSphereMapUVsByNormals(xVec2* uv, S32 verts_size, const xVec3* norm)
 {

@@ -5,7 +5,7 @@
 
 #include <dolphin.h>
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 #define xMEMORYMANAGERASSERT(line, cond)                                                          \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
@@ -32,19 +32,10 @@ public:
     }
 
     U32 GetBlockSize(void* pointer) const;
-
-#ifndef NON_MATCHING
-    bool InActiveList(const void*, U32) const;
-#endif
-
     bool IsValidPointer(const void* pointer) const;
     void DumpActiveList() const;
 
-#ifndef NON_MATCHING
-    bool ValidateActiveList() const;
-#endif
-
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void* Allocate(U32 size, U32 options, const char* file, const char* function, S32 line);
 #else
     void* Allocate(U32 size, U32 options);
@@ -52,7 +43,7 @@ public:
 
     void Free(void* pointer);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void* Reallocate(void* pointer, U32 size, U32 options, const char* file, const char* function, S32 line);
 #else
     void* Reallocate(void* pointer, U32 size, U32 options);
@@ -61,7 +52,7 @@ public:
 protected:
     void DoInit(void* start, U32 size, bool debugging);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void* DoAllocate(U32 size, U32 options, const char*, const char*, S32) = 0;
 #else
     virtual void* DoAllocate(U32 size, U32 options) = 0;
@@ -69,7 +60,7 @@ protected:
 
     virtual void DoFree(void* pointer) = 0;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void* DoReallocate(void* pointer, U32 size, U32 options, const char* file, const char* function, S32 line);
 #else
     virtual void* DoReallocate(void* pointer, U32 size, U32 options);
@@ -77,7 +68,7 @@ protected:
 
     virtual U32 DoGetBlockSize(void* pointer) const = 0;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void HandleOutOfMemory(U32 size, U32 options, const char* file, const char* function, S32 line);
 #else
     virtual void HandleOutOfMemory(U32 size, U32 options);
@@ -110,7 +101,7 @@ private:
     void* arenaStart;
     void* arenaEnd;
     U32 size;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U32 callsToAllocate;
     U32 callsToReallocate;
     U32 callsToFree;
@@ -120,7 +111,7 @@ private:
     S32 lastLine;
     U32 debugDataSize;
     DebugAllocationHeader* activeList;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U32 debugOverhead;
 #endif
 

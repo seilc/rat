@@ -23,12 +23,6 @@ void xEntDriveMount(xEntDrive* drv, xEnt* driver, F32 mt, const xCollis* coll)
     xASSERT(48, drv->driven);
     xASSERT(49, drv->driven->frame);
 
-    // Hack to force xVec3::operator= to link after xCollis::tri_data::operator=
-    if (0) {
-        xVec3 a, b;
-        a = b;
-    }
-
     drv->dLoc = 0.0f;
 
     if (driver == drv->oldDriver && drv->influenceOfOldDriver) {

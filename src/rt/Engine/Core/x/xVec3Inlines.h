@@ -3,7 +3,7 @@
 
 #include "xDebug.h"
 
-#ifdef DEBUG
+#if DEBUG
 #define inline
 #endif
 

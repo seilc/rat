@@ -9,11 +9,13 @@
 #include "xFont.h"
 #include "xScene.h"
 
+#include "decomp.h"
+
 #include <string.h>
 
 namespace {
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 const char* get_asset_name(xCounterAsset* asset)
 {
     const char* name = xSTAssetName(asset);
@@ -204,17 +206,11 @@ void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* 
     }
 }
 
-#ifndef NON_MATCHING
-void __unused(xScene* sc, xCounter* t, xCounter* counter, char* s, xtextbox::jot& j)
-{
-    xASSERT(0, sc);
-#ifdef DEBUG
-    xASSERT(0, t->baseType == eBaseTypeCounter);
-#endif
-    strncpy(s, "Counter", 0);
-    xASSERT(0, counter->baseType == eBaseTypeCounter);
-    sprintf(s, "%d");
-    sprintf(s, "%.*s");
-    j.reset_flags();
-}
-#endif
+DECOMP_FORCEACTIVE(
+    DEBUG || RELEASE ? "sc" : 0,
+    DEBUG ? "t->baseType == eBaseTypeCounter" : 0,
+    "Counter",
+    DEBUG || RELEASE ? "counter->baseType == eBaseTypeCounter" : 0,
+    "%d", "%.*s",
+    &xtextbox::jot::reset_flags
+)

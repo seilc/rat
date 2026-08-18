@@ -7,6 +7,8 @@
 #include "zRenderState.h"
 #include "xMemMgr.h"
 
+#include "decomp.h"
+
 #include <string.h>
 
 bool xFXCameraTexture::create(S32 w, S32 h, bool need_zwrite, S32 bpp, S32 zbpp)
@@ -214,11 +216,8 @@ void xFXCameraTexture::render_background()
     xMEMPOPTEMP(vert);
 }
 
-void xFXCameraTexture::__unused()
-{
-    xASSERT(0, oldcam != cam);
-    *(F32*)0 = 0.5f;
-}
+DECOMP_FORCEACTIVE("oldcam != cam")
+DECOMP_FORCEFLOAT(0.5f)
 
 void xFXCameraTexture::setup_subview(RwCamera* src_cam, const xFRect& src_rect, const xFRect& dst_rect)
 {

@@ -8,6 +8,8 @@
 #include "zScene.h"
 #include "xGlobals.h"
 
+#include "decomp.h"
+
 static void xSoundFXPlay(xSoundFX* t);
 static void xSoundFXStop(xSoundFX* t);
 
@@ -59,7 +61,7 @@ void xSoundFXInit(xSoundFX* t, xSoundFXAsset* asset)
         xSoundFXSetSendsDone(asset, true);
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     if (xSndMgrIsLoopedStream(asset->soundAsset) && xSoundFXSendsDone(asset)) {
         xFAILM(109, "SoundFX '%s' will never send DONE event because it loops", xSTAssetName(t->id));
     }
@@ -70,19 +72,7 @@ void xSoundFXInit(xSoundFX* t, xSoundFXAsset* asset)
     xSoundFXSetSoundFXPlaying(t->asset, false);
 }
 
-#ifndef NON_MATCHING
-void xSoundFXSave(xSoundFX* ent, xSerial* s)
-{
-    xASSERT(0, ent);
-    xASSERT(0, s);
-}
-
-void xSoundFXLoad(xSoundFX* ent, xSerial* s)
-{
-    xASSERT(0, ent);
-    xASSERT(0, s);
-}
-#endif
+DECOMP_FORCEACTIVE("ent", "s")
 
 void xSoundFXReset(xSoundFX* ent)
 {

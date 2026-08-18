@@ -38,7 +38,7 @@ void xSubTitlesInit()
         break;
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     xTWEAK("FX|Subtitles|subtitleFontWidth", &subtitleFontWidth, 0.0f, 100.0f, NULL, NULL, 0);
     xTWEAK("FX|Subtitles|subtitleFontHeight", &subtitleFontHeight, 0.0f, 100.0f, NULL, NULL, 0);
 #endif

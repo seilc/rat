@@ -8,7 +8,23 @@
 #include "xShadow.h"
 #include "xDebugTweak.h"
 
+#include "decomp.h"
+
 #include <string.h>
+
+DECOMP_FORCEACTIVE(
+    "FX|Fog|Type",
+    "FX|Fog|Start",
+    "FX|Fog|Stop",
+    "FX|Fog|Density",
+    "FX|Fog|Far Clip"
+)
+#if DEBUG || RELEASE
+DECOMP_FORCEACTIVE((void(*)(const char*, U32*, U32, U32, const tweak_callback*, void*, U32))xDebugAddTweak)
+#else
+DECOMP_FORCEACTIVE((void(*)(const char*, const U32*, U32, U32, const tweak_callback*, void*, U32))xDebugAddTweak)
+#endif
+DECOMP_FORCEFLOAT(0.0f)
 
 #undef RwCameraCreate
 #undef RwCameraBeginUpdate
@@ -36,31 +52,16 @@ static RwCamera* sMainGameCamera = NULL;
 
 namespace {
 
-RwFogType tweakFogType = rwFOGTYPELINEAR;
-F32 tweakFogStart = 0.0f;
-F32 tweakFogStop = 0.0f;
-F32 tweakFogDensity = 0.0f;
 F32 tweakFarClip = 0.0f;
 
 inline F32 iCameraFogFarClip()
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     return tweakFarClip > 0.0f ? tweakFarClip : xglobals->fog.stop;
 #else
     return xglobals->fog.stop;
 #endif
 }
-
-#ifndef NON_MATCHING
-void AddTweaks()
-{
-    xTWEAK("FX|Fog|Type", (U32*)&tweakFogType, rwFOGTYPELINEAR, rwFOGTYPEEXPONENTIAL2, NULL, NULL, 0);
-    xTWEAK("FX|Fog|Start", &tweakFogStart, 0.0f, 1.0f, NULL, NULL, 0);
-    xTWEAK("FX|Fog|Stop", &tweakFogStop, 0.0f, 1.0f, NULL, NULL, 0);
-    xTWEAK("FX|Fog|Density", &tweakFogDensity, 0.0f, 1.0f, NULL, NULL, 0);
-    xTWEAK("FX|Fog|Far Clip", &tweakFarClip, 0.0f, 1.0f, NULL, NULL, 0);
-}
-#endif
 
 }
 
@@ -164,7 +165,7 @@ void iCameraDestroy(RwCamera* camera)
     }
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 F32 iCameraClearTime = 0.0f;
 F32 iCameraClearTimeLast = 0.0f;
 #endif
@@ -179,11 +180,18 @@ void iCameraBegin(RwCamera* cam, S32 clear)
 {
     xASSERT(277, cam);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     iTime timeA = iTimeGet();
-#endif
 
-#ifndef DEBUGRELEASE
+    if (zGameGetOstrich() != eGameOstrich_PlayingMovie && !xglobals->dumpCutscene) {
+        RwCameraClear(cam, &hotPink, rwCAMERACLEARIMAGE | rwCAMERACLEARZ | rwCAMERACLEARSTENCIL);
+    }
+
+    iTime timeB = iTimeGet();
+
+    iCameraClearTimeLast = iCameraClearTime;
+    iCameraClearTime = iTimeDiffSec(timeA, timeB);
+#else
     if (clear) {
         if (xglobals->fog.type != rwFOGTYPENAFOGTYPE) {
             RwCameraClear(cam, &xglobals->fog.bgcolor, rwCAMERACLEARIMAGE | rwCAMERACLEARZ | rwCAMERACLEARSTENCIL);
@@ -191,17 +199,6 @@ void iCameraBegin(RwCamera* cam, S32 clear)
             RwCameraClear(cam, NULL, rwCAMERACLEARZ);
         }
     }
-#else
-    if (zGameGetOstrich() != eGameOstrich_PlayingMovie && !xglobals->dumpCutscene) {
-        RwCameraClear(cam, &hotPink, rwCAMERACLEARIMAGE | rwCAMERACLEARZ | rwCAMERACLEARSTENCIL);
-    }
-#endif
-
-#ifdef DEBUGRELEASE
-    iTime timeB = iTimeGet();
-
-    iCameraClearTimeLast = iCameraClearTime;
-    iCameraClearTime = iTimeDiffSec(timeA, timeB);
 #endif
 
     RwCameraSetNearClipPlane(cam, sCameraNearClip);
@@ -265,19 +262,7 @@ void iCameraSetFOV(RwCamera* cam, F32 fov)
     RwCameraSetViewWindow(cam, &vw);
 }
 
-#ifndef NON_MATCHING
-F32 iCameraGetFOV(RwCamera* cam)
-{
-    xASSERT(0, cam != 0);
-
-    const RwV2d* vw;
-
-    vw = RwCameraGetViewWindow(cam);
-    xASSERT(0, vw != 0);
-
-    return 0;
-}
-#endif
+DECOMP_FORCEACTIVE("cam != 0", "vw != 0")
 
 void iCameraAssignEnv(RwCamera* camera, iEnv* env_geom)
 {
@@ -352,7 +337,7 @@ void iCameraUpdateFog(RwCamera*, iTime t)
     RwRGBA ca, cb, color;
 
 // ???
-#ifdef DEBUG
+#if DEBUG
     if (xglobals->fog.type == rwFOGTYPENAFOGTYPE || xglobals->fog_t0 == 0) {
         return;
     }

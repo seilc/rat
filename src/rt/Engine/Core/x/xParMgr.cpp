@@ -5,6 +5,8 @@
 #include "xDebug.h"
 #include "xOutputMgr.h"
 
+#include "decomp.h"
+
 static U32 sFrameCount;
 static S32 sParMgrInit;
 
@@ -23,12 +25,7 @@ void xParMgrInit()
     }
 }
 
-#ifndef NON_MATCHING
-void xParMgrIgnoreFXEvents(S32 numFrames)
-{
-    xASSERT(0, numFrames >= 0);
-}
-#endif
+DECOMP_FORCEACTIVE("numFrames >= 0", "%s")
 
 void xParMgrKillAllParticles()
 {

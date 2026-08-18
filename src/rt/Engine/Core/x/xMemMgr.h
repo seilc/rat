@@ -21,7 +21,7 @@ struct xMemPool
     U16 Size;
     U16 NumRealloc;
     U32 Total;
-#ifdef DEBUG
+#if DEBUG
     U16 Allocated;
     U16 Pad0;
 #endif
@@ -130,21 +130,21 @@ enum xMemStaticType
 
 extern U32 gActiveHeap;
 
-#if defined(DEBUG) || defined(RELEASE)
+#if DEBUG || RELEASE
 #define xMEMGROWALLOC(size, tag) xMemGrowAlloc(gActiveHeap, (size), (tag))
 #else
 #define xMEMGROWALLOC(size, tag) xMemGrowAlloc(gActiveHeap, (size))
 #endif
 
-#if defined(DEBUG)
+#if DEBUG
 #define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag), (assetID), __FILE__, __FUNCTION__, (line))
-#elif defined(RELEASE)
+#elif RELEASE
 #define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag))
 #else
 #define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align))
 #endif
 
-#if defined(DEBUG)
+#if DEBUG
 #define xMEMPUSHTEMP(amt, assetID, line) xMemPushTemp((amt), (assetID), __FILE__, __FUNCTION__, (line))
 #else
 #define xMEMPUSHTEMP(amt, assetID, line) xMemPushTemp((amt))
@@ -152,27 +152,27 @@ extern U32 gActiveHeap;
 
 #define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
 
-#if defined(DEBUG) || defined(RELEASE)
+#if DEBUG || RELEASE
 U32 xMemMgrGenericMallocGetTag();
 void xMemMgrGenericMallocTally(U32 size, U32 tag);
 void xMemMgrGenericMallocRemove(U32 size, U32 tag);
 #endif
 
-#if defined(DEBUG) || defined(RELEASE)
+#if DEBUG || RELEASE
 void* xMemGrowAlloc(U32 heapID, U32 size, U32 tag);
 #else
 void* xMemGrowAlloc(U32 heapID, U32 size);
 #endif
 
-#if defined(DEBUG)
+#if DEBUG
 void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag, U32 assetID, const char* file, const char* func, S32 line);
-#elif defined(RELEASE)
+#elif RELEASE
 void* xMemAlloc(U32 heapID, U32 size, S32 align, U32 tag);
 #else
 void* xMemAlloc(U32 heapID, U32 size, S32 align);
 #endif
 
-#if defined(DEBUG)
+#if DEBUG
 inline void* xMemPushTemp(U32 amt, U32, const char* file, const char* func, S32 line)
 {
     void* ptr = iMemPushTemp(amt);

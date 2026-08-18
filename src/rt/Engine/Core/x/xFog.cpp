@@ -96,7 +96,7 @@ void xFogUpdate(xBase* to, xScene* sc, F32)
     xASSERT(172, to);
     xASSERT(173, sc);
 
-#ifdef DEBUG
+#if DEBUG
     xFog* t = (xFog*)to;
     xASSERT(178, t->baseType == eBaseTypeFog);
 #endif

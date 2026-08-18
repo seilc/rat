@@ -6,6 +6,8 @@
 #include "zGame.h"
 #include "zGlobals.h"
 
+#include "decomp.h"
+
 #include <string.h>
 
 xPad mPad[k_XPAD_MAX];
@@ -28,12 +30,14 @@ S32 xPadInit()
     return 1;
 }
 
-#ifndef NON_MATCHING
-S32 xPadInit(S32 i)
-{
-    xASSERT(0, i > -1 && i < k_XPAD_MAX);
-    return 1;
-}
+DECOMP_FORCEACTIVE(
+    "xPad.cpp",
+    "i > -1 && i < 4",
+    "%s",
+    "i > -1 && i < k_XPAD_MAX"
+)
+#if DEBUG || RELEASE
+DECOMP_FORCEACTIVE(iDebugBreak)
 #endif
 
 xPad* xPadEnable(S32 idx)
@@ -120,7 +124,7 @@ S32 xPadUpdate(S32 idx, F32 time_passed)
         }
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     static S32 submap = 0;
     if (submap) {
         SubMapAll((S32*)&new_on, p);

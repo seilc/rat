@@ -33,12 +33,12 @@ void xLightEffectFlicker::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 
     flickerEffect->tasset = (xLightEffectFlickerAsset*)&asset;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     flickerEffect->InitDebugTweak();
 #endif
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void xLightEffectFlicker::InitDebugTweak()
 {
     char name[128];
@@ -130,12 +130,12 @@ void xLightEffectStrobe::Init(xBase& data, xDynAsset& asset, size_t asset_size)
     strobeEffect->tasset = (xLightEffectStrobeAsset*)&asset;
     strobeEffect->tasset->minColor.a = 1.0f;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     strobeEffect->InitDebugTweak();
 #endif
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void xLightEffectStrobe::InitDebugTweak()
 {
     char name[128];

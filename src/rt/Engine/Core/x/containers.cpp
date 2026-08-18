@@ -1,5 +1,7 @@
 #include "containers.h"
 
+#include "decomp.h"
+
 void pool_list_base::push_front()
 {
     node_base* n = alloc();
@@ -10,12 +12,7 @@ void pool_list_base::push_front()
     _size++;
 }
 
-#ifndef NON_MATCHING
-void pool_list_base::pop_front()
-{
-    xASSERT(0, !empty());
-}
-#endif
+DECOMP_FORCEACTIVE("containers.cpp", "!empty()")
 
 void pool_list_base::push_back()
 {
@@ -27,13 +24,7 @@ void pool_list_base::push_back()
     _size++;
 }
 
-#ifndef NON_MATCHING
-void pool_list_base::pop_back()
-{
-    node_base* n = tail.prev;
-    xASSERT(0, n != 0);
-}
-#endif
+DECOMP_FORCEACTIVE("n != 0")
 
 void pool_list_base::create(S32 node_size, S32 max_size, U32 memtag, void* buffer)
 {
@@ -94,7 +85,7 @@ pool_list_base::node_base* pool_list_base::insert(node_base* it)
 
 pool_list_base::node_base* pool_list_base::erase(node_base* it)
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     node_base* alive = head.next;
     while (alive != &tail) {
         if (it == alive) break;
@@ -140,19 +131,11 @@ pool_list_base::node_base* pool_list_base::erase(node_base* first, node_base* la
     return last;
 }
 
-#ifdef DEBUGRELEASE
-#ifndef NON_MATCHING
-void pool_list_base::validate()
-{
-    S32 dead_total = 0;
-    S32 alive_total = 0;
-    node_base* alive = 0;
-    xASSERT(0, dead_total == (_max_size - _size));
-    xASSERT(0, alive->prev != 0);
-    xASSERT(0, alive->next != 0);
-    xASSERT(0, alive->prev->next == alive);
-    xASSERT(0, alive->next->prev == alive);
-    xASSERT(0, alive_total == _size);
-}
-#endif
-#endif
+DECOMP_FORCEACTIVE(
+    "dead_total == (_max_size - _size)",
+    "alive->prev != 0",
+    "alive->next != 0",
+    "alive->prev->next == alive",
+    "alive->next->prev == alive",
+    "alive_total == _size"
+)

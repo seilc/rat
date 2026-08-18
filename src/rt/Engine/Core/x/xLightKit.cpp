@@ -5,28 +5,27 @@
 #include "xMath.h"
 #include "xModel.h"
 
+#include "decomp.h"
+
 #include <string.h>
 
 xLightKitBlendInfo gLastLightKit;
 
-#ifndef NON_MATCHING
-void xLightKit_Parse(char*, U32, U32*, U32, U32)
-{
-    xLightKit* lightKit = NULL;
-    *(F32*)0 = 0.0f;
-
-    iprintf("\n\r");
-    iprintf("intensity=");
-    iprintf("color=");
-    xASSERT(0, lightKit);
-    iprintf("%f");
-    iprintf("%f,%f,%f");
-    iprintf("matrix=");
-    iprintf("%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f");
-    iprintf("radius=");
-    iprintf("angle=");
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "\n\r",
+    "intensity=",
+    "color=",
+    "xLightKit.cpp",
+    "lightKit",
+    "%s",
+    "%f",
+    "%f,%f,%f",
+    "matrix=",
+    "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f",
+    "radius=",
+    "angle="
+)
+DECOMP_FORCEFLOAT(0.0f)
 
 xLightKit* xLightKit_Prepare(void* data)
 {

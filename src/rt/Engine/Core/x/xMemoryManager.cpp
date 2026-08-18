@@ -1,8 +1,10 @@
 #include "xMemoryManager.h"
 
+#include "decomp.h"
+
 #include <stdio.h>
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 #define Allocate(size, options, file, function, line) Allocate(size, options, file, function, line)
 #define Reallocate(pointer, size, options, file, function, line) Reallocate(pointer, size, options, file, function, line)
 #define DoAllocate(size, options, file, function, line) DoAllocate(size, options, file, function, line)
@@ -27,7 +29,7 @@ namespace {
 
 void* xMemoryManager::Allocate(U32 size, U32 options, const char* file, const char* function, S32 line)
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     callsToAllocate++;
 #endif
 
@@ -59,7 +61,7 @@ void* xMemoryManager::Allocate(U32 size, U32 options, const char* file, const ch
 
 void xMemoryManager::Free(void* pointer)
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     callsToFree++;
 #endif
 
@@ -84,7 +86,7 @@ void* xMemoryManager::Reallocate(void* pointer, U32 size, U32 options, const cha
         return Allocate(size, options, file, function, line);
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     callsToReallocate++;
 #endif
 
@@ -125,14 +127,6 @@ U32 xMemoryManager::GetBlockSize(void* pointer) const
     return DoGetBlockSize(pointer) - debugDataSize;
 }
 
-#ifndef NON_MATCHING
-bool xMemoryManager::InActiveList(const void*, U32) const
-{
-    xMEMADVANCE(activeList, (U32)0);
-    return false;
-}
-#endif
-
 bool xMemoryManager::IsValidPointer(const void* pointer) const
 {
     DebugAllocationHeader* list = activeList;
@@ -163,26 +157,19 @@ void xMemoryManager::DumpActiveList() const
     printf("total: %d\n", count);
 }
 
-#ifndef NON_MATCHING
-bool xMemoryManager::ValidateActiveList() const
-{
-    S32 first = 0, second = 0, i = 0;
-    DebugAllocationHeader* header = NULL;
-    DebugAllocationTrailer* trailer = NULL;
-    xASSERT(0, first != second);
-    xASSERT(0, Owns( header ));
-    xASSERT(0, header->magic[ i ] == header->MAGIC);
-    xASSERT(0, trailer->magic[ i ] == trailer->MAGIC);
-    return false;
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "first != second",
+    "Owns( header )",
+    "header->magic[ i ] == header->MAGIC",
+    "trailer->magic[ i ] == trailer->MAGIC"
+)
 
 void xMemoryManager::DoInit(void* start, U32 size, bool debugging)
 {
     arenaStart = start;
     arenaEnd = (void*)((U32)start + size);
     this->size = size;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     callsToAllocate = 0;
     callsToReallocate = 0;
     callsToFree = 0;
@@ -241,7 +228,7 @@ void* xMemoryManager::SetupDebugBlock(void* memory, U32 size, const char* file, 
         trailer->magic[i] = trailer->MAGIC;
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     debugOverhead += debugDataSize;
 #endif
 
@@ -277,7 +264,7 @@ void* xMemoryManager::RemoveDebugBlock(void* memory, U32* size)
         header->next->prev = header->prev;
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     debugOverhead -= debugDataSize;
 #endif
 

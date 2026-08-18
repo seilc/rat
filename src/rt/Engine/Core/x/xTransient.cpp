@@ -24,7 +24,7 @@ void reset()
     space_tree.clear();
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void debug_update(F32 dt)
 {
     space_tree.debug_update(dt);

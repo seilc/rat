@@ -13,7 +13,7 @@ void FunctionGeneratorEventWrapper(xBase* from, xBase* to, U32 toEvent, const F3
     ((xFunctionGenerator*)to)->HandleEvent(from, toEvent, toParam, toParamWidget, toParamWidgetID);
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void FunctionGeneratorExpandTweaks(const tweak_info& info)
 {
     xFunctionGenerator* fg = (xFunctionGenerator*)info.context;
@@ -56,7 +56,7 @@ xFunctionGenerator::xFunctionGenerator(const xFunctionGeneratorAsset* asset)
     started = false;
     currentState = false;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     graphName = xSceneID2Name(xglobals->sceneCur, asset->id);
 
     char name[128];
@@ -130,7 +130,7 @@ void xFunctionGenerator::Update(F32 dt)
         }
     } while (firedAny);
     
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     xDebugGraphAdd(graphName, currentState ? 1 : 0);
     xDebugGraphSetOriginValue(graphName, 0.5f);
     xDebugGraphSetScale(graphName, 1.0f);
@@ -194,7 +194,7 @@ void xFunctionGenerator::Reset()
     started = false;
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void xFunctionGenerator::AddTweaks(const char* base)
 {
     char buffer[128];

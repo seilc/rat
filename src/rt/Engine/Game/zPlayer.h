@@ -79,7 +79,7 @@ public:
     virtual void SetCamera();
     virtual void RenderEffects();
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void SetupTweaks();
 #endif
 
@@ -228,7 +228,7 @@ private:
     F32 idleSoundTimer;
     U32 oldSlidePen;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     struct
     {
         U8 debugging;

@@ -29,7 +29,7 @@ public:
     virtual void set_params(xModelInstance*& model, render_context& rc, F32 xs, F32 ys, F32 lx, F32 ly);
     virtual void render();
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual const char* category() { return "Model"; }
 #endif
 };

@@ -66,7 +66,7 @@ private:
         RwRaster* raster;
     };
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     struct debug_info
     {
         char tweak_prefix[128];
@@ -98,7 +98,7 @@ private:
     activity_data* act;
     const config_type* cfg;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     debug_info* debug;
 #endif
 };

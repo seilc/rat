@@ -42,7 +42,7 @@ struct xLight : xBase
         xLightEffectFlickerData flickerData;
         xLightEffectStrobeData strobeData;
     };
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     char effectName[64];
     char attachedToName[64];
     U8 drawDebugSpherePos;

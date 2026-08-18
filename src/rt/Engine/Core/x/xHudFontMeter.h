@@ -29,7 +29,7 @@ public:
     virtual void update(F32 dt);
     virtual void render();
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual const char* category() { return "Font Meter"; }
 #endif
 

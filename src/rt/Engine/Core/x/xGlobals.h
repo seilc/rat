@@ -68,7 +68,7 @@ struct xGlobals
     U32 slowdown;
     F32 update_dt;
     U32 dumpCutscene;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U32 PlaybackMode;
     PlaybackBuffers PlaybackFrames[4];
     char PlaybackFile[128];
@@ -90,7 +90,7 @@ struct xGlobals
     bool enableHelperAIAttack;
     bool enableDebugControls;
     bool showReleaseMemInfo;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     bool PlaybackFlashDemo;
 #endif
     bool FlashWIP;
@@ -114,7 +114,7 @@ struct xGlobals
     char watermark[127];
     U8 watermarkAlpha;
     F32 watermarkSize;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     xDebugLink* debugLink;
     bool enableRealTimeUpdate;
 #endif

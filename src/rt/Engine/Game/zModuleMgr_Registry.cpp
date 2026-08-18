@@ -1,19 +1,19 @@
 #include "zModuleMgr_Registry.h"
 
-#ifdef DEBUG
+#if DEBUG
 #include "zModuleExample.h"
 #endif
 
 void zModuleMgr_Registry_Startup()
 {
-#ifdef DEBUG
+#if DEBUG
     ModuleExample::zModuleExample_Startup();
 #endif
 }
 
 void zModuleMgr_Registry_Shutdown()
 {
-#ifdef DEBUG
+#if DEBUG
     ModuleExample::zModuleExample_Shutdown();
 #endif
 }

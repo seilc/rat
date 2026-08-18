@@ -82,10 +82,6 @@ public:
         xASSERT(236, subMeshIndex >= 0 && subMeshIndex < numSubMeshes);
         return subMeshes[subMeshIndex].getHeight(triangle, A.x, A.z);
     }
-
-#ifndef NON_MATCHING
-    U32 getId(const xNavigationMeshAssetSubMesh*, U32, U32) const;
-#endif
 };
 
 inline F32 xNavigationMeshAssetSubMesh::getHeight(S32 triangle, F32 x, F32 z) const

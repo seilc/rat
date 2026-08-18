@@ -1,7 +1,7 @@
 #ifndef XMATHINLINES_H
 #define XMATHINLINES_H
 
-#ifdef DEBUG
+#if DEBUG
 #define inline
 #endif
 

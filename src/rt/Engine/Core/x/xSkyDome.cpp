@@ -5,6 +5,8 @@
 #include "iCamera.h"
 #include "zRenderState.h"
 
+#include "decomp.h"
+
 struct SkyDomeInfo
 {
     xEnt* ent;
@@ -113,7 +115,7 @@ void xSkyDome_Render()
             }
 
             if (!xModelCullSingle(ent->model)) {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
                 if (xModelRenderLogEnabled()) {
                     xModelRenderLogSetEntity(ent);
                 }
@@ -147,9 +149,4 @@ void xSkyDome_Render()
     RwCameraBeginUpdateWrapper(cam);
 }
 
-#ifndef NON_MATCHING
-static void __unused(xEnt* ent)
-{
-    xASSERT(0, xSkyDome_EntityIsSkyDome(ent));
-}
-#endif
+DECOMP_FORCEACTIVE("xSkyDome_EntityIsSkyDome(ent)")

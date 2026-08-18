@@ -21,7 +21,7 @@ public:
     void SetArriverV(xVec3*) {}
     void Attached() {}
     void Detached() {}
-#ifdef RELEASE
+#if RELEASE
     void Reset() {}
 #endif
     void Update(xScene*, F32) {}

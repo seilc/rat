@@ -7,6 +7,8 @@
 #include "zMain.h"
 #include "xScrFx.h"
 
+#include "decomp.h"
+
 #include <string.h>
 
 namespace xhud {
@@ -89,14 +91,7 @@ bool text_widget::is(U32 id) const
     return id == text_widget::type() || widget::is(id);
 }
 
-#ifndef NON_MATCHING // Force float literal order in .sdata2
-#ifndef MASTER
-static void __unused()
-{
-    *(F32*)0 = 0.0f;
-}
-#endif
-#endif
+DECOMP_FORCEFLOAT(0.0f)
 
 void text_widget::update(F32 dt)
 {
@@ -122,7 +117,7 @@ void text_widget::update(F32 dt)
 
 void text_widget::render()
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     bool bDebug = *(bool*)&rc.size.z;
     if (bDebug) {
         F32 rc_x0 = rc.loc.x * FB_XRES;
@@ -154,17 +149,15 @@ void text_widget::set_text(const char* intext)
     text[copychars] = '\0';
 }
 
-#ifndef NON_MATCHING
-static void __unused(widget& w, motive& m)
-{
-    text_widget& textWid = (text_widget&)w;
-    xASSERT(0, m.value != 0);
-    xASSERT(0, textWid.tb.font.width);
-    xASSERT(0, textWid.tb.font.height);
-    xASSERT(0, m.orig_height);
-    xASSERT(0, m.orig_width);
-    xASSERT(0, m.current_scale != 0);
-}
+#if DEBUG || RELEASE
+DECOMP_FORCEACTIVE(
+    "m.value != 0",
+    "textWid.tb.font.width",
+    "textWid.tb.font.height",
+    "m.orig_height",
+    "m.orig_width",
+    "m.current_scale != 0"
+)
 #endif
 
 }

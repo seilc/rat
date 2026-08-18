@@ -179,13 +179,13 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-i include",
+    "-i src",
     f"-i build/{config.version}/include",
-    "-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Math/Include",
-    #"-i include/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
-    "-i include/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
+    "-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
+    #"-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",
+    #"-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Math/Include",
+    #"-i src/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include",
+    "-i src/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include",
 ]
 
 # Debug flags
@@ -221,7 +221,7 @@ cflags_rwcore_base = [
     "-DRW_USE_SPF",
     "-DRWNOVECMULTFUNCS",
     "-gccinc",
-    "-i include/dolphin",
+    "-i src/dolphin",
     "-i src/rwsdk/include/gcn",
     "-i src/rwsdk/driver/common",
     "-i src/rwsdk/driver/gcn",
@@ -329,16 +329,21 @@ cflags_rat_base = [
     '-pragma "cpp_extensions on"',
     "-sym on",
     "-inline off",
+    "-i src/rt",
     "-i src/rt/Engine/Core/gc",
     "-i src/rt/Engine/Core/x",
     "-i src/rt/Engine/Game",
     "-i src/rwsdk/include/gcn",
-    "-i include/dolphin",
-    "-i include/bink",
+    "-i src/dolphin",
+    "-i src/bink",
+    "-DDEBUG=0",
+    "-DRELEASE=0",
+    "-DMASTERDEBUG=0",
+    "-DMASTER=0",
 ]
 cflags_rat_d = [
     *cflags_rat_base,
-    "-DDEBUG",
+    "-DDEBUG=1",
     r'-DBUILDNUM="\"129\""',
     r'-D__DATE__="\"Jan 11 2006\""',
     r'-D__TIME__="\"00:29:14\""',
@@ -349,7 +354,7 @@ cflags_rat_d = [
 ]
 cflags_rat_r = [
     *cflags_rat_base,
-    "-DRELEASE",
+    "-DRELEASE=1",
     r'-DBUILDNUM="\"135\""',
     r'-D__DATE__="\"Jan 18 2006\""',
     r'-D__TIME__="\"15:52:40\""',
@@ -359,14 +364,14 @@ cflags_rat_r = [
 ]
 cflags_rat_md = [
     *cflags_rat_base,
-    "-DMASTERDEBUG",
+    "-DMASTERDEBUG=1",
     "-opt level=4, peep, space",
     "-sdata 64",
     "-sdata2 64",
 ]
 cflags_rat_m = [
     *cflags_rat_base,
-    "-DMASTER",
+    "-DMASTER=1",
     "-opt level=4, peep, space",
     "-sdata 64",
     "-sdata2 64",

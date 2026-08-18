@@ -14,7 +14,7 @@ struct zGlobalSettings
     F32 DamageInvincibility;
     F32 Gravity;
     U8 AttractModeDuringGameplay;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U32 AccelScripts;
 #endif
     F32 CameraFOV;
@@ -68,7 +68,7 @@ struct zGlobals : xGlobals
     zEconomics* economics;
     zMiniGameManager* mgManager;
     bool fmvJustFinished;
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U32 initialRemyPowerUp[5];
 #endif
 };

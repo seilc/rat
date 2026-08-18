@@ -3,6 +3,8 @@
 #include "xDebug.h"
 #include "xString.h"
 
+#include "decomp.h"
+
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -98,21 +100,16 @@ S32 xOutTrumps(U32 hval, xOutSeverity usersev)
     return xout_mss[k].trumpsev >= usersev;
 }
 
-#ifndef NON_MATCHING
-void xOutputMgrDump()
-{
-    iprintf("xOutputMgr: dumping list of enabled modules:\n");
-    iprintf(" --hashval-- | ----------name---------- | --trumps--\n");
-    iprintf("yes");
-    iprintf("no");
-#ifdef DEBUG
-    iprintf("<none>");
-#endif
-    iprintf("  0x%08x   %24s   %s\n");
-    iprintf("<none>");
-    iprintf("\t\t      --empty--\n");
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "xOutputMgr: dumping list of enabled modules:\n",
+    " --hashval-- | ----------name---------- | --trumps--\n",
+    "yes",
+    "no",
+    DEBUG ? "<none>" : 0,
+    "  0x%08x   %24s   %s\n",
+    "<none>",
+    "\t\t      --empty--\n"
+)
 
 void xOutCrit(const char* fmt, ...)
 {

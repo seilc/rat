@@ -8,6 +8,8 @@
 #include "zScene.h"
 #include "zPlayer.h"
 
+#include "decomp.h"
+
 namespace {
 
 void emitter_EventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*, U32)
@@ -47,7 +49,7 @@ void emitter_EventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
 
 namespace xRumble {
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void effectAsset::AddTweaks(const char* prefix)
 {
     xAUTOTWEAKRANGE(prefix, "time", &time, 0, 100, NULL, NULL, 0, false);
@@ -116,12 +118,12 @@ effect::effect(effectAsset* pAsset)
         link = (xLinkAsset*)((U8*)pAsset + sizeof(effectAsset));
     }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     AddTweaks();
 #endif
 }
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 void effect::AddTweaks()
 {
     char prefix[256];
@@ -245,14 +247,13 @@ void sphericalEmitter::UpdatePosition(const xVec3& playerPos) const
     pAsset->position = playerPos;
 }
 
-#ifndef NON_MATCHING
-static void __unused(sphericalEmitterAsset* a)
-{
-    *a = *a;
-    xFAILM(0, "Unable to find FREEZABLE_OBJECT_RUMBLE_EMIT. Please repack BOOT.SDF");
-    xFAILM(0, "Unable to find FREEZABLE_OBJECT_RUMBLE. Please repack BOOT.SDF");
-    xFAIL_ONCE_M(0, "OnlyOnFloor is ignored by the FreezableObject Rumble Effect.");
-}
-#endif
+DECOMP_FORCEACTIVE(
+    "*always*",
+    "Unable to find FREEZABLE_OBJECT_RUMBLE_EMIT. Please repack BOOT.SDF",
+    "Unable to find FREEZABLE_OBJECT_RUMBLE. Please repack BOOT.SDF",
+    "*once only*",
+    "OnlyOnFloor is ignored by the FreezableObject Rumble Effect.",
+    &xDynAsset::operator=
+)
 
 }

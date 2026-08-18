@@ -15,7 +15,7 @@ public:
     void Stop();
     void Reset();
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     void AddTweaks(const char* base);
 #endif
 
@@ -29,7 +29,7 @@ private:
     bool currentState;
     bool override;
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     const char* graphName;
 #endif
 

@@ -51,7 +51,7 @@ void xQuickCullForBox(xQCControl* ctrl, xQCData* q, const xBox* box);
 void xQuickCullForOBB(xQCControl* ctrl, xQCData* q, const xBox* b, const xMat4x3* m);
 void xQuickCullForEverything(xQCData* q);
 
-#ifdef DEBUG
+#if DEBUG
 void xQuickCullDebugCB();
 void xQuickCullDebugUpdate();
 void xQuickCullDebugRegister(const xQCData* q);

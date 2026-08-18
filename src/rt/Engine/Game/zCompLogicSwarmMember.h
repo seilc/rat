@@ -9,7 +9,7 @@ public:
     virtual void Attached() {}
     virtual void AllAttached() {}
     virtual void Detached() {}
-#ifdef RELEASE
+#if RELEASE
     virtual void Reset() {}
 #endif
     virtual void Update(xScene*, F32 dt);

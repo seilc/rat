@@ -53,11 +53,11 @@ public:
     virtual void PastUpdateDistCleanup();
     virtual void VisibilityCullCleanup();
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     virtual void ForceEnterDeathState();
 #endif
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     U8 npc_selection;
 #endif
 };

@@ -42,7 +42,7 @@ F32 xasin(F32 x);
 F32 xatan2(F32 y, F32 x);
 void xsqrtfast(F32& o, F32 fVal);
 
-#ifndef DEBUG
+#if !DEBUG
 #include "xMathInlines.h"
 #endif
 

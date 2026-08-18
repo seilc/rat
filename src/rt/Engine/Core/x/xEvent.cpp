@@ -8,7 +8,7 @@
 #include "zEnt.h"
 #include "zEvent.h"
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
 char zEventLogBuf[20][256];
 #endif
 
@@ -73,7 +73,7 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
 {
     xFAIL_AND_RETURN_IF(127, to == NULL);
 
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     static const S32 MAX_REENTRANT_COUNT = 32;
     static S32 reentrantCount = 0;
 
@@ -144,14 +144,14 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
         }
     }
     
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     reentrantCount--;
 #endif
 }
 
 void xEventDebugLogDump()
 {
-#ifdef DEBUGRELEASE
+#if DEBUG || RELEASE
     iprintf("========================================== EVENT LOG DUMP [BEGIN]\n");
 
     for (S32 i = 0; i < 20; i++) {
