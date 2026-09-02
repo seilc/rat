@@ -178,69 +178,57 @@ namespace {
 
         static RwIm3DVertex sStripVert[4];
         RwIm3DVertex* vert = sStripVert;
-        {
-            RwV3d tmp;
-            tmp.x = g_pos.x - w.x - h.x;
-            tmp.y = g_pos.y - w.y - h.y;
-            tmp.z = g_pos.z - w.z - h.z;
-            RwIm3DVertexSetPos(vert, tmp.x, tmp.y, tmp.z);
-            RwIm3DVertexSetUV(vert, 0.0f, 0.0f);
 
-            RwRGBA col;
-            col.red = 255.0f * g->col.red;
-            col.green = 255.0f * g->col.green;
-            col.blue = 255.0f * g->col.blue;
-            col.alpha = 255.0f * g->col.alpha;
-            RwIm3DVertexSetRGBA(vert, col.red, col.green, col.blue, col.alpha);
-        }
+        RwIm3DVertexSetPos(vert,
+            g_pos.x - w.x - h.x,
+            g_pos.y - w.y - h.y,
+            g_pos.z - w.z - h.z);
+        RwIm3DVertexSetUV(vert, 0.0f, 0.0f);
+        RwIm3DVertexSetRGBA(vert,
+            255.0f * g->col.red,
+            255.0f * g->col.green,
+            255.0f * g->col.blue,
+            255.0f * g->col.alpha);
+        
         vert++;
-        {
-            RwV3d tmp;
-            tmp.x = g_pos.x - w.x + h.x;
-            tmp.y = g_pos.y - w.y + h.y;
-            tmp.z = g_pos.z - w.z + h.z;
-            RwIm3DVertexSetPos(vert, tmp.x, tmp.y, tmp.z);
-            RwIm3DVertexSetUV(vert, 0.0f, 1.0f);
-
-            RwRGBA col;
-            col.red = 255.0f * g->col.red;
-            col.green = 255.0f * g->col.green;
-            col.blue = 255.0f * g->col.blue;
-            col.alpha = 255.0f * g->col.alpha;
-            RwIm3DVertexSetRGBA(vert, col.red, col.green, col.blue, col.alpha);
-        }
+        
+        RwIm3DVertexSetPos(vert,
+            g_pos.x - w.x + h.x,
+            g_pos.y - w.y + h.y,
+            g_pos.z - w.z + h.z);
+        RwIm3DVertexSetUV(vert, 0.0f, 1.0f);
+        RwIm3DVertexSetRGBA(vert,
+            255.0f * g->col.red,
+            255.0f * g->col.green,
+            255.0f * g->col.blue,
+            255.0f * g->col.alpha);
+        
         vert++;
-        {
-            RwV3d tmp;
-            tmp.x = g_pos.x + w.x - h.x;
-            tmp.y = g_pos.y + w.y - h.y;
-            tmp.z = g_pos.z + w.z - h.z;
-            RwIm3DVertexSetPos(vert, tmp.x, tmp.y, tmp.z);
-            RwIm3DVertexSetUV(vert, 1.0f, 0.0f);
 
-            RwRGBA col;
-            col.red = 255.0f * g->col.red;
-            col.green = 255.0f * g->col.green;
-            col.blue = 255.0f * g->col.blue;
-            col.alpha = 255.0f * g->col.alpha;
-            RwIm3DVertexSetRGBA(vert, col.red, col.green, col.blue, col.alpha);
-        }
+        RwIm3DVertexSetPos(vert,
+            g_pos.x + w.x - h.x,
+            g_pos.y + w.y - h.y,
+            g_pos.z + w.z - h.z);
+        RwIm3DVertexSetUV(vert, 1.0f, 0.0f);
+        RwIm3DVertexSetRGBA(vert,
+            255.0f * g->col.red,
+            255.0f * g->col.green,
+            255.0f * g->col.blue,
+            255.0f * g->col.alpha);
+        
         vert++;
-        {
-            RwV3d tmp;
-            tmp.x = g_pos.x + w.x + h.x;
-            tmp.y = g_pos.y + w.y + h.y;
-            tmp.z = g_pos.z + w.z + h.z;
-            RwIm3DVertexSetPos(vert, tmp.x, tmp.y, tmp.z);
-            RwIm3DVertexSetUV(vert, 1.0f, 1.0f);
 
-            RwRGBA col;
-            col.red = 255.0f * g->col.red;
-            col.green = 255.0f * g->col.green;
-            col.blue = 255.0f * g->col.blue;
-            col.alpha = 255.0f * g->col.alpha;
-            RwIm3DVertexSetRGBA(vert, col.red, col.green, col.blue, col.alpha);
-        }
+        RwIm3DVertexSetPos(vert,
+            g_pos.x + w.x + h.x,
+            g_pos.y + w.y + h.y,
+            g_pos.z + w.z + h.z);
+        RwIm3DVertexSetUV(vert, 1.0f, 1.0f);
+        RwIm3DVertexSetRGBA(vert,
+            255.0f * g->col.red,
+            255.0f * g->col.green,
+            255.0f * g->col.blue,
+            255.0f * g->col.alpha);
+        
         vert++;
         
         RwRenderStateSet(rwRENDERSTATETEXTURERASTER, (void*)g->raster);

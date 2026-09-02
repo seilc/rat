@@ -30,6 +30,7 @@ struct xVec3
     xVec3& operator*=(F32 f);
     xVec3& operator=(F32 f) { x = y = z = f; return *this; }
     F32 dot(const xVec3& c) const;
+    F32 length() const;
     F32 length2() const;
     F32 up_normalize();
     void AddScale(const xVec3& d, F32 s);
@@ -37,6 +38,7 @@ struct xVec3
     void Add(const xVec3& a);
     void Scale(F32 scalar);
     void Scale(const xVec3& a, F32 scalar);
+    F32 Distance(const xVec3& other) const;
     F32 Distance2(const xVec3& other) const;
     void Negate(const xVec3& a);
 };
@@ -78,6 +80,7 @@ F32 xVec3Length2(const xVec3* v);
 void xVec3Inv(xVec3& v);
 F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 F32 xVec3Dist2(const xVec3* a, const xVec3* b);
+F32 xVec3NormalizeSafe(xVec3& v);
 
 #if !DEBUG
 #include "xVec3Inlines.h"

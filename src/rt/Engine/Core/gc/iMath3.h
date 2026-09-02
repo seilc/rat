@@ -15,5 +15,6 @@ struct xMat3x3;
 struct xMat4x3;
 
 void iBoxIsectRay(const xBox* b, const xRay3* r, xIsect* isx);
+void iBoxBoundVec(xBox* o, const xBox* b, const xVec3* v);
 
 #endif

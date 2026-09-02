@@ -35,28 +35,41 @@ typedef RwIm2DVertex RxScrSpace2DVertex;
 #define RwIm3DVertexSetPos(_vert, _imx, _imy, _imz)                                               \
 MACRO_START                                                                                       \
 {                                                                                                 \
-    (_vert)->x = _imx;                                                                            \
-    (_vert)->y = _imy;                                                                            \
-    (_vert)->z = _imz;                                                                            \
+    RwV3d tmp;                                                                                    \
+    tmp.x = _imx;                                                                                 \
+    tmp.y = _imy;                                                                                 \
+    tmp.z = _imz;                                                                                 \
+    (_vert)->x = tmp.x;                                                                           \
+    (_vert)->y = tmp.y;                                                                           \
+    (_vert)->z = tmp.z;                                                                           \
 }                                                                                                 \
 MACRO_STOP
 
 #define RwIm3DVertexSetNormal(_vert, _imx, _imy, _imz)                                            \
 MACRO_START                                                                                       \
 {                                                                                                 \
-    (_vert)->nx = _imx;                                                                           \
-    (_vert)->ny = _imy;                                                                           \
-    (_vert)->nz = _imz;                                                                           \
+    RwV3d packed;                                                                                 \
+    packed.x = _imx;                                                                              \
+    packed.y = _imy;                                                                              \
+    packed.z = _imz;                                                                              \
+    (_vert)->nx = packed.x;                                                                       \
+    (_vert)->ny = packed.y;                                                                       \
+    (_vert)->nz = packed.z;                                                                       \
 }                                                                                                 \
 MACRO_STOP
 
 #define RwIm3DVertexSetRGBA(_vert, _r, _g, _b, _a)                                                \
 MACRO_START                                                                                       \
 {                                                                                                 \
-    (_vert)->r = _r;                                                                              \
-    (_vert)->g = _g;                                                                              \
-    (_vert)->b = _b;                                                                              \
-    (_vert)->a = _a;                                                                              \
+    RwRGBA col;                                                                                   \
+    col.red = _r;                                                                                 \
+    col.green = _g;                                                                               \
+    col.blue = _b;                                                                                \
+    col.alpha = _a;                                                                               \
+    (_vert)->r = col.red;                                                                         \
+    (_vert)->g = col.green;                                                                       \
+    (_vert)->b = col.blue;                                                                        \
+    (_vert)->a = col.alpha;                                                                       \
 }                                                                                                 \
 MACRO_STOP
 

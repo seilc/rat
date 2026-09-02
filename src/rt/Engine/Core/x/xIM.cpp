@@ -72,19 +72,10 @@ void xIMRender(xIMLockContext& context, const xMat4x3* mat, U32 flags)
     RwIm3DVertex* vert = vert_buffer;
     RwIm3DVertex* end_vert = vert + verts_size;
     while (vert != end_vert) {
-        RwV3d tmp;
-        tmp.x = pos->x;
-        tmp.y = pos->y;
-        tmp.z = pos->z;
-        RwIm3DVertexSetPos(vert, tmp.x, tmp.y, tmp.z);
+        RwIm3DVertexSetPos(vert, pos->x, pos->y, pos->z);
         RwIm3DVertexSetUV(vert, uv->x, uv->y);
         if (flags & 0x10) {
-            RwRGBA col;
-            col.red = color->r;
-            col.green = color->g;
-            col.blue = color->b;
-            col.alpha = color->a;
-            RwIm3DVertexSetRGBA(vert, col.red, col.green, col.blue, col.alpha);
+            RwIm3DVertexSetRGBA(vert, color->r, color->g, color->b, color->a);
         }
         color++;
         pos++;
