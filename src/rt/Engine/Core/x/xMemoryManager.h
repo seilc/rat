@@ -25,6 +25,7 @@ class xMemoryManager
 public:
     bool Owns(const void* pointer) const;
     void* GetArenaStart() const;
+    void* GetArenaEnd() const;
 
     bool IsDebugging() const
     {

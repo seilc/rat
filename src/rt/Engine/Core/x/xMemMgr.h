@@ -156,6 +156,23 @@ extern U32 gActiveHeap;
 U32 xMemMgrGenericMallocGetTag();
 void xMemMgrGenericMallocTally(U32 size, U32 tag);
 void xMemMgrGenericMallocRemove(U32 size, U32 tag);
+
+#define xMEMMGRGENERICMALLOCTALLY(size)                                                           \
+do {                                                                                              \
+    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {                                      \
+        xMemMgrGenericMallocTally((size), xMemMgrGenericMallocGetTag());                          \
+    }                                                                                             \
+} while (0)
+
+#define xMEMMGRGENERICMALLOCREMOVE(size)                                                          \
+do {                                                                                              \
+    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {                                      \
+        xMemMgrGenericMallocRemove((size), xMemMgrGenericMallocGetTag());                         \
+    }                                                                                             \
+} while (0)
+#else
+#define xMEMMGRGENERICMALLOCTALLY(size)
+#define xMEMMGRGENERICMALLOCREMOVE(size)
 #endif
 
 #if DEBUG || RELEASE

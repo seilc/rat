@@ -4,14 +4,6 @@
 #include "decomp.h"
 
 #if DEBUG || RELEASE
-#define DoAllocate(size, options, file, function, line) DoAllocate(size, options, file, function, line)
-#define DoReallocate(pointer, size, options, file, function, line) DoReallocate(pointer, size, options, file, function, line)
-#else
-#define DoAllocate(size, options, file, function, line) DoAllocate(size, options)
-#define DoReallocate(pointer, size, options, file, function, line) DoReallocate(pointer, size, options)
-#endif
-
-#if DEBUG || RELEASE
 inline U8 ConvertToFixedSizeEnum(U32 size)
 {
     if (size <= 4) return 1;
@@ -63,7 +55,11 @@ void xMemoryManagerFixed::Init(void* start, U32 elements, U32 elementSize)
     InitMemory();
 }
 
+#if DEBUG || RELEASE
 void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options, const char*, const char*, S32)
+#else
+void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options)
+#endif
 {
     xASSERT(108, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 2);
 
@@ -77,10 +73,7 @@ void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options, const char*, const 
 
 #if DEBUG || RELEASE
     allocatedElements++;
-
-    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {
-        xMemMgrGenericMallocTally(elementSize, xMemMgrGenericMallocGetTag());
-    }
+    xMEMMGRGENERICMALLOCTALLY(elementSize);
 #endif
 
     return ret;
@@ -96,15 +89,16 @@ void xMemoryManagerFixed::DoFree(void* pointer)
     this->freeList = header;
 
 #if DEBUG || RELEASE
-    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {
-        xMemMgrGenericMallocRemove(elementSize, xMemMgrGenericMallocGetTag());
-    }
-
+    xMEMMGRGENERICMALLOCREMOVE(elementSize);
     allocatedElements--;
 #endif
 }
 
+#if DEBUG || RELEASE
 void* xMemoryManagerFixed::DoReallocate(void* pointer, U32 size, U32, const char*, const char*, S32)
+#else
+void* xMemoryManagerFixed::DoReallocate(void* pointer, U32 size, U32)
+#endif
 {
     xASSERT(158, size <= elementSize);
     return pointer;
