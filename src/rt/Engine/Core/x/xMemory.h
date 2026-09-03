@@ -47,4 +47,19 @@ inline void xMemoryCopyUpA32(void* dest, const void* source, U32 count)
     }
 }
 
+void xMemoryCopyUpA128(void* dest, const void* source, U32 count);
+
+inline void xMemoryCopyDownA128(void* dest, const void* source, U32 count)
+{
+    xASSERT(352, count % 16 == 0 && (U32)dest % 16 == 0 && (U32)source % 16 == 0);
+
+    count /= sizeof(U32);
+
+    U32* destIterator = (U32*)dest + count - 1;
+    const U32* sourceIterator = (const U32*)source + count - 1;
+    while (count--) {
+        *destIterator-- = *sourceIterator--;
+    }
+}
+
 #endif
