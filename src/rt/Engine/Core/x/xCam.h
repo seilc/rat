@@ -10,6 +10,9 @@
 struct xCamGroup;
 struct xCamBlend;
 class xCamTransition;
+struct xScene;
+class zCamSplineCommonMix;
+class zCam2Player;
 
 enum xCamCoordType
 {
@@ -33,6 +36,14 @@ struct xCamCoordSphere
     xVec3 origin;
     F32 dist;
     xQuat dir;
+};
+
+struct xCamCoordPolar
+{
+    xVec3 origin;
+    F32 theta;
+    F32 phi;
+    F32 dist;
 };
 
 struct xCamCoord
@@ -84,6 +95,27 @@ struct xCamConfigCommon
     F32 blend_time;
 };
 
+struct xCamConfigFollow
+{
+    struct zone_data
+    {
+        xVec3 offset;
+        xVec3 face;
+    };
+
+    zone_data zone_rest;
+    zone_data zone_above;
+    zone_data zone_below;
+    F32 speed_zone_offset;
+    F32 speed_zone_face;
+    F32 speed_move_orbit;
+};
+
+struct xCamTransitionParams : xCamConfigCommon
+{
+    xCamTransition* mTransitionObject;
+};
+
 struct xCam
 {
 public:
@@ -99,23 +131,45 @@ public:
     xCamSpatialInfo spatial;
     xCamSpatialInfo coll_spatial;
     xCamConfigCommon cfg_common;
-    void* __vptr;
+    
+    virtual xCam* get_final_dest();
+    virtual zCamSplineCommonMix* get_common_mix();
+    virtual void create();
+    virtual void destroy();
+    virtual void start();
+    virtual void stop();
+    virtual void update(xScene& scene, F32 dt) = 0;
+    virtual void pre_update(xScene& scene);
+    virtual void post_update(xScene& scene);
+    virtual xCam* get_next();
+    virtual xCam* find_camera(U32 ownerID);
+    virtual zCam2Player* get_zCam2Player() const;
+    virtual F32 getCameraPlayerAudioBias() const;
+    virtual xCamConfigFollow* config_follow();
 
 private:
     S32 group_flags;
     xCamBlend* blender;
 
+#if DEBUG || RELEASE
 public:
     struct
     {
         S32 flags;
         xColor color[3];
     } debug;
+
+    virtual void debug_render();
+    virtual void debug_mode_draw();
+    virtual void add_tweaks(const char* prefix);
+#endif
 };
 
 struct xCamGroup
 {
 public:
+    void transition_to(xCam& cam, const xCamTransitionParams* params, bool force_cut, bool force_restart);
+
     xMat4x3 mat;
     xMat4x3 coll_mat;
     xVec3 coll_atXZ;
@@ -142,7 +196,14 @@ struct xCamScreen
 class xCamBias
 {
 public:
-    void* __vptr;
+    xCamBias();
+
+    virtual void Start() = 0;
+    virtual void Update(F32 dt) = 0;
+    virtual F32 GetBias() = 0;
+    virtual void Reverse() = 0;
+    virtual bool IsActive() = 0;
+    virtual bool DidComplete() = 0;
 
 protected:
     bool mIsBiDirectional;
@@ -150,6 +211,14 @@ protected:
 
 class xCamTimeBias : public xCamBias
 {
+public:
+    virtual void Start();
+    virtual void Update(F32 dt);
+    virtual F32 GetBias();
+    virtual void Reverse();
+    virtual bool IsActive();
+    virtual bool DidComplete();
+
 private:
     F32 bias;
     F32 time;

@@ -5,4 +5,6 @@
 
 #define IDTAG(a,b,c,d) (((U32)(a)<<24)|((U32)(b)<<16)|((U32)(c)<<8)|((U32)(d)))
 
+F32 xClampAngle0_2PI(F32 angle);
+
 #endif

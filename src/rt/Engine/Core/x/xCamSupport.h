@@ -63,4 +63,15 @@ private:
     F32 weights[31];
 };
 
+class xCamSupportLOSBar
+{
+public:
+    xVec3 origin;
+    xVec3 last_origin;
+    xVec3 stern_loc;
+    xVec3 last_stern_loc;
+    F32 rail_yoffset;
+    F32 last_rail_yoffset;
+};
+
 #endif

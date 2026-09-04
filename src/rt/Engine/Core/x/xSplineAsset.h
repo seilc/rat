@@ -28,6 +28,11 @@ public:
     void AddCrossSectionPos(xVec3& lastPos, xVec3& centerLinePos, F32 halfWidth) const;
     void DrawCrossSection(S32 segments, F32 width) const;
     bool advance_u(F32 start_u, F32 distance, bool forward, F32& new_u) const;
+
+    S32 numKnots() const
+    {
+        return knotMaxIndex + 1;
+    }
 };
 
 #endif

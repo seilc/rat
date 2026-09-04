@@ -730,7 +730,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zCommonPlayerActions.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerAction.cpp"),
             Object(NonMatching, "rt/Engine/Game/zAnimCustom.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xCamTransition.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xCamTransition.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Game/zFrostEffect.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCCustomAV.cpp"),
             Object(Matching, "rt/Engine/Game/zFrozoneBlast.cpp"),
