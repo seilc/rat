@@ -519,7 +519,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xSndMgr.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSoundFX.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSpacePartitionTree.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xSpline.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xSpline.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSplineAsset.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xstransvc.cpp"),
             Object(Matching, "rt/Engine/Core/x/xString.cpp"),
