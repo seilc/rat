@@ -2,6 +2,7 @@
 #define XVEC3_H
 
 #include "xMath.h"
+#include "xDebug.h"
 
 #include <rwcore.h>
 
@@ -33,6 +34,19 @@ struct xVec3
     F32 dot(const xVec3& c) const;
     F32 length() const;
     F32 length2() const;
+    xVec3& negate();
+
+    F32 normalize()
+    {
+        F32 len2 = length2();
+        xASSERT(86, len2 > 0.f);
+
+        F32 len = xsqrt(len2);
+        *this *= 1.0f / len;
+        
+        return len;
+    }
+
     F32 up_normalize();
     void AddScale(const xVec3& p, const xVec3& d, F32 s);
     void AddScale(const xVec3& d, F32 s);

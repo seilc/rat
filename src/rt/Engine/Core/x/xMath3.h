@@ -108,10 +108,13 @@ public:
         d = norm.dot(pt);
     }
 
+    void Init(const xVec3& normal, const xVec3& pt);
+
     F32 Dist(const xVec3& pt) const;
     void Project(xVec3& proj, const xVec3& pt, F32 dist_above) const;
 };
 
+extern xVec3 g_Y3;
 extern xMat4x3 g_I3;
 
 void xBoxInitBoundOBB(xBox* o, const xBox* b, const xMat4x3* m);

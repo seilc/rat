@@ -160,6 +160,12 @@ inline void xEntVisibilityCullOff(xEnt* ent)
     }
 }
 
+inline xMat4x3* xEntGetFrame(const xEnt* ent)
+{
+    xASSERT(1098, ent->model);
+    return xModelGetFrame(ent->model);
+}
+
 void xEntShow(xEnt* ent);
 void xEntHide(xEnt* ent);
 U32 xEntIsVisible(const xEnt* ent);
