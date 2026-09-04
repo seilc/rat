@@ -468,7 +468,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xGrid.cpp"),
             Object(Matching, "rt/Engine/Core/x/xGroup.cpp"),
             Object(Matching, "rt/Engine/Core/x/xHierarchyBound.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xhipio.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xhipio.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xHud.cpp"),
             Object(Matching, "rt/Engine/Core/x/xHudFontMeter.cpp"),
             Object(Matching, "rt/Engine/Core/x/xHudMeter.cpp"),
