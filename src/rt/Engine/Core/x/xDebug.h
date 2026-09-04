@@ -29,7 +29,7 @@ enum en_VERBOSE_MSGLEVEL
 #endif
 
 #if DEBUG
-#define _xVALIDATEFAIL(line, cond, msg)                                                           \
+#define _xVALIDATEFAIL(line, msg)                                                                 \
 do {                                                                                              \
     static S32 been_here;                                                                         \
     if (!been_here) {                                                                             \
@@ -42,19 +42,22 @@ do {                                                                            
 #define xVALIDATE(line, cond)                                                                     \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        _xVALIDATEFAIL(line, cond, #cond);                                                        \
+        _xVALIDATEFAIL(line, #cond);                                                              \
     }                                                                                             \
 } while (0)
 
 #define xVALIDATEM(line, cond, msg)                                                               \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        _xVALIDATEFAIL(line, cond, msg);                                                          \
+        _xVALIDATEFAIL(line, msg);                                                                \
     }                                                                                             \
 } while (0)
+
+#define xVALIDATEFAIL(line) _xVALIDATEFAIL(line, "*always*")
 #else
 #define xVALIDATE(line, cond)
 #define xVALIDATEM(line, cond, msg)
+#define xVALIDATEFAIL(line)
 #endif
 
 #if DEBUG || RELEASE
