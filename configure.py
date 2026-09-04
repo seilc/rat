@@ -637,7 +637,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zWaterhose.cpp"),
             Object(NonMatching, "rt/Engine/Game/zZipLine.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/screenshot.c"),
-            Object(NonMatching, "rt/Engine/Core/x/xCollideSpherePolygon.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xCollideSpherePolygon.cpp", extra_cflags=['-sym on']),
             Object(NonMatching, "rt/Engine/Game/zAsync.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xParticleBatch.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSmoke.cpp"),

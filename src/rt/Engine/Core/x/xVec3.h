@@ -29,10 +29,12 @@ struct xVec3
     xVec3& operator-=(const xVec3& v);
     xVec3& operator*=(F32 f);
     xVec3& operator=(F32 f) { x = y = z = f; return *this; }
+    xVec3& cross(const xVec3& c0, const xVec3& c1);
     F32 dot(const xVec3& c) const;
     F32 length() const;
     F32 length2() const;
     F32 up_normalize();
+    void AddScale(const xVec3& p, const xVec3& d, F32 s);
     void AddScale(const xVec3& d, F32 s);
     void Sub(const xVec3& a, const xVec3& b);
     void Add(const xVec3& a);

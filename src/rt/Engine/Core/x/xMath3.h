@@ -102,6 +102,14 @@ class xPlane
 public:
     xVec3 norm;
     F32 d;
+
+    void Init(const xVec3& pt)
+    {
+        d = norm.dot(pt);
+    }
+
+    F32 Dist(const xVec3& pt) const;
+    void Project(xVec3& proj, const xVec3& pt, F32 dist_above) const;
 };
 
 extern xMat4x3 g_I3;

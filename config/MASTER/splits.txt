@@ -1210,14 +1210,14 @@ rt/Engine/Core/x/xCollideSpherePolygon.cpp:
 	.text       start:0x800EE824 end:0x800EE854
 	.text       start:0x800EE854 end:0x800EE854
 	.text       start:0x800EE854 end:0x800EE880
-	.sdata2     start:0x803C5548 end:0x803C5568
+	.sdata2     start:0x803C5548 end:0x803C5564
 
 rt/Engine/Game/zAsync.cpp:
 	.text       start:0x800EE880 end:0x800EEC00
 	.text       start:0x800EEC00 end:0x800EEC00
 	.text       start:0x800EEC00 end:0x800EEC10
 	.sbss       start:0x803C1208 end:0x803C1228
-	.sdata2     start:0x803C5568 end:0x803C55A8
+	.sdata2     start:0x803C5564 end:0x803C55A8
 	.sbss2      start:0x803C9708 end:0x803C9710
 
 rt/Engine/Core/x/xParticleBatch.cpp:
