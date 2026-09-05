@@ -25,8 +25,20 @@ typedef enum _tagTRCState
     TRC_Total
 } TRCState;
 
+typedef enum _tagTRCPadState
+{
+    TRC_PadStateUnknown,
+    TRC_PadStatePresent,
+    TRC_PadStateMissingDuringGameplay,
+    TRC_PadStateMissingDuringCutscene,
+    TRC_PadStateMissingDuringMainMenu,
+    TRC_PadStateMissingDuringMovie,
+    TRC_PadStateMissingDuringLoadSave
+} TRCPadState;
+
 bool xTRCPadFindFirst(S32& idx, TRCState state);
 S32 xTRCPadGetPadPort(S32 idx);
+TRCPadState xTRCPadGetPadStatePort(S32 port);
 U8 xTRCPadGetPadPort(S32& idx, TRCState state);
 void xTRCInit();
 

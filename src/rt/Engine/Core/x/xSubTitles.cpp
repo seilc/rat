@@ -116,18 +116,7 @@ bool xSubTitlesRender(U32 aid, F32 fTime)
     xColor cText = { 184, 196, 200, 255 };
     xColor cBackGnd = { 16, 16, 16, 188 };
 
-    xtextbox tbSubtitles =
-        xtextbox::create(
-            xfont::create(
-                0,
-                NSCREENX(subtitleFontWidth), NSCREENY(subtitleFontHeight), 0.0f,
-                cText,
-                screen_bounds,
-                g_BLACK, 2.0f, 2.0f),
-            screen_bounds,
-            0x2,
-            0.0f, 0.0f, 0.0f, 0.0f);
-
+    xtextbox tbSubtitles = xtextbox::create(xfont::create(0, NSCREENX(subtitleFontWidth), NSCREENY(subtitleFontHeight), 0.0f, cText));
     tbSubtitles.set_text(pszDisplay);
     tbSubtitles.bounds.x = 0.05f;
     tbSubtitles.bounds.w = 0.9f;
