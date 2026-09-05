@@ -4,6 +4,7 @@
 #include "types.h"
 
 #include <rwcore.h>
+#include <rpcollis.h>
 
 struct xClumpCollBSPBranchNode
 {
@@ -39,5 +40,7 @@ struct xClumpCollBSPTree
     S32 numTriangles;
     xClumpCollBSPTriangle* triangles;
 };
+
+xClumpCollBSPTree* xClumpColl_ForAllIntersections(xClumpCollBSPTree* tree, RpIntersection* intersection, RpIntersectionCallBackWorldTriangle callBack, void* data);
 
 #endif

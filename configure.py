@@ -514,7 +514,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xScrFx.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xserializer.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xShadow.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xShadowSimple.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xShadowSimple.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSkyDome.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSndMgr.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSoundFX.cpp"),
