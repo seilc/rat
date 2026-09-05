@@ -76,6 +76,7 @@ void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
 void xModelEval(xModelInstance* modelInst);
 void xModelAnimCollRefresh(const xModelInstance& cm);
 S32 xModelCullSingle(xModelInstance* minst);
+bool xModelIsPreinstanced(const xModelInstance* model);
 RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
 
 #if DEBUG || RELEASE
