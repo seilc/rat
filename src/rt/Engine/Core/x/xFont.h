@@ -2,11 +2,11 @@
 #define XFONT_H
 
 #include "xColor.h"
+#include "xCommon.h"
 #include "xMath2.h"
 #include "xString.h"
 
-F32 NSCREENX(F32 v);
-F32 NSCREENY(F32 v);
+static const basic_rect<F32> screen_bounds = { 0, 0, 1, 1 };
 
 class xfont
 {
@@ -21,7 +21,29 @@ public:
     F32 shadowOffsetY;
     basic_rect<F32> clip;
 
-    static xfont create(U32 id, F32 width, F32 height, F32 space, xColor color, const basic_rect<F32>& clip, xColor shadowColor, F32 shadowOffsetX, F32 shadowOffsetY);
+    static xfont create(
+        U32 id,
+        F32 width,
+        F32 height,
+        F32 space,
+        xColor color,
+        const basic_rect<F32>& clip = screen_bounds,
+        xColor shadowColor = g_BLACK,
+        F32 shadowOffsetX = 2.0f,
+        F32 shadowOffsetY = 2.0f)
+    {
+        xfont r;
+        r.id = id;
+        r.width = width;
+        r.height = height;
+        r.space = space;
+        r.color = color;
+        r.clip = clip;
+        r.shadowColor = shadowColor;
+        r.shadowOffsetX = shadowOffsetX;
+        r.shadowOffsetY = shadowOffsetY;
+        return r;
+    }
 
     void start_render() const;
     void stop_render() const;
@@ -39,6 +61,7 @@ class xtextbox
 {
 public:
     struct jot;
+    class layout;
 
     struct split_tag
     {
@@ -93,6 +116,8 @@ public:
         void reset_flags() { *(U16*)&flag = 0; }
     };
 
+    static callback text_cb;
+
     xfont font;
     basic_rect<F32> bounds;
     U32 flags;
@@ -103,11 +128,39 @@ public:
     const callback* cb;
     void* context;
 
-    static xtextbox create();
-    static xtextbox create(const xfont& font, const basic_rect<F32>& bounds, U32 flags, F32 line_space, F32 tab_stop, F32 left_indent, F32 right_indent);
-
     void set_text(const char* text);
-    void render(bool cache) const;
+    layout& temp_layout(bool cache) const;
+    void render(layout& l, S32 begin_jot, S32 end_jot) const;
+
+    static xtextbox create();
+
+    static xtextbox create(
+        const xfont& font,
+        const basic_rect<F32>& bounds = screen_bounds,
+        U32 flags = 0x2,
+        F32 line_space = 0.0f,
+        F32 tab_stop = 0.0f,
+        F32 left_indent = 0.0f,
+        F32 right_indent = 0.0f)
+    {
+        xtextbox r;
+        r.font = font;
+        r.bounds = bounds;
+        r.flags = flags;
+        r.line_space = line_space;
+        r.tab_stop = tab_stop;
+        r.left_indent = left_indent;
+        r.right_indent = right_indent;
+        r.texts_size = 0;
+        r.text_hash = 0;
+        r.cb = &text_cb;
+        return r;
+    }
+
+    void render(bool cache) const
+    {
+        render(temp_layout(cache), 0, -1);
+    }
 
 private:
     const char** texts;
@@ -117,6 +170,14 @@ private:
     U32 text_hash;
 };
 
-static const basic_rect<F32> screen_bounds = { 0, 0, 1, 1 };
+inline F32 NSCREENX(F32 v)
+{
+    return 1.0f / SCREEN_WIDTH * v;
+}
+
+inline F32 NSCREENY(F32 v)
+{
+    return 1.0f / SCREEN_HEIGHT * v;
+}
 
 #endif

@@ -77,6 +77,7 @@ private:
     bool motionLoop;
 };
 
+S32 zUIGetPadPortInitiatedPause();
 void zUI_Init(zUI* text, zUIAsset* asset);
 
 #endif

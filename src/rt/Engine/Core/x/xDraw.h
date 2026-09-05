@@ -15,4 +15,6 @@ inline void xDrawSphere(const xSphere* sph, U32 flags) {}
 inline void xDrawSphere(const xVec3* center, F32 r, U32 flags) {}
 #endif
 
+S32 Im2DRenderQuadAlpha(F32 x1, F32 y1, F32 x2, F32 y2, F32 alpha, F32 z, F32, F32 uvOffset);
+
 #endif
