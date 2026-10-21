@@ -15,7 +15,7 @@ F32 xVec3Normalize(xVec3* o, const xVec3* v)
 
 void xVec3Copy(register xVec3* o, register const xVec3* v)
 {
-    register __vec2x32float__ vxy, vz;
+    register F32 vxy, vz;
     asm {
         psq_l vxy, 0(v), 0, 0
         psq_l vz, 8(v), 1, 0
