@@ -62,12 +62,12 @@ do {                                                                            
 
 #if DEBUG || RELEASE
 #define _xASSERTFAIL(line, cond, ...)                                                             \
-do {                                                                                              \
+{                                                                                                 \
     xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                     \
     xDebug_assert2(__VA_ARGS__);                                                                  \
     xDebugStackTrace();                                                                           \
     if (xDebugBoing()) iDebugBreak();                                                             \
-} while (0)
+}
 
 #define xASSERT(line, cond)                                                                       \
 do {                                                                                              \
