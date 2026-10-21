@@ -59,7 +59,8 @@ xJawSpeaker xJawData::Eval(F32 time, F32& jawValue)
         jawValue = 0.0f;
         return exJawSpeaker_Remy;
     }
-    else if (idx >= header.numSamples - 1)
+
+    if (idx >= header.numSamples - 1)
     {
         jawValue = 0.0f;
         return exJawSpeaker_Remy;
