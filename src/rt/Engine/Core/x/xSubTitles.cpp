@@ -91,18 +91,17 @@ bool xSubTitlesRender(U32 aid, F32 fTime)
         uSearchIndex = m_uLastTimeKey;
     }
 
-    while (uSearchIndex < m_pCurrentAsset->m_uAssetNumLines) {
+    for (; uSearchIndex < m_pCurrentAsset->m_uAssetNumLines; uSearchIndex++) {
         xASSERT(135, fTime < m_pCurrentAsset->m_paSubtitleLines[m_pCurrentAsset->m_uAssetNumLines-1].fStopTime);
 
         if (fTime >= m_pCurrentAsset->m_paSubtitleLines[uSearchIndex].fStartTime &&
             fTime < m_pCurrentAsset->m_paSubtitleLines[uSearchIndex].fStopTime) {
             m_uLastTimeKey = uSearchIndex;
-        } else if (fTime >= m_pCurrentAsset->m_paSubtitleLines[uSearchIndex].fStopTime &&
-                   fTime < m_pCurrentAsset->m_paSubtitleLines[uSearchIndex+1].fStartTime) {
+        }
+        else if (fTime >= m_pCurrentAsset->m_paSubtitleLines[uSearchIndex].fStopTime &&
+                 fTime < m_pCurrentAsset->m_paSubtitleLines[uSearchIndex+1].fStartTime) {
             return false;
         }
-
-        uSearchIndex++;
     }
 
     char* pszDisplay = (char*)(m_pCurrentAsset->m_paSubtitleLines + m_pCurrentAsset->m_uAssetNumLines);
