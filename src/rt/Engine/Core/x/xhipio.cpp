@@ -134,9 +134,7 @@ static S32 HIPLSetBypass(st_HIPLOADDATA* lddata, S32 enable, S32 use_async)
     if (enable && lddata->bypass) {
         xWARN("HIP Bypass Enable - already enabled!\n");
         return 0;
-    }
-    
-    if (!enable && !lddata->bypass) {
+    } else if (!enable && !lddata->bypass) {
         xWARN("HIP Bypass Disable - already disabled!\n");
         return 0;
     }
