@@ -11,13 +11,16 @@ zParEmitter* zParEmitterFind(U32 asset_id)
     }
 
     S32 total;
+    (void)total;
+    (void)total;
     zParEmitter* pe;
     S32 i = s->baseCount[eBaseTypeParticleEmitter];
-    
-    for (pe = (zParEmitter*)s->baseList[eBaseTypeParticleEmitter]; i > 0; pe++, i--) {
+    pe = (zParEmitter*)s->baseList[eBaseTypeParticleEmitter];
+    for (; i > 0; i--) {
         if (pe->tasset->id == asset_id) {
             return pe;
         }
+        pe++;
     }
 
     return NULL;
