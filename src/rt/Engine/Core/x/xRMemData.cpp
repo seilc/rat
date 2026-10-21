@@ -18,19 +18,14 @@ void* RyzMemData::operator new(size_t amt, S32 who, U32 memtag, RyzMemGrow* grow
 
     xVALIDATE(87, who);
 
-    if (!who) {
-        who = 'RMEM';
-    }
+    if (!who) who = 'RMEM';
 
     xASSERTM(89, (amt>1), "%s", "Don't be shy");
 
     S32 dogrow = TRUE;
 
-    if (!growCtxt) {
-        dogrow = FALSE;
-    } else if (!growCtxt->IsEnabled()) {
-        dogrow = FALSE;
-    }
+    if (!growCtxt) dogrow = FALSE;
+    else if (!growCtxt->IsEnabled()) dogrow = FALSE;
 
     if (dogrow) {
         xASSERTM(99, growCtxt->ptr, "%s", "Missing base address");
