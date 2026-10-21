@@ -8,11 +8,10 @@ void xVolume::Init(xVolumeAsset* asset)
 
     this->asset = asset;
 
-    if (this->linkCount) {
+    if (this->linkCount)
         this->link = (xLinkAsset*)((U8*)this->asset + sizeof(xVolumeAsset));
-    } else {
+    else
         this->link = NULL;
-    }
 }
 
 void xVolume::Reset()
