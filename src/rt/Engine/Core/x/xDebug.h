@@ -29,30 +29,19 @@ enum en_VERBOSE_MSGLEVEL
 #endif
 
 #if DEBUG
-#define _xVALIDATEFAIL(line, msg)                                                                 \
+#define _xVALIDATE(line, cond, msg)                                                               \
 do {                                                                                              \
     static S32 been_here;                                                                         \
-    if (!been_here) {                                                                             \
+    if (!(cond) && !been_here) {                                                                  \
         DBprintf(DBML_VALID, "%s(%d) : (" msg ") in '%s'\n", __FILE__, line, __FUNCTION__);       \
         xDebugValidateFailed();                                                                   \
         been_here = TRUE;                                                                         \
     }                                                                                             \
 } while (0)
 
-#define xVALIDATE(line, cond)                                                                     \
-do {                                                                                              \
-    if (!(cond)) {                                                                                \
-        _xVALIDATEFAIL(line, #cond);                                                              \
-    }                                                                                             \
-} while (0)
-
-#define xVALIDATEM(line, cond, msg)                                                               \
-do {                                                                                              \
-    if (!(cond)) {                                                                                \
-        _xVALIDATEFAIL(line, msg);                                                                \
-    }                                                                                             \
-} while (0)
-
+#define _xVALIDATEFAIL(line, msg) _xVALIDATE(line, 0, msg)
+#define xVALIDATE(line, cond) _xVALIDATE(line, cond, #cond)
+#define xVALIDATEM(line, cond, msg) _xVALIDATE(line, cond, msg)
 #define xVALIDATEFAIL(line) _xVALIDATEFAIL(line, "*always*")
 #else
 #define xVALIDATE(line, cond)
