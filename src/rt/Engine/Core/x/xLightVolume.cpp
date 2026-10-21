@@ -31,10 +31,9 @@ void xLightVolume::reset_all()
     activity_type* act = activities;
     activity_type* end_act = act + activities_used;
 
-    while (act != end_act) {
+    for (; act != end_act; act++) {
         xASSERT(56, act->owner != 0);
         act->owner->activity = 0;
-        act++;
     }
 
     activities_used = 0;
@@ -53,9 +52,8 @@ bool xLightVolume::activate()
     activity_type* act = activities;
     activity_type* end_act = act + activities_used;
 
-    while (act != end_act) {
+    for (; act != end_act; act++) {
         xASSERT(80, (act->owner != this) && "Added light volume more than once.");
-        act++;
     }
 #endif
 
