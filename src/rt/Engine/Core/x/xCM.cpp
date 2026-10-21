@@ -385,15 +385,14 @@ static U32 xCMrender(F32 time, xCreditsData* data)
                 xASSERT(1125, cp->fout.end - cp->fout.start > EPSILON);
 
                 F32 x0, x1, y0, y1, ca;
-                if (a < cp->fin.start || a > cp->fout.end) {
+                if (a < cp->fin.start || a > cp->fout.end)
                     ca = 0.0f;
-                } else if (a >= cp->fin.start && a <= cp->fin.end) {
+                else if (a >= cp->fin.start && a <= cp->fin.end)
                     ca = (a - cp->fin.start) / (cp->fin.end - cp->fin.start);
-                } else if (a >= cp->fout.start && a <= cp->fout.end) {
+                else if (a >= cp->fout.start && a <= cp->fout.end)
                     ca = (cp->fout.end - a) / (cp->fout.end - cp->fout.start);
-                } else {
+                else
                     ca = 1.0f;
-                }
 
                 switch (preset->align) {
                 case CM_ALIGN_TEXTURE: {
@@ -601,11 +600,10 @@ void xCMupdate(F32 dt)
 
     xASSERT(1360, port >= 0 && port < k_XPAD_MAX);
 
-    if (mPad[port].analog1.y < 0) {
+    if (mPad[port].analog1.y < 0)
         scale *= (mPad[port].analog1.y + 128) / 128.0f;
-    } else {
+    else
         scale *= 2.0f * mPad[port].analog1.y / 128.0f + 1.0f;
-    }
 
     credits_time += dt * scale;
     
@@ -647,15 +645,14 @@ void xCMstop()
         return;
     }
 
-    credits_data = NULL;
     credits_time = 10000.0f;
+    credits_data = NULL;
 
     if (credits_parentID) {
-        if (globals.sceneCur->sceneID == 'MNUS') {
+        if (globals.sceneCur->sceneID == 'MNUS')
             zEntEvent(credits_parentID, eEventCreditsEndedBackToMainMenu);
-        } else if (!zGameIsPaused()) {
+        else if (!zGameIsPaused())
             zEntEvent(credits_parentID, eEventCreditsEnded);
-        }
     }
 }
 
