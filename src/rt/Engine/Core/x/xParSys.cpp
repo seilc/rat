@@ -395,7 +395,8 @@ void xParSysUpdate(xBase* to, xScene*, F32 dt)
 
     xASSERT(593, s);
 
-    for (xParGroup* g = s->group; g != NULL; g = g->m_next) {
+    xParGroup* g = s->group;
+    while (g != NULL) {
         if (g->m_active) {
             if (parent) {
                 xParGroupUpdateR(parent, g, dt);
@@ -410,6 +411,8 @@ void xParSysUpdate(xBase* to, xScene*, F32 dt)
         if (g->m_num_of_particles > 0 && s->tasset->renderFunc == eParSysRenderFuncSprite) {
             par_sprite_update(*s, *g);
         }
+
+        g = g->m_next;
     }
 }
 
