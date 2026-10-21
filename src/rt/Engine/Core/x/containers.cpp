@@ -7,8 +7,7 @@ void pool_list_base::push_front()
     node_base* n = alloc();
     n->next = head.next;
     n->prev = &head;
-    n->next->prev = n;
-    n->prev->next = n;
+    n->next->prev = n; n->prev->next = n;
     _size++;
 }
 
@@ -19,8 +18,7 @@ void pool_list_base::push_back()
     node_base* n = alloc();
     n->prev = tail.prev;
     n->next = &tail;
-    n->next->prev = n;
-    n->prev->next = n;
+    n->next->prev = n; n->prev->next = n;
     _size++;
 }
 
@@ -56,27 +54,23 @@ void pool_list_base::reset(S32 node_size)
 
     U8* mem = (U8*)buffer;
     U8* end_mem = mem + (_max_size-1) * node_size;
-    while (mem != end_mem) {
+    for (; mem != end_mem; mem += node_size)
         ((node_base*)mem)->next = (node_base*)(mem + node_size);
-        mem += node_size;
-    }
     ((node_base*)mem)->next = 0;
 }
 
 pool_list_base::node_base* pool_list_base::insert(node_base* it)
 {
     node_base* alive = head.next;
-    while (alive) {
+    for (; alive; alive = alive->next) {
         if (it == alive) break;
-        alive = alive->next;
     }
     xASSERT(77, alive != 0);
 
     node_base* n = alloc();
     n->next = it;
     n->prev = it->prev;
-    n->next->prev = n;
-    n->prev->next = n;
+    n->next->prev = n; n->prev->next = n;
 
     _size++;
 
@@ -87,9 +81,8 @@ pool_list_base::node_base* pool_list_base::erase(node_base* it)
 {
 #if DEBUG || RELEASE
     node_base* alive = head.next;
-    while (alive != &tail) {
+    for (; alive != &tail; alive = alive->next) {
         if (it == alive) break;
-        alive = alive->next;
     }
     xASSERT(96, alive != &tail);
 
@@ -97,8 +90,7 @@ pool_list_base::node_base* pool_list_base::erase(node_base* it)
     xASSERT(99, _size > 0);
 #endif
 
-    node_base* next = it->next;
-    node_base* prev = it->prev;
+    node_base* next = it->next, *prev = it->prev;
 
     next->prev = prev;
     prev->next = next;
