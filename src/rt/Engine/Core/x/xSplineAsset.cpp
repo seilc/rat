@@ -59,11 +59,12 @@ S32 xNurbs::find_span(F32 u) const
 DECOMP_FORCEFLOAT(0.5f)
 #endif
 
+static const S32 MAX_DEGREE = 4;
+
 void xNurbs::find_basis_functions(F32 u, S32 i, F32* N) const
 {
     N[0] = 1.0f;
 
-    const S32 MAX_DEGREE = 4;
     xASSERT(91, degree <= MAX_DEGREE);
 
     F32 left[5];
@@ -85,7 +86,6 @@ void xNurbs::find_derivative_basis_functions(F32 u, S32 i, S32 order, F32 ders[5
 {
     // My brain hurts.
 
-    const S32 MAX_DEGREE = 4;
     xASSERT(119, degree <= MAX_DEGREE);
 
     F32 ndu[5][5];
