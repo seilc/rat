@@ -100,8 +100,7 @@ void xSkyDome_Render()
             xEnt* ent = sSkyList[i].ent;
             ent->model->Flags &= (U16)~0x1;
 
-            if (!ent->model) continue;
-            if (!xEntIsVisible(ent)) continue;
+            if (!ent->model || !xEntIsVisible(ent)) continue;
 
             RwV3d oldpos;
             oldpos = ent->model->Mat->pos;
@@ -130,7 +129,8 @@ void xSkyDome_Render()
                     if (useZBuf) {
                         zRenderState(eRenderStateSkyDome3D);
                     }
-                } else if (i == 1 && !sSkyList[i].zReadWrite) {
+                }
+                else if (i == 1 && !sSkyList[i].zReadWrite) {
                     zRenderState(eRenderStateSkyDomeFlat);
                 }
 
