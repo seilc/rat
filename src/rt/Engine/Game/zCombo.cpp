@@ -9,9 +9,11 @@ static bool sComboIsPaused = false;
 
 void zCombo_Add(F32 points, zComboType type)
 {
-    // Fakematch?
     S32 rewardLevel;
-    rewardLevel = rewardLevel;
+    (void)rewardLevel;
+    (void)rewardLevel;
+    (void)points;
+    (void)type;
 }
 
 DECOMP_FORCEACTIVE(
