@@ -71,20 +71,15 @@ void xIMRender(xIMLockContext& context, const xMat4x3* mat, U32 flags)
 
     RwIm3DVertex* vert = vert_buffer;
     RwIm3DVertex* end_vert = vert + verts_size;
-    while (vert != end_vert) {
+    for (; vert != end_vert; color++, pos++, uv++, vert++) {
         RwIm3DVertexSetPos(vert, pos->x, pos->y, pos->z);
         RwIm3DVertexSetUV(vert, uv->x, uv->y);
         if (flags & 0x10) {
             RwIm3DVertexSetRGBA(vert, color->r, color->g, color->b, color->a);
         }
-        color++;
-        pos++;
-        uv++;
-        vert++;
     }
-    
-    RwMatrix* m = (RwMatrix*)mat;
-    RwIm3DTransform(vert_buffer, verts_size, m, flags);
+
+    RwIm3DTransform(vert_buffer, verts_size, (RwMatrix*)mat, flags);
     RwIm3DRenderPrimitive((RwPrimitiveType)context.format);
     RwIm3DEnd();
 
