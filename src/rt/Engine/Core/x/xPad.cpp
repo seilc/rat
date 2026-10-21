@@ -87,7 +87,8 @@ S32 xPadUpdate(S32 idx, F32 time_passed)
 
     if (zScene_ScreenAdjustMode()) {
         xPadAnalogIsDigital(idx, 0);
-    } else if (zMenuRunning() || zGameIsPaused() || globals.mgManager->IsMiniGamePaused()) {
+    }
+    else if (zMenuRunning() || zGameIsPaused() || globals.mgManager->IsMiniGamePaused()) {
         xPadAnalogIsDigital(idx, 1);
     } else {
         xPadAnalogIsDigital(idx, 0);
@@ -101,34 +102,36 @@ S32 xPadUpdate(S32 idx, F32 time_passed)
         return 1;
     }
 
-    if ((p->flags & 0x10) && (p->flags & 0x1)) {
-        U32 fake_dpad = 0;
-        if (p->analog1.x >= 50) {
-            fake_dpad |= 0x20;
-        } else if (p->analog1.x <= -50) {
-            fake_dpad |= 0x80;
-        }
-        if (p->analog1.y >= 50) {
-            fake_dpad |= 0x40;
-        } else if (p->analog1.y <= -50) {
-            fake_dpad |= 0x10;
-        }
-        if (fake_dpad == 0) {
-            p->al2d_timer = 0.0f;
-        } else {
-            p->al2d_timer -= time_passed;
-            if (p->al2d_timer <= 0.0f) {
-                new_on |= fake_dpad;
-                p->al2d_timer = 0.35f;
+    if (p->flags & 0x10) {
+        if (p->flags & 0x1) {
+            U32 fake_dpad = 0;
+            if (p->analog1.x >= 50) {
+                fake_dpad |= 0x20;
+            }
+            else if (p->analog1.x <= -50) {
+                fake_dpad |= 0x80;
+            }
+            if (p->analog1.y >= 50) {
+                fake_dpad |= 0x40;
+            }
+            else if (p->analog1.y <= -50) {
+                fake_dpad |= 0x10;
+            }
+            if (fake_dpad == 0) {
+                p->al2d_timer = 0.0f;
+            } else {
+                p->al2d_timer -= time_passed;
+                if (p->al2d_timer <= 0.0f) {
+                    new_on |= fake_dpad;
+                    p->al2d_timer = 0.35f;
+                }
             }
         }
     }
 
 #if DEBUG || RELEASE
     static S32 submap = 0;
-    if (submap) {
-        SubMapAll((S32*)&new_on, p);
-    }
+    if (submap) SubMapAll((S32*)&new_on, p);
 #endif
 
     p->pressed = new_on & ~p->on;
@@ -157,12 +160,14 @@ S32 xPadUpdate(S32 idx, F32 time_passed)
                 p->d_timer = 0.35f;
                 if (p->on & 0x10) {
                     p->pressed |= 0x10;
-                } else if (p->on & 0x40) {
+                }
+                else if (p->on & 0x40) {
                     p->pressed |= 0x40;
                 }
                 if (p->on & 0x80) {
                     p->pressed |= 0x80;
-                } else if (p->on & 0x20) {
+                }
+                else if (p->on & 0x20) {
                     p->pressed |= 0x20;
                 }
             }
