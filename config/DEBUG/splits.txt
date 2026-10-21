@@ -7200,9 +7200,6 @@ PowerPC_EABI_Support/Runtime/Src/global_destructor_chain.c:
 	.dtors      start:0x80472968 end:0x8047296C
 	.sbss       start:0x80D6BC88 end:0x80D6BC90
 
-PowerPC_EABI_Support/Runtime/Src/__mem.c:
-	.init       start:0x80003100 end:0x80003238
-
 PowerPC_EABI_Support/Runtime/Src/NewMore.cp:
 	.sbss       start:0x80D6BC90 end:0x80D6BC98
 
@@ -7557,6 +7554,9 @@ PowerPC_EABI_Support/MetroTRK/debugger/embedded/MetroTRK/Portable/notify.c:
 
 PowerPC_EABI_Support/MetroTRK/debugger/embedded/MetroTRK/Processor/ppc/Generic/flush_cache.c:
 	.text       start:0x80390AF4 end:0x80390B2C
+
+PowerPC_EABI_Support/Runtime/Src/__mem.c:
+	.init       start:0x80003100 end:0x80003238
 
 PowerPC_EABI_Support/MetroTRK/debugger/embedded/MetroTRK/Portable/mem_TRK.c:
 	.init       start:0x80003238 end:0x8000328C

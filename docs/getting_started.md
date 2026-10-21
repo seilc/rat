@@ -6,7 +6,11 @@ See [Dependencies](dependencies.md) first.
 
 2. Rename `orig/GAMEID` to the game's ID. (For example, `GLZE01` for _The Legend of Zelda: The Wind Waker_.)
 
-3. Extract your game to `orig/[GAMEID]`. In Dolphin, use "Extract Entire Disc" for GameCube games, or use "Data Partition" -> "Extract Entire Partition" for Wii games.
+3. Place your game files in `orig/[GAMEID]`. There are two options:
+
+   - **Disc image (recommended):** Place the disc image (ISO, GCM, RVZ, WBFS, CISO, GCZ, NFS, TGC, or WAD) directly in `orig/[GAMEID]`. When `object_base` is set in `config.yml`, decomp-toolkit will automatically read files from the disc image. Objects will be extracted to the filesystem on first build, so the disc image can be deleted afterward to save space.
+
+   - **Extracted files:** In Dolphin, use "Extract Entire Disc" for GameCube games, or use "Data Partition" -> "Extract Entire Partition" for Wii games.
 
 4. Rename `config/GAMEID` to the game's ID and modify `config/[GAMEID]/config.yml` appropriately, using [`config.example.yml`](/config/GAMEID/config.example.yml) as a reference. If the game doesn't use RELs, the `modules` list in `config.yml` can be removed.
 
@@ -35,6 +39,18 @@ Add the `map` key to `config.yml`, pointing to the `.map` file from the game dis
 If the game uses [common BSS](common_bss.md), be sure to set `common_start` as well. (See [`config.example.yml`](/config/GAMEID/config.example.yml).) Otherwise, the final link order may fail to be determined.
 
 Once the initial analysis is completed, `symbols.txt` and `splits.txt` will be generated from the map information. **Remove** the `map` fields from `config.yml` to avoid conflicts.
+
+## Using an `.elf`
+
+If the game has an `.elf` file (matching the DOL after running `dtk elf2dol` on it) then you can run the following to generate a config:
+
+```sh
+dtk elf config game.elf config/GAMEID
+```
+
+However, the splits _will_ be wrong, so the recommended move is to use the `symbols.txt` file that was generated, and copy the generated splits to a blank `splits.txt` as needed.
+
+If the game has an `.elf` file that _doesn't_ match the DOL, the info will still be useful, but you'll have to manually map the symbols over to your game version. Alternatively, you could base the project on the DOL created from that `.elf` instead.
 
 ## Post-analysis
 

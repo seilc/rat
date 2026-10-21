@@ -6001,9 +6001,6 @@ PowerPC_EABI_Support/Runtime/Src/global_destructor_chain.c:
 	.dtors      start:0x802A2068 end:0x802A206C
 	.sbss       start:0x803C3F00 end:0x803C3F08
 
-PowerPC_EABI_Support/Runtime/Src/__mem.c:
-	.init       start:0x80003100 end:0x80003238
-
 PowerPC_EABI_Support/Runtime/Src/CPlusLibPPC.cp:
 	.text       start:0x801FCB5C end:0x801FCB8C
 
@@ -6338,6 +6335,9 @@ PowerPC_EABI_Support/MetroTRK/debugger/embedded/MetroTRK/Portable/notify.c:
 
 PowerPC_EABI_Support/MetroTRK/debugger/embedded/MetroTRK/Processor/ppc/Generic/flush_cache.c:
 	.text       start:0x80211B20 end:0x80211B58
+
+PowerPC_EABI_Support/Runtime/Src/__mem.c:
+	.init       start:0x80003100 end:0x80003238
 
 PowerPC_EABI_Support/MetroTRK/debugger/embedded/MetroTRK/Portable/mem_TRK.c:
 	.init       start:0x80003238 end:0x8000328C
@@ -6823,13 +6823,13 @@ dolphin/os/src/OSThread.c:
 	.sdata      start:0x803C0A90 end:0x803C0A98
 	.sbss       start:0x803C4378 end:0x803C4388
 
-dolphin/os/src/init/__start.c:
-	.init       start:0x800051EC end:0x800054EC
-	.sbss       start:0x803C4388 end:0x803C4390
-
 dolphin/os/src/OSTime.c:
 	.text       start:0x8023F75C end:0x8023FBD8
 	.data       start:0x802F32E0 end:0x802F3340
+
+dolphin/os/src/init/__start.c:
+	.init       start:0x800051EC end:0x800054EC
+	.sbss       start:0x803C4388 end:0x803C4390
 
 dolphin/os/src/init/__ppc_eabi_init.cpp:
 	.init       start:0x800054EC end:0x80005544
