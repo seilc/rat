@@ -30,11 +30,8 @@ void XOrdInit(st_XORDEREDARRAY* array, S32 size, U32 memtag, S32 tempAlloc)
 void XOrdDone(st_XORDEREDARRAY* array, S32 wasTempAlloc)
 {
     if (array->max) {
-        if (wasTempAlloc) {
-            xMEMPOPTEMP(array->list);
-        } else {
-            xVERBOSE("XOrdDone - (Game) Skipping de-allocation of array\n");
-        }
+        if (wasTempAlloc) xMEMPOPTEMP(array->list);
+        else xVERBOSE("XOrdDone - (Game) Skipping de-allocation of array\n");
     }
 
     array->list = NULL;
@@ -49,12 +46,14 @@ void XOrdAppend(st_XORDEREDARRAY* array, void* elt)
 
     if (array->cnt >= array->max) {
         xWARN("XOrdArray: Max size exceeded! (max:%d)\n", array->max);
-    } else {
-        if (array->cnt >= array->warnlvl) {
-            xVERBOSE("XOrdArray: Nearly Full! (%d/%d)\n", array->cnt, array->max);
-        }
-        array->list[array->cnt++] = elt;
+        return;
     }
+
+    if (array->cnt >= array->warnlvl) {
+        xVERBOSE("XOrdArray: Nearly Full! (%d/%d)\n", array->cnt, array->max);
+    }
+
+    array->list[array->cnt++] = elt;
 }
 
 void XOrdInsert(st_XORDEREDARRAY* array, void* elt, XOrdCompareCallback compare)
