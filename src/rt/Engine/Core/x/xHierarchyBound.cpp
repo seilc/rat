@@ -129,7 +129,8 @@ namespace {
 S32 xHierarchyBoundSetup(xHierarchyBound* bound, const xHierarchyBoundInitData* init, U32 extraBounds)
 {
     U32 nodesSize = 0;
-    while (init[nodesSize].bone >= -1) nodesSize++;
+    for (; init[nodesSize].bone >= -1; nodesSize++) {
+    }
     nodesSize += extraBounds;
     xASSERT(202, nodesSize <= 255);
 
