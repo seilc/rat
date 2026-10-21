@@ -23,8 +23,10 @@ U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
         return TRUE;
     }
 
-    if ((r->flags & XRAY3_USE_MAX) && c > (2.0f * s->r + r->max_t) * r->max_t) {
-        return FALSE;
+    if (r->flags & XRAY3_USE_MAX) {
+        if (c > (2.0f * s->r + r->max_t) * r->max_t) {
+            return FALSE;
+        }
     }
 
     F32 b = xVec3Dot(&diff, &r->dir);
