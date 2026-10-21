@@ -61,9 +61,11 @@ do {                                                                            
 #endif
 
 #if DEBUG || RELEASE
-#define _xASSERTFAIL(line, cond, ...)                                                             \
+#define _xSTR(x) #x
+
+#define _xASSERTFAIL(line, condstr, ...)                                                          \
 {                                                                                                 \
-    xDebug_assert2_info(__FUNCTION__, __FILE__, line, #cond);                                     \
+    xDebug_assert2_info(__FUNCTION__, __FILE__, line, condstr);                                   \
     xDebug_assert2(__VA_ARGS__);                                                                  \
     xDebugStackTrace();                                                                           \
     if (xDebugBoing()) iDebugBreak();                                                             \
@@ -72,26 +74,33 @@ do {                                                                            
 #define xASSERT(line, cond)                                                                       \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        _xASSERTFAIL(line, cond, "%s", #cond);                                                    \
+        _xASSERTFAIL(line, _xSTR(cond), "%s", #cond);                                             \
+    }                                                                                             \
+} while (0)
+
+#define xASSERTMSG(line, cond, msg)                                                               \
+do {                                                                                              \
+    if (!(cond)) {                                                                                \
+        _xASSERTFAIL(line, _xSTR(cond), "%s", msg);                                               \
     }                                                                                             \
 } while (0)
 
 #define xASSERTM(line, cond, ...)                                                                 \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        _xASSERTFAIL(line, ##cond, __VA_ARGS__);                                                  \
+        _xASSERTFAIL(line, #cond, __VA_ARGS__);                                                   \
     }                                                                                             \
 } while (0)
 
-#define xFAIL(line) _xASSERTFAIL(line, *always*, "%s", "*always*")
-#define xFAILM(line, ...) _xASSERTFAIL(line, *always*, __VA_ARGS__)
+#define xFAIL(line) _xASSERTFAIL(line, "*always*", "%s", "*always*")
+#define xFAILM(line, ...) _xASSERTFAIL(line, "*always*", __VA_ARGS__)
 
 #define xFAIL_ONCE_M(line, ...)                                                                   \
 do {                                                                                              \
     static bool done = false;                                                                     \
     if (!done) {                                                                                  \
         done = true;                                                                              \
-        _xASSERTFAIL(line, *once only*, __VA_ARGS__);                                             \
+        _xASSERTFAIL(line, "*once only*", __VA_ARGS__);                                           \
     }                                                                                             \
 } while (0)
 
@@ -109,11 +118,12 @@ do {                                                                            
     static bool already_asserted = false;                                                         \
     if (!already_asserted && !(cond)) {                                                           \
         already_asserted = true;                                                                  \
-        _xASSERTFAIL(line, cond, msg);                                                            \
+        _xASSERTFAIL(line, _xSTR(cond), msg);                                                     \
     }                                                                                             \
 } while (0)
 #else
 #define xASSERT(line, cond)
+#define xASSERTMSG(line, cond, msg)
 #define xASSERTM(line, cond, ...)
 #define xFAIL(line)
 #define xFAILM(line, ...)

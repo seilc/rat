@@ -20,7 +20,7 @@ void* RyzMemData::operator new(size_t amt, S32 who, U32 memtag, RyzMemGrow* grow
 
     if (!who) who = 'RMEM';
 
-    xASSERTM(89, (amt>1), "%s", "Don't be shy");
+    xASSERTMSG(89, (amt>1), "Don't be shy");
 
     S32 dogrow = TRUE;
 
@@ -28,7 +28,7 @@ void* RyzMemData::operator new(size_t amt, S32 who, U32 memtag, RyzMemGrow* grow
     else if (!growCtxt->IsEnabled()) dogrow = FALSE;
 
     if (dogrow) {
-        xASSERTM(99, growCtxt->ptr, "%s", "Missing base address");
+        xASSERTMSG(99, growCtxt->ptr, "Missing base address");
 
         xOutInfo("RyzMemData",
                  "RMemGrow (0x%08X [0x%08X]) base 0x%08x add (0x%08X) %d\n",

@@ -276,7 +276,7 @@ void xShadowSimple_Init()
         sShadRaster = NULL;
     }
 
-    xASSERTM(376, sShadRaster != 0L, "%s", "who deleted the default shadow texture 'shadow_round' from boot.hip?!?");
+    xASSERTMSG(376, sShadRaster != NULL, "who deleted the default shadow texture 'shadow_round' from boot.hip?!?");
 
     memset(sShadVert, 0, sizeof(sShadVert));
     for (U32 i = 0; i < MAX_SHAD_QUADS; i++) {
