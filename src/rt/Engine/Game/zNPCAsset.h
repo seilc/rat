@@ -14,4 +14,6 @@ struct zNPCAssetRATS : xDynAsset
     U32 flags;
 };
 
+bool zNPCAsset_IsNPC(const xDynAsset& asset);
+
 #endif

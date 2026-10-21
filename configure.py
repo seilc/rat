@@ -803,7 +803,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zFXScreenDecal.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomMissionSelect.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iDebugLink.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xDebugLink.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xDebugLink.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNavigationMesh.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemPop.cpp"),
             Object(Matching, "rt/Engine/Core/x/xOneLiner.cpp", extra_cflags=['-sym on']),
