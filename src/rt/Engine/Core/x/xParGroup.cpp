@@ -234,8 +234,8 @@ void xParGroupAddParP(xParGroup* ps, xPar* p)
                 ps->m_root = p;
             }
 
-            sSortDistance = 0.0f;
             sSortID = 0;
+            sSortDistance = 0.0f;
         } else {
             p->m_next = ps->m_root;
             ps->m_root->m_prev = p;
