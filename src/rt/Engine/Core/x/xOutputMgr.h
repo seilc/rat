@@ -56,7 +56,7 @@ void xOutBabble(char* name, const char* fmt, ...);
 #define xOutCrit(name, ...)
 #define xOutErr(name, ...)
 #define xOutWarn(name, ...)
-#define xOutInfo(name, ...)
+#define xOutInfo
 #define xOutBabble(name, ...)
 #endif
 
