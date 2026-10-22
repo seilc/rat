@@ -48,7 +48,7 @@ def main():
         row += f"{cur.get('complete_units', 0):>5}/{cur.get('total_units', 0)}"
         rows.append(row)
     note = "" if prev_dir else "\n(no previous report to compare with)"
-    print(json.dumps({"content": f"**{title}**\n```\n" + "\n".join(rows) + "\n```" + note}))
+    print(json.dumps({"username": "Remy", "content": f"**{title}**\n```\n" + "\n".join(rows) + "\n```" + note}))
 
 
 if __name__ == "__main__":
