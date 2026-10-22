@@ -50,12 +50,16 @@ jobs:
 
       - name: Post progress to Discord
         env:
-          HOOK1: ${{ secrets.DISCORD_PROGRESS_WEBHOOK_1 }}
-          HOOK2: ${{ secrets.DISCORD_PROGRESS_WEBHOOK_2 }}
+          RAT: ${{ secrets.DISCORD_PROGRESS_WEBHOOK }}
+          PROTO: ${{ secrets.DISCORD_PROGRESS_WEBHOOK_PROTO }}
           SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           python3 .github/progress.py cur $PREV --title "Progress after ${SHA:0:7}" > payload.json
-          for hook in "$HOOK1" "$HOOK2"; do
-            [ -n "$hook" ] || continue
+          for name in RAT PROTO; do
+            hook=${!name}
+            if [ -z "$hook" ]; then
+              echo "::warning::No webhook secret for $name, skipped"
+              continue
+            fi
             curl -fsS -H "Content-Type: application/json" --data-binary @payload.json "$hook"
           done
