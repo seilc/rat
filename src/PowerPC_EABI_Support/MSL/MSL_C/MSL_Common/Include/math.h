@@ -13,6 +13,7 @@ extern double pow(double, double);
 extern double cos(double);
 extern double sin(double);
 extern double sqrt(double);
+extern double ceil(double);
 
 extern float cosf(float);
 extern float sinf(float);
