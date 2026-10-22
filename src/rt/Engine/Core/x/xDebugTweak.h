@@ -115,9 +115,7 @@ void xDebugRemoveTweak(const char* name);
 
 template <class T, class T2>
 inline void _t_auto_tweak(const char* prefix, const char* name, T* v, T2 vmin, T2 vmax, const tweak_callback* cb, void* context, U32 flags, bool process)
-{
-    _auto_tweak(prefix, name, v, vmin, vmax, cb, context, flags, process);
-}
+{ _auto_tweak(prefix, name, v, vmin, vmax, cb, context, flags, process); }
 
 template <>
 inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process)
