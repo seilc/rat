@@ -22,6 +22,12 @@ public:
 
     meter_widget(const meter_asset& a);
 
+    // RECONSTRUCTED (deadstripped): __dt__Q24xhud12meter_widgetFv, MAP UNUSED in xHudFontMeter.o, see
+    // ~widget. Verified: sizes 0x60/0x60/0x54/0x54 match the MAP in all four builds. Unverified: the empty
+    // body, its position in the class.
+    ~meter_widget() {}
+    // END RECONSTRUCTED
+
     void destruct();
     
     virtual U32 type() const;

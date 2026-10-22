@@ -59,6 +59,24 @@ struct font_meter_asset : meter_asset
     static const char* type_name() { return "hud:meter:font"; }
 };
 
+struct model_info
+{
+    U32 id;
+    xVec3 loc;
+    xVec3 size;
+};
+
+struct unit_meter_asset : meter_asset
+{
+    static const U16 VERSION = 3;
+
+    model_info model[2];
+    xVec3 offset;
+    U32 fill_forward;
+
+    static const char* type_name() { return "hud:meter:unit"; }
+};
+
 }
 
 #endif

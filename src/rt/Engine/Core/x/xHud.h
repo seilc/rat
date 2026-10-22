@@ -8,6 +8,8 @@
 
 #include <stddef.h>
 
+struct tweak_info;
+
 namespace xhud {
 
 struct render_context;
@@ -123,13 +125,21 @@ public:
 
     widget(const asset& a);
 
+    // RECONSTRUCTED (deadstripped): __dt__Q24xhud6widgetFv, MAP UNUSED in xHudFontMeter.o. A derived
+    // constructor registers it as a cleanup action, which makes IRO treat `this` as address-taken
+    // (xHudUnitMeter ctor loop in R/MD/M). Verified: sizes 0x54/0x48/0x44/0x44 match the MAP in all four
+    // builds. Unverified: the empty body, its position in the class.
+    ~widget() {}
+    // END RECONSTRUCTED
+
     static void init_base(xBase& data, const xBaseAsset& asset, size_t chunk_size);
 
     void destruct();
     void presetup();
     void updater(F32 dt);
     void clear_motives();
-    bool visible() const;
+    bool enabled() const { return flag.enabled; }
+    bool visible() const { return flag.visible && enabled(); }
 
     virtual void destroy();
     virtual U32 type() const;
@@ -153,6 +163,13 @@ private:
 
 xModelInstance* load_model(U32 id);
 void render_model(xModelInstance& m, const render_context& rc);
+
+#if DEBUG || RELEASE
+void screenToNormalizedX(const tweak_info&, void* value);
+void screenToNormalizedY(const tweak_info&, void* value);
+void normalizedToScreenX(const tweak_info&, void* value);
+void normalizedToScreenY(const tweak_info&, void* value);
+#endif
 
 }
 
