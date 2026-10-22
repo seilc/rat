@@ -122,7 +122,7 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
             if (toEvent != idx->srcEvent) continue;
             if (idx->chkAssetID && (!from || idx->chkAssetID != from->id)) continue;
 
-            if (idx->dstAssetID == 0x6F7EC01E) { // TODO: Find out what asset this is
+            if (idx->dstAssetID == 0x6F7EC01E) { // xStrHash("THIS_PLYR")
                 sendTo = zSceneFindObject(gThisPlayer);
             } else {
                 sendTo = zSceneFindObject(idx->dstAssetID);
@@ -131,7 +131,7 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
 
             xBase* b = NULL;
             if (idx->paramWidgetAssetID) {
-                if (idx->paramWidgetAssetID == 0xB3BB6012) { // TODO: Find out what asset this is
+                if (idx->paramWidgetAssetID == 0xB3BB6012) { // xStrHash("THIS_CAM_TARGET")
                     b = zSceneFindObject(gThisCameraTarget);
                 } else {
                     b = zSceneFindObject(idx->paramWidgetAssetID);
