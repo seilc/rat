@@ -81,8 +81,8 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
-#define xFAIL(line) _xASSERTFAIL(line, "*always*", "%s", "*always*")
-#define xFAILM(line, ...) _xASSERTFAIL(line, "*always*", __VA_ARGS__)
+#define xFAIL(line) do { _xASSERTFAIL(line, "*always*", "%s", "*always*") } while (0)
+#define xFAILM(line, ...) do { _xASSERTFAIL(line, "*always*", __VA_ARGS__) } while (0)
 
 #define xFAIL_ONCE_M(line, ...)                                                                   \
 do {                                                                                              \
@@ -111,6 +111,7 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 #else
+#define _xASSERTFAIL(line, condstr, ...)
 #define xASSERT(line, cond)
 #define xASSERTMSG(line, cond, msg)
 #define xASSERTM(line, cond, ...)
@@ -124,7 +125,7 @@ do {                                                                            
 #define xFAIL_AND_RETURN_IF(line, cond)                                                                     \
 do {                                                                                              \
     if ((cond)) {                                                                                 \
-        xFAILM(line, "%s", #cond);                                                                \
+        _xASSERTFAIL(line, "*always*", "%s", #cond)                                               \
         return;                                                                                   \
     }                                                                                             \
 } while (0)
@@ -132,7 +133,7 @@ do {                                                                            
 #define xFAIL_AND_RETURN_VALUE_IF(line, cond, retval)                                                            \
 do {                                                                                              \
     if ((cond)) {                                                                                 \
-        xFAILM(line, "%s", #cond);                                                                \
+        _xASSERTFAIL(line, "*always*", "%s", #cond)                                               \
         return (retval);                                                                          \
     }                                                                                             \
 } while (0)
