@@ -65,7 +65,9 @@ void xMemoryManager::Free(void* pointer)
     callsToFree++;
 #endif
 
-    if (!pointer || pointer == &zeroMemoryAddress) return;
+    if (!pointer || pointer == &zeroMemoryAddress) {
+        return;
+    }
 
     xASSERT(81, Owns(pointer));
 
@@ -127,6 +129,24 @@ U32 xMemoryManager::GetBlockSize(void* pointer) const
     return DoGetBlockSize(pointer) - debugDataSize;
 }
 
+// RECONSTRUCTED (deadstripped): MAP UNUSED in all four builds; it must exist because it instantiates
+// xMEMADVANCE<DebugAllocationHeader> before IsValidPointer's xMEMADVANCE<const void>, which fixes the weak
+// template order in the D/R link. Verified: D/R DOL match, R size (0x6C), D DWARF locals (list).
+// Unverified: the body (D is 0x7C here vs 0x78 in the MAP; MD/M not emitted, MAP 0x64), the comparison,
+// what the unnamed U32 parameter was for.
+bool xMemoryManager::InActiveList(const void* pointer, U32) const
+{
+    DebugAllocationHeader* list = activeList;
+    while (list) {
+        if (pointer >= list + 1 && pointer < xMEMADVANCE(list + 1, list->size)) {
+            return true;
+        }
+        list = list->next;
+    }
+    return false;
+}
+// END RECONSTRUCTED
+
 bool xMemoryManager::IsValidPointer(const void* pointer) const
 {
     DebugAllocationHeader* list = activeList;
@@ -151,8 +171,7 @@ void xMemoryManager::DumpActiveList() const
                list->file,
                list->line,
                list->function);
-        list = list->next;
-        count++;
+        list = list->next; count++;
     }
     printf("total: %d\n", count);
 }
@@ -186,7 +205,9 @@ void xMemoryManager::HandleOutOfMemory(U32 size, U32 options, const char* file, 
 void* xMemoryManager::DoReallocate(void* pointer, U32 size, U32 options, const char* file, const char* function, S32 line)
 {
     U32 copySize = DoGetBlockSize(pointer);
-    if (copySize > size) copySize = size;
+    if (copySize > size) {
+        copySize = size;
+    }
 
     void* newBlock = DoAllocate(size, options, file, function, line);
     if (!newBlock) {
@@ -220,13 +241,11 @@ void* xMemoryManager::SetupDebugBlock(void* memory, U32 size, const char* file, 
 
     activeList = header;
 
-    for (S32 i = 0; i < header->NUM_MAGIC; i++) {
+    for (S32 i = 0; i < header->NUM_MAGIC; i++)
         header->magic[i] = header->MAGIC;
-    }
-    
-    for (S32 i = 0; i < trailer->NUM_MAGIC; i++) {
+
+    for (S32 i = 0; i < trailer->NUM_MAGIC; i++)
         trailer->magic[i] = trailer->MAGIC;
-    }
 
 #if DEBUG || RELEASE
     debugOverhead += debugDataSize;
@@ -237,8 +256,6 @@ void* xMemoryManager::SetupDebugBlock(void* memory, U32 size, const char* file, 
 
 void* xMemoryManager::RemoveDebugBlock(void* memory, U32* size)
 {
-    // Equivalent (regalloc)
-
     xASSERT(292, IsValidPointer( memory ));
 
     DebugAllocationHeader* header = (DebugAllocationHeader*)((U32)memory - sizeof(DebugAllocationHeader));
@@ -246,23 +263,21 @@ void* xMemoryManager::RemoveDebugBlock(void* memory, U32* size)
 
     xASSERT(299, header->manager == this);
 
-    for (S32 i = 0; i < header->NUM_MAGIC; i++) {
+    for (S32 i = 0; i < header->NUM_MAGIC; i++)
         xASSERT(303, header->magic[i] == header->MAGIC);
-    }
-    
-    for (S32 i = 0; i < trailer->NUM_MAGIC; i++) {
+
+    for (S32 i = 0; i < trailer->NUM_MAGIC; i++)
         xASSERT(305, trailer->magic[i] == trailer->MAGIC);
-    }
 
-    if (header->prev) {
+    if (header->prev)
         header->prev->next = header->next;
-    } else {
+    else
         activeList = header->next;
-    }
 
-    if (header->next) {
+    if (header->next)
         header->next->prev = header->prev;
-    }
+
+    (void)memory;
 
 #if DEBUG || RELEASE
     debugOverhead -= debugDataSize;
