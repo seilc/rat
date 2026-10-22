@@ -9,7 +9,7 @@ namespace xRumble {
 
 struct effectAsset : xDynAsset
 {
-    static const U16 VERSION = 3;
+    enum { VERSION = 3 };
 
     F32 time;
     F32 intensity;
@@ -61,7 +61,7 @@ struct effect : emitterBase
 
 struct boxEmitterAsset : xDynAsset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
 
     U32 effectID;
     xVec3 minCorner;
@@ -82,7 +82,7 @@ struct boxEmitter : emitterBase
 
 struct sphericalEmitterAsset : xDynAsset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
 
     U32 effectID;
     F32 radius;

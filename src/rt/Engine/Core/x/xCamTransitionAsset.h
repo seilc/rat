@@ -7,7 +7,7 @@ struct xLinkAsset;
 
 struct xCamTransitionAsset : xDynAsset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
     
     U32 mVersion;
     S32 mType;

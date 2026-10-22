@@ -21,7 +21,7 @@ public:
 
 struct xLightEffectFlickerAsset : xDynAsset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
 
     xFColor maxColorVariation;
     F32 flickerRate;
@@ -53,7 +53,7 @@ private:
 
 struct xLightEffectStrobeAsset : xDynAsset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
 
     xFColor minColor;
     F32 fadeUpTime;

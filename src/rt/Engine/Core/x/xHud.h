@@ -17,7 +17,7 @@ struct font_context;
 struct motive;
 struct motive_node;
 struct asset;
-struct widget;
+class widget;
 
 struct render_context
 {

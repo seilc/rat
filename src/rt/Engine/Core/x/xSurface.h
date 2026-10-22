@@ -25,7 +25,7 @@ void xSurfaceInit(U16 num_surfs);
 void xSurfaceExit();
 void xSurfaceSave(xSurface* ent, xSerial* s);
 void xSurfaceLoad(xSurface* ent, xSerial* s);
-void xSurfaceReset();
+void xSurfaceReset(xSurface*);
 U16 xSurfaceGetNumSurfaces();
 xSurface* xSurfaceGetByIdx(U16 n);
 

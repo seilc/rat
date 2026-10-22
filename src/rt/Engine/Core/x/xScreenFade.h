@@ -18,7 +18,7 @@ struct xScreenFade : xBase
 {
     struct asset_type : xDynAsset
     {
-        static const U16 VERSION = 1;
+        enum { VERSION = 1 };
         
         xColor dest;
         F32 fadeDownTime;

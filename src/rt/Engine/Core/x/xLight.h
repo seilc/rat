@@ -6,7 +6,7 @@
 #include "iLight.h"
 
 struct xModelInstance;
-struct xLightEffectBase;
+class xLightEffectBase;
 
 struct xLightEffectFlickerData
 {

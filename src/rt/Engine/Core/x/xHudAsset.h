@@ -15,7 +15,7 @@ struct asset : xDynAsset
 
 struct model_asset : asset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
 
     U32 model;
 
@@ -24,7 +24,7 @@ struct model_asset : asset
 
 struct text_asset : asset
 {
-    static const U16 VERSION = 1;
+    enum { VERSION = 1 };
     
     U32 text_box;
     U32 text;
@@ -52,7 +52,7 @@ struct meter_asset : asset
 
 struct font_meter_asset : meter_asset
 {
-    static const U16 VERSION = 2;
+    enum { VERSION = 2 };
 
     font_context font;
 
@@ -68,7 +68,7 @@ struct model_info
 
 struct unit_meter_asset : meter_asset
 {
-    static const U16 VERSION = 3;
+    enum { VERSION = 3 };
 
     model_info model[2];
     xVec3 offset;
