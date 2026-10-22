@@ -297,7 +297,55 @@ bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, 
     return false;
 }
 
-DECOMP_FORCEACTIVE(xMath2NearestPointOnLine)
+// RECONSTRUCTED (deadstripped): MAP UNUSED in all four builds; replaces the
+// DECOMP_FORCEACTIVE(xMath2NearestPointOnLine) stand-in. Body from RotU GC, where it is linked and matches.
+// Verified in Rat: sizes (D 0x1F8, R/MD/M 0x1AC), D DWARF locals and params (names, order, registers, slots).
+// Unverified: the instruction bytes, the .line layout (one-line `if (b == end)`), $N (D/R 3 short after
+// the 1e38f literal, MD/M 8 long before it).
+void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh)
+{
+    F32 smallest_distance2 = 1e38f;
+
+    for (S32 m = 0; m < numSubMeshes; m++) {
+        xNavigationMeshAssetSubMesh* sub_mesh = &subMeshes[m];
+
+        for (S32 i = 0; i < sub_mesh->numTriangles; i++) {
+            const U8* portal = &sub_mesh->portal[i * 3];
+            const U8* a = &sub_mesh->triangles[i].a;
+            const U8* b = a + 1;
+            const U8* end = a + 3;
+
+            for (; a != end; b++, a++, portal++) {
+                if (b == end) b = &sub_mesh->triangles[i].a;
+
+                S32 triangle_index = *portal;
+                if (triangle_index == NO_TRIANGLE) {
+                    const xVec3& vertex_a = sub_mesh->vertices[*a];
+                    const xVec3& vertex_b = sub_mesh->vertices[*b];
+                    F32 portal_point_x, portal_point_y;
+
+                    F32 line_t = xMath2NearestPointOnLine(portal_point_x, portal_point_y, anyPosition.x, anyPosition.z, vertex_a.x, vertex_a.z, vertex_b.x, vertex_b.z);
+
+                    F32 CPx = portal_point_x - anyPosition.x;
+                    F32 CPy = portal_point_y - anyPosition.z;
+                    F32 line_dist2 = CPx * CPx + CPy * CPy;
+                    F32 y_diff = anyPosition.y - sub_mesh->getHeight(i, portal_point_x, portal_point_y);
+                    F32 portal_distance2 = y_diff * y_diff + line_dist2;
+
+                    if (smallest_distance2 > portal_distance2) {
+                        smallest_distance2 = line_dist2;
+                        pointOnMesh.x = portal_point_x;
+                        pointOnMesh.z = portal_point_y;
+                        triangleIndex = i;
+                        subMeshIndex = m;
+                        pointOnMesh.y = sub_mesh->getHeight(triangleIndex, pointOnMesh.x, pointOnMesh.z);
+                    }
+                }
+            }
+        }
+    }
+}
+// END RECONSTRUCTED
 
 void xNavigationMeshAsset::CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex)
 {
