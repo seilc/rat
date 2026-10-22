@@ -1,0 +1,21 @@
+name: Discord
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Forward push event to Discord
+        env:
+          HOOK1: ${{ secrets.DISCORD_WEBHOOK_1 }}
+          HOOK2: ${{ secrets.DISCORD_WEBHOOK_2 }}
+        run: |
+          for hook in "$HOOK1" "$HOOK2"; do
+            curl -fsS -H "Content-Type: application/json" -H "X-GitHub-Event: push" \
+              --data-binary @"$GITHUB_EVENT_PATH" "$hook"
+          done
