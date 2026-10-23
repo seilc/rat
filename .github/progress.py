@@ -42,7 +42,7 @@ def main():
             if prev:
                 delta = pct(cur, key, total) - pct(prev, key, total)
                 changed |= round(delta, 2) != 0
-                part += f" ({delta:+.2f})"
+                part += f" ({delta:+.2f}%)"
             parts.append(part)
         units = cur.get("complete_units", 0)
         part = f"Files **{units}/{cur.get('total_units', 0)}**"
