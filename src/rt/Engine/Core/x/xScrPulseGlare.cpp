@@ -2,8 +2,7 @@
 
 #include "xRand.h"
 #include "xIM.h"
-
-#include "decomp.h"
+#include "xstransvc.h"
 
 #include <cmath>
 
@@ -51,6 +50,8 @@ struct xPulseGlareMgr
 {
 public:
     void init();
+    S32 get_next_idx();
+    xPulseGlare& get(U32 i);
     void update(F32 dt);
     void render(const xMat4x3& mat);
 
@@ -117,6 +118,18 @@ namespace {
         g.angle += 0.2f;
         g.angle = (F32)((S32)g.angle % 360);
     }
+
+    // RECONSTRUCTED (deadstripped): from Incredibles GC
+    RwRaster* raster_pulse_glare(U32 id)
+    {
+        RwTexture* texture = NULL;
+        texture = (RwTexture*)xSTFindAsset(id, NULL);
+        if (texture) {
+            return texture->raster;
+        }
+        return NULL;
+    }
+    // END RECONSTRUCTED
 
     // Equivalent: scheduling
     void render_pulse_glare(const xMat4x3& mat, xPulseGlare* g)
@@ -244,6 +257,26 @@ void xPulseGlareMgr::init()
     }
 }
 
+// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+S32 xPulseGlareMgr::get_next_idx()
+{
+    for (S32 i = 0; i < zMAX_PULSE_GLARES; i++) {
+        if (!(glares[i].flags & 0x1) && !(glares[i].flags & 0x100)) {
+            glares[i].flags |= 0xE9;
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+xPulseGlare& xPulseGlareMgr::get(U32 i)
+{
+    xASSERT(__LINE__, !(i < 0 || i >= zMAX_PULSE_GLARES ));
+    return glares[i];
+}
+// END RECONSTRUCTED
+
 void xPulseGlareMgr::update(F32 dt)
 {
     for (S32 i = 0; i < zMAX_PULSE_GLARES; i++) {
@@ -262,6 +295,34 @@ void xPulseGlareMgr::render(const xMat4x3& mat)
     }
 }
 
+// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+S32 xScrFX_PulseGlaresAdd(RwRaster* raster)
+{
+    S32 idx = -1;
+    idx = glare_mgr.get_next_idx();
+    if (idx > -1) {
+        xPulseGlare& g = glare_mgr.get(idx);
+        g.raster = raster;
+    } else {
+        xASSERTM(__LINE__, 0, " GLARE Manager run out of available slots !");
+    }
+    return idx;
+}
+
+S32 xScrFX_PulseGlaresAdd(U32 glareID)
+{
+    S32 idx = -1;
+    idx = glare_mgr.get_next_idx();
+    if (idx > -1) {
+        xPulseGlare& g = glare_mgr.get(idx);
+        g.raster = raster_pulse_glare(glareID);
+    } else {
+        xASSERTM(__LINE__, 0, " GLARE Manager run out of available slots !");
+    }
+    return idx;
+}
+// END RECONSTRUCTED
+
 void xScrFX_PulseGlaresRender(const xMat4x3& mat)
 {
     glare_mgr.render(mat);
@@ -277,17 +338,64 @@ void xScrFX_PulseGlaresReset()
     glare_mgr.init();
 }
 
-DECOMP_FORCEACTIVE(
-    "!(i < 0 || i >= 128 )",
-    "%s",
-    "!(i < 0 || i >= zMAX_PULSE_GLARES )",
-    "0",
-    " GLARE Manager run out of available slots !",
-    "idx > -1",
-    "pos",
-    "dir",
-    "size > 0.0f",
-    "scale > 0.0f",
-    "lifetime > 0.0f",
-    "flag > 0"
-)
+// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+void xScrFX_PulseGlaresUpdatePos(S32 idx, xVec3* pos)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, pos);
+    xPulseGlare& g = glare_mgr.get(idx);
+    g.pos = *pos;
+}
+
+void xScrFX_PulseGlaresUpdateDir(S32 idx, xVec3* dir)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, dir);
+    xPulseGlare& g = glare_mgr.get(idx);
+    g.dir = *dir;
+}
+
+void xScrFX_PulseGlaresUpdateSize(S32 idx, F32 size)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, size > 0.0f);
+    xPulseGlare& g = glare_mgr.get(idx);
+    g.size = size;
+}
+
+void xScrFX_PulseGlaresSetScale(S32 idx, F32 scale)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, scale > 0.0f);
+    xPulseGlare& g = glare_mgr.get(idx);
+    g.scale_dir = scale;
+}
+
+void xScrFX_PulseGlaresSetLifetime(S32 idx, F32 lifetime)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, lifetime > 0.0f);
+    xPulseGlare& g = glare_mgr.get(idx);
+    g.lifetime = lifetime;
+}
+
+void xScrFX_PulseGlaresSetFlag(S32 idx, S32 flag, bool reverse)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, flag > 0);
+    xPulseGlare& g = glare_mgr.get(idx);
+    if (!reverse) {
+        g.flags |= flag;
+    } else {
+        g.flags &= ~flag;
+    }
+}
+
+bool xScrFX_PulseGlaresCheckFlag(S32 idx, S32 flag)
+{
+    xASSERT(__LINE__, idx > -1);
+    xASSERT(__LINE__, flag > 0);
+    xPulseGlare& g = glare_mgr.get(idx);
+    return g.flags & flag ? true : false;
+}
+// END RECONSTRUCTED
