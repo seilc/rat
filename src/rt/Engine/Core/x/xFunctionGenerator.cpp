@@ -1,7 +1,7 @@
 #include "xFunctionGenerator.h"
 
 #include "xDebugTweak.h"
-#include "zScene.h"
+#include "xScene.h"
 #include "xGlobals.h"
 #include "zEvent.h"
 #include "xDebugGraph.h"
@@ -19,7 +19,7 @@ void FunctionGeneratorExpandTweaks(const tweak_info& info)
     xFunctionGenerator* fg = (xFunctionGenerator*)info.context;
 
     char name[128];
-    sprintf(name, "Widgets|Function Generator|%s", xSceneID2Name(xglobals->sceneCur, fg->GetAsset()->id));
+    sprintf(name, "Widgets|Function Generator|%s", xSceneID2Name((xScene*)xglobals->sceneCur, fg->GetAsset()->id));
 
     fg->AddTweaks(name);
 }
@@ -57,10 +57,10 @@ xFunctionGenerator::xFunctionGenerator(const xFunctionGeneratorAsset* asset)
     currentState = false;
 
 #if DEBUG || RELEASE
-    graphName = xSceneID2Name(xglobals->sceneCur, asset->id);
+    graphName = xSceneID2Name((xScene*)xglobals->sceneCur, asset->id);
 
     char name[128];
-    sprintf(name, "Widgets|Function Generator|%s", xSceneID2Name(xglobals->sceneCur, asset->id));
+    sprintf(name, "Widgets|Function Generator|%s", xSceneID2Name((xScene*)xglobals->sceneCur, asset->id));
 
     static tweak_callback cb = tweak_callback::create_expand(FunctionGeneratorExpandTweaks, NULL);
     xTWEAKBRANCH(name, &cb, this, 0x2);
