@@ -199,7 +199,7 @@ sphericalEmitter::sphericalEmitter(sphericalEmitterAsset* pAsset)
     U32 size;
     pEffectAsset = (effectAsset*)xSTFindAsset(pAsset->effectID, &size);
 
-    radiusSqrd = pAsset->radius * pAsset->radius;
+    radiusSqrd = xsqr(pAsset->radius);
     xASSERTM(248, pAsset->radius, "The radius cannot be 0");
 
     if (linkCount) {
@@ -281,7 +281,7 @@ void FreezableObjectEffect::Init(U32 sphereEmitterID)
     xBaseInit(this, mDefaultSphericalEmitterAsset);
     eventFunc = emitter_EventCB;
     mModifiableAsset = *mDefaultSphericalEmitterAsset;
-    mRadiusSqrd = mModifiableAsset.radius * mModifiableAsset.radius;
+    mRadiusSqrd = xsqr(mModifiableAsset.radius);
 }
 
 bool FreezableObjectEffect::GetIntensity(const xVec3& position, F32& intensity) const
