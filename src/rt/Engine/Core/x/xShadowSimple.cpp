@@ -7,8 +7,9 @@
 #include "xIM.h"
 #include "xJSP.h"
 #include "xRenderState.h"
+#include "xScene.h"
+#include "xstransvc.h"
 #include "zGrid.h"
-#include "zScene.h"
 
 #include <string.h>
 
@@ -138,7 +139,7 @@ static void xShadowSimple_SceneCollide(xShadowSimpleCache* cache, const xVec3* p
     cache->castOnEnt = NULL;
     cache->collPriority = 0;
 
-    xEnv* env = xglobals->sceneCur->env;
+    xEnv* env = ((xScene*)xglobals->sceneCur)->env;
 
     RpIntersection isx;
     isx.type = rpINTERSECTLINE;
