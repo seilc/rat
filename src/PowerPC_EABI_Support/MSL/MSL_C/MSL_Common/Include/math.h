@@ -9,6 +9,14 @@ int __float_nan[];
 
 #define NAN       (*(float*)      __float_nan)
 
+int __fpclassifyf(float);
+int __fpclassifyd(double);
+
+#define FP_INFINITE 2
+
+#define fpclassify(x) ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float)(x)) : __fpclassifyd((double)(x)))
+#define isinf(x) ((fpclassify(x) == FP_INFINITE))
+
 extern double pow(double, double);
 extern double cos(double);
 extern double sin(double);
