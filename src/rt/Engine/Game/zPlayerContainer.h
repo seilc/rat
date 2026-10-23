@@ -2,9 +2,9 @@
 #define ZPLAYERCONTAINER_H
 
 #include "xDebug.h"
+#include "xEnt.h"
 
 struct zPlayer;
-struct xEnt;
 
 class zPlayerContainer
 {
