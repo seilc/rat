@@ -8,8 +8,8 @@
 #include "xGridBound.h"
 #include "xBound.h"
 #include "xShadowSimple.h"
+#include "xScene.h"
 
-struct xScene;
 struct xFFX;
 
 struct xEnt;
