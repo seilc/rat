@@ -1,5 +1,5 @@
 #include "types.h"
-#include "../../../../rwsdk/include/gcn/rwcore.h"
+#include "../rwsdk/include/rwcore.h"
 
 RwCamera* RwCameraCreateWrapper();
 #define RwCameraCreate RwCameraCreateWrapper
