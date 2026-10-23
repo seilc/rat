@@ -80,32 +80,7 @@ public:
 
 private:
 #if DEBUG || RELEASE
-    struct debug_info
-    {
-        char tweak_prefix[128];
-        char name[32];
-        curve_node curve[32];
-        U32 texture;
-        S32 active_joints;
-        config_type cfg;
-        void(*tweaked)(xFXRibbon&, void*);
-        void* context;
-        struct
-        {
-            bool active;
-            bool repeat;
-            bool bind_to_player;
-            F32 time;
-            xVec3 center;
-            xVec3 offset;
-            F32 radius_inner;
-            F32 radius_outer;
-            F32 freq;
-            F32 duration;
-            F32 orient;
-            F32 random_orient_increase;
-        } spiral;
-    };
+    struct debug_info;
 #endif
 
     activity_data* act;

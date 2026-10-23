@@ -39,11 +39,7 @@ public:
 
 private:
 #if DEBUG || RELEASE
-    struct debug_context
-    {
-        char weight_text[256];
-        S32 max_nodes_used;
-    };
+    struct debug_context;
 
     debug_context* debug;
 #endif
