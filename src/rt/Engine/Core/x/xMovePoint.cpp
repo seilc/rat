@@ -181,3 +181,23 @@ xVec3* xMovePointGetPos(const xMovePoint* m)
     xASSERT(275, m);
     return m->pos;
 }
+
+// RESTORED: from Incredibles GC
+S32 xMovePointGetAllLinked(xMovePoint** mps, S32 mps_max, xMovePoint* mp, S32 mps_used)
+{
+    if (mps_used >= mps_max) return mps_used;
+
+    for (S32 i = 0; i < mps_used; i++) {
+        if (mp == mps[i]) return mps_used;
+    }
+
+    mps[mps_used++] = mp;
+
+    S32 size = mp->asset->numPoints;
+    for (S32 i = 0; i < size; i++) {
+        mps_used = xMovePointGetAllLinked(mps, mps_max, mp->nodes[i], mps_used);
+    }
+
+    return mps_used;
+}
+// END RESTORED
