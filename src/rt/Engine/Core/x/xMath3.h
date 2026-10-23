@@ -118,9 +118,11 @@ extern xVec3 g_Y3;
 extern xMat4x3 g_I3;
 
 void xBoxInitBoundOBB(xBox* o, const xBox* b, const xMat4x3* m);
+void xMat3x3Normalize(xMat3x3* o, const xMat3x3* m);
 void xMat3x3GetEuler(const xMat3x3* m, xVec3* a);
 void xMat3x3RotY(xMat3x3* m, F32 t);
 void xMat3x3Mul(xMat3x3* o, const xMat3x3* a, const xMat3x3* b);
+void xMat3x3Tolocal(xVec3* o, const xMat3x3* m, const xVec3* v);
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
 {

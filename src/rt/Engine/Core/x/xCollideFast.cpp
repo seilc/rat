@@ -3,8 +3,6 @@
 #include "xDebug.h"
 #include "xBound.h"
 
-#include "decomp.h"
-
 U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
 {
     xASSERT(26, r);
@@ -48,9 +46,51 @@ U32 xRayHitsBoxFast(const xRay3* r, const xBox* b)
     return (isx.penned <= 0.0f || isx.contained <= 0.0f);
 }
 
-DECOMP_FORCEACTIVE(
-    "c",
-    DEBUG ? "%s(%d) : (xeq(ms*ms,xVec3Length2(&b->mat->up),1e-3f)) in '%s'\n" : 0,
-    DEBUG ? "%s(%d) : (xeq(ms*ms,xVec3Length2(&b->mat->at),1e-3f)) in '%s'\n" : 0,
-    "xRayHitsBoundFast: unsupported bound type %d\n"
-)
+// RECONSTRUCTED (deadstripped): both functions are MAP UNUSED in all four builds. Bodies from RotU GC,
+// where they are linked and match.
+// Verified in Rat: sizes (Cylinder D 0x13C, R 0x108, MD/M 0x60; Bound D 0x2C0, R 0x1C0, MD/M 0x100),
+// D DWARF params and locals (names, order, registers, slots) and References order.
+// Unverified: the instruction bytes, the .line layout, the assert lines (__LINE__).
+U32 xRayHitsCylinderFast(const xRay3* r, const xCylinder* c)
+{
+    xASSERT(__LINE__, r);
+    xASSERT(__LINE__, c);
+
+    xIsect isx;
+    iCylinderIsectRay(c, r, &isx);
+
+    return (isx.penned <= 0.0f || isx.contained <= 0.0f);
+}
+
+U32 xRayHitsBoundFast(const xRay3* r, const xBound* b)
+{
+    xASSERT(__LINE__, r);
+    xASSERT(__LINE__, b);
+
+    if (b->type == k_XBOUNDTYPE_SPHERE) {
+        return xRayHitsSphereFast(r, &b->sph);
+    } else if (b->type == k_XBOUNDTYPE_OBB) {
+        xRay3 lr;
+        xMat3x3 mn;
+        F32 ms = xVec3Length(&b->mat->right);
+        xVALIDATE(__LINE__, xeq(ms*ms,xVec3Length2(&b->mat->up),1e-3f));
+        xVALIDATE(__LINE__, xeq(ms*ms,xVec3Length2(&b->mat->at),1e-3f));
+
+        xMat3x3Normalize(&mn, b->mat);
+        xMat4x3ToLocal(&lr.origin, b->mat, &r->origin);
+        xMat3x3Tolocal(&lr.dir, &mn, &r->dir);
+        lr.max_t = r->max_t / ms;
+        lr.min_t = r->min_t / ms;
+        lr.flags = r->flags;
+
+        return xRayHitsBoxFast(&lr, &b->box.box);
+    } else if (b->type == k_XBOUNDTYPE_BOX) {
+        return xRayHitsBoxFast(r, &b->box.box);
+    } else if (b->type == k_XBOUNDTYPE_CYLINDER) {
+        return xRayHitsCylinderFast(r, &b->cyl);
+    }
+
+    xWARN("xRayHitsBoundFast: unsupported bound type %d\n", b->type);
+    return FALSE;
+}
+// END RECONSTRUCTED
