@@ -8,8 +8,6 @@
 #include "zScene.h"
 #include "zPlayer.h"
 
-#include "decomp.h"
-
 namespace {
 
 void emitter_EventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*, U32)
@@ -247,13 +245,80 @@ void sphericalEmitter::UpdatePosition(const xVec3& playerPos) const
     pAsset->position = playerPos;
 }
 
-DECOMP_FORCEACTIVE(
-    "*always*",
-    "Unable to find FREEZABLE_OBJECT_RUMBLE_EMIT. Please repack BOOT.SDF",
-    "Unable to find FREEZABLE_OBJECT_RUMBLE. Please repack BOOT.SDF",
-    "*once only*",
-    "OnlyOnFloor is ignored by the FreezableObject Rumble Effect.",
-    &xDynAsset::operator=
-)
+// RESTORED: from RotU GC
+F32 sphericalEmitter::GetTimeLeft()
+{
+    F32 timeLeft = 0.0f;
+    S32 startidx = 0;
+    while (xTRCPadFindFirst(startidx, TRC_PadActive)) {
+        S32 padPort = xTRCPadGetPadPort(startidx);
+        xASSERT(__LINE__, padPort >= 0 && padPort < k_MAX_TRC_PADS);
+        timeLeft += Manager::Get().GetRumbleTimeLeft(&mPad[padPort], this);
+        startidx++;
+    }
+    return timeLeft;
+}
+
+FreezableObjectEffect::FreezableObjectEffect()
+    : emitterBase()
+{
+    mDefaultSphericalEmitterAsset = NULL;
+    pEffectAsset = NULL;
+}
+
+void FreezableObjectEffect::Init(U32 sphereEmitterID)
+{
+    mDefaultSphericalEmitterAsset = (sphericalEmitterAsset*)xSTFindAsset(sphereEmitterID, NULL);
+    if (!mDefaultSphericalEmitterAsset) {
+        xFAILM(__LINE__, "%s", "Unable to find FREEZABLE_OBJECT_RUMBLE_EMIT. Please repack BOOT.SDF");
+        return;
+    }
+    pEffectAsset = (effectAsset*)xSTFindAsset(mDefaultSphericalEmitterAsset->effectID, NULL);
+    if (!pEffectAsset) {
+        xFAILM(__LINE__, "%s", "Unable to find FREEZABLE_OBJECT_RUMBLE. Please repack BOOT.SDF");
+        return;
+    }
+    xBaseInit(this, mDefaultSphericalEmitterAsset);
+    eventFunc = emitter_EventCB;
+    mModifiableAsset = *mDefaultSphericalEmitterAsset;
+    mRadiusSqrd = mModifiableAsset.radius * mModifiableAsset.radius;
+}
+
+bool FreezableObjectEffect::GetIntensity(const xVec3& position, F32& intensity) const
+{
+    intensity = 0.0f;
+
+    if (!pEffectAsset) {
+        return false;
+    }
+
+    F32 distSqrd = xVec3Dist2(&position, &mModifiableAsset.position);
+
+    if (distSqrd > mRadiusSqrd) {
+        return false;
+    }
+
+    if (mModifiableAsset.onlyRumbleOnY && !xeq(mModifiableAsset.position.y / position.y, 1.0f, 0.1f)) {
+        return false;
+    }
+
+    if (mModifiableAsset.onlyOnFloor) {
+        xFAIL_ONCE_M(__LINE__, "%s", "OnlyOnFloor is ignored by the FreezableObject Rumble Effect.");
+    }
+
+    if (mModifiableAsset.fallOff) {
+        intensity = pEffectAsset->intensity * (1.0f - xsqrt(distSqrd) / mModifiableAsset.radius);
+    } else {
+        intensity = pEffectAsset->intensity;
+    }
+
+    return true;
+}
+
+void FreezableObjectEffect::UpdatePosition(xVec3& newPosition)
+{
+    mModifiableAsset.position = newPosition;
+}
+// END RESTORED
 
 }

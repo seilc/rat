@@ -103,7 +103,23 @@ struct sphericalEmitter : emitterBase
 
     virtual bool GetIntensity(const xVec3& playerPos, F32& intensity) const;
     virtual void UpdatePosition(const xVec3& playerPos) const;
+    F32 GetTimeLeft(); // RESTORED
 };
+
+// RESTORED
+struct FreezableObjectEffect : emitterBase
+{
+    sphericalEmitterAsset mModifiableAsset;
+    sphericalEmitterAsset* mDefaultSphericalEmitterAsset;
+    F32 mRadiusSqrd;
+
+    FreezableObjectEffect();
+    void Init(U32 sphereEmitterID);
+
+    virtual bool GetIntensity(const xVec3& position, F32& intensity) const;
+    virtual void UpdatePosition(xVec3& newPosition);
+};
+// END RESTORED
 
 }
 
