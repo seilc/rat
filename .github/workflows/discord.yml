@@ -54,6 +54,10 @@ jobs:
           PROTO: ${{ secrets.DISCORD_PROGRESS_WEBHOOK_PROTO }}
         run: |
           python3 .github/progress.py cur $PREV > payload.json
+          if [ ! -s payload.json ]; then
+            echo "No progress change, skipped"
+            exit 0
+          fi
           for name in RAT PROTO; do
             hook=${!name}
             if [ -z "$hook" ]; then
