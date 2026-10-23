@@ -2,12 +2,10 @@
 #define IENV_H
 
 #include "xMath3.h"
+#include "xJSP.h"
 
 #include <rwcore.h>
 #include <rpworld.h>
-
-struct xJSPHeader;
-struct xJSPNodeInfo;
 
 struct iEnvMatOrder
 {
