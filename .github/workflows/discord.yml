@@ -52,9 +52,8 @@ jobs:
         env:
           RAT: ${{ secrets.DISCORD_PROGRESS_WEBHOOK }}
           PROTO: ${{ secrets.DISCORD_PROGRESS_WEBHOOK_PROTO }}
-          SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
-          python3 .github/progress.py cur $PREV --title "Progress after ${SHA:0:7}" > payload.json
+          python3 .github/progress.py cur $PREV > payload.json
           for name in RAT PROTO; do
             hook=${!name}
             if [ -z "$hook" ]; then
