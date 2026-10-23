@@ -1,5 +1,6 @@
 #include "xRMemData.h"
 
+#include "xBase.h"
 #include "xMemMgr.h"
 #include "xDebug.h"
 #include "xOutputMgr.h"

@@ -1,13 +1,14 @@
 #ifndef XRMEMDATA_H
 #define XRMEMDATA_H
 
-#include "xBase.h"
+#include "types.h"
 
 #include <stddef.h>
 
 #define RMEM_GROWSTUB_SIZE 32
 #define RMEM_GROW_ENABLED (1<<0)
 
+struct xBase;
 struct RyzMemGrow;
 
 struct RyzMemData
