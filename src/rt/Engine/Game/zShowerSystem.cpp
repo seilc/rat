@@ -2,6 +2,7 @@
 
 #include "xCam.h"
 #include "xCollideSweptSphere.h"
+#include "xDebugTweak.h"
 #include "xFX.h"
 #include "xMath.h"
 #include "xModel.h"
@@ -25,15 +26,9 @@ const xFXRibbon::curve_node RIBBON_CURVE[] = {
 
 xFXRibbon::config_type RIBBON_CONFIG = { 0.15f, rwBLENDSRCALPHA, rwBLENDONE, 0.5f, 0, RIBBON_CURVE, 2, NULL };
 
-#if DEBUG || RELEASE
-F32 TIMEOUT = 5.0f;
-F32 Y_COLLISION_START = 7.0f;
-F32 Y_HEIGHT_SHIFT = 15.0f;
-#else
-const F32 TIMEOUT = 5.0f;
-const F32 Y_COLLISION_START = 7.0f;
-const F32 Y_HEIGHT_SHIFT = 15.0f;
-#endif
+xTWEAKABLE F32 TIMEOUT = 5.0f;
+xTWEAKABLE F32 Y_COLLISION_START = 7.0f;
+xTWEAKABLE F32 Y_HEIGHT_SHIFT = 15.0f;
 
 xLightKit* GetGlobalLightKit();
 }
