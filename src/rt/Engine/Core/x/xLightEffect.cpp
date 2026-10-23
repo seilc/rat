@@ -3,7 +3,7 @@
 #include "xLight.h"
 #include "zBase.h"
 #include "xGlobals.h"
-#include "zScene.h"
+#include "xScene.h"
 #include "xDebugTweak.h"
 #include "xRand.h"
 
@@ -44,7 +44,7 @@ void xLightEffectFlicker::InitDebugTweak()
     char name[128];
     char buffer[128];
 
-    strcpy(effectName, xSceneID2Name(xglobals->sceneCur, tasset->id));
+    strcpy(effectName, xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
 
     sprintf(name, "Widgets|Light Effects|%s", effectName);
     xTWEAKBRANCH(name, NULL, NULL, 0x2);
@@ -141,7 +141,7 @@ void xLightEffectStrobe::InitDebugTweak()
     char name[128];
     char buffer[128];
 
-    strcpy(effectName, xSceneID2Name(xglobals->sceneCur, tasset->id));
+    strcpy(effectName, xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
 
     sprintf(name, "Widgets|Light Effects|%s", effectName);
     xTWEAKBRANCH(name, NULL, NULL, 0x2);
