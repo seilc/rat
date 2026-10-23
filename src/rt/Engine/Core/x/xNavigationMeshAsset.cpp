@@ -297,11 +297,7 @@ bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, 
     return false;
 }
 
-// RECONSTRUCTED (deadstripped): MAP UNUSED in all four builds; replaces the
-// DECOMP_FORCEACTIVE(xMath2NearestPointOnLine) stand-in. Body from RotU GC, where it is linked and matches.
-// Verified in Rat: sizes (D 0x1F8, R/MD/M 0x1AC), D DWARF locals and params (names, order, registers, slots).
-// Unverified: the instruction bytes, the .line layout (one-line `if (b == end)`), $N (D/R 3 short after
-// the 1e38f literal, MD/M 8 long before it).
+// RECONSTRUCTED (deadstripped): from RotU GC
 void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh)
 {
     F32 smallest_distance2 = 1e38f;

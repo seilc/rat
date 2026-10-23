@@ -46,11 +46,7 @@ U32 xRayHitsBoxFast(const xRay3* r, const xBox* b)
     return (isx.penned <= 0.0f || isx.contained <= 0.0f);
 }
 
-// RECONSTRUCTED (deadstripped): both functions are MAP UNUSED in all four builds. Bodies from RotU GC,
-// where they are linked and match.
-// Verified in Rat: sizes (Cylinder D 0x13C, R 0x108, MD/M 0x60; Bound D 0x2C0, R 0x1C0, MD/M 0x100),
-// D DWARF params and locals (names, order, registers, slots) and References order.
-// Unverified: the instruction bytes, the .line layout, the assert lines (__LINE__).
+// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
 U32 xRayHitsCylinderFast(const xRay3* r, const xCylinder* c)
 {
     xASSERT(__LINE__, r);

@@ -129,11 +129,7 @@ U32 xMemoryManager::GetBlockSize(void* pointer) const
     return DoGetBlockSize(pointer) - debugDataSize;
 }
 
-// RECONSTRUCTED (deadstripped): MAP UNUSED in all four builds; it must exist because it instantiates
-// xMEMADVANCE<DebugAllocationHeader> before IsValidPointer's xMEMADVANCE<const void>, which fixes the weak
-// template order in the D/R link. Verified: D/R DOL match, R size (0x6C), D DWARF locals (list).
-// Unverified: the body (D is 0x7C here vs 0x78 in the MAP; MD/M not emitted, MAP 0x64), the comparison,
-// what the unnamed U32 parameter was for.
+// RECONSTRUCTED (deadstripped): speculative
 bool xMemoryManager::InActiveList(const void* pointer, U32) const
 {
     DebugAllocationHeader* list = activeList;
