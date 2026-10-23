@@ -152,7 +152,7 @@ void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* 
         if (t->count <= 0) {
             zEntEvent(t, t, eEventExpired);
         } else if (t->count > 0 && t->count <= 20) {
-            zEntEvent(t, t, t->count + (eEventCount1 - 1));
+            zEntEvent(t, t, eEventCount1 + (U32)(t->count - 1));
         }
         break;
     case eEventIncrement:
@@ -160,7 +160,7 @@ void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* 
         if (t->count <= 0) {
             zEntEvent(t, t, eEventExpired);
         } else if (t->count > 0 && t->count <= 20) {
-            zEntEvent(t, t, t->count + (eEventCount1 - 1));
+            zEntEvent(t, t, eEventCount1 + (U32)(t->count - 1));
         }
         break;
     case eEventReset:
