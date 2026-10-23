@@ -131,6 +131,7 @@ public:
 
     static void init_base(xBase& data, const xBaseAsset& asset, size_t chunk_size);
 
+    void disable();
     void destruct();
     void presetup();
     void updater(F32 dt);
@@ -167,6 +168,8 @@ void screenToNormalizedY(const tweak_info&, void* value);
 void normalizedToScreenX(const tweak_info&, void* value);
 void normalizedToScreenY(const tweak_info&, void* value);
 #endif
+
+inline void widget::disable() { flag.enabled = false; }
 
 }
 

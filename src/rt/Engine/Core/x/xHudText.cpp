@@ -29,10 +29,7 @@ text_widget::text_widget(const text_asset& a)
     text[0] = '\0';
 }
 
-void text_widget::destruct()
-{
-    widget::destruct();
-}
+void text_widget::destruct() { widget::destruct(); }
 
 void text_widget::setup()
 {
@@ -150,14 +147,124 @@ void text_widget::set_text(const char* intext)
 }
 
 #if DEBUG || RELEASE
-DECOMP_FORCEACTIVE(
-    "m.value != 0",
-    "textWid.tb.font.width",
-    "textWid.tb.font.height",
-    "m.orig_height",
-    "m.orig_width",
-    "m.current_scale != 0"
-)
+DECOMP_FORCEACTIVE("m.value != 0")
 #endif
+
+// RESTORED: from Incredibles GC
+bool scale_text_motive_reset(widget& w, motive& m)
+{
+    text_widget& textWid = (text_widget&)w;
+
+    if (m.orig_height != 0.0f) {
+        textWid.tb.font.height = m.orig_height;
+        textWid.tb.font.width = m.orig_width;
+    }
+
+    xASSERT(__LINE__, textWid.tb.font.width);
+    xASSERT(__LINE__, textWid.tb.font.height);
+
+    textWid.tb.font.color.a = 0xFF;
+    textWid.tb.font.shadowColor.a = 0xFF;
+    w.disable();
+    return false;
+}
+
+bool scale_text_motive_update(widget& w, motive& m, F32 dt)
+{
+    text_widget& textWid = (text_widget&)w;
+
+    if (m.orig_height == 0.0f) {
+        m.orig_height = textWid.tb.font.height;
+        m.orig_width = textWid.tb.font.width;
+        m.current_scale = m.begin_scale;
+        xASSERT(__LINE__, m.orig_height);
+        xASSERT(__LINE__, m.orig_width);
+    }
+
+    F32 diff = dt * (m.final_scale - m.begin_scale) / m.delta;
+    bool result;
+
+    xASSERT(__LINE__, m.current_scale != 0);
+
+    F32 remaining = m.final_scale - m.current_scale;
+
+    if ((diff >= 0.0f && diff >= remaining) || (diff < 0.0f && diff <= remaining)) {
+        m.current_scale = m.final_scale;
+        result = false;
+    } else {
+        m.current_scale += diff;
+        result = true;
+    }
+
+    textWid.tb.font.width = m.orig_width * m.current_scale;
+    textWid.tb.font.height = m.orig_height * m.current_scale;
+
+    xASSERT(__LINE__, textWid.tb.font.width);
+    xASSERT(__LINE__, textWid.tb.font.height);
+
+    F32 fPot = (m.current_scale - m.begin_scale) / (m.final_scale - m.begin_scale);
+    F32 fAlpha = fPot * m.end_alpha + (1.0f - fPot) * m.begin_alpha;
+    textWid.tb.font.color.a = (U8)(0.5f + fAlpha);
+    textWid.tb.font.shadowColor.a = textWid.tb.font.color.a;
+
+    if (!result) {
+        scale_text_motive_reset(w, m);
+        return false;
+    }
+
+    return true;
+}
+
+bool blink_text_motive_reset(widget& w, motive& m)
+{
+    text_widget& textWid = (text_widget&)w;
+
+    textWid.tb.font.color = m.off_blink_color;
+    textWid.tb.font.shadowColor.a = textWid.tb.font.color.a;
+    return false;
+}
+
+bool blink_text_motive_update(widget& w, motive& m, F32 dt)
+{
+    xColor curr_color;
+
+    if (m.current_blink_time > m.time_to_blink && !m.hold) {
+        if (m.fp_finish) {
+            m.fp_finish(w, m);
+        }
+        return false;
+    }
+
+    F32 percent_done = m.current_blink_time / m.time_to_blink;
+    percent_done = xclamp(percent_done, 0.0f, 1.0f);
+    F32 curr_blink_period = percent_done * m.end_blink_period + (1.0f - percent_done) * m.start_blink_period;
+    F32 on_time = 0.5f * curr_blink_period;
+
+    if (m.period_blink_time > on_time + m.fade_blink_time) {
+        curr_color = m.off_blink_color;
+    } else if (m.period_blink_time > on_time) {
+        F32 fade_time = m.fade_blink_time;
+        F32 fade_percent = (m.period_blink_time - on_time) / fade_time;
+        curr_color.a = (U8)(0.5f + (fade_percent * m.off_blink_color.a + (1.0f - fade_percent) * m.on_blink_color.a));
+        curr_color.r = (U8)(0.5f + (fade_percent * m.off_blink_color.r + (1.0f - fade_percent) * m.on_blink_color.r));
+        curr_color.g = (U8)(0.5f + (fade_percent * m.off_blink_color.g + (1.0f - fade_percent) * m.on_blink_color.g));
+        curr_color.b = (U8)(0.5f + (fade_percent * m.off_blink_color.b + (1.0f - fade_percent) * m.on_blink_color.b));
+    } else {
+        curr_color = m.on_blink_color;
+    }
+
+    m.current_blink_time += dt;
+    m.period_blink_time += dt;
+
+    if (m.period_blink_time >= curr_blink_period) {
+        m.period_blink_time = 0.0f;
+    }
+
+    text_widget& textWid = (text_widget&)w;
+    textWid.tb.font.color = curr_color;
+    textWid.tb.font.shadowColor.a = curr_color.a;
+    return true;
+}
+// END RESTORED
 
 }
