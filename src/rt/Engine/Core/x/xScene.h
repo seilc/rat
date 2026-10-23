@@ -1,8 +1,11 @@
 #ifndef XSCENE_H
 #define XSCENE_H
 
-#include "xEnt.h"
+#include "xBase.h"
 #include "xEnv.h"
+#include "xMemMgr.h"
+
+struct xEnt;
 
 typedef xBase*(*xSceneResolvIDCallback)(U32);
 typedef char*(*xSceneBase2NameCallback)(xBase*);

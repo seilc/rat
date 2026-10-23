@@ -2,6 +2,7 @@
 #define ZSCENE_H
 
 #include "xScene.h"
+#include "xEnt.h"
 #include "zBase.h"
 #include "zPortal.h"
 #include "zEnv.h"
