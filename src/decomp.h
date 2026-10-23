@@ -9,6 +9,9 @@
 #define __CONCAT(x, y) x##y
 #define CONCAT(x, y) __CONCAT(x, y)
 
+// Reference a variable twice without code, so MWCC gives it a register
+#define DECOMP_FORCEREGISTER(x) ((void)(x), (void)(x))
+
 // Compile without matching hacks.
 #if defined(NON_MATCHING) || !defined(__MWERKS__)
 #define DECOMP_FORCEACTIVE(...)

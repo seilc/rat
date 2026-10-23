@@ -10,8 +10,7 @@ static bool sComboIsPaused = false;
 void zCombo_Add(F32 points, zComboType type)
 {
     S32 rewardLevel;
-    (void)rewardLevel;
-    (void)rewardLevel;
+    DECOMP_FORCEREGISTER(rewardLevel);
     (void)points;
     (void)type;
 }

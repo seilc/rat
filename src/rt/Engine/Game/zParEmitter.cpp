@@ -3,6 +3,8 @@
 #include "zGlobals.h"
 #include "zScene.h"
 
+#include "decomp.h"
+
 zParEmitter* zParEmitterFind(U32 asset_id)
 {
     zScene* s = globals.sceneCur;
@@ -11,8 +13,7 @@ zParEmitter* zParEmitterFind(U32 asset_id)
     }
 
     S32 total;
-    (void)total;
-    (void)total;
+    DECOMP_FORCEREGISTER(total);
     zParEmitter* pe;
     S32 i = s->baseCount[eBaseTypeParticleEmitter];
     pe = (zParEmitter*)s->baseList[eBaseTypeParticleEmitter];

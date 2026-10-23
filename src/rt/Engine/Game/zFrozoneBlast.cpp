@@ -15,6 +15,8 @@
 #include "zGlobals.h"
 #include "zParticleCustom.h"
 
+#include "decomp.h"
+
 // RESTORED: from RotU GC
 namespace {
 
@@ -488,8 +490,7 @@ U32 zFrozoneBlast::_ActivateStream(const xRay3* direction)
 
 void zFrozoneBlast::_UpdateStream(U32 id, const xRay3* newDirection, bool collision)
 {
-    (void)collision;
-    (void)collision;
+    DECOMP_FORCEREGISTER(collision);
 
     U32 blastID = id - 1000;
     xASSERT(__LINE__, blastID < 3);
@@ -509,8 +510,7 @@ void zFrozoneBlast::_StopStream(U32 id)
 
 void zFrozoneBlast::_SingleBlast(const xRay3* direction, F32 velocity, bool collision)
 {
-    (void)collision;
-    (void)collision;
+    DECOMP_FORCEREGISTER(collision);
 
     xASSERT(__LINE__, direction);
 
