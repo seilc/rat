@@ -7,8 +7,7 @@
 #include "zConversation.h"
 #include "xRand.h"
 #include "xSndMgr.h"
-
-#include "decomp.h"
+#include "xString.h"
 
 xOneLiner* xOneLiner::sDelayedSound;
 
@@ -23,6 +22,15 @@ struct xRequestedSound
     xOneLiner* mSound;
     F32 mRequestTime;
     S32 mRequestID;
+
+    // RESTORED: speculative
+    void Init(xOneLiner* sound, S32 requestID)
+    {
+        mSound = sound;
+        mRequestID = requestID;
+        mRequestTime = iTimeGetGame();
+    }
+    // END RESTORED
 
     void Display(bool wasPlayed)
     {
@@ -51,6 +59,18 @@ struct xSoundHistory
             mNumSounds--;
         }
     }
+
+    // RESTORED: speculative
+    void AddSound(xOneLiner* sound)
+    {
+        if (mNumSounds >= 5) {
+            ScrollSounds();
+        }
+        mHistory[mNumSounds].Init(sound, mTotalRequests);
+        mNumSounds++;
+        mTotalRequests++;
+    }
+    // END RESTORED
 
     void Age()
     {
@@ -170,13 +190,72 @@ bool xOneLiner::PlaySoundCore()
     return false;
 }
 
+// RESTORED: from RotU GC
+bool xOneLiner::PlaySound()
+{
+    S32 delayBits = mFlags & 0xF;
+    if (delayBits) {
+        return PlaySoundDelayed(0.1f * delayBits);
+    }
+#if DEBUG || RELEASE
+    sSndHistory.AddSound(this);
+#endif
+    return PlaySoundCore();
+}
+
+bool xOneLiner::PlaySoundDelayed(F32 delay)
+{
+    if (!sDelayedSound) {
+        F32 timeNow = iTimeGetGame();
+        F32 futureTime = timeNow + delay;
+        if (futureTime >= mSoonestTimeToPlay) {
+            mSoonestTimeToPlay = futureTime;
+#if DEBUG || RELEASE
+            sSndHistory.AddSound(this);
+#endif
+            sDelayedSound = this;
+            return true;
+        }
+    }
+    return false;
+}
+// END RESTORED
+
 inline F32 xOneLiner::CalcTimeToWait() const
 {
     return mCycleTime;
 }
 
-DECOMP_FORCEACTIVE(
-    "xOneLiner.cpp",
-    "maxCheck == 0 || maxCheck == mNumSounds",
-    "%s"
-)
+// RESTORED: from RotU GC
+void xOneLinerList::InitWithSounds(xOneLiner* soundList, U32 maxCheck)
+{
+    F32 timeNow = iTimeGetGame();
+    mNumSounds = 0;
+    mSounds = soundList;
+    while (soundList->mAssetName) {
+        soundList->Init();
+        mNumSounds++;
+        soundList++;
+    }
+    xASSERT(__LINE__, maxCheck == 0 || maxCheck == mNumSounds);
+}
+
+inline void xOneLiner::Init()
+{
+    mSoonestTimeToPlay = iTimeGetGame() + xrand_RandomFloatRange(0.2f, 0.5f) * CalcTimeToWait();
+    mSoundGroupHdl = mAssetName[0] ? xSndMgrGetSoundGroup(xStrHash(mAssetName)) : ISND_INVALID_SND_GROUP_HANDLE;
+}
+
+void xOneLinerList::Reset()
+{
+    xOneLiner* sp = mSounds;
+    for (U32 i = 0; i < mNumSounds; i++, sp++) {
+        sp->Reset();
+    }
+}
+
+inline void xOneLiner::Reset()
+{
+    mFlags &= ~0x4000;
+}
+// END RESTORED

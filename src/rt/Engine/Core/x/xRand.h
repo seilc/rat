@@ -43,6 +43,12 @@ inline F32 xrand_RandomBipolarUnitFloat()
     return 2.0f * xrand_RandomFloat() - 1.0f;
 }
 
+inline F32 xrand_RandomFloatRange(F32 fMin, F32 fMax)
+{
+    F32 fRandUnitFloat = xrand_RandomFloat();
+    return fRandUnitFloat * fMax + (1.0f - fRandUnitFloat) * fMin;
+}
+
 inline U32 xrand_RandomChoice(U32 nChoice)
 {
     xASSERT(124, nChoice <= 0xffff);
