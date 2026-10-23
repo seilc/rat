@@ -55,4 +55,10 @@ inline U32 xrand_RandomChoice(U32 nChoice)
     return (nChoice * xrand_RandomInt16()) / 0x10000;
 }
 
+inline F32 xurand()
+{
+    static const F32 scale = 1.0f / 4294967296.0f;
+    return scale * xrand_RandomInt32();
+}
+
 #endif

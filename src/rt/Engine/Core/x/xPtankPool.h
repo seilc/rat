@@ -44,6 +44,53 @@ struct ptank_pool
     void grab_block(ptank_group_type type);
 };
 
+struct ptank_pool__pos_color_size : ptank_pool
+{
+    xVec3* pos;
+    xColor* color;
+    xVec2* size;
+    RwInt32 stride_pos;
+    RwInt32 stride_color;
+    RwInt32 stride_size;
+
+    void next()
+    {
+        if (used >= 80) {
+            if (valid()) {
+                unlock_block();
+            }
+            grab_block(PGT_POS_COLOR_SIZE);
+            if (!valid()) {
+                return;
+            }
+            lock_block();
+        } else {
+            pos = (xVec3*)((U8*)pos + stride_pos);
+            color = (xColor*)((U8*)color + stride_color);
+            size = (xVec2*)((U8*)size + stride_size);
+        }
+
+        used++;
+    }
+
+    void lock_block()
+    {
+        used = 0;
+
+        RpPTankLockStruct ls_color, ls_pos, ls_size;
+        RpPTankAtomicLock(ptank, &ls_pos, rpPTANKLFLAGPOSITION, rpPTANKLOCKWRITE);
+        RpPTankAtomicLock(ptank, &ls_color, rpPTANKLFLAGCOLOR, rpPTANKLOCKWRITE);
+        RpPTankAtomicLock(ptank, &ls_size, rpPTANKLFLAGSIZE, rpPTANKLOCKWRITE);
+
+        pos = (xVec3*)ls_pos.data;
+        color = (xColor*)ls_color.data;
+        size = (xVec2*)ls_size.data;
+        stride_pos = ls_pos.stride;
+        stride_color = ls_color.stride;
+        stride_size = ls_size.stride;
+    }
+};
+
 struct ptank_pool__pos_color_size_uv2 : ptank_pool
 {
     xVec3* pos;

@@ -123,6 +123,7 @@ void xMat3x3GetEuler(const xMat3x3* m, xVec3* a);
 void xMat3x3RotY(xMat3x3* m, F32 t);
 void xMat3x3Mul(xMat3x3* o, const xMat3x3* a, const xMat3x3* b);
 void xMat3x3Tolocal(xVec3* o, const xMat3x3* m, const xVec3* v);
+F32 xMat3x3LookVec(xMat3x3* m, const xVec3* at);
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
 {
