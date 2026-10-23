@@ -20,7 +20,7 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
     xVERBOSE("... entering xEnvLoadJSPList ...\n");
 
 #if DEBUG || RELEASE
-    xDebugRemoveTweak("Debugging Options|JSP Visibility");
+    xTWEAKREMOVE("Debugging Options|JSP Visibility");
 #endif
 
     if (dataType == 0) {

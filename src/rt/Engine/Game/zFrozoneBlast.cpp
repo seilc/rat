@@ -221,7 +221,7 @@ S32 zFrozoneBlast::updateBlastParticles(U8* mem, S32 count, ptank_pool& apool, F
 
         RwSphere worldsph;
         worldsph.center = p->loc.m_RwV3d;
-        worldsph.radius = p->scaleX > p->scaleY ? p->scaleX : p->scaleY;
+        worldsph.radius = xmax(p->scaleX, p->scaleY);
 
         if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph) != rwSPHEREOUTSIDE) {
             pool.next();
@@ -661,7 +661,7 @@ void zFrozoneBlast::emitSplashParticles(const xVec3* pos, const xVec3* normal, F
         dirPtr++;
 
         F32 length = glintLength + glintLengthRand * xrand_GenRandFloat();
-        *lenPtr = length < glintLegnthMax ? length : glintLegnthMax;
+        *lenPtr = xmin(length, glintLegnthMax);
         lenPtr++;
     }
 
