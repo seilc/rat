@@ -18,6 +18,10 @@ A work-in-progress decompilation of [Ratatouille (Jan 18, 2006 prototype)](https
 
 This repository does **not** contain any game assets or assembly whatsoever. An existing copy of the game is required.
 
+Full disclosure: this project is AI-assisted, much of the decompiled code is written with the help of an LLM and
+checked against the original binaries. Matching code is byte-identical to the original, but names, types and
+source structure beyond what the binaries and their debug info prove may be guesses.
+
 Supported versions:
 
 - `DEBUG` - ratsgc_d.elf
