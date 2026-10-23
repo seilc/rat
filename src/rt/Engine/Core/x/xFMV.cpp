@@ -8,10 +8,12 @@
 #include "zMenu.h"
 #include "xDebug.h"
 
+#include "decomp.h"
+
 static void DefaultFMVPauseSoundCB(bool doPause);
 
 static F32 sFMVVolumeScale = 1.0f;
-static void(*sxFMVPauseSoundCB)(bool doPause) = DefaultFMVPauseSoundCB;
+static xFMVPauseSoundCallback sxFMVPauseSoundCB = DefaultFMVPauseSoundCB;
 
 void xFMVPauseSound(bool doPause)
 {
@@ -27,8 +29,10 @@ static void DefaultFMVPauseSoundCB(bool doPause)
     if (zGameIsPaused()) {
         xSndMgrPauseSounds(6, doPause, true);
 
-        if (globals.sceneCur && globals.sceneCur->sceneID == IDTAG('M','N','U','S') && zMenuRunning()) {
-            xSndMgrPauseSounds(-3, doPause, true);
+        if (globals.sceneCur && globals.sceneCur->sceneID == IDTAG('M','N','U','S')) {
+            if (zMenuRunning()) {
+                xSndMgrPauseSounds(-3, doPause, true);
+            }
         }
 
         if (doPause) {
@@ -38,6 +42,21 @@ static void DefaultFMVPauseSoundCB(bool doPause)
         xSndMgrPauseSounds(-3, doPause, true);
     }
 }
+
+// RESTORED: from TSSM GC
+xFMVPauseSoundCallback xFMVSetPauseSoundCB(xFMVPauseSoundCallback pauseSoundCB)
+{
+    xFMVPauseSoundCallback curCB = sxFMVPauseSoundCB;
+
+    if (!pauseSoundCB) {
+        pauseSoundCB = DefaultFMVPauseSoundCB;
+    }
+
+    sxFMVPauseSoundCB = pauseSoundCB;
+
+    return curCB;
+}
+// END RESTORED
 
 S32 xFMVGetBinkCompliantVolume()
 {
@@ -66,13 +85,14 @@ RwTexture* xFMVGetTexture(MOVIE* pMovie, U16 looping, U16 freezeframed, U32 star
 
 #if DEBUG || RELEASE
     if (xDebugModeGet() == 18) {
-        S32 frameSkipped = pMovie->hBink->FrameNum;
+        S32 frameSkipped;
+        DECOMP_FORCEREGISTER(frameSkipped);
         xprintf("Time Code:       %02d:%02d:%02d:%02d\nFrame %d/%d\nSkipped %d\n",
                 pMovie->hBink->FrameNum / (30 * 60 * 40),
                 pMovie->hBink->FrameNum / (30 * 60) % 60,
                 pMovie->hBink->FrameNum / 30 % 60,
                 pMovie->hBink->FrameNum % 30,
-                frameSkipped,
+                pMovie->hBink->FrameNum,
                 pMovie->hBink->Frames,
                 pMovie->hBink->skippedblits);
     }
@@ -85,8 +105,8 @@ RwTexture* xFMVGetTexture(MOVIE* pMovie, U16 looping, U16 freezeframed, U32 star
 
         RwUInt8* pBits = RwRasterLock(pBinkRaster, 0, rwRASTERLOCKWRITE | rwRASTERLOCKRAW);
 
-        RwInt32 format;
-        RwInt32 pixformat = RwRasterGetFormat(pBinkRaster) & rwRASTERFORMATPIXELFORMATMASK;
+        RwInt32 format = RwRasterGetFormat(pBinkRaster);
+        RwInt32 pixformat = format & rwRASTERFORMATPIXELFORMATMASK;
 
         xASSERT(194, pBits);
 
@@ -106,12 +126,15 @@ RwTexture* xFMVGetTexture(MOVIE* pMovie, U16 looping, U16 freezeframed, U32 star
         }
 
         if (looping) {
-            if (endframe == pMovie->hBink->LastFrameNum && startframe != 0) {
-                BinkGoto(pMovie->hBink, startframe, 0);
+            if (endframe == pMovie->hBink->LastFrameNum) {
+                if (startframe != 0) {
+                    BinkGoto(pMovie->hBink, startframe, 0);
+                }
             }
             BinkNextFrame(pMovie->hBink);
             BinkWait(pMovie->hBink);
-        } else if (endframe != pMovie->hBink->LastFrameNum) {
+        }
+        else if (endframe != pMovie->hBink->LastFrameNum) {
             BinkNextFrame(pMovie->hBink);
             BinkWait(pMovie->hBink);
         }
