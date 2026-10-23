@@ -396,7 +396,7 @@ void zFrozoneBlast::updateLight(blastStream& stream, F32 dt)
             return;
         }
 
-        stream.light = xLIGHTCREATETEMP(false, __LINE__);
+        stream.light = xLightCreateTemp(false, __LINE__);
         if (!stream.light) {
             return;
         }
@@ -409,7 +409,7 @@ void zFrozoneBlast::updateLight(blastStream& stream, F32 dt)
     stream.lightIntensity -= lightDecay * dt;
     if (stream.lightIntensity <= 0.0f) {
         if (!stream.active) {
-            xLIGHTDESTROYTEMP(stream.light, __LINE__);
+            xLightDestroyTemp(stream.light, __LINE__);
             stream.light = NULL;
             return;
         }

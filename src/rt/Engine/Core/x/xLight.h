@@ -55,13 +55,13 @@ struct xLight : xBase
 #if DEBUG || RELEASE
 xLight* xLightCreateTempInternal(bool useLightCard, const char* fileName, U32 lineNumber);
 void xLightDestroyTempInternal(xLight* xl, const char* fileName, U32 lineNumber);
-#define xLIGHTCREATETEMP(useLightCard, line) xLightCreateTempInternal((useLightCard), __FILE__, (line))
-#define xLIGHTDESTROYTEMP(xl, line) xLightDestroyTempInternal((xl), __FILE__, (line))
+#define xLightCreateTemp(useLightCard, line) xLightCreateTempInternal((useLightCard), __FILE__, (line))
+#define xLightDestroyTemp(xl, line) xLightDestroyTempInternal((xl), __FILE__, (line))
 #else
 xLight* xLightCreateTempInternal(bool useLightCard);
 void xLightDestroyTempInternal(xLight* xl);
-#define xLIGHTCREATETEMP(useLightCard, line) xLightCreateTempInternal((useLightCard))
-#define xLIGHTDESTROYTEMP(xl, line) xLightDestroyTempInternal((xl))
+#define xLightCreateTemp(useLightCard, line) xLightCreateTempInternal((useLightCard))
+#define xLightDestroyTemp(xl, line) xLightDestroyTempInternal((xl))
 #endif
 void xLightOn(xLight* xl, bool on, F32 transitionTime);
 void xLightSetColor(xLight* xl, F32 r, F32 g, F32 b, F32 transitionTime);
