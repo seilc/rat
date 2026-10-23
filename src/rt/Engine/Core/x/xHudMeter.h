@@ -22,9 +22,9 @@ public:
 
     meter_widget(const meter_asset& a);
 
-    // RECONSTRUCTED (deadstripped): speculative
+    // RESTORED: speculative
     ~meter_widget() {}
-    // END RECONSTRUCTED
+    // END RESTORED
 
     void destruct();
     

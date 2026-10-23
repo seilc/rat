@@ -119,7 +119,7 @@ namespace {
         g.angle = (F32)((S32)g.angle % 360);
     }
 
-    // RECONSTRUCTED (deadstripped): from Incredibles GC
+    // RESTORED: from Incredibles GC
     RwRaster* raster_pulse_glare(U32 id)
     {
         RwTexture* texture = NULL;
@@ -129,7 +129,7 @@ namespace {
         }
         return NULL;
     }
-    // END RECONSTRUCTED
+    // END RESTORED
 
     // Equivalent: scheduling
     void render_pulse_glare(const xMat4x3& mat, xPulseGlare* g)
@@ -257,7 +257,7 @@ void xPulseGlareMgr::init()
     }
 }
 
-// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+// RESTORED: from RotU GC, Incredibles GC
 S32 xPulseGlareMgr::get_next_idx()
 {
     for (S32 i = 0; i < zMAX_PULSE_GLARES; i++) {
@@ -275,7 +275,7 @@ xPulseGlare& xPulseGlareMgr::get(U32 i)
     xASSERT(__LINE__, !(i < 0 || i >= zMAX_PULSE_GLARES ));
     return glares[i];
 }
-// END RECONSTRUCTED
+// END RESTORED
 
 void xPulseGlareMgr::update(F32 dt)
 {
@@ -295,7 +295,7 @@ void xPulseGlareMgr::render(const xMat4x3& mat)
     }
 }
 
-// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+// RESTORED: from RotU GC, Incredibles GC
 S32 xScrFX_PulseGlaresAdd(RwRaster* raster)
 {
     S32 idx = -1;
@@ -321,7 +321,7 @@ S32 xScrFX_PulseGlaresAdd(U32 glareID)
     }
     return idx;
 }
-// END RECONSTRUCTED
+// END RESTORED
 
 void xScrFX_PulseGlaresRender(const xMat4x3& mat)
 {
@@ -338,7 +338,7 @@ void xScrFX_PulseGlaresReset()
     glare_mgr.init();
 }
 
-// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+// RESTORED: from RotU GC, Incredibles GC
 void xScrFX_PulseGlaresUpdatePos(S32 idx, xVec3* pos)
 {
     xASSERT(__LINE__, idx > -1);
@@ -398,4 +398,4 @@ bool xScrFX_PulseGlaresCheckFlag(S32 idx, S32 flag)
     xPulseGlare& g = glare_mgr.get(idx);
     return g.flags & flag ? true : false;
 }
-// END RECONSTRUCTED
+// END RESTORED

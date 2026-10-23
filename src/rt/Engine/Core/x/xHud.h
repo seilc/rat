@@ -125,9 +125,9 @@ public:
 
     widget(const asset& a);
 
-    // RECONSTRUCTED (deadstripped): speculative
+    // RESTORED: speculative
     ~widget() {}
-    // END RECONSTRUCTED
+    // END RESTORED
 
     static void init_base(xBase& data, const xBaseAsset& asset, size_t chunk_size);
 

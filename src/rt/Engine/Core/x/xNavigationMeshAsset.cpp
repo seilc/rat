@@ -297,7 +297,7 @@ bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, 
     return false;
 }
 
-// RECONSTRUCTED (deadstripped): from RotU GC
+// RESTORED: from RotU GC
 void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh)
 {
     F32 smallest_distance2 = 1e38f;
@@ -341,7 +341,7 @@ void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& su
         }
     }
 }
-// END RECONSTRUCTED
+// END RESTORED
 
 void xNavigationMeshAsset::CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex)
 {

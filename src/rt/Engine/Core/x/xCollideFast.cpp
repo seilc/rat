@@ -46,7 +46,7 @@ U32 xRayHitsBoxFast(const xRay3* r, const xBox* b)
     return (isx.penned <= 0.0f || isx.contained <= 0.0f);
 }
 
-// RECONSTRUCTED (deadstripped): from RotU GC, Incredibles GC
+// RESTORED: from RotU GC, Incredibles GC
 U32 xRayHitsCylinderFast(const xRay3* r, const xCylinder* c)
 {
     xASSERT(__LINE__, r);
@@ -89,4 +89,4 @@ U32 xRayHitsBoundFast(const xRay3* r, const xBound* b)
     xWARN("xRayHitsBoundFast: unsupported bound type %d\n", b->type);
     return FALSE;
 }
-// END RECONSTRUCTED
+// END RESTORED

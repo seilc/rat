@@ -129,7 +129,7 @@ U32 xMemoryManager::GetBlockSize(void* pointer) const
     return DoGetBlockSize(pointer) - debugDataSize;
 }
 
-// RECONSTRUCTED (deadstripped): speculative
+// RESTORED: speculative
 bool xMemoryManager::InActiveList(const void* pointer, U32) const
 {
     DebugAllocationHeader* list = activeList;
@@ -141,7 +141,7 @@ bool xMemoryManager::InActiveList(const void* pointer, U32) const
     }
     return false;
 }
-// END RECONSTRUCTED
+// END RESTORED
 
 bool xMemoryManager::IsValidPointer(const void* pointer) const
 {
