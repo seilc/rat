@@ -3,6 +3,16 @@
 
 #include "xMath2.h"
 
+// RESTORED: speculative
+static bool line_vs_square(F32 tx0, F32 ty0, F32 tx1, F32 ty1)
+{
+    F32 tmin, tmax;
+    if (tx0 > ty0) tmin = tx0; else tmin = ty0;
+    if (tx1 < ty1) tmax = tx1; else tmax = ty1;
+    return tmin <= tmax && tmax >= 0.0f && tmin <= 1.0f;
+}
+// END RESTORED
+
 class xSpacePartitionTree2D
 {
 public:

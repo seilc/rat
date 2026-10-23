@@ -8,6 +8,7 @@
 #include "xModel.h"
 #include "xRand.h"
 #include "xScrFx.h"
+#include "xSpacePartitionTree.h"
 #include "xstransvc.h"
 #include "iMath.h"
 #include "zBomb.h"

@@ -1,4 +1,5 @@
 #include "xEnt.h"
+#include "xSpacePartitionTree.h"
 
 #include "decomp.h"
 

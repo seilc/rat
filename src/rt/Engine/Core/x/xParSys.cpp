@@ -7,6 +7,7 @@
 #include "xGlobals.h"
 #include "xMemMgr.h"
 #include "xPtankPool.h"
+#include "xSpacePartitionTree.h"
 #include "zEvent.h"
 #include "zParSys.h"
 #include "zScene.h"
@@ -29,9 +30,6 @@ struct xParSysInfo
     S32 type;
     xParGroupRenderFunction func;
 };
-
-DECOMP_FORCEFLOAT(0.0f)
-DECOMP_FORCEFLOAT(1.0f)
 
 static const S32 sBlendTable[] = {
     rwBLENDZERO,

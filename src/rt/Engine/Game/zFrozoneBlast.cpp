@@ -10,14 +10,10 @@
 #include "xParticleBatch.h"
 #include "xPtankPool.h"
 #include "xRand.h"
+#include "xSpacePartitionTree.h"
 #include "xstransvc.h"
 #include "zGlobals.h"
 #include "zParticleCustom.h"
-
-#include "decomp.h"
-
-DECOMP_FORCEFLOAT(0.0f)
-DECOMP_FORCEFLOAT(1.0f)
 
 // RESTORED: from RotU GC
 namespace {

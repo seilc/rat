@@ -4,6 +4,7 @@
 #include "xDebugTweak.h"
 #include "xDraw.h"
 #include "xEvent.h"
+#include "xSpacePartitionTree.h"
 #include "xSplineAsset.h"
 #include "xutil.h"
 #include "zBase.h"
@@ -18,9 +19,6 @@
 #include "zScene.h"
 
 #include "decomp.h"
-
-DECOMP_FORCEFLOAT(0.0f)
-DECOMP_FORCEFLOAT(1.0f)
 
 inline F32 xCamPathBias::RawBias()
 {
