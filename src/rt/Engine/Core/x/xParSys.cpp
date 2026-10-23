@@ -135,7 +135,7 @@ static void par_sprite_update(xParSys& sys, xParGroup& group)
     if (sys.tasset->parFlags & 0x80) {
         pool.rs.flags |= 0x4;
         pool.order_index = sys.tasset->priority;
-        pool.order_group = 0x484F424F; // Asset ID?
+        pool.order_group = 'HOBO';
     }
 
     S32 min_alpha;

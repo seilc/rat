@@ -36,9 +36,9 @@ struct _blastConfig
     F32 blueTintDist;
 };
 
-xTWEAKABLE U32 texture = 0xDED04D47;
-xTWEAKABLE U32 mistTexture = 0xDED04D47;
-xTWEAKABLE U32 glintTexture = 0xDED04D47;
+xTWEAKABLE U32 texture = 0xDED04D47; // xStrHash("ice_stream_particle_01")
+xTWEAKABLE U32 mistTexture = 0xDED04D47; // xStrHash("ice_stream_particle_01")
+xTWEAKABLE U32 glintTexture = 0xDED04D47; // xStrHash("ice_stream_particle_01")
 xTWEAKABLE F32 singleEmitTime = 0.03f;
 xTWEAKABLE F32 singleVelocity = 20.0f;
 xTWEAKABLE F32 singleSize = 0.3f;

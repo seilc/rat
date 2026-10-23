@@ -6,16 +6,16 @@
 #include "zEvent.h"
 
 static U32 sPauseTimerHash[] = {
-    0xBC345600, 0xBC345609,
-    0xBC345683, 0xBC34568C,
-    0xBC345706, 0xBC34570F,
-    0xBC345789, 0xBC345792,
-    0xBC34580C, 0xBC345815,
-    0xBC34588F, 0xBC345898,
-    0xBC345912, 0xBC34591B,
-    0xBC345995, 0xBC34599E,
-    0xBC345A18, 0xBC345A21,
-    0xBC345A9B, 0xBC345AA4,
+    0xBC345600, 0xBC345609, // xStrHash("PAUSE_TIMER00"), xStrHash("PAUSE_TIMER09")
+    0xBC345683, 0xBC34568C, // xStrHash("PAUSE_TIMER10"), xStrHash("PAUSE_TIMER19")
+    0xBC345706, 0xBC34570F, // xStrHash("PAUSE_TIMER20"), xStrHash("PAUSE_TIMER29")
+    0xBC345789, 0xBC345792, // xStrHash("PAUSE_TIMER30"), xStrHash("PAUSE_TIMER39")
+    0xBC34580C, 0xBC345815, // xStrHash("PAUSE_TIMER40"), xStrHash("PAUSE_TIMER49")
+    0xBC34588F, 0xBC345898, // xStrHash("PAUSE_TIMER50"), xStrHash("PAUSE_TIMER59")
+    0xBC345912, 0xBC34591B, // xStrHash("PAUSE_TIMER60"), xStrHash("PAUSE_TIMER69")
+    0xBC345995, 0xBC34599E, // xStrHash("PAUSE_TIMER70"), xStrHash("PAUSE_TIMER79")
+    0xBC345A18, 0xBC345A21, // xStrHash("PAUSE_TIMER80"), xStrHash("PAUSE_TIMER89")
+    0xBC345A9B, 0xBC345AA4, // xStrHash("PAUSE_TIMER90"), xStrHash("PAUSE_TIMER99")
 };
 
 static F32 GetRandomizedTime(xTimerAsset* tasset)
@@ -37,8 +37,8 @@ void xTimerInit(void* b, void* tasset)
 
 static S32 xTimer_ObjIDIsPauseTimer(U32 id)
 {
-    if (id == 0xCB3F6340) return TRUE;
-    if (id >= 0x016FC9F0 && id <= 0x016FC9F9) return TRUE;
+    if (id == 0xCB3F6340) return TRUE; // xStrHash("PAUSE_TIMER")
+    if (id >= 0x016FC9F0 && id <= 0x016FC9F9) return TRUE; // xStrHash("PAUSE_TIMER0"), xStrHash("PAUSE_TIMER9")
 
     S32 foo = (id >= 0xBC345600);
     S32 bar = (id <= 0xBC345AA4);

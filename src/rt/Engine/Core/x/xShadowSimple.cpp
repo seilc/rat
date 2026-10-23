@@ -269,8 +269,7 @@ void xShadowSimple_Init()
     memset(sCollQueue, 0, sizeof(sCollQueue));
     memset(sCollModelMatrices, 0, sizeof(sCollModelMatrices));
 
-    // 0x1A2A0413 = xStrHash("shadow_round")
-    RwTexture* tex = (RwTexture*)xSTFindAsset(0x1A2A0413, NULL);
+    RwTexture* tex = (RwTexture*)xSTFindAsset(0x1A2A0413, NULL); // xStrHash("shadow_round")
     if (tex) {
         sShadRaster = RwTextureGetRaster(tex);
     } else {
