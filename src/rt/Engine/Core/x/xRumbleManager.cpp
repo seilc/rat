@@ -223,6 +223,19 @@ void Manager::Update(xPad* pad, const xVec3& playerPos, F32 timeElapsed, bool bP
     }
 }
 
+// RESTORED: from RotU GC
+F32 Manager::GetRumbleTimeLeft(xPad* pad, emitterBase* pEmitter)
+{
+    padInfo* pInfo = &m_padInfo[pad->port];
+    for (U32 i = 0; i < 16; i++) {
+        if (pInfo->m_effects[i].pEmitter && pEmitter->pEffectAsset == pInfo->m_effects[i].pEmitter->pEffectAsset) {
+            return pInfo->m_effects[i].timeToLive;
+        }
+    }
+    return 0.0f;
+}
+// END RESTORED
+
 Manager& Manager::Get()
 {
     static Manager rumbleManager;
@@ -248,6 +261,14 @@ void Manager::StopRumbling()
     }
 }
 
+// RESTORED: from RotU GC
+void Manager::ClearRumbling(xPad* pad)
+{
+    iPadStopRumble(pad);
+    memset(&m_padInfo[pad->port], 0, sizeof(padInfo));
+}
+// END RESTORED
+
 void Manager::StopCameraShake(S32 padNum)
 {
     padInfo* pInfo = &m_padInfo[padNum];
@@ -257,6 +278,19 @@ void Manager::StopCameraShake(S32 padNum)
         }
     }
 }
+
+// RESTORED: from RotU GC
+void Manager::Clear(xPad* pad)
+{
+    StopCameraShake(pad);
+    ClearRumbling(pad);
+}
+
+void Manager::StopCameraShake(xPad* pad)
+{
+    StopCameraShake(pad->port);
+}
+// END RESTORED
 
 void Manager::StopCameraShake()
 {
