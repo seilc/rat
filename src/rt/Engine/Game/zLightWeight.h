@@ -6,7 +6,19 @@
 class zLightweightSystemBase
 {
 public:
-    void* __vptr; // TEMP
+    virtual void SceneSetup() {}
+    virtual void Reset() {}
+    virtual void Update(F32) {}
+    virtual void Render() {}
+    virtual void PostRender2d() const {}
+    virtual void PostRender3d() const {}
+    virtual void Exit() {}
+};
+
+class zLightweightManager
+{
+public:
+    static void RegisterLightweight(zLightweightSystemBase* newSystem);
 };
 
 #endif

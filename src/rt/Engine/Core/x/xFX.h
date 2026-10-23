@@ -35,6 +35,11 @@ public:
         return (act == NULL) ? joint_queue::dummy_iterator() : act->joints.end();
     }
 
+    bool empty() const
+    {
+        return (act == NULL) ? true : act->joints.empty();
+    }
+
 private:
     struct activity_data
     {
@@ -47,6 +52,7 @@ private:
         U32 mlife;
     };
 
+public:
     struct curve_node
     {
         F32 time;
@@ -66,6 +72,13 @@ private:
         RwRaster* raster;
     };
 
+    void set_config(const config_type* cfg);
+    void insert(const xVec3& loc, const xVec3& norm, F32 scale, F32 alpha, S32 flags);
+    void copy_parameters(xFXRibbon* ribbon) const;
+
+    static RwRaster* get_raster(const char* name);
+
+private:
 #if DEBUG || RELEASE
     struct debug_info
     {

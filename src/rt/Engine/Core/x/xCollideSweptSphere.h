@@ -5,6 +5,8 @@
 #include "xQuickCull.h"
 #include "xJSP.h"
 
+struct xScene;
+
 enum xCollideSphereHitType
 {
     exCOLLIDESPHEREHITTYPE_UNKNOWN,
@@ -40,6 +42,7 @@ struct xSweptSphere
     xPlane tri_plane;
 
     xSweptSphere();
+    xSweptSphere(const xVec3& start, const xVec3& end, F32 radius, U16 filterFlags);
 };
 
 struct xCollideLineSegment
@@ -61,12 +64,21 @@ struct xCollideProcessedTri
     xEdge edges[3];
 };
 
+void xSweptSphereGetResults(xSweptSphere* sws);
+void xSweptSpherePrepare(xSweptSphere* sws, const xVec3* start, const xVec3* end, F32 radius, U32 filterFlags);
 void xSweptSphereResetCollision(xSweptSphere* sws);
+S32 xSweptSphereToScene(xSweptSphere* sws, xScene* sc, const xEnt* mover, U8 collType, S32 penby);
+S32 xSweptSphereToPlayer(xSweptSphere* sws, xScene* sc, xEnt* mover, U8 collType, S32 penby);
 S32 xSweptSphereToSphere(xSweptSphere& sws, const xVec3& center, F32 radius);
 
 inline S32 xSweptSphereToSphere(xSweptSphere* sws, const xSphere* sph)
 {
     return xSweptSphereToSphere(*sws, sph->center, sph->r);
+}
+
+inline xSweptSphere::xSweptSphere(const xVec3& start, const xVec3& end, F32 radius, U16 filterFlags)
+{
+    xSweptSpherePrepare(this, &start, &end, radius, filterFlags);
 }
 
 #endif
