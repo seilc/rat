@@ -10,6 +10,8 @@
 
 #include "decomp.h"
 
+#include <bink.h>
+
 static void DefaultFMVPauseSoundCB(bool doPause);
 
 static F32 sFMVVolumeScale = 1.0f;

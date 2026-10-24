@@ -1,15 +1,17 @@
 #ifndef IFMV_H
 #define IFMV_H
 
-#include <bink.h>
 #include "types.h"
+#include "xpkrsvc.h"
 #include <rwcore.h>
 #include <dolphin.h>
+
+struct BINK;
 
 struct MOVIE
 {
     U32 aid;
-    HBINK hBink;
+    BINK* hBink;
     DVDFileInfo file;
     RwTexture* pBinkTexture;
     U32 uMovieOffsetBytes;
@@ -17,5 +19,8 @@ struct MOVIE
     U32 other_movie_flags : 7;
     U32 disk_open_frame : 24;
 };
+
+MOVIE* iFMVOpen(PKRAssetTOCInfo& rAssetInfo);
+void iFMVClose(MOVIE*& pMovie);
 
 #endif

@@ -25,8 +25,10 @@ struct PKRAssetTOCInfo
     U32 plus_offset;
     U32 size;
     void* mempos;
+#if DEBUG || RELEASE
     const char* assetname;
     const char* filename;
+#endif
 };
 
 struct st_HIPLOADDATA;
