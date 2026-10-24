@@ -7,8 +7,10 @@
 
 #include <string.h>
 
+#define MAX_LOADINST 8
+
 static U32 g_loadlock = 0;
-static st_HIPLOADDATA g_hiploadinst[8] = {};
+static st_HIPLOADDATA g_hiploadinst[MAX_LOADINST] = {};
 
 static st_HIPLOADDATA* HIPLCreate(const char* filename, char* dblbuf, S32 bufsize, S32 fileflags);
 static void HIPLDestroy(st_HIPLOADDATA* lddata);
@@ -58,7 +60,7 @@ static st_HIPLOADDATA* HIPLCreate(const char* filename, char* dblbuf, S32 bufsiz
 
     xVALIDATE(232, filename);
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < MAX_LOADINST; i++) {
         if (!(g_loadlock & (1 << i))) {
             uselock = i;
             g_loadlock |= 1 << i;
@@ -81,7 +83,7 @@ static st_HIPLOADDATA* HIPLCreate(const char* filename, char* dblbuf, S32 bufsiz
         lddata->pos = 0;
         lddata->readTop = 0;
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < MAX_OPENBLK; i++) {
             tmp_blk = &lddata->stk[i];
             tmp_blk->endpos = 0;
             tmp_blk->blk_id = 0;
