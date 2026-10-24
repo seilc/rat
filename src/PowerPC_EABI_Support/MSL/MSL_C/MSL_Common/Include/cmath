@@ -3,6 +3,9 @@
 
 #include <math.h>
 
+#pragma push
+#pragma sym off
+
 namespace std {
 
 float cosf(float);
@@ -11,5 +14,7 @@ float floorf(float);
 inline float ceilf(float x) { return ceil(x); }
 
 }
+
+#pragma pop
 
 #endif
