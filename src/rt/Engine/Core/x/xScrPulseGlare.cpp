@@ -297,7 +297,7 @@ void xPulseGlareMgr::render(const xMat4x3& mat)
     }
 }
 
-// RESTORED: from RotU GC, Incredibles GC
+// RESTORED: from RotU GC
 S32 xScrFX_PulseGlaresAdd(RwRaster* raster)
 {
     S32 idx = -1;
@@ -310,7 +310,9 @@ S32 xScrFX_PulseGlaresAdd(RwRaster* raster)
     }
     return idx;
 }
+// END RESTORED
 
+// RESTORED: from Incredibles GC
 S32 xScrFX_PulseGlaresAdd(U32 glareID)
 {
     S32 idx = -1;
@@ -348,7 +350,9 @@ void xScrFX_PulseGlaresUpdatePos(S32 idx, xVec3* pos)
     xPulseGlare& g = glare_mgr.get(idx);
     g.pos = *pos;
 }
+// END RESTORED
 
+// RESTORED: from Incredibles GC
 void xScrFX_PulseGlaresUpdateDir(S32 idx, xVec3* dir)
 {
     xASSERT(__LINE__, idx > -1);
@@ -356,7 +360,9 @@ void xScrFX_PulseGlaresUpdateDir(S32 idx, xVec3* dir)
     xPulseGlare& g = glare_mgr.get(idx);
     g.dir = *dir;
 }
+// END RESTORED
 
+// RESTORED: from RotU GC, Incredibles GC
 void xScrFX_PulseGlaresUpdateSize(S32 idx, F32 size)
 {
     xASSERT(__LINE__, idx > -1);
@@ -364,7 +370,9 @@ void xScrFX_PulseGlaresUpdateSize(S32 idx, F32 size)
     xPulseGlare& g = glare_mgr.get(idx);
     g.size = size;
 }
+// END RESTORED
 
+// RESTORED: from Incredibles GC
 void xScrFX_PulseGlaresSetScale(S32 idx, F32 scale)
 {
     xASSERT(__LINE__, idx > -1);
@@ -372,7 +380,9 @@ void xScrFX_PulseGlaresSetScale(S32 idx, F32 scale)
     xPulseGlare& g = glare_mgr.get(idx);
     g.scale_dir = scale;
 }
+// END RESTORED
 
+// RESTORED: from RotU GC, Incredibles GC
 void xScrFX_PulseGlaresSetLifetime(S32 idx, F32 lifetime)
 {
     xASSERT(__LINE__, idx > -1);
@@ -392,7 +402,9 @@ void xScrFX_PulseGlaresSetFlag(S32 idx, S32 flag, bool reverse)
         g.flags &= ~flag;
     }
 }
+// END RESTORED
 
+// RESTORED: from Incredibles GC
 bool xScrFX_PulseGlaresCheckFlag(S32 idx, S32 flag)
 {
     xASSERT(__LINE__, idx > -1);
