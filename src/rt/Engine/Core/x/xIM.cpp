@@ -36,10 +36,65 @@ void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount)
     context.format = format;
 }
 
+// RESTORED: from Incredibles GC
+void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount, const xIMLockParameters& params)
+{
+    xASSERT(__LINE__, vertCount > 0);
+    xASSERT(__LINE__, !((format == XIM_TRILIST) && ((vertCount % 3) != 0)));
+
+    S32 pos_qwords = (vertCount * sizeof(xVec3) + (16-1)) / 16;
+    S32 uv_qwords = (vertCount * sizeof(xVec2) + (16-1)) / 16;
+    S32 color_qwords = (vertCount * sizeof(xColor) + (16-1)) / 16;
+    S32 alloc_qwords = 0;
+
+    if (!(params.flags & 0x1)) {
+        alloc_qwords += pos_qwords;
+    }
+
+    if (!(params.flags & 0x4)) {
+        alloc_qwords += uv_qwords;
+    }
+
+    if (!(params.flags & 0x10)) {
+        alloc_qwords += color_qwords;
+    }
+
+    context.data = xMEMPUSHTEMP((alloc_qwords*16), 0, __LINE__);
+
+    U8* data_buffer = (U8*)context.data;
+
+    if (params.flags & 0x1) {
+        xASSERT(__LINE__, params.cpos != 0);
+        context.pos = (xVec3*)params.cpos;
+    } else {
+        context.pos = (xVec3*)data_buffer;
+        data_buffer += pos_qwords*16;
+    }
+
+    if (params.flags & 0x4) {
+        xASSERT(__LINE__, params.cuv != 0);
+        context.uv = (xVec2*)params.cuv;
+    } else {
+        context.uv = (xVec2*)data_buffer;
+        data_buffer += uv_qwords*16;
+    }
+
+    if (params.flags & 0x10) {
+        xASSERT(__LINE__, params.ccolor != 0);
+        context.color = (xColor*)params.ccolor;
+    } else {
+        context.color = (xColor*)data_buffer;
+        data_buffer += color_qwords*16;
+    }
+
+    xASSERT(__LINE__, ((U32)data_buffer - (U32)context.data) == (alloc_qwords*16));
+
+    context.vertCount = vertCount;
+    context.format = format;
+}
+// END RESTORED
+
 DECOMP_FORCEACTIVE(
-    "params.cpos != 0",
-    "params.cuv != 0",
-    "params.ccolor != 0",
     "(params1.cpos != 0) && (((int)params1.cpos & 15) == 0)",
     "(params1.cuv != 0) && (((int)params1.cuv & 15) == 0)",
     "(params1.ccolor != 0) && (((int)params1.ccolor & 15) == 0)",
