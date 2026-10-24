@@ -4,7 +4,7 @@
 
 static S32 gDebugTweakBranchMemUsed = 0;
 
-zDebugTweakBranch::zDebugTweakBranch(const char* name, void(*addTweaksFunction)(const char*))
+zDebugTweakBranch::zDebugTweakBranch(const char* name, zDebugTweakBranchCallback addTweaksFunction)
 {
     this->addTweaksFunction = addTweaksFunction;
     tweakCB.on_expand = sOnExpand;
@@ -12,7 +12,7 @@ zDebugTweakBranch::zDebugTweakBranch(const char* name, void(*addTweaksFunction)(
     xTWEAKBRANCH(name, &tweakCB, this, 0x2);
 }
 
-zDebugTweakBranch* zDebugTweakBranch::Create(const char* name, void(*addTweaksFunction)(const char*))
+zDebugTweakBranch* zDebugTweakBranch::Create(const char* name, zDebugTweakBranchCallback addTweaksFunction)
 {
     gDebugTweakBranchMemUsed += sizeof(zDebugTweakBranch);
     if (gDebugTweakBranchMemUsed >= 10000) {

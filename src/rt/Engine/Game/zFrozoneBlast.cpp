@@ -174,7 +174,7 @@ void zFrozoneBlast::loadAssets()
 }
 
 S32 zFrozoneBlast::createParticleSystem(S32 oldSystemId, U32, U32 srcBlend, U32 dstBlend, S32 stride,
-                                        S32 (*update)(U8*, S32, ptank_pool&, F32, void*))
+                                        xParticleBatchUpdateCallback update)
 {
     xParticleBatchSystem system;
     system.pool_type = PGT_POS_COLOR_SIZE;

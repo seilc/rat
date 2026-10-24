@@ -3,6 +3,8 @@
 
 #include "xPtankPool.h"
 
+typedef S32(*xParticleBatchUpdateCallback)(U8*, S32, ptank_pool&, F32, void*);
+
 struct xParticleBatchSystem
 {
     ptank_group_type pool_type;
@@ -10,7 +12,7 @@ struct xParticleBatchSystem
     U32 order_group;
     S32 order_index;
     S32 stride;
-    S32 (*update)(U8*, S32, ptank_pool&, F32, void*);
+    xParticleBatchUpdateCallback update;
     void* context;
 };
 

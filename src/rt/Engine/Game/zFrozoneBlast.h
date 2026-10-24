@@ -2,9 +2,9 @@
 #define ZFROZONEBLAST_H
 
 #include "xMath3.h"
+#include "xParticleBatch.h"
 
 struct xLight;
-struct ptank_pool;
 
 // RESTORED
 class zFrozoneBlast
@@ -64,7 +64,7 @@ public:
     void addTweaks();
     void loadAssets();
     S32 createParticleSystem(S32 oldSystemId, U32, U32 srcBlend, U32 dstBlend, S32 stride,
-                             S32 (*update)(U8*, S32, ptank_pool&, F32, void*));
+                             xParticleBatchUpdateCallback update);
     static void updateParticle(blastParticle* p, F32 dt);
     static S32 updateBlastParticles(U8* mem, S32 count, ptank_pool& apool, F32 dt, void*);
     void emitBlastParticles(blastStream& stream, F32 dt);

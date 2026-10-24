@@ -23,7 +23,6 @@ struct xParSys : xBase
 #endif
 };
 
-// Not present in DWARF, names are guesses except for eParSysRenderFuncCount which is present in an assert string
 enum eParSysRenderFunc
 {
     eParSysRenderFuncSprite,
