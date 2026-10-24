@@ -1,10 +1,15 @@
 #ifndef XDRAW_H
 #define XDRAW_H
 
+#include "xColor.h"
+#include "xMath2.h"
 #include "xMath3.h"
 
 #if DEBUG || RELEASE
+void xDrawSetColor(xColor color);
 void xDrawSetColor(U8 r, U8 g, U8 b, U8 a);
+void xDrawLine2D(F32 x1, F32 y1, F32 x2, F32 y2);
+void xDrawPolyLine2D(const xVec2* p, U32 len);
 void xDrawLine(const xVec3* a, const xVec3* b);
 void xDrawSphere(const xSphere* sph, U32 flags);
 void xDrawSphere(const xVec3* center, F32 r, U32 flags);

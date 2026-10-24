@@ -9,6 +9,8 @@ struct substr
 {
     const char* text;
     size_t size;
+
+    static substr create(const char* text, size_t size) { substr s = { text, size }; return s; }
 };
 
 U32 xStrHash(const char* str);

@@ -138,6 +138,16 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
+#define xFIXNAN(line, x)                                                                          \
+if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {                                                      \
+    static bool done = false;                                                                     \
+    if (!done) {                                                                                  \
+        xFAILM(line, "%s", "NAN");                                                                \
+        done = true;                                                                              \
+    }                                                                                             \
+    (x) = 0.0f;                                                                                   \
+}
+
 typedef void(*xDebugModeCallback)();
 
 void xDebugValidateFailed();
