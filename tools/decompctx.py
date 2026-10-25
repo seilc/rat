@@ -162,8 +162,8 @@ def main():
         os.path.join(root_dir, "src/rt/Engine/Core/gc"),
         os.path.join(root_dir, "src/rt/Engine/Core/x"),
         os.path.join(root_dir, "src/rt/Engine/Game"),
-        os.path.join(root_dir, "src/rwsdk/include/gcn"),
-        os.path.join(root_dir, "src/dolphin"),
+        os.path.join(root_dir, "src/rwsdk/include"),
+        os.path.join(root_dir, "src/dolphin/include"),
         os.path.join(root_dir, "src/bink/bink"),
     ]
     global exclude_globs
