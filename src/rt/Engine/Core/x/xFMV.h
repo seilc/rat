@@ -6,7 +6,7 @@
 typedef void(*xFMVPauseSoundCallback)(bool doPause);
 
 void xFMVPauseSound(bool doPause);
-xFMVPauseSoundCallback xFMVSetPauseSoundCB(xFMVPauseSoundCallback pauseSoundCB); // RESTORED
+xFMVPauseSoundCallback xFMVSetPauseSoundCB(xFMVPauseSoundCallback pauseSoundCB);
 S32 xFMVGetBinkCompliantVolume();
 RwTexture* xFMVGetTexture(MOVIE* pMovie, U16 looping, U16 freezeframed, U32 startframe, U32 endframe, U32);
 

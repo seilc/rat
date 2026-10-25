@@ -35,15 +35,15 @@ public:
     bool Add(xPad* pad, emitterBase* pEmitter);
     bool Stop(xPad* pad, emitterBase* pEmitter);
     void Update(xPad* pad, const xVec3& playerPos, F32 timeElapsed, bool bPauseState);
-    F32 GetRumbleTimeLeft(xPad* pad, emitterBase* pEmitter); // RESTORED
+    F32 GetRumbleTimeLeft(xPad* pad, emitterBase* pEmitter);
     static Manager& Get();
     void Reset();
     Manager();
     void StopRumbling();
-    void ClearRumbling(xPad* pad); // RESTORED
+    void ClearRumbling(xPad* pad);
     void StopCameraShake(S32 padNum);
-    void Clear(xPad* pad); // RESTORED
-    void StopCameraShake(xPad* pad); // RESTORED
+    void Clear(xPad* pad);
+    void StopCameraShake(xPad* pad);
     void StopCameraShake();
 
 private:

@@ -75,7 +75,7 @@ public:
     static void ReleaseCircle(zMeshCircle* circle);
 
     bool GetTriangle(const xVec3& position, S32 subMeshGuess, S32 triGuess, S32& subMeshIndex, S32& triIndex);
-    void GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh); // RESTORED
+    void GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh);
     void CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex);
 
     F32 getHeight(S32 subMeshIndex, S32 triangle, const xVec3& A) const

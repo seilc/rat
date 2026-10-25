@@ -39,10 +39,10 @@ struct text_widget::widget_chunk : xBase
     text_widget w;
 };
 
-bool scale_text_motive_reset(widget& w, motive& m); // RESTORED
-bool scale_text_motive_update(widget& w, motive& m, F32 dt); // RESTORED
-bool blink_text_motive_reset(widget& w, motive& m); // RESTORED
-bool blink_text_motive_update(widget& w, motive& m, F32 dt); // RESTORED
+bool scale_text_motive_reset(widget& w, motive& m);
+bool scale_text_motive_update(widget& w, motive& m, F32 dt);
+bool blink_text_motive_reset(widget& w, motive& m);
+bool blink_text_motive_update(widget& w, motive& m, F32 dt);
 
 }
 

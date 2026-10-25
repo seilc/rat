@@ -103,7 +103,7 @@ struct sphericalEmitter : emitterBase
 
     virtual bool GetIntensity(const xVec3& playerPos, F32& intensity) const;
     virtual void UpdatePosition(const xVec3& playerPos) const;
-    F32 GetTimeLeft(); // RESTORED
+    F32 GetTimeLeft();
 };
 
 // RESTORED
