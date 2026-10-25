@@ -3,6 +3,7 @@
 
 #include "xColor.h"
 #include "xModel.h"
+#include "xDebug.h"
 
 #include <rpworld.h>
 
@@ -18,10 +19,14 @@ public:
     void deactivate();
 
     virtual void render() = 0;
-    virtual void render_immediate_pass();
+    virtual void render_immediate_pass(xColor, bool, bool)
+    {
+        xASSERT(72, false && "Must implement for immediate-mode.");
+    }
 
     static void render_all();
-    static void render_atomic(RpAtomic*, xColor, bool, U32);
+    void render_atomic(RpAtomic*, xColor, bool, U32);
+    void render_immediate(xColor, bool);
 
 private:
     struct activity_type;
@@ -30,6 +35,19 @@ private:
 
     static activity_type* activities;
     static S32 activities_used;
+};
+
+class xLightVolumeModel : public xLightVolume
+{
+public:
+    void create();
+    virtual void render();
+    void render_single(xModelInstance* model, U32 stencil_pass);
+
+    xModelInstance* model;
+    xColor color;
+    bool inside;
+    bool single;
 };
 
 #endif
