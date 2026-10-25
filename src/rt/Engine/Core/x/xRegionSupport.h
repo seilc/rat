@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#include <string.h>
+
 enum xRegion
 {
     eRegionUnknown = -1,
@@ -34,5 +36,16 @@ enum xRegion
 extern char* region_array[eRegionCount];
 
 bool xRegionCodeIsValid(const char* pszRegionCode);
+
+inline xRegion xRegionString(const char* pszRegion)
+{
+    for (xRegion iRegion = eRegionUS; iRegion < eRegionCount; iRegion = (xRegion)(iRegion + 1)) {
+        if (stricmp(region_array[iRegion], pszRegion) == 0) {
+            return iRegion;
+        }
+    }
+
+    return eRegionUnknown;
+}
 
 #endif

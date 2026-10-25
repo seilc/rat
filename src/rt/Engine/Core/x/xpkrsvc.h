@@ -2,6 +2,27 @@
 #define XPKRSVC_H
 
 #include "types.h"
+#include "xordarray.h"
+
+#include <time.h>
+
+enum en_LAYER_TYPE
+{
+    PKR_LTYPE_ALL = -1,
+    PKR_LTYPE_DEFAULT,
+    PKR_LTYPE_TEXTURE,
+    PKR_LTYPE_TEXTURE_STRM,
+    PKR_LTYPE_BSP,
+    PKR_LTYPE_MODEL,
+    PKR_LTYPE_ANIMATION,
+    PKR_LTYPE_VRAM,
+    PKR_LTYPE_SRAM,
+    PKR_LTYPE_SNDTOC,
+    PKR_LTYPE_CUTSCENE,
+    PKR_LTYPE_CUTSCENETOC,
+    PKR_LTYPE_JSPINFO,
+    PKR_LTYPE_NOMORE
+};
 
 struct PKRAssetType
 {
@@ -34,6 +55,36 @@ struct PKRAssetTOCInfo
 struct st_HIPLOADDATA;
 struct st_PACKER_READ_DATA;
 
+struct PKRReadFuncs
+{
+    U32 api_ver;
+    st_PACKER_READ_DATA*(*Init)(void*, char*, U32, S32*, PKRAssetType*, S32);
+    void(*Done)(st_PACKER_READ_DATA*);
+    S32(*LoadLayer)(st_PACKER_READ_DATA*, en_LAYER_TYPE);
+    U32(*GetAssetSize)(st_PACKER_READ_DATA*, U32);
+    void*(*LoadAsset)(st_PACKER_READ_DATA*, U32, char*, void*, S32*);
+    void*(*AssetByType)(st_PACKER_READ_DATA*, U32, S32, U32*);
+    S32(*AssetCount)(st_PACKER_READ_DATA*, U32);
+    S32(*IsAssetReady)(st_PACKER_READ_DATA*, U32);
+    S32(*SetActive)(st_PACKER_READ_DATA*, en_LAYER_TYPE);
+    char*(*AssetName)(st_PACKER_READ_DATA*, U32);
+    U32(*GetBaseSector)(st_PACKER_READ_DATA*);
+    S32(*GetAssetInfo)(st_PACKER_READ_DATA*, U32, PKRAssetTOCInfo*);
+    S32(*GetAssetInfoByType)(st_PACKER_READ_DATA*, U32, S32, PKRAssetTOCInfo*);
+    S32(*PkgHasAsset)(st_PACKER_READ_DATA*, U32);
+    U32(*PkgTimeStamp)(st_PACKER_READ_DATA*);
+    void(*PkgDisconnect)(st_PACKER_READ_DATA*);
+#if DEBUG
+    void(*dbgrpt_stats)(st_PACKER_READ_DATA*);
+    void(*dbgrpt_typeInfo)(st_PACKER_READ_DATA*);
+    void(*dbgrpt_typeTally)(st_PACKER_READ_DATA*);
+    void(*dbgrpt_layers)(st_PACKER_READ_DATA*);
+    void(*dbgrpt_assets)(st_PACKER_READ_DATA*);
+    void(*dbgrpt_kosher)(st_PACKER_READ_DATA*);
+    void(*dbgrpt_loadtimes)(st_PACKER_READ_DATA*, S32);
+#endif
+};
+
 struct st_PACKER_ATOC_NODE
 {
     U32 aid;
@@ -53,9 +104,65 @@ struct st_PACKER_ATOC_NODE
     st_HIPLOADDATA* ownpkg;
     st_PACKER_READ_DATA* ownpr;
     char name[32];
+#if DEBUG
     char fullname[128];
     S64 dbg_loadtime[4];
+#endif
 };
+
+struct st_PACKER_READ_DATA
+{
+    PKRAssetType* types;
+    void* userdata;
+    U32 opts;
+    U32 pkgver;
+    S32 cltver;
+    S32 subver;
+    S32 compatver;
+    st_HIPLOADDATA* pkg;
+    U32 base_sector;
+    S32 lockid;
+    char packfile[128];
+    S32 asscnt;
+    S32 laycnt;
+    st_XORDEREDARRAY asstoc;
+    st_XORDEREDARRAY laytoc;
+    st_PACKER_ATOC_NODE* pool_anode;
+    S32 pool_nextaidx;
+    st_XORDEREDARRAY typelist[129];
+    time_t time_made;
+    time_t time_mod;
+#if DEBUG
+    S32 dbg_typlodtym_done;
+    F32 dbg_typlodtym[130];
+    F32 dbg_typxformtym[130];
+    S64 dbg_readtime[4];
+#endif
+};
+
+enum en_pkrfindmyass
+{
+    PKR_FIND_FAILED,
+    PKR_FIND_EXACT,
+    PKR_FIND_EXACT_XFORM,
+    PKR_FIND_RANGE,
+    PKR_FIND_RANGE_XFORM
+};
+
+PKRReadFuncs* PKRGetReadFuncs(S32 apiver);
+S32 PKRStartup();
+S32 PKRShutdown();
+S32 PKRLoadStep(S32 block);
+st_PACKER_ATOC_NODE* PKR_FindAssetNode(st_PACKER_READ_DATA* pr, U32 aid, S32* assetsize);
+U32 PKRAssetIDFromInst(void* asset_inst);
+#if DEBUG || RELEASE
+en_pkrfindmyass PKRFindMyAsset(st_PACKER_READ_DATA* pr, PKRAssetTOCInfo* tocinfo, const void* ptr_raw);
+#else
+inline en_pkrfindmyass PKRFindMyAsset(st_PACKER_READ_DATA*, PKRAssetTOCInfo*, const void*)
+{
+    return PKR_FIND_FAILED;
+}
+#endif
 
 void* PKR_getmem(U32 id, S32 amount, U32 aid, S32 align, U32 memtag);
 void PKR_relmem(U32 id, S32 blksize, void* memptr, U32 aid, S32 isTemp);
