@@ -58,11 +58,11 @@ struct st_PACKER_READ_DATA;
 struct PKRReadFuncs
 {
     U32 api_ver;
-    st_PACKER_READ_DATA*(*Init)(void*, char*, U32, S32*, PKRAssetType*, S32);
+    st_PACKER_READ_DATA*(*Init)(void*, const char*, U32, S32*, PKRAssetType*, S32);
     void(*Done)(st_PACKER_READ_DATA*);
     S32(*LoadLayer)(st_PACKER_READ_DATA*, en_LAYER_TYPE);
     U32(*GetAssetSize)(st_PACKER_READ_DATA*, U32);
-    void*(*LoadAsset)(st_PACKER_READ_DATA*, U32, char*, void*, S32*);
+    void*(*LoadAsset)(st_PACKER_READ_DATA*, U32, const char*, void*, S32*);
     void*(*AssetByType)(st_PACKER_READ_DATA*, U32, S32, U32*);
     S32(*AssetCount)(st_PACKER_READ_DATA*, U32);
     S32(*IsAssetReady)(st_PACKER_READ_DATA*, U32);
