@@ -20,9 +20,14 @@ struct xVec3
 
     static const xVec3 m_Null;
     static const xVec3 m_Ones;
+    static const xVec3 m_NegOnes;
     static const xVec3 m_UnitAxisX;
     static const xVec3 m_UnitAxisY;
     static const xVec3 m_UnitAxisZ;
+    static const xVec3 m_HalfVec;
+    static const xVec3 m_NegHalfVec;
+    static const xVec3 m_DoubleVec;
+    static const xVec3 m_NegDoubleVec;
 
     xVec3& assign(F32 x, F32 y, F32 z);
     xVec3& assign(F32 v);
@@ -92,7 +97,9 @@ do {                                                                            
 } while (0)
 
 F32 xVec3Normalize(xVec3* o, const xVec3* v);
+F32 xVec3NormalizeFast(xVec3* o, const xVec3* v);
 void xVec3Copy(xVec3* o, const xVec3* v);
+F32 xVec3Dot(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
 F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
 
 void xVec3AddTo(xVec3& a, const xVec3& b);

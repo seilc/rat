@@ -19,10 +19,14 @@ inline void xVec3Init(xVec3& v, F32 _x, F32 _y, F32 _z)
     v.z = _z;
 }
 
+inline void xVec3FromLatLong(xVec3* v, F32 lat, F32 lng);
+
 inline U32 xVec3Equals(const xVec3* a, const xVec3* b)
 {
     return xeq(a->x, b->x, 0.0f) && xeq(a->y, b->y, 0.0f) && xeq(a->z, b->z, 0.0f);
 }
+
+inline U32 xVec3EqualsWT(const xVec3* a, const xVec3* b, F32 t);
 
 inline void xVec3AddC(xVec3* o, const xVec3* a, F32 _x, F32 _y, F32 _z)
 {
@@ -91,6 +95,8 @@ inline void xVec3Sub(xVec3& o, const xVec3& a, const xVec3& b)
     o.z = a.z - b.z;
 }
 
+inline void xVec3SubXZ(xVec3& o, const xVec3& a, const xVec3& b);
+
 inline void xVec3SubFrom(xVec3* a, const xVec3* b)
 {
     a->x -= b->x, a->y -= b->y, a->z -= b->z;
@@ -156,6 +162,17 @@ inline F32 xVec3LengthFast(F32 _x, F32 _y, F32 _z)
     return len;
 }
 
+// RESTORED: from RotU GC, Incredibles GC, BFBB GC
+inline F32 xVec3LengthFast(const xVec3* v)
+{
+    F32 len;
+    xsqrtfast(len, v->x * v->x + v->y * v->y + v->z * v->z);
+    return len;
+}
+// END RESTORED
+
+inline F32 xVec3Length2(F32 _x, F32 _y, F32 _z);
+
 inline F32 xVec3Length2(const xVec3* v)
 {
     return v->x * v->x + v->y * v->y + v->z * v->z;
@@ -180,6 +197,8 @@ inline void xVec3Inv(xVec3& v)
     v.z = -v.z;
 }
 
+inline void xVec3ScaleC(xVec3* o, const xVec3* v, F32 _x, F32 _y, F32 _z);
+
 inline void xVec3ScaleC(xVec3& o, F32 scale)
 {
     o.x *= scale;
@@ -193,6 +212,8 @@ inline void xVec3ScaleC(xVec3& o, const xVec3& v, F32 scale)
     o.y = v.y * scale;
     o.z = v.z * scale;
 }
+
+inline void xVec3Scale(xVec3* o, const xVec3* v, const xVec3* s);
 
 inline F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b)
 {
@@ -220,6 +241,10 @@ inline F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b)
     }
     return d;
 }
+
+inline F32 xVec3Dist(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
+inline F32 xVec3DistFast(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
+inline F32 xVec3Dist2(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
 
 inline F32 xVec3Dist(const xVec3* a, const xVec3* b)
 {
