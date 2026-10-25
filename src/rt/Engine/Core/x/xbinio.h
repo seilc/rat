@@ -3,8 +3,6 @@
 
 #include "types.h"
 
-struct tag_xFile;
-
 enum en_BIO_ASYNC_ERRCODES
 {
     BINIO_ASYNC_FAIL = -1,
@@ -54,7 +52,5 @@ struct st_FILELOADINFO
 };
 
 st_FILELOADINFO* xBinioLoadCreate(const char* filename, S32 fileflags);
-void xFileSetUserData(tag_xFile* xf, void* p);
-void* xFileGetUserData(tag_xFile* xf);
 
 #endif
