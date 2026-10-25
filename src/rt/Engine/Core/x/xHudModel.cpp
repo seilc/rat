@@ -16,7 +16,7 @@ namespace xhud {
 
 void model_widget::load(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate(40, asset, model_asset, model_asset::type_name());
+    xDynAssetValidate_L(40, asset, model_asset, model_asset::type_name());
 
     init_base(data, asset, sizeof(widget_chunk));
 
@@ -30,7 +30,7 @@ model_widget::model_widget(const model_asset& a)
     , model(0)
 {
     model = xhud::load_model(mid);
-    xASSERTM(50, model != 0, "Could not load hud model: %s", xSTAssetNameOrID(mid));
+    xASSERT_FMT_L(50, model != 0, "Could not load hud model: %s", xSTAssetNameOrID(mid));
 
     x_scale = 1.0f;
     y_scale = 1.0f;

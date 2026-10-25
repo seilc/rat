@@ -9,11 +9,11 @@ F32* zUIUVs_Init(RpAtomic* atomic, U32& texCoordsCount)
     texCoordsCount = 0;
 
     RpGeometry* geom = RpAtomicGetGeometry(atomic);
-    xASSERT(10, geom);
+    xASSERT_L(10, geom);
 
     if (geom) {
         RwTexCoords* c = RpGeometryGetVertexTexCoords(geom, rwTEXTURECOORDINATEINDEX0);
-        xASSERT(14, c);
+        xASSERT_L(14, c);
 
         if (c) {
             S32 numcoordsets = RpGeometryGetNumTexCoordSets(geom);

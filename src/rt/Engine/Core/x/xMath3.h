@@ -147,7 +147,7 @@ static inline void xMat3x3RMulVec(xVec3* o, const xMat3x3* m, const xVec3* v)
 
 inline void xMat3x3MulScaleC(xMat3x3* o, const xMat3x3* m, F32 x, F32 y, F32 z)
 {
-    xASSERT(2996, (o != 0) && (m != 0));
+    xASSERT_L(2996, (o != 0) && (m != 0));
     o->right.assign(m->right.x * x, m->right.y * x, m->right.z * x);
     o->up.assign(m->up.x * y, m->up.y * y, m->up.z * y);
     o->at.assign(m->at.x * z, m->at.y * z, m->at.z * z);
@@ -155,7 +155,7 @@ inline void xMat3x3MulScaleC(xMat3x3* o, const xMat3x3* m, F32 x, F32 y, F32 z)
 
 inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
 {
-    xASSERT(3021, (o != 0) && (m != 0) && (s != 0));
+    xASSERT_L(3021, (o != 0) && (m != 0) && (s != 0));
     return xMat3x3MulScaleC(o, m, s->x, s->y, s->z);
 }
 

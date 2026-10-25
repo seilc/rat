@@ -83,7 +83,7 @@ S32 xPadUpdate(S32 idx, F32 time_passed)
 {
     U32 new_on = 0;
 
-    xASSERT(206, idx >= 0 && idx < k_XPAD_MAX);
+    xASSERT_L(206, idx >= 0 && idx < k_XPAD_MAX);
 
     if (zScene_ScreenAdjustMode()) {
         xPadAnalogIsDigital(idx, 0);

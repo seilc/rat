@@ -8,7 +8,7 @@
 
 void xMemoryManagerGeneral::Init(void* start, U32 size, Dir dir, Strategy strategy, bool debugging)
 {
-    xMEMORYMANAGERASSERT(23, size % 16 == 0);
+    xMEMORYMANAGER_ASSERT_L(23, size % 16 == 0);
 
     DoInit(start, size, debugging);
 
@@ -91,7 +91,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options)
 {
     size = (size + 15) & ~15;
 
-    xASSERT(127, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 4);
+    xASSERT_L(127, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 4);
     
 #if DEBUG || RELEASE
     bool updateLargestBlock = false;
@@ -139,7 +139,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options)
             node->size = size;
 
             FreeNode* next = NextBlockOfMemory(node);
-            xASSERT(185, next == newNode);
+            xASSERT_L(185, next == newNode);
 
             if (node == freeEnd) {
                 freeEnd = newNode;
@@ -191,7 +191,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options)
             node->size -= size + sizeof(FreeNode);
 
             FreeNode* next = NextBlockOfMemory(node);
-            xASSERT(242, next == newNode);
+            xASSERT_L(242, next == newNode);
 
             if (node == freeEnd) {
                 freeEnd = newNode;
@@ -206,7 +206,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options)
         }
     }
 
-    xASSERT(260, node->size >= size);
+    xASSERT_L(260, node->size >= size);
 
     if (node->prev) {
         node->prev->next = node->next;
@@ -249,7 +249,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options)
 
     allocatedHeap = allocatedNode;
 
-    xASSERT(308, nodeSize - size < 65536);
+    xASSERT_L(308, nodeSize - size < 65536);
 
     allocatedNode->extraOverhead = nodeSize - size;
     extraOverheadSpace += allocatedNode->extraOverhead;
@@ -442,7 +442,7 @@ void* xMemoryManagerGeneral::DoReallocate(void* pointer, U32 size, U32 options)
 
     const void* dataStart = allocatedNode + 1;
 
-    xASSERT(582, size > nodeSize);
+    xASSERT_L(582, size > nodeSize);
     U32 neededSize = size - nodeSize;
 
     if ((sizeAfterNode != 0 && dir == Up) || (sizeBeforeNode != 0 && dir == Down)) {
@@ -575,10 +575,10 @@ U32 xMemoryManagerGeneral::DoGetBlockSize(void* pointer) const
 #if DEBUG || RELEASE
 void xMemoryManagerGeneral::SetOrigSize(void* pointer, U32 size) const
 {
-    xASSERT(767, pointer);
-    xASSERT(768, ((U32)pointer & 3) == 0);
+    xASSERT_L(767, pointer);
+    xASSERT_L(768, ((U32)pointer & 3) == 0);
     AllocatedNode& node = *((AllocatedNode*)pointer - 1);
-    xASSERT(770, size <= 0xFFFF);
+    xASSERT_L(770, size <= 0xFFFF);
     node.origSize = size;
 }
 

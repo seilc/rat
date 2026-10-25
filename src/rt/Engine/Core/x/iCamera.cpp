@@ -89,18 +89,18 @@ RwCamera* iCameraCreate(S32 width, S32 height, S32 mainGameCamera)
     RwRaster* cameraRaster, *zbuffer;
 
     camera = RwCameraCreate();
-    xASSERT(150, camera);
+    xASSERT_L(150, camera);
 
     cameraFrame = RwFrameCreate();
-    xASSERT(154, cameraFrame);
+    xASSERT_L(154, cameraFrame);
     RwCameraSetFrame(camera, cameraFrame);
 
     cameraRaster = RwRasterCreate(width, height, 0, rwRASTERTYPECAMERA);
-    xASSERT(158, cameraRaster != NULL);
+    xASSERT_L(158, cameraRaster != NULL);
     RwCameraSetRaster(camera, cameraRaster);
 
     zbuffer = RwRasterCreate(width, height, 0, rwRASTERTYPEZBUFFER);
-    xASSERT(163, zbuffer != NULL);
+    xASSERT_L(163, zbuffer != NULL);
     RwCameraSetZRaster(camera, zbuffer);
 
     RwCameraSetFarClipPlane(camera, sCameraFarClip);
@@ -111,7 +111,7 @@ RwCamera* iCameraCreate(S32 width, S32 height, S32 mainGameCamera)
     RwCameraSetViewWindow(camera, &vw);
 
     if (mainGameCamera) {
-        xASSERT(181, sMainGameCamera == 0);
+        xASSERT_L(181, sMainGameCamera == 0);
         iScrFxCameraCreated(camera);
         sMainGameCamera = camera;
     }
@@ -121,7 +121,7 @@ RwCamera* iCameraCreate(S32 width, S32 height, S32 mainGameCamera)
 
 void iCameraDestroy(RwCamera* camera)
 {
-    xASSERT(197, camera);
+    xASSERT_L(197, camera);
 
     iAsyncLockRWSentry rw_sentry;
     RpWorld* pWorld;
@@ -178,7 +178,7 @@ RwRGBA hotPink = { 128, 0, 128, 255 };
 
 void iCameraBegin(RwCamera* cam, S32 clear)
 {
-    xASSERT(277, cam);
+    xASSERT_L(277, cam);
 
 #if DEBUG || RELEASE
     iTime timeA = iTimeGet();
@@ -207,7 +207,7 @@ void iCameraBegin(RwCamera* cam, S32 clear)
 
 void iCameraEnd(RwCamera* cam)
 {
-    xASSERT(336, cam);
+    xASSERT_L(336, cam);
 
     iScrFxCameraEndScene(cam);
     RwCameraEndUpdate(cam);
@@ -215,28 +215,28 @@ void iCameraEnd(RwCamera* cam)
 
 void iCameraShowRaster(RwCamera* cam)
 {
-    xASSERT(354, cam);
+    xASSERT_L(354, cam);
 
     RwCameraShowRaster(cam, NULL, 0);
 }
 
 void iCameraUpdatePos(RwCamera* cam, xMat4x3* pos)
 {
-    xASSERT(383, cam);
-    xASSERT(384, pos);
+    xASSERT_L(383, cam);
+    xASSERT_L(384, pos);
 
     RwFrame* f;
     RwMatrix* m;
 
     f = RwCameraGetFrame(cam);
-    xASSERT(387, f);
+    xASSERT_L(387, f);
 
     m = RwFrameGetMatrix(f);
-    xASSERT(389, m);
+    xASSERT_L(389, m);
     xMat4x3Copy((xMat4x3*)m, pos);
 
     m = RwFrameGetLTM(f);
-    xASSERT(394, m);
+    xASSERT_L(394, m);
     xMat4x3Copy((xMat4x3*)m, pos);
     
     RwFrameOrthoNormalize(f);
@@ -266,8 +266,8 @@ DECOMP_FORCEACTIVE("cam != 0", "vw != 0")
 
 void iCameraAssignEnv(RwCamera* camera, iEnv* env_geom)
 {
-    xASSERT(500, env_geom);
-    xASSERT(501, env_geom->world);
+    xASSERT_L(500, env_geom);
+    xASSERT_L(501, env_geom->world);
 
     iAsyncLockRWSentry rw_sentry;
 

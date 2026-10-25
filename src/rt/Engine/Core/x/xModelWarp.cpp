@@ -73,11 +73,11 @@ namespace {
     void set_texture(RpAtomic* atomic, RwTexture* texture)
     {
         RpGeometry* geom = RpAtomicGetGeometry(atomic);
-        xASSERT(170, geom != 0);
-        xASSERT(171, RpGeometryGetNumMaterials(geom) == 1);
+        xASSERT_L(170, geom != 0);
+        xASSERT_L(171, RpGeometryGetNumMaterials(geom) == 1);
 
         RpMaterial* material = RpGeometryGetMaterial(geom, 0);
-        xASSERT(172, material != 0);
+        xASSERT_L(172, material != 0);
 
         RpMaterialSetTexture(material, texture);
     }
@@ -128,12 +128,12 @@ void xModelWarpSceneExit()
 
 void xModelWarpSetEffect(RpAtomic* atomic, const xBox* box, const xFColor* color)
 {
-    xASSERT(624, render_contexts_size < MAX_ACTIVE);
+    xASSERT_L(624, render_contexts_size < MAX_ACTIVE);
 
     if (render_contexts_size >= MAX_ACTIVE) return;
 
     render_context* old_context = get_render_context(atomic);
-    xASSERT(628, old_context == 0);
+    xASSERT_L(628, old_context == 0);
     if (old_context != 0) return;
 
     render_context& context = render_contexts[render_contexts_size];
@@ -148,7 +148,7 @@ void xModelWarpSetEffect(RpAtomic* atomic, const xBox* box, const xFColor* color
     context.atomic = atomic;
 
     context.original_render_callback = RpAtomicGetRenderCallBack(atomic);
-    xASSERT(651, context.original_render_callback != render_callback);
+    xASSERT_L(651, context.original_render_callback != render_callback);
     RpAtomicSetRenderCallBack(atomic, render_callback);
 
     set_texture(context.atomic, camtex.texture);

@@ -39,7 +39,7 @@ struct xVec3
     F32 normalize()
     {
         F32 len2 = length2();
-        xASSERT(86, len2 > 0.f);
+        xASSERT_L(86, len2 > 0.f);
 
         F32 len = xsqrt(len2);
         *this *= 1.0f / len;

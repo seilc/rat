@@ -130,7 +130,7 @@ struct xEnt : xBase
 
 inline xVec3* xEntGetPos(const xEnt* ent)
 {
-    xASSERT(1078, ent->model);
+    xASSERT_L(1078, ent->model);
     return &xModelGetFrame(ent->model)->pos;
 }
 
@@ -162,7 +162,7 @@ inline void xEntVisibilityCullOff(xEnt* ent)
 
 inline xMat4x3* xEntGetFrame(const xEnt* ent)
 {
-    xASSERT(1098, ent->model);
+    xASSERT_L(1098, ent->model);
     return xModelGetFrame(ent->model);
 }
 

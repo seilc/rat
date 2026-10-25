@@ -65,7 +65,7 @@ void xNurbs::find_basis_functions(F32 u, S32 i, F32* N) const
 {
     N[0] = 1.0f;
 
-    xASSERT(91, degree <= MAX_DEGREE);
+    xASSERT_L(91, degree <= MAX_DEGREE);
 
     F32 left[5];
     F32 right[5];
@@ -86,7 +86,7 @@ void xNurbs::find_derivative_basis_functions(F32 u, S32 i, S32 order, F32 ders[5
 {
     // My brain hurts.
 
-    xASSERT(119, degree <= MAX_DEGREE);
+    xASSERT_L(119, degree <= MAX_DEGREE);
 
     F32 ndu[5][5];
     ndu[0][0] = 1.0f;
@@ -171,7 +171,7 @@ F32 xNurbs::end() const
 
 void xNurbs::evaluate(F32 u, xVec3& point) const
 {
-    xASSERT(222, (u >= start()) && (u <= end()));
+    xASSERT_L(222, (u >= start()) && (u <= end()));
 
     S32 span = find_span(u);
     F32 N[5];
@@ -228,7 +228,7 @@ xVec3 xNurbs::project_point(const xVec3& point, F32* u, F32* distance, F32 guess
             }
         }
 
-        xASSERT(315, (guess >= start()) && (guess <= end()));
+        xASSERT_L(315, (guess >= start()) && (guess <= end()));
     } else {
         evaluate(guess, curve_point);
         length2 = point.Distance2(curve_point);
@@ -323,7 +323,7 @@ void xNurbs::getBoundBox(xBox& box) const
 
 void xNurbs::AddCrossSectionPos(xVec3& lastPos, xVec3& centerLinePos, F32 halfWidth) const
 {
-    xASSERT_ONCE(454, (gTotalSectionVerts+2) <= NURBS_DRAW_MAX && "Tight rope is too large to draw!?!?");
+    xASSERT_ONCE_L(454, (gTotalSectionVerts+2) <= NURBS_DRAW_MAX && "Tight rope is too large to draw!?!?");
 
     xVec3 dirVec;
     dirVec.Sub(centerLinePos, lastPos);

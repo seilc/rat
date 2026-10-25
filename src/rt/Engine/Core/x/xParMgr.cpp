@@ -12,7 +12,7 @@ static S32 sParMgrInit;
 
 void xParMgrInit()
 {
-    xTRACEFUNCTION(62, "PAR");
+    xTRACE_FUNCTION_L(62, "PAR");
 
     if (!sParMgrInit) {
         xParMemInit();
@@ -38,8 +38,8 @@ void xParMgrUpdate(F32 elapsedTime)
     iParMgrUpdate(elapsedTime);
     numFrames = 1;
 
-    xASSERT(289, numFrames < 100);
-    xASSERT(290, sFrameCount < 100);
+    xASSERT_L(289, numFrames < 100);
+    xASSERT_L(290, sFrameCount < 100);
 
     sFrameCount += numFrames;
 

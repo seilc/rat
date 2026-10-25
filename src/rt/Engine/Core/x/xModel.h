@@ -95,8 +95,8 @@ void xModelRenderLogSetEntity(xEnt* ent);
 
 inline xMat4x3* xModelGetFrame(xModelInstance* model)
 {
-    xASSERT(855, model);
-    xASSERT(856, model->Mat);
+    xASSERT_L(855, model);
+    xASSERT_L(856, model->Mat);
     return (xMat4x3*)model->Mat;
 }
 

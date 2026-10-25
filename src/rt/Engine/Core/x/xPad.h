@@ -66,8 +66,8 @@ void xPadAnalogIsDigital(S32 idx, S32 enable);
 
 inline F32 normalize_analog(S32 v, S32 v_min, S32 v_max, S32 dead_center, S32 dead_min, S32 dead_max)
 {
-    xASSERT(248, dead_min > v_min);
-    xASSERT(249, dead_max < v_max);
+    xASSERT_L(248, dead_min > v_min);
+    xASSERT_L(249, dead_max < v_max);
     if (v <= dead_center) {
         if (v >= dead_min) {
             return 0.0f;

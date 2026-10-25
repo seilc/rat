@@ -127,7 +127,7 @@ void xFXCameraTexture::destroy()
 
 void xFXCameraTexture::begin_render(S32 clear_flags, U32 fbmsk_write, U32, F32 near_plane, F32 far_plane)
 {
-    xASSERT(162, valid());
+    xASSERT_L(162, valid());
 
     oldworld = globals.currWorld;
     xLightKit_Enable(NULL, oldworld, NULL, 0.0f);
@@ -202,7 +202,7 @@ void xFXCameraTexture::render_background()
     zRenderState(eRenderStateFill);
     RwRenderStateSet(rwRENDERSTATETEXTURERASTER, (void*)bgraster);
 
-    RwIm2DVertex* vert = (RwIm2DVertex*)xMEMPUSHTEMP(sizeof(RwIm2DVertex) * 6, 0, 276);
+    RwIm2DVertex* vert = (RwIm2DVertex*)xMEMPUSHTEMP_L(sizeof(RwIm2DVertex) * 6, 0, 276);
 
     set_vert(vert[0], 0, 0, 0, 0);
     set_vert(vert[1], 0, h, 0, 1);
@@ -395,7 +395,7 @@ void xFXFastRaster::set_source(RwRaster*, tcc_type, tfx_type, filter_type)
 
 void xFXFastRaster::set_destination(RwRaster* dst, U32 fbmsk)
 {
-    xASSERT(2142, dst != 0);
+    xASSERT_L(2142, dst != 0);
 
     this->dst = dst;
     this->fbmsk = fbmsk;

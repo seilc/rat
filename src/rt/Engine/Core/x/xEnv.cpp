@@ -27,7 +27,7 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
         env->geom = &env->ienv;
 
         S32 jsp_count = xSTAssetCountByType('JSP ');
-        xASSERTM(54, (jsp_count > 0), "No JSP's found in scene!");
+        xASSERT_FMT_L(54, (jsp_count > 0), "No JSP's found in scene!");
 
         iEnvLoadBegin(env->geom, dataType, jsp_count / 2);
 
@@ -48,14 +48,14 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
         iEnvLoadEnd(env->geom, dataType);
     }
 
-    xASSERT(77, env->geom);
+    xASSERT_L(77, env->geom);
 
     gCurXEnv = env;
 }
 
 void xEnvSetup(xEnv* env)
 {
-    xASSERT(106, env->geom);
+    xASSERT_L(106, env->geom);
 
     iEnvSetup(env->geom);
     iEnvDefaultLighting(env->geom);
@@ -66,10 +66,10 @@ void xEnvSetup(xEnv* env)
 
 void xEnvFree(xEnv* env)
 {
-    xASSERT(135, env);
+    xASSERT_L(135, env);
 
     if (env->geom) {
-        xASSERT(140, env->geom == &env->ienv);
+        xASSERT_L(140, env->geom == &env->ienv);
         iEnvFree(env->geom);
         env->geom = NULL;
     }
@@ -77,7 +77,7 @@ void xEnvFree(xEnv* env)
 
 void xEnvRender(xEnv* env, bool alpha)
 {
-    xASSERT(155, env);
+    xASSERT_L(155, env);
 
     if (env->geom) {
         iEnvRender(env->geom, alpha);
@@ -95,11 +95,11 @@ void xEnvRender(xEnv* env, bool alpha)
             char text[128];
             if (env->geom->jsp_visibilityCount[i] < 0) {
                 sprintf(text, "JSP '%s' had too many Decrements (once only assertion)", xSTAssetName(env->geom->jsp_aid[i]));
-                xFAIL_ONCE_M(175, "%s", text);
+                xFAIL_ONCE_L(175, "%s", text);
             }
             if (env->geom->jsp_visibilityCount[i] > 4) {
                 sprintf(text, "JSP '%s' had suspiciously high Inc's\n (more than 4, missing Dec's?)", xSTAssetName(env->geom->jsp_aid[i]));
-                xFAIL_ONCE_M(181, "%s", text);
+                xFAIL_ONCE_L(181, "%s", text);
             }
 #endif
         }
@@ -112,7 +112,7 @@ void xEnvRender(xEnv* env, bool alpha)
 
 void xEnvResetJSPVisibilities(xEnv* env)
 {
-    xASSERT(204, env);
+    xASSERT_L(204, env);
 
     if (env && env->geom) {
         for (S32 i = 0; i < env->geom->jsp_count; i++) {

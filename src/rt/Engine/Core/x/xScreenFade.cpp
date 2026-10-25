@@ -61,7 +61,7 @@ void xScreenFade::StartFade()
     state = eScreenFadeStateFadeDown;
     time_passed = 0.0f;
 
-    xASSERT(73, ScreenFade::GlobalData::cnt_fadesInProgress>=0);
+    xASSERT_L(73, ScreenFade::GlobalData::cnt_fadesInProgress>=0);
     ScreenFade::GlobalData::cnt_fadesInProgress++;
 }
 
@@ -77,7 +77,7 @@ void xScreenFade::update(F32 seconds)
     if (zGameIsPaused()) return;
     if (state == eScreenFadeStateOff) return;
 
-    xASSERT(121, ScreenFade::GlobalData::cnt_fadesInProgress > 0);
+    xASSERT_L(121, ScreenFade::GlobalData::cnt_fadesInProgress > 0);
 
     time_passed += seconds;
 
@@ -111,7 +111,7 @@ void xScreenFade::update(F32 seconds)
             zEntEvent(this, this, eEventFadeUpDone);
 
             ScreenFade::GlobalData::cnt_fadesInProgress--;
-            xASSERT(190, ScreenFade::GlobalData::cnt_fadesInProgress>=0);
+            xASSERT_L(190, ScreenFade::GlobalData::cnt_fadesInProgress>=0);
 
             if (ScreenFade::GlobalData::cnt_fadesInProgress < 0) {
                 ScreenFade::GlobalData::cnt_fadesInProgress = 0;
@@ -146,7 +146,7 @@ void xScreenFade::reset()
 
 void xScreenFade::load(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate(236, asset, xScreenFade::asset_type, xScreenFade::asset_type::type_name());
+    xDynAssetValidate_L(236, asset, xScreenFade::asset_type, xScreenFade::asset_type::type_name());
     ((xScreenFade&)data).load((xScreenFade::asset_type&)asset);
 }
 
@@ -174,10 +174,10 @@ void xScreenFade::render_all()
 
 void xScreenFade::cb_dispatch(xBase* from, xBase* to, U32 event, const F32*, xBase*, U32)
 {
-    xASSERT(261, to != 0);
+    xASSERT_L(261, to != 0);
 
     xScreenFade& e = (xScreenFade&)*to;
-    xASSERT(263, e.baseType == eBaseTypeScreenFade);
+    xASSERT_L(263, e.baseType == eBaseTypeScreenFade);
 
     switch (event) {
     case eEventReset:

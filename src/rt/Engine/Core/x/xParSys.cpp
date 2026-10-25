@@ -193,17 +193,17 @@ static void render_par_sprite(void* data, xParGroup* ps)
 
 xParGroupRenderFunction xParSysGetRenderFunction(S32 which)
 {
-    xASSERT(262, (which >= 0) && (which < eParSysRenderFuncCount));
+    xASSERT_L(262, (which >= 0) && (which < eParSysRenderFuncCount));
 
     return sParSysInfo[which].func;
 }
 
 void xParCmdTexInit(xParCmdTex* cmd)
 {
-    xASSERT(270, cmd->cols > 0);
-    xASSERT(271, cmd->rows > 0);
-    xASSERT(272, cmd->rows <= 16);
-    xASSERT(273, cmd->cols <= 16);
+    xASSERT_L(270, cmd->cols > 0);
+    xASSERT_L(271, cmd->rows > 0);
+    xASSERT_L(272, cmd->rows <= 16);
+    xASSERT_L(273, cmd->cols <= 16);
 
     cmd->unit_count = cmd->rows * cmd->cols;
     cmd->unit_width = (cmd->x2 - cmd->x1) / cmd->cols;
@@ -235,11 +235,11 @@ void xParSysInit(xBase* b, xParSysAsset* tasset)
     U32 size, i;
 #if DEBUG || RELEASE
     size = (t->cmdCount <= 8) ? 8 : t->cmdCount;
-    t->cmd = (xParCmd*)xMEMALLOC(size * sizeof(xParCmd), 0, eMemMgrTag_Particle, 0, 340);
+    t->cmd = (xParCmd*)xMEMALLOC_L(size * sizeof(xParCmd), 0, eMemMgrTag_Particle, 0, 340);
 #else
     size = t->cmdCount;
     if (size > 0) {
-        t->cmd = (xParCmd*)xMEMALLOC(size * sizeof(xParCmd), 0, eMemMgrTag_Particle, 0, 0);
+        t->cmd = (xParCmd*)xMEMALLOC_L(size * sizeof(xParCmd), 0, eMemMgrTag_Particle, 0, 0);
     } else {
         t->cmd = NULL;
     }
@@ -255,7 +255,7 @@ void xParSysInit(xBase* b, xParSysAsset* tasset)
     {
         U32 size, i;
         size = (t->cmdCount <= 8) ? 8 : t->cmdCount;
-        t->cmd_buffer = (xParCmdAny*)xMEMALLOC(size * sizeof(xParCmdAny), 0, eMemMgrTag_Particle, 0, 373);
+        t->cmd_buffer = (xParCmdAny*)xMEMALLOC_L(size * sizeof(xParCmdAny), 0, eMemMgrTag_Particle, 0, 373);
         for (i = 0; i < t->cmdCount; i++) {
             memcpy(&t->cmd_buffer[i], t->cmd[i].tasset, xParCmdGetSize(t->cmd[i].tasset->type));
             t->cmd[i].tasset = (xParCmdAsset*)&t->cmd_buffer[i];
@@ -273,9 +273,9 @@ void xParSysInit(xBase* b, xParSysAsset* tasset)
     }
 #endif
     
-    t->group = (xParGroup*)xMEMALLOC(sizeof(xParGroup), 0, eMemMgrTag_Particle, 0, 395);
+    t->group = (xParGroup*)xMEMALLOC_L(sizeof(xParGroup), 0, eMemMgrTag_Particle, 0, 395);
 
-    xASSERT(397, t->group);
+    xASSERT_L(397, t->group);
 
     xParGroupInit(t->group);
     xParGroupSetPriority(t->group, tasset->priority);
@@ -308,8 +308,8 @@ void xParSysSetup(xParSys* t)
 
 void xParSysReset(xParSys* t)
 {
-    xASSERT(452, t);
-    xASSERT(453, t->tasset);
+    xASSERT_L(452, t);
+    xASSERT_L(453, t->tasset);
 
     xBaseReset(t, t->tasset);
 
@@ -332,7 +332,7 @@ xBase* xParSysExit(xBase* b, zScene*, void*)
 
 void xParSysExit(xParSys* t)
 {
-    xASSERT(479, t);
+    xASSERT_L(479, t);
 
     if (t->group) {
         xParGroupKillAllParticles(t->group);
@@ -346,7 +346,7 @@ void xParSysEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
 {
     xParSys* t = (xParSys*)to;
 
-    xASSERT(541, to);
+    xASSERT_L(541, to);
 
     switch (toEvent) {
     case eEventReset:
@@ -382,7 +382,7 @@ static void xParGroupUpdateR(xParSys* s, xParGroup* g, F32 dt);
 
 void xParSysUpdate(xBase* to, xScene*, F32 dt)
 {
-    xASSERT(585, to);
+    xASSERT_L(585, to);
 
     xParSys* s = (xParSys*)to;
     xParSys* parent = s->parent;
@@ -391,7 +391,7 @@ void xParSysUpdate(xBase* to, xScene*, F32 dt)
         par_sprite_begin();
     }
 
-    xASSERT(593, s);
+    xASSERT_L(593, s);
 
     xParGroup* g = s->group;
     while (g != NULL) {
@@ -416,20 +416,20 @@ void xParSysUpdate(xBase* to, xScene*, F32 dt)
 
 static void xParGroupUpdateR(xParSys* s, xParGroup* g, F32 dt)
 {
-    xASSERT(629, s);
-    xASSERT(630, g);
-    xASSERTM(632, s != s->parent, "Particle system has itself as a parent!");
+    xASSERT_L(629, s);
+    xASSERT_L(630, g);
+    xASSERT_FMT_L(632, s != s->parent, "Particle system has itself as a parent!");
     
     if (s->parent) {
         xParGroupUpdateR(s->parent, g, dt);
     }
 
-    xASSERT(637, s->group);
+    xASSERT_L(637, s->group);
 
     if (s->group->m_active) {
         for (U32 i = 0; i < s->cmdCount; i++) {
             xParCmd* cmd = &s->cmd[i];
-            xASSERT(645, cmd);
+            xASSERT_L(645, cmd);
             if (cmd && cmd->tasset) {
                 xParCmdUpdateFunction func = xParCmdGetUpdateFunc(cmd->tasset->type);
                 if (func) {
@@ -444,7 +444,7 @@ void xParGroupUpdate(xParSys* s, xParGroup* g, F32 dt)
 {
     for (U32 i = 0; i < s->cmdCount; i++) {
         xParCmd* cmd = &s->cmd[i];
-        xASSERT(664, cmd);
+        xASSERT_L(664, cmd);
         if (cmd && cmd->tasset) {
             xParCmdUpdateFunction func = xParCmdGetUpdateFunc(cmd->tasset->type);
             if (func) {

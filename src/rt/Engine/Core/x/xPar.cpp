@@ -44,7 +44,7 @@ xPar* xParAlloc()
 
 void xParFree(xPar* par)
 {
-    xASSERT(100, par);
+    xASSERT_L(100, par);
 
     if (par->m_next) {
         par->m_next->m_prev = par->m_prev;

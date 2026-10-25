@@ -42,20 +42,20 @@ void xNavigationMeshAsset::RegisterEntity(U32 id)
     }
 
     xEnt* entity = (xEnt*)zSceneFindObject(id);
-    xFAIL_AND_RETURN_IF(76, entity == NULL);
-    xASSERT(77, entity->baseFlags & k_XBASE_IS_ENTITY);
+    xFAIL_RETURN_IF_L(76, entity == NULL);
+    xASSERT_L(77, entity->baseFlags & k_XBASE_IS_ENTITY);
 
     if (entity->frame == 0) {
-        xASSERTM(82, entity->frame != 0,
-                   "Entity %s added to navigation mesh but it doesn't have a frame.  Maybe a bad Maya reference.",
-                   xSceneID2Name(xglobals->sceneCur, entity->id));
+        xASSERT_FMT_L(82, entity->frame != 0,
+                     "Entity %s added to navigation mesh but it doesn't have a frame.  Maybe a bad Maya reference.",
+                     xSceneID2Name(xglobals->sceneCur, entity->id));
         return;
     }
 
     xCylinder cylinder;
     xBoundGetCylinder(cylinder, entity->bound);
 
-    zMeshCircle* newCircle = new (xMEMALLOC(sizeof(zMeshCircle), 0, eMemMgrTag_NavigationMesh, 0, 89)) zMeshCircle();
+    zMeshCircle* newCircle = new (xMEMALLOC_L(sizeof(zMeshCircle), 0, eMemMgrTag_NavigationMesh, 0, 89)) zMeshCircle();
 
     newCircle->ownerEntity = entity;
     newCircle->mesh = this;
@@ -127,7 +127,7 @@ zMeshCircle* xNavigationMeshAsset::FindMeshCircleForEnt(const xEnt* ent)
 
 void xNavigationMeshAsset::AddCircle(zMeshCircle* circle)
 {
-    xFAIL_AND_RETURN_IF(200, circle == NULL);
+    xFAIL_RETURN_IF_L(200, circle == NULL);
 
     if (circle->mesh != this) {
         circle->masterListNext = circleList;
@@ -138,8 +138,8 @@ void xNavigationMeshAsset::AddCircle(zMeshCircle* circle)
 
 bool xNavigationMeshAsset::RemoveCircle(zMeshCircle* circle)
 {
-    xFAIL_AND_RETURN_VALUE_IF(219, circle == NULL, false);
-    xFAIL_AND_RETURN_VALUE_IF(220, circle->mesh != this, false);
+    xFAIL_RETURN_VALUE_IF_L(219, circle == NULL, false);
+    xFAIL_RETURN_VALUE_IF_L(220, circle->mesh != this, false);
 
     zMeshCircle* currentCircle = circleList;
     zMeshCircle* prevCircle = NULL;
@@ -163,9 +163,9 @@ bool xNavigationMeshAsset::RemoveCircle(zMeshCircle* circle)
 
 void xNavigationMeshAsset::SceneInit()
 {
-    xASSERT(262, sFreeCirclePool == NULL);
+    xASSERT_L(262, sFreeCirclePool == NULL);
 
-    sFreeCirclePool = new (xMEMALLOC(sizeof(zMeshCircle) * MAX_CIRCLES, 0, eMemMgrTag_NavigationMesh, 0, 263)) zMeshCircle();
+    sFreeCirclePool = new (xMEMALLOC_L(sizeof(zMeshCircle) * MAX_CIRCLES, 0, eMemMgrTag_NavigationMesh, 0, 263)) zMeshCircle();
 
     for (U32 i = 0; i < MAX_CIRCLES-1; i++) {
         sFreeCirclePool[i].masterListNext = &sFreeCirclePool[i+1];
@@ -179,7 +179,7 @@ void xNavigationMeshAsset::SceneExit()
 
 zMeshCircle* xNavigationMeshAsset::GetFreeCircle()
 {
-    xASSERTM(279, sFreeCirclePool, "Running out of free mesh circles.  Increase pool size?");
+    xASSERT_FMT_L(279, sFreeCirclePool, "Running out of free mesh circles.  Increase pool size?");
 
     if (sFreeCirclePool) {
         zMeshCircle* circle = sFreeCirclePool;
@@ -209,7 +209,7 @@ DECOMP_FORCEACTIVE(
 
 S32 xNavigationMeshAssetSubMesh::getTriangle(const xVec3& point, S32 current_triangle) const
 {
-    xASSERT(460, (current_triangle == NO_TRIANGLE) || ((current_triangle < numTriangles) && (current_triangle >= 0)));
+    xASSERT_L(460, (current_triangle == NO_TRIANGLE) || ((current_triangle < numTriangles) && (current_triangle >= 0)));
 
     if (current_triangle != NO_TRIANGLE) {
         if (inTriangle(current_triangle, point)) {
@@ -231,8 +231,8 @@ S32 xNavigationMeshAssetSubMesh::getTriangle(const xVec3& point, S32 current_tri
         }
     }
     
-    xASSERTM(510, numTriangles >= 0 && numTriangles < MAX_TRIANGLES_PER_SUB_MESH,
-               "Corrupted navigation mesh.  Invalid triangle count!");
+    xASSERT_FMT_L(510, numTriangles >= 0 && numTriangles < MAX_TRIANGLES_PER_SUB_MESH,
+                 "Corrupted navigation mesh.  Invalid triangle count!");
     
     for (S32 i = 0; i < numTriangles; i++) {
         if (inTriangle(i, point)) {
@@ -279,8 +279,8 @@ S32 xNavigationMeshAssetSubMesh::lookup_next(S32 source, S32 destination) const
 
 bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, S32 triGuess, S32& subMeshIndex, S32& triIndex)
 {
-    xFAIL_AND_RETURN_VALUE_IF(618, subMeshGuess < 0 || subMeshGuess >= numSubMeshes, false);
-    xFAIL_AND_RETURN_VALUE_IF(619, triGuess != NO_TRIANGLE && (triGuess < 0 || triGuess >= subMeshes[subMeshGuess].numTriangles), false);
+    xFAIL_RETURN_VALUE_IF_L(618, subMeshGuess < 0 || subMeshGuess >= numSubMeshes, false);
+    xFAIL_RETURN_VALUE_IF_L(619, triGuess != NO_TRIANGLE && (triGuess < 0 || triGuess >= subMeshes[subMeshGuess].numTriangles), false);
 
     for (subMeshIndex = 0; subMeshIndex < numSubMeshes; subMeshIndex++) {
         xNavigationMeshAssetSubMesh* sub_mesh = &subMeshes[subMeshIndex];
@@ -345,11 +345,11 @@ void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& su
 
 void xNavigationMeshAsset::CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex)
 {
-    xFAIL_AND_RETURN_IF(722, subMeshIndex < 0 || subMeshIndex >= numSubMeshes);
+    xFAIL_RETURN_IF_L(722, subMeshIndex < 0 || subMeshIndex >= numSubMeshes);
 
     xNavigationMeshAssetSubMesh* subMesh = &subMeshes[subMeshIndex];
 
-    xFAIL_AND_RETURN_IF(727, triangleIndex < 0 || triangleIndex >= subMesh->numTriangles);
+    xFAIL_RETURN_IF_L(727, triangleIndex < 0 || triangleIndex >= subMesh->numTriangles);
     
     for (S32 i = 0; i < subMesh->numExits; i++) {
         if (triangleIndex == subMesh->exits[i].exitTriangleIndex) {

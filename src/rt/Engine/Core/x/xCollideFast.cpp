@@ -5,15 +5,15 @@
 
 U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
 {
-    xASSERT(26, r);
-    xASSERT(27, s);
+    xASSERT_L(26, r);
+    xASSERT_L(27, s);
 
     xVec3 diff;
     xVec3Sub(&diff, &r->origin, &s->center);
     
 #if DEBUG
     F32 a = xVec3Dot(&r->dir, &r->dir);
-    xVALIDATE(33, xabs(a-1) < 1e-3f);
+    xVALIDATE_L(33, xabs(a-1) < 1e-3f);
 #endif
     
     F32 c = xVec3Dot(&diff, &diff) - s->r * s->r;
@@ -37,8 +37,8 @@ U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
 
 U32 xRayHitsBoxFast(const xRay3* r, const xBox* b)
 {
-    xASSERT(63, r);
-    xASSERT(64, b);
+    xASSERT_L(63, r);
+    xASSERT_L(64, b);
 
     xIsect isx;
     iBoxIsectRay(b, r, &isx);
@@ -49,8 +49,8 @@ U32 xRayHitsBoxFast(const xRay3* r, const xBox* b)
 // RESTORED: from RotU GC, Incredibles GC
 U32 xRayHitsCylinderFast(const xRay3* r, const xCylinder* c)
 {
-    xASSERT(__LINE__, r);
-    xASSERT(__LINE__, c);
+    xASSERT(r);
+    xASSERT(c);
 
     xIsect isx;
     iCylinderIsectRay(c, r, &isx);
@@ -60,8 +60,8 @@ U32 xRayHitsCylinderFast(const xRay3* r, const xCylinder* c)
 
 U32 xRayHitsBoundFast(const xRay3* r, const xBound* b)
 {
-    xASSERT(__LINE__, r);
-    xASSERT(__LINE__, b);
+    xASSERT(r);
+    xASSERT(b);
 
     if (b->type == k_XBOUNDTYPE_SPHERE) {
         return xRayHitsSphereFast(r, &b->sph);
@@ -69,8 +69,8 @@ U32 xRayHitsBoundFast(const xRay3* r, const xBound* b)
         xRay3 lr;
         xMat3x3 mn;
         F32 ms = xVec3Length(&b->mat->right);
-        xVALIDATE(__LINE__, xeq(ms*ms,xVec3Length2(&b->mat->up),1e-3f));
-        xVALIDATE(__LINE__, xeq(ms*ms,xVec3Length2(&b->mat->at),1e-3f));
+        xVALIDATE(xeq(ms*ms,xVec3Length2(&b->mat->up),1e-3f));
+        xVALIDATE(xeq(ms*ms,xVec3Length2(&b->mat->at),1e-3f));
 
         xMat3x3Normalize(&mn, b->mat);
         xMat4x3ToLocal(&lr.origin, b->mat, &r->origin);

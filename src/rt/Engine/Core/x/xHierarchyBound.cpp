@@ -132,9 +132,9 @@ S32 xHierarchyBoundSetup(xHierarchyBound* bound, const xHierarchyBoundInitData* 
     for (; init[nodesSize].bone >= -1; nodesSize++) {
     }
     nodesSize += extraBounds;
-    xASSERT(202, nodesSize <= 255);
+    xASSERT_L(202, nodesSize <= 255);
 
-    bound->nodes = (xHierarchyNode*)xMEMALLOC(sizeof(xHierarchyNode) * nodesSize, 0, eMemMgrTag_HierarchyBound, 0, 205);
+    bound->nodes = (xHierarchyNode*)xMEMALLOC_L(sizeof(xHierarchyNode) * nodesSize, 0, eMemMgrTag_HierarchyBound, 0, 205);
     bound->maxCount = nodesSize;
 
     return sizeof(xHierarchyNode) * nodesSize;
@@ -143,9 +143,9 @@ S32 xHierarchyBoundSetup(xHierarchyBound* bound, const xHierarchyBoundInitData* 
 S32 xHierarchyBoundSetup(xHierarchyBound* bound, U32 nodesNumber)
 {
     U32 nodesSize = nodesNumber;
-    xASSERT(215, nodesSize <= 255);
+    xASSERT_L(215, nodesSize <= 255);
 
-    bound->nodes = (xHierarchyNode*)xMEMALLOC(sizeof(xHierarchyNode) * nodesSize, 0, eMemMgrTag_HierarchyBound, 0, 218);
+    bound->nodes = (xHierarchyNode*)xMEMALLOC_L(sizeof(xHierarchyNode) * nodesSize, 0, eMemMgrTag_HierarchyBound, 0, 218);
     bound->maxCount = nodesSize;
 
     return sizeof(xHierarchyNode) * nodesSize;
@@ -153,7 +153,7 @@ S32 xHierarchyBoundSetup(xHierarchyBound* bound, U32 nodesNumber)
 
 void xHierarchyBoundInit(xHierarchyBound* bound, const xHierarchyBoundInitData* init, F32 masterRadius, F32 scale)
 {
-    xASSERT(227, bound->nodes);
+    xASSERT_L(227, bound->nodes);
 
     U32 count = 0;
     while (init[count].bone >= -1) count++;
@@ -167,7 +167,7 @@ void xHierarchyBoundInit(xHierarchyBound* bound, const xHierarchyBoundInitData* 
         node.userData = init[i].userData;
     }
 
-    xASSERT(246, count <= 255);
+    xASSERT_L(246, count <= 255);
     
     U32 extraBounds = bound->maxCount - count;
     memset(bound->nodes + count, 0, sizeof(xHierarchyNode) * extraBounds);
@@ -245,8 +245,8 @@ void xHierarchyBoundAddDebugTweaks(xHierarchyBound* bound, const char* base, con
         NULL
     };
 
-    xASSERT(461, boneNames != NULL || boneCount > 0);
-    xASSERT(462, boneCount < 64);
+    xASSERT_L(461, boneNames != NULL || boneCount > 0);
+    xASSERT_L(462, boneCount < 64);
 
     char buffer[128];
 

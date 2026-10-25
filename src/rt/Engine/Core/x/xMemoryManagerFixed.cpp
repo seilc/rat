@@ -41,7 +41,7 @@ DECOMP_FORCEACTIVE(
 
 void xMemoryManagerFixed::Init(void* start, U32 elements, U32 elementSize)
 {
-    xMEMORYMANAGERASSERT(89, elementSize > 0 && elementSize >= sizeof(FixedHeader) && elements > 0);
+    xMEMORYMANAGER_ASSERT_L(89, elementSize > 0 && elementSize >= sizeof(FixedHeader) && elements > 0);
 
 #if DEBUG || RELEASE
     DoInit(start, elements * (elementSize + 1), false);
@@ -61,11 +61,11 @@ void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options, const char*, const 
 void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options)
 #endif
 {
-    xASSERT(108, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 2);
+    xASSERT_L(108, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 2);
 
     if (!freeList) return NULL;
 
-    xASSERT(115, size <= elementSize);
+    xASSERT_L(115, size <= elementSize);
 
     FixedHeader* ret = freeList;
 
@@ -82,7 +82,7 @@ void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options)
 void xMemoryManagerFixed::DoFree(void* pointer)
 {
     S32 TESTVALUE = (S32)((S32)pointer - (S32)GetArenaStart());
-    xASSERT(138, TESTVALUE % elementSize == 0);
+    xASSERT_L(138, TESTVALUE % elementSize == 0);
 
     FixedHeader* header = (FixedHeader*)pointer;
     header->next = freeList;
@@ -100,7 +100,7 @@ void* xMemoryManagerFixed::DoReallocate(void* pointer, U32 size, U32, const char
 void* xMemoryManagerFixed::DoReallocate(void* pointer, U32 size, U32)
 #endif
 {
-    xASSERT(158, size <= elementSize);
+    xASSERT_L(158, size <= elementSize);
     return pointer;
 }
 

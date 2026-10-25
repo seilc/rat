@@ -17,7 +17,7 @@ public:
         iterator& operator+=(int i) { _it = (_it + (SIZE+1) + i) % (SIZE+1); return *this; }
         iterator operator-=(int i) { return (*this += -i); }
         iterator operator-(int i) const { iterator c = *this; c -= i; return c; }
-        T& operator*() const { xASSERT(38, valid()); return _owner->_buffer[_it]; }
+        T& operator*() const { xASSERT_L(38, valid()); return _owner->_buffer[_it]; }
 
     private:
         bool valid() const
@@ -42,12 +42,12 @@ public:
     bool empty() const { return _last == _first; }
     bool full() const { return size() == max_size(); }
     void clear() { _first = _last = 0; }
-    void push_back() { xASSERT(69, !full()); _last = (_last + 1) % (SIZE+1); }
-    void pop_front() { xASSERT(71, !empty()); _first = (_first + 1) % (SIZE+1); }
+    void push_back() { xASSERT_L(69, !full()); _last = (_last + 1) % (SIZE+1); }
+    void pop_front() { xASSERT_L(71, !empty()); _first = (_first + 1) % (SIZE+1); }
     iterator begin() const { return create_iterator(_first); }
     iterator end() const { return create_iterator(_last); }
-    T& front() { xASSERT(76, !empty()); return *begin(); }
-    T& back() { xASSERT(78, !empty()); return *(end() - 1); }
+    T& front() { xASSERT_L(76, !empty()); return *begin(); }
+    T& back() { xASSERT_L(78, !empty()); return *(end() - 1); }
 
 private:
     iterator create_iterator(size_t i) const { iterator r; r._it = i; r._owner = (fixed_queue*)this; return r; }
@@ -73,13 +73,13 @@ public:
 
         iterator& operator+=(int i)
         {
-            xASSERT(119, _owner != 0);
-            xASSERT(120, i >= -(int)_owner->_max_size);
+            xASSERT_L(119, _owner != 0);
+            xASSERT_L(120, i >= -(int)_owner->_max_size);
             _it = _owner->mod_max_size(_it + i);
             return *this;
         }
 
-        T& operator*() const { xASSERT(130, valid()); return _owner->_buffer[_it]; }
+        T& operator*() const { xASSERT_L(130, valid()); return _owner->_buffer[_it]; }
         
     private:
         bool valid() const
@@ -97,28 +97,28 @@ public:
 
     void init(size_t size, U32 memtag)
     {
-        xASSERT(167, size > 0);
+        xASSERT_L(167, size > 0);
         size_t power = 0;
         size++;
         while (size > 1) { size >>= 1; power++; }
         _max_size = (1 << power);
         _max_size_mask = _max_size - 1;
-        _buffer = (T*)xMEMALLOC(_max_size * sizeof(T), 0, memtag, 0, 173);
-        xASSERT(174, _buffer != 0);
+        _buffer = (T*)xMEMALLOC_L(_max_size * sizeof(T), 0, memtag, 0, 173);
+        xASSERT_L(174, _buffer != 0);
         clear();
     }
 
 #if DEBUG || RELEASE
     void tweak_init(size_t size)
     {
-        xASSERT(183, size > 0);
+        xASSERT_L(183, size > 0);
         size_t power = 0;
         size++;
         while (size > 1) { size >>= 1; power++; }
         _max_size = (1 << power);
         _max_size_mask = _max_size - 1;
         _buffer = (T*)xDebugTweak_StaticAlloc(_max_size * sizeof(T));
-        xASSERT(190, _buffer != 0);
+        xASSERT_L(190, _buffer != 0);
         clear();
     }
 #endif
@@ -128,15 +128,15 @@ public:
     bool empty() const { return size() == 0; }
     bool full() const { return size() == max_size(); }
     void clear() { _first = _size = 0; }
-    T& push_front() { xASSERT(201, !full()); _size++; _first = mod_max_size(_first-1); return front(); }
-    void pop_back() { xASSERT(206, !empty()); _size--; }
+    T& push_front() { xASSERT_L(201, !full()); _size++; _first = mod_max_size(_first-1); return front(); }
+    void pop_back() { xASSERT_L(206, !empty()); _size--; }
     iterator begin() const { return create_iterator(_first); }
     iterator end() const { return create_iterator(mod_max_size(_first + _size)); }
-    T& front() { xASSERT(210, !empty()); return *begin(); }
+    T& front() { xASSERT_L(210, !empty()); return *begin(); }
 
     void erase(const iterator& first, const iterator& last)
     {
-        xASSERT(220, (first == begin()) || (last == end()));
+        xASSERT_L(220, (first == begin()) || (last == end()));
 
         if (first._it == _first) {
             size_t tail = _first + _size;
@@ -146,7 +146,7 @@ public:
         }
 
         size_t diff = mod_max_size(last._it - first._it);
-        xASSERT(230, diff <= _size);
+        xASSERT_L(230, diff <= _size);
         _size -= diff;
     }
 
@@ -188,8 +188,8 @@ public:
         iterator& operator++() { n = n->next; return *this; }
         bool operator==(const iterator& c) const { return n == c.n; }
         bool operator!=(const iterator& c) const { return !(*this == c); }
-        T& operator*() const { xASSERT(291, n != 0); return n->value; }
-        T* operator->() const { xASSERT(292, n != 0); return &n->value; }
+        T& operator*() const { xASSERT_L(291, n != 0); return n->value; }
+        T* operator->() const { xASSERT_L(292, n != 0); return &n->value; }
 
     private:
         node_type* n;
@@ -221,7 +221,7 @@ public:
     size_t size() const { return _size; }
     size_t max_size() const { return SIZE; }
     bool empty() const { return _size == 0; }
-    T& back() { xASSERT(320, !empty()); return tail.prev->value; }
+    T& back() { xASSERT_L(320, !empty()); return tail.prev->value; }
 
     void push_back()
     {
@@ -246,8 +246,8 @@ public:
 
     iterator erase(iterator it)
     {
-        xASSERT(382, it != end());
-        xASSERT(383, _size > 0);
+        xASSERT_L(382, it != end());
+        xASSERT_L(383, _size > 0);
         node_type* next = it.n->next;
         node_type* prev = it.n->prev;
         next->prev = prev;
@@ -261,11 +261,11 @@ public:
     {
         node_type* n = first.n;
         node_type* end = last.n;
-        xASSERT(394, n->prev != 0);
+        xASSERT_L(394, n->prev != 0);
         n->prev->next = end;
         end->prev = n->prev;
         while (n != end) {
-            xASSERT(399, _size > 0);
+            xASSERT_L(399, _size > 0);
             node_type* next = n->next;
             free(n);
             _size--;
@@ -281,10 +281,10 @@ public:
 
     iterator get_iterator(const T* value)
     {
-        xASSERT(414, (void*)value >= (void*)buffer);
-        xASSERT(415, (void*)value < (void*)(buffer + SIZE));
+        xASSERT_L(414, (void*)value >= (void*)buffer);
+        xASSERT_L(415, (void*)value < (void*)(buffer + SIZE));
         char* p = (char*)value - sizeof(empty_node_type);
-        xASSERT(417, ((p - (char*)buffer) % sizeof(node_type)) == 0);
+        xASSERT_L(417, ((p - (char*)buffer) % sizeof(node_type)) == 0);
         return create_iterator((node_type*)p);
     }
 
@@ -298,7 +298,7 @@ private:
 
     node_type* alloc()
     {
-        xASSERT(448, size() < max_size());
+        xASSERT_L(448, size() < max_size());
         node_type* ret = stack;
         stack = ret->next;
         return ret;
@@ -306,7 +306,7 @@ private:
 
     void free(node_type* n)
     {
-        xASSERT(455, n != 0);
+        xASSERT_L(455, n != 0);
         n->next = stack;
         stack = n;
     }
@@ -346,7 +346,7 @@ protected:
 
     node_base* alloc()
     {
-        xASSERT(489, size() < max_size());
+        xASSERT_L(489, size() < max_size());
         node_base* ret = stack;
         stack = ret->next;
         return ret;
@@ -354,7 +354,7 @@ protected:
 
     void free(node_base* n)
     {
-        xASSERT(496, n != 0);
+        xASSERT_L(496, n != 0);
         n->next = stack;
         stack = n;
     }
@@ -369,7 +369,7 @@ protected:
 
     void unlink(node_base* it)
     {
-        xASSERT(509, (it != &head) && (it != &tail));
+        xASSERT_L(509, (it != &head) && (it != &tail));
         it->prev->next = it->next;
         it->next->prev = it->prev;
     }
@@ -409,8 +409,8 @@ public:
     node_type* get_buffer() const { return (node_type*)buffer; }
     node_type* begin() const { return (node_type*)head.next; }
     node_type* end() const { return (node_type*)&tail; }
-    T& front() { xASSERT(579, !empty()); return ((node_type*)head.next)->value; }
-    T& back() { xASSERT(580, !empty()); return ((node_type*)tail.prev)->value; }
+    T& front() { xASSERT_L(579, !empty()); return ((node_type*)head.next)->value; }
+    T& back() { xASSERT_L(580, !empty()); return ((node_type*)tail.prev)->value; }
 
     node_type* insert(node_type* it)
     {
@@ -424,17 +424,17 @@ public:
 
     void move(node_type* it, node_type* at)
     {
-        xASSERT(614, it != at);
+        xASSERT_L(614, it != at);
         unlink((node_base*)it);
         link((node_base*)it, (node_base*)at);
     }
 
     node_type* get_iterator(const T* value)
     {
-        xASSERT(624, (void*)value >= (void*)buffer);
-        xASSERT(625, (void*)value < (void*)((U8*)buffer + _max_size*NODE_SIZE));
+        xASSERT_L(624, (void*)value >= (void*)buffer);
+        xASSERT_L(625, (void*)value < (void*)((U8*)buffer + _max_size*NODE_SIZE));
         U8* p = ((U8*)value - sizeof(node_base));
-        xASSERT(627, ((p - (U8*)buffer) % NODE_SIZE) == 0);
+        xASSERT_L(627, ((p - (U8*)buffer) % NODE_SIZE) == 0);
         return (node_type*)p;
     }
 
@@ -461,12 +461,12 @@ public:
     void clear() { _size = 0; }
     T* begin() { return _buffer; }
     T* end() { return _buffer + _size; }
-    T& back() { xASSERT(669, !empty()); return _buffer[_size-1]; }
-    void push_back() { xASSERT(671, !full()); _size++; }
+    T& back() { xASSERT_L(669, !empty()); return _buffer[_size-1]; }
+    void push_back() { xASSERT_L(671, !full()); _size++; }
 
     void erase(T* it)
     {
-        xASSERT(684, (it >= _buffer) && (it < (_buffer+_size)));
+        xASSERT_L(684, (it >= _buffer) && (it < (_buffer+_size)));
         _size--;
         T* tail = _buffer + _size;
         if (it != tail) *it = *tail;
@@ -495,7 +495,7 @@ public:
 
     void init(size_t unit_size, size_t block_size, size_t max_blocks, U32 memtag)
     {
-        xASSERT(778, (unit_size > 0) && (block_size > 0) && (max_blocks > 0) && (max_blocks <= MAX_BLOCKS));
+        xASSERT_L(778, (unit_size > 0) && (block_size > 0) && (max_blocks > 0) && (max_blocks <= MAX_BLOCKS));
 
         _unit_size = (unit_size + 3) & ~3;
         _block_size_shift = log2_ceil(block_size);
@@ -503,7 +503,7 @@ public:
         _max_blocks_shift = log2_ceil(max_blocks);
         _max_blocks = 1 << _max_blocks_shift;
 
-        blocks = (block_data*)xMEMALLOC(_max_blocks * sizeof(block_data), 0, memtag, 0, 784);
+        blocks = (block_data*)xMEMALLOC_L(_max_blocks * sizeof(block_data), 0, memtag, 0, 784);
 
         size_t i = 0;
         size_t end = _max_blocks;
@@ -530,13 +530,13 @@ public:
 
     bool full() const
     {
-        xASSERT(808, valid());
+        xASSERT_L(808, valid());
         return head == blocks[head].next;
     }
 
     void clear()
     {
-        xASSERT(814, valid());
+        xASSERT_L(814, valid());
 
         head = 0;
 
@@ -555,8 +555,8 @@ public:
 
     U8 alloc_block(U32 memtag)
     {
-        xASSERT(832, valid());
-        xASSERT(833, !full());
+        xASSERT_L(832, valid());
+        xASSERT_L(833, !full());
 
         U8 index = head;
         block_data& block = blocks[index];
@@ -568,8 +568,8 @@ public:
 
         if (!block.data) block.data = alloc_block_data(memtag);
         
-        xASSERT(841, size < _max_blocks);
-        xASSERT(842, !(block.flags & FLAG_TAKEN));
+        xASSERT_L(841, size < _max_blocks);
+        xASSERT_L(842, !(block.flags & FLAG_TAKEN));
         block.flags = FLAG_TAKEN;
 
         size++;
@@ -579,12 +579,12 @@ public:
 
     void free_block(U8 index)
     {
-        xASSERT(851, valid());
-        xASSERT(852, index < _max_blocks);
+        xASSERT_L(851, valid());
+        xASSERT_L(852, index < _max_blocks);
 
         block_data& block = blocks[index];
 
-        xASSERT(854, block.data != 0);
+        xASSERT_L(854, block.data != 0);
 
         block.next = head;
         block.prev = blocks[head].prev;
@@ -592,8 +592,8 @@ public:
         blocks[block.prev].next = index;
         blocks[block.next].prev = index;
 
-        xASSERT(860, size > 0);
-        xASSERT(861, block.flags & FLAG_TAKEN);
+        xASSERT_L(860, size > 0);
+        xASSERT_L(861, block.flags & FLAG_TAKEN);
 
         block.flags = 0;
 
@@ -603,7 +603,7 @@ public:
 
     void* get_block(size_t at) const
     {
-        xASSERT(870, at < _max_blocks);
+        xASSERT_L(870, at < _max_blocks);
         return blocks[at].data;
     }
 
@@ -624,8 +624,8 @@ private:
 
     void* alloc_block_data(U32 memtag) const
     {
-        void* data = xMEMALLOC(_block_size * _unit_size, 0, memtag, 0, 912);
-        xASSERT(913, data != 0);
+        void* data = xMEMALLOC_L(_block_size * _unit_size, 0, memtag, 0, 912);
+        xASSERT_L(913, data != 0);
         return data;
     }
 
@@ -696,7 +696,7 @@ public:
 
     void push_front(U32 memtag)
     {
-        xASSERT(1002, !front_full());
+        xASSERT_L(1002, !front_full());
 
         _size++;
 
@@ -711,7 +711,7 @@ public:
 
     void pop_back()
     {
-        xASSERT(1040, !empty());
+        xASSERT_L(1040, !empty());
 
         if (_size <= 1) {
             clear();
@@ -729,9 +729,9 @@ public:
 
     iterator begin() const { return create_iterator(first); }
     iterator end() const { return create_iterator(wrap_index(first + _size)); }
-    T& front() { xASSERT(1053, !empty()); return *begin(); }
-    T& back() { xASSERT(1055, !empty()); return *(end() - 1); }
-    T& operator[](int i) { xASSERT(1057, (i >= 0) && (i < (int)_size)); return get_at(wrap_index(first + i)); }
+    T& front() { xASSERT_L(1053, !empty()); return *begin(); }
+    T& back() { xASSERT_L(1055, !empty()); return *(end() - 1); }
+    T& operator[](int i) { xASSERT_L(1057, (i >= 0) && (i < (int)_size)); return get_at(wrap_index(first + i)); }
 
     static iterator dummy_iterator()
     {
@@ -747,7 +747,7 @@ private:
         size_t block_index = blocks[get_block(i)];
 
         T* data = (T*)alloc->get_block(block_index);
-        xASSERT(1110, data != 0);
+        xASSERT_L(1110, data != 0);
 
         size_t unit_index = alloc->mod_block_size(i);
         return data[unit_index];
@@ -791,7 +791,7 @@ public:
 
     bool get(S32 index)
     {
-        xASSERTM(1249, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
+        xASSERT_FMT_L(1249, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
         S32 which_byte = index / 8;
         S32 which_bit = index % 8;
         return ((1<<which_bit) & bytes[which_byte]) != 0;
@@ -799,7 +799,7 @@ public:
 
     void set(S32 index, bool value)
     {
-        xASSERTM(1257, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
+        xASSERT_FMT_L(1257, index < count, "Sorry, index (%i) is too big for the size (%i)", index, count);
         S32 which_byte = index / 8;
         S32 which_bit = index % 8;
         if (value) {

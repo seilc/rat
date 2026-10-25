@@ -109,8 +109,8 @@ F32 xrand_GenRandFloat()
     y ^= (y >> 18);
 
     fRandFloat = (1.0f / 4294967296.0f) * y;
-    xASSERT(178, fRandFloat >= 0.0f);
-    xASSERT(179, fRandFloat <= 1.0f);
+    xASSERT_L(178, fRandFloat >= 0.0f);
+    xASSERT_L(179, fRandFloat <= 1.0f);
 
     return fRandFloat;
 }
@@ -129,8 +129,8 @@ F32 xrand_GenRandFloatLessThanOne()
     y ^= (y >> 18);
 
     fRandFloat = (1.0f / 4294967296.0f) * y;
-    xASSERT(201, fRandFloat >= 0.0f);
-    xASSERT(202, fRandFloat < 1.0f);
+    xASSERT_L(201, fRandFloat >= 0.0f);
+    xASSERT_L(202, fRandFloat < 1.0f);
 
     if (fRandFloat >= 1.0f) {
         fRandFloat = 0.99999f;
@@ -154,11 +154,11 @@ U32 xrand_RandomChoice(U32& randomChoiceData, U8& randomChoiceDataSize, U32 maxC
         choice = xrand_RandomChoice(maxCount);
         break;
     case xRandomChoiceRule_ANY_NOT_CHOSEN:
-        xASSERTM(298, maxCount < 32, "xRandomChoiceRule_ANY_NOT_CHOSEN only works for sets that have 32 elements or less in them. Only first 32 will work!");
+        xASSERT_FMT_L(298, maxCount < 32, "xRandomChoiceRule_ANY_NOT_CHOSEN only works for sets that have 32 elements or less in them. Only first 32 will work!");
         if (maxCount >= 32) {
             maxCount = 32;
         }
-        xASSERT(301, randomChoiceDataSize < maxCount);
+        xASSERT_L(301, randomChoiceDataSize < maxCount);
         U32 ithUnplayed = xrand_RandomChoice(maxCount - randomChoiceDataSize) + 1;
         U32 testMask = 1;
         for (;;) {
@@ -207,7 +207,7 @@ U32 xrand_RandomChoice(U32& randomChoiceData, U8& randomChoiceDataSize, U32 maxC
 
 void xRandUniformSpherePoints(xVec3* loc, S32 amount, F32 zmin, F32 zmax)
 {
-    xASSERT(361, (amount > 0) && (amount <= 0xffff));
+    xASSERT_L(361, (amount > 0) && (amount <= 0xffff));
 
     F32 z_frac = 0.5f * (zmax - zmin);
     S32 z_sectors = std::ceilf(z_frac * xsqrt(amount));
@@ -216,7 +216,7 @@ void xRandUniformSpherePoints(xVec3* loc, S32 amount, F32 zmin, F32 zmax)
     }
     S32 yaw_sectors = (amount + z_sectors - 1) / z_sectors;
     S32 sectors = yaw_sectors * z_sectors;
-    xASSERT(368, sectors >= amount);
+    xASSERT_L(368, sectors >= amount);
 
     F32 dyaw = 2.0f * PI / yaw_sectors;
     F32 dz = (zmax - zmin) / z_sectors;
@@ -227,7 +227,7 @@ void xRandUniformSpherePoints(xVec3* loc, S32 amount, F32 zmin, F32 zmax)
         F32 z;
     };
 
-    sector_type* sector_buffer = (sector_type*)xMEMPUSHTEMP(sectors * sizeof(sector_type), 0, 378);
+    sector_type* sector_buffer = (sector_type*)xMEMPUSHTEMP_L(sectors * sizeof(sector_type), 0, 378);
 
     sector_type* sector = sector_buffer;
     F32 sector_yaw = (2.0f * PI / 4294967296.0f) * xrand_RandomInt32();

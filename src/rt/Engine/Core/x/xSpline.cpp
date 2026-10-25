@@ -468,7 +468,7 @@ void xSpline3_ArcInit(xSpline3* spl, U32 sample)
 
     oldalloc = spl->arcLength ? spl->allocN * spl->arcSample : 0;
     if (oldalloc < spl->N * sample) {
-        spl->arcLength = (F32*)xMEMALLOC(spl->arcSample * spl->allocN * sizeof(F32), 0, eMemMgrTag_Spline, 0, 775);
+        spl->arcLength = (F32*)xMEMALLOC_L(spl->arcSample * spl->allocN * sizeof(F32), 0, eMemMgrTag_Spline, 0, 775);
     }
 
     arcsum = 0.0f;
@@ -486,7 +486,7 @@ static xSpline3* AllocSpline3(xVec3* points, F32* time, U32 numpoints, U32 numal
 {
     xSpline3* spl;
 
-    spl = (xSpline3*)xMEMALLOC(sizeof(xSpline3), 0, eMemMgrTag_Spline, 0, 904);
+    spl = (xSpline3*)xMEMALLOC_L(sizeof(xSpline3), 0, eMemMgrTag_Spline, 0, 904);
 
     if (numalloc < numpoints) {
         numalloc = numpoints;
@@ -503,11 +503,11 @@ static xSpline3* AllocSpline3(xVec3* points, F32* time, U32 numpoints, U32 numal
     spl->arcSample = 0;
     spl->arcLength = NULL;
 
-    spl->points = (xVec3*)xMEMALLOC((spl->allocN + 1) * sizeof(xVec3), 0, eMemMgrTag_Spline, 0, 920);
+    spl->points = (xVec3*)xMEMALLOC_L((spl->allocN + 1) * sizeof(xVec3), 0, eMemMgrTag_Spline, 0, 920);
     memcpy(spl->points, points, (spl->N + 1) * sizeof(xVec3));
 
     if (time) {
-        spl->time = (F32*)xMEMALLOC((spl->allocN + 1) * sizeof(F32), 0, eMemMgrTag_Spline, 0, 925);
+        spl->time = (F32*)xMEMALLOC_L((spl->allocN + 1) * sizeof(F32), 0, eMemMgrTag_Spline, 0, 925);
         memcpy(spl->time, time, (spl->N + 1) * sizeof(F32));
     } else {
         spl->time = NULL;
@@ -522,7 +522,7 @@ xSpline3* xSpline3_Bezier(xVec3* points, F32* time, U32 numpoints, U32 numalloc,
     U32 i;
 
     spl = AllocSpline3(points, time, numpoints, numalloc, 0, 3);
-    spl->p12 = (xVec3*)xMEMALLOC(spl->allocN * 2 * sizeof(xVec3), 0, eMemMgrTag_Spline, 0, 1013);
+    spl->p12 = (xVec3*)xMEMALLOC_L(spl->allocN * 2 * sizeof(xVec3), 0, eMemMgrTag_Spline, 0, 1013);
 
     if (!p1 || !p2) {
         xSpline3_Catmullize(spl);

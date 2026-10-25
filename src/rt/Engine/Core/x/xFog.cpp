@@ -32,8 +32,8 @@ void xFogInit(xBase* b, xFogAsset* tasset)
 
 void xFogReset(xFog* t)
 {
-    xASSERT(61, t);
-    xASSERT(62, t->tasset);
+    xASSERT_L(61, t);
+    xASSERT_L(62, t->tasset);
 
     xBaseReset(t, t->tasset);
 }
@@ -42,24 +42,24 @@ void xFogSave(xFog* ent, xSerial* s)
 {
     xBaseSave(ent, s);
 
-    xASSERT(83, ent);
-    xASSERT(84, s);
+    xASSERT_L(83, ent);
+    xASSERT_L(84, s);
 }
 
 void xFogLoad(xFog* ent, xSerial* s)
 {
     xBaseLoad(ent, s);
 
-    xASSERT(102, ent);
-    xASSERT(103, s);
+    xASSERT_L(102, ent);
+    xASSERT_L(103, s);
 }
 
 void xFogEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
 {
     xFog* t = (xFog*)to;
 
-    xASSERT(123, to);
-    xASSERT(124, to->baseType == eBaseTypeFog);
+    xASSERT_L(123, to);
+    xASSERT_L(124, to->baseType == eBaseTypeFog);
 
     switch (toEvent) {
     case eEventOn:
@@ -93,11 +93,11 @@ void xFogEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
 
 void xFogUpdate(xBase* to, xScene* sc, F32)
 {
-    xASSERT(172, to);
-    xASSERT(173, sc);
+    xASSERT_L(172, to);
+    xASSERT_L(173, sc);
 
 #if DEBUG
     xFog* t = (xFog*)to;
-    xASSERT(178, t->baseType == eBaseTypeFog);
+    xASSERT_L(178, t->baseType == eBaseTypeFog);
 #endif
 }

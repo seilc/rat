@@ -129,13 +129,13 @@ inline void xVec3SMulBy(xVec3& v, F32 s)
 
 inline void xVec3Cross(xVec3* o, const xVec3* a, const xVec3* b)
 {
-    xASSERTM(287, o != a && o != b, "Sorry, but the input vector can't be the same as the output vector. You'll get the wrong answer");
+    xASSERT_FMT_L(287, o != a && o != b, "Sorry, but the input vector can't be the same as the output vector. You'll get the wrong answer");
     o->x = a->y * b->z - b->y * a->z, o->y = a->z * b->x - b->z * a->x, o->z = a->x * b->y - b->x * a->y;
 }
 
 inline void xVec3Cross(xVec3& o, const xVec3& a, const xVec3& b)
 {
-    xASSERTM(292, &o != &a && &o != &b, "Sorry, but the input vector can't be the same as the output vector. You'll get the wrong answer");
+    xASSERT_FMT_L(292, &o != &a && &o != &b, "Sorry, but the input vector can't be the same as the output vector. You'll get the wrong answer");
     o.x = a.y * b.z - b.y * a.z, o.y = a.z * b.x - b.z * a.x, o.z = a.x * b.y - b.x * a.y;
 }
 

@@ -20,7 +20,7 @@ U32 gThisCameraTarget;
 
 void zEntEvent(char* to, U32 toEvent)
 {
-    xASSERT(52, to);
+    xASSERT_L(52, to);
 
     U32 id;
     xBase* sendTo;
@@ -37,7 +37,7 @@ void zEntEvent(char* to, U32 toEvent)
 
 void zEntEvent(U32 toID, U32 toEvent)
 {
-    xASSERT(77, toID);
+    xASSERT_L(77, toID);
 
     xBase* sendTo;
     
@@ -52,7 +52,7 @@ void zEntEvent(U32 toID, U32 toEvent)
 
 void zEntEvent(U32 toID, U32 toEvent, F32 toParam0, F32 toParam1, F32 toParam2, F32 toParam3)
 {
-    xASSERT(90, toID);
+    xASSERT_L(90, toID);
 
     xBase* sendTo;
     F32 toParam[4];
@@ -73,19 +73,19 @@ void zEntEvent(U32 toID, U32 toEvent, F32 toParam0, F32 toParam1, F32 toParam2, 
 
 void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID, ForceEvent forceEvent)
 {
-    xFAIL_AND_RETURN_IF(127, to == NULL);
+    xFAIL_RETURN_IF_L(127, to == NULL);
 
 #if DEBUG || RELEASE
     static S32 reentrantCount = 0;
 
     reentrantCount++;
-    xASSERTM(134, reentrantCount < MAX_REENTRANT_COUNT, "Circular links detected!");
+    xASSERT_FMT_L(134, reentrantCount < MAX_REENTRANT_COUNT, "Circular links detected!");
 
     zEventDebugLog(from, fromEvent, to, toEvent, toParam);
 
     if (from && to && from == to && fromEvent == toEvent) {
         xEventDebugLogDump();
-        xASSERT(150, fromEvent != toEvent);
+        xASSERT_L(150, fromEvent != toEvent);
     }
 
     xOutInfo("EVENT", "zEntEvent: %s\n", zEventLogBuf[19]);
@@ -111,11 +111,11 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
     }
 
     if (xBaseIsEnabled(to) && to->linkCount) {
-        xASSERTM(209, to->link, "to %s", xSTAssetName(to));
+        xASSERT_FMT_L(209, to->link, "to %s", xSTAssetName(to));
 
         const xLinkAsset* idx = to->link;
         for (S32 i = 0; i < to->linkCount; i++, idx++) {
-            xASSERT(215, idx);
+            xASSERT_L(215, idx);
 
             xBase* sendTo;
 

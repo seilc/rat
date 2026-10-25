@@ -110,18 +110,18 @@ RwTexture* xFMVGetTexture(MOVIE* pMovie, U16 looping, U16 freezeframed, U32 star
         RwInt32 format = RwRasterGetFormat(pBinkRaster);
         RwInt32 pixformat = format & rwRASTERFORMATPIXELFORMATMASK;
 
-        xASSERT(194, pBits);
+        xASSERT_L(194, pBits);
 
         RwInt32 nDestPitch = RwRasterGetStride(pBinkRaster);
 
         S32 bFailed = BinkCopyToBuffer(pMovie->hBink, pBits, nDestPitch, RwRasterGetHeight(pBinkRaster), 0, 0, BINKCOPYALL | BINKSURFACE32);
-        xASSERT(197, !bFailed);
+        xASSERT_L(197, !bFailed);
         if (bFailed) {
             return NULL;
         }
 
         RwRaster* pNullOnErr = RwRasterUnlock(pBinkRaster);
-        xASSERT(201, pNullOnErr);
+        xASSERT_L(201, pNullOnErr);
 
         if (pMovie->hBink->Paused != freezeframed) {
             BinkPause(pMovie->hBink, freezeframed);

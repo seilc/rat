@@ -61,7 +61,7 @@ inline void xBaseValidate(xBase* xb)
 
 inline bool xBaseIsEntity(const xBase* xb)
 {
-    xASSERT(130, xb != NULL);
+    xASSERT_L(130, xb != NULL);
     return xb->baseFlags & k_XBASE_IS_ENTITY;
 }
 

@@ -113,7 +113,7 @@ void zFrozoneBlast::SingleBlast(const xRay3* direction, F32 velocity, bool colli
 
 void zFrozoneBlast::SetPowerupLevel(S32 level)
 {
-    xASSERT(__LINE__, level >= 0 && level < 3);
+    xASSERT(level >= 0 && level < 3);
     sPowerupLevel = level;
 }
 
@@ -167,9 +167,9 @@ void zFrozoneBlast::loadAssets()
     blastConfig[2].velocityRange = 0.5f;
 
     mSystemID = createParticleSystem(mSystemID, texture, 5, 6, sizeof(blastParticle), updateBlastParticles);
-    xASSERT(__LINE__, mSystemID != -1);
+    xASSERT(mSystemID != -1);
     mMistSystemID = createParticleSystem(mMistSystemID, mistTexture, 5, 6, sizeof(mistParticle), updateMistParticles);
-    xASSERT(__LINE__, mMistSystemID != -1);
+    xASSERT(mMistSystemID != -1);
     zParticleCustomCreateGlintSystem(mGlintSystemID, glintTexture, "Frozone Blast Splash");
 }
 
@@ -189,7 +189,7 @@ S32 zFrozoneBlast::createParticleSystem(S32 oldSystemId, U32, U32 srcBlend, U32 
     system.context = NULL;
 
     if (oldSystemId == -1) {
-        return xPARTICLEBATCHADDSYSTEM(system, __LINE__);
+        return xPARTICLEBATCHADDSYSTEM(system);
     }
 
     xParticleBatchReplaceSystem(oldSystemId, system);
@@ -394,7 +394,7 @@ void zFrozoneBlast::updateLight(blastStream& stream, F32 dt)
             return;
         }
 
-        stream.light = xLightCreateTemp(false, __LINE__);
+        stream.light = xLightCreateTemp(false);
         if (!stream.light) {
             return;
         }
@@ -407,7 +407,7 @@ void zFrozoneBlast::updateLight(blastStream& stream, F32 dt)
     stream.lightIntensity -= lightDecay * dt;
     if (stream.lightIntensity <= 0.0f) {
         if (!stream.active) {
-            xLightDestroyTemp(stream.light, __LINE__);
+            xLightDestroyTemp(stream.light);
             stream.light = NULL;
             return;
         }
@@ -484,7 +484,7 @@ U32 zFrozoneBlast::_ActivateStream(const xRay3* direction)
         }
     }
 
-    xFAIL(__LINE__);
+    xFAIL();
     return 0;
 }
 
@@ -493,7 +493,7 @@ void zFrozoneBlast::_UpdateStream(U32 id, const xRay3* newDirection, bool collis
     DECOMP_FORCEREGISTER(collision);
 
     U32 blastID = id - 1000;
-    xASSERT(__LINE__, blastID < 3);
+    xASSERT(blastID < 3);
     blastStream& s = mStreams[blastID];
     s.direction = *newDirection;
     s.colliding = true;
@@ -504,7 +504,7 @@ void zFrozoneBlast::_UpdateStream(U32 id, const xRay3* newDirection, bool collis
 void zFrozoneBlast::_StopStream(U32 id)
 {
     U32 blastID = id - 1000;
-    xASSERT(__LINE__, blastID < 3);
+    xASSERT(blastID < 3);
     mStreams[blastID].active = false;
 }
 
@@ -512,7 +512,7 @@ void zFrozoneBlast::_SingleBlast(const xRay3* direction, F32 velocity, bool coll
 {
     DECOMP_FORCEREGISTER(collision);
 
-    xASSERT(__LINE__, direction);
+    xASSERT(direction);
 
     if (velocity < 0.0f) {
         velocity = singleVelocity;
@@ -636,9 +636,9 @@ void zFrozoneBlast::emitSplashParticles(const xVec3* pos, const xVec3* normal, F
         return;
     }
 
-    xVec3* locList = (xVec3*)xMEMPUSHTEMP(num_particles * sizeof(xVec3), 0, __LINE__);
-    xVec3* dirList = (xVec3*)xMEMPUSHTEMP(num_particles * sizeof(xVec3), 0, __LINE__);
-    F32* lenVelList = (F32*)xMEMPUSHTEMP(num_particles * sizeof(F32), 0, __LINE__);
+    xVec3* locList = (xVec3*)xMEMPUSHTEMP(num_particles * sizeof(xVec3), 0);
+    xVec3* dirList = (xVec3*)xMEMPUSHTEMP(num_particles * sizeof(xVec3), 0);
+    F32* lenVelList = (F32*)xMEMPUSHTEMP(num_particles * sizeof(F32), 0);
 
     F32 cosangle = icos(glintDirVary);
     xMat3x3 dirMat;
@@ -676,8 +676,8 @@ void zFrozoneBlast::emitSplashParticles(const xVec3* pos, const xVec3* normal, F
 
 void zFrozoneBlast::_CollisionSplash(const xVec3* pos, const xVec3* normal, F32 dt)
 {
-    xASSERT(__LINE__, pos);
-    xASSERT(__LINE__, normal);
+    xASSERT(pos);
+    xASSERT(normal);
 
     emitSplashMist(pos, normal, dt);
     emitSplashParticles(pos, normal, dt);

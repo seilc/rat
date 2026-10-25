@@ -199,7 +199,7 @@ namespace {
 
     graph_handle* alloc_graph()
     {
-        xASSERT(213, graphs_size < MAX_GRAPHS);
+        xASSERT_L(213, graphs_size < MAX_GRAPHS);
         graph_context* g = head_free_graph;
         head_free_graph = g->next;
         graph_handle* gh = sorted_graphs + graphs_size;
@@ -238,7 +238,7 @@ namespace {
 
     void add_value(graph_context& graph, F32 value)
     {
-        xFIXNAN(261, value);
+        xFIX_NAN_L(261, value);
 
         if (graph.flags & FLAG_AUTO_SCALE) {
             if (graph.scale < xabs(value - graph.originValue)) {

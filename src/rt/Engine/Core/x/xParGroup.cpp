@@ -18,7 +18,7 @@ static U32 sSortID = 0;
 
 void xParGroupInit(xParGroup* ps)
 {
-    xASSERT(41, ps);
+    xASSERT_L(41, ps);
 
     ps->m_root = NULL;
     ps->m_dead = NULL;
@@ -49,7 +49,7 @@ static void xParGroupRegisterInit()
 
 void xParGroupSetAging(xParGroup* ps, S32 age)
 {
-    xASSERT(76, ps);
+    xASSERT_L(76, ps);
 
     if (age) {
         FLAG_REMOVE(ps->m_flags, 0x4);
@@ -60,7 +60,7 @@ void xParGroupSetAging(xParGroup* ps, S32 age)
 
 void xParGroupSetBack2Life(xParGroup* ps, S32 b2l)
 {
-    xASSERT(90, ps);
+    xASSERT_L(90, ps);
 
     if (b2l) {
         FLAG_REMOVE(ps->m_flags, 0x8);
@@ -71,21 +71,21 @@ void xParGroupSetBack2Life(xParGroup* ps, S32 b2l)
 
 void xParGroupSetVisibility(xParGroup* ps, S32 vis)
 {
-    xASSERT(118, ps);
+    xASSERT_L(118, ps);
 
     ps->m_visible = vis;
 }
 
 void xParGroupSetPriority(xParGroup* ps, U8 val)
 {
-    xASSERT(126, ps);
+    xASSERT_L(126, ps);
 
     ps->m_priority = val;
 }
 
 void xParGroupRegister(xParGroup* ps)
 {
-    xASSERT(133, ps);
+    xASSERT_L(133, ps);
 
     if (!sParGroupRegTableInit) {
         xParGroupRegisterInit();
@@ -102,8 +102,8 @@ void xParGroupRegister(xParGroup* ps)
 
 void xParGroupUnregister(xParGroup* ps)
 {
-    xASSERT(159, ps);
-    xASSERT(160, sParGroupRegTableInit);
+    xASSERT_L(159, ps);
+    xASSERT_L(160, sParGroupRegTableInit);
 
     for (U8 i = 0; i < REG_TABLE_MAX; i++) {
         if (sParGroupRegTable[i] == ps) {
@@ -116,7 +116,7 @@ void xParGroupUnregister(xParGroup* ps)
 
 void xParGroupSetActive(xParGroup* ps, U32 isActive)
 {
-    xASSERT(226, ps);
+    xASSERT_L(226, ps);
 
     ps->m_active = isActive;
 }
@@ -125,7 +125,7 @@ void xParGroupKillAllParticles(xParGroup* ps)
 {
     xPar* i = NULL, *tmp = NULL;
 
-    xASSERT(274, ps);
+    xASSERT_L(274, ps);
 
     i = ps->m_root;
     while (i) {
@@ -140,7 +140,7 @@ void xParGroupAnimate(xParGroup* ps, F32 dt)
     xPar* i, *tmp;
     F32 age = dt;
 
-    xASSERT(303, ps);
+    xASSERT_L(303, ps);
 
     i = ps->m_root;
 
@@ -192,8 +192,8 @@ void xParGroupSetSortDistance(F32 sortDistance, U32 sortID)
 
 void xParGroupAddParP(xParGroup* ps, xPar* p)
 {
-    xASSERT(500, p);
-    xASSERT(501, ps);
+    xASSERT_L(500, p);
+    xASSERT_L(501, ps);
 
     ps->m_alive = TRUE;
     ps->m_num_of_particles++;
@@ -211,8 +211,8 @@ void xParGroupAddParP(xParGroup* ps, xPar* p)
             test = ps->m_root;
             prev = NULL;
 
-            xASSERT(535, test->m_prev == NULL);
-            xASSERT(536, p != test);
+            xASSERT_L(535, test->m_prev == NULL);
+            xASSERT_L(536, p != test);
 
             while (test && sSortID != test->m_sortID && sSortDistance < test->m_dist2Camera) {
                 prev = test;
@@ -225,7 +225,7 @@ void xParGroupAddParP(xParGroup* ps, xPar* p)
             if (test) {
                 test->m_prev = p;
             } else {
-                xASSERT(550, prev->m_next == NULL);
+                xASSERT_L(550, prev->m_next == NULL);
             }
 
             if (prev) {
@@ -248,7 +248,7 @@ void xParGroupAddParP(xParGroup* ps, xPar* p)
 
 xPar* xParGroupAddPar(xParGroup* ps)
 {
-    xASSERT(587, ps);
+    xASSERT_L(587, ps);
 
     xPar* p;
     if (ps->m_flags & 0x2) {
@@ -265,7 +265,7 @@ xPar* xParGroupAddPar(xParGroup* ps)
                     xParGroupKillPar(sParGroupRegTable[i], sParGroupRegTable[i]->m_root);
 
                     p = xParAlloc();
-                    xASSERT(622, p);
+                    xASSERT_L(622, p);
                     break;
                 }
             }
@@ -292,7 +292,7 @@ xPar* xParGroupAddPar(xParGroup* ps)
 
 void xParGroupKillPar(xParGroup* ps, xPar* p)
 {
-    xASSERT(661, p);
+    xASSERT_L(661, p);
 
     if (p == ps->m_root) {
         ps->m_root = p->m_next;
@@ -323,7 +323,7 @@ void xParGroupKillPar(xParGroup* ps, xPar* p)
 
 void xParGroupAddParToDeadList(xParGroup* ps, xPar* p)
 {
-    xASSERT(738, p);
+    xASSERT_L(738, p);
 
     if (ps->m_dead) {
         ps->m_dead->m_prev = p;

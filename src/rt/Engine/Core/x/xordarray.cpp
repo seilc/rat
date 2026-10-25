@@ -7,16 +7,16 @@
 
 void XOrdInit(st_XORDEREDARRAY* array, S32 size, U32 memtag, S32 tempAlloc)
 {
-    xVALIDATE(63, size>0);
+    xVALIDATE_L(63, size>0);
     if (size<2) {
         xWARN("XOrdArray: TINY list size! (%d)\n", size);
     }
     size = (size<1) ? 1 : size;
 
     if (tempAlloc) {
-        array->list = (void**)xMEMPUSHTEMP(size * sizeof(void*), 'XORD', 75);
+        array->list = (void**)xMEMPUSHTEMP_L(size * sizeof(void*), 'XORD', 75);
     } else {
-        array->list = (void**)xMEMALLOC(size * sizeof(void*), 0, memtag, 'XORD', 78);
+        array->list = (void**)xMEMALLOC_L(size * sizeof(void*), 0, memtag, 'XORD', 78);
     }
 
     array->cnt = 0;
@@ -42,7 +42,7 @@ void XOrdDone(st_XORDEREDARRAY* array, S32 wasTempAlloc)
 
 void XOrdAppend(st_XORDEREDARRAY* array, void* elt)
 {
-    xASSERT(134, array->cnt < array->max);
+    xASSERT_L(134, array->cnt < array->max);
 
     if (array->cnt >= array->max) {
         xWARN("XOrdArray: Max size exceeded! (max:%d)\n", array->max);
@@ -60,8 +60,8 @@ void XOrdInsert(st_XORDEREDARRAY* array, void* elt, XOrdCompareCallback compare)
 {
     S32 i = 0;
 
-    xVALIDATE(167, compare);
-    xASSERT(168, array->cnt <= (array->max-1));
+    xVALIDATE_L(167, compare);
+    xASSERT_L(168, array->cnt <= (array->max-1));
 
     if (array->cnt >= array->max) {
         xWARN("XOrdArray: Insert exceeds array size\n");

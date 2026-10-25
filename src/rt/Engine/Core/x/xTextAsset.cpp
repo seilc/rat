@@ -17,7 +17,7 @@ const char* xTextFindString(U32 key, U32* len)
         return NULL;
     }
 
-    xASSERT(46, asset->len < 10000 && asset->len + 4 + sizeof(xTextAsset) >= size && asset->len + sizeof(xTextAsset) <= size);
+    xASSERT_L(46, asset->len < 10000 && asset->len + 4 + sizeof(xTextAsset) >= size && asset->len + sizeof(xTextAsset) <= size);
 
     if (len) {
         *len = asset->len;

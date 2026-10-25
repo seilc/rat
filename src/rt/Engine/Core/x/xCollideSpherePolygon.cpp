@@ -347,7 +347,7 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
             }
         }
 
-        xFAIL(811);
+        xFAIL_L(811);
         return false;
     }
 
@@ -550,7 +550,7 @@ static bool PolygonTestAH0c(S32 i, F32 closest_dist_squ, const xPlane& surface, 
         }
     }
     
-    xFAIL(1127);
+    xFAIL_L(1127);
 
     results.type = exCOLLIDESPHEREHITTYPE_VERTEX;
     return true;

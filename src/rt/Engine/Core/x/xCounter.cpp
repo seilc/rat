@@ -102,8 +102,8 @@ void xCounterReset(xBase* b)
 {
     xCounter* t = (xCounter*)b;
 
-    xVALIDATE(131, t);
-    xVALIDATE(132, t->asset);
+    xVALIDATE_L(131, t);
+    xVALIDATE_L(132, t->asset);
 
     xBaseInit(t, t->asset);
 
@@ -121,8 +121,8 @@ void xCounterSave(xCounter* ent, xSerial* s)
 {
     xBaseSave(ent, s);
 
-    xASSERT(162, ent);
-    xASSERT(163, s);
+    xASSERT_L(162, ent);
+    xASSERT_L(163, s);
 
     s->Write(ent->state);
     s->Write(ent->count);
@@ -132,8 +132,8 @@ void xCounterLoad(xCounter* ent, xSerial* s)
 {
     xBaseLoad(ent, s);
 
-    xASSERT(184, ent);
-    xASSERT(185, s);
+    xASSERT_L(184, ent);
+    xASSERT_L(185, s);
 
     s->Read(&ent->state);
     s->Read(&ent->count);
@@ -143,8 +143,8 @@ void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* 
 {
     xCounter* t = (xCounter*)to;
 
-    xASSERT(208, to);
-    xASSERT(209, to->baseType == eBaseTypeCounter);
+    xASSERT_L(208, to);
+    xASSERT_L(209, to->baseType == eBaseTypeCounter);
 
     switch (toEvent) {
     case eEventDecrement:
@@ -166,7 +166,7 @@ void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* 
     case eEventReset:
     case eEventDebugReset:
         t->state = 0;
-        xASSERT(256, t->asset);
+        xASSERT_L(256, t->asset);
         t->count = t->asset->count;
         break;
     case eEventExpired:

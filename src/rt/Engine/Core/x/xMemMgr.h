@@ -137,18 +137,22 @@ extern U32 gActiveHeap;
 #endif
 
 #if DEBUG
-#define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag), (assetID), __FILE__, __FUNCTION__, (line))
+#define xMEMALLOC_L(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag), (assetID), __FILE__, __FUNCTION__, (line))
 #elif RELEASE
-#define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag))
+#define xMEMALLOC_L(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align), (tag))
 #else
-#define xMEMALLOC(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align))
+#define xMEMALLOC_L(size, align, tag, assetID, line) xMemAlloc(gActiveHeap, (size), (align))
 #endif
 
+#define xMEMALLOC(size, align, tag, assetID) xMEMALLOC_L(size, align, tag, assetID, __LINE__)
+
 #if DEBUG
-#define xMEMPUSHTEMP(amt, assetID, line) xMemPushTemp((amt), (assetID), __FILE__, __FUNCTION__, (line))
+#define xMEMPUSHTEMP_L(amt, assetID, line) xMemPushTemp((amt), (assetID), __FILE__, __FUNCTION__, (line))
 #else
-#define xMEMPUSHTEMP(amt, assetID, line) xMemPushTemp((amt))
+#define xMEMPUSHTEMP_L(amt, assetID, line) xMemPushTemp((amt))
 #endif
+
+#define xMEMPUSHTEMP(amt, assetID) xMEMPUSHTEMP_L(amt, assetID, __LINE__)
 
 #define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
 
@@ -193,26 +197,26 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align);
 inline void* xMemPushTemp(U32 amt, U32, const char* file, const char* func, S32 line)
 {
     void* ptr = iMemPushTemp(amt);
-    xASSERTM(391, ptr, "for %d bytes from %s, in %s line %d", amt, func, file, line);
+    xASSERT_FMT_L(391, ptr, "for %d bytes from %s, in %s line %d", amt, func, file, line);
     return ptr;
 }
 #else
 inline void* xMemPushTemp(U32 amt)
 {
     void* ptr = iMemPushTemp(amt);
-    xASSERT(425, ptr);
+    xASSERT_L(425, ptr);
     return ptr;
 }
 #endif
 
 inline void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID = 0)
 {
-    return xMEMALLOC(size, 0, tag, assetID, 650);
+    return xMEMALLOC_L(size, 0, tag, assetID, 650);
 }
 
 inline void* operator new[](size_t size, xMemStaticType, U32 tag, U32 assetID = 0)
 {
-    return xMEMALLOC(size, 0, tag, assetID, 655);
+    return xMEMALLOC_L(size, 0, tag, assetID, 655);
 }
 
 #endif

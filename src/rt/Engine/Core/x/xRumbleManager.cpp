@@ -32,7 +32,7 @@ void effectInternal::updateCameraShake(F32 intensity)
 
 void effectInternal::EndCameraShake()
 {
-    xASSERT(62, cameraEffect);
+    xASSERT_L(62, cameraEffect);
 
     xCameraFXShakeEnd(cameraEffect, 0.3f);
     cameraEffect = NULL;
@@ -98,7 +98,7 @@ void Manager::store(padInfo* pInfo, const emitterBase* pEmitter, effectInternal*
 
 bool Manager::Add(xPad* pad, emitterBase* pEmitter)
 {
-    xASSERT_ONCE(119, pEmitter);
+    xASSERT_ONCE_L(119, pEmitter);
     if (!pEmitter) return false;
     if (!pad) return false;
     
@@ -110,15 +110,15 @@ bool Manager::Add(xPad* pad, emitterBase* pEmitter)
     }
     if (counter == xglobals->players.size()) return false;
 
-    xASSERTM(137, pad->port != -1, "There is no controller inserted/initialized for this pad !");
-    xASSERTM(138, (pad->port > -1 && pad->port < kMaxRumblingPads), "Rumbling is not supported for this pad");
+    xASSERT_FMT_L(137, pad->port != -1, "There is no controller inserted/initialized for this pad !");
+    xASSERT_FMT_L(138, (pad->port > -1 && pad->port < kMaxRumblingPads), "Rumbling is not supported for this pad");
     if (pad->port == -1) return false;
 
     padInfo* pInfo = &m_padInfo[pad->port];
     F32 timeToLive = pEmitter->pEffectAsset->time;
     bool rumbleForever = (pEmitter->pEffectAsset->time == 0.0f);
-    xASSERTM(149, (!(rumbleForever || timeToLive > RUMBLELIVE_MAXTHRESHOLD )),
-               "Rumble effect was started with lifetime higher than %f", RUMBLELIVE_MAXTHRESHOLD);
+    xASSERT_FMT_L(149, (!(rumbleForever || timeToLive > RUMBLELIVE_MAXTHRESHOLD )),
+                 "Rumble effect was started with lifetime higher than %f", RUMBLELIVE_MAXTHRESHOLD);
     
     effectInternal* currentExclusive = pInfo->m_currentExclusive;
 
@@ -154,7 +154,7 @@ bool Manager::Add(xPad* pad, emitterBase* pEmitter)
             freeEffect = &pInfo->m_effects[i];
         }
     }
-    xASSERTM(184, freeEffect, "number of current rumblings has exceeded the limit.");
+    xASSERT_FMT_L(184, freeEffect, "number of current rumblings has exceeded the limit.");
     if (freeEffect) {
         store(pInfo, pEmitter, freeEffect, timeToLive, rumbleForever);
     }

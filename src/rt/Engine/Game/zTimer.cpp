@@ -14,9 +14,9 @@ static xBase* zTimeDebugModeIteratorCB(xBase* b, zScene* s, void*)
 {
     xTimer* t = (xTimer*)b;
 
-    xASSERT(67, b);
-    xASSERT(68, s);
-    xASSERT(69, b->baseType == eBaseTypeTimer);
+    xASSERT_L(67, b);
+    xASSERT_L(68, s);
+    xASSERT_L(69, b->baseType == eBaseTypeTimer);
     
     xprintf("%s %s (sec=%f)\n",
         zSceneGetName(t),

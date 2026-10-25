@@ -108,7 +108,7 @@ void xFunctionGenerator::Update(F32 dt)
 
         if (!currentState) {
             F32 currentOffWidth = currentCycleWidth - currentPulseWidth;
-            xASSERT(122, currentOffWidth > 0.0f);
+            xASSERT_L(122, currentOffWidth > 0.0f);
 
             if (currentTime - lastDownTime > currentOffWidth) {
                 currentState = true;

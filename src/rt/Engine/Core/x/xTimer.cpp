@@ -76,8 +76,8 @@ void xTimerInit(xBase* b, xTimerAsset* tasset)
 
 void xTimerReset(xTimer* t)
 {
-    xASSERT(178, t);
-    xASSERT(179, t->tasset);
+    xASSERT_L(178, t);
+    xASSERT_L(179, t->tasset);
 
     xBaseReset(t, t->tasset);
 
@@ -90,8 +90,8 @@ void xTimerSave(xTimer* ent, xSerial* s)
 {
     xBaseSave(ent, s);
 
-    xASSERT(204, ent);
-    xASSERT(205, s);
+    xASSERT_L(204, ent);
+    xASSERT_L(205, s);
 
     s->Write(ent->state);
     s->Write(ent->secondsLeft);
@@ -101,8 +101,8 @@ void xTimerLoad(xTimer* ent, xSerial* s)
 {
     xBaseLoad(ent, s);
 
-    xASSERT(225, ent);
-    xASSERT(226, s);
+    xASSERT_L(225, ent);
+    xASSERT_L(226, s);
 
     s->Read(&ent->state);
     s->Read(&ent->secondsLeft);
@@ -112,8 +112,8 @@ void xTimerEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*, U
 {
     xTimer* t = (xTimer*)to;
 
-    xASSERT(250, to);
-    xASSERT(251, to->baseType == eBaseTypeTimer);
+    xASSERT_L(250, to);
+    xASSERT_L(251, to->baseType == eBaseTypeTimer);
 
     switch (toEvent) {
     case eEventRun:
@@ -142,12 +142,12 @@ void xTimerEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*, U
 
 void xTimerUpdate(xBase* to, xScene* sc, F32 dt)
 {
-    xASSERT(302, to);
-    xASSERT(303, sc);
+    xASSERT_L(302, to);
+    xASSERT_L(303, sc);
 
     xTimer* t = (xTimer*)to;
 
-    xASSERT(307, t->baseType == eBaseTypeTimer);
+    xASSERT_L(307, t->baseType == eBaseTypeTimer);
 
     if (t->state == 1) {
         t->secondsLeft -= dt;

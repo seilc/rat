@@ -31,7 +31,7 @@ void xGroupInit(xBase* b, xGroupAsset* asset)
 
     U32 count = xGroupGetCount(t);
     
-    t->item = (count > 0) ? (xBase**)xMEMALLOC(sizeof(xBase*) * count, 0, eMemMgrTag_Scene, 0, 53) : NULL;
+    t->item = (count > 0) ? (xBase**)xMEMALLOC_L(sizeof(xBase*) * count, 0, eMemMgrTag_Scene, 0, 53) : NULL;
     t->last_index = 0;
     t->ptr_last_index = 0;
     t->flg_group = 0;
@@ -39,7 +39,7 @@ void xGroupInit(xBase* b, xGroupAsset* asset)
 
 void xGroupSetup(xGroup* g)
 {
-    xASSERT(64, g);
+    xASSERT_L(64, g);
 
     if (g->flg_group & 0x1) return;
 
@@ -60,32 +60,32 @@ void xGroupSetup(xGroup* g)
     
     g->flg_group |= 0x1;
 
-    xASSERTM(99, ((XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET) & g->flg_group) != (
-                     XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET),
-               "ERROR:  Group 0x%08x  \"%s\" has both widgets and assets!\n",
-               g->id, xSTAssetName(g->id));
+    xASSERT_FMT_L(99, ((XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET) & g->flg_group) != (
+                       XGRP_FLG_HASWIDGET|XGRP_FLG_HASASSET),
+                 "ERROR:  Group 0x%08x  \"%s\" has both widgets and assets!\n",
+                 g->id, xSTAssetName(g->id));
 }
 
 void xGroupSave(xGroup* ent, xSerial* s)
 {
     xBaseSave(ent, s);
 
-    xASSERT(119, ent);
-    xASSERT(120, s);
+    xASSERT_L(119, ent);
+    xASSERT_L(120, s);
 }
 
 void xGroupLoad(xGroup* ent, xSerial* s)
 {
     xBaseLoad(ent, s);
 
-    xASSERT(138, ent);
-    xASSERT(139, s);
+    xASSERT_L(138, ent);
+    xASSERT_L(139, s);
 }
 
 void xGroupReset(xGroup* ent)
 {
-    xASSERT(144, ent);
-    xASSERT(145, ent->asset);
+    xASSERT_L(144, ent);
+    xASSERT_L(145, ent->asset);
 
     xBaseReset(ent, ent->asset);
 }
@@ -93,8 +93,8 @@ void xGroupReset(xGroup* ent)
 void xGroupEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID)
 {
     xGroup* g = (xGroup*)to;
-    xASSERT(167, g);
-    xASSERT(168, g->asset);
+    xASSERT_L(167, g);
+    xASSERT_L(168, g->asset);
 
     switch (toEvent) {
     case eEventReset:
@@ -173,15 +173,15 @@ void xGroupEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBas
 
 U32 xGroupGetCount(xGroup* g)
 {
-    xASSERT(279, g);
-    xASSERT(280, g->asset);
+    xASSERT_L(279, g);
+    xASSERT_L(280, g->asset);
 
     return g->asset->itemCount;
 }
 
 xBase* xGroupGetItemPtr(xGroup* g, U32 index)
 {
-    xASSERT(301, g);
+    xASSERT_L(301, g);
 
     if (!(g->flg_group & 0x1)) {
         xOutWarn("GROUP", "xGroupGetItemPtr called before xGroupSetup.\n");
@@ -193,9 +193,9 @@ xBase* xGroupGetItemPtr(xGroup* g, U32 index)
 
 U32 xGroupGetItem(xGroup* g, U32 index)
 {
-    xASSERT(319, g);
-    xASSERT(320, g->asset);
-    xASSERT(323, index < g->asset->itemCount);
+    xASSERT_L(319, g);
+    xASSERT_L(320, g->asset);
+    xASSERT_L(323, index < g->asset->itemCount);
 
     U32* idx = (U32*)((U8*)g->asset + sizeof(xGroupAsset));
     return idx[index];
@@ -205,9 +205,9 @@ DECOMP_FORCEACTIVE("to", "sc")
 
 U32 xGroupGetAny(xGroup* g)
 {
-    xASSERT(354, g->asset);
+    xASSERT_L(354, g->asset);
     if (g->asset->itemCount == 0) return 0;
-    xASSERT(356, g->last_index < g->asset->itemCount);
+    xASSERT_L(356, g->last_index < g->asset->itemCount);
 
     U32* ids = (U32*)((U8*)g->asset + sizeof(xGroupAsset));
     U32 id = ids[g->last_index];
@@ -221,7 +221,7 @@ DECOMP_FORCEACTIVE("g->ptr_last_index < g->asset->itemCount")
 
 xBase* xGroupGetAnyRandomPtr(xGroup* g)
 {
-    xASSERT(384, g->asset);
+    xASSERT_L(384, g->asset);
     if (g->asset->itemCount == 0) return NULL;
 
     U32 idx = xrand_RandomChoice(g->asset->itemCount);

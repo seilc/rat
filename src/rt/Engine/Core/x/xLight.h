@@ -55,14 +55,17 @@ struct xLight : xBase
 #if DEBUG || RELEASE
 xLight* xLightCreateTempInternal(bool useLightCard, const char* fileName, U32 lineNumber);
 void xLightDestroyTempInternal(xLight* xl, const char* fileName, U32 lineNumber);
-#define xLightCreateTemp(useLightCard, line) xLightCreateTempInternal((useLightCard), __FILE__, (line))
-#define xLightDestroyTemp(xl, line) xLightDestroyTempInternal((xl), __FILE__, (line))
+#define xLightCreateTemp_L(useLightCard, line) xLightCreateTempInternal((useLightCard), __FILE__, (line))
+#define xLightDestroyTemp_L(xl, line) xLightDestroyTempInternal((xl), __FILE__, (line))
 #else
 xLight* xLightCreateTempInternal(bool useLightCard);
 void xLightDestroyTempInternal(xLight* xl);
-#define xLightCreateTemp(useLightCard, line) xLightCreateTempInternal((useLightCard))
-#define xLightDestroyTemp(xl, line) xLightDestroyTempInternal((xl))
+#define xLightCreateTemp_L(useLightCard, line) xLightCreateTempInternal((useLightCard))
+#define xLightDestroyTemp_L(xl, line) xLightDestroyTempInternal((xl))
 #endif
+
+#define xLightCreateTemp(useLightCard) xLightCreateTemp_L(useLightCard, __LINE__)
+#define xLightDestroyTemp(xl) xLightDestroyTemp_L(xl, __LINE__)
 void xLightOn(xLight* xl, bool on, F32 transitionTime);
 void xLightSetColor(xLight* xl, F32 r, F32 g, F32 b, F32 transitionTime);
 void xLightSetColor(xLight* xl, const xFColor& col, F32 transitionTime);

@@ -54,19 +54,19 @@ static void xOutEnable(U32 hval, char* name, xOutSeverity trumpsev)
 
 void xOutEnable(char* name, xOutSeverity trumpsev)
 {
-    xASSERT(111, name);
+    xASSERT_L(111, name);
     xOutEnable(xStrHash(name), name, trumpsev);
 }
 
 S32 xOutEnabled(char* name)
 {
-    xASSERT(125, name);
+    xASSERT_L(125, name);
     return xOutEnabled(xStrHash(name));
 }
 
 S32 xOutTrumps(char* name, xOutSeverity usersev)
 {
-    xASSERT(132, name);
+    xASSERT_L(132, name);
     return xOutTrumps(xStrHash(name), usersev);
 }
 
