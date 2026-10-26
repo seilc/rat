@@ -54,6 +54,8 @@ namespace {
 
 F32 tweakFarClip = 0.0f;
 
+void AddTweaks();
+
 inline F32 iCameraFogFarClip()
 {
 #if DEBUG || RELEASE
@@ -79,6 +81,13 @@ void iCameraSetOrthoProjection(RwCamera* cam, bool ortho)
         RwCameraBeginUpdateWrapper(camera);
     }
 }
+
+// RESTORED: from TSSM GC
+void iCameraClear(RwCamera* camera, xColor color)
+{
+    RwCameraClear(camera, (RwRGBA*)&color, rwCAMERACLEARIMAGE | rwCAMERACLEARZ | rwCAMERACLEARSTENCIL);
+}
+// END RESTORED
 
 RwCamera* iCameraCreate(S32 width, S32 height, S32 mainGameCamera)
 {
@@ -262,7 +271,16 @@ void iCameraSetFOV(RwCamera* cam, F32 fov)
     RwCameraSetViewWindow(cam, &vw);
 }
 
-DECOMP_FORCEACTIVE("cam != 0", "vw != 0")
+// RESTORED: speculative
+F32 iCameraGetFOV(RwCamera* cam)
+{
+    xASSERT(cam != 0);
+    const RwV2d* vw = RwCameraGetViewWindow(cam);
+    xASSERT(vw != 0);
+    F32 angle = xatan(vw->x);
+    return 2.0f * (180.0f/PI) * angle;
+}
+// END RESTORED
 
 void iCameraAssignEnv(RwCamera* camera, iEnv* env_geom)
 {
