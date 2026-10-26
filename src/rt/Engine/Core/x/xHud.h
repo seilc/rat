@@ -125,7 +125,7 @@ public:
 
     widget(const asset& a);
 
-    // RESTORED: speculative
+    // RESTORED: from Rat MAP
     ~widget() {}
     // END RESTORED
 
