@@ -134,7 +134,6 @@ static void xCMprep(xCreditsData* data)
         return;
     }
 
-    // Fakematch: different declaration order than DWARF
     xCMhunk* hp;
     char* dp;
     xCMcredits* cp;
@@ -316,7 +315,6 @@ static void xCMdump_hunk(xCMhunk* hunk)
 
 static U32 xCMrender(F32 time, xCreditsData* data)
 {
-    // Fakematch: different declaration order than DWARF
     xCMhunk* hp;
     xCMheader* hdr;
     char* dp;

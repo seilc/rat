@@ -106,7 +106,7 @@ struct sphericalEmitter : emitterBase
     F32 GetTimeLeft();
 };
 
-// RESTORED
+// RESTORED: from RotU GC
 struct FreezableObjectEffect : emitterBase
 {
     sphericalEmitterAsset mModifiableAsset;

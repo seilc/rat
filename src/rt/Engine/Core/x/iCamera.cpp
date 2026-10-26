@@ -336,7 +336,6 @@ void iCameraUpdateFog(RwCamera*, iTime t)
     F32 a;
     RwRGBA ca, cb, color;
 
-// ???
 #if DEBUG
     if (xglobals->fog.type == rwFOGTYPENAFOGTYPE || xglobals->fog_t0 == 0) {
         return;

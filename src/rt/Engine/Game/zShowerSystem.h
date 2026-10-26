@@ -14,7 +14,7 @@ struct xCameraFXShakeParams;
 struct zShrapnelAsset;
 class zFXShockwaveConfig;
 
-// RESTORED
+// RESTORED: from RotU GC
 class zShowerCBInterface
 {
 public:

@@ -31,7 +31,6 @@ void xRenderStateSetZBias(RwReal bias)
     xASSERT_L(184, cam != 0);
     if (!cam) return;
 
-// Fakematch?
 #if DEBUG || RELEASE
     static RwReal bias_scale = 0.005f;
 #else

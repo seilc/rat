@@ -36,7 +36,7 @@ public:
     }
 };
 
-// RESTORED
+// RESTORED: from RotU GC
 class xOneLinerList
 {
     U32 mNumSounds;

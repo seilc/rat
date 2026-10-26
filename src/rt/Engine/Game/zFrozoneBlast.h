@@ -6,7 +6,7 @@
 
 struct xLight;
 
-// RESTORED
+// RESTORED: from RotU GC
 class zFrozoneBlast
 {
 public:

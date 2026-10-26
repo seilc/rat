@@ -133,7 +133,6 @@ namespace {
     }
     // END RESTORED
 
-    // Equivalent: scheduling
     void render_pulse_glare(const xMat4x3& mat, xPulseGlare* g)
     {
         xVec3 w, h;

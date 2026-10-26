@@ -115,7 +115,6 @@ static F32 ArcLength3(xCoef3* coef, F64 ustart, F64 uend)
     u = ustart + h;
 
     for (i = 2; i <= 50; i++) {
-// ???
 #if DEBUG
         if (i % 2 == 0) {
             sum += 4.0 * sqrt((((A * u + B) * u + C) * u + D) * u + E);

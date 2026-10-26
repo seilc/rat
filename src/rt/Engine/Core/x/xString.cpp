@@ -432,7 +432,6 @@ const char* find_char(const substr& s, const substr& cs)
     const char* p = s.text;
     const char* d = cs.text;
 
-    // Why?????????????
     switch (cs.size) {
     case 0:
         break;
