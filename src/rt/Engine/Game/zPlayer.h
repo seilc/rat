@@ -115,6 +115,8 @@ public:
     virtual F32 PredictY(F32 time) const;
     virtual bool IsInteractioning();
 
+    bool CanSayOneLiner();
+
     bool Get_humanPlayer() const
     {
         return (zPlayerFlags >> 18) & 0x1;
