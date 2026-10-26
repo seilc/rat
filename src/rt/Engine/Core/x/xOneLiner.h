@@ -18,6 +18,7 @@ public:
 
     static void SceneInit();
     static void SceneReset();
+    static void CalcLevelAdjustments();
     static void UpdateSounds();
     static void TweaksInit();
 
@@ -34,9 +35,15 @@ public:
     {
         return (mSoundGroupHdl != ISND_INVALID_SND_GROUP_HANDLE);
     }
+
+    // RESTORED: from RotU GC
+    iSndGroupHandle GetSoundGroup() const
+    {
+        return mSoundGroupHdl;
+    }
+    // END RESTORED
 };
 
-// RESTORED: from RotU GC
 class xOneLinerList
 {
     U32 mNumSounds;
@@ -44,8 +51,28 @@ class xOneLinerList
 
 public:
     void InitWithSounds(xOneLiner* soundList, U32 maxCheck);
+    void SetTimers(xOneLiner* soundList, U32 maxCheck, F32);
     void Reset();
+
+    // RESTORED: from RotU GC
+    bool PlaySound(U32 r4)
+    {
+        if (r4 < mNumSounds) {
+            return mSounds[r4].PlaySound();
+        }
+        return false;
+    }
+
+    iSndGroupHandle GetSoundGroup(U32 r4) const
+    {
+        if (r4 >= mNumSounds) {
+            return ISND_INVALID_SND_GROUP_HANDLE;
+        }
+        return mSounds[r4].GetSoundGroup();
+    }
+    // END RESTORED
+
+    inline void PlaySoundDelayed(U32, F32);
 };
-// END RESTORED
 
 #endif
