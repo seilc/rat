@@ -45,6 +45,7 @@ void xDampSpring(F32& s, F32& v, F32 dt, F32 k);
 F32 xsqrt(F32 x);
 F32 xexp(F32 x);
 F32 xasin(F32 x);
+F32 xatan(F32 x);
 F32 xatan2(F32 y, F32 x);
 F32 xfmod(F32 x, F32 y);
 void xsqrtfast(F32& o, F32 fVal);

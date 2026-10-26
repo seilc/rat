@@ -32,6 +32,16 @@ inline F32 xsqrt(register F32 x)
     return 100000.0f;
 }
 
+// RESTORED: from RotU GC
+inline F32 xatan(F32 x)
+{
+    return std::atanf(x);
+}
+// END RESTORED
+
+inline void xatanfast(F32& fValue, F32);
+inline void xatan2fast(F32& o, F32 y, F32 x);
+
 #undef inline
 
 #endif
