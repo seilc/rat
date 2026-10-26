@@ -248,7 +248,6 @@ cflags_runtime = [
 ]
 
 # Dolphin SDK flags (dolsdk2004's Makefile). D links the debug libraries, R/MD/M the release ones.
-# OS and GX are the Nov 10 2004 patch (SDK_REVISION 2) in D/MD/M, the unpatched Apr 5 2004 ones in R.
 cflags_sdk_base = [
     "-char unsigned",
     "-nodefaults",
@@ -260,7 +259,6 @@ cflags_sdk_base = [
     "-requireprotos",
     '-pragma "cats off"',
     "-D__GEKKO__",
-    f"-DSDK_REVISION={[2, 0, 2, 2][version_num]}",
     "-nosyspath",
     "-i src/dolphin/include",
     "-i src/dolphin/include/libc",
@@ -283,8 +281,23 @@ cflags_sdk_release = [
 ]
 cflags_sdk = cflags_sdk_debug if version_num == 0 else cflags_sdk_release
 sdk_char_signed = ["-char signed"]
+
+# SDK_REVISION: each library's build date (YYYYMMDD) from its version string; libraries without one get the date
+# most libraries carry. OS and GX are the Nov 10 2004 patch in D/MD/M, the unpatched Apr 5 2004 ones in R.
+sdk_dates = {
+    "gx": [20041110, 20040405, 20041110, 20041110][version_num],
+    "os": [20041110, 20040405, 20041110, 20041110][version_num],
+    "vi": 20040407,
+}
+sdk_date_default = 20040405
+
+
+def sdk_revision(lib_name: str) -> str:
+    return f"-DSDK_REVISION={sdk_dates.get(lib_name, sdk_date_default)}"
+
+
 # EXIBios.c is built at -O3,p instead of -O4,p in the release library
-cflags_sdk_exibios = [("-O3,p" if f == "-O4,p" else f) for f in cflags_sdk]
+cflags_sdk_exibios = [("-O3,p" if f == "-O4,p" else f) for f in cflags_sdk] + [sdk_revision("exi")]
 
 # REL flags
 cflags_rel = [
@@ -478,7 +491,7 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
         "mw_version": "GC/1.2.5n",
-        "cflags": cflags_sdk,
+        "cflags": [*cflags_sdk, sdk_revision(lib_name)],
         "progress_category": "sdk",
         "objects": objects,
     }
