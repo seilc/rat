@@ -7,6 +7,9 @@
 #define ARRAY_LENGTH(a) (sizeof(a) / sizeof(a[0]))
 
 char* xUtil_idtag2string(U32 srctag, S32 bufidx);
+#if DEBUG
+void xUtil_niceBufDump(char* membuf, S32 bytcnt, S32 ashex, S32 rptoff);
+#endif
 F32 xClampAngle0_2PI(F32 angle);
 void quicksort_uint(void* base, unsigned long num, unsigned long width, unsigned long key_offset);
 void quicksort_istr(void* base, unsigned long num, unsigned long width, unsigned long key_offset);
