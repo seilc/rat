@@ -44,6 +44,11 @@ public:
     S32 index;
     
 public:
+    zPad* GetPad()
+    {
+        return pad;
+    }
+
     virtual void Init(xEntAsset* asset);
     virtual void SceneSetup();
     virtual void SceneEnter(zScene*);

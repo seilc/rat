@@ -5,6 +5,11 @@
 
 void iDrawSetFBMSK(U32 abgr, U32 setMask, bool);
 
-U32 iDrawGetFBMSK();
+extern U32 lastSetFBMSK;
+
+inline U32 iDrawGetFBMSK()
+{
+    return lastSetFBMSK;
+}
 
 #endif

@@ -19,6 +19,11 @@ public:
 
     bool Pressed(U32 button);
 
+    S32 GetPadPort()
+    {
+        return padPort;
+    }
+
 private:
     U8 used;
     U8 enable;
