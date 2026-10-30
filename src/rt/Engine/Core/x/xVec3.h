@@ -29,16 +29,24 @@ struct xVec3
     static const xVec3 m_DoubleVec;
     static const xVec3 m_NegDoubleVec;
 
-    xVec3& assign(F32 x, F32 y, F32 z);
+    xVec3& assign(F32 x, F32 y, F32 z) { this->x = x; this->y = y; this->z = z; return *this; }
     xVec3& assign(F32 v);
     xVec3& operator+=(const xVec3& v);
     xVec3& operator-=(const xVec3& v);
     xVec3& operator*=(F32 f);
     xVec3& operator=(F32 f) { x = y = z = f; return *this; }
-    xVec3& cross(const xVec3& c0, const xVec3& c1);
-    F32 dot(const xVec3& c) const;
-    F32 length() const;
-    F32 length2() const;
+
+    xVec3& cross(const xVec3& c0, const xVec3& c1)
+    {
+        x = c0.y * c1.z - c1.y * c0.z;
+        y = c0.z * c1.x - c1.z * c0.x;
+        z = c0.x * c1.y - c1.x * c0.y;
+        return *this;
+    }
+
+    F32 dot(const xVec3& c) const { return x * c.x + y * c.y + z * c.z; }
+    F32 length() const { return xsqrt(length2()); }
+    F32 length2() const { return x * x + y * y + z * z; }
     xVec3& negate();
 
     F32 normalize()
@@ -66,6 +74,7 @@ struct xVec3
     void AddScale(const xVec3& p, const xVec3& d, F32 s);
     void AddScale(const xVec3& d, F32 s);
     void Sub(const xVec3& a, const xVec3& b);
+    void ScaleDiff(const xVec3& a, const xVec3& b, F32 scale);
     void Add(const xVec3& a);
     void Scale(F32 scalar);
     void Scale(const xVec3& a, F32 scalar);
@@ -102,6 +111,7 @@ void xVec3Copy(xVec3* o, const xVec3* v);
 F32 xVec3Dot(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
 F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
 
+void xVec3Add(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3AddTo(xVec3& a, const xVec3& b);
 void xVec3AddTo(xVec3* a, const xVec3* b);
 void xVec3Sub(xVec3* o, const xVec3* a, const xVec3* b);
@@ -117,6 +127,48 @@ void xVec3ScaleC(xVec3& o, F32 scale);
 F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 F32 xVec3Dist2(const xVec3* a, const xVec3* b);
 F32 xVec3NormalizeSafe(xVec3& v);
+
+inline void xVec3::Sub(const xVec3& a, const xVec3& b)
+{
+    x = a.x - b.x;
+    y = a.y - b.y;
+    z = a.z - b.z;
+}
+
+inline void xVec3::ScaleDiff(const xVec3& a, const xVec3& b, F32 scale)
+{
+    x = scale * (a.x - b.x);
+    y = scale * (a.y - b.y);
+    z = scale * (a.z - b.z);
+}
+
+inline void xVec3::Add(const xVec3& a)
+{
+    x += a.x;
+    y += a.y;
+    z += a.z;
+}
+
+inline void xVec3::Scale(F32 scalar)
+{
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+}
+
+inline F32 xVec3::Distance(const xVec3& other) const
+{
+    xVec3 diff;
+    diff.Sub(other, *this);
+    return diff.length();
+}
+
+inline F32 xVec3::Distance2(const xVec3& other) const
+{
+    xVec3 diff;
+    diff.Sub(other, *this);
+    return diff.length2();
+}
 
 #if !DEBUG
 #include "xVec3Inlines.h"

@@ -51,9 +51,19 @@ void xQuickCullForBox(xQCControl* ctrl, xQCData* q, const xBox* box);
 void xQuickCullForOBB(xQCControl* ctrl, xQCData* q, const xBox* b, const xMat4x3* m);
 void xQuickCullForEverything(xQCData* q);
 
+inline void xQuickCullForBound(xQCData* q, const xBound* b)
+{
+    xQuickCullForBound(&xqc_def_ctrl, q, b);
+}
+
 inline void xQuickCullForLine(xQCData* q, const xLine3* r)
 {
     xQuickCullForLine(&xqc_def_ctrl, q, r);
+}
+
+inline void xQuickCullForSphere(xQCData* q, const xSphere* s)
+{
+    xQuickCullForSphere(&xqc_def_ctrl, q, s);
 }
 
 #if DEBUG
