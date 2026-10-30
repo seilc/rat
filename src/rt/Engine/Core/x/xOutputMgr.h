@@ -27,6 +27,8 @@ do {                                                                            
 #define xWARN_INVALID(name, cond) _xWARN_INVALID(__LINE__, name, cond, #cond)
 #define xWARN_INVALID_L(line, name, cond) _xWARN_INVALID(line, name, cond, #cond)
 
+#define xFUNCTION_FMT(fmt) "%s: " fmt, __FUNCTION__
+
 #define xTRACE_FUNCTION_L(line, name)                                                               \
 do {                                                                                                \
     if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= xOutSevInfo)) {  \
@@ -50,6 +52,9 @@ void xOutBabble(char* name, const char* fmt, ...);
 #else
 #define xWARN_INVALID(name, cond)
 #define xWARN_INVALID_L(line, name, cond)
+
+#define xFUNCTION_FMT(fmt) "%s: " fmt
+
 #define xTRACE_FUNCTION_L(line, name)
 
 #define xOutSetSev(sev)
