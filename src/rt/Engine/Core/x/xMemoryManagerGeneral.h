@@ -24,6 +24,7 @@ public:
     void* GetCurrentEnd() const;
 
 #if DEBUG || RELEASE
+    U32 GetUnfragmentedSpace() const;
     U32 GetFragmentedSpace() const;
     U32 GetFreeSpace() const;
     void DumpAllocatedHeap() const;
@@ -60,6 +61,9 @@ public:
     void SetOrigSize(void* pointer, U32 size) const;
     U32 GetOrigSize(void* pointer) const;
 #endif
+
+public:
+    bool CheckHeap() const;
 
 private:
     struct FreeNode
@@ -105,13 +109,14 @@ private:
 
 #if DEBUG || RELEASE
     void UpdateLargestBlock();
+    void VerifyMetrics() const;
 #endif
 
     FreeNode* NextBlockOfMemory(FreeNode* node) const
     {
-        return (FreeNode*)(dir == Up ?
-            (U8*)(node + 1) + node->size :
-            (U8*)(node - 1) - node->size);
+        return dir == Up ?
+            (FreeNode*)((U8*)(node + 1) + node->size) :
+            (FreeNode*)((U8*)(node - 1) - node->size);
     }
 };
 
