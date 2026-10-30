@@ -23363,6 +23363,7 @@ nullString = .sdata2:0x803CA1E0; // type:object size:0x1 scope:local
 @327 = .sdata2:0x803CA330; // type:object size:0x4 scope:local align:4 data:float
 @329 = .sdata2:0x803CA338; // type:object size:0x8 scope:local align:8 data:double
 @56 = .sdata2:0x803CA340; // type:object size:0x4 scope:local data:4byte
+lbl_803CA35C = .sbss2:0x803CA35C; // type:label data:4byte
 @1071 = .sbss2:0x803CA360; // type:object size:0x2C scope:local
 @1121 = .sbss2:0x803CA38C; // type:object size:0x2C scope:local
 @760 = .sbss2:0x803CA3B8; // type:object size:0xC scope:local data:4byte

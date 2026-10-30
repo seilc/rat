@@ -8,6 +8,14 @@ ldscript_template: config/MASTER/ldscript.tpl
 
 # Pool references taken minus 4 that dtk attributes to the previous object.
 add_relocations:
+- source: .text:0x8000BE64
+  type: sda21
+  target: "@1071!.sbss2:0x803C8E40"
+  addend: -4
+- source: .text:0x8000BFE8
+  type: sda21
+  target: "@1121!.sbss2:0x803C8E6C"
+  addend: -4
 - source: .text:0x8001CC54
   type: sda21
   target: "@1494!.sbss2:0x803C9010"
