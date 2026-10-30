@@ -32,7 +32,11 @@ public:
         return cam != 0;
     }
 
-    void set_background(xColor color);
+    void set_background(xColor color)
+    {
+        bgraster = NULL;
+        bgcolor = color;
+    }
 
     void set_vert(RwIm2DVertex& vert, F32 x, F32 y, F32 u, F32 v)
     {
@@ -85,6 +89,8 @@ public:
 
     static bool clip_rect(xFRect& dst_rect, RwRaster* dst_raster);
     static bool clip_rect(xFRect& dst_rect, RwRaster* dst_raster, xFRect& src_rect);
+
+    bool clip_rect(xFRect& dst_rect, xFRect& src_rect) const { return clip_rect(dst_rect, dst, src_rect); }
 
     void begin_render();
     void end_render();

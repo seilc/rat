@@ -808,7 +808,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zParticleSystemWaterfall.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUberLaser.cpp"),
             Object(NonMatching, "rt/Engine/Game/zLoadingScreen.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xModelBlur.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xModelBlur.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iWater.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/water/fxembm.c"),
             Object(NonMatching, "rt/Engine/Core/gc/water/fxmain.c"),

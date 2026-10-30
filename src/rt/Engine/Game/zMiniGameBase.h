@@ -54,6 +54,8 @@ public:
     virtual void Exit();
     virtual void SetRespawnPosition(xMat4x3*);
     virtual void AddTweaks(const char*);
+
+    static zMiniGameBase* currentMiniGame;
 };
 
 #endif
