@@ -26,4 +26,6 @@ struct xBound
 void xBoundGetBox(xBox& box, const xBound& bound);
 void xBoundGetCylinder(xCylinder& o, const xBound& bound);
 
+inline xVec3* xBoundCenter(const xBound* b) { return (xVec3*)&b->sph.center; }
+
 #endif
