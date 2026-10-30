@@ -10,5 +10,8 @@
 RpHAnimHierarchy* iModelGetHierarchy(RpAtomic* imodel);
 U32 iModelNumBones(RpAtomic* model);
 void iModelRender(RpAtomic* model, RwMatrix* mat);
+void iModelSetMaterialAlpha(RpAtomic* model, U8 alpha);
+void iModelResetMaterial(RpAtomic* model);
+void iModelMaterialMul(RpAtomic* model, F32 rm, F32 gm, F32 bm);
 
 #endif

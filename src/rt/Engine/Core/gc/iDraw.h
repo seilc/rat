@@ -4,6 +4,8 @@
 #include "types.h"
 
 void iDrawSetFBMSK(U32 abgr, U32 setMask, bool);
+void iXFBreset();
+void* iXFBalloc(U32 size);
 
 extern U32 lastSetFBMSK;
 

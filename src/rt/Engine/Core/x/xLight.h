@@ -72,5 +72,7 @@ void xLightSetColor(xLight* xl, const xFColor& col, F32 transitionTime);
 void xLightGetColor(xLight* xl, xFColor& col);
 void xLightSetPos(xLight* xl, const xVec3& pos);
 void xLightSetRadius(xLight* xl, F32 radius);
+void xLightAddLocal(xModelInstance* minst);
+void xLightRemoveLocal(xModelInstance* minst);
 
 #endif

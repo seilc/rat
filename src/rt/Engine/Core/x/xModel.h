@@ -14,6 +14,10 @@ struct xLight;
 struct xModelInstance;
 struct xModelPool;
 
+#if DEBUG || RELEASE
+extern bool prelit_and_thats_the_way_we_likes_it;
+#endif
+
 struct xModelInstance
 {
     xModelInstance* Next;
@@ -88,11 +92,6 @@ void xModelRender(xModelInstance* modelInst);
 void xModelSetLightKit(xModelInstance* minst, xLightKit* lightKit, F32 transitionTime);
 RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
 
-#if DEBUG || RELEASE
-bool xModelRenderLogEnabled();
-void xModelRenderLogSetEntity(xEnt* ent);
-#endif
-
 inline xMat4x3* xModelGetFrame(xModelInstance* model)
 {
     xASSERT_L(855, model);
@@ -106,5 +105,40 @@ inline xModelInstance* xModelInstanceAlloc(RpAtomic* data, void* object, U16 fla
 {
     return xModelInstanceAllocReuse(data, object, flags, boneIndex, boneRemap, NULL);
 }
+
+inline void xModelSetMaterialAlpha(xModelInstance* modelInst, U8 alpha)
+{
+    xASSERT_L(1064, modelInst);
+    iModelSetMaterialAlpha(modelInst->Data, alpha);
+}
+
+inline void xModelMaterialMul(xModelInstance* modelInst, F32 rm, F32 gm, F32 bm)
+{
+    xASSERT_L(1076, modelInst);
+    xASSERT_L(1077, modelInst->Data);
+    iModelMaterialMul(modelInst->Data, rm, gm, bm);
+}
+
+inline void xModelResetMaterial(xModelInstance* modelInst)
+{
+    xASSERT_L(1085, modelInst);
+    xASSERT_L(1086, modelInst->Data);
+    iModelResetMaterial(modelInst->Data);
+}
+
+#if DEBUG || RELEASE
+extern bool render_log_enabled;
+extern xEnt* render_log_entity;
+
+inline bool xModelRenderLogEnabled()
+{
+    return render_log_enabled;
+}
+
+inline void xModelRenderLogSetEntity(xEnt* ent)
+{
+    render_log_entity = ent;
+}
+#endif
 
 #endif
