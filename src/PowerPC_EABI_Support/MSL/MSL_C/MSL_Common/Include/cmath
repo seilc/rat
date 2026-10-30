@@ -11,8 +11,19 @@ namespace std {
 float cosf(float);
 float floorf(float);
 
+inline float acosf(float x) { return acos(x); }
+inline float asinf(float x) { return asin(x); }
 inline float atanf(float x) { return atan(x); }
+inline float atan2f(float y, float x) { return atan2(y, x); }
 inline float ceilf(float x) { return ceil(x); }
+inline float coshf(float x) { return cosh(x); }
+inline float expf(float x) { return exp(x); }
+inline float fabsf(float x) { return fabs(x); }
+inline float fmodf(float x, float y) { return fmod(x, y); }
+inline float logf(float x) { return log(x); }
+inline float powf(float x, float y) { return pow(x, y); }
+inline float sinhf(float x) { return sinh(x); }
+inline float tanhf(float x) { return tanh(x); }
 
 }
 

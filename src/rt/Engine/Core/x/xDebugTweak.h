@@ -20,6 +20,7 @@ struct tweak_callback
     void(*convert_mem_to_tweak)(const tweak_info&, void*);
     void(*convert_tweak_to_mem)(const tweak_info&, void*);
 
+    static tweak_callback create(void(*on_change)(const tweak_info&), void(*on_select)(const tweak_info&) = NULL, void(*on_unselect)(const tweak_info&) = NULL, void(*on_start_edit)(const tweak_info&) = NULL, void(*on_stop_edit)(const tweak_info&) = NULL, void(*on_expand)(const tweak_info&) = NULL, void(*on_collapse)(const tweak_info&) = NULL, void(*on_update)(const tweak_info&) = NULL, void(*convert_mem_to_tweak)(const tweak_info&, void*) = NULL, void(*convert_tweak_to_mem)(const tweak_info&, void*) = NULL);
     static tweak_callback create_change(void(*on_change)(const tweak_info&));
     static tweak_callback create_expand(void(*on_expand)(const tweak_info&), void(*on_collapse)(const tweak_info&));
 
@@ -95,6 +96,7 @@ struct tweak_info
 
 #if DEBUG || RELEASE
 void* xDebugTweak_StaticAlloc(U32 size);
+tweak_info* xDebugGetTweak(const char* name);
 
 void xDebugAddTweak(const char* name, S8* v, S8 vmin, S8 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags);
@@ -109,6 +111,7 @@ void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* c
 void xDebugAddTweak(const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags);
 
 void _auto_tweak(const char* prefix, const char* name, S32* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
+void _auto_tweak(const char* prefix, const char* name, U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak(const char* prefix, const char* name, U8* v, U8 vmin, U8 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak(const char* prefix, const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak(const char* prefix, const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags, bool process);
