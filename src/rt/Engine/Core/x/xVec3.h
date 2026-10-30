@@ -75,7 +75,7 @@ struct xVec3
 };
 
 #define xVec3NormalizeMacro(o, v, outlen)                                                          \
-do {                                                                                               \
+{                                                                                                  \
     F32 len2 = xsqr((v)->x) + xsqr((v)->y) + xsqr((v)->z);                                         \
     if (xeq(len2, 1.0f, EPSILON)) {                                                                \
         (o)->x = (v)->x;                                                                           \
@@ -94,7 +94,7 @@ do {                                                                            
         (o)->y = (v)->y * len_inv;                                                                 \
         (o)->z = (v)->z * len_inv;                                                                 \
     }                                                                                              \
-} while (0)
+}
 
 F32 xVec3Normalize(xVec3* o, const xVec3* v);
 F32 xVec3NormalizeFast(xVec3* o, const xVec3* v);
