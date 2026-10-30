@@ -160,7 +160,17 @@ inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
 }
 
 void xMat4x3Copy(xMat4x3* o, const xMat4x3* m);
-void xMat4x3ToWorld(xVec3* o, const xMat4x3* m, const xVec3* v);
-void xMat4x3ToLocal(xVec3* o, const xMat4x3* m, const xVec3* v);
+
+inline void xMat4x3ToWorld(xVec3* o, const xMat4x3* m, const xVec3* v)
+{
+    xMat3x3RMulVec(o, m, v);
+    o->x = o->x + m->pos.x, o->y = o->y + m->pos.y, o->z = o->z + m->pos.z;
+}
+
+inline void xMat4x3ToLocal(xVec3* o, const xMat4x3* m, const xVec3* v)
+{
+    o->x = v->x - m->pos.x, o->y = v->y - m->pos.y, o->z = v->z - m->pos.z;
+    xMat3x3Tolocal(o, m, o);
+}
 
 #endif
