@@ -783,7 +783,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xCollideSpherePolygonUnprocessed.cpp"),
             Object(NonMatching, "rt/Engine/Game/zInteraction.cpp"),
             Object(NonMatching, "rt/Engine/Game/zBomb.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zProgressScript.cpp"),
+            Object(Matching, "rt/Engine/Game/zProgressScript.cpp"),
             Object(Matching, "rt/Engine/Core/x/xHudText.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFlameThrower.cpp"),
             Object(NonMatching, "rt/Engine/Game/zRocket.cpp"),
