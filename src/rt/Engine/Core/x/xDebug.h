@@ -41,15 +41,32 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
+#define _xVALIDATE_EQ(line, a, b, msg)                                                            \
+do {                                                                                              \
+    static S32 been_here;                                                                         \
+    if (!been_here) {                                                                             \
+        size_t l = (a), r = (b);                                                                  \
+        if (l != r) {                                                                             \
+            DBprintf(DBML_VALID, "%s(%d) : (" msg ") in '%s'\n", __FILE__, line, __FUNCTION__);   \
+            xDebugValidateFailed();                                                               \
+            been_here = TRUE;                                                                     \
+        }                                                                                         \
+    }                                                                                             \
+} while (0)
+
 #define xVALIDATE(cond) _xVALIDATE(__LINE__, cond, #cond)
 #define xVALIDATE_L(line, cond) _xVALIDATE(line, cond, #cond)
 #define xVALIDATE_FAIL_L(line) _xVALIDATE(line, 0, "*always*")
 #define xVALIDATE_MSG_L(line, cond, msg) _xVALIDATE(line, cond, msg)
+#define xVALIDATE_EQ(a, b) _xVALIDATE_EQ(__LINE__, a, b, #a "==" #b)
+#define xVALIDATE_EQ_L(line, a, b) _xVALIDATE_EQ(line, a, b, #a "==" #b)
 #else
 #define xVALIDATE(cond)
 #define xVALIDATE_L(line, cond)
 #define xVALIDATE_FAIL_L(line)
 #define xVALIDATE_MSG_L(line, cond, msg)
+#define xVALIDATE_EQ(a, b)
+#define xVALIDATE_EQ_L(line, a, b)
 #endif
 
 #define xVALIDATE_FAIL() xVALIDATE_FAIL_L(__LINE__)
@@ -173,6 +190,8 @@ void DBprintf(en_VERBOSE_MSGLEVEL msglvl, const char* fmt, ...);
 void xDebug_assert2_info(const char* func, const char* file, U32 line, const char* expr);
 void xDebug_assert2(const char* fmt, ...);
 U32 xDebugBoing();
+#else
+#define DBprintf(...)
 #endif
 
 S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func);

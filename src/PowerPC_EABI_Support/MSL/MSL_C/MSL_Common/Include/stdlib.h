@@ -15,6 +15,8 @@ extern void free(void*);
 extern void* malloc(size_t);
 extern void* realloc(void*, size_t);
 
+extern void exit(int);
+
 extern void qsort(void*, size_t, size_t, int (*)(const void*, const void*));
 
 #ifdef __cplusplus
