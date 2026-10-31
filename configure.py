@@ -558,7 +558,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/x/xCamFollow.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCamSupport.cpp"),
             Object(Matching, "rt/Engine/Core/x/xClimate.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xClumpColl.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xClumpColl.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCM.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xCollide.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCollideFast.cpp"),
