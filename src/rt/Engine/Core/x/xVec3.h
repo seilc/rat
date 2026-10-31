@@ -31,9 +31,9 @@ struct xVec3
 
     xVec3& assign(F32 x, F32 y, F32 z) { this->x = x; this->y = y; this->z = z; return *this; }
     xVec3& assign(F32 v);
-    xVec3& operator+=(const xVec3& v);
+    xVec3& operator+=(const xVec3& v) { x += v.x; y += v.y; z += v.z; return *this; }
     xVec3& operator-=(const xVec3& v);
-    xVec3& operator*=(F32 f);
+    xVec3& operator*=(F32 f) { x *= f; y *= f; z *= f; return *this; }
     xVec3& operator=(F32 f) { x = y = z = f; return *this; }
 
     xVec3& cross(const xVec3& c0, const xVec3& c1)
@@ -76,11 +76,15 @@ struct xVec3
     void Sub(const xVec3& a, const xVec3& b);
     void ScaleDiff(const xVec3& a, const xVec3& b, F32 scale);
     void Add(const xVec3& a);
+    void Add(const xVec3& a, const xVec3& b);
     void Scale(F32 scalar);
     void Scale(const xVec3& a, F32 scalar);
     F32 Distance(const xVec3& other) const;
     F32 Distance2(const xVec3& other) const;
     void Negate(const xVec3& a);
+    void SubAdd(const xVec3& a, const xVec3& b, const xVec3& c);
+    void ScaleComponents(const xVec3& scale);
+    void Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
 };
 
 #define xVec3NormalizeMacro(o, v, outlen)                                                          \
@@ -129,6 +133,13 @@ F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 F32 xVec3Dist2(const xVec3* a, const xVec3* b);
 F32 xVec3NormalizeSafe(xVec3& v);
 
+inline void xVec3::AddScale(const xVec3& d, F32 s)
+{
+    x += d.x * s;
+    y += d.y * s;
+    z += d.z * s;
+}
+
 inline void xVec3::Sub(const xVec3& a, const xVec3& b)
 {
     x = a.x - b.x;
@@ -136,11 +147,25 @@ inline void xVec3::Sub(const xVec3& a, const xVec3& b)
     z = a.z - b.z;
 }
 
+inline void xVec3::SubAdd(const xVec3& a, const xVec3& b, const xVec3& c)
+{
+    x = a.x - b.x + c.x;
+    y = a.y - b.y + c.y;
+    z = a.z - b.z + c.z;
+}
+
 inline void xVec3::ScaleDiff(const xVec3& a, const xVec3& b, F32 scale)
 {
     x = scale * (a.x - b.x);
     y = scale * (a.y - b.y);
     z = scale * (a.z - b.z);
+}
+
+inline void xVec3::Add(const xVec3& a, const xVec3& b)
+{
+    x = a.x + b.x;
+    y = a.y + b.y;
+    z = a.z + b.z;
 }
 
 inline void xVec3::Add(const xVec3& a)
@@ -157,6 +182,20 @@ inline void xVec3::Scale(F32 scalar)
     z *= scalar;
 }
 
+inline void xVec3::Scale(const xVec3& a, F32 scalar)
+{
+    x = a.x * scalar;
+    y = a.y * scalar;
+    z = a.z * scalar;
+}
+
+inline void xVec3::ScaleComponents(const xVec3& scale)
+{
+    x *= scale.x;
+    y *= scale.y;
+    z *= scale.z;
+}
+
 inline F32 xVec3::Distance(const xVec3& other) const
 {
     xVec3 diff;
@@ -169,6 +208,13 @@ inline F32 xVec3::Distance2(const xVec3& other) const
     xVec3 diff;
     diff.Sub(other, *this);
     return diff.length2();
+}
+
+inline void xVec3::Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale1)
+{
+    x = a.x * scale0 + b.x * scale1;
+    y = a.y * scale0 + b.y * scale1;
+    z = a.z * scale0 + b.z * scale1;
 }
 
 #if !DEBUG
