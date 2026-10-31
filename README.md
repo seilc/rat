@@ -101,10 +101,17 @@ Building
   ninja
   ```
 
-Visual Studio Code
-==================
+Code style
+==========
 
-If desired, use the recommended Visual Studio Code settings by renaming the `.vscode.example` directory to `.vscode`.
+The game code is formatted by hand, not by clang-format, and some of it looks inconsistent on purpose. The DEBUG
+build's debug info records which source line each piece of code came from, so the layout follows it where it can: a loop or
+`if` written on one line without braces, several statements on one line, or brace style changing within a file
+usually reflect which statements shared a line in the original source. Assert conditions are spelled exactly as
+in the original binary's assert strings (`0==xSTFindAsset(...)`), since the compiler stringifies them.
+
+Please don't run an auto-formatter over the C/C++ source. New code follows the surrounding code: 4-space indent,
+function braces on their own line, control-statement braces on the same line.
 
 Diffing
 =======
