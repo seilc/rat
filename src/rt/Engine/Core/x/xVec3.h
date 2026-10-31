@@ -111,6 +111,7 @@ void xVec3Copy(xVec3* o, const xVec3* v);
 F32 xVec3Dot(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
 F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
 
+void xVec3Init(xVec3& v, F32 _x, F32 _y, F32 _z);
 void xVec3Add(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3AddTo(xVec3& a, const xVec3& b);
 void xVec3AddTo(xVec3* a, const xVec3* b);
