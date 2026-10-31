@@ -1,11 +1,9 @@
 {
     "[c]": {
-        "files.encoding": "utf8",
-        "editor.defaultFormatter": "xaver.clang-format"
+        "files.encoding": "utf8"
     },
     "[cpp]": {
-        "files.encoding": "utf8",
-        "editor.defaultFormatter": "xaver.clang-format"
+        "files.encoding": "utf8"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
