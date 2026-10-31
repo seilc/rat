@@ -2,7 +2,9 @@
 #define XVOLUME_H
 
 #include "xBase.h"
-#include "xVolumeAsset.h"
+
+struct xBound;
+struct xVolumeAsset;
 
 class xVolume : public xBase
 {

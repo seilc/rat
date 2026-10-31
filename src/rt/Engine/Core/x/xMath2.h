@@ -8,6 +8,8 @@ struct xVec2
     F32 x, y;
 
     xVec2& assign(F32 x, F32 y);
+    xVec2& operator*=(F32 f) { x *= f; y *= f; return *this; }
+    xVec2 operator*(F32 f) const { xVec2 temp = *this; temp *= f; return temp; }
     xVec2& operator/=(F32 f);
     F32 length() const;
 };
@@ -32,6 +34,17 @@ struct basic_rect
 };
 
 extern const xVec2 g_O2;
+
+inline void xVec2Init(xVec2* v, F32 x, F32 y)
+{
+    v->x = x;
+    v->y = y;
+}
+
+inline F32 xVec2Dot(const xVec2* v1, const xVec2* v2)
+{
+    return v1->x * v2->x + v1->y * v2->y;
+}
 
 inline F32 xMath2NearestPointOnLine(F32& Px, F32& Py, F32 Cx, F32 Cy, F32 Ax, F32 Ay, F32 Bx, F32 By)
 {

@@ -1,6 +1,7 @@
 #include "xVolume.h"
 
 #include "xDebug.h"
+#include "xVolumeAsset.h"
 
 void xVolume::Init(xVolumeAsset* asset)
 {
