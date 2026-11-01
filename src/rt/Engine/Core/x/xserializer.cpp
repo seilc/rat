@@ -170,7 +170,7 @@ S32 xSerial::Write(char* data, S32 elesize, S32 n)
     }
 
 #if DEBUG || RELEASE
-    this->ctxtdata->watermark = xmax(this->ctxtdata->watermark, this->bittally);
+    this->ctxtdata->watermark = MAX(this->ctxtdata->watermark, this->bittally);
 #endif
 
     return nbit;
@@ -292,7 +292,7 @@ S32 xSerial::Read(char* buf, S32 elesize, S32 n)
     }
 
 #if DEBUG || RELEASE
-    this->ctxtdata->watermark = xmax(this->ctxtdata->watermark, this->bittally);
+    this->ctxtdata->watermark = MAX(this->ctxtdata->watermark, this->bittally);
 #endif
 
     return nbit;

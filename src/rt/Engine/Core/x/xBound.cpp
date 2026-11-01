@@ -536,8 +536,8 @@ bool xOBBHitsTriangle(const xBox& box, const xMat4x3& mat, const xVec3* vertices
         F32 v0DotS = vertices[0].dot(s);
         F32 v1DotS = vertices[1].dot(s);
         F32 v2DotS = vertices[2].dot(s);
-        F32 minTriPos = xmin(xmin(v0DotS, v1DotS), v2DotS);
-        F32 maxTriPos = xmax(xmax(v0DotS, v1DotS), v2DotS);
+        F32 minTriPos = MIN3(v0DotS, v1DotS, v2DotS);
+        F32 maxTriPos = MAX3(v0DotS, v1DotS, v2DotS);
 
         if (minBoxPos > maxTriPos || minTriPos > maxBoxPos) {
             return false;

@@ -474,7 +474,7 @@ void xCamPathBias::DebugRender()
     
     while (u < end) {
         u += step;
-        u = xmin(u, end);
+        u = MIN(u, end);
 
         pCurve->evaluate(u, p1);
 

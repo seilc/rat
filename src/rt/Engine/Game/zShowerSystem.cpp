@@ -126,7 +126,7 @@ void zShowerParticle::Update(pool_list<zShowerParticle>& list, xEnt* owner, zSho
             }
         }
 
-        F32 shadowRadius = config->radius * xmin(1.0f, time * speed / Y_HEIGHT_SHIFT);
+        F32 shadowRadius = config->radius * MIN(1.0f, time * speed / Y_HEIGHT_SHIFT);
         xShadowSimple_Add(&shadow, (xMat4x3*)model->Mat, shadowRadius, 1.0f);
 
         xVec3Copy((xVec3*)&model->Mat->pos, &end);

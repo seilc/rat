@@ -94,7 +94,10 @@ inline F32 xatan2(F32 y, F32 x)
     return xAngleClampFast(std::atan2f(y, x));
 }
 
+inline F32 xmin(F32 a, F32 b);
 inline F32 xmin3(F32 a, F32 b, F32 c);
+inline F32 xmax(F32 a, F32 b);
+inline F32 xmax3(F32 a, F32 b, F32 c);
 
 inline void xsqrtfast(F32& o, register F32 fVal)
 {

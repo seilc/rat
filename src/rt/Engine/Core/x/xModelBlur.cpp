@@ -467,7 +467,7 @@ bool xModelBlur::update(F32 dt)
             card.center.assign(A.x + ABx * t, A.y + ABy * t, A.z + ABz * t);
 
             if (tweak::render_card_spheres) {
-                U32 alpha = xmin((U32)(255.9f * card.alpha), 255);
+                U32 alpha = MIN((U32)(255.9f * card.alpha), 255);
                 xColor color = { 255, i * 5, alpha, 255 };
                 xDrawSetColor(color);
                 xDrawSphere(&card.center, activity->cfg->radius, 0xC0006);
@@ -552,8 +552,8 @@ void xModelBlur::render()
     xFRect tex_rect;
     tex_rect.x = 0.0f;
     tex_rect.y = 0.0f;
-    tex_rect.w = xmin(scr_rect.w, 128.0f);
-    tex_rect.h = xmin(scr_rect.h, 128.0f);
+    tex_rect.w = MIN(scr_rect.w, 128.0f);
+    tex_rect.h = MIN(scr_rect.h, 128.0f);
 
     camtex.setup_subview(world_cam, scr_rect, tex_rect);
 

@@ -112,7 +112,7 @@ void xLightEffectFlicker::UpdateEffect(xLight& light, F32 dt)
             newColor.b = flickerData.initialColor.b * (1.0f - tasset->maxColorVariation.b * xrand_GenRandFloat());
         }
 
-        F32 blendtime = xmin(tasset->blendTime, flickerData.time);
+        F32 blendtime = MIN(tasset->blendTime, flickerData.time);
 
         xLightSetColor(&light, newColor, blendtime);
     }

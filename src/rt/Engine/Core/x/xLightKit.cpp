@@ -50,8 +50,8 @@ xLightKit* xLightKit_Prepare(void* data)
             iprintf("BOGUS LIGHT COLOR:  % 5.2f % 5.2f % 5.2f\n",
                     currlight->color.red, currlight->color.green, currlight->color.blue);
             
-            RwReal s = xmax3(currlight->color.red, currlight->color.green, currlight->color.blue);
-            s = xmax(s, 0.00001f);
+            RwReal s = MAX3(currlight->color.red, currlight->color.green, currlight->color.blue);
+            s = MAX(s, 0.00001f);
             s = 1.0f / s;
 
             currlight->color.red *= s;

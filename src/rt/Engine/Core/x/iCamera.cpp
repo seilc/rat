@@ -366,7 +366,7 @@ void iCameraUpdateFog(RwCamera*, iTime t)
     t = iTimeGet();
 
     a = iTimeDiffSec(xglobals->fog_t0, t) / iTimeDiffSec(xglobals->fog_t0, xglobals->fog_t1);
-    a = xclamp(a, 0.0f, 1.0f);
+    a = CLAMP(a, 0.0f, 1.0f);
 
     fp->type = xglobals->fogB.type;
     fp->table = xglobals->fogB.table;
