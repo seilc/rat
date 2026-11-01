@@ -35,4 +35,13 @@ RwCamera* RwCameraBeginUpdateWrapper(RwCamera* camera);
 void UpdateGlobalFrustumPlanes(RwCamera*);
 void iCameraPerformRenderWareHack(RwCamera* camera);
 
+inline RwCamera* RwCameraCreateWrapper()
+{
+    RwCamera* camera = RwCameraCreate();
+    if (camera) {
+        iCameraPerformRenderWareHack(camera);
+    }
+    return camera;
+}
+
 #endif

@@ -3,6 +3,7 @@
 #include "xRand.h"
 #include "xIM.h"
 #include "xstransvc.h"
+#include "xRenderState.h"
 
 #include <cmath>
 

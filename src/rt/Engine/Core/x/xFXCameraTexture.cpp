@@ -6,6 +6,8 @@
 #include "iDraw.h"
 #include "zRenderState.h"
 #include "xMemMgr.h"
+#include "iCamera.h"
+#include "xRenderState.h"
 
 #include "decomp.h"
 
@@ -24,7 +26,7 @@ bool xFXCameraTexture::create(S32 w, S32 h, bool need_zwrite, S32 bpp, S32 zbpp)
     this->w = w;
     this->h = h;
 
-    cam = RwCameraCreate();
+    cam = RwCameraCreateWrapper();
     if (!cam) {
         destroy();
         return false;
@@ -169,7 +171,7 @@ void xFXCameraTexture::begin_render(S32 clear_flags, U32 fbmsk_write, U32, F32 n
 
     RwFrameGetLTM(RwCameraGetFrame(cam))->flags |= rwMATRIXTYPEORTHONORMAL;
 
-    RwCameraBeginUpdate(cam);
+    RwCameraBeginUpdateWrapper(cam);
 
     if ((clear_flags & rwCAMERACLEARIMAGE) && bgraster) {
         render_background();
@@ -193,7 +195,7 @@ void xFXCameraTexture::end_render()
             RwCameraSetFarClipPlane(oldcam, old_far_plane);
         }
 
-        RwCameraBeginUpdate(oldcam);
+        RwCameraBeginUpdateWrapper(oldcam);
     }
 }
 

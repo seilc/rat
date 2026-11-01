@@ -6,6 +6,7 @@
 #include "xTextAsset.h"
 #include "zMain.h"
 #include "xScrFx.h"
+#include "xRenderState.h"
 
 #include "decomp.h"
 
