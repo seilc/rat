@@ -161,7 +161,7 @@ def main():
 
     global include_dirs
     include_dirs = args.include or [
-        os.path.join(root_dir, "src"),
+        os.path.join(root_dir, "include"),
         os.path.join(root_dir, "src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include"),
         os.path.join(root_dir, "src/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include"),
         os.path.join(root_dir, "src/rt"),

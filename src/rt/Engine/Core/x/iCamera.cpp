@@ -7,6 +7,7 @@
 #include "xGlobals.h"
 #include "xShadow.h"
 #include "xDebugTweak.h"
+#include "xRenderState.h"
 
 #include "decomp.h"
 
@@ -25,9 +26,6 @@ DECOMP_FORCEACTIVE((void(*)(const char*, U32*, U32, U32, const tweak_callback*, 
 DECOMP_FORCEACTIVE((void(*)(const char*, const U32*, U32, U32, const tweak_callback*, void*, U32))xDebugAddTweak)
 #endif
 DECOMP_FORCEFLOAT(0.0f)
-
-#undef RwCameraCreate
-#undef RwCameraBeginUpdate
 
 // Taken from baworobj.c
 typedef struct RpWorldCameraExt RpWorldCameraExt;

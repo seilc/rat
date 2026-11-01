@@ -21,7 +21,9 @@ void xRenderFixIMEnd();
 RwBool xRenderStateCheckBlendModes(RwBlendFunction desiredSrcBlend, RwBlendFunction desiredDestBlend);
 RwBool xRenderStateCheckState(RwRenderState state, void* desiredValue);
 void RwRenderStateSetWrapper(RwRenderState state, void* value);
+#define RwRenderStateSet RwRenderStateSetWrapper
 RwBool RwRenderStateGetWrapper(RwRenderState state, void* value);
+#define RwRenderStateGet RwRenderStateGetWrapper
 #else
 #define xRenderStateCheckBlendModes FALSE
 #define xRenderStateCheckState FALSE

@@ -9,7 +9,7 @@
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "C_Cpp.default.includePath": [
-        "${workspaceFolder}/src",
+        "${workspaceFolder}/include",
         "${workspaceFolder}/src/rt",
         "${workspaceFolder}/src/rt/Engine/Core/gc",
         "${workspaceFolder}/src/rt/Engine/Core/x",
@@ -33,6 +33,7 @@
     "C_Cpp.default.compilerPath": "",
     "C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
     "C_Cpp.default.browse.path": [
+        "${workspaceFolder}/include",
         "${workspaceFolder}/src"
     ],
     "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": true,

@@ -213,7 +213,7 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-i src",
+    "-i include",
     f"-i build/{config.version}/include",
     "-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include",
     #"-i src/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common_Embedded/Include",
