@@ -22,24 +22,12 @@ struct tweak_callback
 
     static tweak_callback create(void(*on_change)(const tweak_info&), void(*on_select)(const tweak_info&) = NULL, void(*on_unselect)(const tweak_info&) = NULL, void(*on_start_edit)(const tweak_info&) = NULL, void(*on_stop_edit)(const tweak_info&) = NULL, void(*on_expand)(const tweak_info&) = NULL, void(*on_collapse)(const tweak_info&) = NULL, void(*on_update)(const tweak_info&) = NULL, void(*convert_mem_to_tweak)(const tweak_info&, void*) = NULL, void(*convert_tweak_to_mem)(const tweak_info&, void*) = NULL);
     static tweak_callback create_change(void(*on_change)(const tweak_info&));
-    static tweak_callback create_expand(void(*on_expand)(const tweak_info&), void(*on_collapse)(const tweak_info&));
+
+    static tweak_callback create_expand(void(*on_expand)(const tweak_info&), void(*on_collapse)(const tweak_info&))
+    { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, on_expand, on_collapse, NULL, NULL, NULL }; return cb; }
 
     static tweak_callback create_update(void(*on_update)(const tweak_info&))
-    {
-        tweak_callback cb = {
-            NULL,
-            NULL,
-            NULL,
-            NULL,
-            NULL,
-            NULL,
-            NULL,
-            on_update,
-            NULL,
-            NULL
-        };
-        return cb;
-    }
+    { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, on_update, NULL, NULL }; return cb; }
 };
 
 struct tweak_info
@@ -121,8 +109,11 @@ void _auto_tweak_flag(const char* prefix, const char* name, U32* v, U32 mask, co
 
 typedef bool(*xDebugRemoveTweaksCallback)(const tweak_info&, void*);
 
-void xDebugRemoveTweak(const char* name);
+void xDebugRemoveTweak(const substr& name);
 void xDebugRemoveTweaks(const substr& name, xDebugRemoveTweaksCallback cb, void* context);
+
+inline void xDebugRemoveTweak(const char* name)
+{ xDebugRemoveTweak(substr::create(name, strlen(name))); }
 
 inline void xDebugRemoveTweaks(const char* name, xDebugRemoveTweaksCallback cb, void* context)
 { xDebugRemoveTweaks(substr::create(name, strlen(name)), cb, context); }
@@ -165,7 +156,7 @@ inline void xDebugAddTweak(const char* name, const U32* v, U32 vmin, U32 vmax, c
 inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
 inline void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags) {}
 
-void xDebugRemoveTweak(const char* name);
+inline void xDebugRemoveTweak(const char* name) {}
 
 #define xTWEAK(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
 #define xTWEAKSELECT(name, v, labels, values, labels_size, cb, context, flags)

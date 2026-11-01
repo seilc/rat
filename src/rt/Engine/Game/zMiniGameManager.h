@@ -15,6 +15,8 @@ public:
         return false;
     }
 
+    bool IsParallelCam();
+
 private:
     zMiniGameBase* currentGame;
     S32 userSetPlayerCount;
