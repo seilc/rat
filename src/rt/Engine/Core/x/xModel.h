@@ -10,6 +10,7 @@
 
 struct xSurface;
 struct xLight;
+template <class T> struct basic_rect;
 
 struct xModelInstance;
 struct xModelPool;
@@ -89,6 +90,7 @@ void xModelAnimCollRefresh(const xModelInstance& cm);
 S32 xModelCullSingle(xModelInstance* minst);
 bool xModelIsPreinstanced(const xModelInstance* model);
 void xModelRender(xModelInstance* modelInst);
+void xModelRender2D(const xModelInstance& model, const basic_rect<F32>& r, const xVec3& from, const xVec3& to);
 void xModelSetLightKit(xModelInstance* minst, xLightKit* lightKit, F32 transitionTime);
 RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
 
@@ -99,7 +101,15 @@ inline xMat4x3* xModelGetFrame(xModelInstance* model)
     return (xMat4x3*)model->Mat;
 }
 
+inline void xModelSetFrame(xModelInstance* model, const xMat4x3* frame)
+{
+    xASSERT_L(861, model);
+    xASSERT_L(862, model->Mat);
+    xMat4x3Copy((xMat4x3*)model->Mat, frame);
+}
+
 bool xModelAnimCollDirty(const xModelInstance& m);
+bool xModelPoolStressTesting();
 
 inline xModelInstance* xModelInstanceAlloc(RpAtomic* data, void* object, U16 flags, U8 boneIndex, U8* boneRemap)
 {
