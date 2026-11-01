@@ -192,7 +192,7 @@ xVec3 xNurbs::evaluate(F32 u, S32 d) const
 
 void xNurbs::evaluate(F32 u, S32 d, xVec3& point) const
 {
-    u = xclamp(u, start(), end());
+    u = CLAMP(u, start(), end());
     point = xVec3::m_Null;
 
     if (d > degree) {
@@ -281,7 +281,7 @@ xVec3 xNurbs::project_point(const xVec3& point, F32* u, F32* distance, F32 guess
         }
 
         guess -= curve_tangent.dot(point_to_curve) / denom;
-        guess = xclamp(guess, start(), end());
+        guess = CLAMP(guess, start(), end());
         
         evaluate(guess, curve_point);
 
