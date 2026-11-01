@@ -4,6 +4,8 @@
 #include "xBase.h"
 #include "xGroupAsset.h"
 
+struct xScene;
+
 struct xGroup : xBase
 {
     xGroupAsset* asset;
@@ -26,7 +28,9 @@ void xGroupEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBas
 U32 xGroupGetCount(xGroup* g);
 xBase* xGroupGetItemPtr(xGroup* g, U32 index);
 U32 xGroupGetItem(xGroup* g, U32 index);
+void xGroupUpdate(xBase* to, xScene* sc, F32);
 U32 xGroupGetAny(xGroup* g);
+xBase* xGroupGetAnyPtr(xGroup* g);
 xBase* xGroupGetAnyRandomPtr(xGroup* g);
 
 #endif

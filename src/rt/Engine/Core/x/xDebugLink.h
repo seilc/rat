@@ -56,8 +56,11 @@ public:
     virtual bool IsConnected() const;
     virtual void Update(F32);
 
+    eError ProcessCmd(const char* cmd, char* response, U32 responseLen, void* userData);
+    eError ProcessCmdDefault(const char* cmd, char* response, U32 responseLen, void* userData);
     eError UpdateSceneObject(char* receivedBuffer);
     S32 CmdToArgv(char* str, char** argv, S32 maxargs);
+    void PrintData(char* data, U32 size);
 
     static char mBuffer[2048];
 

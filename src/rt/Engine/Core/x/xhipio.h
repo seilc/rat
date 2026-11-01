@@ -57,6 +57,9 @@ struct st_HIPLOADFUNCS
     en_READ_ASYNC_STATUS(*pollRead)(st_HIPLOADDATA*);
 };
 
+struct st_HIPSAVEFUNCS;
+
 st_HIPLOADFUNCS* get_HIPLFuncs();
+st_HIPSAVEFUNCS* get_HIPSFuncs();
 
 #endif

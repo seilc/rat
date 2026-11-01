@@ -111,6 +111,8 @@ struct xColorUnpack
 
 static const char* KEY = "xCMChunkHandler";
 
+static void Encrypt(void* buffer_, U32 size, const void* key_, U32 keySize);
+
 static void Decrypt(void* buffer_, U32 size, const void* key_, U32 keySize)
 {
     U8* buffer = (U8*)buffer_;

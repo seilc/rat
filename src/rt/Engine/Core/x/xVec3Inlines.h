@@ -162,15 +162,7 @@ inline F32 xVec3LengthFast(F32 _x, F32 _y, F32 _z)
     return len;
 }
 
-// RESTORED: from RotU GC, Incredibles GC, BFBB GC
-inline F32 xVec3LengthFast(const xVec3* v)
-{
-    F32 len;
-    xsqrtfast(len, v->x * v->x + v->y * v->y + v->z * v->z);
-    return len;
-}
-// END RESTORED
-
+inline F32 xVec3LengthFast(const xVec3* v);
 inline F32 xVec3Length2(F32 _x, F32 _y, F32 _z);
 
 inline F32 xVec3Length2(const xVec3* v)

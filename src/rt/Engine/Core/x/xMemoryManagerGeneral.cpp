@@ -97,7 +97,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options, const char*, cons
     size = (size + 15) & ~15;
 
     xASSERT_L(127, (options & xMEMORYOPT_ALIGN_MASK) >> xMEMORYOPT_ALIGN_SHIFT <= 4);
-    
+
 #if DEBUG || RELEASE
     bool updateLargestBlock = false;
 #endif
@@ -353,7 +353,7 @@ void* xMemoryManagerGeneral::DoReallocate(void* pointer, U32 size, U32 options, 
 
     if (size < nodeSize && nodeSize - size >= 32) {
         allocatedNode = ShortenNode(allocatedNode, size);
-        
+
 #if DEBUG || RELEASE
         reallocShrinks++;
         allocatedSpace += size;
@@ -530,7 +530,7 @@ void* xMemoryManagerGeneral::DoReallocate(void* pointer, U32 size, U32 options, 
             allocatedHeap = allocatedNode;
 #endif
     }
-    
+
     void* dataDest = allocatedNode + 1;
     if (dataDest < dataStart)
         xMemoryCopyUpA128(dataDest, dataStart, size);
@@ -631,9 +631,9 @@ xMemoryManagerGeneral::AllocatedNode* xMemoryManagerGeneral::ShortenNode(Allocat
             allocatedHeap = allocatedNode;
 #endif
     }
-    
+
     allocatedNode->size = size;
-    
+
     newNode->next = NULL;
     newNode->prev = NULL;
     newNode->size = nodeSize - size - sizeof(FreeNode);
@@ -667,7 +667,7 @@ xMemoryManagerGeneral::AllocatedNode* xMemoryManagerGeneral::ShortenNode(Allocat
             insertBefore->prev = newNode;
         }
     }
-    
+
     MergeNodes(newNode);
 
 #if DEBUG || RELEASE

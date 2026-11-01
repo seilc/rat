@@ -43,6 +43,9 @@ struct font_context
     xColor drop_c;
 };
 
+typedef bool(*motive_update_callback)(widget&, motive&, F32);
+typedef bool(*motive_finish_callback)(widget&, motive&);
+
 struct motive
 {
     union
@@ -90,8 +93,8 @@ struct motive
         F32 current_scale;
         F32 current_blink_time;
     };
-    bool(*fp_update)(widget&, motive&, F32);
-    bool(*fp_finish)(widget&, motive&);
+    motive_update_callback fp_update;
+    motive_finish_callback fp_finish;
     union
     {
         F32 start_delta;
@@ -100,6 +103,8 @@ struct motive
     };
     bool hold;
     bool inverse;
+
+    inline motive(F32*, F32, F32, F32, F32, F32, motive_update_callback, motive_finish_callback);
 };
 
 class widget

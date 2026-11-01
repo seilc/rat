@@ -59,6 +59,11 @@ extern xColor g_COLOR_TRYME2;
 extern xColor g_COLOR_TRYME3;
 #endif
 
+#if !MASTER
+F32 xColorLuminanceFromRGB(S32 r, S32 g, S32 b);
+F32 xColorLuminanceFromFRGB(F32 r, F32 g, F32 b);
+#endif
+
 inline void xColorInit(xColor& rToInit, U8 r, U8 g, U8 b, U8 a)
 {
     rToInit.r = r;

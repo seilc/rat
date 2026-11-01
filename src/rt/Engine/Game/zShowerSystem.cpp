@@ -31,6 +31,9 @@ xTWEAKABLE F32 TIMEOUT = 5.0f;
 xTWEAKABLE F32 Y_COLLISION_START = 7.0f;
 xTWEAKABLE F32 Y_HEIGHT_SHIFT = 15.0f;
 
+#if DEBUG || RELEASE
+void cbModelChange(const tweak_info& info);
+#endif
 xLightKit* GetGlobalLightKit();
 }
 

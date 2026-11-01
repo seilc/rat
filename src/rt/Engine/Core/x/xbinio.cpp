@@ -128,7 +128,7 @@ st_FILELOADINFO* xBinioLoadCreate(const char* filename, S32 fileflags)
             fli->filesize = BFD_getLength(tmp_fp, fli->xtradata);
             fli->remain = fli->filesize;
         } else {
-            xWARN("Failed to open read file %s\n", filename);
+            DBprintf(DBML_WARN, "Failed to open read file %s\n", filename);
             LoadDestroy(fli);
             fli = NULL;
         }
@@ -323,7 +323,9 @@ static en_BIO_ASYNC_ERRCODES AsyncReadStatus(st_FILELOADINFO* fli)
 
 static S32 is_Motorola();
 
-DECOMP_FORCEACTIVE(DEBUG ? "%s(%d) : (sizeof(S32)==4) in '%s'\n" : 0)
+#if DEBUG
+DECOMP_FORCEACTIVE("%s(%d) : (sizeof(S32)==4) in '%s'\n")
+#endif
 
 static void Swap2(char* d, S32 n)
 {
@@ -398,11 +400,11 @@ static xFile* BFD_open(const char* filename, const char* mode, U32 lockid, S32, 
         xfflg = XFILE_READ;
     }
     else if (strcmp(mode, "wb") == 0) {
-        xWARN("WARNING: BINIO write operation nonsupported\n");
+        DBprintf(DBML_WARN, "WARNING: BINIO write operation nonsupported\n");
         bffp = NULL;
         xfflg = XFILE_WRITE;
     } else {
-        xWARN("Unknown/Unsupported file open state request (%s)\n", mode);
+        DBprintf(DBML_WARN, "Unknown/Unsupported file open state request (%s)\n", mode);
         bffp = NULL;
     }
 
@@ -418,7 +420,7 @@ static xFile* BFD_open(const char* filename, const char* mode, U32 lockid, S32, 
 
         orc = iFileOpen(filename, xfflg, bffp);
         if (orc) {
-            xWARN("xFileOpen failed for %s(%d)\n", filename, orc);
+            DBprintf(DBML_WARN, "xFileOpen failed for %s(%d)\n", filename, orc);
             bffp = NULL;
         } else {
             xtra->fpos = 0;
@@ -472,7 +474,7 @@ static S32 BFD_read(void* data, S32 elesize, S32 elecnt, xFile* bffp, void* xtra
     if (!xtra->dbl_buf || xtra->dblbuf_size < 1 || (S32)numBytes > xtra->dblbuf_size) {
         xVALIDATE_L(1726, !(xtra->fpos % FIOIO_GUESS_ALIGN));
 
-        xVERBOSE("BINIO:read - direct passthru (code: %d)\n", numBytes);
+        DBprintf(DBML_VDBG, "BINIO:read - direct passthru (code: %d)\n", numBytes);
 
         iFileSeek(bffp, xtra->fpos, 0);
         actual = iFileRead(bffp, dest, numBytes);
@@ -483,7 +485,7 @@ static S32 BFD_read(void* data, S32 elesize, S32 elecnt, xFile* bffp, void* xtra
         xVALIDATE_L(1748, xtra->dbl_buf && (xtra->dblbuf_size > 0));
 
         remain = numBytes;
-        xVERBOSE("BINIO:read - from buffer (code: %d)\n", numBytes);
+        DBprintf(DBML_VDBG, "BINIO:read - from buffer (code: %d)\n", numBytes);
 
         for (;;) {
             if (xtra->fpos < xtra->dbl_beg) {
@@ -628,7 +630,7 @@ static S32 BFD_AsyncRead(st_FILELOADINFO* fli, S32 pos, void* data, S32 size, S3
     if (!result) {
         g_async_context = NULL;
         xtra->asyn_status = BINIO_ASYNC_NOOP;
-        xWARN("XBIN: GCAsync queue failed\n");
+        DBprintf(DBML_WARN, "XBIN: GCAsync queue failed\n");
     }
 
     return (rdsec == 0) ? 1 : 0;
@@ -645,7 +647,7 @@ static en_BIO_ASYNC_ERRCODES BFD_AsyncReadStatus(st_FILELOADINFO* fli)
 
     xVALIDATE_L(2125, xtra == g_async_context);
     if (xtra != g_async_context) {
-        xWARN("BIO: Non-Owner client requesting async status\n");
+        DBprintf(DBML_WARN, "BIO: Non-Owner client requesting async status\n");
         return BINIO_ASYNC_INPROG;
     }
 

@@ -335,7 +335,9 @@ bool xDebugLink::IsConnected() const
     return mConnected;
 }
 
-DECOMP_FORCEACTIVE(DEBUG ? "\n" : 0, DEBUG ? "%.2X " : 0)
+#if DEBUG
+DECOMP_FORCEACTIVE("\n", "%.2X ")
+#endif
 
 void xDebugLink::Update(F32)
 {

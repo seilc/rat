@@ -185,6 +185,24 @@ bool xSweptSphereToLineSement(const xSweptSphere& sphere, const xVec3& segment_s
     }
 }
 
+#define RETURN_VERTEX_TEST(n, test)                                                               \
+    xVec3 sphere_to_vertex;                                                                       \
+    xVec3Sub(sphere_to_vertex, edges[(n)].segment.start, sphere.start);                           \
+    F32 closest_dist_squ = sphere_to_vertex.length2();                                            \
+    results.dist = vertex_collide.dist;                                                           \
+    results.contact = edges[(n)].segment.start;                                                   \
+    return (test)((n), closest_dist_squ, surface, edges, num_edges, sphere, results)
+
+#define UPDATE_CLOSEST_VERTEX(n)                                                                  \
+    xVec3 sphere_to_vert;                                                                         \
+    xVec3Sub(sphere_to_vert, edges[(n)].segment.start, sphere.start);                             \
+    F32 new_dist_squ = sphere_to_vert.length2();                                                  \
+    if (new_dist_squ < closest_dist_squ) {                                                        \
+        results.dist = vertex_collide.dist;                                                       \
+        results.contact = edges[(n)].segment.start;                                               \
+        closest_dist_squ = new_dist_squ;                                                          \
+    }
+
 bool xSweptSphereToPolygon(const xSweptSphere& sphere, const xPlane& surface, const xCollideProcessedTri::xEdge* edges, S32 num_edges, xCollideSphereToPolygonResults& results)
 {
     F32 vertical_vel = sphere.dir.dot(surface.norm);
@@ -245,24 +263,14 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
         }
 
         if (xSweptSphereToPoint(sphere, edges[0].segment.start, vertex_collide) == true) {
-            xVec3 sphere_to_vertex;
-            xVec3Sub(sphere_to_vertex, edges[0].segment.start, sphere.start);
-            F32 closest_dist_squ = sphere_to_vertex.length2();
-            results.dist = vertex_collide.dist;
-            results.contact = edges[0].segment.start;
-            return PolygonTestAH0c(0, closest_dist_squ, surface, edges, num_edges, sphere, results);
+            RETURN_VERTEX_TEST(0, PolygonTestAH0c);
         }
 
         for (S32 i = 1; i < num_edges; i++) {
             above_edge_d0 = edges[i].edge.Dist(sphere.start);
             if (above_edge_d0 <= 0.0f) {
                 if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                    xVec3 sphere_to_vertex;
-                    xVec3Sub(sphere_to_vertex, edges[0].segment.start, sphere.start);
-                    F32 closest_dist_squ = sphere_to_vertex.length2();
-                    results.dist = vertex_collide.dist;
-                    results.contact = edges[0].segment.start;
-                    return PolygonTestBH0a(0, closest_dist_squ, surface, edges, num_edges, sphere, results);
+                    RETURN_VERTEX_TEST(0, PolygonTestBH0a);
                 }
 
                 for (i++; i < num_edges; i++) {
@@ -285,12 +293,7 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
                     }
 
                     if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                        xVec3 sphere_to_vertex;
-                        xVec3Sub(sphere_to_vertex, edges[i].segment.start, sphere.start);
-                        F32 closest_dist_squ = sphere_to_vertex.length2();
-                        results.dist = vertex_collide.dist;
-                        results.contact = edges[i].segment.start;
-                        return PolygonTestAH0b(i, closest_dist_squ, surface, edges, num_edges, sphere, results);
+                        RETURN_VERTEX_TEST(i, PolygonTestAH0b);
                     }
 
                     for (i++; i < num_edges; i++) {
@@ -309,12 +312,7 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
                         }
 
                         if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                            xVec3 sphere_to_vertex;
-                            xVec3Sub(sphere_to_vertex, edges[i].segment.start, sphere.start);
-                            F32 closest_dist_squ = sphere_to_vertex.length2();
-                            results.dist = vertex_collide.dist;
-                            results.contact = edges[i].segment.start;
-                            return PolygonTestAH0b(i, closest_dist_squ, surface, edges, num_edges, sphere, results);
+                            RETURN_VERTEX_TEST(i, PolygonTestAH0b);
                         }
                     }
 
@@ -338,12 +336,7 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
             }
 
             if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                xVec3 sphere_to_vertex;
-                xVec3Sub(sphere_to_vertex, edges[i].segment.start, sphere.start);
-                F32 closest_dist_squ = sphere_to_vertex.length2();
-                results.dist = vertex_collide.dist;
-                results.contact = edges[i].segment.start;
-                return PolygonTestAH0c(i, closest_dist_squ, surface, edges, num_edges, sphere, results);
+                RETURN_VERTEX_TEST(i, PolygonTestAH0c);
             }
         }
 
@@ -368,12 +361,7 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
             }
 
             if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                xVec3 sphere_to_vertex;
-                xVec3Sub(sphere_to_vertex, edges[i].segment.start, sphere.start);
-                F32 closest_dist_squ = sphere_to_vertex.length2();
-                results.dist = vertex_collide.dist;
-                results.contact = edges[i].segment.start;
-                return PolygonTestAH0a(i, closest_dist_squ, surface, edges, num_edges, sphere, results);
+                RETURN_VERTEX_TEST(i, PolygonTestAH0a);
             }
 
             for (i++; i < num_edges; i++) {
@@ -397,12 +385,7 @@ static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProces
                 }
 
                 if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                    xVec3 sphere_to_vertex;
-                    xVec3Sub(sphere_to_vertex, edges[i].segment.start, sphere.start);
-                    F32 closest_dist_squ = sphere_to_vertex.length2();
-                    results.dist = vertex_collide.dist;
-                    results.contact = edges[i].segment.start;
-                    return PolygonTestAH0a(i, closest_dist_squ, surface, edges, num_edges, sphere, results);
+                    RETURN_VERTEX_TEST(i, PolygonTestAH0a);
                 }
             }
 
@@ -458,14 +441,7 @@ static bool PolygonTestAH0a(S32 i, F32 closest_dist_squ, const xPlane&, const xC
         }
 
         if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-            xVec3 sphere_to_vert;
-            xVec3Sub(sphere_to_vert, edges[i].segment.start, sphere.start);
-            F32 new_dist_squ = sphere_to_vert.length2();
-            if (new_dist_squ < closest_dist_squ) {
-                results.dist = vertex_collide.dist;
-                results.contact = edges[i].segment.start;
-                closest_dist_squ = new_dist_squ;
-            }
+            UPDATE_CLOSEST_VERTEX(i);
         }
     }
     
@@ -494,14 +470,7 @@ static bool PolygonTestAH0b(S32 i, F32 closest_dist_squ, const xPlane&, const xC
         }
 
         if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-            xVec3 sphere_to_vert;
-            xVec3Sub(sphere_to_vert, edges[i].segment.start, sphere.start);
-            F32 new_dist_squ = sphere_to_vert.length2();
-            if (new_dist_squ < closest_dist_squ) {
-                results.dist = vertex_collide.dist;
-                results.contact = edges[i].segment.start;
-                closest_dist_squ = new_dist_squ;
-            }
+            UPDATE_CLOSEST_VERTEX(i);
         }
     }
 
@@ -518,14 +487,7 @@ static bool PolygonTestAH0c(S32 i, F32 closest_dist_squ, const xPlane& surface, 
         F32 above_edge_d0 = edges[i].edge.Dist(sphere.start);
         if (above_edge_d0 <= 0.0f) {
             if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-                xVec3 sphere_to_vert;
-                xVec3Sub(sphere_to_vert, edges[i].segment.start, sphere.start);
-                F32 new_dist_squ = sphere_to_vert.length2();
-                if (new_dist_squ < closest_dist_squ) {
-                    results.dist = vertex_collide.dist;
-                    results.contact = edges[i].segment.start;
-                    closest_dist_squ = new_dist_squ;
-                }
+                UPDATE_CLOSEST_VERTEX(i);
             }
 
             return PolygonTestBH0a(i, closest_dist_squ, surface, edges, num_edges, sphere, results);
@@ -539,14 +501,7 @@ static bool PolygonTestAH0c(S32 i, F32 closest_dist_squ, const xPlane& surface, 
         }
 
         if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-            xVec3 sphere_to_vert;
-            xVec3Sub(sphere_to_vert, edges[i].segment.start, sphere.start);
-            F32 new_dist_squ = sphere_to_vert.length2();
-            if (new_dist_squ < closest_dist_squ) {
-                results.dist = vertex_collide.dist;
-                results.contact = edges[i].segment.start;
-                closest_dist_squ = new_dist_squ;
-            }
+            UPDATE_CLOSEST_VERTEX(i);
         }
     }
     
@@ -575,14 +530,7 @@ static bool PolygonTestBH0a(S32 i, F32 closest_dist_squ, const xPlane& surface, 
         }
 
         if (xSweptSphereToPoint(sphere, edges[i].segment.start, vertex_collide) == true) {
-            xVec3 sphere_to_vert;
-            xVec3Sub(sphere_to_vert, edges[i].segment.start, sphere.start);
-            F32 new_dist_squ = sphere_to_vert.length2();
-            if (new_dist_squ < closest_dist_squ) {
-                results.dist = vertex_collide.dist;
-                results.contact = edges[i].segment.start;
-                closest_dist_squ = new_dist_squ;
-            }
+            UPDATE_CLOSEST_VERTEX(i);
         }
 
         return PolygonTestAH0b(i, closest_dist_squ, surface, edges, num_edges, sphere, results);

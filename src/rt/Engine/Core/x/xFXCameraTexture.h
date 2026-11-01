@@ -24,8 +24,18 @@ public:
     void begin_render(S32 clear_flags, U32 fbmsk_write, U32, F32 near_plane, F32 far_plane);
     void end_render();
     void render_background();
+    void setup_subview(RwCamera* src_cam, F32 view_center_x, F32 view_center_y, F32 view_width, F32 view_height);
+    void setup_subview(RwCamera* src_cam, const xFRect& src_rect);
     void setup_subview(RwCamera* src_cam, const xFRect& src_rect, const xFRect& dst_rect);
+    void commit_view();
+    static void create_view_matrix(xMat4x3& view_mat, const xMat4x3& ltm, const xVec2& view_window, const xVec2& view_offset);
     void get_subview(xMat4x3& ltm, xVec2& view_window, xVec2& view_offset, RwCamera* src_cam, const xFRect& src_rect, const xFRect& dst_rect) const;
+    void get_subview(xMat4x3& view_mat, RwCamera* src_cam, const xFRect& src_rect, const xFRect& dst_rect) const;
+    void get_subview(xMat4x3& ltm, xVec2& view_window, xVec2& view_offset, RwCamera* src_cam, F32 view_center_x, F32 view_center_y, F32 view_width, F32 view_height) const;
+    void get_subview(xMat4x3& view_mat, RwCamera* src_cam, F32 view_center_x, F32 view_center_y, F32 view_width, F32 view_height) const;
+    void get_subview(xMat4x3& ltm, xVec2& view_window, xVec2& view_offset, RwCamera* src_cam, const xFRect& src_rect) const;
+    void get_subview(xMat4x3& view_mat, RwCamera* src_cam, const xFRect& src_rect) const;
+    void shrink_to_fit(S32 w, S32 h);
 
     bool valid()
     {
@@ -87,8 +97,28 @@ public:
         FILTER_DEFAULT = 1
     };
 
+    enum blend_mode
+    {
+        BLEND_INVALID = -1,
+        BLEND_AVERAGE,
+        BLEND_AVERAGE_FIXED,
+        BLEND_RAVERAGE,
+        BLEND_RAVERAGE_FIXED,
+        BLEND_ADDITIVE,
+        BLEND_ADDITIVE_FIXED,
+        BLEND_ADDITIVE_SCALE_FIXED,
+        BLEND_COPY,
+        BLEND_COPY_FIXED,
+        BLEND_SUBTRACT,
+        BLEND_SUBTRACT_FIXED,
+        BLEND_SUBTRACT_SCALE_FIXED,
+        MAX_BLEND
+    };
+
     static bool clip_rect(xFRect& dst_rect, RwRaster* dst_raster);
     static bool clip_rect(xFRect& dst_rect, RwRaster* dst_raster, xFRect& src_rect);
+    static bool clip_rect(RwRect& dst_rect, RwRaster* dst_raster);
+    static bool clip_rect(RwRect& dst_rect, RwRaster* dst_raster, xFRect& src_rect);
 
     bool clip_rect(xFRect& dst_rect, xFRect& src_rect) const { return clip_rect(dst_rect, dst, src_rect); }
 
@@ -96,6 +126,14 @@ public:
     void end_render();
     void set_source(RwRaster*, tcc_type, tfx_type, filter_type);
     void set_destination(RwRaster* dst, U32 fbmsk);
+    void texflush();
+    void set_blend_mode(blend_mode mode, F32 fixed_alpha);
+    void fill(xColor color);
+    void blit_scaled(F32 u, F32 v, xColor color);
+    void set_texa(S32 ta0, S32 aem, S32 ta1);
+    void set_prmode(bool prmodecont, U32 prmode);
+    void set_clamp(S32 wms, S32 wmt, S32 minu, S32 maxu, S32 minv, S32 maxv);
+    void set_scissor(S32 scax0, S32 scax1, S32 scay0, S32 scay1);
 
 private:
     RwRaster* src;

@@ -48,5 +48,6 @@ struct xScreenFade : xBase
     static void cb_dispatch(xBase* from, xBase* to, U32 event, const F32*, xBase*, U32);
 };
 
+S32 xScreenFade_FadeInProgress();
 
 #endif

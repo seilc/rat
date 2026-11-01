@@ -34,6 +34,7 @@ struct xBase
 struct xSerial;
 
 void xBaseInit(xBase* xb, const xBaseAsset* asset);
+void xBaseInit(xBase* xb);
 void xBaseSetup(xBase* xb);
 void xBaseSave(xBase* ent, xSerial* s);
 void xBaseLoad(xBase* ent, xSerial* s);

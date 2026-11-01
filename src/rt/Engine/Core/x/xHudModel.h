@@ -3,6 +3,10 @@
 
 #include "xHud.h"
 
+struct xAnimTable;
+
+xAnimTable* xHUDCreateAnimTable();
+
 namespace xhud {
 
 struct model_asset;

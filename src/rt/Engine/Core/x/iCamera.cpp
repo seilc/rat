@@ -80,13 +80,6 @@ void iCameraSetOrthoProjection(RwCamera* cam, bool ortho)
     }
 }
 
-// RESTORED: from TSSM GC
-void iCameraClear(RwCamera* camera, xColor color)
-{
-    RwCameraClear(camera, (RwRGBA*)&color, rwCAMERACLEARIMAGE | rwCAMERACLEARZ | rwCAMERACLEARSTENCIL);
-}
-// END RESTORED
-
 RwCamera* iCameraCreate(S32 width, S32 height, S32 mainGameCamera)
 {
     iAsyncLockRWSentry rw_sentry;

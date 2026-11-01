@@ -400,6 +400,16 @@ void xNurbs::DrawCrossSection(S32 segments, F32 width) const
     xRenderStateBlendAndZModesSet(srcBlend, destBlend, TRUE, TRUE);
 }
 
+namespace {
+
+struct search_end;
+
+void VerifyBounds(const xNurbs* curve, F32& begin_u, F32& end_u);
+U8 BothEndsOutside(const xNurbs* curve, search_end& begin, search_end& end, const xVec3& circle_center, F32 circle_radius, F32& intersect_u, xVec3& intersect_vec);
+void GetNewGuess(const xNurbs* curve, search_end* inside, search_end* outside, const xVec3& circle_center, F32 circle_radius, search_end* guess);
+
+}
+
 bool xNurbs::advance_u(F32 start_u, F32 distance, bool forward, F32& new_u) const
 {
     F32 spline_start = start();

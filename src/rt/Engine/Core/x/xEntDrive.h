@@ -46,6 +46,7 @@ void xEntDriveDismount(xEntDrive* drv, F32 dmt);
 void xEntDriveUpdate(xEntDrive* drv, xScene*, F32 dt, const xCollis*);
 void xEntDriveSimpleInit(xEntDriveSimple* drv, xMat4x3* mat);
 void xEntDriveSimpleMount(xEntDriveSimple* drv, xEnt* driver);
+void xEntDriveSimpleDismount(xEntDriveSimple* drv);
 void xEntDriveSimpleUpdate(xEntDriveSimple* drv, F32);
 void xEntDriveSimplePostUpdate(xEntDriveSimple* drv);
 

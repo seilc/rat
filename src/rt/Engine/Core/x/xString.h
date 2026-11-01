@@ -5,6 +5,8 @@
 
 #include <stddef.h>
 
+struct xVec3;
+
 struct substr
 {
     const char* text;
@@ -25,9 +27,18 @@ S32 xMemicmp(const void* string1, const void* string2, size_t chars);
 char* xStrupr(char* string);
 S32 xStrParseFloatList(F32* dest, const char* strbuf, S32 max);
 F32 xStrParseFloat(const char* x);
+U8 xStrConvert(const char* istr, F32* oValue);
+U8 xStrConvert(const char* istr, U32* oValue);
+U8 xStrConvert(const char* istr, U8* oValue);
+U8 xStrConvert(const char* istr, S32* oValue);
+U8 xStrConvert(const char* istr, bool* oValue);
+U8 xStrConvert(const char* istr, xVec3* oValue);
+S32 xStrWildCmp(const char* wild, const char* string);
+S32 xStrWildCmpi(const char* wild, const char* string);
 S32 imemcmp(const void* d1, const void* d2, size_t size);
 S32 icompare(const substr& s1, const substr& s2);
 U32 atox(const substr& s, size_t& read_size);
 const char* find_char(const substr& s, const substr& cs);
+char* ifind_string(const substr& s, const substr& key);
 
 #endif

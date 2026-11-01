@@ -87,26 +87,26 @@ struct xVec3
     void Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
 };
 
-#define xVec3NormalizeMacro(o, v, outlen)                                                          \
-{                                                                                                  \
-    F32 len2 = xsqr((v)->x) + xsqr((v)->y) + xsqr((v)->z);                                         \
-    if (xeq(len2, 1.0f, EPSILON)) {                                                                \
-        (o)->x = (v)->x;                                                                           \
-        (o)->y = (v)->y;                                                                           \
-        (o)->z = (v)->z;                                                                           \
-        *(outlen) = 1.0f;                                                                          \
-    } else if (xeq(len2, 0.0f, EPSILON)) {                                                         \
-        (o)->x = 0.0f;                                                                             \
-        (o)->y = 1.0f;                                                                             \
-        (o)->z = 0.0f;                                                                             \
-        *(outlen) = 0.0f;                                                                          \
-    } else {                                                                                       \
-        *(outlen) = xsqrt(len2);                                                                   \
-        F32 len_inv = 1.0f / *(outlen);                                                            \
-        (o)->x = (v)->x * len_inv;                                                                 \
-        (o)->y = (v)->y * len_inv;                                                                 \
-        (o)->z = (v)->z * len_inv;                                                                 \
-    }                                                                                              \
+#define xVec3NormalizeMacro(o, v, outlen)                                                         \
+{                                                                                                 \
+    F32 len2 = xsqr((v)->x) + xsqr((v)->y) + xsqr((v)->z);                                        \
+    if (xeq(len2, 1.0f, EPSILON)) {                                                               \
+        (o)->x = (v)->x;                                                                          \
+        (o)->y = (v)->y;                                                                          \
+        (o)->z = (v)->z;                                                                          \
+        *(outlen) = 1.0f;                                                                         \
+    } else if (xeq(len2, 0.0f, EPSILON)) {                                                        \
+        (o)->x = 0.0f;                                                                            \
+        (o)->y = 1.0f;                                                                            \
+        (o)->z = 0.0f;                                                                            \
+        *(outlen) = 0.0f;                                                                         \
+    } else {                                                                                      \
+        *(outlen) = xsqrt(len2);                                                                  \
+        F32 len_inv = 1.0f / *(outlen);                                                           \
+        (o)->x = (v)->x * len_inv;                                                                \
+        (o)->y = (v)->y * len_inv;                                                                \
+        (o)->z = (v)->z * len_inv;                                                                \
+    }                                                                                             \
 }
 
 F32 xVec3Normalize(xVec3* o, const xVec3* v);

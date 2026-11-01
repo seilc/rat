@@ -9,7 +9,7 @@ void XOrdInit(st_XORDEREDARRAY* array, S32 size, U32 memtag, S32 tempAlloc)
 {
     xVALIDATE_L(63, size>0);
     if (size<2) {
-        xWARN("XOrdArray: TINY list size! (%d)\n", size);
+        DBprintf(DBML_WARN, "XOrdArray: TINY list size! (%d)\n", size);
     }
     size = (size<1) ? 1 : size;
 
@@ -31,7 +31,7 @@ void XOrdDone(st_XORDEREDARRAY* array, S32 wasTempAlloc)
 {
     if (array->max) {
         if (wasTempAlloc) xMEMPOPTEMP(array->list);
-        else xVERBOSE("XOrdDone - (Game) Skipping de-allocation of array\n");
+        else DBprintf(DBML_VDBG, "XOrdDone - (Game) Skipping de-allocation of array\n");
     }
 
     array->list = NULL;
@@ -45,12 +45,12 @@ void XOrdAppend(st_XORDEREDARRAY* array, void* elt)
     xASSERT_L(134, array->cnt < array->max);
 
     if (array->cnt >= array->max) {
-        xWARN("XOrdArray: Max size exceeded! (max:%d)\n", array->max);
+        DBprintf(DBML_WARN, "XOrdArray: Max size exceeded! (max:%d)\n", array->max);
         return;
     }
 
     if (array->cnt >= array->warnlvl) {
-        xVERBOSE("XOrdArray: Nearly Full! (%d/%d)\n", array->cnt, array->max);
+        DBprintf(DBML_VDBG, "XOrdArray: Nearly Full! (%d/%d)\n", array->cnt, array->max);
     }
 
     array->list[array->cnt++] = elt;
@@ -64,7 +64,7 @@ void XOrdInsert(st_XORDEREDARRAY* array, void* elt, XOrdCompareCallback compare)
     xASSERT_L(168, array->cnt <= (array->max-1));
 
     if (array->cnt >= array->max) {
-        xWARN("XOrdArray: Insert exceeds array size\n");
+        DBprintf(DBML_WARN, "XOrdArray: Insert exceeds array size\n");
         return;
     }
 

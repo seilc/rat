@@ -35,13 +35,6 @@ public:
     {
         return (mSoundGroupHdl != ISND_INVALID_SND_GROUP_HANDLE);
     }
-
-    // RESTORED: from RotU GC
-    iSndGroupHandle GetSoundGroup() const
-    {
-        return mSoundGroupHdl;
-    }
-    // END RESTORED
 };
 
 class xOneLinerList
@@ -54,24 +47,8 @@ public:
     void SetTimers(xOneLiner* soundList, U32 maxCheck, F32);
     void Reset();
 
-    // RESTORED: from RotU GC
-    bool PlaySound(U32 r4)
-    {
-        if (r4 < mNumSounds) {
-            return mSounds[r4].PlaySound();
-        }
-        return false;
-    }
-
-    iSndGroupHandle GetSoundGroup(U32 r4) const
-    {
-        if (r4 >= mNumSounds) {
-            return ISND_INVALID_SND_GROUP_HANDLE;
-        }
-        return mSounds[r4].GetSoundGroup();
-    }
-    // END RESTORED
-
+    inline bool PlaySound(U32);
+    inline iSndGroupHandle GetSoundGroup(U32) const;
     inline void PlaySoundDelayed(U32, F32);
 };
 

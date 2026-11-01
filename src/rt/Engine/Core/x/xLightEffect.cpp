@@ -24,7 +24,7 @@ bool xLightEffectIsValid(xBase* base)
 
 void xLightEffectFlicker::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate_L(48, asset, xLightEffectFlickerAsset, "effect:Light Effect Flicker");
+    xDynAssetValidate_L(48, asset, asset_size, xLightEffectFlickerAsset, "effect:Light Effect Flicker");
     
     xLightEffectFlicker* flickerEffect = (xLightEffectFlicker*)&data;
     new (flickerEffect) xLightEffectFlicker();
@@ -120,7 +120,7 @@ void xLightEffectFlicker::UpdateEffect(xLight& light, F32 dt)
 
 void xLightEffectStrobe::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate_L(153, asset, xLightEffectStrobeAsset, "effect:Light Effect Strobe");
+    xDynAssetValidate_L(153, asset, asset_size, xLightEffectStrobeAsset, "effect:Light Effect Strobe");
 
     xLightEffectStrobe* strobeEffect = (xLightEffectStrobe*)&data;
     new (strobeEffect) xLightEffectStrobe();

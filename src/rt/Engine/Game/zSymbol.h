@@ -4,6 +4,7 @@
 #include "types.h"
 
 struct xModelInstance;
+struct xVec3;
 
 namespace z {
 
@@ -20,6 +21,10 @@ public:
     static symbol_map* map;
 
     static void init();
+    static void exit();
+    static xModelInstance* find_model_for_symbol(U32 symbol_id);
+    static void register_symbol(const char* name, const char* model_name);
+    static void render(xVec3 position, const char* symbol_name);
 };
 
 }

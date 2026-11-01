@@ -2,16 +2,9 @@
 #define XPARCMD_H
 
 #include "xMath3.h"
+#include "xParCmdAsset.h"
 
 struct xParGroup;
-
-struct xParCmdAsset
-{
-    U32 type;
-    bool enabled;
-    U8 mode;
-    U8 pad[2];
-};
 
 struct xParCmdMove : xParCmdAsset
 {

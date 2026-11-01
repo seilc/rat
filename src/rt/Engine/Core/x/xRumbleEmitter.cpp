@@ -99,7 +99,7 @@ F32 effectAsset::GetIntensity(F32 currentTime, F32 totalTime) const
 
 void effect::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate_L(150, asset, xRumble::effectAsset, "effect:Rumble");
+    xDynAssetValidate_L(150, asset, asset_size, xRumble::effectAsset, "effect:Rumble");
 
     new (&data) effect((effectAsset*)&asset);
 }
@@ -133,7 +133,7 @@ void effect::AddTweaks()
 
 void boxEmitter::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate_L(184, asset, xRumble::boxEmitterAsset, "effect:Rumble Box Emitter");
+    xDynAssetValidate_L(184, asset, asset_size, xRumble::boxEmitterAsset, "effect:Rumble Box Emitter");
 
     new (&data) boxEmitter((boxEmitterAsset*)&asset);
 }
@@ -183,7 +183,7 @@ bool boxEmitter::GetIntensity(const xVec3& playerPos, F32& intensity) const
 
 void sphericalEmitter::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate_L(236, asset, xRumble::sphericalEmitterAsset, "effect:Rumble Spherical Emitter");
+    xDynAssetValidate_L(236, asset, asset_size, xRumble::sphericalEmitterAsset, "effect:Rumble Spherical Emitter");
 
     new (&data) sphericalEmitter((sphericalEmitterAsset*)&asset);
 }

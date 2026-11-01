@@ -18,7 +18,7 @@ F32 tweak_anim_time_delta = 0.1f;
 
 void unit_meter_widget::load(xBase& data, xDynAsset& asset, size_t asset_size)
 {
-    xDynAssetValidate_L(20, asset, unit_meter_asset, unit_meter_asset::type_name());
+    xDynAssetValidate_L(20, asset, asset_size, unit_meter_asset, unit_meter_asset::type_name());
     init_base(data, asset, sizeof(widget_chunk));
     widget_chunk& wc = (widget_chunk&)data;
     new (&wc.w) unit_meter_widget((unit_meter_asset&)asset);

@@ -23,6 +23,7 @@ static S32 HIPLBlockRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size);
 static S32 HIPLBypassRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size);
 static S32 HIPLReadAsync(st_HIPLOADDATA* lddata, S32 pos, char* data, S32 cnt, S32 elesize);
 static en_READ_ASYNC_STATUS HIPLPollRead(st_HIPLOADDATA* lddata);
+static S32 HIPLBlockLength(st_HIPLOADDATA* lddata);
 static S32 HIPLReadBytes(st_HIPLOADDATA* lddata, char* data, S32 cnt);
 static S32 HIPLReadShorts(st_HIPLOADDATA* lddata, S16* data, S32 cnt);
 static S32 HIPLReadLongs(st_HIPLOADDATA* lddata, S32* data, S32 cnt);
@@ -134,10 +135,10 @@ static S32 HIPLSetBypass(st_HIPLOADDATA* lddata, S32 enable, S32 use_async)
     lddata->fli->discardDblBuf(lddata->fli);
 
     if (enable && lddata->bypass) {
-        xWARN("HIP Bypass Enable - already enabled!\n");
+        DBprintf(DBML_WARN, "HIP Bypass Enable - already enabled!\n");
         return 0;
     } else if (!enable && !lddata->bypass) {
-        xWARN("HIP Bypass Disable - already disabled!\n");
+        DBprintf(DBML_WARN, "HIP Bypass Disable - already disabled!\n");
         return 0;
     }
 
@@ -164,7 +165,7 @@ static void HIPLSetSpot(st_HIPLOADDATA* lddata, S32 spot)
     xVALIDATE_L(379, lddata->bypass);
 
     if (!lddata->bypass) {
-        xWARN("HIP Bypass seeking WITHOUT Bypass Enabled!\n");
+        DBprintf(DBML_WARN, "HIP Bypass seeking WITHOUT Bypass Enabled!\n");
         return;
     }
 
@@ -185,7 +186,7 @@ static U32 HIPLBlockEnter(st_HIPLOADDATA* lddata)
     xVALIDATE_L(428, lddata);
 
     if (lddata->bypass) {
-        xWARN("HIP Block Enter with Bypass Enabled!\n");
+        DBprintf(DBML_WARN, "HIP Block Enter with Bypass Enabled!\n");
         return 0;
     }
 
@@ -231,7 +232,7 @@ static void HIPLBlockExit(st_HIPLOADDATA* lddata)
     xVALIDATE_L(488, !lddata->bypass);
 
     if (lddata->bypass) {
-        xWARN("HIP Block Exit with Bypass Enabled!\n");
+        DBprintf(DBML_WARN, "HIP Block Exit with Bypass Enabled!\n");
         return;
     }
 
@@ -322,7 +323,7 @@ static S32 HIPLBypassRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
     }
 
     if (lddata->use_async) {
-        xVERBOSE("HIP - Async Read\n");
+        DBprintf(DBML_VDBG, "HIP - Async Read\n");
         rc = HIPLReadAsync(lddata, lddata->pos, (char*)data, cnt, size);
         return rc;
     }
@@ -374,12 +375,12 @@ static en_READ_ASYNC_STATUS HIPLPollRead(st_HIPLOADDATA* lddata)
     xVALIDATE_L(666, lddata->bypass);
 
     if (!lddata->bypass) {
-        xWARN("HIP 'PollRead' WITHOUT Bypass Enabled!\n");
+        DBprintf(DBML_WARN, "HIP 'PollRead' WITHOUT Bypass Enabled!\n");
         return HIP_RDSTAT_NOBYPASS;
     }
 
     if (!lddata->use_async) {
-        xWARN("HIP 'PollRead' WITHOUT Aynchronous Enabled!\n");
+        DBprintf(DBML_WARN, "HIP 'PollRead' WITHOUT Aynchronous Enabled!\n");
         return HIP_RDSTAT_NOASYNC;
     }
 
@@ -399,7 +400,7 @@ static en_READ_ASYNC_STATUS HIPLPollRead(st_HIPLOADDATA* lddata)
         lddata->asyn_stat = HIP_RDSTAT_NONE;
         break;
     default:
-        xWARN("Unknown Bin I/O async read status %d\n", pollstat);
+        DBprintf(DBML_WARN, "Unknown Bin I/O async read status %d\n", pollstat);
         xFAIL_FMT_L(700, "%s", "Unknown state - this probably means a request failed");
         lddata->asyn_stat = HIP_RDSTAT_NONE;
         break;

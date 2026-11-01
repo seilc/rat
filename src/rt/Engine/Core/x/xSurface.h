@@ -22,11 +22,13 @@ struct xSurface : xBase
 };
 
 void xSurfaceInit(U16 num_surfs);
+void xSurfaceInit(U16 num_surfs, const xSurface* dflt);
 void xSurfaceExit();
 void xSurfaceSave(xSurface* ent, xSerial* s);
 void xSurfaceLoad(xSurface* ent, xSerial* s);
 void xSurfaceReset(xSurface*);
 U16 xSurfaceGetNumSurfaces();
 xSurface* xSurfaceGetByIdx(U16 n);
+xSurface* xSurfaceGetByName(const char* name);
 
 #endif

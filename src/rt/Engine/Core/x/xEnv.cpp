@@ -17,7 +17,7 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
     U32 bufsize;
     void* buf;
     
-    xVERBOSE("... entering xEnvLoadJSPList ...\n");
+    DBprintf(DBML_VDBG, "... entering xEnvLoadJSPList ...\n");
 
 #if DEBUG || RELEASE
     xTWEAKREMOVE("Debugging Options|JSP Visibility");

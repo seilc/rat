@@ -23,14 +23,7 @@ struct xRequestedSound
     F32 mRequestTime;
     S32 mRequestID;
 
-    // RESTORED: speculative
-    void Init(xOneLiner* sound, S32 requestID)
-    {
-        mSound = sound;
-        mRequestID = requestID;
-        mRequestTime = iTimeGetGame();
-    }
-    // END RESTORED
+    inline void Init(xOneLiner* sound, S32 requestID);
 
     void Display(bool wasPlayed)
     {
@@ -60,17 +53,7 @@ struct xSoundHistory
         }
     }
 
-    // RESTORED: speculative
-    void AddSound(xOneLiner* sound)
-    {
-        if (mNumSounds >= 5) {
-            ScrollSounds();
-        }
-        mHistory[mNumSounds].Init(sound, mTotalRequests);
-        mNumSounds++;
-        mTotalRequests++;
-    }
-    // END RESTORED
+    inline void AddSound(xOneLiner* sound);
 
     void Age()
     {
@@ -189,37 +172,6 @@ bool xOneLiner::PlaySoundCore()
     }
     return false;
 }
-
-// RESTORED: from RotU GC
-bool xOneLiner::PlaySound()
-{
-    S32 delayBits = mFlags & 0xF;
-    if (delayBits) {
-        return PlaySoundDelayed(0.1f * delayBits);
-    }
-#if DEBUG || RELEASE
-    sSndHistory.AddSound(this);
-#endif
-    return PlaySoundCore();
-}
-
-bool xOneLiner::PlaySoundDelayed(F32 delay)
-{
-    if (!sDelayedSound) {
-        F32 timeNow = iTimeGetGame();
-        F32 futureTime = timeNow + delay;
-        if (futureTime >= mSoonestTimeToPlay) {
-            mSoonestTimeToPlay = futureTime;
-#if DEBUG || RELEASE
-            sSndHistory.AddSound(this);
-#endif
-            sDelayedSound = this;
-            return true;
-        }
-    }
-    return false;
-}
-// END RESTORED
 
 F32 xOneLiner::CalcTimeToWait() const
 {

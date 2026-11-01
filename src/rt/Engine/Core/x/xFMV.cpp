@@ -45,21 +45,6 @@ static void DefaultFMVPauseSoundCB(bool doPause)
     }
 }
 
-// RESTORED: from TSSM GC
-xFMVPauseSoundCallback xFMVSetPauseSoundCB(xFMVPauseSoundCallback pauseSoundCB)
-{
-    xFMVPauseSoundCallback curCB = sxFMVPauseSoundCB;
-
-    if (!pauseSoundCB) {
-        pauseSoundCB = DefaultFMVPauseSoundCB;
-    }
-
-    sxFMVPauseSoundCB = pauseSoundCB;
-
-    return curCB;
-}
-// END RESTORED
-
 S32 xFMVGetBinkCompliantVolume()
 {
     S32 volume = (S32)(32768.0f * xSndMixerGetOutputVolume(5) * sFMVVolumeScale);

@@ -1,63 +1,7 @@
 #include "xFactory.h"
 
-// RESTORED: from Incredibles GC
 static S32 OrdTest_infotype(const void* vkey, void* vitem);
 static S32 OrdComp_infotype(void* vkey, void* vitem);
-
-xFactory::~xFactory()
-{
-    infopool = NULL;
-    XOrdDone(&infolist, FALSE);
-}
-
-S32 xFactory::RegItemType(XGOFTypeInfo* info)
-{
-    S32 rc = 0;
-
-    for (XGOFTypeInfo* tptr = info; tptr->tid != 0; tptr++) {
-        XGOFTypeInfo* nextrec;
-
-        rc = 1;
-
-        if (!tptr->creator) {
-            rc = 0;
-            break;
-        }
-
-        if (!tptr->destroyer) {
-            rc = 0;
-            break;
-        }
-
-        if (infolist.cnt >= infolist.max) {
-            rc = -2;
-            break;
-        }
-
-        S32 idx = XOrdLookup(&infolist, tptr, OrdTest_infotype);
-        if (idx >= 0) {
-            rc = -1;
-            break;
-        }
-
-        nextrec = &infopool[infolist.cnt];
-        nextrec->tid = tptr->tid;
-        nextrec->creator = tptr->creator;
-        nextrec->destroyer = tptr->destroyer;
-
-        XOrdInsert(&infolist, nextrec, OrdComp_infotype);
-    }
-
-    return rc;
-}
-// END RESTORED
-
-// RESTORED: from TSSM GC, BFBB GC
-void xFactory::GrowDataDisable()
-{
-    growContextData.Done();
-}
-// END RESTORED
 
 // RESTORED: from Incredibles GC
 xFactoryInst* xFactory::CreateItem(S32 typeID, void* userdata, RyzMemGrow* callerzgrow)
