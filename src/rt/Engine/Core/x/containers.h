@@ -337,12 +337,17 @@ public:
 
 protected:
     void push_front();
+    void pop_front();
     void push_back();
+    void pop_back();
     void create(S32 node_size, S32 max_size, U32 memtag, void* buffer);
     void reset(S32 node_size);
     node_base* insert(node_base* it);
     node_base* erase(node_base* it);
     node_base* erase(node_base* first, node_base* last);
+#if DEBUG || RELEASE
+    void validate();
+#endif
 
     node_base* alloc()
     {

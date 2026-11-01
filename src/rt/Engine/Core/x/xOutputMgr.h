@@ -15,13 +15,13 @@ enum xOutSeverity
 };
 
 #if DEBUG || RELEASE
-#define _xWARN_INVALID(line, name, cond, condstr)                                                    \
-do {                                                                                                \
-    if (!(cond) && (xOutTrumps((name), xOutSevWarn) || xOutEnabled((name)) && xOutGetSev() >= xOutSevWarn)) {   \
-        iprintf(">>> INVALID:" condstr);                                                            \
-        iprintf(" in %s in %s(%d)", __FUNCTION__, __FILE__, (line));                                \
-        iprintf("\n");                                                                              \
-    }                                                                                               \
+#define _xWARN_INVALID(line, name, cond, condstr)                                                                                                   \
+do {                                                                                                                                                \
+    if (!(cond) && (xOutTrumps((name), xOutSevWarn) || xOutEnabled((name)) && xOutGetSev() >= xOutSevWarn)) {                                       \
+        iprintf(">>> INVALID:" condstr);                                                                                                            \
+        iprintf(" in %s in %s(%d)", __FUNCTION__, __FILE__, (line));                                                                                \
+        iprintf("\n");                                                                                                                              \
+    }                                                                                                                                               \
 } while (0)
 
 #define xWARN_INVALID(name, cond) _xWARN_INVALID(__LINE__, name, cond, #cond)
@@ -29,26 +29,40 @@ do {                                                                            
 
 #define xFUNCTION_FMT(fmt) "%s: " fmt, __FUNCTION__
 
-#define xTRACE_FUNCTION_L(line, name)                                                               \
-do {                                                                                                \
-    if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= xOutSevInfo)) {  \
-        iprintf("~~ entering %s in %s(%d)", __FUNCTION__, __FILE__, (line));                        \
-        iprintf("\n");                                                                              \
-    }                                                                                               \
+#define xTRACE_FUNCTION_L(line, name)                                                                                                               \
+do {                                                                                                                                                \
+    if (xOutTrumps((name), xOutSevInfo) || (xOutEnabled((name)) && xOutGetSev() >= xOutSevInfo)) {                                                  \
+        iprintf("~~ entering %s in %s(%d)", __FUNCTION__, __FILE__, (line));                                                                        \
+        iprintf("\n");                                                                                                                              \
+    }                                                                                                                                               \
 } while (0)
 
+void xOutputMgrInit();
+void xOutputMgrExit();
+S32 xOutputMgrInited();
+S32 xOutputMgrExited();
 void xOutSetSev(S32 sev);
 S32 xOutGetSev();
 void xOutEnable(char* name, xOutSeverity trumpsev);
+void xOutDisable(char* name);
 S32 xOutEnabled(char* name);
 S32 xOutTrumps(char* name, xOutSeverity usersev);
+void xOutEnable(U32 hval, xOutSeverity trumpsev);
+void xOutDisable(U32 hval);
 S32 xOutEnabled(U32 hval);
 S32 xOutTrumps(U32 hval, xOutSeverity usersev);
+void xOutputMgrDump();
 void xOutCrit(const char* fmt, ...);
 void xOutErr(char* name, const char* fmt, ...);
 void xOutWarn(char* name, const char* fmt, ...);
 void xOutInfo(char* name, const char* fmt, ...);
 void xOutBabble(char* name, const char* fmt, ...);
+void xOutMsg(xOutSeverity sev, char* name, const char* fmt, ...);
+void xOutMsg(xOutSeverity sev, U32 hval, const char* fmt, ...);
+void xOutErr(U32 hval, const char* fmt, ...);
+void xOutWarn(U32 hval, const char* fmt, ...);
+void xOutInfo(U32 hval, const char* fmt, ...);
+void xOutBabble(U32 hval, const char* fmt, ...);
 #else
 #define xWARN_INVALID(name, cond)
 #define xWARN_INVALID_L(line, name, cond)

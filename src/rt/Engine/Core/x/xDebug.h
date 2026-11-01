@@ -20,16 +20,6 @@ enum en_VERBOSE_MSGLEVEL
     DBML_SPEW
 };
 
-#if DEBUG || RELEASE
-#define xWARN(...) DBprintf(DBML_WARN, __VA_ARGS__)
-#define xVERBOSE(...) DBprintf(DBML_VDBG, __VA_ARGS__)
-#define xDEBUG(...) DBprintf(DBML_DBG, __VA_ARGS__)
-#else
-#define xWARN(...)
-#define xVERBOSE(...)
-#define xDEBUG(...)
-#endif
-
 #if DEBUG
 #define _xVALIDATE(line, cond, msg)                                                               \
 do {                                                                                              \
@@ -83,11 +73,11 @@ do {                                                                            
     if (xDebugBoing()) iDebugBreak();                                                             \
 }
 
-#define _xASSERT(line, cond, condstr, ...)                                                        \
-do {                                                                                              \
-    if (!(cond)) {                                                                                \
-        _xFAIL(line, condstr, __VA_ARGS__);                                                       \
-    }                                                                                             \
+#define _xASSERT(line, cond, condstr, ...)      \
+do {                                            \
+    if (!(cond)) {                              \
+        _xFAIL(line, condstr, __VA_ARGS__);     \
+    }                                           \
 } while (0)
 
 #define xASSERT(cond) _xASSERT(__LINE__, cond, _xSTR(cond), "%s", #cond)
@@ -109,13 +99,13 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
-#define _xASSERT_ONCE(line, cond, condstr)                                                        \
-do {                                                                                              \
-    static bool done = false;                                                                     \
-    if (!done && !(cond)) {                                                                       \
-        xFAIL_FMT_L(line, "%s", condstr);                                                         \
-        done = true;                                                                              \
-    }                                                                                             \
+#define _xASSERT_ONCE(line, cond, condstr)      \
+do {                                            \
+    static bool done = false;                   \
+    if (!done && !(cond)) {                     \
+        xFAIL_FMT_L(line, "%s", condstr);       \
+        done = true;                            \
+    }                                           \
 } while (0)
 
 #define xASSERT_ONCE(cond) _xASSERT_ONCE(__LINE__, cond, #cond)
@@ -168,14 +158,14 @@ do {                                                                            
 #define xFAIL_RETURN_VALUE_IF(cond, retval) _xFAIL_RETURN_IF(__LINE__, cond, #cond, (retval))
 #define xFAIL_RETURN_VALUE_IF_L(line, cond, retval) _xFAIL_RETURN_IF(line, cond, #cond, (retval))
 
-#define xFIX_NAN_L(line, x)                                                                       \
-if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {                                                      \
-    static bool done = false;                                                                     \
-    if (!done) {                                                                                  \
-        xFAIL_FMT_L(line, "%s", "NAN");                                                           \
-        done = true;                                                                              \
-    }                                                                                             \
-    (x) = 0.0f;                                                                                   \
+#define xFIX_NAN_L(line, x)                     \
+if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
+    static bool done = false;                   \
+    if (!done) {                                \
+        xFAIL_FMT_L(line, "%s", "NAN");         \
+        done = true;                            \
+    }                                           \
+    (x) = 0.0f;                                 \
 }
 
 #define xFIX_NAN(x) xFIX_NAN_L(__LINE__, x)

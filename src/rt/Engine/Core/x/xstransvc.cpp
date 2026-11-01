@@ -61,12 +61,12 @@ bool xSTIsLoaded()
 S32 xSTStartup(PKRAssetType* handlers)
 {
     if (g_straninit++ == 0) {
-        xVERBOSE("STM: Starting Scene Transition Module Services\n");
+        DBprintf(DBML_VDBG, "STM: Starting Scene Transition Module Services\n");
 
         xVALIDATE_L(87, handlers);
         g_typeHandlers = handlers;
         if (!g_typeHandlers) {
-            xWARN("xSTStartup: No Asset Type Handlers?!?\n");
+            DBprintf(DBML_WARN, "xSTStartup: No Asset Type Handlers?!?\n");
         }
 
         XST_reset_raw();
@@ -82,7 +82,7 @@ S32 xSTStartup(PKRAssetType* handlers)
 S32 xSTShutdown()
 {
     if (--g_straninit == 0) {
-        xVERBOSE("STM: Shutting Down Scene Transition Services\n");
+        DBprintf(DBML_VDBG, "STM: Shutting Down Scene Transition Services\n");
 
         g_typeHandlers = NULL;
 
@@ -153,7 +153,7 @@ S32 xSTPreLoadScene(U32 sid, void* userdata, S32 flg_hiphop, S32 fileflags, cons
             result = 0;
 #if DEBUG
             char* cp = (char*)&sid;
-            xWARN("HOP open failed: %c%c%c%c\n", cp[0], cp[1], cp[2], cp[3]);
+            DBprintf(DBML_WARN, "HOP open failed: %c%c%c%c\n", cp[0], cp[1], cp[2], cp[3]);
 #endif
         } else {
             result = cltver;
@@ -224,43 +224,12 @@ S32 xSTQueueSceneAssets(U32 sid, S32 flg_hiphop)
     xASSERT_L(308, sdata);
     if (!sdata) result = 0;
     else if (sdata->spkg) {
-        xVERBOSE("Queuing Layer Load (default packed order)\n");
+        DBprintf(DBML_VDBG, "Queuing Layer Load (default packed order)\n");
         g_pkrf->LoadLayer(sdata->spkg, PKR_LTYPE_ALL);
     }
 
     return result;
 }
-
-// RESTORED: from Incredibles GC
-void xSTUnLoadScene(U32 sid, S32 flg_hiphop)
-{
-    st_STRAN_SCENE* sdata = NULL;
-    S32 cnt = 0, i = 0, doTheHOP = 0;
-
-    if (sid == 0) {
-        cnt = XST_cnt_locked();
-        for (i = 0; i < cnt; i++) {
-            sdata = XST_nth_locked(i);
-            xASSERT(sdata);
-            if (sdata->spkg) {
-                g_pkrf->Done(sdata->spkg);
-            }
-            sdata->spkg = NULL;
-        }
-        XST_unlock_all();
-    } else {
-        sdata = XST_find_bySID(sid, flg_hiphop);
-        xVALIDATE(sdata);
-        if (sdata) {
-            if (sdata->spkg) {
-                g_pkrf->Done(sdata->spkg);
-            }
-            sdata->spkg = NULL;
-        }
-        XST_unlock(sdata);
-    }
-}
-// END RESTORED
 
 void xSTUnLoadSceneMany(U32 sceneID, S32 type)
 {
@@ -303,7 +272,7 @@ F32 xSTLoadStep(U32)
     F32 pct = 0.0f;
     S32 rc = 0;
 
-    xVERBOSE("STM: Processing Stepper Load Queue\n");
+    DBprintf(DBML_VDBG, "STM: Processing Stepper Load Queue\n");
 
     rc = PKRLoadStep(0);
     if (rc)
@@ -312,7 +281,7 @@ F32 xSTLoadStep(U32)
         pct = 1.00001f;
 
     if (pct > 1.0f) {
-        xVERBOSE("STM: Stepper Loading Complete\n");
+        DBprintf(DBML_VDBG, "STM: Stepper Loading Complete\n");
     }
 
     iTRC_CHECK_L(429);
@@ -347,10 +316,10 @@ S32 xSTSwitchScene(U32 sid, void* userdata, S32(*progmon)(void*, F32))
         sdata = XST_find_bySID(sid, types[i]);
         if (sdata) {
             if (progmon) progmon(userdata, 0.0f);
-            xVERBOSE("STM: Switching Scene to Active\n");
+            DBprintf(DBML_VDBG, "STM: Switching Scene to Active\n");
 
             rc = g_pkrf->SetActive(sdata->spkg, PKR_LTYPE_ALL);
-            xVERBOSE("STM: Scene Switch Completed with %s\n", rc ? "Success" : "Failure");
+            DBprintf(DBML_VDBG, "STM: Scene Switch Completed with %s\n", rc ? "Success" : "Failure");
 
             if (progmon) {
                 progmon(userdata, 1.0f);

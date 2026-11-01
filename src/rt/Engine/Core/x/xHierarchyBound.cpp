@@ -93,6 +93,10 @@ namespace {
         xTWEAK(buffer, &bound->nodes[which].userData, 0, 0xFFFF, NULL, NULL, 0x2);
     }
 
+    void OnSphereListSelect(const tweak_info& info);
+    void OnSphereListUnselect(const tweak_info& info);
+    void AddSphereListTweak(const char* base, xSphereList* list, U32 which);
+
     void OnHierachyChangeCount(const tweak_info& info)
     {
         xHierarchyBound* bound = (xHierarchyBound*)info.context;
@@ -123,6 +127,7 @@ namespace {
         bound->tweakInfo.lastCount = bound->count;
     }
 
+    void OnSphereChangeCount(const tweak_info& info);
 }
 #endif
 

@@ -261,21 +261,6 @@ void xModelBlur::render_all()
     }
 }
 
-// RESTORED: from TSSM GC
-void xModelBlur::render_enable(bool enabled)
-{
-    sModelBlurEnabled = enabled;
-}
-// END RESTORED
-
-// RESTORED: from Incredibles GC
-const xModelBlur::config_data& xModelBlur::get_default_config()
-{
-    static const config_data cfg = { 0, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.1f, 0.0f, 32 };
-    return cfg;
-}
-// END RESTORED
-
 void xModelBlur::create()
 {
     activity = NULL;
@@ -362,27 +347,11 @@ void xModelBlur::set_lifetime(F32 value, F32 time)
     activity->lifetime.go(value, time);
 }
 
-// RESTORED: from Incredibles GC
-F32 xModelBlur::get_lifetime_goal() const
-{
-    xASSERT(active());
-    return activity->lifetime.end;
-}
-// END RESTORED
-
 void xModelBlur::set_alpha(F32 value, F32 time)
 {
     xASSERT_L(439, active());
     activity->alpha.go(value, time);
 }
-
-// RESTORED: from Incredibles GC
-F32 xModelBlur::get_alpha_goal() const
-{
-    xASSERT(active());
-    return activity->alpha.end;
-}
-// END RESTORED
 
 #if DEBUG || RELEASE
 DECOMP_FORCEACTIVE("cfg. max_card_renders", "write_color", "render_additive", "cfg. radius", "cfg. color_red", "cfg. color_green", "cfg. color_blue", "cfg. color_alpha", "cfg. card_dist", "cfg. zbias")

@@ -204,7 +204,7 @@ void xBoundHitsBound(const xBound* a, const xBound* b, xCollis* c)
         xCylinderHitsSphere(&a->cyl, &b->sph, c);
         break;
     default:
-        xDEBUG("xBoundHitsBound: unsupported collision type - bound %d vs [ANY]\n", a->type);
+        DBprintf(DBML_DBG, "xBoundHitsBound: unsupported collision type - bound %d vs [ANY]\n", a->type);
     }
 }
 
@@ -224,7 +224,7 @@ void xBoundHitsModel(const xBound* b, const xModelInstance* m, xCollis* colls, U
     case k_XBOUNDTYPE_OBB:
     case k_XBOUNDTYPE_CYLINDER:
     default:
-        xDEBUG("xBoundHitsModel: unsupported collision type - bound %d vs [ANY]\n", b->type);
+        DBprintf(DBML_DBG, "xBoundHitsModel: unsupported collision type - bound %d vs [ANY]\n", b->type);
     }
 }
 
@@ -278,7 +278,7 @@ void xRayHitsBound(const xRay3* r, const xBound* b, xCollis* c)
     case k_XBOUNDTYPE_CYLINDER:
         break;
     default:
-        xDEBUG("xRayHitsBound: unsupported bound type %d\n", b->type);
+        DBprintf(DBML_DBG, "xRayHitsBound: unsupported bound type %d\n", b->type);
     }
 
     if (isect.penned <= 0.0f) {
@@ -306,7 +306,7 @@ void xSphereHitsBound(const xSphere* o, const xBound* b, xCollis* c)
         xSphereHitsBox(o, &b->box.box, c);
         break;
     default:
-        xDEBUG("xBoundHitsBound: unsupported collision type - sphere bound vs %d\n", b->type);
+        DBprintf(DBML_DBG, "xBoundHitsBound: unsupported collision type - sphere bound vs %d\n", b->type);
     }
 }
 
@@ -349,7 +349,7 @@ void xVecHitsBound(const xVec3* v, const xBound* b, xCollis* c)
     case k_XBOUNDTYPE_CYLINDER:
         break;
     default:
-        xDEBUG("xVecHitsBound: unsupported bound type %d\n", b->type);
+        DBprintf(DBML_DBG, "xVecHitsBound: unsupported bound type %d\n", b->type);
     }
 
     if (isect.penned <= 0.0f) {
@@ -374,7 +374,7 @@ void xBoundDraw(const xBound* b)
     case k_XBOUNDTYPE_CYLINDER:
         break;
     default:
-        xDEBUG("xBoundDraw: unsupported bound type %d\n", b->type);
+        DBprintf(DBML_DBG, "xBoundDraw: unsupported bound type %d\n", b->type);
     }
 }
 
@@ -400,36 +400,10 @@ bool xBoundHitsBound(const xBound& a, const xBound& b)
     case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_BOX << 3):
         return xOBBHitsOBB(a.box.box, *a.mat, b.box.box, g_I3);
     default:
-        xDEBUG("xBoundHitsBound: unsupported collision type - bound %d vs bound %d\n", a.type, b.type);
+        DBprintf(DBML_DBG, "xBoundHitsBound: unsupported collision type - bound %d vs bound %d\n", a.type, b.type);
         return false;
     }
 }
-
-// RESTORED: from Incredibles GC
-bool xRayHitsBound(const xRay3& r, const xBound& b)
-{
-    xIsect isect;
-    isect.penned = HUGE;
-
-    switch (b.type) {
-    case k_XBOUNDTYPE_SPHERE:
-        iSphereIsectRay(&b.sph, &r, &isect);
-        break;
-    case k_XBOUNDTYPE_BOX:
-        iBoxIsectRay(&b.box.box, &r, &isect);
-        break;
-    case k_XBOUNDTYPE_OBB:
-        xBoundOBBIsectRay(&b.box.box, b.mat, &r, &isect);
-        break;
-    case k_XBOUNDTYPE_CYLINDER:
-        break;
-    default:
-        xDEBUG("xRayHitsBound: unsupported bound type %d\n", b.type);
-    }
-
-    return isect.penned <= 0.0f;
-}
-// END RESTORED
 
 bool xSphereHitsBound(const xVec3& c, F32 r, const xBound& b)
 {
@@ -441,7 +415,7 @@ bool xSphereHitsBound(const xVec3& c, F32 r, const xBound& b)
     case k_XBOUNDTYPE_OBB:
         return xSphereHitsOBB(c, r, b.box.box, *b.mat);
     default:
-        xDEBUG("xSphereHitsBound: unsupported collision type - sphere bound vs %d\n", b.type);
+        DBprintf(DBML_DBG, "xSphereHitsBound: unsupported collision type - sphere bound vs %d\n", b.type);
         return false;
     }
 }
@@ -457,7 +431,7 @@ bool xVecHitsBound(const xVec3& v, const xBound& b)
     case k_XBOUNDTYPE_OBB:
         return xVecHitsOBB(v, b.box.box, *b.mat);
     default:
-        xDEBUG("xVecHitsBound: unsupported collision type - sphere bound vs %d\n", b.type);
+        DBprintf(DBML_DBG, "xVecHitsBound: unsupported collision type - sphere bound vs %d\n", b.type);
         return false;
     }
 }

@@ -209,6 +209,8 @@ namespace {
         return gh;
     }
 
+    void free_graph(graph_handle* gh);
+
     graph_handle* find_graph(const char* name)
     {
         if (need_sort) {

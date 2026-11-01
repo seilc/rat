@@ -36,9 +36,11 @@ extern xLightKitBlendInfo gLastLightKit;
 
 struct xModelInstance;
 
+void* xLightKit_Parse(char* strbuf, U32 len, U32* size, U32 swap, U32 groupID);
 xLightKit* xLightKit_Prepare(void* data);
 void xLightKit_GetBlendInfo(xLightKitBlendInfo& lkitInfo, xModelInstance* model);
 S32 xLightKit_Compare(xLightKitBlendInfo& lkitInfo1, xLightKitBlendInfo& lkitInfo2);
+S32 xLightKit_Compare(xLightKitBlendInfo& lkitInfo, xModelInstance* model);
 void xLightKit_Enable(const xModelInstance& model, RpWorld* world);
 void xLightKit_Enable(xLightKit* lkit, RpWorld* world, xLightKit* lkit_blend, RwReal blendPercentage);
 xLightKitBlendInfo* xLightKit_GetCurrent(RpWorld*);

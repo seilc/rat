@@ -1,10 +1,8 @@
 #include "zProgressScript.h"
 
-#include "xEvent.h"
 #include "xMemMgr.h"
-#include "xstransvc.h"
+#include "zBase.h"
 #include "zEvent.h"
-#include "zScene.h"
 
 void zProgressScript_Init(void* b, void* sasset)
 {
@@ -52,98 +50,6 @@ void zProgressScript_Reset(zProgressScript* s)
         s->flags[i] = 0;
     }
 }
-
-// RESTORED: from RotU GC, Incredibles GC
-void zProgressScript_JumpTo(zProgressScript* s, F32 percent)
-{
-    s->percent = percent;
-    s->current = 0;
-
-    while (s->current < (S32)s->sasset->eventCount) {
-        xProgressScriptEventAsset* event = &s->events[s->current];
-        if (event->percent > percent) {
-            break;
-        }
-
-        s->current++;
-    }
-}
-
-void zProgressScript_WalkForward(zProgressScript* s, F32 percent)
-{
-    while (s->current < (S32)s->sasset->eventCount) {
-        xProgressScriptEventAsset* event = &s->events[s->current];
-        if (percent < event->percent) {
-            break;
-        }
-
-        xBase* b = zSceneFindObject(event->widget);
-        if (b) {
-            xBase* paramWidget = NULL;
-            if (event->paramWidget) {
-                paramWidget = zSceneFindObject(event->paramWidget);
-                if (!paramWidget) {
-                    paramWidget = (xBase*)xSTFindAsset(event->paramWidget, NULL);
-                }
-            }
-
-            S32 index = s->current >> 5;
-            S32 bit = 1 << (s->current & 0x1f);
-            if (!(event->flags & 0x1) || !(bit & s->flags[index])) {
-                zEntEvent(s, 0, b, event->paramEvent, event->param, paramWidget, event->paramWidget, FE_NO);
-                s->flags[index] |= bit;
-            }
-        }
-
-        s->current++;
-    }
-
-    s->percent = percent;
-}
-
-void zProgressScript_WalkBack(zProgressScript* s, F32 percent)
-{
-    while (s->current > 0) {
-        xProgressScriptEventAsset* event = &s->events[s->current - 1];
-        if (percent >= event->percent) {
-            break;
-        }
-
-        xBase* b = zSceneFindObject(event->widget);
-        if (b) {
-            xBase* paramWidget = NULL;
-            if (event->paramWidget) {
-                paramWidget = zSceneFindObject(event->paramWidget);
-                if (!paramWidget) {
-                    paramWidget = (xBase*)xSTFindAsset(event->paramWidget, NULL);
-                }
-            }
-
-            S32 index = (s->current - 1) >> 5;
-            S32 bit = 1 << ((s->current - 1) & 0x1f);
-            if (!(event->flags & 0x1) || !(bit & s->flags[index])) {
-                zEntEvent(s, 0, b, event->paramEvent, event->param, paramWidget, event->paramWidget, FE_NO);
-                s->flags[index] |= bit;
-            }
-        }
-
-        s->current--;
-    }
-
-    s->percent = percent;
-}
-
-void zProgressScript_MoveTo(zProgressScript* s, F32 percent)
-{
-    if (percent != s->percent) {
-        if (percent > s->percent) {
-            zProgressScript_WalkForward(s, percent);
-        } else {
-            zProgressScript_WalkBack(s, percent);
-        }
-    }
-}
-// END RESTORED
 
 void zProgressScript_Save(zProgressScript* ent, xSerial* s)
 {

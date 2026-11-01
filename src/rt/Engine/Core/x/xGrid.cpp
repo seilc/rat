@@ -239,7 +239,7 @@ S32 xGridRemove(xGridBound* gridb)
 
     if (gridb->head) {
         if (gridb->grid->iter_active) {
-            gridb->deleted = TRUE;
+            gridb->deleted = true;
             return FALSE;
         }
 
@@ -257,7 +257,7 @@ S32 xGridRemove(xGridBound* gridb)
         cur->next = NULL;
         cur->head = NULL;
         cur->grid = NULL;
-        cur->deleted = FALSE;
+        cur->deleted = false;
         cur->gx = -1;
         cur->gz = -1;
     }
@@ -291,7 +291,7 @@ void xGridUpdate(xGrid* grid, xEnt* ent)
         cur->next = NULL;
         if (cur != gridb) {
             cur->grid = NULL;
-            cur->deleted = FALSE;
+            cur->deleted = false;
             cur->gx = -1;
             cur->gz = -1;
         }
@@ -505,7 +505,7 @@ void xGridIterClose(xGridIterator& it)
                     cur->next = NULL;
                     cur->head = NULL;
                     cur->grid = NULL;
-                    cur->deleted = FALSE;
+                    cur->deleted = false;
                     cur->gx = -1;
                     cur->gz = -1;
                     cur = *prev;

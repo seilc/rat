@@ -3,6 +3,9 @@
 
 #include "xBase.h"
 #include "xCounterAsset.h"
+#include "xFont.h"
+
+struct xScene;
 
 typedef struct _xCounter : xBase
 {
@@ -22,5 +25,8 @@ void xCounterReset(xBase* b);
 void xCounterSave(xCounter* ent, xSerial* s);
 void xCounterLoad(xCounter* ent, xSerial* s);
 void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32);
+void xCounterUpdate(xBase* to, xScene* sc, F32);
+void xCounterStartup();
+void xCounterParseTag(xtextbox::jot& j, const xtextbox&, const xtextbox&, const xtextbox::split_tag& splitTag);
 
 #endif

@@ -14,8 +14,7 @@
 
 #include <string.h>
 
-namespace
-{
+namespace {
 _tagTRCPadInfo gTrcPad[k_MAX_TRC_PADS];
 _tagTRCDiskInfo gTrcDisk;
 const char* k_CONTROLLER_MISSING_MESSAGE;
@@ -85,10 +84,10 @@ void xTRCPadRemove(S32 port)
             if (gTrcPad[i].state == TRC_PadActive || gTrcPad[i].padstate == TRC_PadStateMissingDuringGameplay) {
                 gTrcPad[i].state = TRC_PadMissing;
                 gTrcPad[i].padstate = TRC_PadStateMissingDuringGameplay;
-                xDEBUG("\niPadXb:Removed active pad %d", gTrcPad[i].id);
+                DBprintf(DBML_DBG, "\niPadXb:Removed active pad %d", gTrcPad[i].id);
                 xTRCSwapPads(gTrcPad[0], gTrcPad[i]);
             } else {
-                xDEBUG("\niPadXb:Removed pad %d", gTrcPad[i].id);
+                DBprintf(DBML_DBG, "\niPadXb:Removed pad %d", gTrcPad[i].id);
                 gTrcPad[i].id = -1;
                 gTrcPad[i].state = TRC_Unknown;
                 gTrcPad[i].padstate = TRC_PadStateUnknown;
@@ -279,8 +278,7 @@ bool xTRCPadPortWasActive(S32 port)
     return xTRCPadIsPort(port, TRC_PadActive) || xTRCPadIsPort(port, TRC_PadPreInserted) || xTRCPadGetPadStatePort(port) == TRC_PadStateMissingDuringGameplay;
 }
 
-namespace
-{
+namespace {
 bool xTRCIsNextState(S32 i, U32 state)
 {
     return (TRCState)state != gTrcPad[i].state && (TRCState)state == gTrcPad[i + 1].state;
@@ -411,7 +409,7 @@ void xTRCPadInsert(S32 i)
 {
     if (xTRCPadIsPort(i, TRC_PadMissing)) {
         xTRCPadSetStatePadPort(i, TRC_PadPreInserted);
-        xDEBUG("\nxTRCPadInsert: Inserted pad %d\n", i);
+        DBprintf(DBML_DBG, "\nxTRCPadInsert: Inserted pad %d\n", i);
     }
     else if (xTRCPadIsPort(i, TRC_Unknown)) {
         _tagTRCPadInfo& trcpad = xTRCPadGetNextAvailablePad();
@@ -490,29 +488,6 @@ void xTRCReset()
 {
     xTRCClearPadMsg();
 }
-
-// RESTORED: from RotU GC
-void xTRCPadGetPressed(TRCState padState, bool& A, bool& B, bool& C, bool& D)
-{
-    A = B = C = D = false;
-    for (S32 k = 0; k < k_XPAD_MAX; k++) {
-        if (xTRCPadIsPort(k, padState)) {
-            if (mPad[k].pressed & 0x10000) {
-                A = true;
-            }
-            if (mPad[k].pressed & 0x20000) {
-                B = true;
-            }
-            if (mPad[k].pressed & 0x40000) {
-                C = true;
-            }
-            if (mPad[k].pressed & 0x80000) {
-                D = true;
-            }
-        }
-    }
-}
-// END RESTORED
 
 void xTRCPadSetPressed(S32 port, S32 value, bool reverse)
 {

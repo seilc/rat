@@ -63,17 +63,17 @@ T binary_find(T first, T last, const V& value, C cmp)
     return notfound;
 }
 
-#define XUTIL_SWAP(a, b, width)                                                                   \
-do {                                                                                              \
-    U8* _b0 = (a);                                                                                \
-    U8* _b1 = (b);                                                                                \
-    U8* _endb0 = (a) + (width);                                                                   \
-    while (_b0 != _endb0) {                                                                       \
-        U32 _temp = *(U32*)_b0;                                                                   \
-        *(U32*)_b0 = *(U32*)_b1;                                                                  \
-        *(U32*)_b1 = _temp;                                                                       \
-        _b0 += 4, _b1 += 4;                                                                       \
-    }                                                                                             \
+#define XUTIL_SWAP(a, b, width)                 \
+do {                                            \
+    U8* _b0 = (a);                              \
+    U8* _b1 = (b);                              \
+    U8* _endb0 = (a) + (width);                 \
+    while (_b0 != _endb0) {                     \
+        U32 _temp = *(U32*)_b0;                 \
+        *(U32*)_b0 = *(U32*)_b1;                \
+        *(U32*)_b1 = _temp;                     \
+        _b0 += 4, _b1 += 4;                     \
+    }                                           \
 } while (0)
 
 template <class T>

@@ -36,6 +36,8 @@ public:
         updater(dt);
     }
 
+    void set_value(F32 v);
+    void set_value_immediate(F32 v);
     void updater(F32 dt);
 
 protected:

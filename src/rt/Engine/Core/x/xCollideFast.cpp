@@ -86,7 +86,7 @@ U32 xRayHitsBoundFast(const xRay3* r, const xBound* b)
         return xRayHitsCylinderFast(r, &b->cyl);
     }
 
-    xWARN("xRayHitsBoundFast: unsupported bound type %d\n", b->type);
+    DBprintf(DBML_WARN, "xRayHitsBoundFast: unsupported bound type %d\n", b->type);
     return FALSE;
 }
 // END RESTORED

@@ -13,7 +13,10 @@ struct xSoundFX : xBase
 
 void xSoundFXInit(void* t, void* asset);
 void xSoundFXInit(xSoundFX* t, xSoundFXAsset* asset);
+void xSoundFXSave(xSoundFX* ent, xSerial* s);
+void xSoundFXLoad(xSoundFX* ent, xSerial* s);
 void xSoundFXReset(xSoundFX* ent);
+void xSoundFXUpdate(xSoundFX* pSoundFX);
 void xSoundFXEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*, U32);
 xSoundFX* xSoundFXGet(U32 soundfxID);
 

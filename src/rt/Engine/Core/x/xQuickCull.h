@@ -42,8 +42,10 @@ struct xBound;
 
 void xQuickCullInit(xQCControl* ctrl, F32 xmin, F32 ymin, F32 zmin, F32 xmax, F32 ymax, F32 zmax);
 void xQuickCullInit(xQCControl* ctrl, const xBox* box);
+void xQuickCullExit();
 S32 xQuickCullIsects(const xQCData* a, const xQCData* b);
 void xQuickCullForBound(xQCControl* ctrl, xQCData* q, const xBound* b);
+void xQuickCullForVec(xQCControl* ctrl, xQCData* q, const xVec3* v);
 void xQuickCullForLine(xQCControl* ctrl, xQCData* q, const xLine3* ln);
 void xQuickCullForRay(xQCControl* ctrl, xQCData* q, const xRay3* r);
 void xQuickCullForSphere(xQCControl* ctrl, xQCData* q, const xSphere* s);

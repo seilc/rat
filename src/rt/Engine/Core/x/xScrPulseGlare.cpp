@@ -403,13 +403,3 @@ void xScrFX_PulseGlaresSetFlag(S32 idx, S32 flag, bool reverse)
     }
 }
 // END RESTORED
-
-// RESTORED: from Incredibles GC
-bool xScrFX_PulseGlaresCheckFlag(S32 idx, S32 flag)
-{
-    xASSERT(idx > -1);
-    xASSERT(flag > 0);
-    xPulseGlare& g = glare_mgr.get(idx);
-    return g.flags & flag ? true : false;
-}
-// END RESTORED

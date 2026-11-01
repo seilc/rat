@@ -40,6 +40,7 @@ public:
     bool InActiveList(const void* pointer, U32) const;
     bool IsValidPointer(const void* pointer) const;
     void DumpActiveList() const;
+    void ValidateActiveList() const;
 
 #if DEBUG || RELEASE
     void* Allocate(U32 size, U32 options, const char* file, const char* function, S32 line);

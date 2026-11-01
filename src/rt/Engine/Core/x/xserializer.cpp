@@ -62,7 +62,7 @@ S32 xSerialStartup(S32 count, st_SERIAL_PERCID_SIZE* sizeinfo)
         xSER_init_tables();
         xSER_init_buffers(count, sizeinfo);
 
-        xVERBOSE("XSER: Startup ... %d sandboxes\n", count);
+        DBprintf(DBML_VDBG, "XSER: Startup ... %d sandboxes\n", count);
     }
 
     return g_serinit;
@@ -71,7 +71,7 @@ S32 xSerialStartup(S32 count, st_SERIAL_PERCID_SIZE* sizeinfo)
 S32 xSerialShutdown()
 {
     if (--g_serinit == 0)
-        xVERBOSE("XSER: Shutdown\n");
+        DBprintf(DBML_VDBG, "XSER: Shutdown\n");
 
     xVALIDATE_L(85, g_serinit>=0);
     return g_serinit;
@@ -176,36 +176,15 @@ S32 xSerial::Write(char* data, S32 elesize, S32 n)
     return nbit;
 }
 
-// RESTORED: from TSSM GC
-S32 xSerial::Write_bn(U32 bits, S32 n)
-{
-    return Write((char*)&bits, 4, -n);
-}
-// END RESTORED
-
 S32 xSerial::Write_b1(S32 bits)
 {
     return Write((char*)&bits, 4, -1);
 }
 
-// RESTORED: from RotU GC, Incredibles GC
-S32 xSerial::Write_b1(U32 bits)
-{
-    return Write((char*)&bits, 4, -1);
-}
-// END RESTORED
-
 S32 xSerial::Write_b2(U32 bits)
 {
     return Write((char*)&bits, 4, -2);
 }
-
-// RESTORED: from BFBB GC
-S32 xSerial::Write_b7(U32 bits)
-{
-    return Write((char*)&bits, 4, -7);
-}
-// END RESTORED
 
 S32 xSerial::Write(U8 data)
 {
@@ -298,13 +277,6 @@ S32 xSerial::Read(char* buf, S32 elesize, S32 n)
     return nbit;
 }
 
-// RESTORED: from TSSM GC
-S32 xSerial::Read_bn(U32* bits, S32 n)
-{
-    return Read((char*)bits, 4, -n);
-}
-// END RESTORED
-
 S32 xSerial::Read_b1(S32* bits)
 {
     return Read((char*)bits, 4, -1);
@@ -319,13 +291,6 @@ S32 xSerial::Read_b2(U32* bits)
 {
     return Read((char*)bits, 4, -2);
 }
-
-// RESTORED: from BFBB GC
-S32 xSerial::Read_b7(U32* bits)
-{
-    return Read((char*)bits, 4, -7);
-}
-// END RESTORED
 
 S32 xSerial::Read(U8* buf)
 {
@@ -387,7 +352,7 @@ S32 xSerial::rdbit()
 
     if (this->bittally + 1 > clt->actsize * 8) {
         if (!this->warned)
-            xWARN("XSER: Client %s playing in someone else's sandbox\n", xUtil_idtag2string(this->idtag, 0));
+            DBprintf(DBML_WARN, "XSER: Client %s playing in someone else's sandbox\n", xUtil_idtag2string(this->idtag, 0));
         this->warned = TRUE;
         return is_on;
     }
@@ -472,7 +437,7 @@ static void xSER_init_buffers(S32 count, st_SERIAL_PERCID_SIZE* sizeinfo)
 
     tally += (count - sicnt) * 400;
 
-    xVERBOSE("XSER: Sandbox total: %d\n", tally);
+    DBprintf(DBML_VDBG, "XSER: Sandbox total: %d\n", tally);
 
     xsd->bitbuf = (S32*)xMEMALLOC_L(tally, 0, eMemMgrTag_Serializer, 'XSER', 992);
     memset(xsd->bitbuf, 0, tally);
@@ -483,7 +448,7 @@ static void xSER_init_buffers(S32 count, st_SERIAL_PERCID_SIZE* sizeinfo)
     sitmp = sizeinfo;
     tally = 0;
     while (sitmp->idtag) {
-        xVERBOSE("XSER: Registering custom client '%s'\n", xUtil_idtag2string(sitmp->idtag, 0));
+        DBprintf(DBML_VDBG, "XSER: Registering custom client '%s'\n", xUtil_idtag2string(sitmp->idtag, 0));
 
         tmp_clt->idtag = sitmp->idtag;
         tmp_clt->trueoff = tally;
@@ -560,7 +525,7 @@ static st_SERIAL_CLIENTINFO* XSER_get_client(U32 idtag)
 
     idx = XOrdLookup(&xsd->cltlist, (void*)idtag, xSER_ord_test);
     if (idx < 0) {
-        xVERBOSE("XSER: Adding client '%s'\n", xUtil_idtag2string(idtag, 0));
+        DBprintf(DBML_VDBG, "XSER: Adding client '%s'\n", xUtil_idtag2string(idtag, 0));
 
         clt = xsd->cltnext; xsd->cltnext++;
 
@@ -571,7 +536,7 @@ static st_SERIAL_CLIENTINFO* XSER_get_client(U32 idtag)
         xVALIDATE_L(1125, clt->membuf);
         XOrdInsert(&xsd->cltlist, clt, xSER_ord_compare);
     } else {
-        xVERBOSE("XSER: Found existing client '%s'\n", xUtil_idtag2string(idtag, 0));
+        DBprintf(DBML_VDBG, "XSER: Found existing client '%s'\n", xUtil_idtag2string(idtag, 0));
         clt = (st_SERIAL_CLIENTINFO*)xsd->cltlist.list[idx];
         xVALIDATE_L(1132, clt->membuf);
     }
@@ -608,7 +573,7 @@ S32 xSerial_svgame_register(st_XSAVEGAME_DATA* sgctxt, en_SAVEGAME_MODE mode)
         xSGAddLoadClient(sgctxt, 'SFIL', &g_xserdata, xSER_xsgclt_ldproc_fill);
     }
     else
-        xWARN("XSER: Unknown savegame mode %d\n", mode);
+        DBprintf(DBML_WARN, "XSER: Unknown savegame mode %d\n", mode);
 
     return TRUE;
 }
@@ -704,7 +669,7 @@ static S32 xSER_xsgclt_svinfo_fill(void*, st_XSAVEGAME_DATA*, S32* cur_space, S3
     xVALIDATE_L(1334, tally<=size);
 
     size -= tally;
-    xVERBOSE("XSER: Reserving %d bytes in SaveGame\n", size);
+    DBprintf(DBML_VDBG, "XSER: Reserving %d bytes in SaveGame\n", size);
 
     *cur_space = size + 8;
     *max_fullgame = size + 8;

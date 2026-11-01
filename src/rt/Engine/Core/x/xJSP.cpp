@@ -174,7 +174,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
             RwStreamReadReal(stream, &jntree->branchNodes[i].leftValue, 2 * sizeof(F32));
         }
         if (!RwStreamReadInt32(stream, (RwInt32*)jntree->leafNodes, jntree->numLeafNodes * sizeof(xJSPNodeTreeLeaf))) {
-            xWARN("Error reading JSP data!!!\n");
+            DBprintf(DBML_WARN, "Error reading JSP data!!!\n");
             xFAIL();
         }
         hdr->nodetree = jntree;
@@ -182,7 +182,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
         RwStreamReadInt32(stream, (RwInt32*)&hdr->stripVecCount, sizeof(U32));
         hdr->stripVecList = (RwV3d*)RwMalloc(hdr->stripVecCount * (sizeof(RwV3d) + hdr->vertDataStride), rwMEMHINTDUR_NADURATION);
         if (!RwStreamReadReal(stream, (RwReal*)hdr->stripVecList, hdr->stripVecCount * sizeof(RwV3d))) {
-            xWARN("Error reading JSP data!!!\n");
+            DBprintf(DBML_WARN, "Error reading JSP data!!!\n");
             xFAIL();
         }
 
@@ -216,7 +216,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
             RwStreamReadInt32(stream, (RwInt32*)&hdr->stripVecCount, sizeof(U32));
             hdr->stripVecList = (RwV3d*)RwMalloc(hdr->stripVecCount * sizeof(RwV3d), rwMEMHINTDUR_NADURATION);
             if (!RwStreamReadReal(stream, (RwReal*)hdr->stripVecList, hdr->stripVecCount * sizeof(RwV3d))) {
-                xWARN("Error reading JSP data!!!\n");
+                DBprintf(DBML_WARN, "Error reading JSP data!!!\n");
                 xFAIL();
             }
             sAtomicStartCount = RpClumpGetNumAtomics(clump);
@@ -822,7 +822,7 @@ static S32 JSPRemoveLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box
 void xJSP_ApplyLocalLight(xJSPHeader* jsp, RpLight* light)
 {
     RwFrame* lframe = RpLightGetFrame(light);
-    F32 lradius = RpLightGetRadius(light);
+    RwReal lradius = RpLightGetRadius(light);
     RwBBox lbox;
 
     lbox.sup.x = lframe->ltm.pos.x + lradius;

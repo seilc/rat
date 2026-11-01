@@ -46,6 +46,8 @@ public:
     void Update(pool_list<zShowerParticle>& list, xEnt* owner, zShowerCBInterface* collideCallback, F32 dt);
 #if DEBUG || RELEASE
     void Start(const xVec3& pos, F32 fallSpeed, const xFXRibbon* tweakRibbon);
+    void DebugRender();
+    void UpdateModel(RpAtomic* iModel, xLightKit* lightKit);
 #else
     void Start(const xVec3& pos, F32 fallSpeed);
 #endif
@@ -89,6 +91,11 @@ public:
     void Start(const xVec3& pos, zShowerCBInterface* collideCB);
     void ResetSpawnTimer();
     void Update(F32 dt);
+#if DEBUG || RELEASE
+    static void AddStaticTweaks();
+    void AddTweaks(const char* prefixName, const char* name);
+    void ModelChange();
+#endif
     void Render();
     void Exit();
 

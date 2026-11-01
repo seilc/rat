@@ -150,19 +150,6 @@ F32 xDangleClamp(F32 a)
     return b;
 }
 
-// RESTORED: from Incredibles GC
-F32 xDangleClampFast(F32 a)
-{
-    if (a >= PI) {
-        a -= 2.0f * PI;
-    } else if (a < -PI) {
-        a += 2.0f * PI;
-    }
-
-    return a;
-}
-// END RESTORED
-
 static void xBinomInit()
 {
     binom_triangle[0] = 1;
@@ -277,59 +264,6 @@ void xAccelMove2(F32& x, F32& v, F32 decel, F32 accel, F32 dt, F32 endx, F32 max
     }
 
     x += dx;
-}
-// END RESTORED
-
-// RESTORED: from Incredibles GC, BFBB GC
-F32 xAccelMoveTime(F32 dx, F32 a, F32, F32 maxv)
-{
-    F32 time;
-    F32 atime = maxv / a;
-    F32 adist = atime * (0.5f * a * atime);
-
-    dx *= 0.5f;
-    if (adist < dx) {
-        time = xsqrt(2.0f * dx / a);
-    } else {
-        time = atime + (dx - adist) / maxv;
-    }
-
-    return 2.0f * time;
-}
-// END RESTORED
-
-// RESTORED: from Incredibles GC, TSSM GC, BFBB GC
-void xAccelMove(F32& x, F32& v, F32 a, F32 dt, F32 maxv)
-{
-    if (xabs(v) > xabs(maxv)) {
-        if (v < 0.0f) {
-            if (a > 0.0f) {
-                a = -a;
-            }
-        } else if (a < 0.0f) {
-            a = -a;
-        }
-
-        a = -a;
-    }
-
-    if (a < 0.0f) {
-        if (maxv > 0.0f) {
-            maxv = -maxv;
-        }
-    } else if (maxv < 0.0f) {
-        maxv = -maxv;
-    }
-
-    F32 diff = maxv - v;
-    F32 dv = a * dt;
-    if (xabs(diff) < xabs(dv)) {
-        x += v * dt + 0.5f * diff * diff / a;
-        v = maxv;
-    } else {
-        x += 0.5f * a * dt * dt + v * dt;
-        v += dv;
-    }
 }
 // END RESTORED
 
@@ -737,4 +671,3 @@ void xResponseCurve::on_change_t(const tweak_info& info)
     }
 }
 #endif
-

@@ -61,6 +61,9 @@ static void Tridiag_Solve(F32* a, F32* b, F32* c, xVec3* d, xVec3* x, S32 n)
     RwFree(delta);
 }
 
+static void Solve3(F32 (*M)[3], F32* X, F32* D);
+static void Tridiag_Circular(F32* a, F32* b, F32* c, xVec3* d, xVec3* x, S32 n);
+
 static void Interpolate_Bspline(xVec3* data, xVec3* control, F32* knots, U32 nodata)
 {
     U32 i;
@@ -177,6 +180,10 @@ static void BasisToCoef3(xCoef3* coef, F32 N[4][4], xVec3* p0, xVec3* p1, xVec3*
         coef->z.a[c] = N[0][c] * p0->z + N[1][c] * p1->z + N[2][c] * p2->z + N[3][c] * p3->z;
     }
 }
+
+static F32 Det3x3(F32 a, F32 b, F32 c, F32 d, F32 e, F32 f, F32 g, F32 h, F32 i);
+static F32 Det4x4(F32* m0, F32* m1, F32* m2, F32* m3);
+static void CoefToBasis3(xVec3* ctrl, xCoef3* coef, F32 (*N)[4]);
 
 static void CoefToUnity3(xCoef3* dest, xCoef3* coef, F32 t1, F32 t2)
 {

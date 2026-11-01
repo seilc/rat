@@ -53,8 +53,11 @@ typedef struct _tagxPad
 extern xPad mPad[k_XPAD_MAX];
 
 S32 xPadInit();
+void xPadInit(S32 i);
 xPad* xPadEnable(S32 idx);
 void xPadRumbleEnable(S32 idx, S32 enable);
+S32 xPadRumbleIsEnabled(S32 idx);
+S32 xPadCanRumble(S32 idx);
 void xPadClear();
 void xPadClear(S32 idx);
 S32 xPadUpdate(S32 idx, F32 time_passed);
@@ -62,6 +65,7 @@ void xPadUpdateAllPads(F32 time_passed);
 void SubMapAll(S32* neuon, xPad* xp);
 void xPadNormalizeAnalog(xPad& pad, S32 inner_zone, S32 outer_zone);
 void xPadKill();
+S32 xPadIsValid(S32 idx);
 void xPadAnalogIsDigital(S32 idx, S32 enable);
 
 inline F32 normalize_analog(S32 v, S32 v_min, S32 v_max, S32 dead_center, S32 dead_min, S32 dead_max)
