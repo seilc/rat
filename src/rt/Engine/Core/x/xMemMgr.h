@@ -202,4 +202,19 @@ inline void* operator new[](size_t size, xMemStaticType, U32 tag, U32 assetID = 
     return xMEMALLOC_L(size, 0, tag, assetID, 655);
 }
 
+#if DEBUG || RELEASE
+// Not in DWARF data
+enum xMemTweakType
+{
+    eMemTweakType_0, // unknown
+};
+
+void* xDebugTweak_StaticAlloc(U32 size);
+
+inline void* operator new(size_t size, xMemTweakType, U32)
+{
+    return xDebugTweak_StaticAlloc(size);
+}
+#endif
+
 #endif

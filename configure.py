@@ -194,6 +194,12 @@ config.reconfig_deps = []
 # Can be overridden in libraries or objects
 config.scratch_preset_id = None
 
+# xParSys includes "xPTankPool.h": __FILE__ needs that exact file (wibo resolves case)
+if config.use_wibo() and sys.platform == "linux":
+    ptank_alias = Path("src/rt/Engine/Core/x/xPTankPool.h")
+    if not ptank_alias.is_symlink():
+        ptank_alias.symlink_to("xPtankPool.h")
+
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
@@ -765,7 +771,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/screenshot.c"),
             Object(Matching, "rt/Engine/Core/x/xCollideSpherePolygon.cpp"),
             Object(NonMatching, "rt/Engine/Game/zAsync.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xParticleBatch.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xParticleBatch.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSmoke.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSplash.cpp"),
             Object(NonMatching, "rt/Engine/Game/zIncrediSlam.cpp"),
