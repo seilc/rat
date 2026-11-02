@@ -46,4 +46,9 @@ void xLightKit_Enable(xLightKit* lkit, RpWorld* world, xLightKit* lkit_blend, Rw
 xLightKitBlendInfo* xLightKit_GetCurrent(RpWorld*);
 void xLightKit_Destroy(xLightKit* lkit);
 
+inline void xLightKit_Enable(const xLightKitBlendInfo& lkitInfo, RpWorld* world)
+{
+    xLightKit_Enable(lkitInfo.lightKit, world, lkitInfo.lightKitBlend, lkitInfo.blendPercentage);
+}
+
 #endif

@@ -149,10 +149,12 @@ void xSndMgrUpdate(F32 dt);
 void xSndMgrStopSounds(S16 eSoundCategory, bool bSkipPaused, bool bInReset);
 void xSndMgrStopPausedSounds(S16 eSoundCategory);
 void xSndMgrPauseSounds(S16 eSoundCategory, bool bPaused, bool bPauseFutureSoundsOfThisType);
+void xSndMgrCutscenePause(S16 eSoundCategory, bool bPaused, bool bPauseFutureSoundsOfThisType);
 F32 xSndMixerGetOutputVolume(S16 eSoundCategory);
 iSndGroupHandle xSndMgrGetSoundGroup(U32 uSoundGroupNameHash);
 xSndHandle xSndMgrPlay(iSndGroupHandle hSoundToPlay, S32 uFlags, const xVec3* pPos_WS, const xVec3* pVel, xEnt* pParentEnt, const F32* pfOverrideVolume, const F32* pfOverridePitch);
 void xSndMgrStop(xSndHandle& hSound);
+void xSndMgrStartStereo(xSndHandle hSnd00, xSndHandle hSnd01);
 void xSndMgrFade(xSndHandle& hSound, F32 fadeTime, F32 startVolume, F32 destVolume);
 void xSndMgrFade(xSndHandle& hSound, F32 fadeTime, F32 destVolume);
 

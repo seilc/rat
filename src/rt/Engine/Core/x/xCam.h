@@ -147,6 +147,9 @@ public:
     virtual F32 getCameraPlayerAudioBias() const;
     virtual xCamConfigFollow* config_follow();
 
+    static void coord_to_local(xVec3& c, const xVec3& loc);
+    static void orient_to_local(xQuat& o, const xMat3x3& mat);
+
 private:
     S32 group_flags;
     xCamBlend* blender;
@@ -164,6 +167,16 @@ public:
     virtual void add_tweaks(const char* prefix);
 #endif
 };
+
+inline void xCam::coord_to_local(xVec3& c, const xVec3& loc)
+{
+    c = loc;
+}
+
+inline void xCam::orient_to_local(xQuat& o, const xMat3x3& mat)
+{
+    xQuatFromMat(&o, &mat);
+}
 
 struct xCamGroup
 {
