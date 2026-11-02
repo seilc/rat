@@ -3,6 +3,8 @@
 
 #include "xMath3.h"
 
+#define IANIM_MAX_BONES 100
+
 void iAnimInit();
 F32 iAnimDuration(void* RawData);
 U32 iAnimBoneCount(void* RawData);

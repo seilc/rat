@@ -41,5 +41,6 @@ struct iSndFileInfo : gcWavInfo
 
 iSndFileInfo* iSndLookup(U32 id);
 bool iSndGetFreeStreamInfo(U32 priority);
+void iSndSetExternalCallback(void*);
 
 #endif
