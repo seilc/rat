@@ -15,6 +15,7 @@ void xDrawSphere(const xSphere* sph, U32 flags);
 void xDrawSphere(const xVec3* center, F32 r, U32 flags);
 void xDrawBox(const xBox* b);
 void xDrawSphere2(const xSphere* sph, U32 lod);
+void xDrawSphere2(const xVec3* pos, F32 r, U32 lod);
 void xDrawOBB(const xBox* b, const xMat4x3* m);
 void xDrawCard(RwRaster* raster, const xFRect& src_rect, const xFRect& dst_rect, bool zwrite);
 #else
@@ -25,6 +26,7 @@ inline void xDrawSphere(const xSphere* sph, U32 flags) {}
 inline void xDrawSphere(const xVec3* center, F32 r, U32 flags) {}
 inline void xDrawBox(const xBox* b) {}
 inline void xDrawSphere2(const xSphere* sph, U32 lod) {}
+inline void xDrawSphere2(const xVec3* pos, F32 r, U32 lod) {}
 inline void xDrawOBB(const xBox* b, const xMat4x3* m) {}
 inline void xDrawCard(RwRaster* raster, const xFRect& src_rect, const xFRect& dst_rect, bool zwrite) {}
 #endif
