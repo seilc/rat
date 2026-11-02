@@ -19,6 +19,8 @@ struct xModelPool;
 extern bool prelit_and_thats_the_way_we_likes_it;
 #endif
 
+static const S32 k_MAX_MODEL_LIGHTS = 4;
+
 struct xModelInstance
 {
     xModelInstance* Next;
@@ -59,8 +61,8 @@ struct xModelInstance
     {
         xVec3* verts;
     } anim_coll;
-    xLight* lights[4];
-    F32 lightsDistance[4];
+    xLight* lights[k_MAX_MODEL_LIGHTS];
+    F32 lightsDistance[k_MAX_MODEL_LIGHTS];
 };
 
 struct xModelPool
@@ -80,9 +82,11 @@ struct xModelTag
 xModelInstance* xModelInstanceAllocReuse(RpAtomic* data, void* object, U16 flags, U8 boneIndex, U8* boneRemap, xModelInstance* reuse_instance);
 #if DEBUG || RELEASE
 void xModelInstanceFreeDebug(xModelInstance* modelInst, bool animFree, const char* file, S32 line, const char* function);
-#define xModelInstanceFree(modelInst, animFree) xModelInstanceFreeDebug(modelInst, animFree, __FILE__, __LINE__, __FUNCTION__)
+#define xModelInstanceFree(modelInst, animFree) xModelInstanceFree_L(modelInst, animFree, __LINE__)
+#define xModelInstanceFree_L(modelInst, animFree, line) xModelInstanceFreeDebug(modelInst, animFree, __FILE__, line, __FUNCTION__)
 #else
 void xModelInstanceFree(xModelInstance* modelInst, bool animFree);
+#define xModelInstanceFree_L(modelInst, animFree, line) xModelInstanceFree(modelInst, animFree)
 #endif
 void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
 void xModelEval(xModelInstance* modelInst);

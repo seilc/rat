@@ -6,6 +6,7 @@
 #include <string.h>
 
 struct tweak_info;
+struct xVec3;
 
 struct tweak_callback
 {
@@ -94,6 +95,7 @@ void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_ca
 void xDebugAddSelectTweak(const char* name, S8* v, const char** labels, const S8* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddSelectTweak(const char* name, U32* v, const char** labels, const U32* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddFlagTweak(const char* name, U32* v, U32 mask, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddTweak(const char* name, xVec3* v, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags);

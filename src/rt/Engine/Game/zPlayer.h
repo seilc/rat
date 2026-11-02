@@ -118,6 +118,9 @@ public:
     virtual F32 GetScreenFadeTime();
     virtual F32 StartScreenFadeAt();
     virtual F32 PredictY(F32 time) const;
+
+    S32 GetCollisionSpheres(const xSphere** sphereArray);
+
     virtual bool IsInteractioning();
 
     bool CanSayOneLiner();
