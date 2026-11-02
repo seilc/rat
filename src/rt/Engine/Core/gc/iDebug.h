@@ -18,4 +18,10 @@ static inline void iDebugBreak()
 }
 #endif
 
+#if DEBUG || RELEASE
+void iDebugDumpEFB(char* name);
+#else
+#define iDebugDumpEFB(name)
+#endif
+
 #endif
