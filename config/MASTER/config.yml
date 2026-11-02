@@ -6,7 +6,7 @@ symbols_known: true
 fill_gaps: false
 ldscript_template: config/MASTER/ldscript.tpl
 
-# Pool references taken minus 4 that dtk attributes to the previous object.
+# Pool references taken minus 4 that dtk attributes to the previous object or symbol.
 add_relocations:
 - source: .text:0x8000BE64
   type: sda21
@@ -83,6 +83,10 @@ add_relocations:
 - source: .text:0x80104660
   type: sda21
   target: "@1223!.sbss2:0x803C9758"
+  addend: -4
+- source: .text:0x801046B8
+  type: sda21
+  target: "@1224!.sdata2:0x803C5948"
   addend: -4
 - source: .text:0x80124154
   type: sda21

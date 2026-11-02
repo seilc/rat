@@ -103,6 +103,7 @@ void _auto_tweak(const char* prefix, const char* name, U32* v, U32 vmin, U32 vma
 void _auto_tweak(const char* prefix, const char* name, U8* v, U8 vmin, U8 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak(const char* prefix, const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak(const char* prefix, const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags, bool process);
+void _auto_tweak(const char* prefix, const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags, bool process);
 
 void _auto_tweak_select(const char* prefix, const char* name, U32* v, const char** labels, const U32* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak_flag(const char* prefix, const char* name, U32* v, U32 mask, const tweak_callback* cb, void* context, U32 flags);
@@ -149,6 +150,7 @@ inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmi
 #define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process) _t_auto_tweak(prefix, name, v, 0, 0, cb, context, flags, process)
 #define xAUTOTWEAKSELECT(prefix, name, v, labels, values, labels_size, cb, context, flags, process) _t_auto_tweak_select(prefix, name, v, labels, values, labels_size, cb, context, flags, process)
 #define xAUTOTWEAKFLAG(prefix, name, v, mask, cb, context, flags) _t_auto_tweak_flag(prefix, name, v, mask, cb, context, flags)
+#define xAUTOTWEAKMESSAGE(prefix, name, message, cb, context, flags, process) _auto_tweak(prefix, name, message, cb, context, flags, process)
 
 #define xTWEAKABLE
 #else
@@ -170,6 +172,7 @@ inline void xDebugRemoveTweak(const char* name) {}
 #define xAUTOTWEAKBOOL(prefix, name, v, cb, context, flags, process)
 #define xAUTOTWEAKSELECT(prefix, name, v, labels, values, labels_size, cb, context, flags, process)
 #define xAUTOTWEAKFLAG(prefix, name, v, mask, cb, context, flags)
+#define xAUTOTWEAKMESSAGE(prefix, name, message, cb, context, flags, process)
 
 #define xTWEAKABLE const
 #endif
