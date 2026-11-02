@@ -3,8 +3,8 @@
 #include "xMemMgr.h"
 #include "iCamera.h"
 
-tagiRenderArrays gRenderArr;
-tagiRenderInput gRenderBuffer;
+iRenderArrays gRenderArr;
+iRenderInput gRenderBuffer;
 i2dQuadBuffer* gQuadBuffer;
 
 void xRenderBufferInit()

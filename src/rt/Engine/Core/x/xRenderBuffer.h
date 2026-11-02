@@ -4,8 +4,8 @@
 #include "iRender.h"
 #include "i2dQuadBuffer.h"
 
-extern tagiRenderArrays gRenderArr;
-extern tagiRenderInput gRenderBuffer;
+extern iRenderArrays gRenderArr;
+extern iRenderInput gRenderBuffer;
 extern i2dQuadBuffer* gQuadBuffer;
 
 void xRenderBufferInit();
