@@ -105,8 +105,12 @@ void _auto_tweak(const char* prefix, const char* name, F32* v, F32 vmin, F32 vma
 void _auto_tweak(const char* prefix, const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak(const char* prefix, const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags, bool process);
 
+void _auto_tweak_select(const char* prefix, const char* name, S32* v, const char** labels, const S32* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak_select(const char* prefix, const char* name, U32* v, const char** labels, const U32* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags, bool process);
 void _auto_tweak_flag(const char* prefix, const char* name, U32* v, U32 mask, const tweak_callback* cb, void* context, U32 flags);
+
+extern const tweak_callback cb_tweak_force_lt;
+extern const tweak_callback cb_tweak_force_gt;
 
 typedef bool(*xDebugRemoveTweaksCallback)(const tweak_info&, void*);
 
