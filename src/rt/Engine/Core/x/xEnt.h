@@ -166,6 +166,8 @@ inline xMat4x3* xEntGetFrame(const xEnt* ent)
     return xModelGetFrame(ent->model);
 }
 
+void xEntSetupPipeline(xSurface* surf, RpAtomic* model);
+void xEntRestorePipeline(xSurface*, RpAtomic* model);
 void xEntShow(xEnt* ent);
 void xEntHide(xEnt* ent);
 U32 xEntIsVisible(const xEnt* ent);

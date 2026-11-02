@@ -33,8 +33,8 @@ void RwRenderStateSetWrapper(RwRenderState state, void* value);
 RwBool RwRenderStateGetWrapper(RwRenderState state, void* value);
 #define RwRenderStateGet RwRenderStateGetWrapper
 #else
-#define xRenderStateCheckBlendModes FALSE
-#define xRenderStateCheckState FALSE
+#define xRenderStateCheckBlendModes(desiredSrcBlend, desiredDestBlend) FALSE
+#define xRenderStateCheckState(state, desiredValue) FALSE
 #endif
 
 void xRenderStateBlendModesSet(RwBlendFunction srcBlend, RwBlendFunction destBlend);
