@@ -32,6 +32,8 @@ void xUtil_spit_flagbits(U16 flag, S32 toScreen);
 void xUtil_spit_flagbits(U32 flag, S32 toScreen);
 void xUtil_spit_flagbits(S32 flag, S32 toScreen);
 void xUtil_spit_flagbits(S32 flag, S32 toScreen, S32 numbytes);
+#else
+#define xUtil_spit_flagbits(...)
 #endif
 F32 xClampAngle0_2PI(F32 angle);
 void quicksort_int(void* base, size_t num, size_t width, size_t key_offset);

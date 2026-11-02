@@ -20,6 +20,39 @@ struct xModelBucket
     xModelPipe Pipe;
 };
 
+#if DEBUG || RELEASE
+extern bool sRenderModels;
+extern bool sRenderAlpha;
+extern bool sRenderClones;
+extern RpAtomic* gxModelBucketProfileModel;
+extern U32 gxModelBucketProfileCount;
+
+U32 xModelBucket_HackPipeFlags(RpAtomic* data, U32 pipeFlags, U32 aid);
+#endif
+void xModelBucket_PreCountReset();
+void xModelBucket_PreCountBucket(RpAtomic* data, xModelPipe& pipe, U32 subObjects);
+void xModelBucket_PreCountAlloc(S32 maxAlphaModels);
+void FullAtomicDupe(RpAtomic* atomic, S32 count, RpAtomic** output);
+void xModelBucket_SetMaterialFX(RpAtomic* model, xModelPipe& pipe);
+void xModelBucket_InsertBucket(RpAtomic* data, xModelPipe& pipe, U32 subObjects);
+void xModelBucket_Init();
+xModelBucket** xModelBucket_GetBuckets(RpAtomic* data);
+void xModelBucket_Begin();
 void xModelBucket_Add(xModelInstance* minst, bool);
+void xModelBucket_AddAlphaFade(xModelInstance* minst, F32 alphaFade, bool);
+void xModelBucket_RenderOpaqueBegin();
+void xModelBucket_RenderOpaque(S32 maxLayer);
+void xModelBucket_RenderAlphaBegin();
+void _xModelBucket_SkipAlphaLayer(S32 maxLayer);
+#if DEBUG || RELEASE
+void ValidateRenderStateExpectations(const xModelInstance* model, U32 pipeFlags);
+void xModelBucket_InitBadSetModelsCheck();
+void xModelBucket_DoGCAsserts();
+#endif
+void xModelBucket_RenderAlphaLayer(S32 maxLayer);
+bool xModelBucket_RenderAny(S32 maxLayer);
+void xModelBucket_RenderAlphaEnd();
+void xModelBucket_Deinit();
+void xModelBucket_PreAllocModelPipe(RpAtomic* m);
 
 #endif

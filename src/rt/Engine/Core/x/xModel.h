@@ -157,4 +157,9 @@ inline void xModelRenderLogSetEntity(xEnt* ent)
 }
 #endif
 
+extern S32 xModelBucketEnabled;
+extern S32 xModelAlphaBucketEnabled;
+
+void xModelRenderSingle(xModelInstance* modelInst);
+
 #endif

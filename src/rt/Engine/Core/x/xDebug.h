@@ -200,6 +200,16 @@ S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func);
 #if DEBUG || RELEASE
 S32 xDebugModeGet();
 void xDebugStackTrace();
+
+enum xScreenDump
+{
+    exSD_NONE,
+    exSD_NATIVE,
+    exSD_MASSIVE,
+    exSD_MASSIVE_RESET
+};
+
+extern xScreenDump gScreenDump;
 #endif
 
 #endif
