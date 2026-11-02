@@ -6,7 +6,7 @@
 #include "xFXHighDynamicRange.h"
 #include "xGlobals.h"
 #include "xMemMgr.h"
-#include "xPtankPool.h"
+#include "xPTankPool.h"
 #include "xSpacePartitionTree.h"
 #include "zEvent.h"
 #include "zParSys.h"
@@ -66,13 +66,6 @@ static xParSysInfo sParSysInfo[] = {
     { eParSysRenderFuncQuadStreak, iParMgrRenderParSys_QuadStreak },
     { eParSysRenderFuncInvStreak, iParMgrRenderParSys_InvStreak },
 };
-
-DECOMP_FORCEACTIVE(
-    "xPTankPool.h",
-    "ptank != 0",
-    "%s",
-    "used <= BLOCK_SIZE"
-)
 
 inline bool using_ptank_render(const xParSysAsset& sys)
 {

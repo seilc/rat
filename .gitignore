@@ -26,6 +26,9 @@ build.ninja
 ctx.*
 *.ctx
 
+# Include-spelling alias (configure.py)
+/src/rt/Engine/Core/x/xPTankPool.h
+
 # Generated configs
 objdiff.json
 compile_commands.json
