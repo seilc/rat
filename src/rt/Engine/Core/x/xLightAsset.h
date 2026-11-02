@@ -15,6 +15,10 @@ enum eLightType
 
 struct xLightAsset : xDynAsset
 {
+    static const char* type_name() { return "Effect:light"; }
+
+    enum { VERSION = 2 };
+
     eLightType lightType;
     U32 lightEffectID;
     F32 lightEffectSpeed;

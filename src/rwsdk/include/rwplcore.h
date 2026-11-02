@@ -731,6 +731,7 @@ struct RwObject
     MACRO_STOP
 
 #define rwObjectGetParent(object) (((const RwObject *)(object))->parent)
+#define RwRGBAAssign(_target, _source) ( *(_target) = *(_source) )
 #define _RW_S2 ( (float) 8.3333337680e-03 )
 #define _RW_S3 ( (float)-1.9841270114e-04 )
 #define _RW_S4 ( (float) 2.7557314297e-06 )

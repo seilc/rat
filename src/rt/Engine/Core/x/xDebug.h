@@ -122,6 +122,15 @@ do {                                                                            
 
 #define xASSERT_DESIGN(cond, msg) _xASSERT_DESIGN(__LINE__, cond, _xSTR(cond), msg)
 #define xASSERT_DESIGN_L(line, cond, msg) _xASSERT_DESIGN(line, cond, _xSTR(cond), msg)
+
+#define _xASSERT_EQ(line, a, b, msg)                                                              \
+do {                                                                                              \
+    size_t il = (a), ir = (b);                                                                    \
+    _xASSERT(line, il == ir, _xSTR(il == ir), "%s", msg);                                         \
+} while (0)
+
+#define xASSERT_EQ(a, b) _xASSERT_EQ(__LINE__, a, b, #a "==" #b)
+#define xASSERT_EQ_L(line, a, b) _xASSERT_EQ(line, a, b, #a "==" #b)
 #else
 #define _xFAIL(line, condstr, ...)
 #define xASSERT(cond)
@@ -137,6 +146,8 @@ do {                                                                            
 #define xASSERT_ONCE_L(line, cond)
 #define xASSERT_DESIGN(cond, msg)
 #define xASSERT_DESIGN_L(line, cond, msg)
+#define xASSERT_EQ(a, b)
+#define xASSERT_EQ_L(line, a, b)
 #endif
 
 #define xFAIL() xFAIL_L(__LINE__)

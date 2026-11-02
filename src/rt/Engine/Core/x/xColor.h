@@ -72,4 +72,25 @@ inline void xColorInit(xColor& rToInit, U8 r, U8 g, U8 b, U8 a)
     rToInit.a = a;
 }
 
+inline void xFColorInit(xFColor* c, F32 r, F32 g, F32 b, F32 a)
+{
+    c->r = r;
+    c->g = g;
+    c->b = b;
+    c->a = a;
+}
+
+inline void xFColorInitB(xFColor* c, U8 r, U8 g, U8 b, U8 a)
+{
+    c->r = (1.0f / 255.0f) * r;
+    c->g = (1.0f / 255.0f) * g;
+    c->b = (1.0f / 255.0f) * b;
+    c->a = (1.0f / 255.0f) * a;
+}
+
+inline void xFColorCopyB(xFColor* o, xColor c)
+{
+    xFColorInitB(o, c.r, c.g, c.b, c.a);
+}
+
 #endif
