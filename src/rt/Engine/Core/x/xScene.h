@@ -6,10 +6,15 @@
 #include "xMemMgr.h"
 
 struct xEnt;
+struct xGrid;
+struct xQCData;
+struct xRay3;
+struct xScene;
 
 typedef xBase*(*xSceneResolvIDCallback)(U32);
 typedef char*(*xSceneBase2NameCallback)(xBase*);
 typedef char*(*xSceneID2NameCallback)(U32);
+typedef void(*xRayEntCallback)(xScene*, xRay3*, xQCData*, xEnt*, void*);
 
 struct xScene
 {
@@ -45,5 +50,6 @@ struct xScene
 
 xBase* xSceneResolvID(xScene* sc, U32 id);
 const char* xSceneID2Name(xScene* sc, U32 id);
+void xRayHitsGrid(xGrid* grid, xScene* sc, xRay3* r, xRayEntCallback rentcb, xQCData* qcr, void* data);
 
 #endif

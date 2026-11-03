@@ -199,6 +199,12 @@ struct ptank_pool__pos_color_size_rot : ptank_pool
     RwInt32 stride_color;
     RwInt32 stride_size;
     RwInt32 stride_rot;
+
+    void SetRot(F32 newRot)
+    {
+        xASSERT_MSG_L(482, newRot>=-PI && newRot<=PI, "PTank particle rotation out of bounds [-pi<=r<=pi]");
+        *rot = newRot;
+    }
 };
 
 struct ptank_pool__pos_color_size_rot_uv2 : ptank_pool
@@ -213,6 +219,12 @@ struct ptank_pool__pos_color_size_rot_uv2 : ptank_pool
     RwInt32 stride_size;
     RwInt32 stride_rot;
     RwInt32 stride_uv;
+
+    void SetRot(F32 newRot)
+    {
+        xASSERT_MSG_L(570, newRot>=-PI && newRot<=PI, "PTank particle rotation out of bounds [-pi<=r<=pi]");
+        *rot = newRot;
+    }
 };
 
 void xPTankPoolSceneEnter();
