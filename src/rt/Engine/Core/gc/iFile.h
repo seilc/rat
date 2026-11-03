@@ -46,6 +46,7 @@ U32 iFileRead(xFile* file, void* buf, U32 size);
 void iFileAsyncService();
 S32 iFileReadAsync(xFile* file, void* buf, U32 asize, iFileReadAsyncCallback dcb, S32);
 IFILE_READSECTOR_STATUS iFileReadAsyncStatus(S32 key, S32* bytes_read);
+U32 iFileWrite(xFile* file, void* buf, U32 size);
 U32 iFileClose(xFile* file);
 U32 iFileGetSize(xFile* file);
 bool iFileExists(const char* name, S32);

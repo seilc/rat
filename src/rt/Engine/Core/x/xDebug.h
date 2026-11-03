@@ -212,4 +212,53 @@ enum xScreenDump
 extern xScreenDump gScreenDump;
 #endif
 
+#if DEBUG || RELEASE
+struct xStats
+{
+    S64 cpu;
+    S64 render;
+    S64 world_render;
+    S64 model_render;
+    S64 ent_update;
+    S64 shadow;
+    S64 shadow_track;
+    S64 shadow_texrender;
+    S64 shadow_collideworld;
+    S64 shadow_renderworld;
+    S64 shadow_receivesetup;
+    S64 shadow_frustumtest;
+    S64 shadow_receive;
+    S64 collision;
+    S64 anim;
+    S64 particle;
+    S64 sound;
+    S64 font;
+    S64 villainUpdate;
+    S64 villainCollide;
+    S64 villainDBG;
+    S64 villainInput;
+    S64 villainAnim;
+    S64 zprjUpdate;
+    S64 zprjCollide;
+    S64 zprjEffects;
+    S64 zprjSolver;
+    S64 player_update;
+    S64 particleRender;
+    S64 renderUI;
+    S64 scene_update;
+    S64 scene_render;
+    S64 x1;
+    S64 x2;
+    S64 x3;
+};
+
+extern xStats gPendingStats;
+
+#define xSTATS_BEGIN(t) iTime t = iTimeGet()
+#define xSTATS_END(t, stat) gPendingStats.stat += iTimeGet() - (t)
+#else
+#define xSTATS_BEGIN(t)
+#define xSTATS_END(t, stat)
+#endif
+
 #endif

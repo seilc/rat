@@ -330,6 +330,7 @@ typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* 
 #define RpGeometryGetMorphTargetMacro(_geometry, _index) (&((_geometry)->morphTarget[(_index)]))
 #define RpGeometryGetNumMaterialsMacro(_geometry) ((_geometry)->matList.numMaterials)
 #define RpGeometryGetNumTexCoordSetsMacro(_geometry) ((_geometry)->numTexCoordSets)
+#define RpGeometryGetNumTrianglesMacro(_geometry) ((_geometry)->numTriangles)
 #define RpGeometryGetNumVerticesMacro(_geometry) ((_geometry)->numVertices)
 #define RpGeometryGetVertexTexCoordsMacro(_geometry, _uvIndex) ((_geometry)->texCoords[(_uvIndex) - 1])
 #define RpGeometrySetFlagsMacro(_geometry, _flags) (((_geometry)->flags = (_flags)), (_geometry))
@@ -391,6 +392,7 @@ RpMaterial* RpGeometryGetMaterial(const RpGeometry* geometry, RwInt32 matNum);
 RpMorphTarget* RpGeometryGetMorphTarget(const RpGeometry* geometry, RwInt32 morphTarget);
 RwInt32 RpGeometryGetNumMaterials(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumTexCoordSets(const RpGeometry* geometry);
+RwInt32 RpGeometryGetNumTriangles(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumVertices(const RpGeometry* geometry);
 RwTexCoords* RpGeometryGetVertexTexCoords(const RpGeometry* geometry, RwTextureCoordinateIndex uvIndex);
 RpGeometry* RpGeometrySetFlags(RpGeometry* geometry, RwUInt32 flags);
@@ -423,6 +425,7 @@ RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #define RpGeometryGetMorphTarget(_geometry, _index) RpGeometryGetMorphTargetMacro(_geometry, _index)
 #define RpGeometryGetNumMaterials(_geometry) RpGeometryGetNumMaterialsMacro(_geometry)
 #define RpGeometryGetNumTexCoordSets(_geometry) RpGeometryGetNumTexCoordSetsMacro(_geometry)
+#define RpGeometryGetNumTriangles(_geometry) RpGeometryGetNumTrianglesMacro(_geometry)
 #define RpGeometryGetNumVertices(_geometry) RpGeometryGetNumVerticesMacro(_geometry)
 
 #define RpGeometryGetVertexTexCoords(_geometry, _uvIndex) \
