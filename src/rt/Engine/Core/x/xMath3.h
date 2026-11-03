@@ -114,6 +114,7 @@ public:
     void Project(xVec3& proj, const xVec3& pt, F32 dist_above) const;
 };
 
+extern xVec3 g_X3;
 extern xVec3 g_Y3;
 extern xMat4x3 g_I3;
 
@@ -164,8 +165,28 @@ inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
     return xMat3x3MulScaleC(o, m, s->x, s->y, s->z);
 }
 
+inline F32 xMat3x3LookVec3(xMat3x3& mat, const xVec3& at)
+{
+    F32 mag = at.length();
+    if (xfeq0(mag)) { mat = g_I3; return 0.0f; }
+    mat.at = at;
+    mat.at *= 1.0f / mag;
+
+    F32 ax = xabs(mat.at.x), ay = xabs(mat.at.y), az = xabs(mat.at.z);
+    if (ax < ay && ax < az) mat.right.assign(0.0f, mat.at.z, -mat.at.y);
+    else if (ay < az) mat.right.assign(-mat.at.z, 0.0f, mat.at.x);
+    else mat.right.assign(mat.at.y, -mat.at.x, 0.0f);
+
+    mat.right.normalize();
+    mat.up.cross(mat.right, mat.at);
+
+    return mag;
+}
+
 void xMat4x3Copy(xMat4x3* o, const xMat4x3* m);
 void xMat4x3Mul(xMat4x3* o, const xMat4x3* a, const xMat4x3* b);
+
+inline void xMat4x3From3x3(xMat4x3* m, const xMat3x3* m3x3);
 
 inline void xMat4x3Identity(xMat4x3* m)
 {

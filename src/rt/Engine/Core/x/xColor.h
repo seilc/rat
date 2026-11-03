@@ -72,6 +72,11 @@ inline void xColorInit(xColor& rToInit, U8 r, U8 g, U8 b, U8 a)
     rToInit.a = a;
 }
 
+inline void xColorCopy(xColor* o, xColor c)
+{
+    *(U32*)o = *(U32*)&c;
+}
+
 inline void xFColorInit(xFColor* c, F32 r, F32 g, F32 b, F32 a)
 {
     c->r = r;
