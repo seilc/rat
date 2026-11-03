@@ -170,6 +170,20 @@ void xEntSetupPipeline(xSurface* surf, RpAtomic* model);
 void xEntRestorePipeline(xSurface*, RpAtomic* model);
 void xEntShow(xEnt* ent);
 void xEntHide(xEnt* ent);
-U32 xEntIsVisible(const xEnt* ent);
+
+#if DEBUG || RELEASE
+extern S32 gDrawInvisibleWalls;
+#endif
+
+inline U32 xEntIsVisible(const xEnt* ent)
+{
+#if DEBUG || RELEASE
+    if (gDrawInvisibleWalls) {
+        return TRUE;
+    }
+#endif
+
+    return (ent->flags & 0x85) == 0x1;
+}
 
 #endif

@@ -70,11 +70,14 @@ void xSweptSphereResetCollision(xSweptSphere* sws);
 S32 xSweptSphereToScene(xSweptSphere* sws, xScene* sc, const xEnt* mover, U8 collType, S32 penby);
 S32 xSweptSphereToPlayer(xSweptSphere* sws, xScene* sc, xEnt* mover, U8 collType, S32 penby);
 S32 xSweptSphereToSphere(xSweptSphere& sws, const xVec3& center, F32 radius);
+S32 xSweptSphereToModel(xSweptSphere* sws, RpAtomic* model, const RwMatrix* mat, bool singleSided);
 
 inline S32 xSweptSphereToSphere(xSweptSphere* sws, const xSphere* sph)
 {
     return xSweptSphereToSphere(*sws, sph->center, sph->r);
 }
+
+inline xSweptSphere::xSweptSphere() { xEntFilterFlags = 0; }
 
 inline xSweptSphere::xSweptSphere(const xVec3& start, const xVec3& end, F32 radius, U16 filterFlags)
 {

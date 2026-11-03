@@ -132,23 +132,32 @@ public:
     xCamSpatialInfo coll_spatial;
     xCamConfigCommon cfg_common;
     
-    virtual xCam* get_final_dest();
-    virtual zCamSplineCommonMix* get_common_mix();
+    virtual xCam* get_final_dest() { return this; }
+    virtual zCamSplineCommonMix* get_common_mix() { return NULL; }
     virtual void create();
-    virtual void destroy();
+    virtual void destroy() {}
     virtual void start();
     virtual void stop();
     virtual void update(xScene& scene, F32 dt) = 0;
-    virtual void pre_update(xScene& scene);
-    virtual void post_update(xScene& scene);
-    virtual xCam* get_next();
-    virtual xCam* find_camera(U32 ownerID);
-    virtual zCam2Player* get_zCam2Player() const;
-    virtual F32 getCameraPlayerAudioBias() const;
+    virtual void pre_update(xScene&) {}
+    virtual void post_update(xScene&) {}
+    virtual xCam* get_next() { return flags & 0x1 ? this : NULL; }
+    virtual xCam* find_camera(U32 ownerID) { return owner == ownerID ? this : NULL; }
+    virtual zCam2Player* get_zCam2Player() const { return NULL; }
+    virtual F32 getCameraPlayerAudioBias() const { return 0.0f; }
     virtual xCamConfigFollow* config_follow();
 
+    static void coord_to_world(xVec3& loc, const xCamCoordCylinder& c);
     static void coord_to_local(xVec3& c, const xVec3& loc);
     static void orient_to_local(xQuat& o, const xMat3x3& mat);
+    static xVec3& convert(xVec3& o, const xCamCoordCylinder& i);
+    static void blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s);
+    static void blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s);
+    static void blend3(xCamConfigFollow::zone_data& o, const xCamConfigFollow::zone_data& i0,
+                       const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s);
+    static void spring_interp(F32& s, F32& v, F32 s0, F32 s1, F32 dt, F32 speed, F32 e);
+    template <class T, class U>
+    static void spring_interp(T& s, U& v, const T& s0, const T& s1, F32 dt, F32 speed);
 
 private:
     S32 group_flags;
@@ -163,10 +172,15 @@ public:
     } debug;
 
     virtual void debug_render();
-    virtual void debug_mode_draw();
+    virtual void debug_mode_draw() {}
     virtual void add_tweaks(const char* prefix);
 #endif
 };
+
+inline void xCam::coord_to_world(xVec3& loc, const xCamCoordCylinder& c)
+{
+    convert(loc, c);
+}
 
 inline void xCam::coord_to_local(xVec3& c, const xVec3& loc)
 {
@@ -176,6 +190,47 @@ inline void xCam::coord_to_local(xVec3& c, const xVec3& loc)
 inline void xCam::orient_to_local(xQuat& o, const xMat3x3& mat)
 {
     xQuatFromMat(&o, &mat);
+}
+
+inline xVec3& xCam::convert(xVec3& o, const xCamCoordCylinder& i)
+{
+    o.x = i.origin.x + i.dist * isin(i.theta);
+    o.y = i.origin.y + i.height;
+    o.z = i.origin.z + i.dist * icos(i.theta);
+    return o;
+}
+
+inline void xCam::blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s)
+{
+    o = i1 + s * (s >= 0.0f ? i2 - i1 : i1 - i0);
+}
+
+inline void xCam::blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s)
+{
+    blend3(o.x, i0.x, i1.x, i2.x, s);
+    blend3(o.y, i0.y, i1.y, i2.y, s);
+    blend3(o.z, i0.z, i1.z, i2.z, s);
+}
+
+inline void xCam::blend3(xCamConfigFollow::zone_data& o, const xCamConfigFollow::zone_data& i0,
+                         const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s)
+{
+    blend3(o.offset, i0.offset, i1.offset, i2.offset, s);
+    blend3(o.face, i0.face, i1.face, i2.face, s);
+}
+
+inline void xCam::spring_interp(F32& s, F32& v, F32 s0, F32 s1, F32 dt, F32 speed, F32 e)
+{
+    F32 ds = s0 - s1;
+    xDampSpring(ds, v, dt, speed, e);
+    s = s1 + ds;
+}
+
+template <class T, class U>
+void xCam::spring_interp(T& s, U& v, const T& s0, const T& s1, F32 dt, F32 speed)
+{
+    F32 e = xDampSpringCoeff(dt, speed);
+    spring_interp(s, v, s0, s1, dt, speed, e);
 }
 
 struct xCamGroup
