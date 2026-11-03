@@ -8,6 +8,7 @@
 
 #include <rpworld.h>
 
+struct xSphere;
 struct xSurface;
 struct xLight;
 template <class T> struct basic_rect;
@@ -18,6 +19,23 @@ struct xModelPool;
 #if DEBUG || RELEASE
 extern bool prelit_and_thats_the_way_we_likes_it;
 #endif
+
+enum eModelPoolStressor
+{
+    eModelPoolStressor_Master,
+    eModelPoolStressor_Destructible,
+    eModelPoolStressor_MainLoop,
+    eModelPoolStressor_SwitchScenes,
+    eModelPoolStressor_SceneReset,
+    eModelPoolStressor_Menu,
+    eModelPoolStressor_NPCProjectileInit,
+    eModelPoolStressor_NumStressors
+};
+
+enum
+{
+    ModelInstance_ChildTransform = 0x40
+};
 
 static const S32 k_MAX_MODEL_LIGHTS = 4;
 
@@ -72,6 +90,26 @@ struct xModelPool
     xModelInstance* List;
 };
 
+struct xModelPipeTable
+{
+    U32 ModelHashID;
+    U32 SubObjectBits;
+    xModelPipe Pipe;
+};
+
+struct xModelPipeLookup
+{
+    RpAtomic* model;
+    xModelPipe Pipe;
+};
+
+extern S32 xModelPipeNumTables;
+extern S32 xModelPipeCount[16];
+extern xModelPipeTable* xModelPipeData[16];
+extern S32 xModelLookupCount;
+extern xModelPipeLookup* xModelLookupList;
+extern S32 xModelInstStaticAlloc;
+
 struct xModelTag
 {
     xVec3 v;
@@ -79,7 +117,26 @@ struct xModelTag
     F32 wt[4];
 };
 
+#if DEBUG
+void xModelPoolStressTestEnable(eModelPoolStressor stressor);
+void xModelPoolStressTestDisable(eModelPoolStressor stressor);
+#endif
+bool xModelPoolStressTesting();
+#if DEBUG || RELEASE
+S32 xModelPipeFlagsToString(U32 flags, char* buffer, char delimeter);
+S32 xModelPipeToString(const xModelPipe& pipe, char* buffer, char delimeter);
+#endif
+xModelPipe xModelGetPipe(RpAtomic* model);
+void xModelInit();
+void xModelInitOnce();
+void xModelExit();
+void xModelPoolInit(U32 count, U32 numMatrices);
+bool xModelInstanceAvailable(S32 bones, S32 need);
 xModelInstance* xModelInstanceAllocReuse(RpAtomic* data, void* object, U16 flags, U8 boneIndex, U8* boneRemap, xModelInstance* reuse_instance);
+#if DEBUG || RELEASE
+void xModelDebugPrintPoolUsage();
+#endif
+void xModelInstanceDump();
 #if DEBUG || RELEASE
 void xModelInstanceFreeDebug(xModelInstance* modelInst, bool animFree, const char* file, S32 line, const char* function);
 #define xModelInstanceFree(modelInst, animFree) xModelInstanceFree_L(modelInst, animFree, __LINE__)
@@ -88,17 +145,47 @@ void xModelInstanceFreeDebug(xModelInstance* modelInst, bool animFree, const cha
 void xModelInstanceFree(xModelInstance* modelInst, bool animFree);
 #define xModelInstanceFree_L(modelInst, animFree, line) xModelInstanceFree(modelInst, animFree)
 #endif
+void xModelInstanceAttach(xModelInstance* inst, xModelInstance* parent);
+void xModelInstanceUpgradeBrotherShared(xModelInstance* inst, U32 flags);
 void xModelUpdate(xModelInstance* modelInst, F32 timeDelta);
+void xModelEvalSingle(xModelInstance* modelInst, xBox* combinedAnimBound);
 void xModelEval(xModelInstance* modelInst);
+void xModelRenderSingle(xModelInstance* modelInst);
+void xModelRender(xModelInstance* modelInst);
+void xModelRender2D(xModelInstance* modelInst, basic_rect<F32>* sr, xVec3* from, xVec3* to, F32);
+void xModelRender2D(const xModelInstance& model, const basic_rect<F32>& r, const xVec3& from, const xVec3& to);
+void xModelRender2DTex(xModelInstance* modelInst, basic_rect<F32>* sr, xVec3*, xVec3*, F32);
+void xModel_SceneEnter(RpWorld* world);
+void xModel_SceneExit(RpWorld* world);
+void xModelAnimCollStart(xModelInstance& m);
 void xModelAnimCollRefresh(const xModelInstance& cm);
+void xModelGetBoneLocation(xVec3& loc, const xModelInstance& model, size_t index);
+void xModelGetBoneMat(xMat3x3& mat, const xModelInstance& model, size_t index);
+void xModelGetBoneMat(xMat4x3& mat, const xModelInstance& model, size_t index);
+void xModelGetBoneMat(xMat4x3& mat, const xModelInstance& model, size_t index, const xVec3& offset);
+void xModelGetBoneLocationScaled(xVec3& loc, const xModelInstance& model, size_t index);
+void xModelGetBoneMatScaled(xMat3x3& mat, const xModelInstance& model, size_t index);
+void xModelGetBoneMatScaled(xMat4x3& mat, const xModelInstance& model, size_t index);
+S32 xModelSphereCull(xSphere* sphere);
+S32 xModelSphereCullPlusShadow(xSphere* sphere, xVec3* shadowVec, S32* shadowOutside);
 S32 xModelBoxCull(xBox* box);
+S32 xModelBoxCullPlusShadow(xBox* box, xVec3* shadowVec, S32* shadowOutside);
+S32 xModelCullGroup(xModelInstance* minst);
+S32 xModelCullGroupPlusShadow(xModelInstance* minst, F32 shadowDepth, S32* shadowOutside);
 S32 xModelCullSingle(xModelInstance* minst);
+void xModelSetLightKit(xModelInstance* minst, xLightKit* lightKit, F32 transitionTime);
+void xModelCloneAtomic(RpAtomic** out, S32 out_size, RpAtomic* in);
 bool xModelIsPreinstanced(const xModelInstance* model);
 bool xModelGetPipe(U32 modelID, U32 atomicNumber, xModelPipe** pipe);
-void xModelRender(xModelInstance* modelInst);
-void xModelRender2D(const xModelInstance& model, const basic_rect<F32>& r, const xVec3& from, const xVec3& to);
-void xModelSetLightKit(xModelInstance* minst, xLightKit* lightKit, F32 transitionTime);
 RpAtomic* xModelFindAtomic(U32 id, U32* actual_id);
+#if DEBUG || RELEASE
+void xModelRenderLogSetup();
+void xModelRenderLogBegin();
+void xModelRenderLogEnd();
+void xModelRenderLogAdd(RpAtomic* model, bool cloned);
+#endif
+S32 xModelGetNumAtomics(RpAtomic& model);
+bool xModelIsInFreeList(const xModelInstance* instance);
 
 inline xMat4x3* xModelGetFrame(xModelInstance* model)
 {
@@ -115,7 +202,6 @@ inline void xModelSetFrame(xModelInstance* model, const xMat4x3* frame)
 }
 
 bool xModelAnimCollDirty(const xModelInstance& m);
-bool xModelPoolStressTesting();
 
 inline xModelInstance* xModelInstanceAlloc(RpAtomic* data, void* object, U16 flags, U8 boneIndex, U8* boneRemap)
 {
@@ -159,7 +245,5 @@ inline void xModelRenderLogSetEntity(xEnt* ent)
 
 extern S32 xModelBucketEnabled;
 extern S32 xModelAlphaBucketEnabled;
-
-void xModelRenderSingle(xModelInstance* modelInst);
 
 #endif

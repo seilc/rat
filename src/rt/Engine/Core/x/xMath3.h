@@ -114,6 +114,7 @@ public:
     void Project(xVec3& proj, const xVec3& pt, F32 dist_above) const;
 };
 
+extern xVec3 g_O3;
 extern xVec3 g_X3;
 extern xVec3 g_Y3;
 extern xMat4x3 g_I3;
@@ -123,6 +124,8 @@ void xMat3x3Normalize(xMat3x3* o, const xMat3x3* m);
 void xMat3x3GetEuler(const xMat3x3* m, xVec3* a);
 void xMat3x3RotY(xMat3x3* m, F32 t);
 void xMat3x3Mul(xMat3x3* o, const xMat3x3* a, const xMat3x3* b);
+void xMat3x3ScaleC(xMat3x3* m, F32 x, F32 y, F32 z);
+void xMat3x3Transpose(xMat3x3* o, const xMat3x3* m);
 void xMat3x3Tolocal(xVec3* o, const xMat3x3* m, const xVec3* v);
 F32 xMat3x3LookVec(xMat3x3* m, const xVec3* at);
 void xMat3x3Euler(xMat3x3* m, F32 yaw, F32 pitch, F32 roll);
@@ -151,6 +154,13 @@ static inline void xMat3x3RMulVec(xVec3* o, const xMat3x3* m, const xVec3* v)
     o->x = x, o->y = y, o->z = z;
 }
 
+inline F32 xMat3x3LookAt(xMat3x3* m, const xVec3* from, const xVec3* to)
+{
+    xVec3 at;
+    xVec3Sub(&at, to, from);
+    return xMat3x3LookVec(m, &at);
+}
+
 inline void xMat3x3MulScaleC(xMat3x3* o, const xMat3x3* m, F32 x, F32 y, F32 z)
 {
     xASSERT_L(2996, (o != 0) && (m != 0));
@@ -163,6 +173,17 @@ inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
 {
     xASSERT_L(3021, (o != 0) && (m != 0) && (s != 0));
     return xMat3x3MulScaleC(o, m, s->x, s->y, s->z);
+}
+
+inline void xMat4x3ScaleC(xMat4x3* m, F32 x, F32 y, F32 z)
+{
+    xMat3x3ScaleC(m, x, y, z);
+    xVec3Copy(&m->pos, &g_O3);
+}
+
+inline void xMat4x3Scale(xMat4x3* m, const xVec3* s)
+{
+    xMat4x3ScaleC(m, s->x, s->y, s->z);
 }
 
 inline F32 xMat3x3LookVec3(xMat3x3& mat, const xVec3& at)

@@ -215,6 +215,11 @@ inline void* operator new(size_t size, xMemTweakType, U32)
 {
     return xDebugTweak_StaticAlloc(size);
 }
+
+inline void* operator new[](size_t size, xMemTweakType, U32)
+{
+    return xDebugTweak_StaticAlloc(size);
+}
 #endif
 
 #endif
