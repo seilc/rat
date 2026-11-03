@@ -85,6 +85,7 @@ struct xVec3
     void SubAdd(const xVec3& a, const xVec3& b, const xVec3& c);
     void ScaleComponents(const xVec3& scale);
     void Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
+    void AddCombine(const xVec3& v, const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
 };
 
 #define xVec3NormalizeMacro(o, v, outlen)                                                         \
@@ -116,12 +117,14 @@ F32 xVec3Dot(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
 F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
 
 void xVec3Init(xVec3& v, F32 _x, F32 _y, F32 _z);
+void xVec3AddC(xVec3* o, const xVec3* a, F32 _x, F32 _y, F32 _z);
 void xVec3Add(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3AddTo(xVec3& a, const xVec3& b);
 void xVec3AddTo(xVec3* a, const xVec3* b);
 void xVec3Sub(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3Sub(xVec3& o, const xVec3& a, const xVec3& b);
 void xVec3SMul(xVec3* o, const xVec3* v, F32 s);
+void xVec3SMulBy(xVec3* v, F32 s);
 void xVec3SMulBy(xVec3& v, F32 s);
 void xVec3Cross(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3Cross(xVec3& o, const xVec3& a, const xVec3& b);
@@ -217,6 +220,13 @@ inline void xVec3::Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale
     x = a.x * scale0 + b.x * scale1;
     y = a.y * scale0 + b.y * scale1;
     z = a.z * scale0 + b.z * scale1;
+}
+
+inline void xVec3::AddCombine(const xVec3& v, const xVec3& a, F32 scale0, const xVec3& b, F32 scale1)
+{
+    x = v.x + a.x * scale0 + b.x * scale1;
+    y = v.y + a.y * scale0 + b.y * scale1;
+    z = v.z + a.z * scale0 + b.z * scale1;
 }
 
 #if !DEBUG

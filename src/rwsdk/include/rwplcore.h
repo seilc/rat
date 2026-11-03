@@ -713,6 +713,9 @@ struct RwObject
 
 #define RwIm2DGetNearScreenZMacro() (RWSRCGLOBAL(dOpenDevice).zBufferNear)
 
+#define RwIm2DRenderLineMacro(_vertices, _numVertices, _vert1, _vert2) \
+    (RWSRCGLOBAL(dOpenDevice).fpIm2DRenderLine(_vertices, _numVertices, _vert1, _vert2))
+
 #define RwIm2DRenderPrimitiveMacro(_primType, _vertices, _numVertices) \
     (RWSRCGLOBAL(dOpenDevice).fpIm2DRenderPrimitive(_primType, _vertices, _numVertices))
 
@@ -796,6 +799,7 @@ RwReal _rwInvSqrt(const RwReal num);
 
 #if (defined(RWDEBUG) || defined(RWSUPPRESSINLINE))
 RwReal RwIm2DGetNearScreenZ(void);
+RwBool RwIm2DRenderLine(RwIm2DVertex* vertices, RwInt32 numVertices, RwInt32 vert1, RwInt32 vert2);
 RwBool RwIm2DRenderPrimitive(RwPrimitiveType primType, RwIm2DVertex* vertices, RwInt32 numVertices);
 RwV3d* RwMatrixGetPos(RwMatrix* matrix);
 void RwMatrixSetIdentity(RwMatrix* matrix);
@@ -811,6 +815,9 @@ void RwV3dSub(RwV3d* out, const RwV3d* ina, const RwV3d* inb);
 
 #if !(defined(RWDEBUG) || defined(RWSUPPRESSINLINE))
 #define RwIm2DGetNearScreenZ() RwIm2DGetNearScreenZMacro()
+
+#define RwIm2DRenderLine(_vertices, _numVertices, _vert1, _vert2) \
+    RwIm2DRenderLineMacro(_vertices, _numVertices, _vert1, _vert2)
 
 #define RwIm2DRenderPrimitive(_primType, _vertices, _numVertices) \
     RwIm2DRenderPrimitiveMacro(_primType, _vertices, _numVertices)
