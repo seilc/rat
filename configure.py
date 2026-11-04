@@ -779,7 +779,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zBehavior.cpp"),
             Object(NonMatching, "rt/Engine/Game/zWater.cpp"),
             Object(NonMatching, "rt/Engine/Game/zTimeHandler.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xCollideSweptSphere.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xCollideSweptSphere.cpp"),
             Object(Matching, "rt/Engine/Core/x/xScreenFade.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCollideSphereBox.cpp"),
             Object(NonMatching, "rt/Engine/Game/zReticle.cpp"),

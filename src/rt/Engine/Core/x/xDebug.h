@@ -144,8 +144,8 @@ do {                                                                            
 #define xFAIL_ONCE_L(line, ...)
 #define xASSERT_ONCE(cond)
 #define xASSERT_ONCE_L(line, cond)
-#define xASSERT_DESIGN(cond, msg)
-#define xASSERT_DESIGN_L(line, cond, msg)
+#define xASSERT_DESIGN(cond, ...)
+#define xASSERT_DESIGN_L(line, cond, ...)
 #define xASSERT_EQ(a, b)
 #define xASSERT_EQ_L(line, a, b)
 #endif

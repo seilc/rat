@@ -672,6 +672,8 @@ struct RwObject
 #define RwIm2DVertexSetScreenZ(vert, scrnz) ((vert)->z = (scrnz))
 #define RwIm2DVertexSetU(vert, texU, recipz) ((vert)->u = (texU))
 #define RwIm2DVertexSetV(vert, texV, recipz) ((vert)->v = (texV))
+#define RwRealMax2(a,b) ((RwReal)( ((a) >= (b)) ? (a) : (b)))
+#define RwRealMin2(a,b) ((RwReal)( ((a) <= (b)) ? (a) : (b)))
 #define RWSRCGLOBAL(variable) (((RwGlobals *)RwEngineInstance)->variable)
 #define RwRenderStateGetMacro(_state, _value) (RWSRCGLOBAL(dOpenDevice).fpRenderStateGet(_state, _value))
 #define RwRenderStateSetMacro(_state, _value) (RWSRCGLOBAL(dOpenDevice).fpRenderStateSet(_state, _value))
@@ -748,6 +750,7 @@ struct RwObject
     }                                  \
     MACRO_STOP
 
+#define RWPLUGINOFFSET(_type, _base, _offset) ((_type *)((RwUInt8 *)(_base) + (_offset)))
 #define rwObjectGetFlags(o) (((const RwObject *)(o))->flags)
 #define rwObjectGetParent(object) (((const RwObject *)(object))->parent)
 #define RwRGBAAssign(_target, _source) ( *(_target) = *(_source) )
@@ -776,8 +779,6 @@ struct RwObject
         (o)->z += (((a)->z) * ( (s)));      \
     }                                       \
     MACRO_STOP
-
-#define RWPLUGINOFFSET(_type, _base, _offset) ((_type *)((RwUInt8 *)(_base) + (_offset)))
 
 #ifdef __cplusplus
 extern "C" {

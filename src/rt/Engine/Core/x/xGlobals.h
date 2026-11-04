@@ -130,4 +130,6 @@ inline bool IsPS2Demo() { return false; }
 extern U32 FB_XRES;
 extern U32 FB_YRES;
 
+#define CURPLAYERS (xglobals->players)
+
 #endif

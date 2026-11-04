@@ -193,4 +193,12 @@ inline U32 xEntIsVisible(const xEnt* ent)
     return (ent->flags & 0x85) == 0x1;
 }
 
+struct xEntOpacity
+{
+    F32 startAlpha;
+    F32 endAlpha;
+    F32 deltaOpacity;
+    U32 oldPipeFlags;
+};
+
 #endif
