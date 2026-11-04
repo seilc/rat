@@ -176,11 +176,13 @@ struct xAnimPlay
     xAnimBeforeAnimMatricesCallback BeforeAnimMatrices;
 };
 
+void xAnimInit();
 xAnimTable* xAnimTableNew(const char* name, U32 userFlags);
 xAnimState* xAnimTableNewState(xAnimTable* table, const char* name, U32 flags, U32 userFlags, F32 speed, F32* boneBlend, F32* timeSnap, F32 fadeRecip, U16* fadeOffset, void* callbackData, xAnimBeforeEnterCallback beforeEnter, xAnimStateCallback stateCallback, xAnimBeforeAnimMatricesCallback beforeAnimMatrices);
 void xAnimPlayChooseTransition(xAnimPlay* play);
 void xAnimPlayUpdate(xAnimPlay* play, F32 timeDelta);
 void xAnimPlayEval(xAnimPlay* play);
+void xAnimPoolInit(xMemPool* pool, U32 count, U32 singles, U32 blendFlags, U32 effectMax);
 void xAnimPoolFree(xAnimPlay* play);
 
 inline F32 xAnimFileRawTime(xAnimFile* afile, F32 time)

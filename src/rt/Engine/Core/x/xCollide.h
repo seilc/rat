@@ -64,6 +64,9 @@ U32 xCylinderHitsSphere(const xCylinder* cyl, const xSphere* sph, xCollis* coll)
 S32 xSphereHitsModel3(const xSphere* b, const xModelInstance* m, xCollis* colls, U8 ncolls, F32 sth);
 void xBoxForTriangle(xBox& box, const xVec3& p0, const xVec3& p1, const xVec3& p2);
 U32 xSphereHitsEnv(const xSphere* b, const xEnv* env, xCollis* coll);
+U32 xSphereHitsModel(const xSphere* b, const xModelInstance* m, xCollis* coll);
+U32 xRayHitsModel(const xRay3* r, const xModelInstance* m, xCollis* coll);
+U32 xRayHitsEnv(const xRay3* r, const xEnv* env, xCollis* coll);
 
 inline bool xSphereHitsSphere(const xVec3& loc1, F32 r1, const xVec3& loc2, F32 r2)
 {

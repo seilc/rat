@@ -633,7 +633,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xRumbleEmitter.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRumbleManager.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xsavegame.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xScene.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xScene.cpp"),
             Object(Matching, "rt/Engine/Core/x/xScreenWarp.cpp"),
             Object(Matching, "rt/Engine/Core/x/xScrFx.cpp"),
             Object(Matching, "rt/Engine/Core/x/xserializer.cpp"),
