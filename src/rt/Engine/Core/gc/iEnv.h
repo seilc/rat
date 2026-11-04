@@ -44,4 +44,9 @@ void iEnvDefaultLighting(iEnv*);
 void iEnvSetup(iEnv* env);
 void iEnvRender(iEnv* env, bool alpha);
 
+inline bool iEnvIsJSPActive(const iEnv* env, S32 which)
+{
+    return env->jsp_visibilityCount[which] > 0;
+}
+
 #endif
