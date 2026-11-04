@@ -10,6 +10,7 @@
 #include "zGlobals.h"
 #include "zNPCAsset.h"
 #include "zScene.h"
+
 #include "decomp.h"
 
 #include <stdio.h>

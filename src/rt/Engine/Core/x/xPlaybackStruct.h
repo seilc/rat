@@ -6,8 +6,8 @@
 struct PlaybackStruct
 {
     U32 on;
-    xPadAnalog analog1;
-    xPadAnalog analog2;
+    PadAnalog analog1;
+    PadAnalog analog2;
     U32 randseed1;
     U32 randseed2;
 };

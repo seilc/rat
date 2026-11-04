@@ -1,8 +1,6 @@
 #ifndef ZNPCONELINER_H
 #define ZNPCONELINER_H
 
-#include "types.h"
-
 enum ezNPCOneLinerType
 {
     ezOLT_Noticing,

@@ -1,7 +1,6 @@
 #ifndef XDEBUGGRAPH_H
 #define XDEBUGGRAPH_H
 
-#include "types.h"
 #include "xColor.h"
 
 void xDebugGraphSceneEnter();

@@ -3,9 +3,9 @@
 #include "xDebug.h"
 #include "xMath.h"
 
-#include <rtintsec.h>
-
 #include "decomp.h"
+
+#include <rtintsec.h>
 
 #define xCLUMPCOLL_MAGIC ((((RwUInt32)'C') << 0) | (((RwUInt32)'C') << 8) | (((RwUInt32)'O') << 16) | (((RwUInt32)'L') << 24))
 #define xCLUMPCOLL_MAGICSWAP ((((RwUInt32)'C') << 24) | (((RwUInt32)'C') << 16) | (((RwUInt32)'O') << 8) | (((RwUInt32)'L') << 0))

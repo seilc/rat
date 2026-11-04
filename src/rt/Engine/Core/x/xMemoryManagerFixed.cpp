@@ -1,6 +1,7 @@
 #include "xMemoryManagerFixed.h"
 
 #include "xMemMgr.h"
+
 #include "decomp.h"
 
 #if DEBUG || RELEASE

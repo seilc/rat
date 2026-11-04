@@ -106,7 +106,7 @@ namespace {
     void render_model_now(xModelInstance* model)
     {
 #if DEBUG || RELEASE
-        prelit_and_thats_the_way_we_likes_it = (model->Pipe.Flags & 0xC0) == 0x80;
+        prelit_and_thats_the_way_we_likes_it = (model->Pipe.Flags & eLIGHT_MASK) == ePIPELIGHT_KITPRELIGHT;
 
         if (xModelRenderLogEnabled()) {
             xModelRenderLogSetEntity((xEnt*)model->Object);

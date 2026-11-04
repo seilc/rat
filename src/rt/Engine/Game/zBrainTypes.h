@@ -1,8 +1,6 @@
 #ifndef ZBRAINTYPES_H
 #define ZBRAINTYPES_H
 
-#include "types.h"
-
 enum eBrainType
 {
     eBrainType_Unknown,

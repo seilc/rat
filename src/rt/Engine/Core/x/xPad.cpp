@@ -220,7 +220,7 @@ void SubMapAll(S32* neuon, xPad* xp)
 
 void xPadNormalizeAnalog(xPad& pad, S32 inner_zone, S32 outer_zone)
 {
-    const xPadAnalog* src = &pad.analog1;
+    const PadAnalog* src = &pad.analog1;
     for (S32 i = 0; i < 2; i++) {
         pad.analog[i].offset.x = normalize_analog(src[i].x, -outer_zone, outer_zone, 0, -inner_zone, inner_zone);
         pad.analog[i].offset.y = normalize_analog(src[i].y, -outer_zone, outer_zone, 0, -inner_zone, inner_zone);

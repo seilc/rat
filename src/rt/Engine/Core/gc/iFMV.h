@@ -1,7 +1,6 @@
 #ifndef IFMV_H
 #define IFMV_H
 
-#include "types.h"
 #include "xpkrsvc.h"
 #include <rwcore.h>
 #include <dolphin.h>

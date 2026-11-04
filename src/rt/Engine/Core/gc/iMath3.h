@@ -1,8 +1,6 @@
 #ifndef IMATH3_H
 #define IMATH3_H
 
-#include "types.h"
-
 struct xVec3;
 struct xVec4;
 struct xBox;

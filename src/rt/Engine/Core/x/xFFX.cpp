@@ -1,6 +1,7 @@
 #include "xFFX.h"
 
 #include "xDebug.h"
+
 #include "decomp.h"
 
 static U32 psize;

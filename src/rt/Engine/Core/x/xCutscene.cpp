@@ -820,7 +820,7 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
                                     JDeltaEval(model, deltaModel, deltaAnim, breakTime);
                                 }
 
-                                if (pipeCurr && (pipeCurr->Flags & 0xFF00)) {
+                                if (pipeCurr && (pipeCurr->Flags & (eSRCBLEND_MASK | eDESTBLEND_MASK))) {
                                     if (fakeCount < FAKE_MAX) {
                                         sCutsceneFakeModel[fakeCount].Data = model;
                                         sCutsceneFakeModel[fakeCount].BoneCount = iModelNumBones(model);
@@ -831,7 +831,7 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
                                         sCutsceneFakeModel[fakeCount].Bucket[0]->Data = model;
                                         sCutsceneFakeModel[fakeCount].Alpha = model->geometry->matList.materials[0]->color.alpha / 255.0f;
                                         sCutsceneFakeModel[fakeCount].Pipe = *pipeCurr;
-                                        if ((pipeCurr->Flags & 0xC0) != 0x40)
+                                        if ((pipeCurr->Flags & eLIGHT_MASK) != ePIPELIGHT_PRELIGHTONLY)
                                             sCutsceneFakeModel[fakeCount].LightKit = gLastLightKit.lightKit;
                                         sCutsceneFakeModel[fakeCount].modelID = data->AssetID;
                                         if (sCutsceneFakeModel[fakeCount].BoneCount) {
@@ -888,7 +888,7 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
                             mphIndex++;
                         }
 
-                        if (pipeCurr && (pipeCurr->Flags & 0xFF00)) {
+                        if (pipeCurr && (pipeCurr->Flags & (eSRCBLEND_MASK | eDESTBLEND_MASK))) {
                             if (fakeCount < FAKE_MAX) {
                                 sCutsceneFakeModel[fakeCount].Data = model;
                                 sCutsceneFakeModel[fakeCount].BoneCount = iModelNumBones(model);
@@ -899,7 +899,7 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
                                 sCutsceneFakeModel[fakeCount].Bucket[0]->Data = model;
                                 sCutsceneFakeModel[fakeCount].Alpha = model->geometry->matList.materials[0]->color.alpha / 255.0f;
                                 sCutsceneFakeModel[fakeCount].Pipe = *pipeCurr;
-                                if ((pipeCurr->Flags & 0xC0) != 0x40)
+                                if ((pipeCurr->Flags & eLIGHT_MASK) != ePIPELIGHT_PRELIGHTONLY)
                                     sCutsceneFakeModel[fakeCount].LightKit = gLastLightKit.lightKit;
                                 sCutsceneFakeModel[fakeCount].modelID = data->AssetID;
                                 if (sCutsceneFakeModel[fakeCount].BoneCount) {
