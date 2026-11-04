@@ -606,7 +606,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xMath.cpp"),
             Object(Matching, "rt/Engine/Core/x/xMath2.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xMath3.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xMemMgr.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xMemMgr.cpp"),
             Object(Matching, "rt/Engine/Core/x/xModel.cpp"),
             Object(Matching, "rt/Engine/Core/x/xModelBucket.cpp"),
             Object(Matching, "rt/Engine/Core/x/xMorph.cpp"),

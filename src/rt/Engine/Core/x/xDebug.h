@@ -111,17 +111,17 @@ do {                                            \
 #define xASSERT_ONCE(cond) _xASSERT_ONCE(__LINE__, cond, #cond)
 #define xASSERT_ONCE_L(line, cond) _xASSERT_ONCE(line, cond, #cond)
 
-#define _xASSERT_DESIGN(line, cond, condstr, msg)                                                 \
+#define _xASSERT_DESIGN(line, cond, condstr, ...)                                                 \
 do {                                                                                              \
     static bool already_asserted = false;                                                         \
     if (!already_asserted && !(cond)) {                                                           \
         already_asserted = true;                                                                  \
-        _xFAIL(line, condstr, msg);                                                               \
+        _xFAIL(line, condstr, __VA_ARGS__);                                                       \
     }                                                                                             \
 } while (0)
 
-#define xASSERT_DESIGN(cond, msg) _xASSERT_DESIGN(__LINE__, cond, _xSTR(cond), msg)
-#define xASSERT_DESIGN_L(line, cond, msg) _xASSERT_DESIGN(line, cond, _xSTR(cond), msg)
+#define xASSERT_DESIGN(cond, ...) _xASSERT_DESIGN(__LINE__, cond, _xSTR(cond), __VA_ARGS__)
+#define xASSERT_DESIGN_L(line, cond, ...) _xASSERT_DESIGN(line, cond, _xSTR(cond), __VA_ARGS__)
 
 #define _xASSERT_EQ(line, a, b, msg)                                                              \
 do {                                                                                              \
@@ -196,6 +196,7 @@ U32 xDebugBoing();
 #endif
 
 S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func);
+void xDebugModeRegisterCallback(S32 mode, xDebugModeCallback func);
 
 #if DEBUG || RELEASE
 S32 xDebugModeGet();
