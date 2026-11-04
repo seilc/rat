@@ -32,7 +32,22 @@ public:
     virtual void activate();
     virtual void deactivate();
     virtual void preupdate(F32 dt);
-    virtual void reset();
+    virtual void reset()
+    {
+        if (inst) {
+            xBaseInit(this, &inst->get_npc_asset()->ent_asset);
+            if (linkCount < 1) {
+                link = NULL;
+            } else {
+                char* ptr = (char*)inst->get_npc_asset();
+                ptr += inst->get_npc_asset_size();
+                S32 amt_linkdata = linkCount * sizeof(xLinkAsset);
+                xASSERT_FMT_L(152, ((amt_linkdata % 4)==0), "0x%08X", id);
+                amt_linkdata = (amt_linkdata + 3) & ~3;
+                link = (xLinkAsset*)(ptr - amt_linkdata);
+            }
+        }
+    }
     virtual void update_bounds();
     virtual void scene_setup();
     virtual void render_npc();

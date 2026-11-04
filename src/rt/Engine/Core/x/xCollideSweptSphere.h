@@ -6,6 +6,7 @@
 #include "xJSP.h"
 
 struct xScene;
+struct zPlayer;
 
 enum xCollideSphereHitType
 {
@@ -69,6 +70,7 @@ void xSweptSpherePrepare(xSweptSphere* sws, const xVec3* start, const xVec3* end
 void xSweptSphereResetCollision(xSweptSphere* sws);
 S32 xSweptSphereToScene(xSweptSphere* sws, xScene* sc, const xEnt* mover, U8 collType, S32 penby);
 S32 xSweptSphereToPlayer(xSweptSphere* sws, xScene* sc, xEnt* mover, U8 collType, S32 penby);
+S32 xSweptSphereToPlayer(xSweptSphere* sws, xScene* sc, xEnt* mover, zPlayer** player, U8 collType, S32 penby);
 S32 xSweptSphereToSphere(xSweptSphere& sws, const xVec3& center, F32 radius);
 S32 xSweptSphereToModel(xSweptSphere* sws, RpAtomic* model, const RwMatrix* mat, bool singleSided);
 

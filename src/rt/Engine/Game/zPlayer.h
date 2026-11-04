@@ -156,6 +156,11 @@ public:
     virtual void ReactiveAnimationCollided();
 
 public:
+    xEntDrive* GetDrive()
+    {
+        return &drv;
+    }
+
     struct mblur_data
     {
         xModelBlur::config_data cfg;
