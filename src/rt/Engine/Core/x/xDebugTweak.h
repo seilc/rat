@@ -161,6 +161,14 @@ inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmi
 #define xAUTOTWEAKFLAG(prefix, name, v, mask, cb, context, flags) _t_auto_tweak_flag(prefix, name, v, mask, cb, context, flags)
 #define xAUTOTWEAKMESSAGE(prefix, name, message, cb, context, flags, process) _auto_tweak(prefix, name, message, cb, context, flags, process)
 
+#define xTEMPTWEAKS_BEGIN(prefix_name)                                                            \
+    static bool _temp_tweaks_registered = false;                                                  \
+    if (!_temp_tweaks_registered) {                                                               \
+        _temp_tweaks_registered = true;                                                           \
+        const char* prefix_name = "Temp|";
+
+#define xTEMPTWEAKS_END }
+
 #define xTWEAKABLE
 #else
 inline void xDebugAddTweak(const char* name, const U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags) {}

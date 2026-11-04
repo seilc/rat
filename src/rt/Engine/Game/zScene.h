@@ -52,6 +52,10 @@ struct zScene : xScene
 
 typedef xBase*(*zSceneCallback)(xBase*, zScene*, void*);
 
+extern const char** all_texture_labels;
+extern U32* all_texture_ids;
+extern U32 all_texture_count;
+
 xBase* zSceneFindObject(U32 gameID);
 bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);
 const char* zSceneGetName(xBase* b);
