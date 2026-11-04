@@ -44,6 +44,10 @@ add_relocations:
   type: sda21
   target: "@1044!.sbss2:0x803CA7A0"
   addend: -4
+- source: .text:0x800640C8
+  type: sda21
+  target: "@1960!.sdata2:0x803C5458"
+  addend: -4
 - source: .text:0x80065BD8
   type: sda21
   target: "@1286!.sbss2:0x803CA7E0"

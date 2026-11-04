@@ -8,6 +8,7 @@ zCamPlayer* zCamGetDefault();
 xCam* zCamGetPrimary();
 void zCamAdd(xCam& cam, bool force_cut);
 void zCamRemove(xCam& cam, bool force_cut);
+bool zCamGetDebugMode(xMat4x3** ppDebugCamMtx);
 
 inline void zCamTrackGround(bool);
 

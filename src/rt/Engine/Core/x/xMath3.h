@@ -128,6 +128,7 @@ void xMat3x3ScaleC(xMat3x3* m, F32 x, F32 y, F32 z);
 void xMat3x3Transpose(xMat3x3* o, const xMat3x3* m);
 void xMat3x3Tolocal(xVec3* o, const xMat3x3* m, const xVec3* v);
 F32 xMat3x3LookVec(xMat3x3* m, const xVec3* at);
+void xMat3x3Euler(xMat3x3* m, const xVec3* ypr);
 void xMat3x3Euler(xMat3x3* m, F32 yaw, F32 pitch, F32 roll);
 void xMat3x3LMulVec(xVec3* o, const xMat3x3* m, const xVec3* v);
 void xQuatFromMat(xQuat* q, const xMat3x3* m);
@@ -206,6 +207,9 @@ inline F32 xMat3x3LookVec3(xMat3x3& mat, const xVec3& at)
 
 void xMat4x3Copy(xMat4x3* o, const xMat4x3* m);
 void xMat4x3Mul(xMat4x3* o, const xMat4x3* a, const xMat4x3* b);
+void xMat4x3MoveLocalRight(xMat4x3* m, F32 mag);
+void xMat4x3MoveLocalUp(xMat4x3* m, F32 mag);
+void xMat4x3MoveLocalAt(xMat4x3* m, F32 mag);
 
 inline void xMat4x3From3x3(xMat4x3* m, const xMat3x3* m3x3);
 
