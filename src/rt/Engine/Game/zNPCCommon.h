@@ -120,7 +120,11 @@ public:
     virtual void deliver_damage(const zCombatDamageInfo& damageInfo);
     virtual bool valid_damage(const zCombatDamageInfo& damageInfo);
     virtual ezHitReaction GetDamageHitReaction(const zCombatDamageInfo& damageInfo, ezHitReactionState inState);
-    virtual bool ShouldEscapeGrab();
+    virtual bool ShouldEscapeGrab()
+    {
+        xASSERT_FMT_L(539, 0, "NPC %s has recieved a ShouldEscapeGrab() call when he cannot be grabbed.  This is a programming error", xSTAssetName(this));
+        return false;
+    }
     virtual bool grabbable(GrabType grabType);
     virtual bool giveBonus();
     virtual bool punchable();

@@ -2,6 +2,7 @@
 #define XMOVEPOINT_H
 
 #include "xBase.h"
+#include "xDebug.h"
 #include "xMovePointAsset.h"
 
 struct xSpline3;
@@ -35,5 +36,11 @@ xSpline3* xMovePointSplineFind(xMovePoint* m, bool search_back);
 F32 xMovePointGetNext(const xMovePoint* m, const xMovePoint* prev, xMovePoint** next, xVec3* hdng);
 xVec3* xMovePointGetPos(const xMovePoint* m);
 S32 xMovePointGetAllLinked(xMovePoint** mps, S32 mps_max, xMovePoint* mp, S32 mps_used);
+
+inline xMovePoint* xMovePointGetPoint(const xMovePoint* m, U16 n)
+{
+    xASSERT_L(114, n < m->asset->numPoints);
+    return m->nodes[n];
+}
 
 #endif

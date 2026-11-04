@@ -7,6 +7,12 @@
 
 struct zCombatDamageInfo
 {
+    zCombatDamageInfo() : flags(0) {}
+    zCombatDamageInfo(xBase* from, S32 damage, zHitSource source, zHitTarget target, const xVec3& knockback, const xVec3& hitLocation, const xVec3& direction, S32 flags)
+        : flags(flags), from(from), damage(damage), source(source), target(target), knockback(knockback), hitLocation(hitLocation), direction(direction)
+    {
+    }
+
     S32 flags;
     xBase* from;
     S32 damage;

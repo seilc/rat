@@ -58,6 +58,16 @@ public:
     virtual void create_data(void* mem) = 0;
 
     zStoredSpawn storedSpawn;
+
+    zNPCAssetIN2* get_npc_asset() const
+    {
+        return npc_asset;
+    }
+
+    S32 get_npc_asset_size() const
+    {
+        return npc_asset_size;
+    }
 };
 
 }
