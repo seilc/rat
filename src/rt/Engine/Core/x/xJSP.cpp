@@ -11,10 +11,10 @@
 
 enum
 {
-    rwID_HI_BEEF01 = 0xBEEF01,
+    rwID_HI_COLLTREE = 0xBEEF01,
     rwID_HI_JSPINFO = 0xBEEF02,
-    rwID_HI_BEEF03 = 0xBEEF03,
-    rwID_HI_BEEF04 = 0xBEEF04
+    rwID_HI_STRIPVECS = 0xBEEF03,
+    rwID_HI_EXTRAINFO = 0xBEEF04
 };
 
 struct __rwMark
@@ -113,7 +113,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
     xASSERT(rwresult);
     clump = RpClumpStreamRead(stream);
 
-    rwresult = RwStreamFindChunk(stream, rwID_HI_BEEF01, NULL, NULL);
+    rwresult = RwStreamFindChunk(stream, rwID_HI_COLLTREE, NULL, NULL);
     xASSERT(rwresult);
     colltree = xClumpColl_StreamRead(stream);
 
@@ -211,7 +211,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
             colltree->triangles[i].v.p = &hdr->stripVecList[colltree->triangles[i].v.rawIdx];
         }
     } else {
-        rwresult = RwStreamFindChunk(stream, rwID_HI_BEEF03, NULL, NULL);
+        rwresult = RwStreamFindChunk(stream, rwID_HI_STRIPVECS, NULL, NULL);
         if (rwresult) {
             RwStreamReadInt32(stream, (RwInt32*)&hdr->stripVecCount, sizeof(U32));
             hdr->stripVecList = (RwV3d*)RwMalloc(hdr->stripVecCount * sizeof(RwV3d), rwMEMHINTDUR_NADURATION);
@@ -245,7 +245,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
         hdr->nodetree = xJSPNodeTreeBuild(hdr);
     }
 
-    rwresult = RwStreamFindChunk(stream, rwID_HI_BEEF04, NULL, NULL);
+    rwresult = RwStreamFindChunk(stream, rwID_HI_EXTRAINFO, NULL, NULL);
     if (rwresult) {
         RwStreamRead(stream, &hdr->extraInfo, sizeof(xJSPExtraInfo));
     }
@@ -306,7 +306,7 @@ void xJSP_MultiStreamRead(void* data, U32 size, xJSPHeader** jsp, U32 assetID)
 
     iAsyncUnlockRW();
 
-    if (mark.type == rwID_HI_BEEF01) {
+    if (mark.type == rwID_HI_COLLTREE) {
         iAsyncLockRW();
 
         data = mp + 1;
@@ -339,7 +339,7 @@ void xJSP_MultiStreamRead(void* data, U32 size, xJSPHeader** jsp, U32 assetID)
                 mp = (__rwMark*)((U8*)data + mark.length);
                 memmove(&mark, mp, sizeof(__rwMark));
                 RwMemNative32(&mark, sizeof(__rwMark));
-                if (mark.type == rwID_HI_BEEF03) {
+                if (mark.type == rwID_HI_STRIPVECS) {
                     data = mp + 1;
 
                     hdr->stripVecCount = *(U32*)data;
@@ -403,7 +403,7 @@ void xJSP_MultiStreamRead(void* data, U32 size, xJSPHeader** jsp, U32 assetID)
         __rwMark mark2;
         memmove(&mark2, mp2, sizeof(__rwMark));
         RwMemNative32(&mark2, sizeof(__rwMark));
-        if (mark2.type == rwID_HI_BEEF04) {
+        if (mark2.type == rwID_HI_EXTRAINFO) {
             mp = mp2;
             mark = mark2;
             data = mp + 1;
@@ -494,7 +494,7 @@ void xJSP_Destroy(xJSPHeader* jsp)
         U32* tp = (U32*)jsp->stripVecList;
         U32 test = *(tp - 4);
         RwMemNative32(&test, sizeof(U32));
-        if (test != rwID_HI_BEEF03) {
+        if (test != rwID_HI_STRIPVECS) {
             RwFree(jsp->stripVecList);
         }
     }

@@ -17,6 +17,8 @@
 
 #include "decomp.h"
 
+#define ICE_STREAM_PARTICLE_01_ID 0xDED04D47 // xStrHash("ice_stream_particle_01")
+
 // RESTORED: from RotU GC
 namespace {
 
@@ -34,9 +36,9 @@ struct _blastConfig
     F32 blueTintDist;
 };
 
-xTWEAKABLE U32 texture = 0xDED04D47; // xStrHash("ice_stream_particle_01")
-xTWEAKABLE U32 mistTexture = 0xDED04D47; // xStrHash("ice_stream_particle_01")
-xTWEAKABLE U32 glintTexture = 0xDED04D47; // xStrHash("ice_stream_particle_01")
+xTWEAKABLE U32 texture = ICE_STREAM_PARTICLE_01_ID;
+xTWEAKABLE U32 mistTexture = ICE_STREAM_PARTICLE_01_ID;
+xTWEAKABLE U32 glintTexture = ICE_STREAM_PARTICLE_01_ID;
 xTWEAKABLE F32 singleEmitTime = 0.03f;
 xTWEAKABLE F32 singleVelocity = 20.0f;
 xTWEAKABLE F32 singleSize = 0.3f;

@@ -13,6 +13,8 @@
 
 #include <string.h>
 
+#define SHADOW_ROUND_ID 0x1A2A0413 // xStrHash("shadow_round")
+
 struct xShadowSimpleQueue
 {
     xShadowSimpleCache* cache;
@@ -269,7 +271,7 @@ void xShadowSimple_Init()
     memset(sCollQueue, 0, sizeof(sCollQueue));
     memset(sCollModelMatrices, 0, sizeof(sCollModelMatrices));
 
-    RwTexture* tex = (RwTexture*)xSTFindAsset(0x1A2A0413, NULL); // xStrHash("shadow_round")
+    RwTexture* tex = (RwTexture*)xSTFindAsset(SHADOW_ROUND_ID, NULL);
     if (tex) {
         sShadRaster = RwTextureGetRaster(tex);
     } else {

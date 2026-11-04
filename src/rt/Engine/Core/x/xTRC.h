@@ -1,7 +1,6 @@
 #ifndef XTRC_H
 #define XTRC_H
 
-#include "types.h"
 #include "iTRC.h"
 
 #define k_MAX_TRC_PADS 4
@@ -37,25 +36,25 @@ typedef enum _tagTRCPadState
     TRC_PadStateMissingDuringLoadSave
 } TRCPadState;
 
-struct _tagTRCPadInfo : _tagiTRCPadInfo
+typedef struct _tagTRCPadInfo : iTRCPadInfo
 {
     S32 id;
     TRCState state;
     TRCPadState padstate;
-};
+} TRCPadInfo;
 
-struct _tagTRCDiskInfo
+typedef struct _tagTRCDiskInfo
 {
     TRCState state;
     TRCState id;
-};
+} TRCDiskInfo;
 
 TRCState xTRCDiskGetState();
 U32 xTRCDiskIsIDed();
 bool xTRCMemCardCheck();
-_tagTRCPadInfo& xTRCPadGetNextAvailablePad();
+TRCPadInfo& xTRCPadGetNextAvailablePad();
 S32 xTRCPadGetArrayIdx(S32 port);
-_tagTRCPadInfo& xTRCPadGetPadFromID(S32 id);
+TRCPadInfo& xTRCPadGetPadFromID(S32 id);
 void xTRCPadRemove(S32 port);
 void xTRCPadRestoreAll();
 void xTRCPadSetState(S32 idx, TRCState state);

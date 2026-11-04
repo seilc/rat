@@ -1,8 +1,6 @@
 #ifndef ZMINIGAMETYPES_H
 #define ZMINIGAMETYPES_H
 
-#include "types.h"
-
 enum ezMiniGameTypes
 {
     MG_GAMETYPE_UNKNOWN,

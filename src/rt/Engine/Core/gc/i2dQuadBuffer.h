@@ -1,7 +1,6 @@
 #ifndef I2DQUADBUFFER_H
 #define I2DQUADBUFFER_H
 
-#include "types.h"
 #include "xColor.h"
 #include "xDebug.h"
 #include "iCamera.h"
@@ -47,27 +46,27 @@ public:
         xASSERT_L(71, location);
         xASSERT_L(72, uv_coords);
 
-        F32 r1_8 = giCameraOONearClip;
+        F32 recipz = giCameraOONearClip;
 
         RwIm2DVertexSetScreenX(&vertArray[vertsUsed], location->tlx);
         RwIm2DVertexSetScreenY(&vertArray[vertsUsed], location->tly);
-        RwIm2DVertexSetU(&vertArray[vertsUsed], uv_coords->tlu, r1_8);
-        RwIm2DVertexSetV(&vertArray[vertsUsed], uv_coords->tlv, r1_8);
+        RwIm2DVertexSetU(&vertArray[vertsUsed], uv_coords->tlu, recipz);
+        RwIm2DVertexSetV(&vertArray[vertsUsed], uv_coords->tlv, recipz);
 
         RwIm2DVertexSetScreenX(&vertArray[vertsUsed + 1], location->tlx);
         RwIm2DVertexSetScreenY(&vertArray[vertsUsed + 1], location->bry);
-        RwIm2DVertexSetU(&vertArray[vertsUsed + 1], uv_coords->tlu, r1_8);
-        RwIm2DVertexSetV(&vertArray[vertsUsed + 1], uv_coords->brv, r1_8);
+        RwIm2DVertexSetU(&vertArray[vertsUsed + 1], uv_coords->tlu, recipz);
+        RwIm2DVertexSetV(&vertArray[vertsUsed + 1], uv_coords->brv, recipz);
 
         RwIm2DVertexSetScreenX(&vertArray[vertsUsed + 2], location->brx);
         RwIm2DVertexSetScreenY(&vertArray[vertsUsed + 2], location->bry);
-        RwIm2DVertexSetU(&vertArray[vertsUsed + 2], uv_coords->bru, r1_8);
-        RwIm2DVertexSetV(&vertArray[vertsUsed + 2], uv_coords->brv, r1_8);
+        RwIm2DVertexSetU(&vertArray[vertsUsed + 2], uv_coords->bru, recipz);
+        RwIm2DVertexSetV(&vertArray[vertsUsed + 2], uv_coords->brv, recipz);
 
         RwIm2DVertexSetScreenX(&vertArray[vertsUsed + 3], location->brx);
         RwIm2DVertexSetScreenY(&vertArray[vertsUsed + 3], location->tly);
-        RwIm2DVertexSetU(&vertArray[vertsUsed + 3], uv_coords->bru, r1_8);
-        RwIm2DVertexSetV(&vertArray[vertsUsed + 3], uv_coords->tlv, r1_8);
+        RwIm2DVertexSetU(&vertArray[vertsUsed + 3], uv_coords->bru, recipz);
+        RwIm2DVertexSetV(&vertArray[vertsUsed + 3], uv_coords->tlv, recipz);
 
         RwIm2DVertexSetIntRGBA(&vertArray[vertsUsed], color.r, color.g, color.b, color.a);
         RwIm2DVertexSetIntRGBA(&vertArray[vertsUsed + 1], vertArray[vertsUsed].r, vertArray[vertsUsed].g, vertArray[vertsUsed].b, vertArray[vertsUsed].a);

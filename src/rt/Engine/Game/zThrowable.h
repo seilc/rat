@@ -1,8 +1,6 @@
 #ifndef ZTHROWABLE_H
 #define ZTHROWABLE_H
 
-#include "types.h"
-
 enum zThrowableSize
 {
     ezThrowableSize_Small,

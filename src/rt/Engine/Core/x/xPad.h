@@ -11,14 +11,14 @@ typedef struct _tagPadAnalog
 {
     S8 x;
     S8 y;
-} xPadAnalog;
+} PadAnalog;
 
 typedef enum _tagPadState
 {
     ePad_Disabled,
     ePad_Enabled,
     ePad_Total
-} xPadState;
+} PadState;
 
 typedef struct _tagxPad
 {
@@ -35,9 +35,9 @@ typedef struct _tagxPad
     U32 on;
     U32 pressed;
     U32 released;
-    xPadAnalog analog1;
-    xPadAnalog analog2;
-    xPadState state;
+    PadAnalog analog1;
+    PadAnalog analog2;
+    PadState state;
     U32 flags;
     S16 port;
     S16 slot;
