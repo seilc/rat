@@ -20,6 +20,7 @@ class zPad
 public:
     static zPad* GetDebugPad();
 
+    bool On(U32 button);
     bool Pressed(U32 button);
 
     S32 GetPadPort()

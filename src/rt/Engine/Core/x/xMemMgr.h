@@ -128,7 +128,89 @@ enum xMemStaticType
     eMemStaticType_0, // unknown
 };
 
+struct xMemArea
+{
+    U32 addr;
+    U32 size;
+    U32 flags;
+};
+
+struct xMemInfo
+{
+    xMemArea system;
+    xMemArea stack;
+    xMemArea DRAM;
+};
+
+#define XMEMMAXSTACK 12
+
+static const S32 XMEM_MAX_HEAPS = 2;
+
+typedef void(*xMemFreeFunc)(void*);
+typedef void(*xMemBaseNotifyFunc)();
+
+struct xMemFreeLink
+{
+    xMemFreeLink* next;
+    xMemFreeFunc func;
+    void* param;
+};
+
+#if DEBUG || RELEASE
+class xMemMgrUsageTracker
+{
+public:
+    void Init();
+    void TrackAllocation(U32 size, U32 tag);
+    U32 GetMemUsageByTag(U32 tag) const;
+
+private:
+    U32 usageByTag[eMemMgrTag_NumTags];
+};
+#endif
+
+struct xHeapState
+{
+    U32 curr;
+    U16 blk_ct;
+    U16 pad;
+    U32 used;
+    U32 wasted;
+    xMemFreeLink* free_funcs;
+#if DEBUG || RELEASE
+    xMemMgrUsageTracker memoryUsed;
+#endif
+};
+
+struct xMemBlock
+{
+    U32 addr;
+    U32 size;
+    S32 align;
+#if DEBUG
+    U32 assetID;
+    const char* file;
+    S32 line;
+    const char* func;
+#endif
+};
+
+struct xMemHeap
+{
+    U32 flags;
+    U32 hard_base;
+    U32 size;
+    S16 opp_heap[2];
+    xHeapState state[XMEMMAXSTACK];
+    U16 state_idx;
+    U16 max_blks;
+    xMemBlock* blk;
+    xMemBlock* lastblk;
+};
+
+extern xMemInfo gMemInfo;
 extern U32 gActiveHeap;
+extern xMemHeap gxHeap[XMEM_MAX_HEAPS];
 
 #if DEBUG || RELEASE
 #define xMEMGROWALLOC(size, tag) xMemGrowAlloc(gActiveHeap, (size), (tag))
@@ -157,10 +239,62 @@ extern U32 gActiveHeap;
 #define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
 
 #if DEBUG || RELEASE
-U32 xMemMgrGenericMallocGetTag();
+void DebugGetHeapUsage(U32* pTotal, U32* pUsed, U32* pOverhead);
+#endif
+void xMemDebug_SoakLog(U32 SceneId);
+U32 xMemFreeMemTotal();
+#if DEBUG
+void xMem_DB_DispStatSum();
+U32 xMem_DB_CurMemUsed(U32* total, U32* overhead);
+#endif
+void xMemInit();
+void xMemExit();
+void xMemInitHeap(xMemHeap* heap, U32 base, U32 size, U32 flags);
+
+#if DEBUG || RELEASE
+void xMemMgrSetDeptMaxMem(U32 deptID, U32 deptMaxMem);
+void xMemMgrUsageTrackerInit();
+void xMemMgrUsageTrackerShutdown();
+void xMemMgrUsageTrackerCB();
+void xMemMgrUsageTrackerSetDumpFile(char* filename);
+void xMemMgrUsageTrackerDumpLog(char* fmt, ...);
+void xMemMgrUsageTrackerCloseLog();
+void xMemMgrPackerStaticTally(U32, U32);
+void xMemMgrPackerStaticRemove(U32, U32);
+void xMemMgrPackerMallocTally(U32 size, U32 tag);
+void xMemMgrPackerMallocRemove(U32 size, U32 tag);
+void xMemMgrPackerApproxRWMallocTally(U32 size, U32 tag);
+void xMemMgrPackerApproxRWMallocRemove(U32 size, U32 tag);
 void xMemMgrGenericMallocTally(U32 size, U32 tag);
 void xMemMgrGenericMallocRemove(U32 size, U32 tag);
+void xMemMgrGenericMallocPushTag(U32 tag);
+U32 xMemMgrGenericMallocGetTag();
+void xMemMgrGenericMallocPopTag();
+bool xMemMgrGenericMallocVerifyClearTag();
+U32 xMemMgrGetTotalMemUsageByTag(U32 tag);
 #endif
+
+void xMemSwitchHeaps(U32 type);
+#if DEBUG
+void xMemTest();
+U32 xMemCheck();
+#endif
+
+S32 xMemPushBase(U32 heapID);
+S32 xMemPushBase();
+void* xMemAllocFreeable(void* alloced_memory, S32 asked_for_size, xMemFreeFunc func, void* param);
+void xMemFreeDefault(void* addr_of_ptr);
+S32 xMemPopBase(U32 heapID, S32 depth);
+S32 xMemPopBase(S32 depth);
+S32 xMemGetBase(U32 heapID);
+void xMemRegisterBaseNotifyFunc(xMemBaseNotifyFunc func);
+S32 xMemGetBase();
+S32 xMemIsBaseValid(S32 level);
+void xMemPoolSetup(xMemPool* pool, void* buffer, U32 nextOffset, U32 flags, xMemPoolInitCallback initCB, U32 size, U32 count, U32 numRealloc);
+void* xMemPoolAlloc(xMemPool* pool, U32 memtag);
+void xMemPoolFree(xMemPool* pool, void* data);
+void* xMemScratchPush(U32 size, U32 align);
+void xMemScratchPop(void* mem);
 
 #if DEBUG || RELEASE
 void* xMemGrowAlloc(U32 heapID, U32 size, U32 tag);

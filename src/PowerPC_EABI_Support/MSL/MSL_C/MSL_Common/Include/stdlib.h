@@ -17,6 +17,8 @@ extern void* realloc(void*, size_t);
 
 extern void exit(int);
 
+extern int abs(int);
+
 extern void qsort(void*, size_t, size_t, int (*)(const void*, const void*));
 
 #ifdef __cplusplus
