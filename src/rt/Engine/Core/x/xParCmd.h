@@ -277,5 +277,6 @@ typedef void(*xParCmdUpdateFunction)(xParCmd* c, xParGroup* ps, F32 dt);
 
 U32 xParCmdGetSize(U32 parType);
 xParCmdUpdateFunction xParCmdGetUpdateFunc(U32 parType);
+void xParCmdAddTweaks(const char* prefix, xParCmd& cmd);
 
 #endif

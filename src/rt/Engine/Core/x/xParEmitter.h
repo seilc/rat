@@ -6,6 +6,9 @@
 #include "xModel.h"
 #include "xParSys.h"
 
+struct xSerial;
+struct xScene;
+
 struct xParEmitter : xBase
 {
     xParEmitterAsset* tasset;
@@ -35,5 +38,39 @@ struct xParEmitter : xBase
     xBase* emit_volume;
     xVec3 last_attach_loc;
 };
+
+struct xParEmitterCustomSettings : xParEmitterPropsAsset
+{
+    U32 custom_flags;
+    U32 attachToID;
+    xVec3 pos;
+    xVec3 last_emit_position;
+    xVec3 vel;
+    xVec3 last_emit_velocity;
+    F32 vel_angle_variation;
+    U8 rot[3];
+    U8 padding;
+    F32 radius;
+    F32 emit_interval_current;
+    xBase* emit_volume;
+};
+
+S32 xParInterpConvertInterpMode(xParInterp* p);
+void xParEmitterInit(void* b, void* tasset);
+void xParEmitterInit(xBase* b, xParEmitterAsset* pea);
+void xParEmitterSetup(xParEmitter* t);
+void xParEmitterReset(xParEmitter* t);
+void xParEmitterSave(xParEmitter* ent, xSerial* s);
+void xParEmitterLoad(xParEmitter* ent, xSerial* s);
+void xParEmitterEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32);
+xPar* xParEmitterEmitCustom(xParEmitter* p, F32 dt, xParEmitterCustomSettings* info);
+F32 xParInterpCompute(S32 interp_mode, xParInterp* r, F32 time, S32 time_has_elapsed, F32 lastVal);
+xPar* xParEmitterEmitSetTexIdxs(xPar* p, const xParSys* ps);
+xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt);
+void xParEmitterUpdate(xBase* to, xScene*, F32 dt);
+void xParEmitterDestroy();
+
+inline xPar* xParEmitterEmit(xParEmitter* pe, F32 dt)
+{ return xParEmitterEmit(pe, dt, dt); }
 
 #endif

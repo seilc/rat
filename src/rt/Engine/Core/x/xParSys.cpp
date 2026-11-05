@@ -347,13 +347,13 @@ void xParSysEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
         xParSysReset(t);
         break;
     case eEventVisible:
-        t->visible = true;
+        t->visible = 1;
         if (t->group) {
             xParGroupSetVisibility(t->group, t->visible);
         }
         break;
     case eEventInvisible:
-        t->visible = false;
+        t->visible = 0;
         if (t->group) {
             xParGroupSetVisibility(t->group, t->visible);
         }

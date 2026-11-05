@@ -166,6 +166,7 @@ inline xMat4x3* xEntGetFrame(const xEnt* ent)
     return xModelGetFrame(ent->model);
 }
 
+bool xEntValidType(U8 type);
 void xEntInit(xEnt* ent, xEntAsset* asset);
 void xEntSetup(xEnt* ent);
 void xEntReset(xEnt* ent);
