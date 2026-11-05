@@ -358,9 +358,8 @@ void xTextureManager::freeNode(xInternalMovieNode*& pNode)
 
 bool xTextureManager::freeElement(xInternalTextureNode* pPrevNode)
 {
-    if (!pPrevNode) {
+    if (!pPrevNode)
         return false;
-    }
 
     for (U32 i = 0; i < maxStreamingTextures; i++) {
         if (&m_texture_nodes[i] == pPrevNode) {
@@ -406,8 +405,7 @@ void xTextureManager::FreeMemory()
 
     for (U32 i = 0; i < maxStreamingMovies; i++) {
         xInternalMovieNode* pNode = &m_movie_nodes[i];
-        if (pNode->used) {
+        if (pNode->used)
             freeNode(pNode);
-        }
     }
 }

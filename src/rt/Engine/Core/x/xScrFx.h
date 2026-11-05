@@ -59,6 +59,12 @@ struct xCameraFXShakeParams
 #endif
 };
 
+extern RwTexture* gxFlareTexture;
+extern RwFrame* gxFlareFrame;
+#if DEBUG || RELEASE
+extern S32 gxLensFlareDebug;
+#endif
+
 void xScrFxInit();
 void xScrFxReset();
 void xScrFxUpdate(RwCamera*, F32 dt);

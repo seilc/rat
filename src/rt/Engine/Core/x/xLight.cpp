@@ -131,7 +131,9 @@ void xLightInit(xBase* b, xLightAsset* tasset)
         iprintf("xLightInit::unknown light type %d\n", tasset->lightType);
     }
 
-    if (!iLightCreate(&light->light, itype)) return;
+    if (!iLightCreate(&light->light, itype)) {
+        return;
+    }
 
     sLight[sLightTotal++] = (xLight*)b;
 
@@ -232,7 +234,9 @@ xLight* xLightCreateTempInternal(bool useLightCard)
 #endif
 {
     for (S32 i = 0; i < k_MAX_TEMP_LIGHTS; i++) {
-        if (sTempLights[i].flags & f_XLIGHT_USED) continue;
+        if (sTempLights[i].flags & f_XLIGHT_USED) {
+            continue;
+        }
 
         sTempLights[i].flags = f_XLIGHT_USED;
 
@@ -440,7 +444,9 @@ void xLightEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* to
 
 static void xLightUpdateLightCard(xLight* xl)
 {
-    if (!xl->lightCard) return;
+    if (!xl->lightCard) {
+        return;
+    }
 
     xVec3 pos;
     iLightGetPos(&xl->light, pos);
@@ -585,7 +591,9 @@ void xLightAddLocalEnv(xEnv* env)
     for (S32 i = 0; i < sLightTotal; i++) {
         xLight* xlight = sLight[i];
 
-        if (!(xlight->flags & f_XLIGHT_USED)) continue;
+        if (!(xlight->flags & f_XLIGHT_USED)) {
+            continue;
+        }
 
         if (xlight->flags & f_XLIGHT_ON) {
             if (xlight->tasset->lightFlags & 0x8) {
@@ -666,7 +674,9 @@ void xLightPrepLocal()
     for (S32 i = 0; i < sLightTotal; i++) {
         xLight* xlight = sLight[i];
 
-        if (!(xlight->flags & f_XLIGHT_USED)) continue;
+        if (!(xlight->flags & f_XLIGHT_USED)) {
+            continue;
+        }
 
         if (xlight->flags & f_XLIGHT_ON) {
             const xSphere* lightSphere = iLightGetBoundingSphere(&xlight->light);
@@ -712,7 +722,9 @@ void xLightAddLocal(xModelInstance* minst)
 {
     xLight** xlights = minst->lights;
 
-    if (!xlights[0]) return;
+    if (!xlights[0]) {
+        return;
+    }
 
     iLight* ilights[k_MAX_MODEL_LIGHTS];
     S32 i;
@@ -727,7 +739,9 @@ void xLightRemoveLocal(xModelInstance* minst)
 {
     xLight** xlights = minst->lights;
 
-    if (!xlights[0]) return;
+    if (!xlights[0]) {
+        return;
+    }
 
     iLight* ilights[k_MAX_MODEL_LIGHTS];
     S32 i;
@@ -859,10 +873,14 @@ void xLightFlash(const xVec3& pos, const xFColor& color, F32 radius, F32 upTime,
         }
     }
 
-    if (!flash) return;
+    if (!flash) {
+        return;
+    }
 
     flash->light = xLightCreateTemp_L(false, 1081);
-    if (!flash->light) return;
+    if (!flash->light) {
+        return;
+    }
 
     flash->downTime = downTime;
     flash->lifetime = downTime + (upTime + maxTime);

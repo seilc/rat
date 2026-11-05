@@ -41,9 +41,10 @@ struct zSimpleShadow
 #define MAX_SHAD_QUADS 64
 #define MAX_SHAD_VERTS (MAX_SHAD_QUADS * 6)
 #define MAX_SHAD_RASTERS 64
+#define MAX_COLL_QUEUE 2
 
-static xShadowSimpleQueue sCollQueue[2];
-static xMat4x3 sCollModelMatrices[2];
+static xShadowSimpleQueue sCollQueue[MAX_COLL_QUEUE];
+static xMat4x3 sCollModelMatrices[MAX_COLL_QUEUE];
 static RxRenderStateVector xrsv;
 static RwIm3DVertex sShadVert[MAX_SHAD_VERTS];
 static RwRaster* sShadRasters[MAX_SHAD_RASTERS];
@@ -387,7 +388,7 @@ void xShadowSimple_Add(xShadowSimpleCache* cache, xMat4x3* entMat, F32 radius, F
 
 void xShadowSimple_Render()
 {
-    for (S32 qnum = 0; qnum < 2; qnum++) {
+    for (S32 qnum = 0; qnum < MAX_COLL_QUEUE; qnum++) {
         if (sCollQueue[qnum].cache) {
             xShadowSimpleCache* cache = sCollQueue[qnum].cache;
 
@@ -435,9 +436,9 @@ inline void XSSC_Add_NudgeItAndFudgeIt(xShadowSimpleCache* cache, const xMat4x3*
 {
     xVec3* vert;
     xVec3 xformvert[3];
-    xVec3 xformnorm;
 
     if (cache->castOnEnt) {
+        xVec3 xformnorm;
         xEnt* castOnEnt = cache->castOnEnt;
 
         xMat4x3ToWorld(&xformvert[0], (xMat4x3*)castOnEnt->model->Mat, &cache->poly.vert[0]);
@@ -486,7 +487,7 @@ inline void XSSC_Add_NudgeItAndFudgeIt(xShadowSimpleCache* cache, const xMat4x3*
 
 inline S32 XSSC_Add_ShoveIntoQueue(xShadowSimpleCache* cache, const xMat4x3* mat_owner, F32 radius, F32 height, F32 ecc, bool copyMat)
 {
-    for (S32 i = 0; i < 2; i++) {
+    for (S32 i = 0; i < MAX_COLL_QUEUE; i++) {
         if (!sCollQueue[i].cache) {
             sCollQueue[i].cache = cache;
             sCollQueue[i].priority = sCollQueue[i].cache->collPriority;

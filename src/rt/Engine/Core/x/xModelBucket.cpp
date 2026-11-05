@@ -283,7 +283,7 @@ void FullAtomicDupe(RpAtomic* atomic, S32 count, RpAtomic** output)
         iAsyncLockRW();
         stream = RwStreamOpen(rwSTREAMMEMORY, rwSTREAMREAD, &rwmemA);
         xASSERT_L(407, stream);
-        S32 result = RwStreamFindChunk(stream, rwID_CLUMP, NULL, NULL);
+        RwBool result = RwStreamFindChunk(stream, rwID_CLUMP, NULL, NULL);
         xASSERT_L(412, result);
         RpClump* tempClump = RpClumpStreamRead(stream);
         xASSERT_FMT_L(415, tempClump, "tempClump is NULL\nRan out of memory for model data...  Crash is likely.\nNeed to remove models, compress anims\nor add textures to texspec.\n");

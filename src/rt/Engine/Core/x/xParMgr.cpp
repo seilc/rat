@@ -43,9 +43,8 @@ void xParMgrUpdate(F32 elapsedTime)
 
     sFrameCount += numFrames;
 
-    if (sFrameCount > 10) {
+    if (sFrameCount > 10)
         sFrameCount = 1;
-    }
 
     while (sFrameCount >= 1) {
         sFrameCount--;

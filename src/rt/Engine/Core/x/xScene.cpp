@@ -103,13 +103,11 @@ void xSceneAddEnt(xScene* sc, xEnt* ent)
     xASSERT_L(177, sc);
     xASSERT_L(178, ent);
 
-    xTriggerAsset* triggerAsset;
-
     switch (ent->collType) {
     case 0x1:
         xASSERT_L(184, sc->numTrigs < sc->numTrigsAllocd);
 
-        triggerAsset = (xTriggerAsset*)(ent->asset + 1);
+        xTriggerAsset* triggerAsset = (xTriggerAsset*)(ent->asset + 1);
 
         if (triggerAsset->flags & 0x380E) {
             sc->specialTriggers[sc->numSpecialTriggers] = ent;

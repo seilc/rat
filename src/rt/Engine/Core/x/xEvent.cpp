@@ -13,8 +13,9 @@
 
 #if DEBUG || RELEASE
 static const S32 MAX_REENTRANT_COUNT = 32;
+static const S32 MAX_EVENT_LOG_LINES = 20;
 
-char zEventLogBuf[20][256];
+char zEventLogBuf[MAX_EVENT_LOG_LINES][256];
 #endif
 
 S32 zEventLogBufInit;
@@ -158,7 +159,7 @@ void xEventDebugLogDump()
 #if DEBUG || RELEASE
     iprintf("========================================== EVENT LOG DUMP [BEGIN]\n");
 
-    for (S32 i = 0; i < 20; i++) {
+    for (S32 i = 0; i < MAX_EVENT_LOG_LINES; i++) {
         if (zEventLogBuf[i]) {
             iprintf(zEventLogBuf[i]);
         }

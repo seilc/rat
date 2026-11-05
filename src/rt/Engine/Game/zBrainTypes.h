@@ -18,6 +18,9 @@ enum eBrainType
     eBrainType_NPC_AnimViewer,
     eBrainType_NPC_SwarmOwl,
     eBrainType_NPC_Simpleton,
+#if RELEASE
+    eBrainType_NPC_InstaKill,
+#endif
     eBrainType_Player_Remy,
     eBrainType_Player_HumanVehicle,
     eBrainType_Player_Ratball,

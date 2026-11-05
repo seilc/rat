@@ -249,9 +249,8 @@ namespace {
         }
 
         if (graph.size >= 128) {
-            if (!(graph.flags & FLAG_PAUSE)) {
+            if (!(graph.flags & FLAG_PAUSE))
                 graph.start = (graph.start + 1) & 127;
-            }
         } else {
             graph.size++;
         }
@@ -322,9 +321,8 @@ void xDebugGraphUpdate(F32 dt)
         if (graph.update_time < graph.update_delay) continue;
 
         graph.update_time -= graph.update_delay;
-        if (graph.update_time > graph.update_delay) {
+        if (graph.update_time > graph.update_delay)
             graph.update_time = graph.update_delay;
-        }
         if (graph.flags & FLAG_BIND_INT)
             add_value(graph, *(S32*)graph.binding);
         else
@@ -334,7 +332,8 @@ void xDebugGraphUpdate(F32 dt)
 
 void xDebugGraphRender()
 {
-    if (tweak::render_none) return;
+    if (tweak::render_none)
+        return;
 
     xVec2* point = point_buffer;
     F32 sx = 0.05f * FB_XRES, sy = 0.05f * FB_YRES;

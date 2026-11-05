@@ -211,6 +211,7 @@ struct xMemHeap
 extern xMemInfo gMemInfo;
 extern U32 gActiveHeap;
 extern xMemHeap gxHeap[XMEM_MAX_HEAPS];
+extern U32 scratch_mem_used;
 
 #if DEBUG || RELEASE
 #define xMEMGROWALLOC(size, tag) xMemGrowAlloc(gActiveHeap, (size), (tag))

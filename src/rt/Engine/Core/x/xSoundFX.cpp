@@ -20,9 +20,8 @@ static bool xSoundFXWillSendDone(xSoundFX* pSoundFX)
         xASSERT_L(62, idx);
 
         for (S32 i = 0; i < pSoundFX->linkCount; i++, idx++) {
-            if (idx->srcEvent == eEventDone) {
+            if (idx->srcEvent == eEventDone)
                 return true;
-            }
         }
     }
     
@@ -230,9 +229,8 @@ xSoundFX* xSoundFXGet(U32 soundfxID)
     xSoundFX* sfx = NULL;
     for (S32 i = 0; i < count; i++) {
         sfx = (xSoundFX*)s->baseList[eBaseTypeSoundFX] + i;
-        if (sfx->id == soundfxID) {
+        if (sfx->id == soundfxID)
             break;
-        }
     }
     return sfx;
 }

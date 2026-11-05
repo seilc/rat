@@ -12,7 +12,9 @@
 
 static S32 g_xutilinit;
 static S32 g_crc_needinit = 1;
-static U32 g_crc32_table[256] = { 0 };
+static const S32 CRC32_TABLE_SIZE = 256;
+
+static U32 g_crc32_table[CRC32_TABLE_SIZE] = { 0 };
 
 static U16 ascii_table[3][2] = {
     { 0x824F, 0x30 },
@@ -208,7 +210,7 @@ U32 xUtil_crc_init()
     U32 crc_accum = 0;
 
     if (g_crc_needinit) {
-        for (i = 0; i < 256; i++) {
+        for (i = 0; i < CRC32_TABLE_SIZE; i++) {
             crc_accum = (U32)i << 24;
             for (j = 0; j < 8; j++) {
                 if (crc_accum & 0x80000000) {

@@ -535,9 +535,13 @@ void xMemMgrUsageTrackerCloseLog()
     sMemMgrTrckLogIsOpen = false;
 }
 
-void xMemMgrPackerStaticTally(U32, U32) {}
+void xMemMgrPackerStaticTally(U32, U32)
+{
+}
 
-void xMemMgrPackerStaticRemove(U32, U32) {}
+void xMemMgrPackerStaticRemove(U32, U32)
+{
+}
 
 void xMemMgrPackerMallocTally(U32 size, U32 tag)
 {

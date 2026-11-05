@@ -634,16 +634,14 @@ void xCMstart(xCreditsData* data, F32, xBase* parent)
 
     credits_time = 0.0f;
 
-    if (parent) {
+    if (parent)
         credits_parentID = parent->id;
-    }
 }
 
 void xCMstop()
 {
-    if (!credits_data) {
+    if (!credits_data)
         return;
-    }
 
     credits_time = 10000.0f;
     credits_data = NULL;

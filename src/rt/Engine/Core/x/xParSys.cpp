@@ -8,6 +8,7 @@
 #include "xMemMgr.h"
 #include "xPTankPool.h"
 #include "xSpacePartitionTree.h"
+#include "xutil.h"
 #include "zEvent.h"
 #include "zParSys.h"
 #include "zScene.h"
@@ -76,7 +77,7 @@ inline bool using_ptank_render(const xParSysAsset& sys)
             "Particle Emitters|\1Debug|PTank Render Mode",
             (U32*)&ptank_render_mode, ptank_render_mode_labels,
             NULL,
-            3,
+            ARRAY_LENGTH(ptank_render_mode_labels),
             NULL, 
             NULL,
             0);
@@ -177,9 +178,8 @@ static void par_sprite_update(xParSys& sys, xParGroup& group)
 
 static void render_par_sprite(void* data, xParGroup* ps)
 {
-    if (using_ptank_render(*((zParSys*)data)->tasset)) {
+    if (using_ptank_render(*((zParSys*)data)->tasset))
         return;
-    }
 
     iParMgrRenderParSys_Sprite(data, ps);
 }
@@ -280,7 +280,7 @@ void xParSysInit(xBase* b, xParSysAsset* tasset)
     t->parent = NULL;
 
     for (i = 0; i < t->cmdCount; i++) {
-        if (t->cmd[i].tasset->type == 12) {
+        if (t->cmd[i].tasset->type == eParCmdTex) {
             t->group->m_cmdTex = (xParCmdTex*)t->cmd[i].tasset;
             xParCmdTexInit(t->group->m_cmdTex);
             break;

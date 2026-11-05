@@ -251,18 +251,21 @@ namespace {
 
         if (p1->order_group != p2->order_group)
             return p1->order_group - p2->order_group;
-        if (p1->order_index != p2->order_index)
+        if (p1->order_index != p2->order_index) {
             return p1->order_index - p2->order_index;
+        }
 
         if (p1->dst_blend != p2->dst_blend)
             return p2->dst_blend - p1->dst_blend;
-        if (p1->src_blend != p2->src_blend)
+        if (p1->src_blend != p2->src_blend) {
             return p1->src_blend - p2->src_blend;
+        }
 
         const RwTexture* tex1 = RpPTankAtomicGetTexture(p1->ptank);
         const RwTexture* tex2 = RpPTankAtomicGetTexture(p2->ptank);
-        if (tex1 != tex2)
+        if (tex1 != tex2) {
             return (S32)tex1 - (S32)tex2;
+        }
 
         return p1->sequence_index - p2->sequence_index;
     }

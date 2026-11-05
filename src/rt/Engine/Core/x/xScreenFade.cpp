@@ -129,7 +129,9 @@ void xScreenFade::update(F32 seconds)
 
 void xScreenFade::render()
 {
-    if (state == eScreenFadeStateOff) return;
+    if (state == eScreenFadeStateOff) {
+        return;
+    }
 
     RwVideoMode video_mode;
     RwEngineGetVideoModeInfo(&video_mode, RwEngineGetCurrentVideoMode());

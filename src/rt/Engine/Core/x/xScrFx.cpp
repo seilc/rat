@@ -1223,7 +1223,9 @@ static void xScrFxLensFlare_RenderElements(RwRaster*, RwFrame* frame, U8 vCol, v
 
     for (S32 i = 0; i < (S32)source->asset->numElements; i++) {
         ep = source->asset->elementArray[i];
-        if (!ep) continue;
+        if (!ep) {
+            continue;
+        }
 
         if ((ep->mode & 0xFF) == 0) {
             verts[0].u = ep->uv[1][0];
@@ -1331,12 +1333,11 @@ S32 dumpFlares;
 
 void xScrFxLensFlare_Render(RwCamera* cam)
 {
-    iScrFxLensFlare* flare;
-
 #if DEBUG || RELEASE
     if (!(gxLensFlareDebug & 0x1))
 #endif
     {
+        iScrFxLensFlare* flare;
         RwMatrix* cammat = RwFrameGetMatrix(RwCameraGetFrame(globalCamera));
         xVec3* campos = (xVec3*)RwMatrixGetPos(cammat);
         xVec3* cam_at = (xVec3*)&cammat->at;
