@@ -1,6 +1,7 @@
 #ifndef XSPLINE_H
 #define XSPLINE_H
 
+#include "xDebug.h"
 #include "xVec3.h"
 
 struct xCoef
@@ -30,6 +31,12 @@ struct xSpline3
     U32 arcSample;
     F32* arcLength;
 };
+
+inline F32 xSpline3_ArcTotal(xSpline3* spl)
+{
+    xASSERT_L(124, spl->arcLength && spl->arcSample);
+    return spl->arcLength[spl->N * spl->arcSample - 1];
+}
 
 void xSpline3_EvalSeg(xSpline3* spl, F32 u, U32 deriv, xVec3* o);
 void xSpline3_EvalTime(xSpline3* spl, F32 time, U32 deriv, xVec3* o);

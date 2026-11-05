@@ -88,6 +88,7 @@ struct xVec3
     void Scale(const xVec3& a, F32 scalar);
     F32 Distance(const xVec3& other) const;
     F32 Distance2(const xVec3& other) const;
+    void Negate();
     void Negate(const xVec3& a);
     void SubAdd(const xVec3& a, const xVec3& b, const xVec3& c);
     void ScaleComponents(const xVec3& scale);
@@ -146,6 +147,7 @@ struct xVec3
 F32 xVec3Normalize(xVec3* o, const xVec3* v);
 F32 xVec3NormalizeFast(xVec3* o, const xVec3* v);
 void xVec3Copy(xVec3* o, const xVec3* v);
+U32 xVec3Equals(const xVec3* a, const xVec3* b);
 F32 xVec3Dot(F32 ax, F32 ay, F32 az, F32 bx, F32 by, F32 bz);
 F32 xVec3Dot(const xVec3* vec1, const xVec3* vec2);
 
@@ -258,6 +260,13 @@ inline F32 xVec3::Distance2(const xVec3& other) const
     xVec3 diff;
     diff.Sub(other, *this);
     return diff.length2();
+}
+
+inline void xVec3::Negate()
+{
+    x = -x;
+    y = -y;
+    z = -z;
 }
 
 inline void xVec3::Negate(const xVec3& a)
