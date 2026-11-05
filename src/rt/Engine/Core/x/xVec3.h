@@ -95,6 +95,13 @@ struct xVec3
     void AddCombine(const xVec3& v, const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
 };
 
+#define xVec3AddScaleMacro(o, a, b, s)          \
+{                                               \
+    (o)->x = (a)->x + (s) * (b)->x;             \
+    (o)->y = (a)->y + (s) * (b)->y;             \
+    (o)->z = (a)->z + (s) * (b)->z;             \
+}
+
 #define xVec3NormalizeMacro(o, v, outlen)                                                         \
 {                                                                                                 \
     F32 len2 = xsqr((v)->x) + xsqr((v)->y) + xsqr((v)->z);                                        \
@@ -115,6 +122,25 @@ struct xVec3
         (o)->y = (v)->y * len_inv;                                                                \
         (o)->z = (v)->z * len_inv;                                                                \
     }                                                                                             \
+}
+
+#define xVec3NormalizeXZMacro(o, v, outlen)     \
+{                                               \
+    F32 len2 = xsqr((v)->x) + xsqr((v)->z);     \
+    if (xeq(len2, 1.0f, EPSILON)) {             \
+        (o)->x = (v)->x;                        \
+        (o)->z = (v)->z;                        \
+        *(outlen) = 1.0f;                       \
+    } else if (xeq(len2, 0.0f, EPSILON)) {      \
+        (o)->x = 0.0f;                          \
+        (o)->z = 0.0f;                          \
+        *(outlen) = 0.0f;                       \
+    } else {                                    \
+        *(outlen) = xsqrt(len2);                \
+        F32 len_inv = 1.0f / *(outlen);         \
+        (o)->x = (v)->x * len_inv;              \
+        (o)->z = (v)->z * len_inv;              \
+    }                                           \
 }
 
 F32 xVec3Normalize(xVec3* o, const xVec3* v);
@@ -231,6 +257,13 @@ inline F32 xVec3::Distance2(const xVec3& other) const
     xVec3 diff;
     diff.Sub(other, *this);
     return diff.length2();
+}
+
+inline void xVec3::Negate(const xVec3& a)
+{
+    x = -a.x;
+    y = -a.y;
+    z = -a.z;
 }
 
 inline void xVec3::Lerp(const xVec3& start, const xVec3& end, F32 percent)

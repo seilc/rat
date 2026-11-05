@@ -8,7 +8,12 @@ class zPad;
 class zPadAnalogControl
 {
 public:
+    static const S32 ANALOG_MIN;
+    static const S32 ANALOG_MAX;
+
     void Get(F32& x, F32& y);
+    F32 GetX();
+    F32 GetY();
 
 private:
     zPad* owner;
@@ -18,6 +23,9 @@ private:
 class zPad
 {
 public:
+    static const S32 MAX_PORTS;
+    static const S32 MAX_PADS;
+
     static zPad* GetDebugPad();
 
     bool On(U32 button);

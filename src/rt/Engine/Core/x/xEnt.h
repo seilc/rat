@@ -134,6 +134,18 @@ inline xVec3* xEntGetPos(const xEnt* ent)
     return &xModelGetFrame(ent->model)->pos;
 }
 
+inline xVec3* xEntGetFacingDirection(const xEnt* ent)
+{
+    xASSERT_L(1083, ent->model);
+    return &xModelGetFrame(ent->model)->at;
+}
+
+inline xVec3* xEntGetUpDirection(const xEnt* ent)
+{
+    xASSERT_L(1088, ent->model);
+    return &xModelGetFrame(ent->model)->up;
+}
+
 inline void xEntDisable(xEnt* ent)
 {
     xBaseDisable(ent);
@@ -164,6 +176,12 @@ inline xMat4x3* xEntGetFrame(const xEnt* ent)
 {
     xASSERT_L(1098, ent->model);
     return xModelGetFrame(ent->model);
+}
+
+inline U32 xEntGetAnimFlags(const xEnt* ent)
+{
+    xASSERT_L(1103, ent->model != NULL && ent->model->Anim != NULL);
+    return ent->model->Anim->Single->State->UserFlags;
 }
 
 bool xEntValidType(U8 type);

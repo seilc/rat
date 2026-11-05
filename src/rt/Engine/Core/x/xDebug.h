@@ -89,6 +89,7 @@ do {                                            \
 
 #define xFAIL_L(line) do { _xFAIL(line, "*always*", "%s", "*always*") } while (0)
 #define xFAIL_FMT_L(line, ...) do { _xFAIL(line, "*always*", __VA_ARGS__) } while (0)
+#define xFAIL_RETURN_VALUE_L(line, retval) do { _xFAIL(line, "*always*", "%s", "*always*") return (retval); } while (0)
 
 #define xFAIL_ONCE_L(line, ...)                                                                   \
 do {                                                                                              \
@@ -141,6 +142,7 @@ do {                                                                            
 #define xASSERT_FMT_L(line, cond, ...)
 #define xFAIL_L(line)
 #define xFAIL_FMT_L(line, ...)
+#define xFAIL_RETURN_VALUE_L(line, retval) return (retval)
 #define xFAIL_ONCE_L(line, ...)
 #define xASSERT_ONCE(cond)
 #define xASSERT_ONCE_L(line, cond)
@@ -154,6 +156,7 @@ do {                                                                            
 #define xFAIL_FMT(...) xFAIL_FMT_L(__LINE__, __VA_ARGS__)
 #define xFAIL_MSG_L(line, msg) xASSERT_FMT_L(line, (0), msg)
 #define xFAIL_MSG(msg) xFAIL_MSG_L(__LINE__, msg)
+#define xFAIL_RETURN_VALUE(retval) xFAIL_RETURN_VALUE_L(__LINE__, retval)
 #define xFAIL_ONCE(...) xFAIL_ONCE_L(__LINE__, __VA_ARGS__)
 
 #define _xFAIL_RETURN_IF(line, cond, condstr, retval)                                             \
