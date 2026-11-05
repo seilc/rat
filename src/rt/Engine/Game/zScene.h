@@ -52,6 +52,9 @@ struct zScene : xScene
 
 typedef xBase*(*zSceneCallback)(xBase*, zScene*, void*);
 
+extern const char** all_entity_labels;
+extern U32* all_entity_ids;
+extern U32 all_entity_count;
 extern const char** all_texture_labels;
 extern U32* all_texture_ids;
 extern U32 all_texture_count;

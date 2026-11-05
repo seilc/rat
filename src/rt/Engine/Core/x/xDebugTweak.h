@@ -21,8 +21,16 @@ struct tweak_callback
     void(*convert_mem_to_tweak)(const tweak_info&, void*);
     void(*convert_tweak_to_mem)(const tweak_info&, void*);
 
-    static tweak_callback create(void(*on_change)(const tweak_info&), void(*on_select)(const tweak_info&) = NULL, void(*on_unselect)(const tweak_info&) = NULL, void(*on_start_edit)(const tweak_info&) = NULL, void(*on_stop_edit)(const tweak_info&) = NULL, void(*on_expand)(const tweak_info&) = NULL, void(*on_collapse)(const tweak_info&) = NULL, void(*on_update)(const tweak_info&) = NULL, void(*convert_mem_to_tweak)(const tweak_info&, void*) = NULL, void(*convert_tweak_to_mem)(const tweak_info&, void*) = NULL);
-    static tweak_callback create_change(void(*on_change)(const tweak_info&));
+    static tweak_callback create(void(*on_change)(const tweak_info&), void(*on_select)(const tweak_info&) = NULL, void(*on_unselect)(const tweak_info&) = NULL, void(*on_start_edit)(const tweak_info&) = NULL, void(*on_stop_edit)(const tweak_info&) = NULL, void(*on_expand)(const tweak_info&) = NULL, void(*on_collapse)(const tweak_info&) = NULL, void(*on_update)(const tweak_info&) = NULL, void(*convert_mem_to_tweak)(const tweak_info&, void*) = NULL, void(*convert_tweak_to_mem)(const tweak_info&, void*) = NULL)
+    {
+        tweak_callback cb = { on_change, on_select, on_unselect, on_start_edit, on_stop_edit,
+                              on_expand, on_collapse, on_update,
+                              convert_mem_to_tweak, convert_tweak_to_mem };
+        return cb;
+    }
+
+    static tweak_callback create_change(void(*on_change)(const tweak_info&))
+    { tweak_callback cb = { on_change, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }; return cb; }
 
     static tweak_callback create_expand(void(*on_expand)(const tweak_info&), void(*on_collapse)(const tweak_info&))
     { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, on_expand, on_collapse, NULL, NULL, NULL }; return cb; }
@@ -87,6 +95,7 @@ struct tweak_info
 void* xDebugTweak_StaticAlloc(U32 size);
 tweak_info* xDebugGetTweak(const char* name);
 
+void xDebugAddTweak(const char* name, S32* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, S8* v, S8 vmin, S8 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, U16* v, U16 vmin, U16 vmax, const tweak_callback* cb, void* context, U32 flags);
@@ -94,7 +103,10 @@ void xDebugAddTweak(const char* name, U8* v, U8 vmin, U8 vmax, const tweak_callb
 void xDebugAddTweak(const char* name, F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddSelectTweak(const char* name, S8* v, const char** labels, const S8* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddSelectTweak(const char* name, U32* v, const char** labels, const U32* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddSelectTweak(const char* name, U8* v, const char** labels, const U8* values, U32 labels_size, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddFlagTweak(const char* name, U32* v, U32 mask, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddFlagTweak(const char* name, U8* v, U8 mask, const tweak_callback* cb, void* context, U32 flags);
+U32 xDebugCountChildTweaks(const tweak_info& info);
 void xDebugAddTweak(const char* name, xVec3* v, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);

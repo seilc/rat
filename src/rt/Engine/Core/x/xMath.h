@@ -40,7 +40,10 @@ inline S32 log2ceil(S32 value)
 }
 
 template <class T>
-T range_limit(T v, T minv, T maxv);
+T range_limit(T v, T minv, T maxv)
+{
+    return v <= minv ? minv : (v >= maxv ? maxv : v);
+}
 
 struct tweak_callback;
 struct tweak_info;

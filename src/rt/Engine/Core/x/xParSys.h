@@ -16,7 +16,7 @@ struct xParSys : xBase
     xParCmd* cmd;
     xParSys* parent;
     xParGroup* group;
-    bool visible;
+    U8 visible;
     RwTexture* txtr_particle;
 #if DEBUG || RELEASE
     xParCmdAny* cmd_buffer;

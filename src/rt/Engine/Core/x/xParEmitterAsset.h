@@ -99,6 +99,15 @@ struct xParInterp
     U32 interp;
     F32 freq;
     F32 oofreq;
+
+    void order()
+    {
+        if (val[1] < val[0]) {
+            F32 tmp = val[1];
+            val[1] = val[0];
+            val[0] = tmp;
+        }
+    }
 };
 
 struct xParEmitterPropsAsset : xBaseAsset

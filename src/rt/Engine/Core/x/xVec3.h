@@ -30,7 +30,7 @@ struct xVec3
     static const xVec3 m_NegDoubleVec;
 
     xVec3& assign(F32 x, F32 y, F32 z) { this->x = x; this->y = y; this->z = z; return *this; }
-    xVec3& assign(F32 v);
+    xVec3& assign(F32 v) { return assign(v, v, v); }
     xVec3& operator+=(const xVec3& v) { x += v.x; y += v.y; z += v.z; return *this; }
     xVec3& operator-=(const xVec3& v) { x -= v.x; y -= v.y; z -= v.z; return *this; }
     xVec3& operator+=(F32 f) { x += f; y += f; z += f; return *this; }
@@ -83,6 +83,7 @@ struct xVec3
     void ScaleDiff(const xVec3& a, const xVec3& b, F32 scale);
     void Add(const xVec3& a);
     void Add(const xVec3& a, const xVec3& b);
+    void Lerp(const xVec3& start, const xVec3& end, F32 percent);
     void Scale(F32 scalar);
     void Scale(const xVec3& a, F32 scalar);
     F32 Distance(const xVec3& other) const;
@@ -223,6 +224,13 @@ inline F32 xVec3::Distance2(const xVec3& other) const
     xVec3 diff;
     diff.Sub(other, *this);
     return diff.length2();
+}
+
+inline void xVec3::Lerp(const xVec3& start, const xVec3& end, F32 percent)
+{
+    x = percent * (end.x - start.x) + start.x;
+    y = percent * (end.y - start.y) + start.y;
+    z = percent * (end.z - start.z) + start.z;
 }
 
 inline void xVec3::Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale1)
