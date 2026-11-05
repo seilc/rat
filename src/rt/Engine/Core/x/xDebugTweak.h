@@ -127,6 +127,7 @@ extern const tweak_callback cb_tweak_force_lt;
 extern const tweak_callback cb_tweak_force_gt;
 extern const tweak_callback cb_tweak_force_lteq;
 extern const tweak_callback cb_tweak_force_gteq;
+extern const tweak_callback cb_tweak_convert_degrees;
 
 extern const char* tweak_blend_mode_labels[11];
 extern const U32 tweak_blend_mode_values[11];
@@ -135,6 +136,11 @@ typedef bool(*xDebugRemoveTweaksCallback)(const tweak_info&, void*);
 
 void xDebugRemoveTweak(const substr& name);
 void xDebugRemoveTweaks(const substr& name, xDebugRemoveTweaksCallback cb, void* context);
+
+inline void xDebugAddFlagTweak(const char* name, S32* v, S32 mask, const tweak_callback* cb, void* context, U32 flags)
+{
+    xDebugAddFlagTweak(name, (U32*)v, (U32)mask, cb, context, flags);
+}
 
 inline void xDebugRemoveTweak(const char* name)
 { xDebugRemoveTweak(substr::create(name, strlen(name))); }

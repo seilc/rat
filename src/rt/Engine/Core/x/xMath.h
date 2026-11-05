@@ -220,6 +220,15 @@ inline void xDampSpring(F32& s, F32& v, F32 dt, F32 k)
     xDampSpring(s, v, dt, k, xDampSpringCoeff(dt, k));
 }
 
+inline F32 xSCurve(F32 t)
+{
+    xASSERT_L(757, (t >= 0.0f) && (t <= 1.0f));
+    if (t <= 0.5f) {
+        return 2.0f * t * t;
+    }
+    t = 1.0f - t; return 1.0f - 2.0f * t * t;
+}
+
 inline F32 xrmod(F32 ang)
 {
     F32 frac = (1.0f / (2.0f * PI)) * ang;

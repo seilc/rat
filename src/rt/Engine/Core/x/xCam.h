@@ -1,8 +1,12 @@
 #ifndef XCAM_H
 #define XCAM_H
 
-#include "xMath3.h"
 #include "xColor.h"
+#include "xDebug.h"
+#include "xDebugTweak.h"
+#include "xMath.h"
+#include "xMath2.h"
+#include "xMath3.h"
 #include "xPad.h"
 
 #include <rwcore.h>
@@ -13,6 +17,11 @@ class xCamTransition;
 struct xScene;
 class zCamSplineCommonMix;
 class zCam2Player;
+class xCamTimeBias;
+
+#if DEBUG || RELEASE
+extern bool gxCamShowDebugMessages;
+#endif
 
 enum xCamCoordType
 {
@@ -131,7 +140,13 @@ public:
     xCamSpatialInfo spatial;
     xCamSpatialInfo coll_spatial;
     xCamConfigCommon cfg_common;
-    
+
+    bool started() const { return flags & 0x1; }
+    bool blending() const { return blender != NULL; }
+    bool active();
+    bool blendingTo() const;
+    bool blendingFrom() const;
+
     virtual xCam* get_final_dest() { return this; }
     virtual zCamSplineCommonMix* get_common_mix() { return NULL; }
     virtual void create();
@@ -145,13 +160,48 @@ public:
     virtual xCam* find_camera(U32 ownerID) { return owner == ownerID ? this : NULL; }
     virtual zCam2Player* get_zCam2Player() const { return NULL; }
     virtual F32 getCameraPlayerAudioBias() const { return 0.0f; }
-    virtual xCamConfigFollow* config_follow();
+    virtual xCamConfigFollow* config_follow() { return NULL; }
 
-    static void coord_to_world(xVec3& loc, const xCamCoordCylinder& c);
+    void do_update(xScene& scene, F32 dt)
+    {
+        pre_update(scene);
+        update(scene, dt);
+        post_update(scene);
+    }
+
+    static void scene_enter();
+    static void scene_exit();
+
+    void refresh_mat(xMat4x3& mat, const xCamSpatialInfo& spatial);
+    void refresh_mat();
+#if DEBUG || RELEASE
+    void debug_init();
+#else
+    void debug_init() {}
+#endif
+
     static void coord_to_local(xVec3& c, const xVec3& loc);
+    static void coord_to_world(xVec3& loc, const xVec3& c);
+    static void coord_to_world(xVec3& loc, const xCamCoordCylinder& c);
+    static void coord_to_world(xVec3& loc, const xCamCoordSphere& c);
     static void orient_to_local(xQuat& o, const xMat3x3& mat);
+    static void orient_to_local(xCamOrientEuler& o, const xMat3x3& mat);
+    static void orient_to_world(xMat3x3& mat, const xQuat& o);
+    static void orient_to_world(xMat3x3& mat, const xCamOrientEuler& o);
     static xVec3& convert(xVec3& o, const xCamCoordCylinder& i);
+    static xVec3& convert(xVec3& o, const xCamCoordSphere& i);
     static xVec3& convert(xVec3& o, const xCamCoordPolar& i);
+    static xCamCoordCylinder& convert(xCamCoordCylinder& o, const xCamCoordSphere& i);
+    static xCamCoordSphere& convert(xCamCoordSphere& o, const xCamCoordCylinder& i);
+    static xQuat& convert(xQuat& o, const xCamOrientEuler& i);
+    static xCamOrientEuler& convert(xCamOrientEuler& o, const xQuat& i);
+    static void blend(F32& o, F32 a, F32 b, F32 s);
+    static void blend_radian(F32& o, F32 a, F32 b, F32 s);
+    static void blend(xVec3& o, const xVec3& a, const xVec3& b, F32 s);
+    static void blend(xCamCoordCylinder& o, const xCamCoordCylinder& a, const xCamCoordCylinder& b, F32 s);
+    static void blend(xCamCoordSphere& o, const xCamCoordSphere& a, const xCamCoordSphere& b, F32 s);
+    static void blend(xQuat& o, const xQuat& a, const xQuat& b, F32 s);
+    static void blend(xCamOrientEuler& o, const xCamOrientEuler& a, const xCamOrientEuler& b, F32 s);
     static void blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s);
     static void blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s);
     static void blend3(xCamConfigFollow::zone_data& o, const xCamConfigFollow::zone_data& i0,
@@ -161,6 +211,9 @@ public:
     static void spring_interp(T& s, U& v, const T& s0, const T& s1, F32 dt, F32 speed);
 
 private:
+    friend struct xCamGroup;
+    friend struct xCamBlend;
+
     S32 group_flags;
     xCamBlend* blender;
 
@@ -174,23 +227,227 @@ public:
 
     virtual void debug_render();
     virtual void debug_mode_draw() {}
-    virtual void add_tweaks(const char* prefix);
+    virtual void add_tweaks(const char* prefix) { add_tweaks_common(prefix); }
+
+    void add_tweaks_common(const char* prefix);
+    void add_tweaks_config_follow(const char* prefix);
 #endif
 };
 
-inline void xCam::coord_to_world(xVec3& loc, const xCamCoordCylinder& c)
+struct xCamGroup
 {
-    convert(loc, c);
+public:
+    void create();
+    void destroy();
+    void reset();
+    void update(xScene& scene, F32 dt);
+    void transition_to(xCam& cam, const xCamTransitionParams* params, bool force_cut, bool force_restart);
+    void add(xCam& cam, bool force_cut);
+    void remove(xCam& cam, bool);
+    void get_view_window(xVec2& vw);
+    void stop(xCam& cam);
+    void notify_released(xCam& cam);
+    void set_child_flags(S32 add, S32 remove);
+#if DEBUG || RELEASE
+    void debug_render(bool force, bool sparse);
+    void PrintCamMsg(const char* msg, U32 ownerID) const;
+    void DumpOwned(S32) const;
+#endif
+
+    xMat4x3 mat;
+    xMat4x3 coll_mat;
+    xVec3 coll_atXZ;
+    F32 cameraPlayerAudioBias;
+    xVec3 vel;
+    F32 fov;
+    F32 fov_default;
+    S32 flags;
+    xCam* primary;
+    xPad::analog_data analog;
+
+private:
+    xCamBlend* grab_blend_cam();
+    void set_primary(xCam* toCamera, bool force_restart);
+    xCam* get_blend(xCamTransition* transition, xCam& to);
+    xCamBlend* create_blend();
+
+    S32 child_flags;
+    S32 child_flags_mask;
+    xCamBlend* blend_cam[4];
+};
+
+inline void xCamGroup::stop(xCam& cam)
+{
+    if (cam.started()) {
+        cam.stop();
+    }
+
+    cam.group = NULL;
 }
+
+struct xCamScreen
+{
+    void create(S32 w, S32 h);
+    void destroy();
+    void set_scene(xScene& scene);
+    void prepare_render();
+    void begin_render(bool clear);
+    void end_render();
+    void set_world_matrix(const xMat4x3& mat);
+    void get_world_matrix(xMat4x3& mat);
+    void set_fov(F32 fov);
+    F32 world_to_screen(xVec3& screen_loc, const xVec3& world_loc) const;
+    static void create_frustum_planes(xVec4* frust_planes, const xMat4x3& ltm, const xVec2& view_offset, const xVec2& view_window, F32 near_plane, F32 far_plane);
+    void create_frustum_planes(xVec4* frust_planes) const;
+
+    RwCamera* icam;
+    F32 fov;
+};
+
+class xCamBias
+{
+public:
+    xCamBias() { mIsBiDirectional = false; }
+
+    virtual void Start() = 0;
+    virtual void Update(F32 dt) = 0;
+    virtual F32 GetBias() = 0;
+    virtual void Reverse() = 0;
+    virtual bool IsActive() = 0;
+    virtual bool DidComplete() = 0;
+
+    static xCamBias* GetBiasObject(xCamTransition* transition, xCamTimeBias& timeBias);
+
+protected:
+    bool mIsBiDirectional;
+};
+
+class xCamTimeBias : public xCamBias
+{
+public:
+    void Init(F32 blendTime);
+    virtual void Start();
+    virtual void Update(F32 dt);
+    virtual F32 GetBias();
+    virtual void Reverse();
+    virtual bool IsActive();
+    virtual bool DidComplete();
+    void CalcBias();
+
+private:
+    F32 bias;
+    F32 time;
+    F32 blendTime;
+};
+
+struct xCamBlend : xCam
+{
+    virtual zCam2Player* get_zCam2Player() const { return src->get_zCam2Player(); }
+    virtual xCam* get_final_dest() { return dst->get_final_dest(); }
+
+    virtual void create();
+    virtual void destroy();
+    virtual void start();
+    virtual void stop();
+    virtual void pre_update(xScene& scene);
+    virtual void post_update(xScene& scene);
+    virtual void update(xScene& scene, F32 dt);
+    virtual xCam* get_next();
+    virtual F32 getCameraPlayerAudioBias() const;
+    virtual xCam* find_camera(U32 ownerID);
+
+    void attach(xCam& src, xCam& dst);
+    void reverse();
+    void blend_coord(F32 s);
+    void blend_orient(F32 s);
+
+    xVec3& convert(const xCam& cam, xVec3& c) const;
+    xCamCoordCylinder& convert(const xCam& cam, xCamCoordCylinder& c) const;
+    xCamCoordSphere& convert(const xCam& cam, xCamCoordSphere& c) const;
+    xQuat& convert(const xCam& cam, xQuat& c) const;
+    xCamOrientEuler& convert(const xCam& cam, xCamOrientEuler& c) const;
+    xVec3& coll_convert(const xCam& cam, xVec3& c) const;
+    xCamCoordCylinder& coll_convert(const xCam& cam, xCamCoordCylinder& c) const;
+    xCamCoordSphere& coll_convert(const xCam& cam, xCamCoordSphere& c) const;
+    xQuat& coll_convert(const xCam& cam, xQuat& c) const;
+    xCamOrientEuler& coll_convert(const xCam& cam, xCamOrientEuler& c) const;
+
+#if DEBUG || RELEASE
+    virtual void debug_render();
+    virtual void add_tweaks(const char* prefix);
+#endif
+
+    xCam* src;
+    xCam* dst;
+    xCamBias* bias;
+    xCamTimeBias timeBias;
+    xCamTransition* transition;
+};
+
+struct xCamDebug : xCam
+{
+    struct config : xCamConfigFollow
+    {
+        xVec2 stick_vel;
+        xVec3 move_vel;
+        F32 slow_turn;
+        F32 slow_move;
+    };
+
+    virtual void create();
+    virtual void start();
+    virtual void update(xScene&, F32 dt);
+
+    void refresh_input();
+
+#if DEBUG || RELEASE
+    virtual void debug_render();
+    virtual void add_tweaks(const char* prefix);
+#endif
+
+    config cfg;
+    xVec2 dpad;
+    F32 slow_input;
+};
 
 inline void xCam::coord_to_local(xVec3& c, const xVec3& loc)
 {
     c = loc;
 }
 
+inline void xCam::coord_to_world(xVec3& loc, const xVec3& c)
+{
+    loc = c;
+}
+
+inline void xCam::coord_to_world(xVec3& loc, const xCamCoordCylinder& c)
+{
+    convert(loc, c);
+}
+
+inline void xCam::coord_to_world(xVec3& loc, const xCamCoordSphere& c)
+{
+    convert(loc, c);
+}
+
 inline void xCam::orient_to_local(xQuat& o, const xMat3x3& mat)
 {
     xQuatFromMat(&o, &mat);
+}
+
+inline void xCam::orient_to_local(xCamOrientEuler& o, const xMat3x3& mat)
+{
+    xMat3x3GetEuler(&mat, (xVec3*)&o);
+}
+
+inline void xCam::orient_to_world(xMat3x3& mat, const xQuat& o)
+{
+    xQuatToMat(&o, &mat);
+}
+
+inline void xCam::orient_to_world(xMat3x3& mat, const xCamOrientEuler& o)
+{
+    xMat3x3Euler(&mat, o.yaw, o.pitch, o.roll);
 }
 
 inline xVec3& xCam::convert(xVec3& o, const xCamCoordCylinder& i)
@@ -201,6 +458,14 @@ inline xVec3& xCam::convert(xVec3& o, const xCamCoordCylinder& i)
     return o;
 }
 
+inline xVec3& xCam::convert(xVec3& o, const xCamCoordSphere& i)
+{
+    xVec3 dir;
+    xQuatToLookVec(&i.dir, &dir);
+    xVec3AddScaleMacro(&o, &i.origin, &dir, i.dist);
+    return o;
+}
+
 inline xVec3& xCam::convert(xVec3& o, const xCamCoordPolar& i)
 {
     F32 cp = i.dist * icos(i.phi);
@@ -208,6 +473,91 @@ inline xVec3& xCam::convert(xVec3& o, const xCamCoordPolar& i)
     o.y = i.origin.y + i.dist * isin(i.phi);
     o.z = i.origin.z + cp * icos(i.theta);
     return o;
+}
+
+inline xCamCoordCylinder& xCam::convert(xCamCoordCylinder& o, const xCamCoordSphere& i)
+{
+    o.origin = i.origin;
+
+    xVec3 offset;
+    xQuatToLookVec(&i.dir, &offset);
+    offset *= i.dist;
+    o.dist = xsqrt(offset.x * offset.x + offset.z * offset.z);
+    o.height = offset.y;
+    o.theta = xatan2(offset.x, offset.z);
+    return o;
+}
+
+inline xCamCoordSphere& xCam::convert(xCamCoordSphere& o, const xCamCoordCylinder& i)
+{
+    o.origin = i.origin;
+
+    xMat3x3 mat;
+    xVec3 offset = { i.dist * -isin(i.theta), -i.height, i.dist * -icos(i.theta) };
+    o.dist = xMat3x3LookVec(&mat, &offset);
+    xQuatFromMat(&o.dir, &mat);
+    return o;
+}
+
+inline xQuat& xCam::convert(xQuat& o, const xCamOrientEuler& i)
+{
+    xMat3x3 mat;
+    xMat3x3Euler(&mat, (const xVec3*)&i);
+    xQuatFromMat(&o, &mat);
+    return o;
+}
+
+inline xCamOrientEuler& xCam::convert(xCamOrientEuler& o, const xQuat& i)
+{
+    xMat3x3 mat;
+    xQuatToMat(&i, &mat);
+    xMat3x3GetEuler(&mat, (xVec3*)&o);
+    return o;
+}
+
+inline void xCam::blend(F32& o, F32 a, F32 b, F32 s)
+{
+    o = a * (1.0f - s) + b * s;
+}
+
+inline void xCam::blend_radian(F32& o, F32 a, F32 b, F32 s)
+{
+    F32 diff = xrmod(PI + (b - a)) - PI;
+    o = xrmod(a + diff * s);
+}
+
+inline void xCam::blend(xVec3& o, const xVec3& a, const xVec3& b, F32 s)
+{
+    blend(o.x, a.x, b.x, s);
+    blend(o.y, a.y, b.y, s);
+    blend(o.z, a.z, b.z, s);
+}
+
+inline void xCam::blend(xCamCoordCylinder& o, const xCamCoordCylinder& a, const xCamCoordCylinder& b, F32 s)
+{
+    blend(o.origin, a.origin, b.origin, s);
+    blend(o.dist, a.dist, b.dist, s);
+    blend(o.height, a.height, b.height, s);
+    blend_radian(o.theta, a.theta, b.theta, s);
+}
+
+inline void xCam::blend(xCamCoordSphere& o, const xCamCoordSphere& a, const xCamCoordSphere& b, F32 s)
+{
+    blend(o.origin, a.origin, b.origin, s);
+    blend(o.dist, a.dist, b.dist, s);
+    xQuatSlerp(&o.dir, &a.dir, &b.dir, s);
+}
+
+inline void xCam::blend(xQuat& o, const xQuat& a, const xQuat& b, F32 s)
+{
+    xQuatSlerp(&o, &a, &b, s);
+}
+
+inline void xCam::blend(xCamOrientEuler& o, const xCamOrientEuler& a, const xCamOrientEuler& b, F32 s)
+{
+    blend_radian(o.yaw, a.yaw, b.yaw, s);
+    blend_radian(o.pitch, a.pitch, b.pitch, s);
+    blend_radian(o.roll, a.roll, b.roll, s);
 }
 
 inline void xCam::blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s)
@@ -243,73 +593,128 @@ void xCam::spring_interp(T& s, U& v, const T& s0, const T& s1, F32 dt, F32 speed
     spring_interp(s, v, s0, s1, dt, speed, e);
 }
 
-struct xCamGroup
+inline xVec3& xCamBlend::convert(const xCam& cam, xVec3& c) const
 {
-public:
-    void transition_to(xCam& cam, const xCamTransitionParams* params, bool force_cut, bool force_restart);
+    switch (cam.coord_type) {
+    case XCAM_COORD_CART:
+        return (xVec3&)cam.spatial.coord.cart;
+    case XCAM_COORD_CYLINDER:
+        return xCam::convert(c, cam.spatial.coord.cylinder);
+    case XCAM_COORD_SPHERE:
+        return xCam::convert(c, cam.spatial.coord.sphere);
+    default:
+        xFAIL_RETURN_VALUE_L(1010, c);
+    }
+}
 
-    xMat4x3 mat;
-    xMat4x3 coll_mat;
-    xVec3 coll_atXZ;
-    F32 cameraPlayerAudioBias;
-    xVec3 vel;
-    F32 fov;
-    F32 fov_default;
-    S32 flags;
-    xCam* primary;
-    xPad::analog_data analog;
-
-private:
-    S32 child_flags;
-    S32 child_flags_mask;
-    xCamBlend* blend_cam[4];
-};
-
-struct xCamScreen
+inline xCamCoordCylinder& xCamBlend::convert(const xCam& cam, xCamCoordCylinder& c) const
 {
-    RwCamera* icam;
-    F32 fov;
-};
+    switch (cam.coord_type) {
+    case XCAM_COORD_CYLINDER:
+        return (xCamCoordCylinder&)cam.spatial.coord.cylinder;
+    case XCAM_COORD_SPHERE:
+        return xCam::convert(c, cam.spatial.coord.sphere);
+    default:
+        xFAIL_RETURN_VALUE_L(1021, c);
+    }
+}
 
-class xCamBias
+inline xCamCoordSphere& xCamBlend::convert(const xCam& cam, xCamCoordSphere& c) const
 {
-public:
-    xCamBias();
+    switch (cam.coord_type) {
+    case XCAM_COORD_CYLINDER:
+        return xCam::convert(c, cam.spatial.coord.cylinder);
+    case XCAM_COORD_SPHERE:
+        return (xCamCoordSphere&)cam.spatial.coord.sphere;
+    default:
+        xFAIL_RETURN_VALUE_L(1032, c);
+    }
+}
 
-    virtual void Start() = 0;
-    virtual void Update(F32 dt) = 0;
-    virtual F32 GetBias() = 0;
-    virtual void Reverse() = 0;
-    virtual bool IsActive() = 0;
-    virtual bool DidComplete() = 0;
-
-protected:
-    bool mIsBiDirectional;
-};
-
-class xCamTimeBias : public xCamBias
+inline xQuat& xCamBlend::convert(const xCam& cam, xQuat& c) const
 {
-public:
-    virtual void Start();
-    virtual void Update(F32 dt);
-    virtual F32 GetBias();
-    virtual void Reverse();
-    virtual bool IsActive();
-    virtual bool DidComplete();
+    switch (cam.orient_type) {
+    case XCAM_ORIENT_QUAT:
+        return (xQuat&)cam.spatial.orient.quat;
+    case XCAM_ORIENT_EULER:
+        return xCam::convert(c, cam.spatial.orient.euler);
+    default:
+        xFAIL_RETURN_VALUE_L(1043, c);
+    }
+}
 
-private:
-    F32 bias;
-    F32 time;
-    F32 blendTime;
-};
-
-struct xCamBlend : xCam
+inline xCamOrientEuler& xCamBlend::convert(const xCam& cam, xCamOrientEuler& c) const
 {
-    xCam* src;
-    xCam* dst;
-    xCamBias* bias;
-    xCamTimeBias timeBias;
-    xCamTransition* transition;
-};
+    switch (cam.orient_type) {
+    case XCAM_ORIENT_QUAT:
+        return xCam::convert(c, cam.spatial.orient.quat);
+    case XCAM_ORIENT_EULER:
+        return (xCamOrientEuler&)cam.spatial.orient.euler;
+    default:
+        xFAIL_RETURN_VALUE_L(1054, c);
+    }
+}
+
+inline xVec3& xCamBlend::coll_convert(const xCam& cam, xVec3& c) const
+{
+    switch (cam.coord_type) {
+    case XCAM_COORD_CART:
+        return (xVec3&)cam.coll_spatial.coord.cart;
+    case XCAM_COORD_CYLINDER:
+        return xCam::convert(c, cam.coll_spatial.coord.cylinder);
+    case XCAM_COORD_SPHERE:
+        return xCam::convert(c, cam.coll_spatial.coord.sphere);
+    default:
+        xFAIL_RETURN_VALUE_L(1069, c);
+    }
+}
+
+inline xCamCoordCylinder& xCamBlend::coll_convert(const xCam& cam, xCamCoordCylinder& c) const
+{
+    switch (cam.coord_type) {
+    case XCAM_COORD_CYLINDER:
+        return (xCamCoordCylinder&)cam.coll_spatial.coord.cylinder;
+    case XCAM_COORD_SPHERE:
+        return xCam::convert(c, cam.coll_spatial.coord.sphere);
+    default:
+        xFAIL_RETURN_VALUE_L(1080, c);
+    }
+}
+
+inline xCamCoordSphere& xCamBlend::coll_convert(const xCam& cam, xCamCoordSphere& c) const
+{
+    switch (cam.coord_type) {
+    case XCAM_COORD_CYLINDER:
+        return xCam::convert(c, cam.coll_spatial.coord.cylinder);
+    case XCAM_COORD_SPHERE:
+        return (xCamCoordSphere&)cam.coll_spatial.coord.sphere;
+    default:
+        xFAIL_RETURN_VALUE_L(1091, c);
+    }
+}
+
+inline xQuat& xCamBlend::coll_convert(const xCam& cam, xQuat& c) const
+{
+    switch (cam.orient_type) {
+    case XCAM_ORIENT_QUAT:
+        return (xQuat&)cam.coll_spatial.orient.quat;
+    case XCAM_ORIENT_EULER:
+        return xCam::convert(c, cam.coll_spatial.orient.euler);
+    default:
+        xFAIL_RETURN_VALUE_L(1102, c);
+    }
+}
+
+inline xCamOrientEuler& xCamBlend::coll_convert(const xCam& cam, xCamOrientEuler& c) const
+{
+    switch (cam.orient_type) {
+    case XCAM_ORIENT_QUAT:
+        return xCam::convert(c, cam.coll_spatial.orient.quat);
+    case XCAM_ORIENT_EULER:
+        return (xCamOrientEuler&)cam.coll_spatial.orient.euler;
+    default:
+        xFAIL_RETURN_VALUE_L(1113, c);
+    }
+}
 
 #endif

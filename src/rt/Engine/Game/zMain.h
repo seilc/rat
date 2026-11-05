@@ -5,5 +5,6 @@
 
 extern U32 FB_XRES;
 extern U32 FB_YRES;
+extern F32 SECS_PER_VBLANK;
 
 #endif
