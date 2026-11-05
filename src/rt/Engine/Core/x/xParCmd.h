@@ -6,6 +6,46 @@
 
 struct xParGroup;
 
+enum eParCmd
+{
+    eParCmdMove,
+    eParCmdMoveRandom,
+    eParCmdAccelerate,
+    eParCmdVelocityApply,
+    eParCmdJet,
+    eParCmdKillOld,
+    eParCmdKillSlow,
+    eParCmdFollow,
+    eParCmdOrbitPoint,
+    eParCmdOrbitLine,
+    eParCmdMoveRandomPar,
+    eParCmdScale3rdPolyReg,
+    eParCmdTex,
+    eParCmdTexAnim,
+    eParCmdPlayerCollision,
+    eParCmdRandomVelocityPar,
+    eParCmdCustom,
+    eParCmdKillDistance,
+    eParCmdAge,
+    eParCmdAlpha3rdPolyReg,
+    eParCmdApplyWind,
+    eParCmdRotPar,
+    eParCmdApplyCamMat,
+    eParCmdRotateAround,
+    eParCmdSmokeAlpha,
+    eParCmdScale,
+    eParCmdClipVolumes,
+    eParCmdAnimalMagentism,
+    eParCmdDamagePlayer,
+    eParCmdCollideFall,
+    eParCmdShaper,
+    eParCmdAlphaInOut,
+    eParCmdSizeInOut,
+    eParCmdDampenSpeed,
+    eParCmdCollideFallSticky,
+    eParCmdCount,
+};
+
 struct xParCmdMove : xParCmdAsset
 {
     xVec3 dir;
@@ -275,8 +315,38 @@ struct xParCmd
 
 typedef void(*xParCmdUpdateFunction)(xParCmd* c, xParGroup* ps, F32 dt);
 
+void xParCmdInit();
+void xParCmdEnable(xParCmd* cmd);
+void xParCmdDisable(xParCmd* cmd);
+void xParCmdRegister(U32 parType, U32 size, xParCmdUpdateFunction func);
 U32 xParCmdGetSize(U32 parType);
 xParCmdUpdateFunction xParCmdGetUpdateFunc(U32 parType);
+void xParCmdKillSlow_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdAge_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdFollow_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdOrbitPoint_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdOrbitLine_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdAccelerate_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdMove_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdMoveRandom_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdMoveRandomPar_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdScale3rdPolyReg_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdSmokeAlpha_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdScale_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdAlpha3rdPolyReg_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdRandomVelocityPar_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdApplyWind_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdRotPar_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdVelocityApply_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdRotateAround_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdTex_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdTexAnim_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdCollideFall_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmdCollideFallSticky_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmd_DampenSpeed_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmd_SizeInOut_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmd_AlphaInOut_Update(xParCmd* c, xParGroup* ps, F32 dt);
+void xParCmd_Shaper_Update(xParCmd* c, xParGroup* ps, F32 dt);
 void xParCmdAddTweaks(const char* prefix, xParCmd& cmd);
 
 #endif
