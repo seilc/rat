@@ -14,9 +14,6 @@ bool debugNoJspsRendering;
 
 void xEnvLoadJSPList(xEnv* env, S32 dataType)
 {
-    U32 bufsize;
-    void* buf;
-    
     DBprintf(DBML_VDBG, "... entering xEnvLoadJSPList ...\n");
 
 #if DEBUG || RELEASE
@@ -24,6 +21,9 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
 #endif
 
     if (dataType == 0) {
+        U32 bufsize;
+        void* buf;
+
         env->geom = &env->ienv;
 
         S32 jsp_count = xSTAssetCountByType('JSP ');

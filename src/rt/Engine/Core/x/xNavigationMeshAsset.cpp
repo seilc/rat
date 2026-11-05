@@ -118,9 +118,8 @@ zMeshCircle* xNavigationMeshAsset::GetNearbyCircles(const xVec3& position, F32 r
 zMeshCircle* xNavigationMeshAsset::FindMeshCircleForEnt(const xEnt* ent)
 {
     for (zMeshCircle* circle = circleList; circle != NULL; circle = circle->masterListNext) {
-        if (circle->ownerEntity == ent) {
+        if (circle->ownerEntity == ent)
             return circle;
-        }
     }
     return NULL;
 }
@@ -312,7 +311,9 @@ void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& su
             const U8* end = a + 3;
 
             for (; a != end; b++, a++, portal++) {
-                if (b == end) b = &sub_mesh->triangles[i].a;
+                if (b == end) {
+                    b = &sub_mesh->triangles[i].a;
+                }
 
                 S32 triangle_index = *portal;
                 if (triangle_index == NO_TRIANGLE) {

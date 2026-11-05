@@ -15,6 +15,7 @@
 #if DEBUG || RELEASE
 static const S32 SPHERE_NUM_PTS = 50;
 static const S32 MARKER_NUM_LINES = 7;
+static const S32 BOX_NUM_PTS = 8;
 
 static xColor sgDrawColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 static xVec3 g_normalXZ = { 0.0f, 1.0f, 0.0f };
@@ -281,7 +282,7 @@ void xDrawSphere(const xVec3* center, F32 r, U32 flags)
 
 void xDrawBox(const xBox* b)
 {
-    static xVec3 v[8];
+    static xVec3 v[BOX_NUM_PTS];
 
     const xVec3* min = &b->lower;
     const xVec3* max = &b->upper;
@@ -289,7 +290,7 @@ void xDrawBox(const xBox* b)
     for (S32 i = 0; i < 4; i++) {
         v[i] = *min;
     }
-    for (S32 i = 4; i < 8; i++) {
+    for (S32 i = 4; i < BOX_NUM_PTS; i++) {
         v[i] = *max;
     }
 
@@ -325,7 +326,7 @@ void xDrawBox(const xBox* b)
 
 void xDrawBox(const xBox* b, const xMat4x3* mat)
 {
-    static xVec3 v[8];
+    static xVec3 v[BOX_NUM_PTS];
 
     xVec3 min = b->lower;
     xVec3 max = b->upper;
@@ -333,7 +334,7 @@ void xDrawBox(const xBox* b, const xMat4x3* mat)
     for (S32 i = 0; i < 4; i++) {
         v[i] = min;
     }
-    for (S32 i = 4; i < 8; i++) {
+    for (S32 i = 4; i < BOX_NUM_PTS; i++) {
         v[i] = max;
     }
 
@@ -351,7 +352,7 @@ void xDrawBox(const xBox* b, const xMat4x3* mat)
 
     v[7].x = min.x;
 
-    for (S32 i = 0; i < 8; i++) {
+    for (S32 i = 0; i < BOX_NUM_PTS; i++) {
         xMat3x3RMulVec(&v[i], mat, &v[i]);
         v[i] += mat->pos;
     }
@@ -608,8 +609,8 @@ void xDrawOBB(const xBox* b, const xMat4x3* m)
         { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 },
         { 4, 5 }, { 5, 6 }, { 6, 7 }, { 7, 4 }
     };
-    xVec3 lverts[8];
-    RwV3d wverts[8];
+    xVec3 lverts[BOX_NUM_PTS];
+    RwV3d wverts[BOX_NUM_PTS];
     lverts[0].x = b->lower.x;
     lverts[0].y = b->lower.y;
     lverts[0].z = b->lower.z;
@@ -635,7 +636,7 @@ void xDrawOBB(const xBox* b, const xMat4x3* m)
     lverts[7].y = b->upper.y;
     lverts[7].z = b->lower.z;
 
-    for (S32 i = 0; i < 8; i++) {
+    for (S32 i = 0; i < BOX_NUM_PTS; i++) {
         xMat4x3ToWorld((xVec3*)&wverts[i], m, &lverts[i]);
     }
 
@@ -645,11 +646,11 @@ void xDrawOBB(const xBox* b, const xMat4x3* m)
 void xDrawOBBShaded(const xBox* b, const xMat4x3* m)
 {
     S32 i;
-    xVec3 lverts[8];
+    xVec3 lverts[BOX_NUM_PTS];
     for (i = 0; i < 4; i++) {
         lverts[i] = b->lower;
     }
-    for (i = 4; i < 8; i++) {
+    for (i = 4; i < BOX_NUM_PTS; i++) {
         lverts[i] = b->upper;
     }
     lverts[1].x = b->upper.x;
@@ -661,8 +662,8 @@ void xDrawOBBShaded(const xBox* b, const xMat4x3* m)
     lverts[5].y = b->lower.y;
     lverts[7].x = b->lower.x;
 
-    xVec3 wverts[8];
-    for (i = 0; i < 8; i++) {
+    xVec3 wverts[BOX_NUM_PTS];
+    for (i = 0; i < BOX_NUM_PTS; i++) {
         xMat4x3ToWorld(&wverts[i], m, &lverts[i]);
     }
 

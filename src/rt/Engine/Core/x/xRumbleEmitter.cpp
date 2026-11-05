@@ -165,9 +165,8 @@ bool boxEmitter::GetIntensity(const xVec3& playerPos, F32& intensity) const
     intensity = 0.0f;
 
     S32 charIndex = 0;
-    if (xglobals->players[1]->Get_humanPlayer() && !xglobals->players[1]->IsDead()) {
+    if (xglobals->players[1]->Get_humanPlayer() && !xglobals->players[1]->IsDead())
         charIndex = 1;
-    }
 
     if (pAsset->onlyOnFloor && !(xglobals->players[charIndex]->collis->colls[0].flags & k_HIT_IT)) {
         return false;
@@ -222,9 +221,8 @@ bool sphericalEmitter::GetIntensity(const xVec3& playerPos, F32& intensity) cons
     }
 
     S32 charIndex = 0;
-    if (xglobals->players[1]->Get_humanPlayer() && !xglobals->players[1]->IsDead()) {
+    if (xglobals->players[1]->Get_humanPlayer() && !xglobals->players[1]->IsDead())
         charIndex = 1;
-    }
     
     if (pAsset->onlyOnFloor && !xglobals->players[charIndex]->IsFloorColliding()) {
         return false;

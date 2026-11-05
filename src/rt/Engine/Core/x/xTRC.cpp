@@ -56,9 +56,8 @@ TRCPadInfo& xTRCPadGetNextAvailablePad()
 S32 xTRCPadGetArrayIdx(S32 port)
 {
     for (S32 i = 0; i < k_MAX_TRC_PADS; i++) {
-        if (port == gTrcPad[i].id) {
+        if (port == gTrcPad[i].id)
             return i;
-        }
     }
     xFAIL_MSG_L(129, "No pad id match, return -1 !");
     return -1;
@@ -218,9 +217,8 @@ TRCState xTRCPadGetStatePort(S32 port)
 {
     xASSERT_L(372, port >= 0 && port < k_MAX_TRC_PADS);
     for (S32 i = 0; i < k_MAX_TRC_PADS; i++) {
-        if (port == gTrcPad[i].id) {
+        if (port == gTrcPad[i].id)
             return gTrcPad[i].state;
-        }
     }
     return TRC_Unknown;
 }
@@ -229,9 +227,8 @@ TRCPadState xTRCPadGetPadStatePort(S32 port)
 {
     xASSERT_L(384, port >= 0 && port < k_MAX_TRC_PADS);
     for (S32 i = 0; i < k_MAX_TRC_PADS; i++) {
-        if (port == gTrcPad[i].id) {
+        if (port == gTrcPad[i].id)
             return gTrcPad[i].padstate;
-        }
     }
     return TRC_PadStateUnknown;
 }
@@ -311,18 +308,16 @@ void xTRCPadReOrder()
 {
     xTRCBabbleSort(xTRCIsNextState, TRC_PadActive);
     xTRCBabbleSort(xTRCIsNextState, TRC_PadPreInserted);
-    if (!xTRCBabbleSort(xTRCIsNextPadState, TRC_PadStateMissingDuringGameplay)) {
+    if (!xTRCBabbleSort(xTRCIsNextPadState, TRC_PadStateMissingDuringGameplay))
         xTRCBabbleSort(xTRCIsNextState, TRC_PadMissing);
-    }
 }
 
 S32 xTRCPadGetPort_Player1()
 {
     if (xglobals->players.size() >= 1) {
         zPad* pad = xglobals->players[0]->GetPad();
-        if (pad) {
+        if (pad)
             return pad->GetPadPort();
-        }
     }
     return -1;
 }
@@ -331,9 +326,8 @@ S32 xTRCPadGetPort_Player2()
 {
     if (xglobals->players.size() >= 2) {
         zPad* pad = xglobals->players[1]->GetPad();
-        if (pad) {
+        if (pad)
             return pad->GetPadPort();
-        }
     }
     return -1;
 }
@@ -518,9 +512,8 @@ static S32 DisplayMessage(S32 port, TRCState state)
             const char* msg = message_text;
             char c;
             while ((c = *msg++) != '\0' && c != '<') {}
-            if (c == '\0') {
+            if (c == '\0')
                 break;
-            }
             U32 sub_len = msg - message_text;
             memcpy(composed_message_text, message_text, sub_len);
             composed_message_text[sub_len - 1] = '1' + port;
@@ -562,9 +555,8 @@ void xTRCPadDisplayMessage(S32 pad_id, TRCState)
     if (!globals.NoPadCheck) {
         S32 display_message = DisplayMessage(gTrcPad[pad_id].id, gTrcPad[pad_id].state);
         if (display_message) {
-            if (!message_text) {
+            if (!message_text)
                 message_text = "<error text>";
-            }
         } else {
             message_text = NULL;
         }
@@ -657,7 +649,6 @@ void RenderText(const char* text, bool enabled)
     tb.bounds.y = 0.5f - 0.5f * tb.bounds.h;
     tb.render(true);
     xColor c2 = { 0x00, 0x00, 0x00, 0x96 };
-    if (!enabled) {
+    if (!enabled)
         render_fill_rect(tb.font.clip, c2);
-    }
 }

@@ -58,7 +58,6 @@ void xFactory::DestroyItem(xFactoryInst* item)
 {
     S32 idx;
     XGOFTypeInfo pattern = {};
-    XGOFTypeInfo* darec;
 
     pattern.tid = item->itemType;
 
@@ -82,7 +81,7 @@ void xFactory::DestroyItem(xFactoryInst* item)
         item->nextprod = NULL;
 
         idx = XOrdLookup(&infolist, &pattern, OrdTest_infotype);
-        darec = (XGOFTypeInfo*)infolist.list[idx];
+        XGOFTypeInfo* darec = (XGOFTypeInfo*)infolist.list[idx];
         darec->destroyer(item);
     }
 }

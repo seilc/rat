@@ -11,7 +11,9 @@
 
 bool xLightEffectIsValid(xBase* base)
 {
-    if (!base) return false;
+    if (!base) {
+        return false;
+    }
 
     switch (base->baseType) {
     case eBaseTypeLightEffectFlicker:
@@ -86,9 +88,8 @@ void xLightEffectFlicker::StopEffect(xLight& light, bool resetColor)
 {
     light.lightEffectRunning = false;
 
-    if (resetColor) {
+    if (resetColor)
         xLightSetColor(&light, light.flickerData.initialColor, 0.0f);
-    }
 }
 
 void xLightEffectFlicker::UpdateEffect(xLight& light, F32 dt)
@@ -190,9 +191,8 @@ void xLightEffectStrobe::StopEffect(xLight& light, bool resetColor)
 {
     light.lightEffectRunning = false;
 
-    if (resetColor) {
+    if (resetColor)
         xLightSetColor(&light, light.strobeData.maxColor, 0.0f);
-    }
 }
 
 void xLightEffectStrobe::UpdateEffect(xLight& light, F32 dt)

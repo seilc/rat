@@ -79,7 +79,8 @@ void model_widget::set_params(xModelInstance*& model, render_context& rc, F32 xs
 
 void model_widget::render()
 {
-    if (xfeq0(rc.a)) return;
+    if (xfeq0(rc.a))
+        return;
 
     model->Scale.x = x_scale;
     model->Scale.y = y_scale;

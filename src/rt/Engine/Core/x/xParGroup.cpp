@@ -302,9 +302,8 @@ void xParGroupKillPar(xParGroup* ps, xPar* p)
         p->m_next = NULL;
         p->m_prev = NULL;
     } else {
-        if (p->m_next) {
+        if (p->m_next)
             p->m_next->m_prev = p->m_prev;
-        }
         if (p->m_prev) {
             p->m_prev->m_next = p->m_next;
         }

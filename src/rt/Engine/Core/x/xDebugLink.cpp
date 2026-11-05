@@ -2,6 +2,7 @@
 
 #include "xMemMgr.h"
 #include "xstransvc.h"
+#include "xutil.h"
 #include "xEvent.h"
 #include "zAssetTypes.h"
 #include "zCameraCurveAsset.h"
@@ -64,10 +65,8 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
     assetNode = NULL;
 
     asset = (char*)xSTFindAsset(mAssetToUpdate, &oldAssetSize);
-    if (asset)
-    {
-        if (oldAssetSize != mAssetDataReceivedSize)
-        {
+    if (asset) {
+        if (oldAssetSize != mAssetDataReceivedSize) {
             xDebugLinkPrintf("Asset size mismatch! Data received was (%d) and scene reports asset size as (%d).\n",
                              mAssetDataReceivedSize, oldAssetSize);
 
@@ -76,8 +75,7 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
 
             xDebugLinkPrintf("Allocating memory...\n");
             tempAllocation = (char*)PKR_getmem('ASET', assetNode->d_size, assetNode->aid, 64, eMemMgrTag_Packer);
-            if (tempAllocation)
-            {
+            if (tempAllocation) {
                 xDebugLinkPrintf("Orginial x_size and d_size = [ %d %d ]...\n", assetNode->x_size, assetNode->d_size);
                 oldAsset = assetNode->memloc;
 
@@ -86,46 +84,35 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
                 assetNode->readrem = mAssetDataReceivedSize;
                 memcpy(assetNode->memloc, receivedBuffer, mAssetDataReceivedSize);
                 asset = assetNode->memloc;
-            }
-            else
-            {
+            } else {
                 xDebugLinkPrintf("Failed to allocated %d bytes!\n", mAssetDataReceivedSize);
                 return eAssetSizeMismatch;
             }
         }
 
         const xBaseAsset* baseAsset = (const xBaseAsset*)asset;
-        switch (baseAsset->baseType)
-        {
-        case eBaseTypeSpline:
-        {
+        switch (baseAsset->baseType) {
+        case eBaseTypeSpline: {
             memcpy(asset, receivedBuffer, mAssetDataReceivedSize);
             asset = (char*)Spline_Read(NULL, 0, asset, mAssetDataReceivedSize, &mAssetDataReceivedSize);
 
             xDebugLinkPrintf("Updating Camera Curves. Searching for Curve: (0x%X)\n", mAssetToUpdate);
             S32 numberOfCameraCurvesInScene = xSTAssetCountByType('CCRV');
             S32 count;
-            for (count = 0; count < numberOfCameraCurvesInScene; count++)
-            {
+            for (count = 0; count < numberOfCameraCurvesInScene; count++) {
                 zCameraCurveAsset* cameraCurveAsset = (zCameraCurveAsset*)xSTFindAssetByType('CCRV', count, NULL);
-                for (U32 i = 0; i < eCamCurveCam_NumCam; i++)
-                {
-                    if (mAssetToUpdate == cameraCurveAsset->GetCurveID((eCamCurveCam)i))
-                    {
+                for (U32 i = 0; i < eCamCurveCam_NumCam; i++) {
+                    if (mAssetToUpdate == cameraCurveAsset->GetCurveID((eCamCurveCam)i)) {
                         sceneObject = zSceneFindObject(cameraCurveAsset->id);
-                        if (sceneObject)
-                        {
+                        if (sceneObject) {
                             xDebugLinkPrintf("Sending Debug Reset event to Camera Curve (0x%X)\n", sceneObject->id);
-                            if (oldAsset)
-                            {
+                            if (oldAsset) {
                                 PKR_relmem('ASET', oldAssetSize, oldAsset, mAssetToUpdate, 0);
                                 oldAsset = NULL;
                             }
 
                             zEntEvent(NULL, sceneObject, eEventDebugReset);
-                        }
-                        else
-                        {
+                        } else {
                             xDebugLinkPrintf("Unable to find scene object (0x%X)\n", mAssetToUpdate);
                             return eUnableToFindAsset;
                         }
@@ -133,15 +120,12 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
                 }
             }
 
-            for (count = 0; count < globals.sceneCur->numSpecialTriggers; count++)
-            {
+            for (count = 0; count < globals.sceneCur->numSpecialTriggers; count++) {
                 zEntTrigger& trigger = *(zEntTrigger*)globals.sceneCur->specialTriggers[count];
                 const xTriggerAsset& triggerAsset = trigger.Asset();
 
-                if (triggerAsset.flags & 0x1000)
-                {
-                    if (triggerAsset.camTransition.curveID == mAssetToUpdate)
-                    {
+                if (triggerAsset.flags & 0x1000) {
+                    if (triggerAsset.camTransition.curveID == mAssetToUpdate) {
                         zEntEvent(NULL, &trigger, eEventDebugReset);
                     }
                 }
@@ -150,27 +134,20 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
             break;
         }
         case eBaseTypeUnknown:
-            if (zNPCAsset_IsNPC(*(xDynAsset*)asset))
-            {
+            if (zNPCAsset_IsNPC(*(xDynAsset*)asset)) {
                 xDebugLinkPrintf("Unable to update scene object (0x%X) because it's an NPC\n", mAssetToUpdate);
                 return eUnableToFindAsset;
             }
 
         default:
             sceneObject = zSceneFindObject(mAssetToUpdate);
-            if (sceneObject)
-            {
-                if (oldAssetSize == mAssetDataReceivedSize)
-                {
+            if (sceneObject) {
+                if (oldAssetSize == mAssetDataReceivedSize) {
                     memcpy(asset, receivedBuffer, mAssetDataReceivedSize);
-                }
-                else
-                {
-                    if (!zSceneUpdateAsset(*sceneObject, asset, mAssetDataReceivedSize))
-                    {
+                } else {
+                    if (!zSceneUpdateAsset(*sceneObject, asset, mAssetDataReceivedSize)) {
                         xDebugLinkPrintf("Unable to update new asset\n");
-                        if (tempAllocation)
-                        {
+                        if (tempAllocation) {
                             PKR_relmem('ASET', mAssetDataReceivedSize, tempAllocation, mAssetToUpdate, 0);
                         }
 
@@ -178,26 +155,20 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
                         assetNode->d_size = oldAssetSize;
                         assetNode->readrem = oldAssetSize;
                         return eAssetSizeMismatch;
-                    }
-                    else
-                    {
+                    } else {
                         PKR_relmem('ASET', oldAssetSize, oldAsset, mAssetToUpdate, 0);
                     }
                 }
 
                 xDebugLinkPrintf("Sending Debug Reset event to (0x%X)\n", sceneObject->id);
                 zEntEvent(NULL, sceneObject, eEventDebugReset);
-            }
-            else
-            {
+            } else {
                 xDebugLinkPrintf("Unable to find scene object (0x%X)\n", mAssetToUpdate);
                 return eUnableToFindAsset;
             }
             break;
         }
-    }
-    else
-    {
+    } else {
         return eUnableToFindAsset;
     }
 
@@ -211,8 +182,7 @@ eError xDebugLink::SendEntEvent(char** argv, S32 argc, void*)
     U32 event, widgetID, paramWidgetID;
     xBase* sceneObject;
 
-    if (argc < 2)
-    {
+    if (argc < 2) {
         return eInsufficientArgs;
     }
 
@@ -220,35 +190,27 @@ eError xDebugLink::SendEntEvent(char** argv, S32 argc, void*)
     event = atoi(argv[1]);
     widgetID = atoi(argv[0]);
 
-    if (argc - 1 == 6)
-    {
-        for (i = 2; i <= 5; i++)
-        {
+    if (argc - 1 == 6) {
+        for (i = 2; i <= 5; i++) {
             params[i - 2] = atof(argv[i]);
         }
         paramWidgetID = atoi(argv[6]);
-    }
-    else
-    {
+    } else {
         memset(params, 0, sizeof(params));
         paramWidgetID = 0;
     }
 
-    if (event == eEventSetText || event == eEventAddText)
-    {
+    if (event == eEventSetText || event == eEventAddText) {
         params[0] = *(F32*)&paramWidgetID;
     }
 
     sceneObject = zSceneFindObject(widgetID);
-    if (sceneObject)
-    {
+    if (sceneObject) {
         xDebugLinkPrintf("Sending Event (%d) event to %s (0x%X)\n", event, xSTAssetName(widgetID), widgetID);
         xDebugLinkPrintf("Params: [ %8.4f %8.4f %8.4f %8.4f ] ParamWidgetID: [ 0x%X ]\n",
                          params[0], params[1], params[2], params[3], paramWidgetID);
         zEntEvent(NULL, sceneObject, event, params, zSceneFindObject(paramWidgetID), paramWidgetID);
-    }
-    else
-    {
+    } else {
         xDebugLinkPrintf("Unable to find widget (0x%X)\n", widgetID);
         return eUnableToFindAsset;
     }
@@ -259,8 +221,7 @@ eError xDebugLink::SendEntEvent(char** argv, S32 argc, void*)
 eError xDebugLink::Connect(char** argv, S32 argc, void*)
 {
     mConnected = true;
-    if (argc > 0)
-    {
+    if (argc > 0) {
         xDebugLinkPrintf("Debug Commands will be accepted from [%s]\n", argv[0]);
         strcpy(mConnectedComputer, argv[0]);
     }
@@ -271,8 +232,7 @@ eError xDebugLink::Connect(char** argv, S32 argc, void*)
 eError xDebugLink::Disconnect(char** argv, S32 argc, void*)
 {
     mConnected = false;
-    if (argc > 0)
-    {
+    if (argc > 0) {
         xDebugLinkPrintf("Disconnected from [%s]\n", argv[0]);
     }
 
@@ -288,25 +248,19 @@ S32 xDebugLink::CmdToArgv(char* str, char** argv, S32 maxargs)
     char* strNil = str + strlen(str);
     xDebugLinkPrintf("[Args = %s]\n", str);
 
-    while (argcT < maxargs)
-    {
-        while (*str && *str == ' ')
-        {
+    while (argcT < maxargs) {
+        while (*str && *str == ' ') {
             str++;
         }
 
-        if (*str == '\0')
-        {
+        if (*str == '\0') {
             argv[argcT] = strNil;
             argcT++;
-        }
-        else
-        {
+        } else {
             char chEnd = (*str == '"' || *str == '\'') ? *str++ : ' ';
             char* strArgEnd = str;
 
-            while (*strArgEnd && *strArgEnd != chEnd)
-            {
+            while (*strArgEnd && *strArgEnd != chEnd) {
                 strArgEnd++;
             }
 
@@ -353,48 +307,36 @@ void xDebugLink::Update(F32)
     U32 cmdPrefixLen = strlen("XCMD");
 
     mProcessingCmds = true;
-    for (i = 0; i < mNumCmd; i++)
-    {
+    for (i = 0; i < mNumCmd; i++) {
         memset(command, 0, sizeof(command));
         strncpy(command, mCmdBuffer[i].command + cmdPrefixLen + 1, sizeof(command) - 1);
         xDebugLinkPrintf("Received Command = %s\n", command);
 
         knownCommand = false;
         strncpy(args, mCmdBuffer[i].command + cmdPrefixLen + 12, sizeof(args));
-        argc = CmdToArgv(args, argv, 10);
+        argc = CmdToArgv(args, argv, ARRAY_LENGTH(argv));
 
-        if (mConnected)
-        {
+        if (mConnected) {
             if (strcmpi(command, "__CONNECT__") == 0 && strlen(mConnectedComputer) != 0 &&
-                strcmpi(argv[0], mConnectedComputer) != 0)
-            {
+                strcmpi(argv[0], mConnectedComputer) != 0) {
                 sprintf(responseString, "Already connected to [%s]. Can not accept connection from [%s]!",
                         mConnectedComputer, argv[0]);
                 continue;
             }
 
-            for (i = 0; i < sizeof(mCommandHandlerMap) / sizeof(mCommandHandlerMap[0]); i++)
-            {
-                if (strcmpi(mCommandHandlerMap[i].command, command) == 0)
-                {
+            for (i = 0; i < ARRAY_LENGTH(mCommandHandlerMap); i++) {
+                if (strcmpi(mCommandHandlerMap[i].command, command) == 0) {
                     knownCommand = true;
-                    if (strcmpi(mCommandHandlerMap[i].command, "__UPDTASS__") == 0)
-                    {
-                        if (mAssetDataReceivedSize != 0)
-                        {
+                    if (strcmpi(mCommandHandlerMap[i].command, "__UPDTASS__") == 0) {
+                        if (mAssetDataReceivedSize != 0) {
                             UpdateSceneObject(mBuffer);
                             mAssetDataReceivedSize = 0;
                         }
-                    }
-                    else
-                    {
+                    } else {
                         result = (this->*mCommandHandlerMap[i].handler)(argv, argc, mCmdBuffer[i].userData);
-                        if (result == eSuccess || result == eReadyForBin)
-                        {
+                        if (result == eSuccess || result == eReadyForBin) {
                             sprintf(responseString, "Successfully performed command: %s", command);
-                        }
-                        else
-                        {
+                        } else {
                             sprintf(responseString, "Unable to perform command: %s", command);
                         }
                     }
@@ -403,21 +345,14 @@ void xDebugLink::Update(F32)
                 }
             }
 
-            if (!knownCommand)
-            {
-                if (strcmpi(command, "help") == 0)
-                {
+            if (!knownCommand) {
+                if (strcmpi(command, "help") == 0) {
                 }
             }
-        }
-        else
-        {
-            if (strcmpi(command, "__CONNECT__") == 0)
-            {
+        } else {
+            if (strcmpi(command, "__CONNECT__") == 0) {
                 result = Connect(argv, argc, mCmdBuffer[i].userData);
-            }
-            else
-            {
+            } else {
                 mConnected = false;
             }
         }

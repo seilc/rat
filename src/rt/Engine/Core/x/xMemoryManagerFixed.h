@@ -11,6 +11,8 @@ public:
         UseAbsoluteSize
     };
 
+    xMemoryManagerFixed() {}
+
 #if DEBUG || RELEASE
     void SetOrigSize(void* pointer, U32 size) const;
     U32 GetOrigSize(void* pointer) const;

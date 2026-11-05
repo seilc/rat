@@ -103,7 +103,7 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
 {
     RpClump* clump;
     xClumpCollBSPTree* colltree;
-    S32 rwresult;
+    RwBool rwresult;
     xJSPHeaderEx* hdr;
     U32 lengthOut;
     char idtag[4];
@@ -284,7 +284,7 @@ void xJSP_MultiStreamRead(void* data, U32 size, xJSPHeader** jsp, U32 assetID)
     S32 i;
     RpClump* clump;
     xClumpCollBSPTree* colltree;
-    S32 rwresult;
+    RwBool rwresult;
     xJSPHeaderEx* hdr;
 
     iAsyncLockRW();
@@ -572,12 +572,14 @@ static F32 GetSplitVolumeSum(xJSPNodeTreeLeaf* tleaf, S32 count, S32 axis, F32 c
            (rightbox.sup.x - rightbox.inf.x) * (rightbox.sup.y - rightbox.inf.y) * (rightbox.sup.z - rightbox.inf.z);
 }
 
+static const S32 NUM_SPLIT_TESTS = 3;
+
 static S32 ChooseSplit_MeanMinSum(xJSPNodeTreeLeaf* tleaf, S32 count, S32& bestaxis, F32& bestcoord)
 {
     F32 bestvolume = HUGE;
     S32 i, axis;
     RwV3d mean = { 0.0f, 0.0f, 0.0f };
-    F32 testarray[3];
+    F32 testarray[NUM_SPLIT_TESTS];
     F32 meancoord, coord, testvol;
 
     for (i = 0; i < count; i++) {
@@ -606,7 +608,7 @@ static S32 ChooseSplit_MeanMinSum(xJSPNodeTreeLeaf* tleaf, S32 count, S32& besta
             }
         }
 
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < NUM_SPLIT_TESTS; i++) {
             testvol = GetSplitVolumeSum(tleaf, count, axis, testarray[i]);
             if (testvol < bestvolume) {
                 bestaxis = axis;
@@ -627,13 +629,13 @@ static void RecurseSplitJSPNode(xJSPNodeTreeLeaf* tleaf, S32 count, TempSplitChi
 {
     S32 i, bestaxis, lastright;
     F32 bestcoord;
-    xJSPNodeTreeLeaf templeaf;
-    TempSplit* thisSplit;
 
     if (count >= 2 && ChooseSplit_MeanMinSum(tleaf, count, bestaxis, bestcoord)) {
         lastright = count;
         for (i = 0; i < lastright; i++) {
             if (0.5f * (GETCOORD(tleaf[i].box.inf, bestaxis) + GETCOORD(tleaf[i].box.sup, bestaxis)) >= bestcoord) {
+                xJSPNodeTreeLeaf templeaf;
+
                 lastright--;
                 templeaf = tleaf[i];
                 tleaf[i] = tleaf[lastright];
@@ -667,7 +669,7 @@ static void RecurseSplitJSPNode(xJSPNodeTreeLeaf* tleaf, S32 count, TempSplitChi
                 childptr->type = 2;
             }
 
-            thisSplit = sSplitCurr;
+            TempSplit* thisSplit = sSplitCurr;
             sSplitCurr++;
             RecurseSplitJSPNode(tleaf, lastright, &thisSplit->leftChild);
             RecurseSplitJSPNode(tleaf + lastright, count - lastright, &thisSplit->rightChild);

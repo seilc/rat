@@ -188,7 +188,9 @@ void xEntBoulder_AddForce(xEntBoulder* ent, xVec3* force)
     }
 }
 
-void xEntBoulder_BUpdate(xEnt*, xVec3*) {}
+void xEntBoulder_BUpdate(xEnt*, xVec3*)
+{
+}
 
 void xEntBoulder_RealBUpdate(xEnt* ent, xVec3* pos)
 {
@@ -1112,10 +1114,9 @@ void xEntBoulderDebugModeCB()
     S32 i;
     bool selectNext, selectPrev;
     xEntBoulder* boul, *prevBoulder;
-    zScene* zsc;
 
     if (globals.sceneCur) {
-        zsc = globals.sceneCur;
+        zScene* zsc = globals.sceneCur;
         xprintf("\n  L2    Toggle usage\n");
 
         if (zPad::GetDebugPad()->Pressed(0x200)) {

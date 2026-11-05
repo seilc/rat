@@ -5,9 +5,8 @@
 void zUIController::DoInit()
 {
     zUI::DoInit();
-    if (linkCount) {
+    if (linkCount)
         link = (const xLinkAsset*)(GetAsset() + 1);
-    }
 }
 
 void zUIController::DoRender() const

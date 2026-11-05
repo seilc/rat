@@ -197,7 +197,9 @@ void xEntRestorePipeline(xSurface*, RpAtomic* model);
 void xEntShow(xEnt* ent);
 void xEntHide(xEnt* ent);
 
+extern S32 xent_entent;
 #if DEBUG || RELEASE
+extern S32 xent_nqcrejects;
 extern S32 gDrawInvisibleWalls;
 #endif
 

@@ -12,6 +12,8 @@ extern S32 xent_entent;
 extern S32 xent_nqcrejects;
 #endif
 
+static const S32 NUM_SEPERATION_AXES = 13;
+
 // RESTORED: speculative
 void xBoundMakeSphere(xBound& b, const xVec3& center, F32 radius)
 {
@@ -25,10 +27,10 @@ void xBoundMakeSphere(xBound& b, const xVec3& center, F32 radius)
 void xBoundUpdate(xBound* b)
 {
     if (b->type == k_XBOUNDTYPE_BOX) {
-        xVec3Add(&b->box.center, &b->box.box.lower, &b->box.box.upper); xVec3SMul(&b->box.center, &b->box.center, 0.5f);
+        xBoxCenter(&b->box.center, &b->box.box);
     }
     else if (b->type == k_XBOUNDTYPE_OBB) {
-        xVec3Add(&b->box.center, &b->box.box.lower, &b->box.box.upper); xVec3SMul(&b->box.center, &b->box.center, 0.5f);
+        xBoxCenter(&b->box.center, &b->box.box);
         xMat4x3ToWorld(&b->box.center, b->mat, &b->box.center);
     }
 
@@ -484,7 +486,7 @@ bool xOBBHitsTriangle(const xBox& box, const xMat4x3& mat, const xVec3* vertices
     v1MinusV0.Sub(vertices[1], vertices[0]);
     v0MinusV2.Sub(vertices[0], vertices[2]);
 
-    xVec3 seperationAxes[13];
+    xVec3 seperationAxes[NUM_SEPERATION_AXES];
     seperationAxes[0].cross(v2MinusV1, v1MinusV0);
     seperationAxes[1] = mat.right;
     seperationAxes[2] = mat.up;
@@ -499,7 +501,7 @@ bool xOBBHitsTriangle(const xBox& box, const xMat4x3& mat, const xVec3* vertices
     seperationAxes[11].cross(mat.at, v2MinusV1);
     seperationAxes[12].cross(mat.at, v0MinusV2);
 
-    for (S32 i = 0; i < 13; i++) {
+    for (S32 i = 0; i < NUM_SEPERATION_AXES; i++) {
         xVec3& s = seperationAxes[i];
 
         F32 boxDist = dist.x * xabs(mat.right.dot(s)) + dist.y * xabs(mat.up.dot(s)) + dist.z * xabs(mat.at.dot(s));

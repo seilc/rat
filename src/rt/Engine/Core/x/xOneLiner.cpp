@@ -46,9 +46,8 @@ struct xSoundHistory
     void ScrollSounds()
     {
         if (mNumSounds > 0) {
-            for (S32 i = 1; i < mNumSounds; i++) {
+            for (S32 i = 1; i < mNumSounds; i++)
                 mHistory[i-1] = mHistory[i];
-            }
             mNumSounds--;
         }
     }
@@ -58,16 +57,14 @@ struct xSoundHistory
     void Age()
     {
         F32 now = iTimeGetGame();
-        while (mNumSounds > 0 && now - mHistory[0].mRequestTime > 10.0f) {
+        while (mNumSounds > 0 && now - mHistory[0].mRequestTime > 10.0f)
             ScrollSounds();
-        }
     }
 
     void Display()
     {
-        for (S32 i = 0; i < mNumSounds; i++) {
+        for (S32 i = 0; i < mNumSounds; i++)
             mHistory[i].Display(false);
-        }
     }
 };
 #endif

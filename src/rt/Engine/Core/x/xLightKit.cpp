@@ -218,7 +218,9 @@ void xLightKit_Destroy(xLightKit* lkit)
     RwUInt32 i;
     xLightKitLight* currLight;
 
-    if (!lkit) return;
+    if (!lkit) {
+        return;
+    }
 
     currLight = lkit->lightList;
     for (i = 0; i < lkit->lightCount; i++) {

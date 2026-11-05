@@ -28,9 +28,8 @@ void FunctionGeneratorStartTweak(const tweak_info& info)
 {
     xFunctionGenerator* fg = (xFunctionGenerator*)info.context;
 
-    if (fg->IsStarted()) {
+    if (fg->IsStarted())
         fg->Stop();
-    }
 
     fg->Start();
 }

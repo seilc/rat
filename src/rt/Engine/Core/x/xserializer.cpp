@@ -571,8 +571,7 @@ S32 xSerial_svgame_register(st_XSAVEGAME_DATA* sgctxt, en_SAVEGAME_MODE mode)
         xSGAddLoadClient(sgctxt, 'SVID', &g_xserdata, xSER_xsgclt_ldproc_ver);
         xSGAddLoadClient(sgctxt, 0, &g_xserdata, xSER_xsgclt_ldproc_clt);
         xSGAddLoadClient(sgctxt, 'SFIL', &g_xserdata, xSER_xsgclt_ldproc_fill);
-    }
-    else
+    } else
         DBprintf(DBML_WARN, "XSER: Unknown savegame mode %d\n", mode);
 
     return TRUE;
@@ -704,14 +703,13 @@ static S32 xSER_xsgclt_ldproc_fill(void*, st_XSAVEGAME_DATA* xsg, st_XSAVEGAME_R
 void xSerial::DBBitDump(S32 ashex) const
 {
     F32 pct = 0.0f;
-    S32 start_ele = 0, stop_ele = 0;
 
     xVALIDATE_L(1396, this->idtag);
     if (this->idtag) {
         xVALIDATE_L(1401, !(this->ctxtdata->actsize%4));
 
-        start_ele = this->ctxtdata->trueoff / 4;
-        stop_ele = start_ele + this->ctxtdata->actsize / 4;
+        S32 start_ele = this->ctxtdata->trueoff / 4;
+        S32 stop_ele = start_ele + this->ctxtdata->actsize / 4;
 
         DBprintf(DBML_DBG, "XSER: Client %s Sandbox (size %d bytes)\n", xUtil_idtag2string(this->idtag, 0), (stop_ele - start_ele) * 4);
 

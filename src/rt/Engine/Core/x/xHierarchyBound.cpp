@@ -105,7 +105,8 @@ namespace {
 
         const char* nameEnd = info.name.text + info.name.size - 1;
         while (true) {
-            if (*nameEnd == '|') break;
+            if (*nameEnd == '|')
+                break;
             nameEnd--;
         }
 
@@ -119,9 +120,8 @@ namespace {
                 xTWEAKREMOVE(buffer);
             }
         } else {
-            for (U32 i = bound->tweakInfo.lastCount; i < bound->count; i++) {
+            for (U32 i = bound->tweakInfo.lastCount; i < bound->count; i++)
                 AddHierarchyTweak(baseName, bound, i);
-            }
         }
 
         bound->tweakInfo.lastCount = bound->count;

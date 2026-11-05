@@ -29,9 +29,8 @@ F32 xNurbs::approximate_length(S32 divisions) const
 
 S32 xNurbs::find_span(F32 u) const
 {
-    if (u == knot[controlMaxIndex + 1]) {
+    if (u == knot[controlMaxIndex + 1])
         return controlMaxIndex;
-    }
 
     S32 low = degree;
     S32 high = controlMaxIndex + 1;
