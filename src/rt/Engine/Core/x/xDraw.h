@@ -76,6 +76,8 @@ void xDrawFrustumEdges(RwCamera* cam, bool);
 inline void xDrawSetColor(xColor color) {}
 inline void xDrawSetColor(U8 r, U8 g, U8 b, U8 a) {}
 inline void xDrawLine(const xVec3* a, const xVec3* b) {}
+inline void xDrawArrow(const xVec3* from, const xVec3* dir, bool asRay, F32 length) {}
+inline void xDrawCapsule(const xVec3* start, const xVec3* end, F32 r, U32 lod) {}
 inline void xDrawSphere(const xSphere* sph, U32 flags) {}
 inline void xDrawSphere(const xVec3* center, F32 r, U32 flags) {}
 inline void xDrawBox(const xBox* b) {}

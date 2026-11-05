@@ -153,7 +153,12 @@ inline void xMat3x3Identity(xMat3x3* m)
     xMat3x3Copy(m, &g_I3);
 }
 
-void xMat3x3Rot(xMat3x3* m, const xVec3* a, F32 t);
+void xMat3x3RotC(xMat3x3* m, F32 x, F32 y, F32 z, F32 t);
+
+inline void xMat3x3Rot(xMat3x3* m, const xVec3* a, F32 t)
+{
+    xMat3x3RotC(m, a->x, a->y, a->z, t);
+}
 
 static inline void xMat3x3RMulVec(xVec3* o, const xMat3x3* m, const xVec3* v)
 {
@@ -251,6 +256,11 @@ inline void xBoxFromCapsule(xBox& box, const xVec3& s, const xVec3& e, F32 r)
     else { l.z = e.z; u.z = s.z; }
     l -= r;
     u += r;
+}
+
+inline void xBoxFromCapsule(xBox& box, const xCapsule& capsule)
+{
+    xBoxFromCapsule(box, capsule.start, capsule.end, capsule.r);
 }
 
 inline void xMat3x3LookVec(const xVec3& at, xVec3& right, xVec3& up)

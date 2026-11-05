@@ -149,6 +149,13 @@ F32 xVec3Dist2(const xVec3* a, const xVec3* b);
 void xVec3Lerp(xVec3* o, const xVec3* a, const xVec3* b, F32 f);
 F32 xVec3NormalizeSafe(xVec3& v);
 
+inline void xVec3::AddScale(const xVec3& p, const xVec3& d, F32 s)
+{
+    x = p.x + d.x * s;
+    y = p.y + d.y * s;
+    z = p.z + d.z * s;
+}
+
 inline void xVec3::AddScale(const xVec3& d, F32 s)
 {
     x += d.x * s;

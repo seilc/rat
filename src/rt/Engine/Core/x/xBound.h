@@ -53,4 +53,6 @@ bool xOBBHitsTriangle(const xBox& box, const xMat4x3& mat, const xVec3* vertices
 
 inline xVec3* xBoundCenter(const xBound* b) { return (xVec3*)&b->sph.center; }
 
+inline bool xSphereHitsBound(const xSphere& o, const xBound& b) { return xSphereHitsBound(o.center, o.r, b); }
+
 #endif

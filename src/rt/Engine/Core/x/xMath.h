@@ -45,6 +45,16 @@ T range_limit(T v, T minv, T maxv)
     return v <= minv ? minv : (v >= maxv ? maxv : v);
 }
 
+static const S32 MAX_BINOM_SIZE = 528;
+extern S32 binom_triangle[MAX_BINOM_SIZE];
+
+inline S32 xBinom(S32 n, S32 r)
+{
+    xASSERT_L(733, n < MAX_BINOM_SIZE);
+    xASSERT_L(734, r <= n);
+    return binom_triangle[n * (n + 1) / 2 + r];
+}
+
 struct tweak_callback;
 struct tweak_info;
 
@@ -182,7 +192,10 @@ void xFuncPiece_ShiftPiece(xFuncPiece* shift, xFuncPiece* func, F32 newZero);
 void xFuncPiece_NewEndpointsPiece(xFuncPiece* move, xFuncPiece* func, F32 oldEnd1, F32 oldEnd2, F32 newEnd1, F32 newEnd2);
 
 F32 xsqrt(F32 x);
+F32 xlog(F32 x);
 F32 xexp(F32 x);
+F32 xpow(F32 x, F32 y);
+F32 xacos(F32 x);
 F32 xasin(F32 x);
 F32 xatan(F32 x);
 F32 xatan2(F32 y, F32 x);
