@@ -142,6 +142,7 @@ void xMat3x3LMulVec(xVec3* o, const xMat3x3* m, const xVec3* v);
 void xQuatFromMat(xQuat* q, const xMat3x3* m);
 void xQuatToMat(const xQuat* q, xMat3x3* m);
 void xQuatSlerp(xQuat* o, const xQuat* a, const xQuat* b, F32 t);
+void xQuatNormalize(xQuat* o, const xQuat* q);
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
 {
@@ -218,8 +219,13 @@ inline F32 xMat3x3LookVec3(xMat3x3& mat, const xVec3& at)
     return mag;
 }
 
-void xMat4x3Copy(xMat4x3* o, const xMat4x3* m);
+inline void xMat4x3Copy(xMat4x3* o, const xMat4x3* m)
+{
+    *o = *m;
+}
+
 void xMat4x3Mul(xMat4x3* o, const xMat4x3* a, const xMat4x3* b);
+void xMat4x3Rot(xMat4x3* m, const xVec3* a, F32 t, const xVec3* p);
 void xMat4x3MoveLocalRight(xMat4x3* m, F32 mag);
 void xMat4x3MoveLocalUp(xMat4x3* m, F32 mag);
 void xMat4x3MoveLocalAt(xMat4x3* m, F32 mag);
@@ -324,6 +330,11 @@ inline void xBoxFromRay(xBox& box, const xRay3& ray)
     xBoxFromLine(box, line);
 }
 
+inline U32 xQuatEquals(const xQuat* a, const xQuat* b)
+{
+    return a->s == b->s && xVec3Equals(&a->v, &b->v);
+}
+
 inline void xQuatToLookVec(const xQuat* q, xVec3* v)
 {
     F32 tx = 2.0f * q->v.x;
@@ -338,6 +349,27 @@ inline void xQuatToLookVec(const xQuat* q, xVec3* v)
     v->x = txz - tsy;
     v->y = tyz + tsx;
     v->z = 1.0f - txx - tyy;
+}
+
+inline F32 xQuatGetAngleDiff(const xQuat* q0, const xQuat* q1)
+{
+    F32 s1 = q0->v.dot(q1->v) + q0->s * q1->s;
+
+    if (s1 > -s1) {
+        return xacos(s1);
+    }
+    return xacos(-s1);
+}
+
+inline F32 xQuatDot(const xQuat* a, const xQuat* b)
+{
+    return xVec3Dot(&a->v, &b->v) + a->s * b->s;
+}
+
+inline void xQuatFlip(xQuat* o, const xQuat* q)
+{
+    o->s = -q->s;
+    xVec3Inv(&o->v, &q->v);
 }
 
 #endif

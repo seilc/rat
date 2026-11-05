@@ -187,6 +187,12 @@ if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
 typedef void(*xDebugModeCallback)();
 
 void xDebugValidateFailed();
+
+inline char* xbtoa(U32 b)
+{
+    return (char*)(b ? "true " : "false");
+}
+
 void xprintf(const char* fmt, ...);
 
 #if DEBUG || RELEASE

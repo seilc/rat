@@ -37,6 +37,11 @@ F32 xMovePointGetNext(const xMovePoint* m, const xMovePoint* prev, xMovePoint** 
 xVec3* xMovePointGetPos(const xMovePoint* m);
 S32 xMovePointGetAllLinked(xMovePoint** mps, S32 mps_max, xMovePoint* mp, S32 mps_used);
 
+inline U16 xMovePointGetNumPoints(const xMovePoint* m)
+{
+    return m->asset->numPoints;
+}
+
 inline xMovePoint* xMovePointGetPoint(const xMovePoint* m, U16 n)
 {
     xASSERT_L(114, n < m->asset->numPoints);
