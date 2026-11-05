@@ -125,6 +125,8 @@ void _auto_tweak_flag(const char* prefix, const char* name, U32* v, U32 mask, co
 
 extern const tweak_callback cb_tweak_force_lt;
 extern const tweak_callback cb_tweak_force_gt;
+extern const tweak_callback cb_tweak_force_lteq;
+extern const tweak_callback cb_tweak_force_gteq;
 
 extern const char* tweak_blend_mode_labels[11];
 extern const U32 tweak_blend_mode_values[11];
