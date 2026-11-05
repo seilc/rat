@@ -165,6 +165,7 @@ void xVec3Cross(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3Cross(xVec3& o, const xVec3& a, const xVec3& b);
 F32 xVec3Length(F32 _x, F32 _y, F32 _z);
 F32 xVec3Length(const xVec3* v);
+F32 xVec3LengthFast(F32 _x, F32 _y, F32 _z);
 F32 xVec3Length2(const xVec3* v);
 void xVec3Inv(xVec3* o, const xVec3* v);
 void xVec3Inv(xVec3& v);

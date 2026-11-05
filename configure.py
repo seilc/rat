@@ -616,7 +616,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xOutputMgr.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPad.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPar.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xParCmd.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xParCmd.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParEmitter.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParEmitterType.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParGroup.cpp"),
