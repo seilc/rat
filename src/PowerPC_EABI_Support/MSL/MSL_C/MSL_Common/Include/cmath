@@ -8,14 +8,13 @@
 
 namespace std {
 
-float cosf(float);
-
 inline float acosf(float x) { return acos(x); }
 inline float asinf(float x) { return asin(x); }
 inline float atanf(float x) { return atan(x); }
 inline float atan(float x) { return atanf(x); }
 inline float atan2f(float y, float x) { return atan2(y, x); }
 inline float ceilf(float x) { return ceil(x); }
+inline float cosf(float x) { return cos(x); }
 inline float coshf(float x) { return cosh(x); }
 inline float expf(float x) { return exp(x); }
 inline float fabsf(float x) { return fabs(x); }
