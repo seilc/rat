@@ -236,9 +236,8 @@ void xSTUnLoadSceneMany(U32 sceneID, S32 type)
     if (type & 0x1) {
         st_STRAN_SCENE* sdata = XST_find_bySID(sceneID, XST_OPTS_HIP);
         if (sdata) {
-            if (sdata->spkg) {
+            if (sdata->spkg)
                 g_pkrf->Done(sdata->spkg);
-            }
             sdata->spkg = NULL;
             XST_unlock(sdata);
         }
@@ -247,9 +246,8 @@ void xSTUnLoadSceneMany(U32 sceneID, S32 type)
     if (type & 0x4) {
         st_STRAN_SCENE* sdata = XST_find_bySID(sceneID, XST_OPTS_LOCAL);
         if (sdata) {
-            if (sdata->spkg) {
+            if (sdata->spkg)
                 g_pkrf->Done(sdata->spkg);
-            }
             sdata->spkg = NULL;
             XST_unlock(sdata);
         }
@@ -258,9 +256,8 @@ void xSTUnLoadSceneMany(U32 sceneID, S32 type)
     if (type & 0x2) {
         st_STRAN_SCENE* sdata = XST_find_bySID(sceneID, XST_OPTS_HOP);
         if (sdata) {
-            if (sdata->spkg) {
+            if (sdata->spkg)
                 g_pkrf->Done(sdata->spkg);
-            }
             sdata->spkg = NULL;
             XST_unlock(sdata);
         }
@@ -307,7 +304,8 @@ void xSTDisconnect(U32 sid, S32 flg_hiphop)
 S32 xSTSwitchScene(U32 sid, void* userdata, S32(*progmon)(void*, F32))
 {
     st_STRAN_SCENE* sdata = NULL;
-    S32 rc = 0, i = 0;
+    S32 rc = 0;
+    S32 i = 0;
 
     xASSERT_L(482, sid);
 
@@ -321,9 +319,8 @@ S32 xSTSwitchScene(U32 sid, void* userdata, S32(*progmon)(void*, F32))
             rc = g_pkrf->SetActive(sdata->spkg, PKR_LTYPE_ALL);
             DBprintf(DBML_VDBG, "STM: Scene Switch Completed with %s\n", rc ? "Success" : "Failure");
 
-            if (progmon) {
+            if (progmon)
                 progmon(userdata, 1.0f);
-            }
         }
     }
 
@@ -400,17 +397,15 @@ en_pkrfindmyass xSTRandMemToAsset(PKRAssetTOCInfo* ainfo, const void* addr)
 
 void* xSTFindAsset(U32 aid, U32* size)
 {
-    void* memloc;
-    S32 scncnt, i;
-    st_STRAN_SCENE* sdata;
-    S32 asssize;
-
     xASSERT_FMT_L(598, aid, "xSTFindAsset function is called with 0 asset ID ");
     if (!aid) {
         return NULL;
     }
 
-    memloc = NULL;
+    void* memloc = NULL;
+    S32 scncnt, i;
+    st_STRAN_SCENE* sdata;
+    S32 asssize;
     scncnt = XST_cnt_locked();
     for (i = 0; i < scncnt; i++) {
         sdata = XST_nth_locked(i);
@@ -435,17 +430,15 @@ void* xSTFindAsset(U32 aid, U32* size)
 
 st_PACKER_ATOC_NODE* xSTFindAssetNode(U32 aid, U32* size)
 {
-    st_PACKER_ATOC_NODE* memloc;
-    S32 scncnt, i;
-    st_STRAN_SCENE* sdata;
-    S32 asssize;
-
     xASSERT_FMT_L(646, aid, "xSTFindAsset function is called with 0 asset ID ");
     if (!aid) {
         return NULL;
     }
 
-    memloc = NULL;
+    st_PACKER_ATOC_NODE* memloc = NULL;
+    S32 scncnt, i;
+    st_STRAN_SCENE* sdata;
+    S32 asssize;
     scncnt = XST_cnt_locked();
     for (i = 0; i < scncnt; i++) {
         sdata = XST_nth_locked(i);
@@ -470,9 +463,11 @@ st_PACKER_ATOC_NODE* xSTFindAssetNode(U32 aid, U32* size)
 
 S32 xSTAssetCountByType(U32 type)
 {
-    S32 sum = 0, cnt = 0;
+    S32 sum = 0;
+    S32 cnt = 0;
     st_STRAN_SCENE* sdata = NULL;
-    S32 scncnt = 0, i = 0;
+    S32 scncnt = 0;
+    S32 i = 0;
 
     scncnt = XST_cnt_locked();
     for (i = 0; i < scncnt; i++) {
@@ -490,7 +485,10 @@ void* xSTFindAssetByType(U32 type, S32 idx, U32* size)
 {
     st_STRAN_SCENE* sdata = NULL;
     void* memptr = NULL;
-    S32 scncnt = 0, i = 0, sum = 0, cnt = 0;
+    S32 scncnt = 0;
+    S32 i = 0;
+    S32 sum = 0;
+    S32 cnt = 0;
 
     scncnt = XST_cnt_locked();
     for (i = 0; i < scncnt; i++) {
@@ -532,7 +530,10 @@ S32 xSTGetAssetInfo(U32 aid, PKRAssetTOCInfo* tocainfo)
 
 S32 xSTGetAssetInfoByType(U32 type, S32 idx, PKRAssetTOCInfo* tocainfo)
 {
-    S32 found = 0, sum = 0, cnt = 0, scncnt, i;
+    S32 found = 0;
+    S32 sum = 0;
+    S32 cnt = 0;
+    S32 scncnt, i;
     st_STRAN_SCENE* sdata;
     S32 rc;
 
@@ -565,7 +566,9 @@ char* xST_xAssetID_HIPFullPath(U32 aid, U32* sceneID)
 {
     const char* da_hipname = NULL;
     st_STRAN_SCENE* sdata = NULL;
-    S32 rc = 0, scncnt = 0, i = 0;
+    S32 rc = 0;
+    S32 scncnt = 0;
+    S32 i = 0;
 
     scncnt = XST_cnt_locked();
     for (i = 0; i < scncnt; i++) {
@@ -588,7 +591,9 @@ char* xST_xAssetID_HIPFullPath(U32 aid, U32* sceneID)
 void xSTReportLoadTimes(U32 sceneID, S32 toScreen)
 {
     st_STRAN_SCENE* sdata = NULL;
-    S32 scncnt = 0, i = 0, rptopts = 0;
+    S32 scncnt = 0;
+    S32 i = 0;
+    S32 rptopts = 0;
 
     if (g_pkrf->dbgrpt_loadtimes) {
         if (toScreen) {
@@ -786,12 +791,11 @@ static st_STRAN_SCENE* XST_find_bySID(U32 sid, S32 flagHipHop)
         if (g_xstdata.loadlock & (1 << i)) {
             tmp_sdata = &g_xstdata.hipscn[i];
             xVALIDATE_L(1245, tmp_sdata->scnid);
-            if (tmp_sdata->scnid == sid) {
+            if (tmp_sdata->scnid == sid)
                 if ((tmp_sdata->flgHipHop & XST_OPTS_MASKHH) == (flagHipHop & XST_OPTS_MASKHH)) {
                     da_sdata = tmp_sdata;
                     break;
                 }
-            }
         }
     }
 

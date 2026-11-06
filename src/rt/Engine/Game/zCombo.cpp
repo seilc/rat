@@ -29,9 +29,8 @@ DECOMP_FORCEACTIVE(
 
 void zCombo_Paused()
 {
-    if (sComboIsPaused) {
+    if (sComboIsPaused)
         return;
-    }
 
     sComboIsPaused = true;
 

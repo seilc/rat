@@ -113,9 +113,7 @@ static void HIPLDestroy(st_HIPLOADDATA* lddata)
     S32 lockid = -1;
 
     if (lddata) {
-        if (lddata->fli) {
-            lddata->fli->destroy(lddata->fli);
-        }
+        if (lddata->fli) lddata->fli->destroy(lddata->fli);
 
         lockid = lddata->lockid;
         memset(lddata, 0, sizeof(st_HIPLOADDATA));
@@ -198,9 +196,8 @@ static U32 HIPLBlockEnter(st_HIPLOADDATA* lddata)
     }
 
     cnt = HIPLReadLongs(lddata, (S32*)&cid, -1);
-    if (cnt == 0) {
-        cid = 0;
-    } else {
+    if (cnt == 0) cid = 0;
+    else {
         xVALIDATE_L(450, cnt == 1);
 
         cnt = HIPLReadLongs(lddata, &size, -1);
@@ -253,17 +250,12 @@ static S32 HIPLBlockRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
     xVALIDATE_L(528, data);
     xVALIDATE_L(531, !lddata->bypass);
 
-    if (lddata->bypass) {
-        return 0;
-    }
+    if (lddata->bypass) return 0;
 
-    if (cnt == 0) {
-        return 0;
-    }
+    if (cnt == 0) return 0;
 
-    if (lddata->top < 0) {
-        top = NULL;
-    } else {
+    if (lddata->top < 0) top = NULL;
+    else {
         top = &lddata->stk[lddata->top];
         left = top->blk_remain / size;
     }
@@ -271,40 +263,30 @@ static S32 HIPLBlockRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
     if (cnt < 0) {
         cnt = -cnt;
         head = 1;
-        if (top && cnt > left) {
-            cnt = left;
-        }
+        if (top && cnt > left) cnt = left;
     } else {
         xVALIDATE_L(548, cnt > 0);
         xVALIDATE_L(549, top);
         xVALIDATE_L(550, cnt <= left);
     }
 
-    if (!head && left < cnt) {
-        cnt = left;
-    }
+    if (!head && left < cnt) cnt = left;
 
     xVALIDATE_L(555, (size == 1) || (size == 2) || (size == 4));
 
-    if (cnt == 0) {
-        got = 0;
-    } else if (size == 1) {
+    if (cnt == 0) got = 0;
+    else if (size == 1)
         got = lddata->fli->readBytes(lddata->fli, (char*)data, cnt);
-    } else if (size == 2) {
+    else if (size == 2)
         got = lddata->fli->readMShorts(lddata->fli, (S16*)data, cnt);
-    } else if (size == 4) {
+    else if (size == 4)
         got = lddata->fli->readMLongs(lddata->fli, (S32*)data, cnt);
-    }
 
-    if (top && got != cnt) {
-        xVALIDATE_FAIL_L(568);
-    }
+    if (top && got != cnt) xVALIDATE_FAIL_L(568);
 
     lddata->pos += got * size;
 
-    if (top) {
-        top->blk_remain -= got * size;
-    }
+    if (top) top->blk_remain -= got * size;
 
     return got * size;
 }
@@ -318,9 +300,7 @@ static S32 HIPLBypassRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
     xVALIDATE_L(601, data);
     xVALIDATE_L(604, lddata->bypass);
 
-    if (!lddata->bypass) {
-        return 0;
-    }
+    if (!lddata->bypass) return 0;
 
     if (lddata->use_async) {
         DBprintf(DBML_VDBG, "HIP - Async Read\n");
@@ -328,21 +308,17 @@ static S32 HIPLBypassRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
         return rc;
     }
 
-    if (cnt == 0) {
-        return 0;
-    }
+    if (cnt == 0) return 0;
 
     xVALIDATE_L(617, (size == 1) || (size == 2) || (size == 4));
 
-    if (cnt == 0) {
-        got = 0;
-    } else if (size == 1) {
+    if (cnt == 0) got = 0;
+    else if (size == 1)
         got = lddata->fli->readBytes(lddata->fli, (char*)data, cnt);
-    } else if (size == 2) {
+    else if (size == 2)
         got = lddata->fli->readMShorts(lddata->fli, (S16*)data, cnt);
-    } else if (size == 4) {
+    else if (size == 4)
         got = lddata->fli->readMLongs(lddata->fli, (S32*)data, cnt);
-    }
 
     xVALIDATE_L(630, got == cnt);
 
@@ -414,11 +390,8 @@ static S32 HIPLReadBytes(st_HIPLOADDATA* lddata, char* data, S32 cnt)
     xVALIDATE_L(724, lddata);
     xVALIDATE_L(725, data);
 
-    if (lddata->bypass) {
-        return HIPLBypassRead(lddata, data, cnt, 1);
-    } else {
-        return HIPLBlockRead(lddata, data, cnt, 1);
-    }
+    if (lddata->bypass) return HIPLBypassRead(lddata, data, cnt, 1);
+    else return HIPLBlockRead(lddata, data, cnt, 1);
 }
 
 static S32 HIPLReadShorts(st_HIPLOADDATA* lddata, S16* data, S32 cnt)
@@ -428,11 +401,8 @@ static S32 HIPLReadShorts(st_HIPLOADDATA* lddata, S16* data, S32 cnt)
     xVALIDATE_L(732, lddata);
     xVALIDATE_L(733, data);
 
-    if (lddata->bypass) {
-        got = HIPLBypassRead(lddata, data, cnt, 2);
-    } else {
-        got = HIPLBlockRead(lddata, data, cnt, 2);
-    }
+    if (lddata->bypass) got = HIPLBypassRead(lddata, data, cnt, 2);
+    else got = HIPLBlockRead(lddata, data, cnt, 2);
 
     return got / 2;
 }
@@ -444,11 +414,8 @@ static S32 HIPLReadLongs(st_HIPLOADDATA* lddata, S32* data, S32 cnt)
     xVALIDATE_L(741, lddata);
     xVALIDATE_L(742, data);
 
-    if (lddata->bypass) {
-        got = HIPLBypassRead(lddata, data, cnt, 4);
-    } else {
-        got = HIPLBlockRead(lddata, data, cnt, 4);
-    }
+    if (lddata->bypass) got = HIPLBypassRead(lddata, data, cnt, 4);
+    else got = HIPLBlockRead(lddata, data, cnt, 4);
 
     return got / 4;
 }
@@ -460,11 +427,8 @@ static S32 HIPLReadFloats(st_HIPLOADDATA* lddata, F32* data, S32 cnt)
     xVALIDATE_L(750, lddata);
     xVALIDATE_L(751, data);
 
-    if (lddata->bypass) {
-        got = HIPLBypassRead(lddata, data, cnt, 4);
-    } else {
-        got = HIPLBlockRead(lddata, data, cnt, 4);
-    }
+    if (lddata->bypass) got = HIPLBypassRead(lddata, data, cnt, 4);
+    else got = HIPLBlockRead(lddata, data, cnt, 4);
 
     return got / 4;
 }
@@ -484,9 +448,7 @@ static S32 HIPLReadString(st_HIPLOADDATA* lddata, char* buf)
     if (lddata->bypass) {
         while (HIPLBypassRead(lddata, buf + n, 1, sizeof(char))) {
             if (buf[n] == '\0') {
-                if (!(n & 1)) {
-                    HIPLBypassRead(lddata, &pad, 1, sizeof(char));
-                }
+                if (!(n & 1)) HIPLBypassRead(lddata, &pad, 1, sizeof(char));
                 break;
             }
             n++;
@@ -494,9 +456,7 @@ static S32 HIPLReadString(st_HIPLOADDATA* lddata, char* buf)
     } else {
         while (HIPLBlockRead(lddata, buf + n, 1, sizeof(char))) {
             if (buf[n] == '\0') {
-                if (!(n & 1)) {
-                    HIPLBlockRead(lddata, &pad, 1, sizeof(char));
-                }
+                if (!(n & 1)) HIPLBlockRead(lddata, &pad, 1, sizeof(char));
                 break;
             }
             n++;

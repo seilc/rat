@@ -116,10 +116,9 @@ void xQuickCullForLine(xQCControl* ctrl, xQCData* q, const xLine3* ln)
     xASSERT_L(545, q);
     xASSERT_L(546, ln);
 
-    xQCData a;
+    xQCData a, b;
     xQuickCullCellForVec(ctrl, &a, &ln->p1);
 
-    xQCData b;
     xQuickCullCellForVec(ctrl, &b, &ln->p2);
 
     xQuickCullCellMerge(q, &a, &b);
@@ -135,10 +134,9 @@ void xQuickCullForRay(xQCControl* ctrl, xQCData* q, const xRay3* r)
 
     xLine3FromRay(ln, r);
 
-    xQCData a;
+    xQCData a, b;
     xQuickCullCellForVec(ctrl, &a, &ln.p1);
 
-    xQCData b;
     xQuickCullCellForVec(ctrl, &b, &ln.p2);
 
     xQuickCullCellMerge(q, &a, &b);
@@ -167,10 +165,9 @@ void xQuickCullForSphere(xQCControl* ctrl, xQCData* q, const xSphere* s)
         v2.y += s->center.y,
         v2.z += s->center.z;
     
-    xQCData a;
+    xQCData a, b;
     xQuickCullCellForVec(ctrl, &a, &v1);
 
-    xQCData b;
     xQuickCullCellForVec(ctrl, &b, &v2);
 
     xQuickCullCellMerge(q, &a, &b);
@@ -182,10 +179,9 @@ void xQuickCullForBox(xQCControl* ctrl, xQCData* q, const xBox* box)
     xASSERT_L(598, q);
     xASSERT_L(599, box);
 
-    xQCData a;
+    xQCData a, b;
     xQuickCullCellForVec(ctrl, &a, &box->lower);
 
-    xQCData b;
     xQuickCullCellForVec(ctrl, &b, &box->upper);
 
     xQuickCullCellMerge(q, &a, &b);

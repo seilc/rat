@@ -93,10 +93,7 @@ public:
     virtual bool NeedsHealth() const;
     virtual const xVec3& GetFloorNormal() const;
 
-    virtual bool IsFloorColliding() const
-    {
-        return Get_floor_collision() && CollisionOn();
-    }
+    virtual bool IsFloorColliding() const { return Get_floor_collision() && CollisionOn(); }
 
     virtual const xVec3* GetFloorPosition() const;
     virtual const char** GetBoneNames() const;
@@ -107,10 +104,7 @@ public:
     virtual void TakeIncrediPower(F32);
     virtual bool IsSwimming() const;
 
-    bool CollisionOn() const
-    {
-        return Get_collisionOn();
-    }
+    bool CollisionOn() const { return Get_collisionOn(); }
 
     virtual bool FindShortestCollision(xSweptSphere& sws, U32& collisionFlags, S32 penby, bool);
     virtual void FindStaticCollisions(const xSphere** spheres, S32 numSpheres, const xVec3& initialDisplacement, const xVec3& validDepenetration);

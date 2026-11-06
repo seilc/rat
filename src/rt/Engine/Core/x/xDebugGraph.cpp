@@ -144,9 +144,8 @@ namespace {
         if (graph.scale <= 0.0f) {
             graph.flags |= FLAG_AUTO_SCALE;
             graph.scale = 0.0f;
-        } else {
+        } else
             graph.flags &= ~FLAG_AUTO_SCALE;
-        }
     }
 
     const tweak_callback cb_change_scale = { on_change_scale };
@@ -227,12 +226,10 @@ namespace {
     graph_handle* grab_graph(const char* name)
     {
         graph_handle* gh = find_graph(name);
-        if (gh) {
+        if (gh)
             return gh;
-        }
-        if (graphs_size >= MAX_GRAPHS) {
+        if (graphs_size >= MAX_GRAPHS)
             return NULL;
-        }
         gh = alloc_graph();
         create_graph(*gh->graph, name);
         return gh;
@@ -283,8 +280,7 @@ namespace {
 
 void xDebugGraphSceneEnter()
 {
-    S32 blech = 3;
-    S32 blah = 4;
+    S32 blech = 3, blah = 4;
     graph_buffer = (graph_context*)xDebugTweak_StaticAlloc(MAX_GRAPHS * sizeof(graph_context));
     sorted_graphs = (graph_handle*)xDebugTweak_StaticAlloc(MAX_GRAPHS * sizeof(graph_handle));
     point_buffer = (xVec2*)xDebugTweak_StaticAlloc(128 * sizeof(xVec2));

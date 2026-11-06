@@ -19,29 +19,26 @@ struct xSoundFXAsset : xBaseAsset
 
 inline void xSoundFXSetSendsDone(xSoundFXAsset* pSoundFX, bool bIsSet)
 {
-    if (bIsSet) {
+    if (bIsSet)
         pSoundFX->uFlags |= 0x1;
-    } else {
+    else
         pSoundFX->uFlags &= ~0x1;
-    }
 }
 
 inline void xSoundFXSetSoundFXPlaying(xSoundFXAsset* pSoundFX, bool bIsSet)
 {
-    if (bIsSet) {
+    if (bIsSet)
         pSoundFX->uFlags |= 0x2;
-    } else {
+    else
         pSoundFX->uFlags &= ~0x2;
-    }
 }
 
 inline void xSoundFXSetHandleSet(xSoundFXAsset* pSoundFX, bool bIsSet)
 {
-    if (bIsSet) {
+    if (bIsSet)
         pSoundFX->uFlags |= 0x8;
-    } else {
+    else
         pSoundFX->uFlags &= ~0x8;
-    }
 }
 
 inline bool xSoundFXIsAttached(xSoundFXAsset* pSoundFX)

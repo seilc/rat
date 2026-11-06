@@ -23,11 +23,10 @@ void xGroupInit(xBase* b, xGroupAsset* asset)
     t->eventFunc = xGroupEventCB;
     t->asset = asset;
 
-    if (t->linkCount > 0) {
+    if (t->linkCount > 0)
         t->link = (xLinkAsset*)((U8*)t->asset + sizeof(xGroupAsset) + sizeof(U32) * asset->itemCount);
-    } else {
+    else
         t->link = NULL;
-    }
 
     U32 count = xGroupGetCount(t);
     
@@ -144,9 +143,8 @@ void xGroupEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBas
                 xBase* b = g->item[i];
                 if (b) {
                     if (b->baseFlags & k_XBASE_IS_ENTITY) {
-                        if (xBaseIsEnabled(b)) {
+                        if (xBaseIsEnabled(b))
                             entVisEventHandler((xEnt*)b);
-                        }
                     } else {
                         zEntEvent(b, toEvent, toParam, toParamWidget, toParamWidgetID);
                     }

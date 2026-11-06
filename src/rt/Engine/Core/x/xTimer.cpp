@@ -61,8 +61,10 @@ void xTimerInit(void* b, void* tasset)
 
 static S32 xTimer_ObjIDIsPauseTimer(U32 id)
 {
-    if (id == PAUSE_TIMER_ID) return TRUE;
-    if (id >= PAUSE_TIMER0_ID && id <= PAUSE_TIMER9_ID) return TRUE;
+    if (id == PAUSE_TIMER_ID)
+        return TRUE;
+    if (id >= PAUSE_TIMER0_ID && id <= PAUSE_TIMER9_ID)
+        return TRUE;
 
     S32 foo = (id >= PAUSE_TIMER00_ID);
     S32 bar = (id <= PAUSE_TIMER99_ID);
@@ -86,11 +88,10 @@ void xTimerInit(xBase* b, xTimerAsset* tasset)
     t->eventFunc = xTimerEventCB;
     t->tasset = tasset;
 
-    if (t->linkCount) {
+    if (t->linkCount)
         t->link = (xLinkAsset*)((U8*)t->tasset + sizeof(xTimerAsset));
-    } else {
+    else
         t->link = NULL;
-    }
 
     t->state = 0;
     t->secondsLeft = GetRandomizedTime(tasset);

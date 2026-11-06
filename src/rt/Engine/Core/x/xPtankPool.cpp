@@ -375,7 +375,9 @@ void ptank_pool::grab_block(ptank_group_type type)
     ptank = NULL;
     group_data& group = groups[type];
 
-    if (group.used >= group.size && create_ptanks(group, 1) < 1) return;
+    if (group.used >= group.size && create_ptanks(group, 1) < 1) {
+        return;
+    }
 
     ptank_context** end = group.buckets + group.buckets_used;
 

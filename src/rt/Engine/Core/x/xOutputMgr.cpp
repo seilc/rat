@@ -125,9 +125,7 @@ void xOutCrit(const char* fmt, ...)
 
 void xOutErr(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevErr) && (!xOutEnabled(name) || xout_sev < xOutSevErr)) {
-        return;
-    }
+    if (!xOutTrumps(name, xOutSevErr) && (!xOutEnabled(name) || xout_sev < xOutSevErr)) return;
 
     char buf[1024];
     va_list args;
@@ -141,9 +139,7 @@ void xOutErr(char* name, const char* fmt, ...)
 
 void xOutWarn(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevWarn) && (!xOutEnabled(name) || xout_sev < xOutSevWarn)) {
-        return;
-    }
+    if (!xOutTrumps(name, xOutSevWarn) && (!xOutEnabled(name) || xout_sev < xOutSevWarn)) return;
 
     char buf[1024];
     va_list args;
@@ -157,9 +153,7 @@ void xOutWarn(char* name, const char* fmt, ...)
 
 void xOutInfo(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevInfo) && (!xOutEnabled(name) || xout_sev < xOutSevInfo)) {
-        return;
-    }
+    if (!xOutTrumps(name, xOutSevInfo) && (!xOutEnabled(name) || xout_sev < xOutSevInfo)) return;
 
     char buf[1024];
     va_list args;
@@ -173,9 +167,7 @@ void xOutInfo(char* name, const char* fmt, ...)
 
 void xOutBabble(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevBabble) && (!xOutEnabled(name) || xout_sev < xOutSevBabble)) {
-        return;
-    }
+    if (!xOutTrumps(name, xOutSevBabble) && (!xOutEnabled(name) || xout_sev < xOutSevBabble)) return;
 
     char buf[1024];
     va_list args;

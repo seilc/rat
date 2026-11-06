@@ -16,7 +16,8 @@ namespace {
     U32 CountElements(const char** list)
     {
         const char** it = list;
-        while (*it) it++;
+        while (*it)
+            it++;
         return it - list;
     }
 
@@ -24,7 +25,8 @@ namespace {
     {
         const char* end = string + size;
         const char* start = end - 1;
-        while (isdigit(*start)) start--;
+        while (isdigit(*start))
+            start--;
         start++;
 
         char buffer[32];
@@ -161,7 +163,8 @@ void xHierarchyBoundInit(xHierarchyBound* bound, const xHierarchyBoundInitData* 
     xASSERT_L(227, bound->nodes);
 
     U32 count = 0;
-    while (init[count].bone >= -1) count++;
+    while (init[count].bone >= -1)
+        count++;
     bound->count = count;
 
     for (U32 i = 0; i < count; i++) {
@@ -188,13 +191,11 @@ void xHierarchyBoundDraw(const xHierarchyBound* bound, U8 mR, U8 mG, U8 mB, U8 m
 
     xDrawSetColor(sR, sG, sB, sA);
     for (U32 i = 0; i < bound->count; i++) {
-        if ((S32)i == hilight) {
+        if ((S32)i == hilight)
             xDrawSetColor(hR, hG, hB, hA);
-        }
         xDrawSphere(&bound->nodes[i].sphere, 0xC0006);
-        if ((S32)i == hilight) {
+        if ((S32)i == hilight)
             xDrawSetColor(sR, sG, sB, sA);
-        }
     }
 }
 
@@ -208,12 +209,10 @@ bool xHierarchyBoundTest(const xHierarchyBound* bound, xSweptSphere* sphere, U16
 
     for (U32 i = 0; i < bound->count; i++) {
         if (xSweptSphereToSphere(sphere, &bound->nodes[i].sphere)) {
-            if (boundUserData) {
+            if (boundUserData)
                 *boundUserData = bound->nodes[i].userData;
-            }
-            if (subsphere) {
+            if (subsphere)
                 *subsphere = i;
-            }
             return true;
         }
     }
@@ -270,9 +269,8 @@ void xHierarchyBoundAddDebugTweaks(xHierarchyBound* bound, const char* base, con
     bound->tweakInfo.lastCount = bound->count;
     bound->tweakInfo.rootSelected = false;
 
-    for (U32 i = 0; i < bound->count; i++) {
+    for (U32 i = 0; i < bound->count; i++)
         AddHierarchyTweak(base, bound, i);
-    }
 }
 #endif
 

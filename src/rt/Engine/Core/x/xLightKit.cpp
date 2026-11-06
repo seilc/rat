@@ -137,12 +137,20 @@ void xLightKit_GetBlendInfo(xLightKitBlendInfo& lkitInfo, xModelInstance* model)
 
 S32 xLightKit_Compare(xLightKitBlendInfo& lkitInfo1, xLightKitBlendInfo& lkitInfo2)
 {
-    if (lkitInfo1.lightKit < lkitInfo2.lightKit) return 1;
-    if (lkitInfo1.lightKit > lkitInfo2.lightKit) return -1;
-    if (lkitInfo1.lightKitBlend < lkitInfo2.lightKitBlend) return 1;
-    if (lkitInfo1.lightKitBlend > lkitInfo2.lightKitBlend) return -1;
-    if (lkitInfo1.blendPercentage < lkitInfo2.blendPercentage) return 1;
-    if (lkitInfo1.blendPercentage > lkitInfo2.blendPercentage) return -1;
+    if (lkitInfo1.lightKit < lkitInfo2.lightKit)
+        return 1;
+    if (lkitInfo1.lightKit > lkitInfo2.lightKit)
+        return -1;
+
+    if (lkitInfo1.lightKitBlend < lkitInfo2.lightKitBlend)
+        return 1;
+    if (lkitInfo1.lightKitBlend > lkitInfo2.lightKitBlend)
+        return -1;
+
+    if (lkitInfo1.blendPercentage < lkitInfo2.blendPercentage)
+        return 1;
+    if (lkitInfo1.blendPercentage > lkitInfo2.blendPercentage)
+        return -1;
     return 0;
 }
 

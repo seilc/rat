@@ -15,9 +15,9 @@ void zEditorLinkInit()
 void zEditorLinkRefresh()
 {
     xFile file;
+    char asset_name[256];
     iFileOpen("UPDATED.TXT", 0x3, &file);
 
-    char asset_name[256];
     U32 asset_size = iFileGetSize(&file);
     if (asset_size != 0) {
         iFileRead(&file, asset_name, asset_size);

@@ -24,22 +24,17 @@ void xScreenFade::load(asset_type& a)
     asset = &a;
     eventFunc = cb_dispatch;
 
-    if (linkCount) {
-        link = (xLinkAsset*)(&a + 1);
-    }
+    if (linkCount) link = (xLinkAsset*)(&a + 1);
 
     state = eScreenFadeStateOff;
     src = g_CLEAR;
 
-    if (asset->fadeDownTime < 0.0f) {
+    if (asset->fadeDownTime < 0.0f)
         asset->fadeDownTime = 2.0f;
-    }
-    if (asset->fadeUpTime < 0.0f) {
+    if (asset->fadeUpTime < 0.0f)
         asset->fadeUpTime = 2.0f;
-    }
-    if (asset->waitTime < 0.0f) {
+    if (asset->waitTime < 0.0f)
         asset->waitTime = 2.0f;
-    }
 
     owner = NULL;
 }
@@ -155,23 +150,17 @@ void xScreenFade::load(xBase& data, xDynAsset& asset, size_t asset_size)
 void xScreenFade::update_all(F32 dt)
 {
     zScene& scene = *xglobals->sceneCur;
-    xScreenFade* it = (xScreenFade*)scene.baseList[eBaseTypeScreenFade];
-    xScreenFade* end = it + scene.baseCount[eBaseTypeScreenFade];
-    while (it != end) {
+    xScreenFade* it = (xScreenFade*)scene.baseList[eBaseTypeScreenFade], *end = it + scene.baseCount[eBaseTypeScreenFade];
+    for (; it != end; it++)
         it->update(dt);
-        it++;
-    }
 }
 
 void xScreenFade::render_all()
 {
     zScene& scene = *xglobals->sceneCur;
-    xScreenFade* it = (xScreenFade*)scene.baseList[eBaseTypeScreenFade];
-    xScreenFade* end = it + scene.baseCount[eBaseTypeScreenFade];
-    while (it != end) {
+    xScreenFade* it = (xScreenFade*)scene.baseList[eBaseTypeScreenFade], *end = it + scene.baseCount[eBaseTypeScreenFade];
+    for (; it != end; it++)
         it->render();
-        it++;
-    }
 }
 
 void xScreenFade::cb_dispatch(xBase* from, xBase* to, U32 event, const F32*, xBase*, U32)

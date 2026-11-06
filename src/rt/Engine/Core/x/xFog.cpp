@@ -23,11 +23,10 @@ void xFogInit(xBase* b, xFogAsset* tasset)
     t->eventFunc = xFogEventCB;
     t->tasset = tasset;
 
-    if (t->linkCount) {
+    if (t->linkCount)
         t->link = (xLinkAsset*)((U8*)t->tasset + sizeof(xFogAsset));
-    } else {
+    else
         t->link = NULL;
-    }
 }
 
 void xFogReset(xFog* t)

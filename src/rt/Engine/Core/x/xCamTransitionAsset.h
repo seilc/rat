@@ -29,15 +29,9 @@ struct xCamTransitionAsset : xDynAsset
         };
     };
 
-    void Validate() const
-    {
-        xASSERT_FMT_L(58, mVersion == VERSION, "Camera Transition Asset version is %d, wanting %d. Repack.", mVersion, VERSION);
-    }
+    void Validate() const { xASSERT_FMT_L(58, mVersion == VERSION, "Camera Transition Asset version is %d, wanting %d. Repack.", mVersion, VERSION); }
 
-    xLinkAsset* Links() const
-    {
-        return linkCount ? (xLinkAsset*)(this + 1) : NULL;
-    }
+    xLinkAsset* Links() const { return linkCount ? (xLinkAsset*)(this + 1) : NULL; }
 };
 
 #endif

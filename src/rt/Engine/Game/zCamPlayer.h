@@ -146,11 +146,7 @@ public:
     debug_info* debug;
 #endif
 
-    void set_start_theta(F32 theta)
-    {
-        start_zone.theta = theta;
-        start_zone.which |= 4;
-    }
+    void set_start_theta(F32 theta) { start_zone.theta = theta; start_zone.which |= 4; }
 };
 
 #endif

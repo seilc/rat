@@ -115,9 +115,8 @@ void xSkyDome_Render()
 
             if (!xModelCullSingle(ent->model)) {
 #if DEBUG || RELEASE
-                if (xModelRenderLogEnabled()) {
+                if (xModelRenderLogEnabled())
                     xModelRenderLogSetEntity(ent);
-                }
 #endif
 
                 if (useZBuf != sSkyList[i].zReadWrite) {
