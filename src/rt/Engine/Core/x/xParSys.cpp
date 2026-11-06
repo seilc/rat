@@ -73,7 +73,7 @@ inline bool using_ptank_render(const xParSysAsset& sys)
 #if DEBUG || RELEASE
     if (!ptank_render_mode_registered) {
         ptank_render_mode_registered = 1;
-        xTWEAKSELECT(
+        xTWEAK_SELECT(
             "Particle Emitters|\1Debug|PTank Render Mode",
             (U32*)&ptank_render_mode, ptank_render_mode_labels,
             NULL,

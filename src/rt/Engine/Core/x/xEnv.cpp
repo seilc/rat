@@ -17,7 +17,7 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
     DBprintf(DBML_VDBG, "... entering xEnvLoadJSPList ...\n");
 
 #if DEBUG || RELEASE
-    xTWEAKREMOVE("Debugging Options|JSP Visibility");
+    xTWEAK_REMOVE("Debugging Options|JSP Visibility");
 #endif
 
     if (dataType == 0) {

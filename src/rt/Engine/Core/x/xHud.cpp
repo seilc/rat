@@ -129,7 +129,7 @@ void init()
 
 void destroy()
 {
-    xTWEAKREMOVE("HUD");
+    xTWEAK_REMOVE("HUD");
     widget::disable_all(true);
 }
 
@@ -574,14 +574,14 @@ void widget::add_tweaks()
     char name[128];
     sprintf(name, "HUD|%s|%s", category(), xSTAssetName((void*)a));
     static tweak_callback cb_explode = tweak_callback::create_expand(on_expand, NULL);
-    xTWEAKBRANCH(name, &cb_explode, this, 2);
+    xTWEAK_BRANCH(name, &cb_explode, this, 2);
 }
 
 void widget::explode_tweaks()
 {
     char type_prefix[64], name[128];
     sprintf(name, "HUD|%s|%s", category(), xSTAssetName((void*)a));
-    xTWEAKBRANCH(name, NULL, NULL, 2);
+    xTWEAK_BRANCH(name, NULL, NULL, 2);
 
     sprintf(type_prefix, "HUD|%s|\001Globals|", category());
     strcat(name, "|");

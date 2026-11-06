@@ -31,8 +31,8 @@ namespace {
 
         void add_tweaks(const char* prefix)
         {
-            xAUTOTWEAKBOOL(prefix, "render_all", &render_all, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "render_none", &render_none, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render_all", &render_all, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render_none", &render_none, NULL, NULL, 0, true);
         }
     }
 
@@ -155,12 +155,12 @@ namespace {
     {
         const char* prefix = get_tweak_prefix(graph.name);
 
-        xAUTOTWEAKFLAG(prefix, "render", &graph.flags, FLAG_RENDER, NULL, NULL, 0);
-        xAUTOTWEAKFLAG(prefix, "pause", &graph.flags, FLAG_PAUSE, NULL, NULL, 0);
-        xAUTOTWEAKRANGE(prefix, "scale", &graph.scale, -1.0f, 1e9f, &cb_change_scale, &graph, 0, false);
-        xAUTOTWEAKRANGE(prefix, "originValue", &graph.originValue, -1e9f, 1e9f, NULL, NULL, 0, false);
-        xAUTOTWEAKRANGE(prefix, "offset", &graph.offset, -1000.0f, 1000.0f, NULL, NULL, 0, false);
-        xAUTOTWEAKSELECT(prefix, "color", (U32*)&graph.color, common_color_names, (const U32*)common_colors, ARRAY_LENGTH(common_colors), NULL, NULL, 0, false);
+        xAUTOTWEAK_FLAG(prefix, "render", &graph.flags, FLAG_RENDER, NULL, NULL, 0);
+        xAUTOTWEAK_FLAG(prefix, "pause", &graph.flags, FLAG_PAUSE, NULL, NULL, 0);
+        xAUTOTWEAK(prefix, "scale", &graph.scale, -1.0f, 1e9f, &cb_change_scale, &graph, 0, false);
+        xAUTOTWEAK(prefix, "originValue", &graph.originValue, -1e9f, 1e9f, NULL, NULL, 0, false);
+        xAUTOTWEAK(prefix, "offset", &graph.offset, -1000.0f, 1000.0f, NULL, NULL, 0, false);
+        xAUTOTWEAK_SELECT(prefix, "color", (U32*)&graph.color, common_color_names, (const U32*)common_colors, ARRAY_LENGTH(common_colors), NULL, NULL, 0, false);
     }
 
     void remove_graph_tweaks(graph_context& graph)
@@ -170,13 +170,13 @@ namespace {
         strcpy(buffer, prefix);
         char* tail = buffer + strlen(buffer);
 
-        strcpy(tail, "render"); xTWEAKREMOVE(buffer);
-        strcpy(tail, "pause"); xTWEAKREMOVE(buffer);
-        strcpy(tail, "scale"); xTWEAKREMOVE(buffer);
-        strcpy(tail, "originValue"); xTWEAKREMOVE(buffer);
-        strcpy(tail, "offset"); xTWEAKREMOVE(buffer);
-        strcpy(tail, "update_delay"); xTWEAKREMOVE(buffer);
-        strcpy(tail, "color"); xTWEAKREMOVE(buffer);
+        strcpy(tail, "render"); xTWEAK_REMOVE(buffer);
+        strcpy(tail, "pause"); xTWEAK_REMOVE(buffer);
+        strcpy(tail, "scale"); xTWEAK_REMOVE(buffer);
+        strcpy(tail, "originValue"); xTWEAK_REMOVE(buffer);
+        strcpy(tail, "offset"); xTWEAK_REMOVE(buffer);
+        strcpy(tail, "update_delay"); xTWEAK_REMOVE(buffer);
+        strcpy(tail, "color"); xTWEAK_REMOVE(buffer);
     }
 
     void create_graph(graph_context& graph, const char* name)
@@ -274,9 +274,9 @@ namespace {
         if (!binding) {
             char buffer[128];
             sprintf(buffer, "%supdate_delay", prefix);
-            xTWEAKREMOVE(buffer);
+            xTWEAK_REMOVE(buffer);
         } else {
-            xAUTOTWEAKRANGE(prefix, "update_delay", &graph.update_delay, 0.0f, 1e9f, NULL, NULL, 0, false);
+            xAUTOTWEAK(prefix, "update_delay", &graph.update_delay, 0.0f, 1e9f, NULL, NULL, 0, false);
         }
     }
 }

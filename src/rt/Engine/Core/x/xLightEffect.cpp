@@ -49,7 +49,7 @@ void xLightEffectFlicker::InitDebugTweak()
     strcpy(effectName, xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
 
     sprintf(name, "Widgets|Light Effects|%s", effectName);
-    xTWEAKBRANCH(name, NULL, NULL, 0x2);
+    xTWEAK_BRANCH(name, NULL, NULL, 0x2);
     
     sprintf(buffer, "%s|Max Color Variation R", name);
     xTWEAK(buffer, &tasset->maxColorVariation.r, 0.0f, 1.0f, NULL, NULL, 0x2);
@@ -61,7 +61,7 @@ void xLightEffectFlicker::InitDebugTweak()
     xTWEAK(buffer, &tasset->maxColorVariation.b, 0.0f, 1.0f, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Flicker Color Channels Together", name);
-    xTWEAKFLAG(buffer, &tasset->flags, 0x1, NULL, NULL, 0x2);
+    xTWEAK_FLAG(buffer, &tasset->flags, 0x1, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Constant Flicker Time", name);
     xTWEAK(buffer, &tasset->flickerRate, 0.0f, 1000.0f, NULL, NULL, 0x2);
@@ -145,7 +145,7 @@ void xLightEffectStrobe::InitDebugTweak()
     strcpy(effectName, xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
 
     sprintf(name, "Widgets|Light Effects|%s", effectName);
-    xTWEAKBRANCH(name, NULL, NULL, 0x2);
+    xTWEAK_BRANCH(name, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Min Color R", name);
     xTWEAK(buffer, &tasset->minColor.r, 0.0f, 1.0f, NULL, NULL, 0x2);

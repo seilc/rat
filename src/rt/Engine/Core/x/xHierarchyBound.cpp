@@ -76,12 +76,12 @@ namespace {
         char buffer[128];
 
         sprintf(buffer, "%s|Entry %2d", base, which);
-        xTWEAKBRANCH(buffer, &tweak_param_cb, bound, 0x2);
+        xTWEAK_BRANCH(buffer, &tweak_param_cb, bound, 0x2);
 
         sprintf(buffer, "%s|Entry %2d|Bone", base, which);
         if (bound->tweakInfo.boneNames) {
             U32 boneNameCount = CountElements(bound->tweakInfo.boneNames);
-            xTWEAKSELECT(buffer, &bound->nodes[which].bone, bound->tweakInfo.boneNames, NULL, boneNameCount, NULL, NULL, 0x2);
+            xTWEAK_SELECT(buffer, &bound->nodes[which].bone, bound->tweakInfo.boneNames, NULL, boneNameCount, NULL, NULL, 0x2);
         } else {
             xTWEAK(buffer, &bound->nodes[which].bone, 0, bound->tweakInfo.boneCount, NULL, NULL, 0x2);
         }
@@ -117,7 +117,7 @@ namespace {
             for (U32 i = bound->count; i < bound->tweakInfo.lastCount; i++) {
                 char buffer[128];
                 sprintf(buffer, "%s|Entry %2d", baseName, i);
-                xTWEAKREMOVE(buffer);
+                xTWEAK_REMOVE(buffer);
             }
         } else {
             for (U32 i = bound->tweakInfo.lastCount; i < bound->count; i++)

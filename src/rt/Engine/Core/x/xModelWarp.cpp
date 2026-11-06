@@ -39,15 +39,15 @@ namespace {
         void add_tweaks()
         {
             const char* prefix = "FX|Model Warp|";
-            xAUTOTWEAKRANGE(prefix, "default_color \1r", &default_color.r, 0.0f, 2.0f, NULL, NULL, 0, false);
-            xAUTOTWEAKRANGE(prefix, "default_color \2g", &default_color.g, 0.0f, 2.0f, NULL, NULL, 0, false);
-            xAUTOTWEAKRANGE(prefix, "default_color \3b", &default_color.b, 0.0f, 2.0f, NULL, NULL, 0, false);
-            xAUTOTWEAKRANGE(prefix, "default_color a", &default_color.a, 0.0f, 2.0f, NULL, NULL, 0, false);
+            xAUTOTWEAK(prefix, "default_color \1r", &default_color.r, 0.0f, 2.0f, NULL, NULL, 0, false);
+            xAUTOTWEAK(prefix, "default_color \2g", &default_color.g, 0.0f, 2.0f, NULL, NULL, 0, false);
+            xAUTOTWEAK(prefix, "default_color \3b", &default_color.b, 0.0f, 2.0f, NULL, NULL, 0, false);
+            xAUTOTWEAK(prefix, "default_color a", &default_color.a, 0.0f, 2.0f, NULL, NULL, 0, false);
 #if DEBUG || RELEASE
-            xAUTOTWEAKRANGE(prefix, "debug::render_texture", &debug::render_texture, -1, MAX_ACTIVE, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::render_bound", &debug::render_bound, -1, MAX_ACTIVE, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::render_rect", &debug::render_rect, -1, MAX_ACTIVE, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "debug::force_default_color", &debug::force_default_color, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::render_texture", &debug::render_texture, -1, MAX_ACTIVE, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::render_bound", &debug::render_bound, -1, MAX_ACTIVE, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::render_rect", &debug::render_rect, -1, MAX_ACTIVE, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "debug::force_default_color", &debug::force_default_color, NULL, NULL, 0, true);
 #endif
         }
 

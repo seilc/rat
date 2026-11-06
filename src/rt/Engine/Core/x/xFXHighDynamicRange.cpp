@@ -98,44 +98,44 @@ namespace {
         {
             const char* prefix = "FX|HDR|\1Globals|";
 
-            xAUTOTWEAKRANGE(prefix, "background_glow_default", &background_glow_default, 0, 255, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "background_darken_default", &background_darken_default, 0, 255, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "clamp_glow", &clamp_glow, 0, 63, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "preserve_glow", &preserve_glow, 0, 255, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "overbrighten", &overbrighten, 0.0f, 100.0f, &cb_refresh_blur, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "overbrighten_decay", &overbrighten_decay, 0.0f, 1.0f, &cb_refresh_blur, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "overbrighten_diminish", &overbrighten_diminish, 0.0f, 100.0f, &cb_refresh_blur, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blur_offset", &blur_offset, -100.0f, 100.0f, &cb_refresh_blur, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "recombine", &recombine, 0.0f, 1.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "random_blur_offset", &random_blur_offset, -100.0f, 100.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "downsamples", &downsamples, 1, 5, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "render", &render, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "blur_faster", &blur_faster, &cb_refresh_blur, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "colorize_red", &colorize_red, 0.0f, 2.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "colorize_green", &colorize_green, 0.0f, 2.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "colorize_blue", &colorize_blue, 0.0f, 2.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "colorize_alpha", &colorize_alpha, 0.0f, 2.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "hdr_offset", &hdr_offset, -1000000.0f, 1000000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "background_glow_default", &background_glow_default, 0, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "background_darken_default", &background_darken_default, 0, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "clamp_glow", &clamp_glow, 0, 63, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "preserve_glow", &preserve_glow, 0, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "overbrighten", &overbrighten, 0.0f, 100.0f, &cb_refresh_blur, NULL, 0, true);
+            xAUTOTWEAK(prefix, "overbrighten_decay", &overbrighten_decay, 0.0f, 1.0f, &cb_refresh_blur, NULL, 0, true);
+            xAUTOTWEAK(prefix, "overbrighten_diminish", &overbrighten_diminish, 0.0f, 100.0f, &cb_refresh_blur, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blur_offset", &blur_offset, -100.0f, 100.0f, &cb_refresh_blur, NULL, 0, true);
+            xAUTOTWEAK(prefix, "recombine", &recombine, 0.0f, 1.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "random_blur_offset", &random_blur_offset, -100.0f, 100.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "downsamples", &downsamples, 1, 5, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render", &render, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "blur_faster", &blur_faster, &cb_refresh_blur, NULL, 0, true);
+            xAUTOTWEAK(prefix, "colorize_red", &colorize_red, 0.0f, 2.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "colorize_green", &colorize_green, 0.0f, 2.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "colorize_blue", &colorize_blue, 0.0f, 2.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "colorize_alpha", &colorize_alpha, 0.0f, 2.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "hdr_offset", &hdr_offset, -1000000.0f, 1000000.0f, NULL, NULL, 0, true);
 
-            xAUTOTWEAKRANGE(prefix, "blit::stress_test", &blit::stress_test, 0, 100000, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blit::stress_test_u", &blit::stress_test_u, -1000000000.0f, 1000000000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blit::stress_test_v", &blit::stress_test_v, -1000000000.0f, 1000000000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blit::optimal_dst_width", &blit::optimal_dst_width, 1, 1000, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blit::optimal_src_width", &blit::optimal_src_width, 1, 1000, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blit::strips", &blit::strips, 0, 0, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "blit::strip_width", &blit::strip_width, 0.0f, 0.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::stress_test", &blit::stress_test, 0, 100000, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::stress_test_u", &blit::stress_test_u, -1000000000.0f, 1000000000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::stress_test_v", &blit::stress_test_v, -1000000000.0f, 1000000000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::optimal_dst_width", &blit::optimal_dst_width, 1, 1000, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::optimal_src_width", &blit::optimal_src_width, 1, 1000, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::strips", &blit::strips, 0, 0, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "blit::strip_width", &blit::strip_width, 0.0f, 0.0f, NULL, NULL, 0, true);
 
-            xAUTOTWEAKBOOL(prefix, "debug::force_background_to_default", &debug::force_background_to_default, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::test_fade_time", &debug::test_fade_time, 0.0f, 100.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::test_fade_glow", &debug::test_fade_glow, 0, 255, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::test_fade_darken", &debug::test_fade_darken, 0, 255, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "debug::render_blur_texture0", &debug::render_blur_texture0, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "debug::skip_screen_render", &debug::skip_screen_render, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::test_uoffset", &debug::test_uoffset, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "debug::test_voffset", &debug::test_voffset, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "debug::force_background_to_default", &debug::force_background_to_default, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::test_fade_time", &debug::test_fade_time, 0.0f, 100.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::test_fade_glow", &debug::test_fade_glow, 0, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::test_fade_darken", &debug::test_fade_darken, 0, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "debug::render_blur_texture0", &debug::render_blur_texture0, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "debug::skip_screen_render", &debug::skip_screen_render, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::test_uoffset", &debug::test_uoffset, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::test_voffset", &debug::test_voffset, -100000.0f, 100000.0f, NULL, NULL, 0, true);
 
-            xAUTOTWEAKMESSAGE(prefix, "debug|test_fade", "Go!", &cb_test_fade, NULL, 0, false);
-            xAUTOTWEAKMESSAGE(prefix, "debug|reset_background", "Go!", &cb_reset_background, NULL, 0, false);
+            xAUTOTWEAK_MESSAGE(prefix, "debug|test_fade", "Go!", &cb_test_fade, NULL, 0, false);
+            xAUTOTWEAK_MESSAGE(prefix, "debug|reset_background", "Go!", &cb_reset_background, NULL, 0, false);
         }
 #else
         void add_tweaks() {}
@@ -254,7 +254,7 @@ namespace {
     {
         const char* prefix = "FX|HDR|\1Globals|";
 
-        xAUTOTWEAKBOOL(prefix, "enabled", &enabled, NULL, NULL, 0, true);
+        xAUTOTWEAK_BOOL(prefix, "enabled", &enabled, NULL, NULL, 0, true);
     }
 #else
     inline void add_global_tweaks() {}

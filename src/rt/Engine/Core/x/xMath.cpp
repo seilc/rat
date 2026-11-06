@@ -601,7 +601,7 @@ void xResponseCurve::add_tweaks(const char* tweak_prefix, const char** value_nam
     }
 
     const char* prefix = debug->tweak_prefix;
-    xAUTOTWEAKRANGE(prefix, "\001Curve Nodes", &_nodes, 2u, 16u, &debug->nodes_cb, this, 0, false);
+    xAUTOTWEAK(prefix, "\001Curve Nodes", &_nodes, 2u, 16u, &debug->nodes_cb, this, 0, false);
     update_node_tweaks();
 }
 
@@ -620,12 +620,12 @@ void xResponseCurve::update_node_tweaks()
 
         *subtail = '\0';
         inode& n = *(inode*)(debug->buffer + i * stride);
-        xAUTOTWEAKRANGE(prefix, "\001t", &n.t, -1000000000.0f, 1000000000.0f, &debug->t_cb, this, 0, false);
+        xAUTOTWEAK(prefix, "\001t", &n.t, -1000000000.0f, 1000000000.0f, &debug->t_cb, this, 0, false);
         strcat(subtail, "\002");
 
         S32 name = 0;
         for (F32 *v = n.value, *endv = v + _values; v != endv; ++v, ++name)
-            xAUTOTWEAKRANGE(prefix, debug->value_names[name], v, -1000000000.0f, 1000000000.0f, debug->cb, debug->cb_context, 0, false);
+            xAUTOTWEAK(prefix, debug->value_names[name], v, -1000000000.0f, 1000000000.0f, debug->cb, debug->cb_context, 0, false);
     }
 
     for (size_t i = _nodes; i < 16; i++) {

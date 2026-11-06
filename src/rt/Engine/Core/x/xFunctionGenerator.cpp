@@ -62,7 +62,7 @@ xFunctionGenerator::xFunctionGenerator(const xFunctionGeneratorAsset* asset)
     sprintf(name, "Widgets|Function Generator|%s", xSceneID2Name((xScene*)xglobals->sceneCur, asset->id));
 
     static tweak_callback cb = tweak_callback::create_expand(FunctionGeneratorExpandTweaks, NULL);
-    xTWEAKBRANCH(name, &cb, this, 0x2);
+    xTWEAK_BRANCH(name, &cb, this, 0x2);
 #endif
 }
 
@@ -224,13 +224,13 @@ void xFunctionGenerator::AddTweaks(const char* base)
     xTWEAK(buffer, &ncasset->endTime, 0.0f, 1000000.0f, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Middle Enabled", base);
-    xTWEAKBOOL(buffer, &ncasset->middleEnabled, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &ncasset->middleEnabled, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|End Enabled", base);
-    xTWEAKBOOL(buffer, &ncasset->endEnabled, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &ncasset->endEnabled, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Override", base);
-    xTWEAKBOOL(buffer, &override, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &override, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Current Cycle Width", base);
     xTWEAK(buffer, &currentCycleWidth, 0.0f, 1000000000.0f, NULL, NULL, 0x2);
@@ -242,18 +242,18 @@ void xFunctionGenerator::AddTweaks(const char* base)
     xTWEAK(buffer, &currentTime, 0.0f, 1000000000.0f, NULL, NULL, 0x3);
 
     sprintf(buffer, "%s|Current State", base);
-    xTWEAKBOOL(buffer, &currentState, NULL, NULL, 0x3);
+    xTWEAK_BOOL(buffer, &currentState, NULL, NULL, 0x3);
 
     sprintf(buffer, "%s|Current Started", base);
-    xTWEAKBOOL(buffer, &started, NULL, NULL, 0x3);
+    xTWEAK_BOOL(buffer, &started, NULL, NULL, 0x3);
 
     sprintf(buffer, "%s|Start", base);
     static tweak_callback cb1 = tweak_callback::create_change(FunctionGeneratorStartTweak);
-    xTWEAKMESSAGE(buffer, "Go!", &cb1, this, 0x2);
+    xTWEAK_MESSAGE(buffer, "Go!", &cb1, this, 0x2);
 
     sprintf(buffer, "%s|Stop", base);
     static tweak_callback cb2 = tweak_callback::create_change(FunctionGeneratorStopTweak);
-    xTWEAKMESSAGE(buffer, "Go!", &cb2, this, 0x2);
+    xTWEAK_MESSAGE(buffer, "Go!", &cb2, this, 0x2);
 }
 #endif
 

@@ -289,7 +289,7 @@ void xPTankPoolSceneEnter()
     for (S32 i = 0; i < MAX_PGT; i++) {
         char name[128];
         sprintf(name, "blocks_used %d", i);
-        xAUTOTWEAKRANGE(prefix, name, &blocks_used[i], 0, 0, NULL, NULL, 0, false);
+        xAUTOTWEAK(prefix, name, &blocks_used[i], 0, 0, NULL, NULL, 0, false);
     }
 #endif
 }

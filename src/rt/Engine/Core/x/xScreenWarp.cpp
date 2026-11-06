@@ -126,41 +126,41 @@ namespace {
 
         void add_tweaks(const char* prefix)
         {
-            xAUTOTWEAKRANGE(prefix, "radius_cull", &radius_cull, 0.0f, 1.0f, &cb_tweak_force_lt, &radius_fade, 0, true);
-            xAUTOTWEAKRANGE(prefix, "radius_fade", &radius_fade, 0.0f, 1.0f, &cb_tweak_force_gt, &radius_cull, 0, true);
+            xAUTOTWEAK(prefix, "radius_cull", &radius_cull, 0.0f, 1.0f, &cb_tweak_force_lt, &radius_fade, 0, true);
+            xAUTOTWEAK(prefix, "radius_fade", &radius_fade, 0.0f, 1.0f, &cb_tweak_force_gt, &radius_cull, 0, true);
 
-            xAUTOTWEAKRANGE(prefix, "warble::mag", &warble::mag, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "ripple::mag", &ripple::mag, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "ripple::freq", &ripple::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "shockwave::mag", &shockwave::mag, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "shockwave::freq", &shockwave::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "shockwave::freq2", &shockwave::freq2, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "heat::mag", &heat::mag, 0.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "heat::freq", &heat::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "heat::dthetax", &heat::dthetax, -100000.0f, 100000.0f, &cb_heat_dtheta, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "heat::dthetay", &heat::dthetay, -100000.0f, 100000.0f, &cb_heat_dtheta, NULL, 0, true);
+            xAUTOTWEAK(prefix, "warble::mag", &warble::mag, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "ripple::mag", &ripple::mag, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "ripple::freq", &ripple::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "shockwave::mag", &shockwave::mag, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "shockwave::freq", &shockwave::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "shockwave::freq2", &shockwave::freq2, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "heat::mag", &heat::mag, 0.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "heat::freq", &heat::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "heat::dthetax", &heat::dthetax, -100000.0f, 100000.0f, &cb_heat_dtheta, NULL, 0, true);
+            xAUTOTWEAK(prefix, "heat::dthetay", &heat::dthetay, -100000.0f, 100000.0f, &cb_heat_dtheta, NULL, 0, true);
 
-            xAUTOTWEAKSELECT(prefix, "test::type", &test::type, common_warp_names, (const S32*)NULL, MAX_TYPE, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::repeat_every", &test::repeat_every, 0.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::radius", &test::radius, 0.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::duration", &test::duration, 0.01f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::intensity", &test::intensity, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::freq", &test::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::emit_height", &test::emit_height, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test::emit_random_offset", &test::emit_random_offset, 0.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKMESSAGE(prefix, "test|\1Emit", "Go!", &cb_debug_emit, NULL, 0, false);
+            xAUTOTWEAK_SELECT(prefix, "test::type", &test::type, common_warp_names, (const S32*)NULL, MAX_TYPE, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::repeat_every", &test::repeat_every, 0.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::radius", &test::radius, 0.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::duration", &test::duration, 0.01f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::intensity", &test::intensity, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::freq", &test::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::emit_height", &test::emit_height, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test::emit_random_offset", &test::emit_random_offset, 0.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK_MESSAGE(prefix, "test|\1Emit", "Go!", &cb_debug_emit, NULL, 0, false);
 
-            xAUTOTWEAKBOOL(prefix, "test_infinite::on", &test_infinite::on, NULL, NULL, 0, true);
-            xAUTOTWEAKSELECT(prefix, "test_infinite::type", &test_infinite::type, common_warp_names, (const S32*)NULL, MAX_TYPE, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test_infinite::radius", &test_infinite::radius, 0.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test_infinite::duration", &test_infinite::duration, 0.01f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test_infinite::intensity", &test_infinite::intensity, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test_infinite::freq", &test_infinite::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "test_infinite::emit_height", &test_infinite::emit_height, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "test_infinite::on", &test_infinite::on, NULL, NULL, 0, true);
+            xAUTOTWEAK_SELECT(prefix, "test_infinite::type", &test_infinite::type, common_warp_names, (const S32*)NULL, MAX_TYPE, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test_infinite::radius", &test_infinite::radius, 0.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test_infinite::duration", &test_infinite::duration, 0.01f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test_infinite::intensity", &test_infinite::intensity, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test_infinite::freq", &test_infinite::freq, -100000.0f, 100000.0f, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "test_infinite::emit_height", &test_infinite::emit_height, -100000.0f, 100000.0f, NULL, NULL, 0, true);
 
-            xAUTOTWEAKBOOL(prefix, "debug::enable", &debug::enable, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "debug::render_bounds", &debug::render_bounds, NULL, NULL, 0, true);
-            xAUTOTWEAKMESSAGE(prefix, "debug|\1Print Active", "Go!", &cb_debug_print_warps, NULL, 0, false);
+            xAUTOTWEAK_BOOL(prefix, "debug::enable", &debug::enable, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "debug::render_bounds", &debug::render_bounds, NULL, NULL, 0, true);
+            xAUTOTWEAK_MESSAGE(prefix, "debug|\1Print Active", "Go!", &cb_debug_print_warps, NULL, 0, false);
         }
 
     }

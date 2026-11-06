@@ -791,7 +791,7 @@ void xParEmitterUpdate(xBase* to, xScene*, F32 dt)
 // RESTORED: from BFBB GC, TSSM GC
 void xParEmitterDestroy()
 {
-    xTWEAKREMOVE("Particle Emitters");
+    xTWEAK_REMOVE("Particle Emitters");
 }
 // END RESTORED
 
@@ -894,7 +894,7 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
     xParEmitterAsset& asset = *emit.tasset;
     char prefix[128];
     sprintf(prefix, "Particle Emitters|%s|\002Region Data", get_asset_name(&asset));
-    xTWEAKREMOVE(prefix);
+    xTWEAK_REMOVE(prefix);
     strcat(prefix, "|");
 
     switch (asset.emit_type) {
@@ -1058,7 +1058,7 @@ void on_change_cmd_count(const tweak_info& info)
     else if (sys.cmdCount < size) {
         for (U32 i = sys.cmdCount; i < size; i++) {
             sprintf(end, "|%02d", i);
-            xTWEAKREMOVE(prefix);
+            xTWEAK_REMOVE(prefix);
         }
     }
 }
@@ -1142,7 +1142,7 @@ static void add_tweaks(xParEmitter& emit)
     char name[128];
     sprintf(name, "Particle Emitters|%s", get_asset_name(emit.tasset));
     static tweak_callback cb_explode = tweak_callback::create_expand(on_expand_emitter, NULL);
-    xTWEAKBRANCH(name, &cb_explode, &emit, 2);
+    xTWEAK_BRANCH(name, &cb_explode, &emit, 2);
 }
 
 static void explode_tweaks(xParEmitter& emit)
@@ -1151,7 +1151,7 @@ static void explode_tweaks(xParEmitter& emit)
 
     char prefix[128];
     sprintf(prefix, "Particle Emitters|%s", asset_name);
-    xTWEAKBRANCH(prefix, NULL, NULL, 2);
+    xTWEAK_BRANCH(prefix, NULL, NULL, 2);
     strcat(prefix, "|");
     char* end = prefix + strlen(prefix);
 

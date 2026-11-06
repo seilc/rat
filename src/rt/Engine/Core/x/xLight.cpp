@@ -153,42 +153,42 @@ void xLightInit(xBase* b, xLightAsset* tasset)
 
     char name[128];
     sprintf(name, "Widgets|Lights|%s", xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
-    xTWEAKBRANCH(name, NULL, NULL, 0x2);
+    xTWEAK_BRANCH(name, NULL, NULL, 0x2);
 
     char buffer[128];
     sprintf(buffer, "%s|On", name);
-    xTWEAKFLAG(buffer, &light->flags, f_XLIGHT_ON, NULL, NULL, 0x2);
+    xTWEAK_FLAG(buffer, &light->flags, f_XLIGHT_ON, NULL, NULL, 0x2);
     sprintf(buffer, "%s|ApplyToNPC", name);
-    xTWEAKFLAG(buffer, &tasset->lightFlags, 0x1, NULL, NULL, 0x2);
+    xTWEAK_FLAG(buffer, &tasset->lightFlags, 0x1, NULL, NULL, 0x2);
     sprintf(buffer, "%s|ApplyToPlayer", name);
-    xTWEAKFLAG(buffer, &tasset->lightFlags, 0x2, NULL, NULL, 0x2);
+    xTWEAK_FLAG(buffer, &tasset->lightFlags, 0x2, NULL, NULL, 0x2);
     sprintf(buffer, "%s|ApplyToObjects", name);
-    xTWEAKFLAG(buffer, &tasset->lightFlags, 0x4, NULL, NULL, 0x2);
+    xTWEAK_FLAG(buffer, &tasset->lightFlags, 0x4, NULL, NULL, 0x2);
     sprintf(buffer, "%s|ApplyToENV", name);
-    xTWEAKFLAG(buffer, &tasset->lightFlags, 0x8, NULL, NULL, 0x2);
+    xTWEAK_FLAG(buffer, &tasset->lightFlags, 0x8, NULL, NULL, 0x2);
     sprintf(buffer, "%s|DrawDebugSpherePos", name);
-    xTWEAKBOOL(buffer, &light->drawDebugSpherePos, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &light->drawDebugSpherePos, NULL, NULL, 0x2);
     sprintf(buffer, "%s|DrawDebugSphereRange", name);
-    xTWEAKBOOL(buffer, &light->drawDebugSphereRange, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &light->drawDebugSphereRange, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|AttachedTo", name);
-    xTWEAKMESSAGE(buffer, light->attachedToName, NULL, NULL, 0x3);
+    xTWEAK_MESSAGE(buffer, light->attachedToName, NULL, NULL, 0x3);
     sprintf(buffer, "%s|AttachedOffset", name);
-    xTWEAKBOOL(buffer, &light->attachedOffset, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &light->attachedOffset, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|LightCardScale", name);
     xTWEAK(buffer, &light->lightCardScale, 0.0f, 100.0f, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|Effect", name);
-    xTWEAKMESSAGE(buffer, light->effectName, NULL, NULL, 0x3);
+    xTWEAK_MESSAGE(buffer, light->effectName, NULL, NULL, 0x3);
     sprintf(buffer, "%s|EffectRunning", name);
-    xTWEAKBOOL(buffer, &light->lightEffectRunning, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, &light->lightEffectRunning, NULL, NULL, 0x2);
     sprintf(buffer, "%s|EffectSpeed", name);
     xTWEAK(buffer, &light->lightEffectSpeed, 0.01f, 100.0f, NULL, NULL, 0x2);
 
     static const tweak_callback detachLight = { DetachLightCB };
     sprintf(buffer, "%s|Detach", name);
-    xTWEAKMESSAGE(buffer, "Free me!", &detachLight, light, 0x2);
+    xTWEAK_MESSAGE(buffer, "Free me!", &detachLight, light, 0x2);
 
     iLightAddTweak(&light->light, name);
 #endif

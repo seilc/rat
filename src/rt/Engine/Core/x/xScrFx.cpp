@@ -723,12 +723,12 @@ static const F32 SHAKE_FOREVER = FLT_MAX;
 #if DEBUG || RELEASE
 void xCameraFXShakeParams::AddTweaks(const char* prefix)
 {
-    xAUTOTWEAKRANGE(prefix, "maxTime", &maxTime, 0.0f, 1000.0f, NULL, NULL, 0, true);
-    xAUTOTWEAKRANGE(prefix, "magnitude", &magnitude, 0.0f, 1000.0f, NULL, NULL, 0, true);
-    xAUTOTWEAKRANGE(prefix, "cycleMax", &cycleMax, 0.0f, 1000.0f, NULL, NULL, 0, true);
-    xAUTOTWEAKRANGE(prefix, "rotateMagnitude", &rotateMagnitude, 0.0f, 1000.0f, NULL, NULL, 0, true);
-    xAUTOTWEAKRANGE(prefix, "radius", &radius, 0.0f, 1000.0f, NULL, NULL, 0, true);
-    xAUTOTWEAKBOOL(prefix, "shakeY", &shakeY, NULL, NULL, 0, true);
+    xAUTOTWEAK(prefix, "maxTime", &maxTime, 0.0f, 1000.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK(prefix, "magnitude", &magnitude, 0.0f, 1000.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK(prefix, "cycleMax", &cycleMax, 0.0f, 1000.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK(prefix, "rotateMagnitude", &rotateMagnitude, 0.0f, 1000.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK(prefix, "radius", &radius, 0.0f, 1000.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "shakeY", &shakeY, NULL, NULL, 0, true);
 }
 #endif
 // END RESTORED
@@ -1203,7 +1203,7 @@ static void xScrFxLensFlare_RenderElements(RwRaster*, RwFrame* frame, U8 vCol, v
 #if DEBUG || RELEASE
     static U32 override_texture = 0;
     xTEMPTWEAKS_BEGIN(prefix)
-        xAUTOTWEAKSELECT(prefix, "override_texture", &override_texture, all_texture_labels, all_texture_ids, all_texture_count, NULL, NULL, 0, true);
+        xAUTOTWEAK_SELECT(prefix, "override_texture", &override_texture, all_texture_labels, all_texture_ids, all_texture_count, NULL, NULL, 0, true);
     xTEMPTWEAKS_END
 
     if (override_texture) {

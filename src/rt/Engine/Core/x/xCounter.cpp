@@ -57,7 +57,7 @@ void add_tweaks(xCounter& counter)
 
     counter.stats[0] = '\0';
 
-    xTWEAKMESSAGE(prefix, counter.stats, &cb_update, &counter, 0x3);
+    xTWEAK_MESSAGE(prefix, counter.stats, &cb_update, &counter, 0x3);
 }
 #else
 void add_tweaks(xCounter& counter)
@@ -69,7 +69,7 @@ void add_tweaks(xCounter& counter)
 
 void xCounterInit()
 {
-    xTWEAKREMOVE("Widgets|Counters");
+    xTWEAK_REMOVE("Widgets|Counters");
 }
 
 void xCounterInit(void* b, void* asset)
