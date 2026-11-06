@@ -540,52 +540,66 @@ void xCamScreen::create_frustum_planes(xVec4* frust_planes, const xMat4x3& ltm, 
     plane_type* planes = (plane_type*)frust_planes;
 
     xVec3 temp, temp2;
-    temp.assign(view_offset.x, view_offset.y, 1.0f);
-    xMat3x3RMulVec(&temp2, &ltm, &temp);
+    temp.Scale(ltm.right, view_offset.x);
+    temp2.Scale(ltm.up, view_offset.y);
 
-    xVec3 right, up;
+    xVec3 right, up, cop;
+    cop.Sub(temp2, temp);
+    F32 scale = 2.0f;
+
     right.Scale(ltm.right, view_window.x);
     up.Scale(ltm.up, view_window.y);
 
-    xVec3 cop = ltm.pos;
-    F32 scale = far_plane / near_plane;
-
     xVec3 corners[8];
     S32 i;
-    corners[0].Add(temp2, right);
+    corners[0].Add(ltm.at, right);
     corners[0] += up;
 
-    right *= 2.0f;
-    up *= 2.0f;
+    right *= scale;
+    up *= scale;
 
-    corners[1] = corners[0];
-    corners[1] -= right;
-    corners[2] = corners[1];
-    corners[2] -= up;
+    corners[1].Sub(corners[0], right);
+    corners[2].Sub(corners[1], up);
     corners[3] = corners[0];
     corners[3] -= up;
 
     for (i = 0; i < 4; i++) {
         xVec3* target = &corners[i];
-        temp = *target;
+        temp.Sub(*target, cop);
         *target = cop;
-        corners[i + 4] = cop;
+        *target += ltm.pos;
         target->AddScale(temp, near_plane);
-        corners[i + 4].AddScale(temp, near_plane * scale);
+        target[4] = cop;
+        target[4] += ltm.pos;
+        target[4].AddScale(temp, far_plane);
     }
 
-    planes[0].norm.Negate(ltm.at);
-    planes[0].dist = planes[0].norm.dot(corners[0]);
-    planes[1].norm = ltm.at;
-    planes[1].dist = planes[1].norm.dot(corners[4]);
+    planes[0].norm = ltm.at;
+    planes[0].dist = planes[0].norm.dot(corners[4]);
+    planes[1].norm.Negate(planes[0].norm);
+    planes[1].dist = planes[1].norm.dot(corners[0]);
 
-    for (i = 0; i < 4; i++) {
-        temp.Sub(corners[(i + 1) & 3], cop);
-        temp2.Sub(corners[i], cop);
-        planes[i + 2].norm.cross(temp, temp2);
-        planes[i + 2].norm.normalize();
-        planes[i + 2].dist = planes[i + 2].norm.dot(cop);
-    }
+    temp.Sub(corners[1], corners[5]);
+    temp2.Sub(corners[6], corners[5]);
+    planes[2].norm.cross(temp, temp2);
+    planes[2].norm.normalize();
+    planes[2].dist = planes[2].norm.dot(corners[1]);
+
+    temp2.Sub(corners[4], corners[5]);
+    planes[3].norm.cross(temp2, temp);
+    planes[3].norm.normalize();
+    planes[3].dist = planes[3].norm.dot(corners[1]);
+
+    temp.Sub(corners[3], corners[7]);
+    temp2.Sub(corners[4], corners[7]);
+    planes[4].norm.cross(temp, temp2);
+    planes[4].norm.normalize();
+    planes[4].dist = planes[4].norm.dot(corners[3]);
+
+    temp2.Sub(corners[6], corners[7]);
+    planes[5].norm.cross(temp2, temp);
+    planes[5].norm.normalize();
+    planes[5].dist = planes[5].norm.dot(corners[3]);
 }
 
 void xCamTimeBias::Init(F32 blendTime)
