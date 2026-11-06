@@ -111,70 +111,35 @@ DECOMP_FORCEACTIVE(
     "\t\t      --empty--\n"
 )
 
+#define xOUT_VPRINT(prefix)                     \
+    char buf[1024];                             \
+    va_list args;                               \
+    va_start(args, fmt);                        \
+    vsprintf(buf, fmt, args);                   \
+    va_end(args);                               \
+    iprintf(prefix, buf)
+
 void xOutCrit(const char* fmt, ...)
 {
-    char buf[1024];
-    va_list args;
-
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
-
-    iprintf("[[[*** %s", buf);
+    xOUT_VPRINT("[[[*** %s");
 }
 
 void xOutErr(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevErr) && (!xOutEnabled(name) || xout_sev < xOutSevErr)) return;
-
-    char buf[1024];
-    va_list args;
-
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
-
-    iprintf("[[[ %s", buf);
+    if (!xOutTrumps(name, xOutSevErr) && (!xOutEnabled(name) || xout_sev < xOutSevErr)) return; xOUT_VPRINT("[[[ %s");
 }
 
 void xOutWarn(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevWarn) && (!xOutEnabled(name) || xout_sev < xOutSevWarn)) return;
-
-    char buf[1024];
-    va_list args;
-
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
-
-    iprintf(">>> %s", buf);
+    if (!xOutTrumps(name, xOutSevWarn) && (!xOutEnabled(name) || xout_sev < xOutSevWarn)) return; xOUT_VPRINT(">>> %s");
 }
 
 void xOutInfo(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevInfo) && (!xOutEnabled(name) || xout_sev < xOutSevInfo)) return;
-
-    char buf[1024];
-    va_list args;
-
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
-
-    iprintf("-- %s", buf);
+    if (!xOutTrumps(name, xOutSevInfo) && (!xOutEnabled(name) || xout_sev < xOutSevInfo)) return; xOUT_VPRINT("-- %s");
 }
 
 void xOutBabble(char* name, const char* fmt, ...)
 {
-    if (!xOutTrumps(name, xOutSevBabble) && (!xOutEnabled(name) || xout_sev < xOutSevBabble)) return;
-
-    char buf[1024];
-    va_list args;
-
-    va_start(args, fmt);
-    vsprintf(buf, fmt, args);
-    va_end(args);
-
-    iprintf("%s", buf);
+    if (!xOutTrumps(name, xOutSevBabble) && (!xOutEnabled(name) || xout_sev < xOutSevBabble)) return; xOUT_VPRINT("%s");
 }
