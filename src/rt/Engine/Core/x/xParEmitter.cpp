@@ -330,7 +330,7 @@ static S32 xParEmitterCull(xParEmitter* pe, xPar* p)
         else
             return dmag < a->cull_dist_sqr;
     }
-    return 0;
+    return FALSE;
 }
 
 F32 xParInterpCompute(S32 interp_mode, xParInterp* r, F32 time, S32 time_has_elapsed, F32 lastVal)
@@ -406,7 +406,7 @@ xPar* xParEmitterEmitSetTexIdxs(xPar* p, const xParSys* ps)
 
 xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
 {
-    static xTWEAKABLE S32 doDebugDraw = 0;
+    static xTWEAKABLE S32 doDebugDraw = FALSE;
     static xTWEAKABLE F32 rad_cullDebugDraw = 30.0f;
 
     if (!pe->parSys) {

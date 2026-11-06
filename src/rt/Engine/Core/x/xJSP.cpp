@@ -810,7 +810,7 @@ static S32 JSPApplyLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box,
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 static S32 JSPRemoveLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box, void* data); // UNUSED

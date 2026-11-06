@@ -736,7 +736,7 @@ void xFXHighDynamicRangeRender(RwCamera*)
     if (hdr_dump_efb)
         iDebugDumpEFB("efb3");
 
-    hdr_dump_efb = 0;
+    hdr_dump_efb = FALSE;
 }
 
 void xFXHighDynamicRangeRestoreSettings()

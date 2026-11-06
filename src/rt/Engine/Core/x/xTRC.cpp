@@ -357,21 +357,21 @@ void xTRCUpdate(S32 i)
                 S32 padPortP2 = xTRCPadGetPort_Player2();
                 if (xTRCPadCountWereActiveTotal() == 1) {
                     if (globals.option_vibration_p1)
-                        xPadRumbleEnable(gTrcPad[i].id, 1);
+                        xPadRumbleEnable(gTrcPad[i].id, TRUE);
                     else
-                        xPadRumbleEnable(gTrcPad[i].id, 0);
+                        xPadRumbleEnable(gTrcPad[i].id, FALSE);
                 } else {
                     if (padPortP1 == gTrcPad[i].id) {
                         if (globals.option_vibration_p1)
-                            xPadRumbleEnable(gTrcPad[i].id, 1);
+                            xPadRumbleEnable(gTrcPad[i].id, TRUE);
                         else
-                            xPadRumbleEnable(gTrcPad[i].id, 0);
+                            xPadRumbleEnable(gTrcPad[i].id, FALSE);
                     }
                     if (padPortP2 == gTrcPad[i].id) {
                         if (globals.option_vibration_p2)
-                            xPadRumbleEnable(gTrcPad[i].id, 1);
+                            xPadRumbleEnable(gTrcPad[i].id, TRUE);
                         else
-                            xPadRumbleEnable(gTrcPad[i].id, 0);
+                            xPadRumbleEnable(gTrcPad[i].id, FALSE);
                     }
                 }
                 xTRCPadReOrder();

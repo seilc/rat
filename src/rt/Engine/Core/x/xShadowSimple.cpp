@@ -98,23 +98,23 @@ struct ShadowSimpleCBParam
 static S32 shadowRayEntCB(xEnt* ent, void* cbdata)
 {
     if (!(ent->baseFlags & k_XBASE_RECEIVES_SHADOWS)) {
-        return 1;
+        return TRUE;
     }
 
     ShadowSimpleCBParam* cbparam = (ShadowSimpleCBParam*)cbdata;
 
     if (cbparam->cache->collSkipsItem == ent) {
-        return 1;
+        return TRUE;
     }
 
     xModelInstance* m = ent->model;
 
     if (iModelNumBones(m->Data) > 1) {
-        return 1;
+        return TRUE;
     }
 
     if (xModelIsPreinstanced(ent->model)) {
-        return 1;
+        return TRUE;
     }
 
     F32 oldHeight = cbparam->cache->shadowHeight;
@@ -130,7 +130,7 @@ static S32 shadowRayEntCB(xEnt* ent, void* cbdata)
         cbparam->cache->castOnEnt = ent;
     }
 
-    return 1;
+    return TRUE;
 }
 
 static void xShadowSimple_SceneCollide(xShadowSimpleCache* cache, const xVec3* pos, F32 depth)
@@ -496,7 +496,7 @@ inline S32 XSSC_Add_ShoveIntoQueue(xShadowSimpleCache* cache, const xMat4x3* mat
             sCollQueue[i].radius = radius;
             sCollQueue[i].height = height;
             sCollQueue[i].ecc = ecc;
-            return 1;
+            return TRUE;
         }
 
         if (cache->collPriority > sCollQueue[i].cache->collPriority) {
@@ -523,11 +523,11 @@ inline S32 XSSC_Add_ShoveIntoQueue(xShadowSimpleCache* cache, const xMat4x3* mat
             sCollQueue[i].radius = radius;
             sCollQueue[i].height = height;
             sCollQueue[i].ecc = ecc;
-            return 1;
+            return TRUE;
         }
     }
     
-    return 0;
+    return FALSE;
 }
 
 void xShadowSimple_Add_Expert(xShadowSimpleCache* cache, const xMat4x3* mat_owner, U8 alpha, F32 radius, F32 height, F32 ecc, bool copyMat)
