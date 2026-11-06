@@ -201,9 +201,8 @@ void xHierarchyBoundDraw(const xHierarchyBound* bound, U8 mR, U8 mG, U8 mB, U8 m
 
 bool xHierarchyBoundTest(const xHierarchyBound* bound, xSweptSphere* sphere, U16* boundUserData, S8* subsphere, bool skipMasterCheck)
 {
-    if (!skipMasterCheck && !xSweptSphereToSphere(sphere, &bound->master)) {
+    if (!skipMasterCheck && !xSweptSphereToSphere(sphere, &bound->master))
         return false;
-    }
 
     xSweptSphereResetCollision(sphere);
 

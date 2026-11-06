@@ -33,9 +33,8 @@ void* xMemoryManager::Allocate(U32 size, U32 options, const char* file, const ch
     callsToAllocate++;
 #endif
 
-    if (size == 0) {
+    if (size == 0)
         return &zeroMemoryAddress;
-    }
 
     size = xALIGN(size, 4);
 
@@ -47,14 +46,12 @@ void* xMemoryManager::Allocate(U32 size, U32 options, const char* file, const ch
 
     if (IsDebugging()) {
         memory = _SetupDebugBlock(memory, size, file, function, line);
-        if (!(options & 0x1)) {
+        if (!(options & 0x1))
             xMemorySetV32A32(memory, MEM_CLEAR_VALUE, size);
-        }
     }
 
-    if (options & 0x1) {
+    if (options & 0x1)
         xMemorySetV32A32(memory, 0, size);
-    }
 
     return memory;
 }
@@ -65,9 +62,8 @@ void xMemoryManager::Free(void* pointer)
     callsToFree++;
 #endif
 
-    if (!pointer || pointer == &zeroMemoryAddress) {
+    if (!pointer || pointer == &zeroMemoryAddress)
         return;
-    }
 
     xASSERT_L(81, Owns(pointer));
 
@@ -84,9 +80,8 @@ void xMemoryManager::Free(void* pointer)
 
 void* xMemoryManager::Reallocate(void* pointer, U32 size, U32 options, const char* file, const char* function, S32 line)
 {
-    if (!pointer) {
+    if (!pointer)
         return Allocate(size, options, file, function, line);
-    }
 
 #if DEBUG || RELEASE
     callsToReallocate++;
@@ -98,9 +93,8 @@ void* xMemoryManager::Reallocate(void* pointer, U32 size, U32 options, const cha
         return &zeroMemoryAddress;
     }
 
-    if (IsDebugging()) {
+    if (IsDebugging())
         pointer = RemoveDebugBlock(pointer, NULL);
-    }
 
     size = xALIGN(size, 4);
 
@@ -110,9 +104,8 @@ void* xMemoryManager::Reallocate(void* pointer, U32 size, U32 options, const cha
         return NULL;
     }
 
-    if (IsDebugging()) {
+    if (IsDebugging())
         newBlock = _SetupDebugBlock(newBlock, size, file, function, line);
-    }
 
     return newBlock;
 }
@@ -132,9 +125,8 @@ bool xMemoryManager::InActiveList(const void* pointer, U32) const
 {
     DebugAllocationHeader* list = activeList;
     while (list) {
-        if (pointer >= list + 1 && pointer < xMEMADVANCE(list + 1, list->size)) {
+        if (pointer >= list + 1 && pointer < xMEMADVANCE(list + 1, list->size))
             return true;
-        }
         list = list->next;
     }
     return false;
@@ -197,14 +189,12 @@ void xMemoryManager::HandleOutOfMemory(U32 size, U32 options, const char* file, 
 void* xMemoryManager::DoReallocate(void* pointer, U32 size, U32 options, const char* file, const char* function, S32 line)
 {
     U32 copySize = DoGetBlockSize(pointer);
-    if (copySize > size) {
+    if (copySize > size)
         copySize = size;
-    }
 
     void* newBlock = DoAllocate(size, options, file, function, line);
-    if (!newBlock) {
+    if (!newBlock)
         return NULL;
-    }
 
     xMemoryCopyUpA32(newBlock, pointer, copySize);
     DoFree(pointer);
@@ -274,9 +264,8 @@ void* xMemoryManager::RemoveDebugBlock(void* memory, U32* size)
     debugOverhead -= debugDataSize;
 #endif
 
-    if (size) {
+    if (size)
         *size = header->size + debugDataSize;
-    }
 
     return (void*)header;
 }
