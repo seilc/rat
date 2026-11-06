@@ -15,7 +15,7 @@ public:
     void Reset();
     void Save(xSerial* s);
     void Load(xSerial* s);
-    void Exit();
+    void Exit(); // UNUSED
     xBound* GetBound();
 };
 

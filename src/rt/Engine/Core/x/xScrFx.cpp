@@ -241,12 +241,11 @@ static void xScrFxFadeRender()
     }
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 void xScrFxShake(F32)
 {
     xFAIL();
 }
-// END RESTORED
 
 static F32 mLetterboxO;
 static F32 mLetterboxTO;
@@ -719,8 +718,8 @@ void xCameraFXZoomUpdate(cameraFX* f, F32 dt, const xMat4x3*, xMat4x3* m)
 
 static const F32 SHAKE_FOREVER = FLT_MAX;
 
-// RESTORED: speculative
 #if DEBUG || RELEASE
+// UNUSED: speculative
 void xCameraFXShakeParams::AddTweaks(const char* prefix)
 {
     xAUTOTWEAK(prefix, "maxTime", &maxTime, 0.0f, 1000.0f, NULL, NULL, 0, true);
@@ -731,7 +730,6 @@ void xCameraFXShakeParams::AddTweaks(const char* prefix)
     xAUTOTWEAK_BOOL(prefix, "shakeY", &shakeY, NULL, NULL, 0, true);
 }
 #endif
-// END RESTORED
 
 cameraFX* xCameraFXShakeForever(F32 magnitude, F32 cycleMax, F32 rotate_magnitude, F32 radius, const xVec3* epicenter, const xVec3* player, bool shakeY)
 {
@@ -1311,7 +1309,7 @@ static void xScrFxLensFlare_RenderElements(RwRaster*, RwFrame* frame, U8 vCol, v
     xRenderStateZModesSet(TRUE, TRUE);
 }
 
-static S32 lfcmp(const void* a, const void* b);
+static S32 lfcmp(const void* a, const void* b); // UNUSED
 
 static void dumpFlare(iScrFxLensFlare* flare)
 {

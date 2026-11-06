@@ -63,7 +63,7 @@ S32 xTRCPadGetArrayIdx(S32 port)
     return -1;
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 TRCPadInfo& xTRCPadGetPadFromID(S32 id)
 {
     for (S32 i = 0; i < k_MAX_TRC_PADS; i++) {
@@ -74,7 +74,6 @@ TRCPadInfo& xTRCPadGetPadFromID(S32 id)
     xFAIL_MSG("No pad id match, return trc pad 0 !");
     return gTrcPad[0];
 }
-// END RESTORED
 
 void xTRCPadRemove(S32 port)
 {
@@ -573,8 +572,8 @@ void xTRCDisk(TRCState state)
     }
 }
 
-// RESTORED: speculative
 #if DEBUG
+// UNUSED: speculative
 void xTRCStateToStr(TRCState state, char* txt)
 {
     switch (state) {
@@ -608,6 +607,7 @@ void xTRCStateToStr(TRCState state, char* txt)
     }
 }
 
+// UNUSED: speculative
 void xTRCDebugCB()
 {
     char txt[64];
@@ -619,7 +619,6 @@ void xTRCDebugCB()
     xprintf("\nDisk state is %s\n", txt);
 }
 #endif
-// END RESTORED
 
 void render_mem_card_no_space(S32 needed, S32 available, S32 neededFiles, bool enabled)
 {

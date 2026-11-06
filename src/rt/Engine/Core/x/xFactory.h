@@ -27,17 +27,17 @@ struct XGOFTypeInfo
 
 struct xFactory : RyzMemData
 {
-    xFactory(S32 maxTypes, U32 memtag);
-    ~xFactory();
-    S32 RegItemType(XGOFTypeInfo* info);
-    XGOFTypeInfo* GetInfoList(S32& count);
-    S32 RegItemType(S32 tid, xFactoryCreateCallback create, xFactoryDestroyCallback destroy);
-    void GrowDataEnable(xBase* user, U32 memtag, S32 isResume);
-    void GrowDataDisable();
-    xFactoryInst* CreateItem(S32 typeID, void* userdata, RyzMemGrow* callerzgrow);
-    void DestroyAll();
-    void DestroyItem(xFactoryInst* item);
-    void TraverseProducts(xFactoryTraverseCallback trav, void* userdata);
+    xFactory(S32 maxTypes, U32 memtag); // UNUSED
+    ~xFactory(); // UNUSED
+    S32 RegItemType(XGOFTypeInfo* info); // UNUSED
+    XGOFTypeInfo* GetInfoList(S32& count); // UNUSED
+    S32 RegItemType(S32 tid, xFactoryCreateCallback create, xFactoryDestroyCallback destroy); // UNUSED
+    void GrowDataEnable(xBase* user, U32 memtag, S32 isResume); // UNUSED
+    void GrowDataDisable(); // UNUSED
+    xFactoryInst* CreateItem(S32 typeID, void* userdata, RyzMemGrow* callerzgrow); // UNUSED
+    void DestroyAll(); // UNUSED
+    void DestroyItem(xFactoryInst* item); // UNUSED
+    void TraverseProducts(xFactoryTraverseCallback trav, void* userdata); // UNUSED
 
 protected:
     XGOFTypeInfo* infopool;

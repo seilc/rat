@@ -6,7 +6,7 @@
 
 struct xLight;
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 class zFrozoneBlast
 {
 public:
@@ -90,6 +90,5 @@ private:
     S32 mGlintSystemID;
     F32 mGlintSplashTimer;
 };
-// END RESTORED
 
 #endif

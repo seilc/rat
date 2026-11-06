@@ -68,7 +68,7 @@ bool xModelPoolStressTesting()
 #endif
 
 #if DEBUG || RELEASE
-static void _xModelPipeBlendFlagsToString(U32 flag, char*& buffer);
+static void _xModelPipeBlendFlagsToString(U32 flag, char*& buffer); // UNUSED
 
 DECOMP_FORCEACTIVE("Layer %i%c", "Alpha Discard %i%c");
 #endif
@@ -596,7 +596,7 @@ void xModelRender(xModelInstance* modelInst)
     xSTATS_END(t0, model_render);
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 void xModelRender2D(xModelInstance* modelInst, basic_rect<F32>* sr, xVec3* from, xVec3* to, F32)
 {
     RwCamera* camera;
@@ -653,7 +653,6 @@ void xModelRender2D(xModelInstance* modelInst, basic_rect<F32>* sr, xVec3* from,
     iModelRender(modelInst->Data, modelInst->Mat);
     *modelInst->Mat = tmp2;
 }
-// END RESTORED
 
 void xModelRender2D(const xModelInstance& model, const basic_rect<F32>& r, const xVec3& from, const xVec3& to)
 {
@@ -779,7 +778,7 @@ static void CameraDestroy(RwCamera* camera)
     }
 }
 
-static void CameraSetViewWindow(RwCamera* camera, F32 width, F32 height, F32 vw);
+static void CameraSetViewWindow(RwCamera* camera, F32 width, F32 height, F32 vw); // UNUSED
 
 void xModel_SceneEnter(RpWorld* world)
 {

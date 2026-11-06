@@ -123,7 +123,7 @@ public:
 
     virtual bool IsInteractioning();
 
-    bool CanSayOneLiner();
+    bool CanSayOneLiner(); // UNUSED
 
     bool Get_humanPlayer() const
     {

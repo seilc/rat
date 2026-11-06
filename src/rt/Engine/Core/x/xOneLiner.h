@@ -18,7 +18,7 @@ public:
 
     static void SceneInit();
     static void SceneReset();
-    static void CalcLevelAdjustments();
+    static void CalcLevelAdjustments(); // UNUSED
     static void UpdateSounds();
     static void TweaksInit();
 
@@ -26,10 +26,10 @@ public:
     bool IsProbable() const;
     F32 CalcTimeToWait() const;
     bool PlaySoundCore();
-    bool PlaySound();
-    bool PlaySoundDelayed(F32 delay);
-    void Init();
-    void Reset();
+    bool PlaySound(); // UNUSED
+    bool PlaySoundDelayed(F32 delay); // UNUSED
+    void Init(); // UNUSED
+    void Reset(); // UNUSED
 
     bool HasValidHandle() const
     {
@@ -43,9 +43,9 @@ class xOneLinerList
     xOneLiner* mSounds;
 
 public:
-    void InitWithSounds(xOneLiner* soundList, U32 maxCheck);
-    void SetTimers(xOneLiner* soundList, U32 maxCheck, F32);
-    void Reset();
+    void InitWithSounds(xOneLiner* soundList, U32 maxCheck); // UNUSED
+    void SetTimers(xOneLiner* soundList, U32 maxCheck, F32); // UNUSED
+    void Reset(); // UNUSED
 
     inline bool PlaySound(U32);
     inline iSndGroupHandle GetSoundGroup(U32) const;

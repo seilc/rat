@@ -921,8 +921,8 @@ void xDrawCard(RwRaster* raster, F32 x, F32 y, F32 w, F32 h, bool zwrite)
     xDrawCard(raster, src_rect, dst_rect, zwrite);
 }
 
-static F32 Det3x3(F32 a, F32 b, F32 c, F32 d, F32 e, F32 f, F32 g, F32 h, F32 i);
-static void IntersectThreePlanes(const RwFrustumPlane* a, const RwFrustumPlane* b, const RwFrustumPlane* c, xVec3* o);
+static F32 Det3x3(F32 a, F32 b, F32 c, F32 d, F32 e, F32 f, F32 g, F32 h, F32 i); // UNUSED
+static void IntersectThreePlanes(const RwFrustumPlane* a, const RwFrustumPlane* b, const RwFrustumPlane* c, xVec3* o); // UNUSED
 #endif
 
 S32 Im2DRenderQuad(F32 x1, F32 y1, F32 x2, F32 y2, F32 z, F32 recipCamZ, F32 uvOffset)

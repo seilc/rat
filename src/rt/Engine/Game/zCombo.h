@@ -23,15 +23,15 @@ enum zComboType
 struct xIniFile;
 struct tweak_info;
 
-void zCombo_ParseINI(xIniFile* ini);
+void zCombo_ParseINI(xIniFile* ini); // UNUSED
 #if DEBUG || RELEASE
-void AddPointCB(const tweak_info&);
+void AddPointCB(const tweak_info&); // UNUSED
 #endif
-void zCombo_Setup();
+void zCombo_Setup(); // UNUSED
 void zCombo_Add(F32 points, zComboType type);
-S32 zCombo_GetPowerMult();
-void zCombo_HideImmediately();
+S32 zCombo_GetPowerMult(); // UNUSED
+void zCombo_HideImmediately(); // UNUSED
 void zCombo_Paused();
-void zCombo_Update(F32 dt);
+void zCombo_Update(F32 dt); // UNUSED
 
 #endif

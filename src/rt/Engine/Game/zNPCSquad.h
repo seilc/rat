@@ -13,10 +13,10 @@ public:
     zNPCSquad();
     virtual ~zNPCSquad();
     virtual void Update(F32) = 0;
-    void Reset();
-    U8 Add(zNPC::zNPCCommon* addMember);
-    U8 Delete(zNPC::zNPCCommon* delMember);
-    U8 IsMember(zNPC::zNPCCommon* isMember);
+    void Reset(); // UNUSED
+    U8 Add(zNPC::zNPCCommon* addMember); // UNUSED
+    U8 Delete(zNPC::zNPCCommon* delMember); // UNUSED
+    U8 IsMember(zNPC::zNPCCommon* isMember); // UNUSED
 
 protected:
     S32 totalMembers;

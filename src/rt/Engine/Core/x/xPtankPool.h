@@ -229,7 +229,7 @@ struct ptank_pool__pos_color_size_rot_uv2 : ptank_pool
 
 void xPTankPoolSceneEnter();
 void xPTankPoolSceneExit();
-void xPTankPoolFreeEnable(bool freeme);
+void xPTankPoolFreeEnable(bool freeme); // UNUSED
 void xPTankPoolRender();
 
 #endif

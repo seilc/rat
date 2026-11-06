@@ -316,8 +316,8 @@ struct xParCmd
 typedef void(*xParCmdUpdateFunction)(xParCmd* c, xParGroup* ps, F32 dt);
 
 void xParCmdInit();
-void xParCmdEnable(xParCmd* cmd);
-void xParCmdDisable(xParCmd* cmd);
+void xParCmdEnable(xParCmd* cmd); // UNUSED
+void xParCmdDisable(xParCmd* cmd); // UNUSED
 void xParCmdRegister(U32 parType, U32 size, xParCmdUpdateFunction func);
 U32 xParCmdGetSize(U32 parType);
 xParCmdUpdateFunction xParCmdGetUpdateFunc(U32 parType);

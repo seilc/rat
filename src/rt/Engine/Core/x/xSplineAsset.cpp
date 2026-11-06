@@ -403,9 +403,9 @@ namespace {
 
 struct search_end;
 
-void VerifyBounds(const xNurbs* curve, F32& begin_u, F32& end_u);
-U8 BothEndsOutside(const xNurbs* curve, search_end& begin, search_end& end, const xVec3& circle_center, F32 circle_radius, F32& intersect_u, xVec3& intersect_vec);
-void GetNewGuess(const xNurbs* curve, search_end* inside, search_end* outside, const xVec3& circle_center, F32 circle_radius, search_end* guess);
+void VerifyBounds(const xNurbs* curve, F32& begin_u, F32& end_u); // UNUSED
+U8 BothEndsOutside(const xNurbs* curve, search_end& begin, search_end& end, const xVec3& circle_center, F32 circle_radius, F32& intersect_u, xVec3& intersect_vec); // UNUSED
+void GetNewGuess(const xNurbs* curve, search_end* inside, search_end* outside, const xVec3& circle_center, F32 circle_radius, search_end* guess); // UNUSED
 
 }
 

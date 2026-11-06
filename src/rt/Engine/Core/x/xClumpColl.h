@@ -113,12 +113,12 @@ extern U8 xClumpColl_FilterFlagsAllEqual;
 
 U32 xClumpColl_SetFilterFlags(U8 filterFlags, U8 allMask, U8 allEqual);
 void xClumpColl_RestoreFilterFlags(U32 previousFlags);
-xClumpCollBSPTree* xClumpColl_DataRead(void* data, U32 size);
-xClumpCollBSPTree* xClumpColl_StreamRead(RwStream* stream);
+xClumpCollBSPTree* xClumpColl_DataRead(void* data, U32 size); // UNUSED
+xClumpCollBSPTree* xClumpColl_StreamRead(RwStream* stream); // UNUSED
 xClumpCollBSPTree* xClumpColl_StaticBufferInit(void* data, U32);
-RpClump* xClumpColl_InstanceClump(RpClump* clump);
+RpClump* xClumpColl_InstanceClump(RpClump* clump); // UNUSED
 void xClumpColl_InstancePointers(xClumpCollBSPTree*, RpClump*);
-xClumpCollBSPTree* xClumpColl_ForAllLeafNodes(xClumpCollBSPTree* tree, xClumpCollBSPLeafCB callBack, void* data);
+xClumpCollBSPTree* xClumpColl_ForAllLeafNodes(xClumpCollBSPTree* tree, xClumpCollBSPLeafCB callBack, void* data); // UNUSED
 xClumpCollBSPTree* xClumpColl_ForAllBoxLeafNodeIntersections(xClumpCollBSPTree* tree, RwBBox* box, xClumpCollBSPLeafCB callBack, void* data);
 xClumpCollBSPTree* xClumpColl_ForAllLineLeafNodeIntersections(xClumpCollBSPTree* tree, RwLine* line, xClumpCollV3dGradient* grad, xClumpCollBSPLeafCB callBack, void* data);
 xClumpCollBSPTree* xClumpColl_ForAllCapsuleLeafNodeIntersections(xClumpCollBSPTree* tree, RwLine* line, F32 radius, xClumpCollV3dGradient* grad, xClumpCollBSPLeafCB callBack, void* data);

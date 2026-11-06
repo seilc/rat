@@ -74,13 +74,13 @@ public:
     static zMeshCircle* GetFreeCircle();
     static void ReleaseCircle(zMeshCircle* circle);
 
-    U32 getId(const xNavigationMeshAssetSubMesh* whichSubMesh, U32 firstVertex, U32 secondVertex) const;
-    void getEdge(xVec3* endPoints, U32 id) const;
-    void ClearSubMeshFlags(U32 flags);
-    void Draw() const;
+    U32 getId(const xNavigationMeshAssetSubMesh* whichSubMesh, U32 firstVertex, U32 secondVertex) const; // UNUSED
+    void getEdge(xVec3* endPoints, U32 id) const; // UNUSED
+    void ClearSubMeshFlags(U32 flags); // UNUSED
+    void Draw() const; // UNUSED
 
     bool GetTriangle(const xVec3& position, S32 subMeshGuess, S32 triGuess, S32& subMeshIndex, S32& triIndex);
-    void GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh);
+    void GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh); // UNUSED
     void CheckSubMeshExits(S32& subMeshIndex, S32& triangleIndex);
 
     F32 getHeight(S32 subMeshIndex, S32 triangle, const xVec3& A) const

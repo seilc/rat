@@ -24,7 +24,7 @@ public:
     void* GetCurrentEnd() const;
 
 #if DEBUG || RELEASE
-    U32 GetUnfragmentedSpace() const;
+    U32 GetUnfragmentedSpace() const; // UNUSED
     U32 GetFragmentedSpace() const;
     U32 GetFreeSpace() const;
     void DumpAllocatedHeap() const;
@@ -63,7 +63,7 @@ public:
 #endif
 
 public:
-    bool CheckHeap() const;
+    bool CheckHeap() const; // UNUSED
 
 private:
     struct FreeNode
@@ -109,7 +109,7 @@ private:
 
 #if DEBUG || RELEASE
     void UpdateLargestBlock();
-    void VerifyMetrics() const;
+    void VerifyMetrics() const; // UNUSED
 #endif
 
     FreeNode* NextBlockOfMemory(FreeNode* node) const

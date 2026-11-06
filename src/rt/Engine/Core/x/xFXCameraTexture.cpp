@@ -287,9 +287,9 @@ void xFXCameraTexture::get_subview(xMat4x3& ltm, xVec2& view_window, xVec2& view
 
 namespace {
 
-S32 power2ceil(S32 v);
-void im_blit_scaled(RwRaster* dst, RwRaster* src, F32 u, F32 v, xColor color);
-void set_vert(RwIm2DVertex& vert, F32 x, F32 y, F32 u, F32 v, xColor color);
+S32 power2ceil(S32 v); // UNUSED
+void im_blit_scaled(RwRaster* dst, RwRaster* src, F32 u, F32 v, xColor color); // UNUSED
+void set_vert(RwIm2DVertex& vert, F32 x, F32 y, F32 u, F32 v, xColor color); // UNUSED
 
 inline bool clip_rect(S32& x, S32& y, S32& w, S32& h, S32 wclip, S32 hclip)
 {

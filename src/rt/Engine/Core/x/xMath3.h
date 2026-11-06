@@ -230,7 +230,7 @@ void xMat4x3MoveLocalRight(xMat4x3* m, F32 mag);
 void xMat4x3MoveLocalUp(xMat4x3* m, F32 mag);
 void xMat4x3MoveLocalAt(xMat4x3* m, F32 mag);
 
-inline void xMat4x3From3x3(xMat4x3* m, const xMat3x3* m3x3);
+inline void xMat4x3From3x3(xMat4x3* m, const xMat3x3* m3x3); // UNUSED
 
 inline void xMat4x3Identity(xMat4x3* m)
 {

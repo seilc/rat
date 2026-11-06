@@ -40,8 +40,8 @@ struct xMorphTargetFile
 
 typedef void*(*xMorphFindAssetCallback)(U32, char*);
 
-xMorphTargetFile* xMorphTargetLoad(char* filename);
-xMorphSeqFile* xMorphSeqLoad(char* filename, xMorphFindAssetCallback FindAssetCB);
+xMorphTargetFile* xMorphTargetLoad(char* filename); // UNUSED
+xMorphSeqFile* xMorphSeqLoad(char* filename, xMorphFindAssetCallback FindAssetCB); // UNUSED
 xMorphSeqFile* xMorphSeqSetup(void* data, xMorphFindAssetCallback FindAssetCB);
 void xMorphRender(xMorphSeqFile* seq, RwMatrix* mat, F32 time);
 F32 xMorphSeqDuration(xMorphSeqFile* seq);

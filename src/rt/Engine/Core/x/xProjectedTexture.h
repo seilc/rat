@@ -7,7 +7,7 @@ struct xModelInstance;
 
 void xProjectedTextureStartup();
 void xProjectedTextureShutdown();
-void xProjectedTextureRender(RpAtomic*, const xMat4x3&);
-void xProjectedTextureRender(xModelInstance*, const xMat4x3&);
+void xProjectedTextureRender(RpAtomic*, const xMat4x3&); // UNUSED
+void xProjectedTextureRender(xModelInstance*, const xMat4x3&); // UNUSED
 
 #endif

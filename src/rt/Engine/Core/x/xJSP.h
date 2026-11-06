@@ -74,15 +74,15 @@ struct xJSPHeader
 
 typedef S32(*xJSPLeafNodeCallback)(xJSPHeader*, xJSPNodeTreeLeaf*, RwBBox*, void*);
 
-xJSPHeader* xJSP_StreamRead(RwStream* stream, U32);
+xJSPHeader* xJSP_StreamRead(RwStream* stream, U32); // UNUSED
 U32 get_matid(const xJSPHeader* jsp, U32 old_mat_id, U32 jspAssetID);
 void xJSP_MultiStreamRead(void* data, U32 size, xJSPHeader** jsp, U32 assetID);
 void xJSP_Destroy(xJSPHeader* jsp);
 xJSPNodeTree* xJSPNodeTreeBuild(xJSPHeader* jsp);
 xJSPHeader* xJSP_ForAllBoxLeafNodeIntersections(xJSPHeader* hdr, RwBBox* box, xJSPLeafNodeCallback callBack, void* data);
-void xJSP_RemoveLocalLight(xJSPHeader* jsp, RpLight* light);
+void xJSP_RemoveLocalLight(xJSPHeader* jsp, RpLight* light); // UNUSED
 void xJSP_ApplyLocalLight(xJSPHeader* jsp, RpLight* light);
 void xJSP_ClearLocalLight(xJSPHeader* jsp);
-xVec3* xJSP_GetTriangleVertData(xJSPHeader* jsp, xClumpCollBSPTriangle* tri, xColor* color, xVec3* normal, F32* uv);
+xVec3* xJSP_GetTriangleVertData(xJSPHeader* jsp, xClumpCollBSPTriangle* tri, xColor* color, xVec3* normal, F32* uv); // UNUSED
 
 #endif

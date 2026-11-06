@@ -98,7 +98,7 @@ static RpAtomic* ListAtomicCB(RpAtomic* atomic, void* data)
     return atomic;
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
 {
     RpClump* clump;
@@ -253,7 +253,6 @@ xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
     xJSPNodeLightBuild(hdr);
     return hdr;
 }
-// END RESTORED
 
 U32 get_matid(const xJSPHeader* jsp, U32 old_mat_id, U32 jspAssetID)
 {
@@ -819,7 +818,7 @@ static S32 JSPApplyLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box,
     return 1;
 }
 
-static S32 JSPRemoveLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box, void* data);
+static S32 JSPRemoveLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box, void* data); // UNUSED
 
 void xJSP_ApplyLocalLight(xJSPHeader* jsp, RpLight* light)
 {
@@ -848,7 +847,7 @@ void xJSP_ClearLocalLight(xJSPHeader* jsp)
     }
 }
 
-// RESTORED: from Incredibles GC
+// UNUSED: ported from Incredibles GC
 xVec3* xJSP_GetTriangleVertData(xJSPHeader* jsp, xClumpCollBSPTriangle* tri, xColor* color, xVec3* normal, F32* uv)
 {
     xASSERT_ONCE((tri >= jsp->colltree->triangles) && (tri < jsp->colltree->triangles+jsp->colltree->numTriangles));
@@ -913,4 +912,3 @@ xVec3* xJSP_GetTriangleVertData(xJSPHeader* jsp, xClumpCollBSPTriangle* tri, xCo
 
     return (xVec3*)tri->v.p;
 }
-// END RESTORED

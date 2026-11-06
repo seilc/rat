@@ -60,15 +60,15 @@ void xParEmitterInit(void* b, void* tasset);
 void xParEmitterInit(xBase* b, xParEmitterAsset* pea);
 void xParEmitterSetup(xParEmitter* t);
 void xParEmitterReset(xParEmitter* t);
-void xParEmitterSave(xParEmitter* ent, xSerial* s);
-void xParEmitterLoad(xParEmitter* ent, xSerial* s);
+void xParEmitterSave(xParEmitter* ent, xSerial* s); // UNUSED
+void xParEmitterLoad(xParEmitter* ent, xSerial* s); // UNUSED
 void xParEmitterEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32);
 xPar* xParEmitterEmitCustom(xParEmitter* p, F32 dt, xParEmitterCustomSettings* info);
 F32 xParInterpCompute(S32 interp_mode, xParInterp* r, F32 time, S32 time_has_elapsed, F32 lastVal);
 xPar* xParEmitterEmitSetTexIdxs(xPar* p, const xParSys* ps);
 xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt);
 void xParEmitterUpdate(xBase* to, xScene*, F32 dt);
-void xParEmitterDestroy();
+void xParEmitterDestroy(); // UNUSED
 
 inline xPar* xParEmitterEmit(xParEmitter* pe, F32 dt)
 { return xParEmitterEmit(pe, dt, dt); }

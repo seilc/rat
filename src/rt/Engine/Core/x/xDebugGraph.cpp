@@ -209,7 +209,7 @@ namespace {
         return gh;
     }
 
-    void free_graph(graph_handle* gh);
+    void free_graph(graph_handle* gh); // UNUSED
 
     graph_handle* find_graph(const char* name)
     {

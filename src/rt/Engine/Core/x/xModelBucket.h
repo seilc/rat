@@ -43,7 +43,7 @@ void xModelBucket_AddAlphaFade(xModelInstance* minst, F32 alphaFade, bool);
 void xModelBucket_RenderOpaqueBegin();
 void xModelBucket_RenderOpaque(S32 maxLayer);
 void xModelBucket_RenderAlphaBegin();
-void _xModelBucket_SkipAlphaLayer(S32 maxLayer);
+void _xModelBucket_SkipAlphaLayer(S32 maxLayer); // UNUSED
 #if DEBUG || RELEASE
 void ValidateRenderStateExpectations(const xModelInstance* model, U32 pipeFlags);
 void xModelBucket_InitBadSetModelsCheck();
@@ -53,6 +53,6 @@ void xModelBucket_RenderAlphaLayer(S32 maxLayer);
 bool xModelBucket_RenderAny(S32 maxLayer);
 void xModelBucket_RenderAlphaEnd();
 void xModelBucket_Deinit();
-void xModelBucket_PreAllocModelPipe(RpAtomic* m);
+void xModelBucket_PreAllocModelPipe(RpAtomic* m); // UNUSED
 
 #endif

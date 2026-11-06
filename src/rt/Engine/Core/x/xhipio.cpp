@@ -23,7 +23,7 @@ static S32 HIPLBlockRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size);
 static S32 HIPLBypassRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size);
 static S32 HIPLReadAsync(st_HIPLOADDATA* lddata, S32 pos, char* data, S32 cnt, S32 elesize);
 static en_READ_ASYNC_STATUS HIPLPollRead(st_HIPLOADDATA* lddata);
-static S32 HIPLBlockLength(st_HIPLOADDATA* lddata);
+static S32 HIPLBlockLength(st_HIPLOADDATA* lddata); // UNUSED
 static S32 HIPLReadBytes(st_HIPLOADDATA* lddata, char* data, S32 cnt);
 static S32 HIPLReadShorts(st_HIPLOADDATA* lddata, S16* data, S32 cnt);
 static S32 HIPLReadLongs(st_HIPLOADDATA* lddata, S32* data, S32 cnt);

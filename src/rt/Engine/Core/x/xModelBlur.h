@@ -30,8 +30,8 @@ public:
     static void reset_all();
     static void update_all(F32 dt);
     static void render_all();
-    static void render_enable(bool enabled);
-    static const config_data& get_default_config();
+    static void render_enable(bool enabled); // UNUSED
+    static const config_data& get_default_config(); // UNUSED
 
     void create();
     bool activate(F32 lifetime, F32 alpha, const config_data& cfg, xModelInstance* model);
@@ -46,13 +46,13 @@ public:
     void set_config(const config_data& cfg);
     bool visible() const;
     void set_lifetime(F32 value, F32 time);
-    F32 get_lifetime() const;
-    F32 get_lifetime_goal() const;
+    F32 get_lifetime() const; // UNUSED
+    F32 get_lifetime_goal() const; // UNUSED
     void set_alpha(F32 value, F32 time);
-    F32 get_alpha() const;
-    F32 get_alpha_goal() const;
+    F32 get_alpha() const; // UNUSED
+    F32 get_alpha_goal() const; // UNUSED
 #if DEBUG || RELEASE
-    static void add_tweaks(const char* prefix, config_data& cfg);
+    static void add_tweaks(const char* prefix, config_data& cfg); // UNUSED
 #endif
     bool update(F32 dt);
     void render();

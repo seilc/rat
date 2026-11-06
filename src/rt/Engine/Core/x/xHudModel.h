@@ -5,7 +5,7 @@
 
 struct xAnimTable;
 
-xAnimTable* xHUDCreateAnimTable();
+xAnimTable* xHUDCreateAnimTable(); // UNUSED
 
 namespace xhud {
 

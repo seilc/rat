@@ -58,8 +58,8 @@ void xEntBoulder_RealBUpdate(xEnt* ent, xVec3* pos);
 void xEntBoulder_Update(xEntBoulder* ent, xScene* sc, F32 dt);
 S32 xEntBoulder_KilledBySurface(xEntBoulder* ent, xScene*, F32);
 void xEntBoulder_Kill(xEntBoulder* ent);
-void xEntBoulder_Save(xEntBoulder* ent, xSerial* s);
-void xEntBoulder_Load(xEntBoulder* ent, xSerial* s);
+void xEntBoulder_Save(xEntBoulder* ent, xSerial* s); // UNUSED
+void xEntBoulder_Load(xEntBoulder* ent, xSerial* s); // UNUSED
 void xEntBoulder_Setup(xEntBoulder* ent);
 void xEntBoulder_Reset(xEntBoulder* ent, xScene*);
 void xEntBoulderEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32);
@@ -74,7 +74,7 @@ void xBoulderGenerator_GenBoulder(xBoulderGenerator* bg);
 #if DEBUG
 void xEntBoulderDebugModeCB();
 void xEntBoulder_DebugID(S32 id);
-S32 xEntBoulder_AllowL3();
+S32 xEntBoulder_AllowL3(); // UNUSED
 void xEntBoulder_SetSnapCamera();
 #endif
 

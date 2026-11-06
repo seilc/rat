@@ -30,9 +30,9 @@ U32 xFXHighDynamicRangeBrightenPtank(RpAtomic* ptank, bool bright, S32);
 void xFXHighDynamicRangeRestorePtank(RpAtomic* ptank, U32 oldtest);
 void xFXHighDynamicRangeTunePalette(RwRaster*, F32, bool);
 void xFXHighDynamicRangeUpdate(F32 dt);
-void xFXHighDynamicRangeEnable(bool enable);
+void xFXHighDynamicRangeEnable(bool enable); // UNUSED
 S32 xFXHighDynamicRangeGetBackgroundGlow();
-S32 xFXHighDynamicRangeGetBackgroundDarken();
+S32 xFXHighDynamicRangeGetBackgroundDarken(); // UNUSED
 void xFXHighDynamicRangeSetConfiguration(const xFXHighDynamicRangeConfiguration& configuration);
 void xFXHighDynamicRangeGetConfiguration(xFXHighDynamicRangeConfiguration& configuration);
 void xFXHighDynamicRangeSetGlowClamp(S32, bool);

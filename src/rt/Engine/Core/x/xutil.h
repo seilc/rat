@@ -15,21 +15,21 @@ void xUtil_niceBufDump(char* membuf, S32 bytcnt, S32 ashex, S32 rptoff);
 U32 xUtil_crc_init();
 U32 xUtil_crc_update(U32 crc_accum, char* data, S32 datasize);
 void strtosjis(U8* string, U8* dest);
-S32 sjistostr(U8* string, U8* destination);
-U8 BCDtoi(U8 hex);
-U8 itoBCD(U8 dec);
-U8 itoBCD(U16 dec);
+S32 sjistostr(U8* string, U8* destination); // UNUSED
+U8 BCDtoi(U8 hex); // UNUSED
+U8 itoBCD(U8 dec); // UNUSED
+U8 itoBCD(U16 dec); // UNUSED
 S32 xUtil_yesno(F32 wt_yes);
-void xUtil_wtadjust(F32* wts, S32 cnt, F32 arbref);
-void xUtil_Sort(F32* list, S32 cnt);
+void xUtil_wtadjust(F32* wts, S32 cnt, F32 arbref); // UNUSED
+void xUtil_Sort(F32* list, S32 cnt); // UNUSED
 #if DEBUG
-void xUtil_spit_flagbits(char flag, S32 toScreen);
-void xUtil_spit_flagbits(U8 flag, S32 toScreen);
-void xUtil_spit_flagbits(S8 flag, S32 toScreen);
-void xUtil_spit_flagbits(S16 flag, S32 toScreen);
-void xUtil_spit_flagbits(U16 flag, S32 toScreen);
+void xUtil_spit_flagbits(char flag, S32 toScreen); // UNUSED
+void xUtil_spit_flagbits(U8 flag, S32 toScreen); // UNUSED
+void xUtil_spit_flagbits(S8 flag, S32 toScreen); // UNUSED
+void xUtil_spit_flagbits(S16 flag, S32 toScreen); // UNUSED
+void xUtil_spit_flagbits(U16 flag, S32 toScreen); // UNUSED
 void xUtil_spit_flagbits(U32 flag, S32 toScreen);
-void xUtil_spit_flagbits(S32 flag, S32 toScreen);
+void xUtil_spit_flagbits(S32 flag, S32 toScreen); // UNUSED
 void xUtil_spit_flagbits(S32 flag, S32 toScreen, S32 numbytes);
 #else
 #define xUtil_spit_flagbits(...)
@@ -38,13 +38,13 @@ F32 xClampAngle0_2PI(F32 angle);
 void quicksort_int(void* base, size_t num, size_t width, size_t key_offset);
 void quicksort_uint(void* base, size_t num, size_t width, size_t key_offset);
 void quicksort_float(void* base, size_t num, size_t width, size_t key_offset);
-void quicksort_str(void* base, size_t num, size_t width, size_t key_offset);
+void quicksort_str(void* base, size_t num, size_t width, size_t key_offset); // UNUSED
 void quicksort_istr(void* base, size_t num, size_t width, size_t key_offset);
-void isort_int(void* base, size_t num, size_t width, size_t key_offset);
+void isort_int(void* base, size_t num, size_t width, size_t key_offset); // UNUSED
 void isort_float(void* base, size_t num, size_t width, size_t key_offset);
-void isort_str(void* base, size_t num, size_t width, size_t key_offset);
-void isort_istr(void* base, size_t num, size_t width, size_t key_offset);
-void xTouchObject(void*);
+void isort_str(void* base, size_t num, size_t width, size_t key_offset); // UNUSED
+void isort_istr(void* base, size_t num, size_t width, size_t key_offset); // UNUSED
+void xTouchObject(void*); // UNUSED
 
 template <class T, class V, class C>
 T binary_find(T first, T last, const V& value, C cmp)

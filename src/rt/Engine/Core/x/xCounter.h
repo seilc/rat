@@ -25,8 +25,8 @@ void xCounterReset(xBase* b);
 void xCounterSave(xCounter* ent, xSerial* s);
 void xCounterLoad(xCounter* ent, xSerial* s);
 void xCounterEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32);
-void xCounterUpdate(xBase* to, xScene* sc, F32);
-void xCounterStartup();
-void xCounterParseTag(xtextbox::jot& j, const xtextbox&, const xtextbox&, const xtextbox::split_tag& splitTag);
+void xCounterUpdate(xBase* to, xScene* sc, F32); // UNUSED
+void xCounterStartup(); // UNUSED
+void xCounterParseTag(xtextbox::jot& j, const xtextbox&, const xtextbox&, const xtextbox::split_tag& splitTag); // UNUSED
 
 #endif

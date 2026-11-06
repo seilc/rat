@@ -345,8 +345,8 @@ F32 xStrParseFloat(const char* x)
 }
 
 namespace {
-    inline S32 toupper(char c);
-    inline S32 toupper(S32 c);
+    inline S32 toupper(char c); // UNUSED
+    inline S32 toupper(S32 c); // UNUSED
 
     inline S32 tolower(S32 c)
     {

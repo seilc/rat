@@ -37,7 +37,7 @@ void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount)
     context.format = format;
 }
 
-// RESTORED: from Incredibles GC
+// UNUSED: ported from Incredibles GC
 void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount, const xIMLockParameters& params)
 {
     xASSERT(vertCount > 0);
@@ -93,7 +93,6 @@ void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount, const xIM
     context.vertCount = vertCount;
     context.format = format;
 }
-// END RESTORED
 
 DECOMP_FORCEACTIVE(
     "(params1.cpos != 0) && (((int)params1.cpos & 15) == 0)",

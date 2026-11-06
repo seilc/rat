@@ -144,8 +144,8 @@ public:
     bool started() const { return flags & 0x1; }
     bool blending() const { return blender != NULL; }
     bool active();
-    bool blendingTo() const;
-    bool blendingFrom() const;
+    bool blendingTo() const; // UNUSED
+    bool blendingFrom() const; // UNUSED
 
     virtual xCam* get_final_dest() { return this; }
     virtual zCamSplineCommonMix* get_common_mix() { return NULL; }
@@ -203,9 +203,9 @@ public:
     static void blend(xQuat& o, const xQuat& a, const xQuat& b, F32 s);
     static void blend(xCamOrientEuler& o, const xCamOrientEuler& a, const xCamOrientEuler& b, F32 s);
     static void blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s);
-    static void blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s);
+    static void blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s); // UNUSED
     static void blend3(xCamConfigFollow::zone_data& o, const xCamConfigFollow::zone_data& i0,
-                       const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s);
+                       const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s); // UNUSED
     static void spring_interp(F32& s, F32& v, F32 s0, F32 s1, F32 dt, F32 speed, F32 e);
     static void spring_interp(xVec3& s, F32& v, const xVec3& s0, const xVec3& s1, F32 dt, F32 speed, F32 e);
     static void spring_interp(xQuat& s, F32& v, const xQuat& s0, const xQuat& s1, F32 dt, F32 speed, F32 e);
@@ -246,14 +246,14 @@ public:
     void transition_to(xCam& cam, const xCamTransitionParams* params, bool force_cut, bool force_restart);
     void add(xCam& cam, bool force_cut);
     void remove(xCam& cam, bool);
-    void get_view_window(xVec2& vw);
+    void get_view_window(xVec2& vw); // UNUSED
     void stop(xCam& cam);
     void notify_released(xCam& cam);
     void set_child_flags(S32 add, S32 remove);
 #if DEBUG || RELEASE
     void debug_render(bool force, bool sparse);
     void PrintCamMsg(const char* msg, U32 ownerID) const;
-    void DumpOwned(S32) const;
+    void DumpOwned(S32) const; // UNUSED
 #endif
 
     xMat4x3 mat;
@@ -299,8 +299,8 @@ struct xCamScreen
     void get_world_matrix(xMat4x3& mat);
     void set_fov(F32 fov);
     F32 world_to_screen(xVec3& screen_loc, const xVec3& world_loc) const;
-    static void create_frustum_planes(xVec4* frust_planes, const xMat4x3& ltm, const xVec2& view_offset, const xVec2& view_window, F32 near_plane, F32 far_plane);
-    void create_frustum_planes(xVec4* frust_planes) const;
+    static void create_frustum_planes(xVec4* frust_planes, const xMat4x3& ltm, const xVec2& view_offset, const xVec2& view_window, F32 near_plane, F32 far_plane); // UNUSED
+    void create_frustum_planes(xVec4* frust_planes) const; // UNUSED
 
     RwCamera* icam;
     F32 fov;
@@ -567,6 +567,7 @@ inline void xCam::blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s)
     o = i1 + s * (s >= 0.0f ? i2 - i1 : i1 - i0);
 }
 
+// UNUSED: ported from Incredibles GC
 inline void xCam::blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s)
 {
     blend3(o.x, i0.x, i1.x, i2.x, s);
@@ -574,6 +575,7 @@ inline void xCam::blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3
     blend3(o.z, i0.z, i1.z, i2.z, s);
 }
 
+// UNUSED: ported from Incredibles GC
 inline void xCam::blend3(xCamConfigFollow::zone_data& o, const xCamConfigFollow::zone_data& i0,
                          const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s)
 {

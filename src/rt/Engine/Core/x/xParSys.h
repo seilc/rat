@@ -43,16 +43,16 @@ void xParSysSetup(xParSys* t);
 void xParSysReset(xParSys* t);
 xBase* xParSysExit(xBase* b, zScene*, void*);
 void xParSysExit(xParSys* t);
-void xParSysSave(xParSys* ent, xSerial* s);
-void xParSysLoad(xParSys* ent, xSerial* s);
+void xParSysSave(xParSys* ent, xSerial* s); // UNUSED
+void xParSysLoad(xParSys* ent, xSerial* s); // UNUSED
 void xParSysEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32);
 void xParSysUpdate(xBase* to, xScene*, F32 dt);
 void xParGroupUpdate(xParSys* s, xParGroup* g, F32 dt);
-void xParSysRender(xBase* b);
+void xParSysRender(xBase* b); // UNUSED
 #if DEBUG
-void xParSysDebugModeCB();
-xBase* xParSysDebugModeIteratorCB(xBase* b, zScene* s, void*);
+void xParSysDebugModeCB(); // UNUSED
+xBase* xParSysDebugModeIteratorCB(xBase* b, zScene* s, void*); // UNUSED
 #endif
-xParSys* xParSysFind(U32 asset_id);
+xParSys* xParSysFind(U32 asset_id); // UNUSED
 
 #endif

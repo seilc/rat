@@ -78,26 +78,25 @@ inline F32 xasin(F32 x)
     return std::asinf(x);
 }
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 inline F32 xatan(F32 x)
 {
     return std::atanf(x);
 }
-// END RESTORED
 
-inline F32 xcosh(F32 x);
-inline F32 xsinh(F32 x);
-inline F32 xtanh(F32 x);
+inline F32 xcosh(F32 x); // UNUSED
+inline F32 xsinh(F32 x); // UNUSED
+inline F32 xtanh(F32 x); // UNUSED
 
 inline F32 xatan2(F32 y, F32 x)
 {
     return xAngleClampFast(std::atan2f(y, x));
 }
 
-inline F32 xmin(F32 a, F32 b);
-inline F32 xmin3(F32 a, F32 b, F32 c);
-inline F32 xmax(F32 a, F32 b);
-inline F32 xmax3(F32 a, F32 b, F32 c);
+inline F32 xmin(F32 a, F32 b); // UNUSED
+inline F32 xmin3(F32 a, F32 b, F32 c); // UNUSED
+inline F32 xmax(F32 a, F32 b); // UNUSED
+inline F32 xmax3(F32 a, F32 b, F32 c); // UNUSED
 
 inline void xsqrtfast(F32& o, register F32 fVal)
 {
@@ -116,13 +115,13 @@ inline void xsqrtfast(F32& o, register F32 fVal)
     o = fRetVal;
 }
 
-inline void xlogfast(F32& o, F32 x);
-inline void xexpfast(F32& o, F32 x);
-inline void xfmodfast(F32& o, F32 x, F32 y);
-inline void xceilfast(F32& o, F32 x);
-inline void xfloorfast(F32& o, F32 x);
-inline void xpowfast(F32& o, F32 x, F32 y);
-inline void xcosfast(F32& fResult, F32 fAngle);
+inline void xlogfast(F32& o, F32 x); // UNUSED
+inline void xexpfast(F32& o, F32 x); // UNUSED
+inline void xfmodfast(F32& o, F32 x, F32 y); // UNUSED
+inline void xceilfast(F32& o, F32 x); // UNUSED
+inline void xfloorfast(F32& o, F32 x); // UNUSED
+inline void xpowfast(F32& o, F32 x, F32 y); // UNUSED
+inline void xcosfast(F32& fResult, F32 fAngle); // UNUSED
 
 inline void xsinfast(F32& fResult, F32 fAngle)
 {
@@ -135,28 +134,27 @@ inline void xsinfast(F32& fResult, F32 fAngle)
     fResult *= fAngle;
 }
 
-inline void xtanfast(F32& fResult, F32 fAngle);
-inline void xacosfast(F32& fResult, F32 fValue);
-inline void xasinfast(F32& fResult, F32 fValue);
-inline void xatanfast(F32& fValue, F32);
-inline void xcoshfast(F32& o, F32 x);
-inline void xsinhfast(F32& o, F32 x);
-inline void xtanhfast(F32& o, F32 x);
-inline void xatan2fast(F32& o, F32 y, F32 x);
+inline void xtanfast(F32& fResult, F32 fAngle); // UNUSED
+inline void xacosfast(F32& fResult, F32 fValue); // UNUSED
+inline void xasinfast(F32& fResult, F32 fValue); // UNUSED
+inline void xatanfast(F32& fValue, F32); // UNUSED
+inline void xcoshfast(F32& o, F32 x); // UNUSED
+inline void xsinhfast(F32& o, F32 x); // UNUSED
+inline void xtanhfast(F32& o, F32 x); // UNUSED
+inline void xatan2fast(F32& o, F32 y, F32 x); // UNUSED
 
-// RESTORED: speculative
+// UNUSED: speculative
 inline void xabsfast(F32& o, F32 x)
 {
     o = std::fabsf(x);
 }
-// END RESTORED
 
-inline void xminfast(F32& o, F32 a, F32 b);
-inline void xmin3fast(F32& o, F32 a, F32 b, F32 c);
-inline void xmaxfast(F32& o, F32 a, F32 b);
-inline void xmax3fast(F32& o, F32 a, F32 b, F32 c);
+inline void xminfast(F32& o, F32 a, F32 b); // UNUSED
+inline void xmin3fast(F32& o, F32 a, F32 b, F32 c); // UNUSED
+inline void xmaxfast(F32& o, F32 a, F32 b); // UNUSED
+inline void xmax3fast(F32& o, F32 a, F32 b, F32 c); // UNUSED
 
-// RESTORED: speculative
+// UNUSED: speculative
 inline F32 xinv(register F32 fVal)
 {
     register F32 fRetVal;
@@ -169,7 +167,6 @@ inline F32 xinv(register F32 fVal)
 
     return fRetVal;
 }
-// END RESTORED
 
 inline F32 xinvsqrt(register F32 fVal)
 {
