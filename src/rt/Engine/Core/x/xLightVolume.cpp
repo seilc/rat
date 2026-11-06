@@ -16,7 +16,7 @@ S32 xLightVolume::activities_used = 0;
 
 namespace {
 
-void set_atomic_color(RpAtomic* atomic, xColor color);
+void set_atomic_color(RpAtomic* atomic, xColor color); // UNUSED
 
 }
 
@@ -91,7 +91,7 @@ void xLightVolume::deactivate()
     activity = 0;
 }
 
-// RESTORED: from Incredibles GC
+// UNUSED: ported from Incredibles GC
 void xLightVolumeModel::create()
 {
     model = 0;
@@ -102,6 +102,7 @@ void xLightVolumeModel::create()
     xLightVolume::create();
 }
 
+// UNUSED: ported from Incredibles GC
 void xLightVolumeModel::render()
 {
     xASSERT(model != 0);
@@ -121,6 +122,7 @@ void xLightVolumeModel::render()
     }
 }
 
+// UNUSED: ported from Incredibles GC
 void xLightVolumeModel::render_single(xModelInstance* model, U32 stencil_pass)
 {
     RpAtomic* atomic = model->Data;
@@ -155,7 +157,6 @@ void xLightVolumeModel::render_single(xModelInstance* model, U32 stencil_pass)
         hierarchy->pMatrixArray = old_anim_mat;
     }
 }
-// END RESTORED
 
 void xLightVolume::render_all()
 {

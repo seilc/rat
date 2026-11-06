@@ -103,10 +103,10 @@ struct sphericalEmitter : emitterBase
 
     virtual bool GetIntensity(const xVec3& playerPos, F32& intensity) const;
     virtual void UpdatePosition(const xVec3& playerPos) const;
-    F32 GetTimeLeft();
+    F32 GetTimeLeft(); // UNUSED
 };
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 struct FreezableObjectEffect : emitterBase
 {
     sphericalEmitterAsset mModifiableAsset;
@@ -119,7 +119,6 @@ struct FreezableObjectEffect : emitterBase
     virtual bool GetIntensity(const xVec3& position, F32& intensity) const;
     virtual void UpdatePosition(xVec3& newPosition);
 };
-// END RESTORED
 
 }
 

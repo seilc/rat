@@ -43,9 +43,9 @@ namespace xScreenWarp {
     void render(RwCamera* cam);
     void clear();
     type_enum find_type(U32 id);
-    warper* emit(const xVec2& loc, F32 radius, F32 duration, type_enum type, F32 intensity, F32 freq, S32 flags);
+    warper* emit(const xVec2& loc, F32 radius, F32 duration, type_enum type, F32 intensity, F32 freq, S32 flags); // UNUSED
     warper* emit(const xVec3& loc, F32 radius, F32 duration, type_enum type, F32 intensity, F32 freq, S32 flags);
-    void modify(warper* warp, const xVec2& loc, F32 radius, F32 duration, type_enum type, F32 intensity, F32 freq, S32 flags);
+    void modify(warper* warp, const xVec2& loc, F32 radius, F32 duration, type_enum type, F32 intensity, F32 freq, S32 flags); // UNUSED
     void modify(warper* warp, const xVec3& loc, F32 radius, F32 duration, type_enum type, F32 intensity, F32 freq, S32 flags);
     void remove(warper* warp);
 

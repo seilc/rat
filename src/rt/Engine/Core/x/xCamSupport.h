@@ -119,7 +119,7 @@ public:
     void precollide();
     bool collide_pivot();
     bool collide_compress();
-    bool collide_llod();
+    bool collide_llod(); // UNUSED
 #if DEBUG || RELEASE
     void add_tweaks(const char* prefix, const char* debug_prefix);
     void debug_render();

@@ -36,22 +36,22 @@ struct xCamFollow : xCam
 
     config cfg;
 
-    virtual void create();
-    virtual void start();
-    virtual void update(xScene& scene, F32 dt);
-    virtual xCamConfigFollow* config_follow() { return &cfg; }
+    virtual void create(); // UNUSED
+    virtual void start(); // UNUSED
+    virtual void update(xScene& scene, F32 dt); // UNUSED
+    inline virtual xCamConfigFollow* config_follow(); // UNUSED
 
 #if DEBUG || RELEASE
-    virtual void debug_render();
-    virtual void add_tweaks(const char* prefix);
+    virtual void debug_render(); // UNUSED
+    virtual void add_tweaks(const char* prefix); // UNUSED
 #endif
 
 private:
-    void face_target();
-    void apply_analog_input(F32 dt);
-    void apply_spring(F32 dt);
-    void collide_inward(xScene& scene, xCamCoordCylinder& coord, const xVec3& face, F32 width);
-    void apply_vel_drift(F32 dt);
+    void face_target(); // UNUSED
+    void apply_analog_input(F32 dt); // UNUSED
+    void apply_spring(F32 dt); // UNUSED
+    void collide_inward(xScene& scene, xCamCoordCylinder& coord, const xVec3& face, F32 width); // UNUSED
+    void apply_vel_drift(F32 dt); // UNUSED
 
     const xVec3* target;
     xCamCoordCylinder end_coord;

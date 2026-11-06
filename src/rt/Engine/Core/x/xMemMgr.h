@@ -240,13 +240,13 @@ extern U32 scratch_mem_used;
 #define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
 
 #if DEBUG || RELEASE
-void DebugGetHeapUsage(U32* pTotal, U32* pUsed, U32* pOverhead);
+void DebugGetHeapUsage(U32* pTotal, U32* pUsed, U32* pOverhead); // UNUSED
 #endif
 void xMemDebug_SoakLog(U32 SceneId);
-U32 xMemFreeMemTotal();
+U32 xMemFreeMemTotal(); // UNUSED
 #if DEBUG
 void xMem_DB_DispStatSum();
-U32 xMem_DB_CurMemUsed(U32* total, U32* overhead);
+U32 xMem_DB_CurMemUsed(U32* total, U32* overhead); // UNUSED
 #endif
 void xMemInit();
 void xMemExit();
@@ -275,22 +275,22 @@ bool xMemMgrGenericMallocVerifyClearTag();
 U32 xMemMgrGetTotalMemUsageByTag(U32 tag);
 #endif
 
-void xMemSwitchHeaps(U32 type);
+void xMemSwitchHeaps(U32 type); // UNUSED
 #if DEBUG
-void xMemTest();
+void xMemTest(); // UNUSED
 U32 xMemCheck();
 #endif
 
 S32 xMemPushBase(U32 heapID);
 S32 xMemPushBase();
 void* xMemAllocFreeable(void* alloced_memory, S32 asked_for_size, xMemFreeFunc func, void* param);
-void xMemFreeDefault(void* addr_of_ptr);
+void xMemFreeDefault(void* addr_of_ptr); // UNUSED
 S32 xMemPopBase(U32 heapID, S32 depth);
 S32 xMemPopBase(S32 depth);
 S32 xMemGetBase(U32 heapID);
 void xMemRegisterBaseNotifyFunc(xMemBaseNotifyFunc func);
 S32 xMemGetBase();
-S32 xMemIsBaseValid(S32 level);
+S32 xMemIsBaseValid(S32 level); // UNUSED
 void xMemPoolSetup(xMemPool* pool, void* buffer, U32 nextOffset, U32 flags, xMemPoolInitCallback initCB, U32 size, U32 count, U32 numRealloc);
 void* xMemPoolAlloc(xMemPool* pool, U32 memtag);
 void xMemPoolFree(xMemPool* pool, void* data);

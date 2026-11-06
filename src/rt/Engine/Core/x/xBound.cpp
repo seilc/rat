@@ -14,7 +14,7 @@ extern S32 xent_nqcrejects;
 
 static const S32 NUM_SEPERATION_AXES = 13;
 
-// RESTORED: speculative
+// UNUSED: speculative
 void xBoundMakeSphere(xBound& b, const xVec3& center, F32 radius)
 {
     b.type = k_XBOUNDTYPE_SPHERE;
@@ -22,7 +22,6 @@ void xBoundMakeSphere(xBound& b, const xVec3& center, F32 radius)
     b.sph.r = radius;
     xQuickCullForSphere(&b.qcd, &b.sph);
 }
-// END RESTORED
 
 void xBoundUpdate(xBound* b)
 {
@@ -125,7 +124,7 @@ void xBoundGetSphere(xSphere& o, const xBound& bound)
     }
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 void xBoundGetSphere2(xSphere& o, const xBound& bound)
 {
     switch (bound.type) {
@@ -148,7 +147,6 @@ void xBoundGetSphere2(xSphere& o, const xBound& bound)
         xFAIL_FMT("%s", "Unsupported bound type.");
     }
 }
-// END RESTORED
 
 void xBoundSphereHitsOBB(const xSphere* s, const xBox* b, const xMat4x3* m, xCollis* coll)
 {
@@ -312,7 +310,7 @@ void xSphereHitsBound(const xSphere* o, const xBound* b, xCollis* c)
     }
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 void xSphereHitsBound(const xSphere* o, const xQCData* q, const xBound* b, xCollis* c)
 {
     xASSERT(q != 0);
@@ -325,7 +323,6 @@ void xSphereHitsBound(const xSphere* o, const xQCData* q, const xBound* b, xColl
         c->flags &= ~k_HIT_IT;
     }
 }
-// END RESTORED
 
 void xVecHitsBound(const xVec3* v, const xBound* b, xCollis* c)
 {
@@ -422,7 +419,7 @@ bool xSphereHitsBound(const xVec3& c, F32 r, const xBound& b)
     }
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 bool xVecHitsBound(const xVec3& v, const xBound& b)
 {
     switch (b.type) {
@@ -437,7 +434,6 @@ bool xVecHitsBound(const xVec3& v, const xBound& b)
         return false;
     }
 }
-// END RESTORED
 
 bool xOBBHitsBound(const xBox& box, const xMat4x3& mat, const xBound& b)
 {

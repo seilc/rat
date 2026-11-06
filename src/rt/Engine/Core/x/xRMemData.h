@@ -14,22 +14,22 @@ struct RyzMemGrow;
 struct RyzMemData
 {
     static void* operator new(size_t amt, S32 who, U32 memtag, RyzMemGrow* growCtxt);
-    static void* operator new[](size_t amt, S32 who, U32 memtag, RyzMemGrow* growCtxt);
+    static void* operator new[](size_t amt, S32 who, U32 memtag, RyzMemGrow* growCtxt); // UNUSED
     static void operator delete(void*);
-    static void operator delete[](void*);
-    static void operator delete(void*, S32, RyzMemGrow*);
-    static void operator delete[](void*, S32, RyzMemGrow*);
+    static void operator delete[](void*); // UNUSED
+    static void operator delete(void*, S32, RyzMemGrow*); // UNUSED
+    static void operator delete[](void*, S32, RyzMemGrow*); // UNUSED
 #if DEBUG
-    static U32 DBG_rmemuse();
+    static U32 DBG_rmemuse(); // UNUSED
 #endif
 };
 
 struct RyzMemGrow
 {
     S32 IsEnabled() { return flg_grow & RMEM_GROW_ENABLED; }
-    RyzMemGrow* Init(xBase* growuser, U32 memtag);
-    RyzMemGrow* Resume(xBase* growuser);
-    void Done();
+    RyzMemGrow* Init(xBase* growuser, U32 memtag); // UNUSED
+    RyzMemGrow* Resume(xBase* growuser); // UNUSED
+    void Done(); // UNUSED
 
 protected:
     S32 flg_grow;

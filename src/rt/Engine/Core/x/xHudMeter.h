@@ -22,9 +22,8 @@ public:
 
     meter_widget(const meter_asset& a);
 
-    // RESTORED: from Rat MAP
+    // UNUSED: speculative
     ~meter_widget() {}
-    // END RESTORED
 
     void destruct();
     
@@ -36,8 +35,8 @@ public:
         updater(dt);
     }
 
-    void set_value(F32 v);
-    void set_value_immediate(F32 v);
+    void set_value(F32 v); // UNUSED
+    void set_value_immediate(F32 v); // UNUSED
     void updater(F32 dt);
 
 protected:

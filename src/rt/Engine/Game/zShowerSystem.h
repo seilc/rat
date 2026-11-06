@@ -14,13 +14,14 @@ struct xCameraFXShakeParams;
 struct zShrapnelAsset;
 class zFXShockwaveConfig;
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 class zShowerCBInterface
 {
 public:
     virtual void Collide(const xVec3& pos) = 0;
 };
 
+// UNUSED: ported from RotU GC
 class zShowerParticle
 {
 public:
@@ -63,6 +64,7 @@ protected:
     bool alive;
 };
 
+// UNUSED: ported from RotU GC
 class zShowerSystem : public zLightweightSystemBase
 {
 public:
@@ -116,6 +118,5 @@ protected:
     xFXRibbon tweakRibbon;
 #endif
 };
-// END RESTORED
 
 #endif

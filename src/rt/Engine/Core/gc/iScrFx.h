@@ -20,7 +20,7 @@ struct iScrFxLensFlare
 void iScrFxInit();
 void iScrFxBegin();
 void iScrFxEnd();
-void iScrFxCruiseDistortSetFactor(F32 factor);
+void iScrFxCruiseDistortSetFactor(F32 factor); // UNUSED
 void iScrFxLensFlare_Reset();
 void iScrFxLensFlare_Render(RwCamera* camera, iScrFxLensFlare* flare, void (*renderCB)(RwRaster*, RwFrame*, U8, void*));
 void iScrFxCameraCreated(RwCamera* pCamera);

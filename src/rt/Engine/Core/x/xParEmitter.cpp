@@ -788,12 +788,11 @@ void xParEmitterUpdate(xBase* to, xScene*, F32 dt)
     }
 }
 
-// RESTORED: from BFBB GC, TSSM GC
+// UNUSED: ported from BFBB GC, TSSM GC
 void xParEmitterDestroy()
 {
     xTWEAK_REMOVE("Particle Emitters");
 }
-// END RESTORED
 
 #if DEBUG || RELEASE
 namespace {
@@ -1076,7 +1075,7 @@ void add_interp_tweak(const char* cat, const char* title, xParInterp& pi)
 void verify_tables()
 {
 #if DEBUG
-    // RESTORED: speculative
+    // UNUSED: speculative
     if (0) {
         static bool verified = false;
 
@@ -1094,7 +1093,6 @@ void verify_tables()
             }
         }
     }
-    // END RESTORED
 #endif
 }
 

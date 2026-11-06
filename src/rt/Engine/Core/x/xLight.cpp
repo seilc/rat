@@ -851,13 +851,12 @@ void xLightSetRadius(xLight* xl, F32 radius)
     iLightSetRadius(&xl->light, radius);
 }
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 void xLightSetLightCardScale(xLight* xl, F32 scale)
 {
     xASSERT(scale >= 0);
     xl->lightCardScale = scale;
 }
-// END RESTORED
 
 void xLightFlash(const xVec3& pos, const xFColor& color, F32 radius, F32 upTime, F32 maxTime, F32 downTime)
 {

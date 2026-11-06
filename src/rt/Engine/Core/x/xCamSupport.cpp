@@ -561,8 +561,8 @@ F32 line_point_dist(const xVec3& A, const xVec3& B, const xVec3& P)
     return (Sx * APx + Sy * APy + Sz * APz) / Smag;
 }
 
-F32 line_point_offset(xVec3& offset, F32& t, const xVec3& A, const xVec3& B, const xVec3& P);
-// RESTORED: speculative
+F32 line_point_offset(xVec3& offset, F32& t, const xVec3& A, const xVec3& B, const xVec3& P); // UNUSED
+// UNUSED: speculative
 bool pivot_depen_bar(xVec3& cap_offset, xVec3& impact, xVec3& rot_axis, const xCapsule& cap, F32 impact_t, F32, const xVec3& tohit)
 {
     cap_offset.assign(cap.end.x - cap.start.x, cap.end.y - cap.start.y, cap.end.z - cap.start.z);
@@ -591,7 +591,6 @@ bool pivot_depen_bar(xVec3& cap_offset, xVec3& impact, xVec3& rot_axis, const xC
 
     return true;
 }
-// END RESTORED
 
 F32 arc_sphere_to_plane(const xMat4x3& circle_mat, F32 Rc, F32 Rs, const xVec3& Nplane, F32 Dplane)
 {
@@ -615,7 +614,7 @@ F32 arc_sphere_to_plane(const xMat4x3& circle_mat, F32 Rc, F32 Rs, const xVec3& 
     return t;
 }
 
-F32 yaxis_sphere_to_plane(const xVec3& v, F32 R, const xVec3& N, F32 D);
+F32 yaxis_sphere_to_plane(const xVec3& v, F32 R, const xVec3& N, F32 D); // UNUSED
 
 #if DEBUG || RELEASE
 DECOMP_FORCEACTIVE("!(((N.y) >= -1e-5f) && ((N.y) <= 1e-5f))", "!xfeq0(N.y)")

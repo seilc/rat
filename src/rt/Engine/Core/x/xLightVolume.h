@@ -26,7 +26,7 @@ public:
 
     static void render_all();
     void render_atomic(RpAtomic*, xColor, bool, U32);
-    void render_immediate(xColor, bool);
+    void render_immediate(xColor, bool); // UNUSED
 
 private:
     struct activity_type;
@@ -40,9 +40,9 @@ private:
 class xLightVolumeModel : public xLightVolume
 {
 public:
-    void create();
-    virtual void render();
-    void render_single(xModelInstance* model, U32 stencil_pass);
+    void create(); // UNUSED
+    virtual void render(); // UNUSED
+    void render_single(xModelInstance* model, U32 stencil_pass); // UNUSED
 
     xModelInstance* model;
     xColor color;

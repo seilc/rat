@@ -741,8 +741,8 @@ void xSerial_DB_dumpWatermarks()
     DBprintf(DBML_DBG, "---- Persistence Watermarks ----\n");
 }
 
-static void xSER_DB_dumpRaw(S32 ashex);
-static void xSER_DB_dumpTables(S32);
+static void xSER_DB_dumpRaw(S32 ashex); // UNUSED
+static void xSER_DB_dumpTables(S32); // UNUSED
 
 DECOMP_FORCEACTIVE(DEBUG ? "%s(%d) : ((xsd->buf_bytcnt%4) == 0) in '%s'\n" : 0,
                    "XSER: ---- Raw Bit Buffer Dump (size %d bytes)\n",

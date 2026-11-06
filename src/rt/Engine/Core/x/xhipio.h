@@ -60,6 +60,6 @@ struct st_HIPLOADFUNCS
 struct st_HIPSAVEFUNCS;
 
 st_HIPLOADFUNCS* get_HIPLFuncs();
-st_HIPSAVEFUNCS* get_HIPSFuncs();
+st_HIPSAVEFUNCS* get_HIPSFuncs(); // UNUSED
 
 #endif

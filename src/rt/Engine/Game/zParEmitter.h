@@ -11,7 +11,7 @@ zParEmitter* zParEmitterFind(U32 asset_id);
 zParEmitter* zParEmitterFind(const char* asset_name);
 
 #if DEBUG
-void zParEmitterDebugModeCB();
+void zParEmitterDebugModeCB(); // UNUSED
 #endif
 
 #endif

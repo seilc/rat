@@ -19,11 +19,11 @@ extern bool debugNoJspsRendering;
 
 void xEnvLoadJSPList(xEnv* env, S32 dataType);
 void xEnvSetup(xEnv* env);
-void xEnvChkMemLvl(xEnv* env);
+void xEnvChkMemLvl(xEnv* env); // UNUSED
 void xEnvFree(xEnv* env);
 void xEnvRender(xEnv* env, bool alpha);
 void xEnvResetJSPVisibilities(xEnv* env);
-void xEnvRenderFX(xEnv* env);
+void xEnvRenderFX(xEnv* env); // UNUSED
 
 inline bool xEnvIsJSPActive(const xEnv* env, S32 which)
 {

@@ -143,7 +143,7 @@ void xEntMotionTranslate(xEntMotion* motion, const xVec3* dpos, xMat4x3* dmat);
 #if DEBUG || RELEASE
 void xEntMotionDebugInit(U16 num_xems);
 void xEntMotionDebugExit();
-void xEntMotionMakeSureExclusive(xEntMotion* motion, U32 id);
+void xEntMotionMakeSureExclusive(xEntMotion* motion, U32 id); // UNUSED
 #endif
 
 inline U32 xEntMotionIsStopped(const xEntMotion* motion)

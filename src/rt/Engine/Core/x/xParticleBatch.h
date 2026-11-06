@@ -51,7 +51,7 @@ S32 xParticleBatchAddSystem(const xParticleBatchSystem& system);
 void xParticleBatchReplaceSystem(S32 system_id, const xParticleBatchSystem& system);
 F32 xParticleBatchRequest(S32 system_id, F32 amount, S32 max_blocks);
 S32 xParticleBatchEmit(S32 system_id, S32 amount, U8** mem);
-U8* xParticleBatchEmit(S32 system_id);
+U8* xParticleBatchEmit(S32 system_id); // UNUSED
 
 #if DEBUG || RELEASE
 void xParticleBatchDebugCB();

@@ -80,9 +80,9 @@ void RpCollTreeForAllCapsuleIntsec(RpCollTree* tree, RwLine* line, RwReal radius
 S32 xSweptSphereToModel(xSweptSphere* sws, RpAtomic* model, const RwMatrix* mat, bool singleSided);
 S32 xSweptSphereToSphere(xSweptSphere& sws, const xVec3& center, F32 radius);
 S32 xSweptSphereToBound(xSweptSphere* sws, const xBound* bound);
-S32 xSweptSphereToTriangle(xSweptSphere& sws, const xVec3& v0, const xVec3& v1, const xVec3& v2);
-S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent);
-S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent);
+S32 xSweptSphereToTriangle(xSweptSphere& sws, const xVec3& v0, const xVec3& v1, const xVec3& v2); // UNUSED
+S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent); // UNUSED
+S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent); // UNUSED
 S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray);
 S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray);
 S32 xSweptSphereToScene(xSweptSphere* sws, xScene* sc, const xEnt* mover, U8 collType, S32 penby);
@@ -93,7 +93,7 @@ S32 xSweptSphereToPlayer(xSweptSphere* sws, xScene* sc, xEnt* mover, U8 collType
 S32 xSweptSphereToPlayer(xSweptSphere* sws, xScene* sc, xEnt* mover, zPlayer** player, U8 collType, S32 penby);
 S32 xSweptSphereToNPC(xSweptSphere* sws, xScene* sc, xEnt* mover, U8 collType, S32 penby);
 #if DEBUG || RELEASE
-void xSweptSphereDrawContact(xSweptSphere* sws);
+void xSweptSphereDrawContact(xSweptSphere* sws); // UNUSED
 #endif
 
 inline S32 xSweptSphereToSphere(xSweptSphere* sws, const xSphere* sph)

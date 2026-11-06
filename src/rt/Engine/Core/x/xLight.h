@@ -100,7 +100,7 @@ void xLightSetColor(xLight* xl, const xFColor& col, F32 transitionTime);
 void xLightGetColor(xLight* xl, xFColor& col);
 void xLightSetPos(xLight* xl, const xVec3& pos);
 void xLightSetRadius(xLight* xl, F32 radius);
-void xLightSetLightCardScale(xLight* xl, F32 scale);
+void xLightSetLightCardScale(xLight* xl, F32 scale); // UNUSED
 void xLightFlash(const xVec3& pos, const xFColor& color, F32 radius, F32 upTime, F32 maxTime, F32 downTime);
 #if DEBUG || RELEASE
 void xLightDebugRender();

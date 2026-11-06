@@ -116,12 +116,11 @@ bool xCam::active()
     return flags & 0x1;
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 bool xCam::blendingTo() const
 {
     return blending() && blender->dst == this;
 }
-// END RESTORED
 
 #if DEBUG || RELEASE
 void xCam::debug_init()
@@ -528,13 +527,14 @@ F32 xCamScreen::world_to_screen(xVec3& screen_loc, const xVec3& world_loc) const
     return rz;
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 struct plane_type
 {
     xVec3 norm;
     F32 dist;
 };
 
+// UNUSED: speculative
 void xCamScreen::create_frustum_planes(xVec4* frust_planes, const xMat4x3& ltm, const xVec2& view_offset, const xVec2& view_window, F32 near_plane, F32 far_plane)
 {
     plane_type* planes = (plane_type*)frust_planes;
@@ -587,7 +587,6 @@ void xCamScreen::create_frustum_planes(xVec4* frust_planes, const xMat4x3& ltm, 
         planes[i + 2].dist = planes[i + 2].norm.dot(cop);
     }
 }
-// END RESTORED
 
 void xCamTimeBias::Init(F32 blendTime)
 {

@@ -213,7 +213,7 @@ void xAccelMove(F32& x, F32& v, F32 a, F32 dt, F32 endx, F32 maxv)
     x += dx;
 }
 
-// RESTORED: from Incredibles GC
+// UNUSED: ported from Incredibles GC
 void xAccelMove2(F32& x, F32& v, F32 decel, F32 accel, F32 dt, F32 endx, F32 maxv)
 {
     xASSERT((decel < 0.0f) && (accel > 0.0f));
@@ -266,9 +266,8 @@ void xAccelMove2(F32& x, F32& v, F32 decel, F32 accel, F32 dt, F32 endx, F32 max
 
     x += dx;
 }
-// END RESTORED
 
-// RESTORED: from Incredibles GC
+// UNUSED: ported from Incredibles GC
 void xAccelMoveRange(F32& x, F32& v, F32 accel_min, F32 accel_max, F32 dt, F32 endx, F32 maxv)
 {
     xASSERT((accel_min < 0.0f) && (accel_max > 0.0f));
@@ -321,9 +320,8 @@ void xAccelMoveRange(F32& x, F32& v, F32 accel_min, F32 accel_max, F32 dt, F32 e
 
     x += dx;
 }
-// END RESTORED
 
-// RESTORED: from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
 void xAccelStop(F32& x, F32& v, F32 a, F32 dt)
 {
     if (xfeq0(v)) {
@@ -352,7 +350,6 @@ void xAccelStop(F32& x, F32& v, F32 a, F32 dt)
         v = 0.0f;
     }
 }
-// END RESTORED
 
 F32 xFuncPiece_Eval(xFuncPiece* func, F32 param, xFuncPiece** iterator)
 {

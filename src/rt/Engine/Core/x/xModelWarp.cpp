@@ -70,9 +70,9 @@ namespace {
         return NULL;
     }
 
-    void get_screen_rect(xFRect& rect, const xVec3& center, F32 radius);
-    void get_screen_rect(xFRect& rect, const xMat4x3& mat, const xFRect& irect);
-    void get_screen_rect(xFRect& rect, const xMat4x3& mat, const xBox& box);
+    void get_screen_rect(xFRect& rect, const xVec3& center, F32 radius); // UNUSED
+    void get_screen_rect(xFRect& rect, const xMat4x3& mat, const xFRect& irect); // UNUSED
+    void get_screen_rect(xFRect& rect, const xMat4x3& mat, const xBox& box); // UNUSED
 
     void set_texture(RpAtomic* atomic, RwTexture* texture)
     {
@@ -91,15 +91,15 @@ namespace {
         RpAtomicSetRenderCallBack(context.original_atomic, context.original_render_callback);
     }
 
-    void sphere_map_normals(xVec2* uv, S32 verts_size, const xVec3* norm);
-    void sphere_map_offsets(xVec2* uv, S32 verts_size, const xVec3* vert, const xVec3& center);
+    void sphere_map_normals(xVec2* uv, S32 verts_size, const xVec3* norm); // UNUSED
+    void sphere_map_offsets(xVec2* uv, S32 verts_size, const xVec3* vert, const xVec3& center); // UNUSED
 
     RpAtomic* render_callback(RpAtomic*)
     {
         return NULL;
     }
 
-    U8 write_screen(xFRect& scr_rect, const xFColor& color);
+    U8 write_screen(xFRect& scr_rect, const xFColor& color); // UNUSED
 }
 
 void xModelWarpSceneEnter()

@@ -18,7 +18,7 @@ public:
     U32 GetOrigSize(void* pointer) const;
 #endif
 
-    void Init(void* start, U32 size, U32 elementSize, UseAbsoluteSizeType, bool debugging);
+    void Init(void* start, U32 size, U32 elementSize, UseAbsoluteSizeType, bool debugging); // UNUSED
     void Init(void* start, U32 elements, U32 elementSize);
 
 protected:

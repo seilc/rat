@@ -374,7 +374,7 @@ S32 xGridEntIsTooBig(xGrid* grid, const xEnt* ent)
     return FALSE;
 }
 
-static void xGridGetCellBound(xGrid* grid, xBox* box, U16 _x, U16 _z);
+static void xGridGetCellBound(xGrid* grid, xBox* box, U16 _x, U16 _z); // UNUSED
 
 #if DEBUG || RELEASE
 DECOMP_FORCEACTIVE("box")
@@ -550,5 +550,5 @@ void xGridCheckBoundSetup(xBox& box, S32& lower_x, S32& lower_z, S32& upper_x, S
 }
 
 #if DEBUG || RELEASE
-static S32 xGridBoundDrawCell(xGrid* grid, xGridBound* gbnd, xBox* boxCaller);
+static S32 xGridBoundDrawCell(xGrid* grid, xGridBound* gbnd, xBox* boxCaller); // UNUSED
 #endif

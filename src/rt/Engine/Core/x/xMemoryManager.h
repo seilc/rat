@@ -39,10 +39,10 @@ public:
     }
 
     U32 GetBlockSize(void* pointer) const;
-    bool InActiveList(const void* pointer, U32) const;
+    bool InActiveList(const void* pointer, U32) const; // UNUSED
     bool IsValidPointer(const void* pointer) const;
     void DumpActiveList() const;
-    void ValidateActiveList() const;
+    void ValidateActiveList() const; // UNUSED
 
 #if DEBUG || RELEASE
     void* Allocate(U32 size, U32 options, const char* file, const char* function, S32 line);

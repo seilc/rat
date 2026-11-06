@@ -60,18 +60,18 @@ class xTextureHandle
 
 public:
     xTextureHandle();
-    xTextureHandle(RwTexture* pTexture);
-    xTextureHandle(U32 assetID);
-    xTextureHandle(PKRAssetTOCInfo* pInfo);
-    xTextureHandle(const xTextureHandle& handle);
+    xTextureHandle(RwTexture* pTexture); // UNUSED
+    xTextureHandle(U32 assetID); // UNUSED
+    xTextureHandle(PKRAssetTOCInfo* pInfo); // UNUSED
+    xTextureHandle(const xTextureHandle& handle); // UNUSED
     ~xTextureHandle();
     xTextureHandle& operator=(const xTextureHandle& handle);
 
     void Reference(U32 assetID, bool clearPrev);
     void Reference(RwTexture* pTexture);
-    void Reference(PKRAssetTOCInfo* pInfo, bool clearPrev);
+    void Reference(PKRAssetTOCInfo* pInfo, bool clearPrev); // UNUSED
     void dereference(bool clearPrev);
-    void FreeMemory();
+    void FreeMemory(); // UNUSED
     RwTexture* GetTexture();
     bool IsReady();
 
@@ -105,7 +105,7 @@ public:
     void freeNode(xInternalMovieNode*& pNode);
     bool freeElement(xInternalTextureNode* pPrevNode);
     void FreeMemory();
-    U8 SetPoolSize(U32 size);
+    U8 SetPoolSize(U32 size); // UNUSED
 
     S32 GetLRU() { return ++m_lru; }
 };

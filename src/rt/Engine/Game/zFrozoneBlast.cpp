@@ -19,7 +19,7 @@
 
 #define ICE_STREAM_PARTICLE_01_ID 0xDED04D47 // xStrHash("ice_stream_particle_01")
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 namespace {
 
 struct _blastConfig
@@ -78,61 +78,73 @@ _blastConfig blastConfig[3];
 
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::SceneEnter()
 {
     blastEffect._SceneEnter();
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::Reset()
 {
     blastEffect._Reset();
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::Update(F32 dt)
 {
     blastEffect._Update(dt);
 }
 
+// UNUSED: ported from RotU GC
 U32 zFrozoneBlast::ActivateStream(const xRay3* direction)
 {
     return blastEffect._ActivateStream(direction);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::UpdateStream(U32 id, const xRay3* newDirection, bool collision)
 {
     blastEffect._UpdateStream(id, newDirection, collision);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::StopStream(U32 id)
 {
     blastEffect._StopStream(id);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::SingleBlast(const xRay3* direction, F32 velocity, bool collision)
 {
     blastEffect._SingleBlast(direction, velocity, collision);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::SetPowerupLevel(S32 level)
 {
     xASSERT(level >= 0 && level < 3);
     sPowerupLevel = level;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::CollisionSplash(const xVec3* pos, const xVec3* normal, F32 dt)
 {
     blastEffect._CollisionSplash(pos, normal, dt);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::EmitBlastParticles(blastStream& stream, F32 dt)
 {
     blastEffect.emitBlastParticles(stream, dt);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::addTweaks()
 {
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::loadAssets()
 {
     blastConfig[0].alpha = 32;
@@ -175,6 +187,7 @@ void zFrozoneBlast::loadAssets()
     zParticleCustomCreateGlintSystem(mGlintSystemID, glintTexture, "Frozone Blast Splash");
 }
 
+// UNUSED: ported from RotU GC
 S32 zFrozoneBlast::createParticleSystem(S32 oldSystemId, U32, U32 srcBlend, U32 dstBlend, S32 stride,
                                         xParticleBatchUpdateCallback update)
 {
@@ -198,6 +211,7 @@ S32 zFrozoneBlast::createParticleSystem(S32 oldSystemId, U32, U32 srcBlend, U32 
     return oldSystemId;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::updateParticle(blastParticle* p, F32 dt)
 {
     p->lifetime -= dt;
@@ -206,6 +220,7 @@ void zFrozoneBlast::updateParticle(blastParticle* p, F32 dt)
     p->loc.AddScale(p->dir, dt);
 }
 
+// UNUSED: ported from RotU GC
 S32 zFrozoneBlast::updateBlastParticles(U8* mem, S32 count, ptank_pool& apool, F32 dt, void*)
 {
     ptank_pool__pos_color_size& pool = (ptank_pool__pos_color_size&)apool;
@@ -251,6 +266,7 @@ S32 zFrozoneBlast::updateBlastParticles(U8* mem, S32 count, ptank_pool& apool, F
     return end - (blastParticle*)mem;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::emitBlastParticles(blastStream& stream, F32 dt)
 {
     S32 powerupLevel = stream.upgradeLevel;
@@ -330,6 +346,7 @@ void zFrozoneBlast::emitBlastParticles(blastStream& stream, F32 dt)
     }
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::emitSingleBlastParticles(blastStream& stream, F32 dt)
 {
     F32 dTime = dt;
@@ -389,6 +406,7 @@ void zFrozoneBlast::emitSingleBlastParticles(blastStream& stream, F32 dt)
     }
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::updateLight(blastStream& stream, F32 dt)
 {
     if (!stream.light) {
@@ -434,6 +452,7 @@ void zFrozoneBlast::updateLight(blastStream& stream, F32 dt)
     xLightSetPos(stream.light, lightPos);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_SceneEnter()
 {
     mSystemID = -1;
@@ -443,6 +462,7 @@ void zFrozoneBlast::_SceneEnter()
     _Reset();
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_Reset()
 {
     for (S32 i = 0; i < 3; i++) {
@@ -451,6 +471,7 @@ void zFrozoneBlast::_Reset()
     }
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_Update(F32 dt)
 {
     for (S32 i = 0; i < 3; i++) {
@@ -466,6 +487,7 @@ void zFrozoneBlast::_Update(F32 dt)
     }
 }
 
+// UNUSED: ported from RotU GC
 U32 zFrozoneBlast::_ActivateStream(const xRay3* direction)
 {
     for (U32 i = 0; i < 3; i++) {
@@ -490,6 +512,7 @@ U32 zFrozoneBlast::_ActivateStream(const xRay3* direction)
     return 0;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_UpdateStream(U32 id, const xRay3* newDirection, bool collision)
 {
     DECOMP_FORCEREGISTER(collision);
@@ -503,6 +526,7 @@ void zFrozoneBlast::_UpdateStream(U32 id, const xRay3* newDirection, bool collis
     s.direction.max_t *= length;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_StopStream(U32 id)
 {
     U32 blastID = id - 1000;
@@ -510,6 +534,7 @@ void zFrozoneBlast::_StopStream(U32 id)
     mStreams[blastID].active = false;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_SingleBlast(const xRay3* direction, F32 velocity, bool collision)
 {
     DECOMP_FORCEREGISTER(collision);
@@ -537,6 +562,7 @@ void zFrozoneBlast::_SingleBlast(const xRay3* direction, F32 velocity, bool coll
     }
 }
 
+// UNUSED: ported from RotU GC
 S32 zFrozoneBlast::updateMistParticles(U8* mem, S32 count, ptank_pool& apool, F32 dt, void*)
 {
     ptank_pool__pos_color_size& pool = (ptank_pool__pos_color_size&)apool;
@@ -585,6 +611,7 @@ S32 zFrozoneBlast::updateMistParticles(U8* mem, S32 count, ptank_pool& apool, F3
     return end - (mistParticle*)mem;
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::emitSplashMist(const xVec3* pos, const xVec3*, F32 dt)
 {
     mMistEmitTimer += mistEmitRate * dt;
@@ -624,6 +651,7 @@ void zFrozoneBlast::emitSplashMist(const xVec3* pos, const xVec3*, F32 dt)
     }
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::emitSplashParticles(const xVec3* pos, const xVec3* normal, F32 dt)
 {
     mGlintSplashTimer -= dt;
@@ -676,6 +704,7 @@ void zFrozoneBlast::emitSplashParticles(const xVec3* pos, const xVec3* normal, F
     xMEMPOPTEMP(locList);
 }
 
+// UNUSED: ported from RotU GC
 void zFrozoneBlast::_CollisionSplash(const xVec3* pos, const xVec3* normal, F32 dt)
 {
     xASSERT(pos);
@@ -684,4 +713,3 @@ void zFrozoneBlast::_CollisionSplash(const xVec3* pos, const xVec3* normal, F32 
     emitSplashMist(pos, normal, dt);
     emitSplashParticles(pos, normal, dt);
 }
-// END RESTORED

@@ -49,12 +49,12 @@ typedef struct _tagTRCDiskInfo
     TRCState id;
 } TRCDiskInfo;
 
-TRCState xTRCDiskGetState();
-U32 xTRCDiskIsIDed();
+TRCState xTRCDiskGetState(); // UNUSED
+U32 xTRCDiskIsIDed(); // UNUSED
 bool xTRCMemCardCheck();
 TRCPadInfo& xTRCPadGetNextAvailablePad();
 S32 xTRCPadGetArrayIdx(S32 port);
-TRCPadInfo& xTRCPadGetPadFromID(S32 id);
+TRCPadInfo& xTRCPadGetPadFromID(S32 id); // UNUSED
 void xTRCPadRemove(S32 port);
 void xTRCPadRestoreAll();
 void xTRCPadSetState(S32 idx, TRCState state);
@@ -84,15 +84,15 @@ void xTRCInitMessages();
 void xTRCClearPadMsg();
 void xTRCRender();
 void xTRCReset();
-void xTRCPadGetPressed(TRCState padState, bool& A, bool& B, bool& C, bool& D);
+void xTRCPadGetPressed(TRCState padState, bool& A, bool& B, bool& C, bool& D); // UNUSED
 void xTRCPadSetPressed(S32 port, S32 value, bool reverse);
 void xTRCPadDisplayMessage(S32 pad_id, TRCState);
 void xTRCDisk(TRCState state);
-void xTRCProcessStateStandalone();
-void xTRCProcessState();
+void xTRCProcessStateStandalone(); // UNUSED
+void xTRCProcessState(); // UNUSED
 #if DEBUG
-void xTRCStateToStr(TRCState state, char* txt);
-void xTRCDebugCB();
+void xTRCStateToStr(TRCState state, char* txt); // UNUSED
+void xTRCDebugCB(); // UNUSED
 #endif
 void render_mem_card_no_space(S32 needed, S32 available, S32 neededFiles, bool enabled);
 void RenderText(const char* text, bool enabled);

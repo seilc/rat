@@ -75,33 +75,33 @@ void xSceneInit(xScene* sc, U16 numTrigs, U16 numSpecialTrigs, U16 numStats, U16
 void xSceneExit(xScene* sc);
 void xSceneSave(xScene* ent, xSerial* s);
 void xSceneLoad(xScene* ent, xSerial* s);
-void xSceneToString(char*, xScene*);
-void xSceneLoadTexDict(xScene* sc, const void* data, U32 datasize);
-void xSceneSetEnv(xScene* sc, xEnv* env);
+void xSceneToString(char*, xScene*); // UNUSED
+void xSceneLoadTexDict(xScene* sc, const void* data, U32 datasize); // UNUSED
+void xSceneSetEnv(xScene* sc, xEnv* env); // UNUSED
 void xSceneSetup(xScene* sc);
 void xSceneAddEnt(xScene* sc, xEnt* ent);
-void xSceneUpdate(xScene* sc, F32 dt);
+void xSceneUpdate(xScene* sc, F32 dt); // UNUSED
 xBase* xSceneResolvID(xScene* sc, U32 id);
-const char* xSceneBase2Name(xScene* sc, xBase* p);
+const char* xSceneBase2Name(xScene* sc, xBase* p); // UNUSED
 const char* xSceneID2Name(xScene* sc, U32 id);
-void xSceneRender(xScene* sc, bool alpha);
+void xSceneRender(xScene* sc, bool alpha); // UNUSED
 void xSceneForAllEnts(xScene* sc, xSceneEntCallback func, void* data);
-void xSceneForAllTriggers(xScene* sc, xSceneEntCallback func, void* data);
-void xSceneForAllStatics(xScene* sc, xSceneEntCallback func, void* data);
-void xSceneForAllDynamics(xScene* sc, xSceneEntCallback func, void* data);
-void xSceneForAllNPCs(xScene* sc, xSceneEntCallback func, void* data);
+void xSceneForAllTriggers(xScene* sc, xSceneEntCallback func, void* data); // UNUSED
+void xSceneForAllStatics(xScene* sc, xSceneEntCallback func, void* data); // UNUSED
+void xSceneForAllDynamics(xScene* sc, xSceneEntCallback func, void* data); // UNUSED
+void xSceneForAllNPCs(xScene* sc, xSceneEntCallback func, void* data); // UNUSED
 void xRayHitsGrid(xGrid* grid, xScene* sc, xRay3* r, xRayEntCallback rentcb, xQCData* qcr, void* data);
 void xSceneDebugUpdate();
-void xRayHitsTikiLandableEnt(xScene*, xRay3* r, xQCData* qcr, xEnt* ent, void* colldata);
+void xRayHitsTikiLandableEnt(xScene*, xRay3* r, xQCData* qcr, xEnt* ent, void* colldata); // UNUSED
 void xRayHitsEnt(xScene*, xRay3* r, xQCData* qcr, xEnt* ent, void* colldata);
-void xRayHitsTikiLandableScene(xScene* sc, xRay3* r, xCollis* coll);
+void xRayHitsTikiLandableScene(xScene* sc, xRay3* r, xCollis* coll); // UNUSED
 void xRayHitsScene(xScene* sc, xRay3* r, xCollis* coll);
-void xRayHitsCameraEnt(xScene*, xRay3* r, xCollis*, xQCData* qcr, xEnt* ent);
-void xRayHitsCameraScene(xScene* sc, xRay3* r, xRayCameraCallback cameraFunc);
+void xRayHitsCameraEnt(xScene*, xRay3* r, xCollis*, xQCData* qcr, xEnt* ent); // UNUSED
+void xRayHitsCameraScene(xScene* sc, xRay3* r, xRayCameraCallback cameraFunc); // UNUSED
 void xRayHitsEntFlags(xScene*, xRay3* r, xCollis* coll, xQCData* qcr, xEnt* ent, U8 collType);
-void xRayHitsEntFlagsCB(xScene* sc, xRay3* r, xCollis* coll, xQCData* qcr, xEnt* ent);
+void xRayHitsEntFlagsCB(xScene* sc, xRay3* r, xCollis* coll, xQCData* qcr, xEnt* ent); // UNUSED
 void xRayHitsSceneFlags(xScene* sc, const xRay3* r, xCollis* coll, U8 collType, U8 chk);
-void xSphereHitsScene(xScene* sc, const xSphere* sphere, xCollis* coll, U8 collType, U8 chk);
+void xSphereHitsScene(xScene* sc, const xSphere* sphere, xCollis* coll, U8 collType, U8 chk); // UNUSED
 U32 xSceneNearestFloorPoly(xScene* sc, xNearFloorPoly* nfpoly, U8 collType, U8 chk);
 
 #endif

@@ -9,7 +9,7 @@ void zFXModelRender();
 void zFXPostModelRender();
 void zFXScreenRender();
 void zFXUpdate(F32 dt);
-void zFX_GameInit();
+void zFX_GameInit(); // UNUSED
 void zFX_SceneEnter(RpWorld* world);
 void zFX_SceneExit(RpWorld* world);
 void zFX_SceneReset();

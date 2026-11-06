@@ -75,7 +75,7 @@ DECOMP_FORCEACTIVE(
     "RMemGrow (0x%08X [0x%08X]) base 0x%08X start\n"
 )
 
-// RESTORED: from BFBB GC, TSSM GC
+// UNUSED: ported from BFBB GC, TSSM GC
 RyzMemGrow* RyzMemGrow::Resume(xBase* growuser)
 {
     xASSERT_MSG(growuser && (growuser == this->user_last), "Under New Mgmt?");
@@ -95,6 +95,7 @@ RyzMemGrow* RyzMemGrow::Resume(xBase* growuser)
     return this;
 }
 
+// UNUSED: ported from BFBB GC, TSSM GC
 void RyzMemGrow::Done()
 {
     xOutInfo("RyzMemData",
@@ -116,4 +117,3 @@ void RyzMemGrow::Done()
     this->user = NULL;
     this->flg_grow = 0;
 }
-// END RESTORED

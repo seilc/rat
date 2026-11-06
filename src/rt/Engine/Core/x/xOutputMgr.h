@@ -37,32 +37,32 @@ do {                                                                            
     }                                                                                                                                               \
 } while (0)
 
-void xOutputMgrInit();
-void xOutputMgrExit();
-S32 xOutputMgrInited();
-S32 xOutputMgrExited();
+void xOutputMgrInit(); // UNUSED
+void xOutputMgrExit(); // UNUSED
+S32 xOutputMgrInited(); // UNUSED
+S32 xOutputMgrExited(); // UNUSED
 void xOutSetSev(S32 sev);
 S32 xOutGetSev();
 void xOutEnable(char* name, xOutSeverity trumpsev);
-void xOutDisable(char* name);
+void xOutDisable(char* name); // UNUSED
 S32 xOutEnabled(char* name);
 S32 xOutTrumps(char* name, xOutSeverity usersev);
-void xOutEnable(U32 hval, xOutSeverity trumpsev);
-void xOutDisable(U32 hval);
+void xOutEnable(U32 hval, xOutSeverity trumpsev); // UNUSED
+void xOutDisable(U32 hval); // UNUSED
 S32 xOutEnabled(U32 hval);
 S32 xOutTrumps(U32 hval, xOutSeverity usersev);
-void xOutputMgrDump();
+void xOutputMgrDump(); // UNUSED
 void xOutCrit(const char* fmt, ...);
 void xOutErr(char* name, const char* fmt, ...);
 void xOutWarn(char* name, const char* fmt, ...);
 void xOutInfo(char* name, const char* fmt, ...);
 void xOutBabble(char* name, const char* fmt, ...);
-void xOutMsg(xOutSeverity sev, char* name, const char* fmt, ...);
-void xOutMsg(xOutSeverity sev, U32 hval, const char* fmt, ...);
-void xOutErr(U32 hval, const char* fmt, ...);
-void xOutWarn(U32 hval, const char* fmt, ...);
-void xOutInfo(U32 hval, const char* fmt, ...);
-void xOutBabble(U32 hval, const char* fmt, ...);
+void xOutMsg(xOutSeverity sev, char* name, const char* fmt, ...); // UNUSED
+void xOutMsg(xOutSeverity sev, U32 hval, const char* fmt, ...); // UNUSED
+void xOutErr(U32 hval, const char* fmt, ...); // UNUSED
+void xOutWarn(U32 hval, const char* fmt, ...); // UNUSED
+void xOutInfo(U32 hval, const char* fmt, ...); // UNUSED
+void xOutBabble(U32 hval, const char* fmt, ...); // UNUSED
 #else
 #define xWARN_INVALID(name, cond)
 #define xWARN_INVALID_L(line, name, cond)

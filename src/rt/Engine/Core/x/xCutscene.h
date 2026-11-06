@@ -124,7 +124,7 @@ S32 xCutscene_Destroy(xCutscene* csn);
 S32 xCutscene_LoadStart(xCutscene* csn);
 S32 xCutscene_Update(xCutscene* csn, F32 dt);
 void xCutscene_SetSpeed(xCutscene* csn, F32 speed);
-void xCutscene_SetCameraMatrix(xCutscene* csn, xMat4x3* mat);
+void xCutscene_SetCameraMatrix(xCutscene* csn, xMat4x3* mat); // UNUSED
 void xCutscene_Render(xCutscene* csn, xEnt** alphaent, S32* alphacnt, F32* alphadist);
 xCutscene* xCutscene_CurrentCutscene();
 

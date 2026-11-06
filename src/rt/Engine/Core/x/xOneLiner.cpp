@@ -23,7 +23,7 @@ struct xRequestedSound
     F32 mRequestTime;
     S32 mRequestID;
 
-    inline void Init(xOneLiner* sound, S32 requestID);
+    inline void Init(xOneLiner* sound, S32 requestID); // UNUSED
 
     void Display(bool wasPlayed)
     {
@@ -52,7 +52,7 @@ struct xSoundHistory
         }
     }
 
-    inline void AddSound(xOneLiner* sound);
+    inline void AddSound(xOneLiner* sound); // UNUSED
 
     void Age()
     {
@@ -175,7 +175,7 @@ F32 xOneLiner::CalcTimeToWait() const
     return mCycleTime;
 }
 
-// RESTORED: from RotU GC
+// UNUSED: ported from RotU GC
 void xOneLinerList::InitWithSounds(xOneLiner* soundList, U32 maxCheck)
 {
     F32 timeNow = iTimeGetGame();
@@ -189,12 +189,14 @@ void xOneLinerList::InitWithSounds(xOneLiner* soundList, U32 maxCheck)
     xASSERT(maxCheck == 0 || maxCheck == mNumSounds);
 }
 
+// UNUSED: ported from RotU GC, Incredibles GC
 inline void xOneLiner::Init()
 {
     mSoonestTimeToPlay = iTimeGetGame() + xrand_RandomFloatRange(0.2f, 0.5f) * CalcTimeToWait();
     mSoundGroupHdl = mAssetName[0] ? xSndMgrGetSoundGroup(xStrHash(mAssetName)) : ISND_INVALID_SND_GROUP_HANDLE;
 }
 
+// UNUSED: ported from RotU GC
 void xOneLinerList::Reset()
 {
     xOneLiner* sp = mSounds;
@@ -203,8 +205,8 @@ void xOneLinerList::Reset()
     }
 }
 
+// UNUSED: ported from RotU GC
 inline void xOneLiner::Reset()
 {
     mFlags &= ~0x4000;
 }
-// END RESTORED

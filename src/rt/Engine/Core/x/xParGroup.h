@@ -30,18 +30,18 @@ struct xParGroup
 void xParGroupInit(xParGroup* ps);
 void xParGroupSetAging(xParGroup* ps, S32 age);
 void xParGroupSetBack2Life(xParGroup* ps, S32 b2l);
-void xParGroupSetStealing(xParGroup* ps, S32 stealing);
+void xParGroupSetStealing(xParGroup* ps, S32 stealing); // UNUSED
 void xParGroupSetVisibility(xParGroup* ps, S32 vis);
 void xParGroupSetPriority(xParGroup* ps, U8 val);
 void xParGroupRegister(xParGroup* ps);
 void xParGroupUnregister(xParGroup* ps);
-void xParGroupDispose(xParGroup* ps);
-void xParGroupSetVisible(xParGroup* ps, U32 isVisible);
+void xParGroupDispose(xParGroup* ps); // UNUSED
+void xParGroupSetVisible(xParGroup* ps, U32 isVisible); // UNUSED
 void xParGroupSetActive(xParGroup* ps, U32 isActive);
-void xParGroupSetCulled(xParGroup* ps, U32 isCulled);
-S32 xParGroupGetNumDeadPars(xParGroup* ps);
-S32 xParGroupGetNumPars(xParGroup* ps);
-U32 xParGroupIsAlive(xParGroup* ps);
+void xParGroupSetCulled(xParGroup* ps, U32 isCulled); // UNUSED
+S32 xParGroupGetNumDeadPars(xParGroup* ps); // UNUSED
+S32 xParGroupGetNumPars(xParGroup* ps); // UNUSED
+U32 xParGroupIsAlive(xParGroup* ps); // UNUSED
 void xParGroupKillAllParticles(xParGroup* ps);
 void xParGroupAnimate(xParGroup* ps, F32 dt);
 void xParGroupSetSortDistance(F32 sortDistance, U32 sortID);
@@ -49,6 +49,6 @@ void xParGroupAddParP(xParGroup* ps, xPar* p);
 xPar* xParGroupAddPar(xParGroup* ps);
 void xParGroupKillPar(xParGroup* ps, xPar* p);
 void xParGroupAddParToDeadList(xParGroup* ps, xPar* p);
-void xParGroupAllocPars(xParGroup* ps, S32 numPars);
+void xParGroupAllocPars(xParGroup* ps, S32 numPars); // UNUSED
 
 #endif

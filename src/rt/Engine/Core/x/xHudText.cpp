@@ -150,7 +150,7 @@ void text_widget::set_text(const char* intext)
 DECOMP_FORCEACTIVE("m.value != 0")
 #endif
 
-// RESTORED: from Incredibles GC
+// UNUSED: ported from Incredibles GC
 bool scale_text_motive_reset(widget& w, motive& m)
 {
     text_widget& textWid = (text_widget&)w;
@@ -169,6 +169,7 @@ bool scale_text_motive_reset(widget& w, motive& m)
     return false;
 }
 
+// UNUSED: ported from Incredibles GC
 bool scale_text_motive_update(widget& w, motive& m, F32 dt)
 {
     text_widget& textWid = (text_widget&)w;
@@ -215,6 +216,7 @@ bool scale_text_motive_update(widget& w, motive& m, F32 dt)
     return true;
 }
 
+// UNUSED: ported from Incredibles GC
 bool blink_text_motive_reset(widget& w, motive& m)
 {
     text_widget& textWid = (text_widget&)w;
@@ -224,6 +226,7 @@ bool blink_text_motive_reset(widget& w, motive& m)
     return false;
 }
 
+// UNUSED: ported from Incredibles GC
 bool blink_text_motive_update(widget& w, motive& m, F32 dt)
 {
     xColor curr_color;
@@ -265,6 +268,5 @@ bool blink_text_motive_update(widget& w, motive& m, F32 dt)
     textWid.tb.font.shadowColor.a = curr_color.a;
     return true;
 }
-// END RESTORED
 
 }

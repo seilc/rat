@@ -416,9 +416,9 @@ struct sort_str_functor
 {
     size_t key_offset;
 
-    sort_str_functor(size_t key_offset);
+    sort_str_functor(size_t key_offset); // UNUSED
 
-    S32 operator()(const void* e1, const void* e2) const;
+    S32 operator()(const void* e1, const void* e2) const; // UNUSED
 };
 
 struct sort_istr_functor
@@ -461,13 +461,12 @@ void quicksort_istr(void* base, size_t num, size_t width, size_t key_offset)
     quicksort(base, num, width, sort_istr_functor(key_offset));
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 void isort_int(void* base, size_t num, size_t width, size_t key_offset)
 {
     xASSERT((key_offset & 3) == 0);
     isort(base, num, width, sort_int_functor(key_offset));
 }
-// END RESTORED
 
 void isort_float(void* base, size_t num, size_t width, size_t key_offset)
 {
@@ -475,10 +474,9 @@ void isort_float(void* base, size_t num, size_t width, size_t key_offset)
     isort(base, num, width, sort_float_functor(key_offset));
 }
 
-// RESTORED: speculative
+// UNUSED: speculative
 void isort_istr(void* base, size_t num, size_t width, size_t key_offset)
 {
     xASSERT((key_offset & 3) == 0);
     isort(base, num, width, sort_istr_functor(key_offset));
 }
-// END RESTORED

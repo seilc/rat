@@ -17,10 +17,10 @@ struct zProgressScript : xBase
 void zProgressScript_Init(void* b, void* sasset);
 void zProgressScript_Init(xBase* b, xProgressScriptAsset* sasset);
 void zProgressScript_Reset(zProgressScript* s);
-void zProgressScript_JumpTo(zProgressScript* s, F32 percent);
-void zProgressScript_WalkForward(zProgressScript* s, F32 percent);
-void zProgressScript_WalkBack(zProgressScript* s, F32 percent);
-void zProgressScript_MoveTo(zProgressScript* s, F32 percent);
+void zProgressScript_JumpTo(zProgressScript* s, F32 percent); // UNUSED
+void zProgressScript_WalkForward(zProgressScript* s, F32 percent); // UNUSED
+void zProgressScript_WalkBack(zProgressScript* s, F32 percent); // UNUSED
+void zProgressScript_MoveTo(zProgressScript* s, F32 percent); // UNUSED
 void zProgressScript_Save(zProgressScript* ent, xSerial* s);
 void zProgressScript_Load(zProgressScript* ent, xSerial* s);
 void zProgressScript_EventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32);

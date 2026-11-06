@@ -321,7 +321,7 @@ static en_BIO_ASYNC_ERRCODES AsyncReadStatus(st_FILELOADINFO* fli)
     return BFD_AsyncReadStatus(fli);
 }
 
-static S32 is_Motorola();
+static S32 is_Motorola(); // UNUSED
 
 #if DEBUG
 DECOMP_FORCEACTIVE("%s(%d) : (sizeof(S32)==4) in '%s'\n")
@@ -382,9 +382,9 @@ static void Swap8(char* d, S32 n)
     }
 }
 
-static void ALT_Swap2(S16* d, S32 n);
-static void ALT_Swap4(S32* d, S32 n);
-static void ALT_Swap8(S32* d, S32 n);
+static void ALT_Swap2(S16* d, S32 n); // UNUSED
+static void ALT_Swap4(S32* d, S32 n); // UNUSED
+static void ALT_Swap8(S32* d, S32 n); // UNUSED
 
 static xFile* BFD_open(const char* filename, const char* mode, U32 lockid, S32, void* xtradata, S32 fileflags)
 {
@@ -539,8 +539,8 @@ static S32 BFD_read(void* data, S32 elesize, S32 elecnt, xFile* bffp, void* xtra
     return actual / elesize;
 }
 
-static S32 BFD_write(void*, S32, S32, xFile*, void*);
-static S32 BFD_tell(xFile*, void* xtradata);
+static S32 BFD_write(void*, S32, S32, xFile*, void*); // UNUSED
+static S32 BFD_tell(xFile*, void* xtradata); // UNUSED
 
 static S32 BFD_seek(xFile* bffp, S32 offset, S32 refpos, void* xtradata)
 {
@@ -578,7 +578,7 @@ static U32 BFD_startSector(const char* filename, S32 fileflags)
     return sect_start;
 }
 
-static void BFD_cb_asyncread(S32);
+static void BFD_cb_asyncread(S32); // UNUSED
 
 DECOMP_FORCEACTIVE(
     DEBUG ? "%s(%d) : (xtra->asyn_status == BINIO_ASYNC_INPROG) in '%s'\n" : 0,
