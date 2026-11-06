@@ -50,11 +50,10 @@ void xSoundFXInit(xSoundFX* t, xSoundFXAsset* asset)
         }
     }
 
-    if (t->linkCount > 0) {
+    if (t->linkCount > 0)
         t->link = (xLinkAsset*)((U8*)t->asset + sizeof(xSoundFXAsset));
-    } else {
+    else
         t->link = NULL;
-    }
 
     if (xSoundFXWillSendDone(t)) {
         xSoundFXSetSendsDone(asset, true);
@@ -117,11 +116,7 @@ void xSoundFXEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
         F32 destVolume = toParam[0];
         if (destVolume < 0.0f || destVolume > 1.0f) {
             xFAIL_FMT_L(281, "SoundFX Change Volume event: Param1-destVolume needs to be between 0.0 and 1.0");
-            if (destVolume < 0.0f) {
-                destVolume = 0.0f;
-            } else if (destVolume > 1.0f) {
-                destVolume = 1.0f;
-            }
+            if (destVolume < 0.0f) destVolume = 0.0f; else if (destVolume > 1.0f) destVolume = 1.0f;
         }
         xSndMgrFade(t->sndHandle, toParam[1], destVolume);
         break;
@@ -131,20 +126,12 @@ void xSoundFXEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*,
         F32 startVolume = toParam[0];
         if (startVolume < 0.0f || startVolume > 1.0f) {
             xFAIL_FMT_L(293, "SoundFX Change Volume event: Param1-startVolume needs to be between 0.0 and 1.0");
-            if (startVolume < 0.0f) {
-                startVolume = 0.0f;
-            } else if (startVolume > 1.0f) {
-                startVolume = 1.0f;
-            }
+            if (startVolume < 0.0f) startVolume = 0.0f; else if (startVolume > 1.0f) startVolume = 1.0f;
         }
         F32 destVolume = toParam[1];
         if (destVolume < 0.0f || destVolume > 1.0f) {
             xFAIL_FMT_L(300, "SoundFX Change Volume event: Param2-destVolume needs to be between 0.0 and 1.0");
-            if (destVolume < 0.0f) {
-                destVolume = 0.0f;
-            } else if (destVolume > 1.0f) {
-                destVolume = 1.0f;
-            }
+            if (destVolume < 0.0f) destVolume = 0.0f; else if (destVolume > 1.0f) destVolume = 1.0f;
         }
         xSndMgrFade(t->sndHandle, toParam[2], startVolume, destVolume);
         break;
@@ -156,14 +143,12 @@ static bool xSoundFXEnsureFreeAudioStream(bool willingToStopMainGameMusic)
 {
     bool haveFreeStreamedVoice;
 
-    haveFreeStreamedVoice = iSndGetFreeStreamInfo(0);
-    if (haveFreeStreamedVoice) {
+    if (haveFreeStreamedVoice = iSndGetFreeStreamInfo(0)) {
         return true;
     }
 
     xSndMgrStopPausedSounds(2);
-    haveFreeStreamedVoice = iSndGetFreeStreamInfo(0);
-    if (haveFreeStreamedVoice) {
+    if (haveFreeStreamedVoice = iSndGetFreeStreamInfo(0)) {
         iprintf("Cancelled Dialog to get a streamed voice\n");
         return true;
     }
@@ -178,8 +163,7 @@ static bool xSoundFXEnsureFreeAudioStream(bool willingToStopMainGameMusic)
     }
 
     xSndMgrStopPausedSounds(3);
-    haveFreeStreamedVoice = iSndGetFreeStreamInfo(0);
-    if (haveFreeStreamedVoice) {
+    if (haveFreeStreamedVoice = iSndGetFreeStreamInfo(0)) {
         iprintf("Cancelled 3D Dialog to get a streamed voice\n");
         return true;
     }

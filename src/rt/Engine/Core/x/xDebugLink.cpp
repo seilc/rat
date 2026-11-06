@@ -296,8 +296,7 @@ DECOMP_FORCEACTIVE("\n", "%.2X ")
 
 void xDebugLink::Update(F32)
 {
-    char command[12];
-    char responseString[256];
+    char command[12], responseString[256];
     char* argv[10];
     char args[256];
     S32 i;

@@ -38,14 +38,12 @@ S32 xNurbs::find_span(F32 u) const
 
     while (u < knot[mid] || u >= knot[mid + 1]) {
         if (u < knot[mid]) {
-            if (high <= mid) {
+            if (high <= mid)
                 break;
-            }
             high = mid;
         } else {
-            if (low >= mid) {
+            if (low >= mid)
                 break;
-            }
             low = mid;
         }
         mid = (low + high) / 2;
@@ -124,16 +122,14 @@ void xNurbs::find_derivative_basis_functions(F32 u, S32 i, S32 order, F32 ders[5
                 d = a[s2][0] * ndu[rk][pk];
             }
             S32 j1, j2;
-            if (rk >= -1) {
+            if (rk >= -1)
                 j1 = 1;
-            } else {
+            else
                 j1 = -rk;
-            }
-            if (r - 1 <= pk) {
+            if (r - 1 <= pk)
                 j2 = k - 1;
-            } else {
+            else
                 j2 = degree - r;
-            }
             for (S32 j = j1; j <= j2; j++) {
                 a[s2][j] = (a[s1][j] - a[s1][j - 1]) / ndu[pk + 1][rk + j];
                 d += a[s2][j] * ndu[rk + j][pk];
@@ -142,10 +138,11 @@ void xNurbs::find_derivative_basis_functions(F32 u, S32 i, S32 order, F32 ders[5
                 a[s2][k] = -a[s1][k - 1] / ndu[pk + 1][r];
                 d += a[s2][k] * ndu[r][pk];
             }
+            ders[k][r] = d;
+
             S32 temp = s1;
             s1 = s2;
             s2 = temp;
-            ders[k][r] = d;
         }
     }
     
@@ -240,9 +237,8 @@ xVec3 xNurbs::project_point(const xVec3& point, F32* u, F32* distance, F32 guess
     const U32 MAX_DEPTH = 10;
     for (S32 depth = 0; depth < MAX_DEPTH; depth++) {
         if (length2 < 0.01f) {
-            if (u) {
+            if (u)
                 *u = minU;
-            }
             if (distance) {
                 *distance = xsqrt(minLength2);
             }
@@ -261,9 +257,8 @@ xVec3 xNurbs::project_point(const xVec3& point, F32* u, F32* distance, F32 guess
         // 0.015707318f = sin(0.9deg)
         if (xabs(curve_tangent.dot(point_to_curve)) <
             0.015707318f * xabs(point_to_curve.length() * curve_tangent.length())) {
-            if (u) {
+            if (u)
                 *u = minU;
-            }
             if (distance) {
                 *distance = xsqrt(minLength2);
             }
@@ -292,9 +287,8 @@ xVec3 xNurbs::project_point(const xVec3& point, F32* u, F32* distance, F32 guess
         }
 
         if (xsqr(guess - last_guess) * curve_tangent.length2() < 0.0001f) {
-            if (u) {
+            if (u)
                 *u = minU;
-            }
             if (distance) {
                 *distance = xsqrt(minLength2);
             }
@@ -302,9 +296,8 @@ xVec3 xNurbs::project_point(const xVec3& point, F32* u, F32* distance, F32 guess
         }
     }
 
-    if (u) {
+    if (u)
         *u = guess;
-    }
     if (distance) {
         *distance = xsqrt(length2);
     }
@@ -414,11 +407,7 @@ bool xNurbs::advance_u(F32 start_u, F32 distance, bool forward, F32& new_u) cons
     F32 spline_start = start();
     F32 spline_end = end();
 
-    if (start_u < spline_start) {
-        start_u = spline_start;
-    } else if (start_u > spline_end) {
-        start_u = spline_end;
-    }
+    if (start_u < spline_start) start_u = spline_start; else if (start_u > spline_end) start_u = spline_end;
 
     new_u = start_u;
     

@@ -470,13 +470,12 @@ void xMemMgrUsageTrackerSetDumpFile(char* filename)
 
 void xMemMgrUsageTrackerDumpLog(char* fmt, ...)
 {
-    char logfilebuf[2048];
-    va_list marker;
-
     if (!sMemMgrTrckLogIsOpen) {
         iFileOpen(xglobals->MemTrackLogFileName, 0x18E, &sMemMgrTrckLog);
         sMemMgrTrckLogIsOpen = true;
     }
+    char logfilebuf[2048];
+    va_list marker;
 
     va_start(marker, fmt);
     vsprintf(logfilebuf, fmt, marker);
@@ -769,12 +768,11 @@ static U32 xMemGetBlockInfo(xMemHeap* heap, U32 size, S32 align, xMemBlkInfo* in
     S32 guard_size;
 #endif
     S32 header_size, total, hdr, pre, block, post, dir;
-    xHeapState* sp;
 
     xASSERT_L(DEBUG ? 1324 : 1330, heap != NULL);
     xASSERT_L(DEBUG ? 1325 : 1331, info != NULL);
 
-    sp = &heap->state[heap->state_idx];
+    xHeapState* sp = &heap->state[heap->state_idx];
     dir = (heap->flags & eMemHeapGrowsDown) ? -1 : 1;
 #if DEBUG
     guard_size = (heap->flags & eMemHeapGuarded) ? 8 : 0;
@@ -783,8 +781,8 @@ static U32 xMemGetBlockInfo(xMemHeap* heap, U32 size, S32 align, xMemBlkInfo* in
 
     if (heap->flags & eMemHeapGrowsDown) {
 #if DEBUG
-        S32 remainder = (sp->curr - header_size - guard_size - size) & (align - 1);
         hdr = -header_size;
+        S32 remainder = (sp->curr - header_size - guard_size - size) & (align - 1);
         block = -header_size - guard_size - size - remainder;
         pre = block - guard_size;
 #else
@@ -884,9 +882,8 @@ void* xMemGrowAlloc(U32 heapID, U32 size)
 #if DEBUG
         guard = hdr->addr - 8;
         iMemSet((void*)guard, 0x50, 8);
-        if (guard <= XMEM_GUARD_BREAK_ADDR && guard + 8 > XMEM_GUARD_BREAK_ADDR) {
+        if (guard <= XMEM_GUARD_BREAK_ADDR && guard + 8 > XMEM_GUARD_BREAK_ADDR)
             iprintf("put a breakpoint here\n");
-        }
 #endif
     } else {
         memptr = (void*)(hdr->addr + hdr->size);
@@ -894,9 +891,8 @@ void* xMemGrowAlloc(U32 heapID, U32 size)
 #if DEBUG
         guard = hdr->addr + newalignsize;
         iMemSet((void*)guard, 0x51, 8);
-        if (guard <= XMEM_GUARD_BREAK_ADDR && guard + 8 >= XMEM_GUARD_BREAK_ADDR) {
+        if (guard <= XMEM_GUARD_BREAK_ADDR && guard + 8 >= XMEM_GUARD_BREAK_ADDR)
             iprintf("put a breakpoint here\n");
-        }
 #endif
     }
 

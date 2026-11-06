@@ -20,10 +20,7 @@
 
 #include "decomp.h"
 
-inline F32 xCamPathBias::RawBias()
-{
-    return mBias;
-}
+inline F32 xCamPathBias::RawBias() { return mBias; }
 
 void xCamTransition::Init(const xCamTransitionAsset& asset)
 {
@@ -188,7 +185,7 @@ void xCamTransition::Completed(bool sendCompletionEvents)
 {
     mActive = false;
 
-    if (sendCompletionEvents) {
+    if (sendCompletionEvents)
         switch (mType) {
         case 0:
             zEntEvent(this, eEventCameraTransitionDone);
@@ -199,7 +196,6 @@ void xCamTransition::Completed(bool sendCompletionEvents)
             break;
         }
         }
-    }
     
 }
 
@@ -389,11 +385,10 @@ F32 xCamPathBias::CurveIntersectPlane(const xVec3& planePoint, F32& u, F32 guess
     F32 distLo = plane.Dist(mCurveEnd0);
     F32 distHi = plane.Dist(mCurveEnd1);
     if (xsamesign(distLo, distHi)) {
-        if (distLo < 0.0f) {
+        if (distLo < 0.0f)
             u = 1.0f;
-        } else {
+        else
             u = 0.0f;
-        }
         return u;
     }
 
@@ -434,7 +429,8 @@ F32 xCamPathBias::CurveIntersectPlane(const xVec3& planePoint, F32& u, F32 guess
         if (guessDist < 0.0f) {
             loU = guess;
             loPt = guessPt;
-        } else if (guessDist > 0.0f) {
+        }
+        else if (guessDist > 0.0f) {
             hiU = guess;
             hiPt = guessPt;
         } else {
@@ -477,11 +473,10 @@ void xCamPathBias::DebugRender()
         pCurve->evaluate(u, p1);
 
         bool p1OutOfBounds = !mTrigger->PointIntersects(p1);
-        if (p0OutOfBounds || p1OutOfBounds) {
+        if (p0OutOfBounds || p1OutOfBounds)
             xDrawSetColor(255, 255, 0, 255);
-        } else {
+        else
             xDrawSetColor(255, 0, 255, 255);
-        }
 
         xDrawLine(&p0, &p1);
         

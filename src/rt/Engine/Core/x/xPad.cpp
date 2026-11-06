@@ -226,16 +226,10 @@ void xPadNormalizeAnalog(xPad& pad, S32 inner_zone, S32 outer_zone)
             pad.analog[i].dir.assign(1.0f, 0.0f);
             pad.analog[i].ang = 0.0f;
         } else {
-            if (pad.analog[i].offset.x > 1.0f) {
-                pad.analog[i].offset.x = 1.0f;
-            } else if (pad.analog[i].offset.x < -1.0f) {
-                pad.analog[i].offset.x = -1.0f;
-            }
-            if (pad.analog[i].offset.y > 1.0f) {
-                pad.analog[i].offset.y = 1.0f;
-            } else if (pad.analog[i].offset.y < -1.0f) {
-                pad.analog[i].offset.y = -1.0f;
-            }
+            if (pad.analog[i].offset.x > 1.0f) pad.analog[i].offset.x = 1.0f;
+            else if (pad.analog[i].offset.x < -1.0f) pad.analog[i].offset.x = -1.0f;
+            if (pad.analog[i].offset.y > 1.0f) pad.analog[i].offset.y = 1.0f;
+            else if (pad.analog[i].offset.y < -1.0f) pad.analog[i].offset.y = -1.0f;
             pad.analog[i].mag = pad.analog[i].offset.length();
             pad.analog[i].dir = pad.analog[i].offset;
             pad.analog[i].dir /= pad.analog[i].mag;
@@ -253,21 +247,17 @@ void xPadAnalogIsDigital(S32 idx, S32 enable)
 {
     xPad* pad = &mPad[idx];
 
-    if (enable) {
+    if (enable)
         pad->flags |= 0x10;
-    } else {
+    else
         pad->flags &= ~0x10;
-    }
 
-    if (pad->al2d_timer >= 0.35f) {
+    if (pad->al2d_timer >= 0.35f)
         pad->al2d_timer = 0.35f;
-    }
 
-    if (pad->ar2d_timer >= 0.35f) {
+    if (pad->ar2d_timer >= 0.35f)
         pad->ar2d_timer = 0.35f;
-    }
 
-    if (pad->d_timer >= 0.35f) {
+    if (pad->d_timer >= 0.35f)
         pad->d_timer = 0.35f;
-    }
 }

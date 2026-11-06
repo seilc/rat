@@ -25,11 +25,7 @@ template <S32 unknown>
 class sound_queue
 {
 public:
-    sound_queue()
-    {
-        head = 0;
-        tail = 0;
-    }
+    sound_queue() { head = 0; tail = 0; }
 
     void play(iSndGroupHandle hSoundToPlay, S32 uFlags, const xVec3* pPos_WS, const xVec3* pVel, xEnt* pParentEnt, F32* pfOverrideVolume, F32* pfOverridePitch)
     {
@@ -167,17 +163,13 @@ inline bool xSndMgrIsDialogPlaying()
 
 inline bool xSndMgrIsLoopedStream(iSndGroupHandle hSound)
 {
-    if (hSound == ISND_INVALID_SND_GROUP_HANDLE) {
-        return false;
-    }
+    if (hSound == ISND_INVALID_SND_GROUP_HANDLE) return false;
     return xSndMgr_GetGroup(hSound)->header.uFlags & 0x1;
 }
 
 inline bool xSndMgrIsStream(iSndGroupHandle hSound)
 {
-    if (hSound == ISND_INVALID_SND_GROUP_HANDLE) {
-        return false;
-    }
+    if (hSound == ISND_INVALID_SND_GROUP_HANDLE) return false;
     if (xSndMgr_GetGroup(hSound)->header.uFlags & 0x3) {
         return true;
     }

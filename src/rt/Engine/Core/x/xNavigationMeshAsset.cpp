@@ -128,11 +128,13 @@ void xNavigationMeshAsset::AddCircle(zMeshCircle* circle)
 {
     xFAIL_RETURN_IF_L(200, circle == NULL);
 
-    if (circle->mesh != this) {
-        circle->masterListNext = circleList;
-        circleList = circle;
-        circle->mesh = this;
+    if (circle->mesh == this) {
+        return;
     }
+
+    circle->masterListNext = circleList;
+    circleList = circle;
+    circle->mesh = this;
 }
 
 bool xNavigationMeshAsset::RemoveCircle(zMeshCircle* circle)
@@ -219,14 +221,13 @@ S32 xNavigationMeshAssetSubMesh::getTriangle(const xVec3& point, S32 current_tri
         }
         for (S32 i = 0; i < 3; i++) {
             S32 triangle = portal[current_triangle*3+i];
-            if (triangle != NO_TRIANGLE) {
+            if (triangle != NO_TRIANGLE)
                 if (inTriangle(portal[current_triangle*3+i], point)) {
                     F32 triangleHeight = getHeight(triangle, point.x, point.z);
                     if (point.y + 3.0f > triangleHeight && point.y - 3.0f < triangleHeight) {
                         return triangle;
                     }
                 }
-            }
         }
     }
     

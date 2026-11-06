@@ -26,15 +26,11 @@ inline S32 log2ceil(S32 value)
 {
     S32 power = 0;
 
-    S32 v = value;
-    while (v > 1) {
-        v >>= 1;
+    for (S32 v = value; v > 1; v >>= 1)
         power++;
-    }
 
-    if ((1 << power) < value) {
+    if ((1 << power) < value)
         power++;
-    }
 
     return power;
 }

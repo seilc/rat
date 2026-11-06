@@ -117,9 +117,8 @@ void xIMRender(xIMLockContext& context, const xMat4x3* mat, U32 flags)
     const xVec2* uv = context.uv;
     const xColor* color = context.color;
 
-    if (flags == 0) {
+    if (flags == 0)
         flags = (rwIM3D_VERTEXUV | rwIM3D_VERTEXXYZ | rwIM3D_VERTEXRGBA);
-    }
 
     RwIm3DVertex* vert_buffer = (RwIm3DVertex*)xMEMPUSHTEMP_L(verts_size * sizeof(RwIm3DVertex), 0, 225);
 
@@ -128,9 +127,8 @@ void xIMRender(xIMLockContext& context, const xMat4x3* mat, U32 flags)
     for (; vert != end_vert; color++, pos++, uv++, vert++) {
         RwIm3DVertexSetPos(vert, pos->x, pos->y, pos->z);
         RwIm3DVertexSetUV(vert, uv->x, uv->y);
-        if (flags & 0x10) {
+        if (flags & 0x10)
             RwIm3DVertexSetRGBA(vert, color->r, color->g, color->b, color->a);
-        }
     }
 
     RwIm3DTransform(vert_buffer, verts_size, (RwMatrix*)mat, flags);

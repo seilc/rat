@@ -73,21 +73,13 @@ inline F32 normalize_analog(S32 v, S32 v_min, S32 v_max, S32 dead_center, S32 de
     xASSERT_L(248, dead_min > v_min);
     xASSERT_L(249, dead_max < v_max);
     if (v <= dead_center) {
-        if (v >= dead_min) {
-            return 0.0f;
-        } else if (v <= v_min) {
-            return -1.0f;
-        } else {
-            return (F32)(v - dead_min) / (dead_min - v_min);
-        }
+        if (v >= dead_min) return 0.0f;
+        else if (v <= v_min) return -1.0f;
+        else return (F32)(v - dead_min) / (dead_min - v_min);
     } else {
-        if (v <= dead_max) {
-            return 0.0f;
-        } else if (v >= v_max) {
-            return 1.0f;
-        } else {
-            return (F32)(v - dead_max) / (v_max - dead_max);
-        }
+        if (v <= dead_max) return 0.0f;
+        else if (v >= v_max) return 1.0f;
+        else return (F32)(v - dead_max) / (v_max - dead_max);
     }
 }
 

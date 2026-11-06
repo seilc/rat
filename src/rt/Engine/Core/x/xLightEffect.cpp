@@ -43,10 +43,8 @@ void xLightEffectFlicker::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 #if DEBUG || RELEASE
 void xLightEffectFlicker::InitDebugTweak()
 {
-    char name[128];
-    char buffer[128];
-
     strcpy(effectName, xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
+    char name[128], buffer[128];
 
     sprintf(name, "Widgets|Light Effects|%s", effectName);
     xTWEAK_BRANCH(name, NULL, NULL, 0x2);
@@ -139,10 +137,8 @@ void xLightEffectStrobe::Init(xBase& data, xDynAsset& asset, size_t asset_size)
 #if DEBUG || RELEASE
 void xLightEffectStrobe::InitDebugTweak()
 {
-    char name[128];
-    char buffer[128];
-
     strcpy(effectName, xSceneID2Name((xScene*)xglobals->sceneCur, tasset->id));
+    char name[128], buffer[128];
 
     sprintf(name, "Widgets|Light Effects|%s", effectName);
     xTWEAK_BRANCH(name, NULL, NULL, 0x2);
@@ -200,7 +196,7 @@ void xLightEffectStrobe::UpdateEffect(xLight& light, F32 dt)
     xLightEffectStrobeData& strobeData = light.strobeData;
 
     strobeData.time -= dt;
-    if (strobeData.time <= 0.0f) {
+    if (strobeData.time <= 0.0f)
         switch (strobeData.stage) {
         case 0:
             strobeData.stage = 1;
@@ -216,5 +212,4 @@ void xLightEffectStrobe::UpdateEffect(xLight& light, F32 dt)
             xFAIL_FMT_L(244, "%s", "Unknown Strobe Stage");
             break;
         }
-    }
 }

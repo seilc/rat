@@ -59,13 +59,10 @@ namespace {
 
     render_context* get_render_context(RpAtomic* atomic)
     {
-        render_context* context = render_contexts;
-        render_context* end_context = context + render_contexts_size;
-        while (context != end_context) {
-            if (context->original_atomic == atomic) {
+        render_context* context = render_contexts, *end_context = context + render_contexts_size;
+        for (; context != end_context; context++) {
+            if (context->original_atomic == atomic)
                 return context;
-            }
-            context++;
         }
         return NULL;
     }
@@ -76,12 +73,10 @@ namespace {
 
     void set_texture(RpAtomic* atomic, RwTexture* texture)
     {
-        RpGeometry* geom = RpAtomicGetGeometry(atomic);
-        xASSERT_L(170, geom != 0);
+        RpGeometry* geom = RpAtomicGetGeometry(atomic); xASSERT_L(170, geom != 0);
         xASSERT_L(171, RpGeometryGetNumMaterials(geom) == 1);
 
-        RpMaterial* material = RpGeometryGetMaterial(geom, 0);
-        xASSERT_L(172, material != 0);
+        RpMaterial* material = RpGeometryGetMaterial(geom, 0); xASSERT_L(172, material != 0);
 
         RpMaterialSetTexture(material, texture);
     }
@@ -123,12 +118,9 @@ void xModelWarpSceneEnter()
 
 void xModelWarpSceneExit()
 {
-    render_context* context = render_contexts;
-    render_context* end_context = context + render_contexts_size;
-    while (context != end_context) {
+    render_context* context = render_contexts, *end_context = context + render_contexts_size;
+    for (; context != end_context; context++)
         destroy_render_context(*context);
-        context++;
-    }
     render_contexts_size = 0;
 
     camtex.destroy();
@@ -166,11 +158,10 @@ void xModelWarpSetEffect(RpAtomic* atomic, const xBox* box, const xFColor* color
         context.box = *box;
     }
 
-    if (color) {
+    if (color)
         context.color = *color;
-    } else {
+    else
         context.color = tweak::default_color;
-    }
 }
 
 DECOMP_FORCEACTIVE("context != 0")
@@ -178,25 +169,22 @@ DECOMP_FORCEACTIVE("context != 0")
 void xModelWarpSphereMapUVsByNormals(xVec2* uv, S32 verts_size, const xVec3* norm)
 {
     xVec2* end_uv = uv + verts_size;
-    while (uv != end_uv) {
+    for (; uv != end_uv; uv++, norm++) {
         uv->x = xasin(norm->x) * (1/PI) + 0.5f;
         uv->y = -(xasin(norm->y) * (1/PI) + 0.5f);
-        uv++, norm++;
     }
 }
 
 void xModelWarpSphereMapUVsByOffsets(xVec2* uv, S32 verts_size, const xVec3* vert, const xVec3& center)
 {
     xVec2* end_uv = uv + verts_size;
-    while (uv != end_uv) {
+    for (; uv != end_uv; uv++, vert++) {
         xVec3 offset = *vert;
         offset -= center;
         offset.up_normalize();
 
         uv->x = xasin(offset.x) * (1/PI) + 0.5f;
         uv->y = -(xasin(offset.y) * (1/PI) + 0.5f);
-
-        uv++, vert++;
     }
 }
 
@@ -213,11 +201,10 @@ void xModelWarpSphereMapUVs(RpAtomic* atomic, bool use_normals)
     xVec2* uv = (xVec2*)RpGeometryGetVertexTexCoords(geom, rwTEXTURECOORDINATEINDEX0);
     const xVec3& center = *(const xVec3*)&atomic->boundingSphere.center;
 
-    if (use_normals) {
+    if (use_normals)
         xModelWarpSphereMapUVsByNormals(uv, verts_size, norm);
-    } else {
+    else
         xModelWarpSphereMapUVsByOffsets(uv, verts_size, vert, center);
-    }
 
     RpGeometryUnlock(geom);
 }

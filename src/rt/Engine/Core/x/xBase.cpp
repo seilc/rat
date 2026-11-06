@@ -27,11 +27,10 @@ void xBaseSave(xBase* ent, xSerial* s)
     xASSERT_L(81, ent);
     xASSERT_L(82, s);
 
-    if (xBaseIsEnabled(ent)) {
+    if (xBaseIsEnabled(ent))
         s->Write_b1(1);
-    } else {
+    else
         s->Write_b1(0);
-    }
 }
 
 void xBaseLoad(xBase* ent, xSerial* s)
@@ -42,11 +41,10 @@ void xBaseLoad(xBase* ent, xSerial* s)
     S32 b = 0;
     s->Read_b1(&b);
 
-    if (b) {
+    if (b)
         xBaseEnable(ent);
-    } else {
+    else
         xBaseDisable(ent);
-    }
 }
 
 void xBaseReset(xBase* xb, xBaseAsset* asset)

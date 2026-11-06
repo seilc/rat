@@ -26,17 +26,13 @@ void zEntEvent(char* to, U32 toEvent)
 {
     xASSERT_L(52, to);
 
-    U32 id;
-    xBase* sendTo;
+    U32 id = xStrHash(to);
+    xBase* sendTo = zSceneFindObject(id);
 
-    id = xStrHash(to);
-    sendTo = zSceneFindObject(id);
-
-    if (sendTo) {
+    if (sendTo)
         zEntEvent(sendTo, toEvent);
-    } else {
+    else
         xOutWarn("EVENT", "zEntEvent unable to find %s\n", to);
-    }
 }
 
 void zEntEvent(U32 toID, U32 toEvent)
@@ -47,11 +43,10 @@ void zEntEvent(U32 toID, U32 toEvent)
     
     sendTo = zSceneFindObject(toID);
 
-    if (sendTo) {
+    if (sendTo)
         zEntEvent(sendTo, toEvent);
-    } else {
+    else
         xOutWarn("EVENT", "zEntEvent unable to find object with HashID %x\n", toID);
-    }
 }
 
 void zEntEvent(U32 toID, U32 toEvent, F32 toParam0, F32 toParam1, F32 toParam2, F32 toParam3)
@@ -68,11 +63,10 @@ void zEntEvent(U32 toID, U32 toEvent, F32 toParam0, F32 toParam1, F32 toParam2, 
 
     sendTo = zSceneFindObject(toID);
 
-    if (sendTo) {
+    if (sendTo)
         zEntEvent(sendTo, toEvent, toParam);
-    } else {
+    else
         xOutWarn("EVENT", "zEntEvent unable to find object with HashID %x\n", toID);
-    }
 }
 
 void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID, ForceEvent forceEvent)
@@ -96,11 +90,10 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
 #endif
 
     if (to->baseType != eBaseTypeNPC) {
-        if (toEvent == eEventDisable) {
+        if (toEvent == eEventDisable)
             xBaseDisable(to);
-        } else if (toEvent == eEventEnable) {
+        else if (toEvent == eEventEnable)
             xBaseEnable(to);
-        }
     }
 
     if (to->eventFunc && (xBaseIsEnabled(to) || forceEvent == FE_YES || toEvent == eEventDebugReset)) {
@@ -108,7 +101,8 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
         if (to->baseFlags & k_XBASE_IS_ENTITY) {
             if (toEvent == eEventCollisionOn || toEvent == eEventCollision_Visible_On) {
                 ((xEnt*)to)->collisionEventReceived = 1;
-            } else if (toEvent == eEventCollisionOff || toEvent == eEventCollision_Visible_Off) {
+            }
+            else if (toEvent == eEventCollisionOff || toEvent == eEventCollision_Visible_Off) {
                 ((xEnt*)to)->collisionEventReceived = 2;
             }
         }
@@ -139,9 +133,8 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
                     b = zSceneFindObject(gThisCameraTarget);
                 } else {
                     b = zSceneFindObject(idx->paramWidgetAssetID);
-                    if (!b) {
+                    if (!b)
                         b = (xBase*)xSTFindAsset(idx->paramWidgetAssetID, NULL);
-                    }
                 }
             }
 
@@ -160,9 +153,8 @@ void xEventDebugLogDump()
     iprintf("========================================== EVENT LOG DUMP [BEGIN]\n");
 
     for (S32 i = 0; i < MAX_EVENT_LOG_LINES; i++) {
-        if (zEventLogBuf[i]) {
+        if (zEventLogBuf[i])
             iprintf(zEventLogBuf[i]);
-        }
     }
 
     iprintf("========================================== EVENT LOG DUMP [END]\n");

@@ -258,9 +258,8 @@ namespace {
         for (; b; pb = &b->next, b = b->next) {
             if (b->used < s0->used) {
                 s1 = s0; s0 = b; ps0 = pb;
-            } else if (b->used < s1->used) {
+            } else if (b->used < s1->used)
                 s1 = b;
-            }
         }
 
         S32 total = s0->used + s1->used;
@@ -571,9 +570,8 @@ S32 xParticleBatchGroup::create_system(const xParticleBatchSystem& system)
     const U8* end_elements = elements + elements_size;
     const U8* found = binary_find((const U8*)elements, end_elements, system, compare_group_systems_functor());
 
-    if (found != end_elements) {
+    if (found != end_elements)
         return *found;
-    }
 
     xASSERT_L(757, elements_size < MAX_SYSTEMS_PER_GROUP);
 

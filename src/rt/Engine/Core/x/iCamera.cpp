@@ -195,9 +195,8 @@ void iCameraBegin(RwCamera* cam, S32 clear)
     if (clear) {
         if (xglobals->fog.type != rwFOGTYPENAFOGTYPE) {
             RwCameraClear(cam, &xglobals->fog.bgcolor, rwCAMERACLEARIMAGE | rwCAMERACLEARZ | rwCAMERACLEARSTENCIL);
-        } else {
+        } else
             RwCameraClear(cam, NULL, rwCAMERACLEARZ);
-        }
     }
 #endif
 
@@ -226,12 +225,11 @@ void iCameraUpdatePos(RwCamera* cam, xMat4x3* pos)
     xASSERT_L(384, pos);
 
     RwFrame* f;
-    RwMatrix* m;
 
     f = RwCameraGetFrame(cam);
     xASSERT_L(387, f);
 
-    m = RwFrameGetMatrix(f);
+    RwMatrix* m = RwFrameGetMatrix(f);
     xASSERT_L(389, m);
     xMat4x3Copy((xMat4x3*)m, pos);
 
@@ -250,12 +248,9 @@ F32 iCameraGetAspectRatio()
 
 void iCameraSetFOV(RwCamera* cam, F32 fov)
 {
-    F32 view_window;
-    F32 fAspectRatio;
+    F32 view_window = itan(0.5f * fov * (PI/180.0f));
+    F32 fAspectRatio = iCameraGetAspectRatio();
     RwV2d vw;
-
-    view_window = itan(0.5f * fov * (PI/180.0f));
-    fAspectRatio = iCameraGetAspectRatio();
 
     vw.x = view_window;
     vw.y = view_window * fAspectRatio;
@@ -287,9 +282,7 @@ void iCameraAssignEnv(RwCamera* camera, iEnv* env_geom)
 
 void iCamGetViewMatrix(RwCamera* camera, xMat4x3* view_matrix)
 {
-    RwMatrix* rw_view;
-
-    rw_view = RwCameraGetViewMatrix(camera);
+    RwMatrix* rw_view = RwCameraGetViewMatrix(camera);
 
     memset(view_matrix, 0, sizeof(xMat4x3));
 
@@ -324,7 +317,8 @@ void iCameraSetFogParams(iFogParams* fp, F32 time)
     if (!fp || fp->type == rwFOGTYPENAFOGTYPE) {
         xglobals->fog.type = rwFOGTYPENAFOGTYPE;
         xglobals->fogA.type = rwFOGTYPENAFOGTYPE;
-    } else if (time == 0.0f || fp->type != xglobals->fogA.type) {
+    }
+    else if (time == 0.0f || fp->type != xglobals->fogA.type) {
         xglobals->fog = *fp;
         xglobals->fogA = *fp;
         xglobals->fog_t0 = 0;
@@ -338,16 +332,13 @@ void iCameraSetFogParams(iFogParams* fp, F32 time)
 
 void iCameraUpdateFog(RwCamera*, iTime t)
 {
-    iFogParams* fp = &xglobals->fog;
-    iFogParams* fa = &xglobals->fogA;
-    iFogParams* fb = &xglobals->fogB;
+    iFogParams* fp = &xglobals->fog, *fa = &xglobals->fogA, *fb = &xglobals->fogB;
     F32 a;
     RwRGBA ca, cb, color;
 
 #if DEBUG
-    if (xglobals->fog.type == rwFOGTYPENAFOGTYPE || xglobals->fog_t0 == 0) {
+    if (xglobals->fog.type == rwFOGTYPENAFOGTYPE || xglobals->fog_t0 == 0)
         return;
-    }
 #else
     if (xglobals->fog.type == rwFOGTYPENAFOGTYPE) return;
     if (xglobals->fog_t0 == 0) return;
@@ -394,18 +385,16 @@ static inline void iCameraFogOffWrapper()
 void iCameraSetFogRenderStates()
 {
     RwCamera* pCamera;
-    iFogParams* pFogParams;
     
     pCamera = RwCameraGetCurrentCamera();
     if (!pCamera) return;
 
-    pFogParams = &xglobals->fog;
+    iFogParams* pFogParams = &xglobals->fog;
     if (pFogParams->type == rwFOGTYPENAFOGTYPE || pFogParams->start >= pFogParams->stop) {
-        if (pFogParams->type == rwFOGTYPENAFOGTYPE) {
+        if (pFogParams->type == rwFOGTYPENAFOGTYPE)
             RwCameraSetFarClipPlane(pCamera, sCameraFarClip);
-        } else {
+        else
             RwCameraSetFarClipPlane(pCamera, pFogParams->stop);
-        }
         iCameraFogOffWrapper();
     } else {
         RwUInt32 bite_me = RWRGBALONG(pFogParams->fogcolor.red,

@@ -92,8 +92,7 @@ void xMovePointSplineSetup(xMovePoint* m)
     xASSERT_L(133, m);
     xASSERT_L(134, m->asset);
 
-    if (m->asset->bezIndex != 1) return;
-    if (m->spl) return;
+    if (m->asset->bezIndex != 1) return; if (m->spl) return;
 
     xASSERT_L(138, m->prev);
     xASSERT_L(139, m->nodes);
@@ -154,7 +153,8 @@ F32 xMovePointGetNext(const xMovePoint* m, const xMovePoint* prev, xMovePoint** 
         rnd -= (*next)->asset->wt;
         if (!(*next)->on) {
             *next = NULL;
-        } else if ((*next) == prev) {
+        }
+        else if ((*next) == prev) {
             *next = NULL;
         } else {
             previousOption = *next;
@@ -163,11 +163,10 @@ F32 xMovePointGetNext(const xMovePoint* m, const xMovePoint* prev, xMovePoint** 
     }
 
     if (!*next) {
-        if (previousOption) {
+        if (previousOption)
             *next = previousOption;
-        } else {
+        else
             return 0.0f;
-        }
     }
 
     if (hdng) {

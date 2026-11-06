@@ -33,9 +33,9 @@ void xEnvLoadJSPList(xEnv* env, S32 dataType)
 
         S32 index = 0;
         for (S32 i = 0; i < jsp_count; i++) {
+            PKRAssetTOCInfo info;
             buf = xSTFindAssetByType('JSP ', i, &bufsize);
 
-            PKRAssetTOCInfo info;
             xSTGetAssetInfoByType('JSP ', i, &info);
 
             S32 rc = iEnvLoadJSP(env->geom, info.aid, buf, bufsize, dataType, index);

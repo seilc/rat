@@ -8,15 +8,13 @@
 zParEmitter* zParEmitterFind(U32 asset_id)
 {
     zScene* s = globals.sceneCur;
-    if (!s) {
+    if (!s)
         return NULL;
-    }
 
     S32 total;
     DECOMP_FORCEREGISTER(total);
     zParEmitter* pe;
-    S32 i = s->baseCount[eBaseTypeParticleEmitter];
-    pe = (zParEmitter*)s->baseList[eBaseTypeParticleEmitter];
+    S32 i = s->baseCount[eBaseTypeParticleEmitter]; pe = (zParEmitter*)s->baseList[eBaseTypeParticleEmitter];
     for (; i > 0; i--) {
         if (pe->tasset->id == asset_id) {
             return pe;

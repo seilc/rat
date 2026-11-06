@@ -118,11 +118,11 @@ void xEntDriveUpdate(xEntDrive* drv, xScene*, F32 dt, const xCollis*)
         if (drv->outroTimer <= 0.0f) {
             drv->influenceOfOldDriver = 0.0f;
             drv->outroTimer = 0.0f;
-        } else if (xfeq0(drv->outroTime)) {
-            drv->influenceOfOldDriver = 0.0f;
-        } else {
-            drv->influenceOfOldDriver = drv->outroTimer / drv->outroTime;
         }
+        else if (xfeq0(drv->outroTime))
+            drv->influenceOfOldDriver = 0.0f;
+        else
+            drv->influenceOfOldDriver = drv->outroTimer / drv->outroTime;
     } else {
         drv->influenceOfOldDriver = 0.0f;
     }
@@ -171,9 +171,7 @@ void xEntDriveUpdate(xEntDrive* drv, xScene*, F32 dt, const xCollis*)
     if (drv->influenceOfDriver) {
         if (drv->flags & 0x2) {
             xModelInstance& m = *drv->driver->model;
-            if (xModelAnimCollDirty(m)) {
-                xModelAnimCollRefresh(m);
-            }
+            if (xModelAnimCollDirty(m)) xModelAnimCollRefresh(m);
 
             xVec3 world_loc, new_loc;
             xMat4x3ToWorld(&world_loc, &drv->tri.trioldmat, &drv->tri.loc);

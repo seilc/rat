@@ -35,21 +35,14 @@ public:
         Reset();
     }
 
-    void SetGoal(F32 target)
-    {
-        mGoal = target;
-    }
+    void SetGoal(F32 target) { mGoal = target; }
 
     F32 Goal() const
     {
         return mGoal;
     }
 
-    void Reset()
-    {
-        mCurrent = mGoal;
-        mVelocity = 0.0f;
-    }
+    void Reset() { mCurrent = mGoal; mVelocity = 0.0f; }
 
     void SnapGoal()
     {
@@ -69,11 +62,10 @@ public:
             mVelocitySaveMax = xabs(mVelocity);
         }
         if (mVelocityMax != 0.0f && xabs(mVelocity) > mVelocityMax) {
-            if (mVelocity < 0.0f) {
+            if (mVelocity < 0.0f)
                 mVelocity = -mVelocityMax;
-            } else {
+            else
                 mVelocity = mVelocityMax;
-            }
         }
         xDampSpring(delta, mVelocity, dt, mResponse);
         mCurrent = mGoal - delta;
@@ -84,15 +76,9 @@ public:
         return mCurrent;
     }
 
-    void operator=(F32 value)
-    {
-        SetGoal(value);
-    }
+    void operator=(F32 value) { SetGoal(value); }
 
-    operator const F32() const
-    {
-        return Sprung();
-    }
+    operator const F32() const { return Sprung(); }
 
 protected:
     F32 mVelocitySaveMax;
