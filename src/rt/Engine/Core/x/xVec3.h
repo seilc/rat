@@ -144,6 +144,55 @@ struct xVec3
     }                                           \
 }
 
+#define xVec3HdngMacro(o, a, b, outlen)                                                           \
+do {                                                                                              \
+    F32 dx__ = (b)->x - (a)->x;                                                                   \
+    F32 dy__ = (b)->y - (a)->y;                                                                   \
+    F32 dz__ = (b)->z - (a)->z;                                                                   \
+    F32 dist2 = dx__*dx__ + dy__*dy__ + dz__*dz__;                                                \
+    if (xeq(dist2, 1.0f, 0.00001f)) {                                                             \
+        (o)->x = dx__;                                                                            \
+        (o)->y = dy__;                                                                            \
+        (o)->z = dz__;                                                                            \
+        *(outlen) = 1.0f;                                                                         \
+    } else if (xeq(dist2, 0.0f, 0.00001f)) {                                                      \
+        (o)->x = 0.0f;                                                                            \
+        (o)->y = 1.0f;                                                                            \
+        (o)->z = 0.0f;                                                                            \
+        *(outlen) = 0.0f;                                                                         \
+    } else {                                                                                      \
+        *(outlen) = xsqrt(dist2);                                                                 \
+        F32 dist_inv = 1.0f / *(outlen);                                                          \
+        (o)->x = dx__ * dist_inv;                                                                 \
+        (o)->y = dy__ * dist_inv;                                                                 \
+        (o)->z = dz__ * dist_inv;                                                                 \
+    }                                                                                             \
+} while (0)
+
+#define xVec3DistMacro(a, b, outlen)                                                              \
+do {                                                                                              \
+    F32 dx__ = (a)->x - (b)->x;                                                                   \
+    F32 dy__ = (a)->y - (b)->y;                                                                   \
+    F32 dz__ = (a)->z - (b)->z;                                                                   \
+    *(outlen) = xsqrt(dx__ * dx__ + dy__ * dy__ + dz__ * dz__);                                   \
+} while (0)
+
+#define xVec3DistFastMacro(a, b, outlen)                                                          \
+do {                                                                                              \
+    F32 dx__ = (a)->x - (b)->x;                                                                   \
+    F32 dy__ = (a)->y - (b)->y;                                                                   \
+    F32 dz__ = (a)->z - (b)->z;                                                                   \
+    xsqrtfast(*(outlen), dx__ * dx__ + dy__ * dy__ + dz__ * dz__);                                \
+} while (0)
+
+#define xVec3Dist2Macro(a, b, outlen)                                                             \
+do {                                                                                              \
+    F32 dx__ = (a)->x - (b)->x;                                                                   \
+    F32 dy__ = (a)->y - (b)->y;                                                                   \
+    F32 dz__ = (a)->z - (b)->z;                                                                   \
+    *(outlen) = dx__ * dx__ + dy__ * dy__ + dz__ * dz__;                                          \
+} while (0)
+
 F32 xVec3Normalize(xVec3* o, const xVec3* v);
 F32 xVec3NormalizeFast(xVec3* o, const xVec3* v); // UNUSED
 void xVec3Copy(xVec3* o, const xVec3* v);
