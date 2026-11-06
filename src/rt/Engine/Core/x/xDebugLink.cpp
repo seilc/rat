@@ -107,7 +107,7 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
                         if (sceneObject) {
                             xDebugLinkPrintf("Sending Debug Reset event to Camera Curve (0x%X)\n", sceneObject->id);
                             if (oldAsset) {
-                                PKR_relmem('ASET', oldAssetSize, oldAsset, mAssetToUpdate, 0);
+                                PKR_relmem('ASET', oldAssetSize, oldAsset, mAssetToUpdate, FALSE);
                                 oldAsset = NULL;
                             }
 
@@ -148,7 +148,7 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
                     if (!zSceneUpdateAsset(*sceneObject, asset, mAssetDataReceivedSize)) {
                         xDebugLinkPrintf("Unable to update new asset\n");
                         if (tempAllocation) {
-                            PKR_relmem('ASET', mAssetDataReceivedSize, tempAllocation, mAssetToUpdate, 0);
+                            PKR_relmem('ASET', mAssetDataReceivedSize, tempAllocation, mAssetToUpdate, FALSE);
                         }
 
                         assetNode->memloc = oldAsset;
@@ -156,7 +156,7 @@ eError xDebugLink::UpdateSceneObject(char* receivedBuffer)
                         assetNode->readrem = oldAssetSize;
                         return eAssetSizeMismatch;
                     } else {
-                        PKR_relmem('ASET', oldAssetSize, oldAsset, mAssetToUpdate, 0);
+                        PKR_relmem('ASET', oldAssetSize, oldAsset, mAssetToUpdate, FALSE);
                     }
                 }
 

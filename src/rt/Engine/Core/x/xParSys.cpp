@@ -72,7 +72,7 @@ inline bool using_ptank_render(const xParSysAsset& sys)
 {
 #if DEBUG || RELEASE
     if (!ptank_render_mode_registered) {
-        ptank_render_mode_registered = 1;
+        ptank_render_mode_registered = true;
         xTWEAK_SELECT(
             "Particle Emitters|\1Debug|PTank Render Mode",
             (U32*)&ptank_render_mode, ptank_render_mode_labels,
@@ -354,11 +354,11 @@ void xParSysEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
         break;
     case eEventOn:
         if (t->group)
-            xParGroupSetActive(t->group, 1);
+            xParGroupSetActive(t->group, TRUE);
         break;
     case eEventOff:
         if (t->group) {
-            xParGroupSetActive(t->group, 0);
+            xParGroupSetActive(t->group, FALSE);
         }
         break;
     }

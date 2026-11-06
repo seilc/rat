@@ -111,7 +111,7 @@ namespace {
 }
 
 #if DEBUG || RELEASE
-inline S32 DBG_SkipCloneHelperComment(U32) { static U32 aid_skipComment[] = { 0 }; return 1; }
+inline S32 DBG_SkipCloneHelperComment(U32) { static U32 aid_skipComment[] = { 0 }; return TRUE; }
 
 U32 xModelBucket_HackPipeFlags(RpAtomic* data, U32 pipeFlags, U32 aid)
 {
@@ -214,7 +214,7 @@ void xModelBucket_PreCountAlloc(S32 maxAlphaModels)
     sBucketDummyWorld = RpWorldCreate(&bbox);
     iAsyncUnlockRW();
 
-    sBucketDummyCamera = iCameraCreate(0, 0, 0);
+    sBucketDummyCamera = iCameraCreate(0, 0, FALSE);
 
     iAsyncLockRW();
     RpWorldAddCamera(sBucketDummyWorld, sBucketDummyCamera);
@@ -865,7 +865,7 @@ void ValidateRenderStateExpectations(const xModelInstance* model, U32 pipeFlags)
     if (isProblem) {
         iprintf("Minimalism Render state failure\n{\n");
         iprintf("\t%-12s: 0x%08X\n", "PipeFlags", pipeFlags);
-        xUtil_spit_flagbits(pipeFlags, 0);
+        xUtil_spit_flagbits(pipeFlags, FALSE);
 
         if (model) {
             PKRAssetTOCInfo info_curr;

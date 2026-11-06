@@ -108,7 +108,7 @@ void xModelInit()
 void xModelInitOnce()
 {
     if (!subcamera) {
-        subcamera = CameraCreate(0, 0, 1);
+        subcamera = CameraCreate(0, 0, TRUE);
         xASSERT_L(329, subcamera != NULL);
     }
 }

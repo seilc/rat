@@ -77,9 +77,9 @@ static st_HIPLOADDATA* HIPLCreate(const char* filename, char* dblbuf, S32 bufsiz
         lddata->lockid = uselock;
         lddata->top = -1;
         lddata->base_sector = 0;
-        lddata->use_async = 0;
+        lddata->use_async = FALSE;
         lddata->asyn_stat = HIP_RDSTAT_NONE;
-        lddata->bypass = 0;
+        lddata->bypass = FALSE;
         lddata->bypass_recover = -1;
         lddata->pos = 0;
         lddata->readTop = 0;
@@ -142,13 +142,13 @@ static S32 HIPLSetBypass(st_HIPLOADDATA* lddata, S32 enable, S32 use_async)
 
     if (enable) {
         xVALIDATE_L(354, lddata->bypass_recover == -1);
-        lddata->bypass = 1;
+        lddata->bypass = TRUE;
         lddata->use_async = use_async;
         lddata->bypass_recover = lddata->fli->position;
     } else {
         lddata->fli->seekSpot(lddata->fli, lddata->bypass_recover);
-        lddata->bypass = 0;
-        lddata->use_async = 0;
+        lddata->bypass = FALSE;
+        lddata->use_async = FALSE;
         lddata->bypass_recover = -1;
     }
 
@@ -244,7 +244,7 @@ static S32 HIPLBlockRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
     st_HIPLOADBLOCK* top = NULL;
     S32 got = 0;
     S32 left = 0;
-    S32 head = 0;
+    S32 head = FALSE;
 
     xVALIDATE_L(527, lddata);
     xVALIDATE_L(528, data);
@@ -262,7 +262,7 @@ static S32 HIPLBlockRead(st_HIPLOADDATA* lddata, void* data, S32 cnt, S32 size)
 
     if (cnt < 0) {
         cnt = -cnt;
-        head = 1;
+        head = TRUE;
         if (top && cnt > left) cnt = left;
     } else {
         xVALIDATE_L(548, cnt > 0);

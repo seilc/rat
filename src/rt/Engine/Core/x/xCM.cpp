@@ -229,7 +229,7 @@ static xColor xCMcolor_scale(xColor color, F32 scale)
 }
 
 #if DEBUG || RELEASE
-U32 dumpit = 0;
+U32 dumpit = FALSE;
 #endif
 
 static void xCMdump_header(xCMheader* hdr)
@@ -315,7 +315,7 @@ static U32 xCMrender(F32 time, xCreditsData* data)
     xCMheader* hdr = (xCMheader*)data;
 
     if (!hdr || hdr->magic != 0xBEEEEEEF)
-        return 0;
+        return FALSE;
 
     char* dp;
     xCMcredits* cp;
@@ -546,7 +546,7 @@ static U32 xCMrender(F32 time, xCreditsData* data)
     }
 
 #if DEBUG || RELEASE
-    dumpit = 0;
+    dumpit = FALSE;
 #endif
 
     return time >= 0.0f && time <= hdr->total_time;

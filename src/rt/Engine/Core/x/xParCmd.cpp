@@ -1152,7 +1152,7 @@ void reset_command(xParEmitter& emit, xParCmdAsset& cmd)
     {
         xParCmdKillSlow& ccmd = (xParCmdKillSlow&)cmd;
         ccmd.speedLimitSqr = 2.0f;
-        ccmd.kill_less_than = 1;
+        ccmd.kill_less_than = TRUE;
     }
         break;
     case eParCmdFollow:
@@ -1228,7 +1228,7 @@ void reset_command(xParEmitter& emit, xParCmdAsset& cmd)
     {
         xParCmdKillDistance& ccmd = (xParCmdKillDistance&)cmd;
         ccmd.dSqr = 100.0f;
-        ccmd.kill_greater_than = 1;
+        ccmd.kill_greater_than = TRUE;
     }
         break;
     case eParCmdAge:

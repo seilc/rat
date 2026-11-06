@@ -988,7 +988,7 @@ S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
     }
 
     if (ent->collLev == 5) {
-        U32 result = 0;
+        U32 result = FALSE;
 
         switch (ent->bound.type) {
         case k_XBOUNDTYPE_SPHERE: {
@@ -1036,7 +1036,7 @@ S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
             break;
         }
 
-        if (result == 0) {
+        if (result == FALSE) {
             return FALSE;
         }
 
@@ -1046,7 +1046,7 @@ S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
             xModelAnimCollApply(*collmod);
         }
 
-        result = 0;
+        result = FALSE;
         if (xModelIsPreinstanced(collmod)) {
             xASSERT_DESIGN_L(1849, !xModelIsPreinstanced(collmod), "xSweptSphereToEnt: Entity is using pre-instanced model: %s", xSTAssetNameOrID(ent->id));
             return FALSE;
@@ -1110,7 +1110,7 @@ S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
     }
 
     if (ent->collLev == 5) {
-        U32 result = 0;
+        U32 result = FALSE;
 
         switch (ent->bound.type) {
         case k_XBOUNDTYPE_SPHERE: {
@@ -1158,7 +1158,7 @@ S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
             break;
         }
 
-        if (result == 0) {
+        if (result == FALSE) {
             return FALSE;
         }
 
@@ -1168,7 +1168,7 @@ S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
             xModelAnimCollApply(*collmod);
         }
 
-        result = 0;
+        result = FALSE;
         if (xModelIsPreinstanced(collmod)) {
             xASSERT_DESIGN_L(1996, !xModelIsPreinstanced(collmod), "xSweptSphereToEnt: Entity is using pre-instanced model: %s", xSTAssetNameOrID(ent->id));
             return FALSE;
