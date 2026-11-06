@@ -415,16 +415,16 @@ static const tweak_callback cb_config = { on_change_config };
 
 void xCamSupportPath::add_tweaks(const char* prefix, const char* debug_prefix)
 {
-    xAUTOTWEAKRANGE(prefix, "subdiv_thresh", &cfg.subdiv_thresh, 0.000001f, 1.0f, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "min_segment_dist", &cfg.min_segment_dist, 0.000001f, 1.0f, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "smooth_factor", &cfg.smooth_factor, 0.0f, 1.0f, &cb_config, this, 0, false);
-    xAUTOTWEAKRANGE(prefix, "smooth_passes", &cfg.smooth_passes, 0, 31, &cb_config, this, 0, false);
-    xAUTOTWEAKMESSAGE(prefix, "Weights", debug->weight_text, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "max_nodes_used", &debug->max_nodes_used, 0, 0, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "subdiv_thresh", &cfg.subdiv_thresh, 0.000001f, 1.0f, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "min_segment_dist", &cfg.min_segment_dist, 0.000001f, 1.0f, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "smooth_factor", &cfg.smooth_factor, 0.0f, 1.0f, &cb_config, this, 0, false);
+    xAUTOTWEAK(prefix, "smooth_passes", &cfg.smooth_passes, 0, 31, &cb_config, this, 0, false);
+    xAUTOTWEAK_MESSAGE(prefix, "Weights", debug->weight_text, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "max_nodes_used", &debug->max_nodes_used, 0, 0, NULL, NULL, 0, false);
 
     if (debug_prefix)
         prefix = debug_prefix;
-    xAUTOTWEAKFLAG(prefix, "render_path", &debug_flags, DEBUG_FLAG_RENDER, NULL, NULL, 0);
+    xAUTOTWEAK_FLAG(prefix, "render_path", &debug_flags, DEBUG_FLAG_RENDER, NULL, NULL, 0);
 }
 
 void xCamSupportPath::debug_render()
@@ -481,12 +481,12 @@ xTWEAKABLE bool render_coll_compress = false;
 
 void add_tweaks(const char* prefix)
 {
-    xAUTOTWEAKBOOL(prefix, "enable_collision", &enable_collision, NULL, NULL, 0, true);
-    xAUTOTWEAKBOOL(prefix, "enable_coll_entity", &enable_coll_entity, NULL, NULL, 0, true);
-    xAUTOTWEAKBOOL(prefix, "render_coll_cache_ent", &render_coll_cache_ent, NULL, NULL, 0, true);
-    xAUTOTWEAKBOOL(prefix, "render_coll_cache_tri", &render_coll_cache_tri, NULL, NULL, 0, true);
-    xAUTOTWEAKBOOL(prefix, "render_coll_pivot", &render_coll_pivot, NULL, NULL, 0, true);
-    xAUTOTWEAKBOOL(prefix, "render_coll_compress", &render_coll_compress, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "enable_collision", &enable_collision, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "enable_coll_entity", &enable_coll_entity, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "render_coll_cache_ent", &render_coll_cache_ent, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "render_coll_cache_tri", &render_coll_cache_tri, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "render_coll_pivot", &render_coll_pivot, NULL, NULL, 0, true);
+    xAUTOTWEAK_BOOL(prefix, "render_coll_compress", &render_coll_compress, NULL, NULL, 0, true);
 }
 
 }
@@ -1170,12 +1170,12 @@ void xCamSupportLOSBar::add_tweaks(const char* prefix, const char* debug_prefix)
     if (!debug_prefix) debug_prefix = prefix;
     losbar_tweak::add_tweaks(debug_prefix);
 
-    xAUTOTWEAKRANGE(prefix, "rail_ymin", &cfg.rail_ymin, -10.0f, 10.0f, &cb_tweak_force_lteq, &cfg.rail_ymax, 0, false);
-    xAUTOTWEAKRANGE(prefix, "rail_ymax", &cfg.rail_ymax, -10.0f, 10.0f, &cb_tweak_force_gteq, &cfg.rail_ymin, 0, false);
-    xAUTOTWEAKRANGE(prefix, "pivot_bar_radius", &cfg.pivot_bar_radius, 0.0f, 10.0f, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "compress_bar_radius", &cfg.compress_bar_radius, 0.0f, 10.0f, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "compress_ball_radius", &cfg.compress_ball_radius, 0.0f, 10.0f, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "compress_dist_min", &cfg.compress_dist_min, 0.0f, 10.0f, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "rail_ymin", &cfg.rail_ymin, -10.0f, 10.0f, &cb_tweak_force_lteq, &cfg.rail_ymax, 0, false);
+    xAUTOTWEAK(prefix, "rail_ymax", &cfg.rail_ymax, -10.0f, 10.0f, &cb_tweak_force_gteq, &cfg.rail_ymin, 0, false);
+    xAUTOTWEAK(prefix, "pivot_bar_radius", &cfg.pivot_bar_radius, 0.0f, 10.0f, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "compress_bar_radius", &cfg.compress_bar_radius, 0.0f, 10.0f, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "compress_ball_radius", &cfg.compress_ball_radius, 0.0f, 10.0f, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "compress_dist_min", &cfg.compress_dist_min, 0.0f, 10.0f, NULL, NULL, 0, false);
 }
 
 void xCamSupportLOSBar::debug_render()

@@ -15,5 +15,5 @@ void zCompParameters::AddTweak(const char* parentName, const char* groupName, co
 {
     char buffer[256];
     sprintf(buffer, "%s|%s|%s", parentName, groupName, name);
-    xTWEAKBOOL(buffer, v, NULL, NULL, 0x2);
+    xTWEAK_BOOL(buffer, v, NULL, NULL, 0x2);
 }

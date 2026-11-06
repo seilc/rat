@@ -247,9 +247,9 @@ xCamPathBias::xCamPathBias(zEntTrigger* triggerEnt)
     static bool tweakAdded = false;
     if (!tweakAdded) {
         tweakAdded = true;
-        xTWEAKBOOL("Camera|Debug|Transition Curve Render", &debugRenderTransitionCurve, NULL, NULL, 0);
+        xTWEAK_BOOL("Camera|Debug|Transition Curve Render", &debugRenderTransitionCurve, NULL, NULL, 0);
         xTWEAK("Camera|Debug|Transition Velocity Scale", &debugCurveVelocityScale, 0.1f, 5.0f, NULL, NULL, 0);
-        xTWEAKBOOL("Camera|Debug|Use Plane on Transition Curve", &tweakUsePlaneMapping, NULL, NULL, 0);
+        xTWEAK_BOOL("Camera|Debug|Use Plane on Transition Curve", &tweakUsePlaneMapping, NULL, NULL, 0);
         xTWEAK("Camera|Debug|Transition Curve Spring Tension", &cBiasSpringTension, 5.0f, 50.0f, NULL, NULL, 0);
     }
 #endif

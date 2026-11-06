@@ -38,7 +38,7 @@ namespace {
 
         void add_tweaks(const char* prefix)
         {
-            xAUTOTWEAKRANGE(prefix, "debug::super_sample_updates", &debug::super_sample_updates, 0, 100, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "debug::super_sample_updates", &debug::super_sample_updates, 0, 100, NULL, NULL, 0, true);
         }
     }
 }
@@ -60,7 +60,7 @@ void xCam::scene_enter()
 
 void xCam::scene_exit()
 {
-    xTWEAKREMOVE("Camera");
+    xTWEAK_REMOVE("Camera");
 }
 
 void xCam::refresh_mat(xMat4x3& mat, const xCamSpatialInfo& spatial)

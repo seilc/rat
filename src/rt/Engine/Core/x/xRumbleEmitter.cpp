@@ -50,14 +50,14 @@ namespace xRumble {
 #if DEBUG || RELEASE
 void effectAsset::AddTweaks(const char* prefix)
 {
-    xAUTOTWEAKRANGE(prefix, "time", &time, 0, 100, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "intensity", &intensity, 0, 1, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "priority", &priority, 0, 255, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "param1", &param1, 0, 255, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "Screen Shake|magnitude", &shakeMagnitude, 0, 100, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "Screen Shake|cycle max", &shakeCycleMax, 0, 100, NULL, NULL, 0, false);
-    xAUTOTWEAKRANGE(prefix, "Screen Shake|Rot mag", &shakeRotationalMagnitude, 0, 100, NULL, NULL, 0, false);
-    xAUTOTWEAKBOOL(prefix, "Screen Shake|shake Y axis", &shakeY, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "time", &time, 0, 100, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "intensity", &intensity, 0, 1, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "priority", &priority, 0, 255, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "param1", &param1, 0, 255, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "Screen Shake|magnitude", &shakeMagnitude, 0, 100, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "Screen Shake|cycle max", &shakeCycleMax, 0, 100, NULL, NULL, 0, false);
+    xAUTOTWEAK(prefix, "Screen Shake|Rot mag", &shakeRotationalMagnitude, 0, 100, NULL, NULL, 0, false);
+    xAUTOTWEAK_BOOL(prefix, "Screen Shake|shake Y axis", &shakeY, NULL, NULL, 0, false);
 }
 #endif
 

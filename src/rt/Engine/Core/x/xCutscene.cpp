@@ -62,8 +62,8 @@ void xCutscene_InitBegin()
     memset(sCutTocInfo, 0, sizeof(sCutTocInfo));
     sCutTocMax = 0;
 
-    xTWEAKBOOL("Cutscene|Draw model bounds", &gCutsceneDrawBounds, NULL, NULL, 2);
-    xTWEAKBOOL("Cutscene|Draw line to origin", &gCutsceneDrawLineToOrigin, NULL, NULL, 2);
+    xTWEAK_BOOL("Cutscene|Draw model bounds", &gCutsceneDrawBounds, NULL, NULL, 2);
+    xTWEAK_BOOL("Cutscene|Draw line to origin", &gCutsceneDrawLineToOrigin, NULL, NULL, 2);
 }
 
 void xCutscene_InitTOC(void* toc)

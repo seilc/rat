@@ -35,12 +35,12 @@ namespace {
         {
             const char* prefix = "FX|Model Blur|";
 
-            xAUTOTWEAKBOOL(prefix, "render", &render, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "render_texture", &render_texture, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "render_opaque", &render_opaque, NULL, NULL, 0, true);
-            xAUTOTWEAKBOOL(prefix, "render_card_spheres", &render_card_spheres, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "alpha_compare", &alpha_compare, 0, 255, NULL, NULL, 0, true);
-            xAUTOTWEAKRANGE(prefix, "min_alpha", &min_alpha, 1, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render", &render, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render_texture", &render_texture, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render_opaque", &render_opaque, NULL, NULL, 0, true);
+            xAUTOTWEAK_BOOL(prefix, "render_card_spheres", &render_card_spheres, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "alpha_compare", &alpha_compare, 0, 255, NULL, NULL, 0, true);
+            xAUTOTWEAK(prefix, "min_alpha", &min_alpha, 1, 255, NULL, NULL, 0, true);
         }
 
     }

@@ -9,7 +9,7 @@ zDebugTweakBranch::zDebugTweakBranch(const char* name, zDebugTweakBranchCallback
     this->addTweaksFunction = addTweaksFunction;
     tweakCB.on_expand = sOnExpand;
     tweakCB.on_collapse = sOnCollapse;
-    xTWEAKBRANCH(name, &tweakCB, this, 0x2);
+    xTWEAK_BRANCH(name, &tweakCB, this, 0x2);
 }
 
 zDebugTweakBranch* zDebugTweakBranch::Create(const char* name, zDebugTweakBranchCallback addTweaksFunction)

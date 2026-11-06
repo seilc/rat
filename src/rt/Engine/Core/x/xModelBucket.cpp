@@ -474,9 +474,9 @@ void xModelBucket_Init()
         bucket->List = NULL;
     }
 
-    xTWEAKBOOL("Debugging Options|Performance|Render Models", &sRenderModels, NULL, NULL, 0);
-    xTWEAKBOOL("Debugging Options|Performance|Render Alpha", &sRenderAlpha, NULL, NULL, 0);
-    xTWEAKBOOL("Debugging Options|Performance|Render Clones", &sRenderClones, NULL, NULL, 0);
+    xTWEAK_BOOL("Debugging Options|Performance|Render Models", &sRenderModels, NULL, NULL, 0);
+    xTWEAK_BOOL("Debugging Options|Performance|Render Alpha", &sRenderAlpha, NULL, NULL, 0);
+    xTWEAK_BOOL("Debugging Options|Performance|Render Clones", &sRenderClones, NULL, NULL, 0);
 }
 
 xModelBucket** xModelBucket_GetBuckets(RpAtomic* data)

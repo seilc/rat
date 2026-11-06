@@ -1387,9 +1387,9 @@ void xModelRenderLogSetup()
     static char* sort_by_labels[] = { "Render Order", "Model", "Entity" };
     static const tweak_callback cb_dump_log = { on_dump_log };
 
-    xAUTOTWEAKSELECT(prefix, "Sort By", &render_log_sort_by, (const char**)sort_by_labels, (S32*)NULL, MAX_RL_SORT, NULL, NULL, 0, false);
-    xAUTOTWEAKMESSAGE(prefix, "Print Log", "Go!", &cb_dump_log, NULL, 0, false);
-    xAUTOTWEAKMESSAGE(prefix, "Write Log To", render_log_output_file, &cb_dump_log, (void*)render_log_output_file, 0, false);
+    xAUTOTWEAK_SELECT(prefix, "Sort By", &render_log_sort_by, (const char**)sort_by_labels, (S32*)NULL, MAX_RL_SORT, NULL, NULL, 0, false);
+    xAUTOTWEAK_MESSAGE(prefix, "Print Log", "Go!", &cb_dump_log, NULL, 0, false);
+    xAUTOTWEAK_MESSAGE(prefix, "Write Log To", render_log_output_file, &cb_dump_log, (void*)render_log_output_file, 0, false);
 }
 
 void xModelRenderLogBegin()
