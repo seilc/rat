@@ -108,9 +108,8 @@ void xScreenFade::update(F32 seconds)
             ScreenFade::GlobalData::cnt_fadesInProgress--;
             xASSERT_L(190, ScreenFade::GlobalData::cnt_fadesInProgress>=0);
 
-            if (ScreenFade::GlobalData::cnt_fadesInProgress < 0) {
+            if (ScreenFade::GlobalData::cnt_fadesInProgress < 0)
                 ScreenFade::GlobalData::cnt_fadesInProgress = 0;
-            }
         } else {
             F32 percent = time_passed / asset->fadeUpTime;
             current_color.r = InterpCol(percent, asset->dest.r, src.r);
@@ -124,9 +123,8 @@ void xScreenFade::update(F32 seconds)
 
 void xScreenFade::render()
 {
-    if (state == eScreenFadeStateOff) {
+    if (state == eScreenFadeStateOff)
         return;
-    }
 
     RwVideoMode video_mode;
     RwEngineGetVideoModeInfo(&video_mode, RwEngineGetCurrentVideoMode());

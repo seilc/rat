@@ -132,9 +132,8 @@ F32 xrand_GenRandFloatLessThanOne()
     xASSERT_L(201, fRandFloat >= 0.0f);
     xASSERT_L(202, fRandFloat < 1.0f);
 
-    if (fRandFloat >= 1.0f) {
+    if (fRandFloat >= 1.0f)
         fRandFloat = 0.99999f;
-    }
 
     return fRandFloat;
 }
@@ -163,9 +162,8 @@ U32 xrand_RandomChoice(U32& randomChoiceData, U8& randomChoiceDataSize, U32 maxC
         for (;;) {
             if (!(testMask & randomChoiceData)) {
                 ithUnplayed--;
-                if (ithUnplayed == 0) {
+                if (ithUnplayed == 0)
                     break;
-                }
             }
             testMask <<= 1;
             choice++;
@@ -189,9 +187,8 @@ U32 xrand_RandomChoice(U32& randomChoiceData, U8& randomChoiceDataSize, U32 maxC
         randomChoiceData = choice + 1;
         break;
     case xRandomChoiceRule_IN_ORDER_RANDOM:
-        if (randomChoiceData == 0) {
+        if (randomChoiceData == 0)
             randomChoiceData = (U8)xrand_RandomChoice(maxCount);
-        }
         choice = randomChoiceData;
         if (choice >= maxCount)
             choice = 0;

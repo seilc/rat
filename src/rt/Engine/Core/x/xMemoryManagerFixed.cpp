@@ -83,9 +83,8 @@ void* xMemoryManagerFixed::DoAllocate(U32 size, U32 options, const char*, const 
 
 #if DEBUG || RELEASE
     allocatedElements++;
-    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {
+    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags)
         xMemMgrGenericMallocTally(elementSize, xMemMgrGenericMallocGetTag());
-    }
 #endif
 
     return ret;
@@ -101,9 +100,8 @@ void xMemoryManagerFixed::DoFree(void* pointer)
     this->freeList = header;
 
 #if DEBUG || RELEASE
-    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags) {
+    if (xMemMgrGenericMallocGetTag() < eMemMgrTag_NumTags)
         xMemMgrGenericMallocRemove(elementSize, xMemMgrGenericMallocGetTag());
-    }
     allocatedElements--;
 #endif
 }

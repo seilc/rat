@@ -240,9 +240,8 @@ namespace {
         xFIX_NAN_L(261, value);
 
         if (graph.flags & FLAG_AUTO_SCALE) {
-            if (graph.scale < xabs(value - graph.originValue)) {
+            if (graph.scale < xabs(value - graph.originValue))
                 graph.scale = xabs(value - graph.originValue);
-            }
         }
 
         if (graph.size >= 128) {

@@ -159,9 +159,8 @@ bool xOneLiner::PlaySoundCore()
             if (!sDelayedSound && IsProbable()) {
                 zConversationPlay(mSoundGroupHdl, NULL);
                 mSoonestTimeToPlay = timeNow + CalcTimeToWait();
-                if (mFlags & 0x10) {
+                if (mFlags & 0x10)
                     mFlags |= 0x4000;
-                }
                 return true;
             }
         } else if (mFlags & 0x20) {
@@ -201,9 +200,8 @@ inline void xOneLiner::Init()
 void xOneLinerList::Reset()
 {
     xOneLiner* sp = mSounds;
-    for (U32 i = 0; i < mNumSounds; i++, sp++) {
+    for (U32 i = 0; i < mNumSounds; i++, sp++)
         sp->Reset();
-    }
 }
 
 // UNUSED: ported from RotU GC
