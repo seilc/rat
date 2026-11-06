@@ -46,6 +46,21 @@ struct xPEVCyl
     F32 deflection;
 };
 
+enum eParBoneRegion
+{
+    eParBoneRegionPoint,
+    eParBoneRegionSphere,
+    eParBoneRegionVerticalCircle,
+    eParBoneRegionRightCircle,
+    eParBoneRegionUpCircle,
+    eParBoneRegionAtCircle,
+    eParBoneRegionSphereEdge,
+    eParBoneRegionVerticalCircleEdge,
+    eParBoneRegionRightCircleEdge,
+    eParBoneRegionUpCircleEdge,
+    eParBoneRegionAtCircleEdge
+};
+
 struct xPEEntBone
 {
     U8 flags;
@@ -57,6 +72,12 @@ struct xPEEntBone
     F32 deflection;
 };
 
+enum eParBoundRegion
+{
+    eParBoundRegionVolume,
+    eParBoundRegionEdge
+};
+
 struct xPEEntBound
 {
     U8 flags;
@@ -65,6 +86,27 @@ struct xPEEntBound
     U8 pad2;
     F32 expand;
     F32 deflection;
+};
+
+enum eParRegion
+{
+    eParRegionPoint,
+    eParRegionXZCircleEdge,
+    eParRegionXZCircle,
+    eParRegionXZRectEdge,
+    eParRegionXZRect,
+    eParRegionLine,
+    eParRegionVolume,
+    eParRegionSphereEdge,
+    eParRegionSphere,
+    eParRegionOffsetPoint,
+    eParRegionSphereEdgeUpper,
+    eParRegionSphereEdgeLower,
+    eParRegionVCylEdge,
+    eParRegionCircleEdge,
+    eParRegionCircle,
+    eParRegionEntBone,
+    eParRegionEntBound
 };
 
 struct xParEmitterAsset : xBaseAsset
@@ -91,6 +133,19 @@ struct xParEmitterAsset : xBaseAsset
     F32 vel_angle_variation;
     U32 cull_mode;
     F32 cull_dist_sqr;
+};
+
+enum eParInterp
+{
+    eParInterpConstA,
+    eParInterpConstB,
+    eParInterpRandom,
+    eParInterpLinear,
+    eParInterpSine,
+    eParInterpCosine,
+    eParInterpSawTooth,
+    eParInterpStep,
+    eParInterpCount
 };
 
 struct xParInterp

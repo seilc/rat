@@ -144,7 +144,7 @@ struct xMemInfo
 
 #define XMEMMAXSTACK 12
 
-static const S32 XMEM_MAX_HEAPS = 2;
+enum { XMEM_MAX_HEAPS = 2 };
 
 typedef void(*xMemFreeFunc)(void*);
 typedef void(*xMemBaseNotifyFunc)();

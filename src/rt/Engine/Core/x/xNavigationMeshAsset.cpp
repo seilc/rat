@@ -7,7 +7,7 @@
 
 #include "decomp.h"
 
-static const U32 MAX_CIRCLES = 50;
+#define MAX_CIRCLES 50
 
 #if !MASTER
 DECOMP_FORCEFLOAT(1.0f)

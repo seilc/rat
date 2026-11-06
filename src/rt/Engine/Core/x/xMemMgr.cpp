@@ -1408,7 +1408,7 @@ U32 scratch_mem_used;
 
 namespace
 {
-static const S32 MAX_SCRATCH_ALLOC = 128;
+#define MAX_SCRATCH_ALLOC 128
 
 static U16 scratch_stack[MAX_SCRATCH_ALLOC];
 static U8 scratch_buffer[0x4000] ALIGN(16);

@@ -5,8 +5,8 @@
 #include "xMath3.h"
 #include "zMeshCircle.h"
 
-static const U8 NO_TRIANGLE = 0xFF;
-static const U32 MAX_TRIANGLES_PER_SUB_MESH = (NO_TRIANGLE-1);
+enum { NO_TRIANGLE = 0xFF };
+#define MAX_TRIANGLES_PER_SUB_MESH ((U32)(NO_TRIANGLE-1))
 
 class xNavigationMeshAssetSubMesh
 {

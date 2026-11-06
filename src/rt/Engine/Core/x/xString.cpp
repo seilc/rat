@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 
-static const S32 CHAR_MAP_SIZE = 32;
+#define CHAR_MAP_SIZE 32
 
 U32 xStrHash(const char* str)
 {

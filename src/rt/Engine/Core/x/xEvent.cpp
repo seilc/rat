@@ -12,8 +12,8 @@
 #define THIS_CAM_TARGET_ID 0xB3BB6012 // xStrHash("THIS_CAM_TARGET")
 
 #if DEBUG || RELEASE
-static const S32 MAX_REENTRANT_COUNT = 32;
-static const S32 MAX_EVENT_LOG_LINES = 20;
+#define MAX_REENTRANT_COUNT 32
+#define MAX_EVENT_LOG_LINES 20
 
 char zEventLogBuf[MAX_EVENT_LOG_LINES][256];
 #endif

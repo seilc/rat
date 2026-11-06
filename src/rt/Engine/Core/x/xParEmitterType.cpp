@@ -212,13 +212,13 @@ void xParEmitterEmitSphereEdge(xPar* p, xParEmitterAsset* a, F32, S32 subtype)
     p->m_vel = a->vel;
 
     switch (subtype) {
-    case 7:
+    case eParRegionSphereEdge:
         xMat3x3Euler(&mat_rot, 2.0f * PI * xurand(), 2.0f * PI * xurand(), 2.0f * PI * xurand());
         break;
-    case 10:
+    case eParRegionSphereEdgeUpper:
         xMat3x3Euler(&mat_rot, 2.0f * PI * xurand(), PI * xurand() + PI, 0.0f);
         break;
-    case 11:
+    case eParRegionSphereEdgeLower:
         xMat3x3Euler(&mat_rot, 2.0f * PI * xurand(), PI * xurand(), 0.0f);
         break;
     default:
@@ -382,10 +382,10 @@ inline xVec3 get_random_offset(const xPEEntBone& region, const xMat4x3& mat)
     xVec3 offset;
 
     switch (region.type) {
-    case 0:
+    case eParBoneRegionPoint:
         offset = 0.0f;
         break;
-    case 1: {
+    case eParBoneRegionSphere: {
         F32 ang = 2.0f * PI * xurand();
         F32 uz = 2.0f * xurand() - 1.0f;
         F32 r = xsqrt(1.0f - uz * uz);
@@ -394,55 +394,55 @@ inline xVec3 get_random_offset(const xPEEntBone& region, const xMat4x3& mat)
         offset.assign(rr * r * icos(ang), rr * r * isin(ang), rr * uz);
     }
         break;
-    case 2: {
+    case eParBoneRegionVerticalCircle: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius * xsqrt(xurand());
         offset.assign(rr * isin(ang), 0.0f, rr * icos(ang));
     }
         break;
-    case 3: {
+    case eParBoneRegionRightCircle: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius * xsqrt(xurand());
         offset.Combine(mat.up, rr * isin(ang), mat.at, rr * icos(ang));
     }
         break;
-    case 4: {
+    case eParBoneRegionUpCircle: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius * xsqrt(xurand());
         offset.Combine(mat.right, rr * isin(ang), mat.at, rr * icos(ang));
     }
         break;
-    case 5: {
+    case eParBoneRegionAtCircle: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius * xsqrt(xurand());
         offset.Combine(mat.right, rr * isin(ang), mat.up, rr * icos(ang));
     }
         break;
-    case 6: {
+    case eParBoneRegionSphereEdge: {
         F32 ang = 2.0f * PI * xurand();
         F32 uz = 2.0f * xurand() - 1.0f;
         F32 r = region.radius * xsqrt(1.0f - uz * uz);
         offset.assign(r * icos(ang), r * isin(ang), uz * region.radius);
     }
         break;
-    case 7: {
+    case eParBoneRegionVerticalCircleEdge: {
         F32 ang = 2.0f * PI * xurand();
         offset.assign(region.radius * isin(ang), 0.0f, region.radius * icos(ang));
     }
         break;
-    case 8: {
+    case eParBoneRegionRightCircleEdge: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius;
         offset.Combine(mat.up, rr * isin(ang), mat.at, rr * icos(ang));
     }
         break;
-    case 9: {
+    case eParBoneRegionUpCircleEdge: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius;
         offset.Combine(mat.right, rr * isin(ang), mat.at, rr * icos(ang));
     }
         break;
-    case 10: {
+    case eParBoneRegionAtCircleEdge: {
         F32 ang = 2.0f * PI * xurand();
         F32 rr = region.radius;
         offset.Combine(mat.right, rr * isin(ang), mat.up, rr * icos(ang));
@@ -458,7 +458,7 @@ inline xVec3 get_random_offset(const xBound& bound, F32 expand, U32 vtype)
     xVec3 offset;
     xVec3 expandVec = { expand, expand, expand };
 
-    switch (bound.type | (vtype << 3)) {
+    switch (bound.type | (vtype << k_XBOUNDTYPE_SHIFT)) {
     case k_XBOUNDTYPE_SPHERE: {
         F32 ang = 2.0f * PI * xurand();
         F32 uz = 2.0f * xurand() - 1.0f;
@@ -481,14 +481,14 @@ inline xVec3 get_random_offset(const xBound& bound, F32 expand, U32 vtype)
         offset.z *= 2.0f * xurand() - 1.0f;
         xMat3x3RMulVec(&offset, bound.mat, &offset);
         break;
-    case k_XBOUNDTYPE_SPHERE | (1 << 3): {
+    case k_XBOUNDTYPE_SPHERE | (eParBoundRegionEdge << k_XBOUNDTYPE_SHIFT): {
         F32 ang = 2.0f * PI * xurand();
         F32 uz = 2.0f * xurand() - 1.0f;
         F32 r = (bound.sph.r + expand) * xsqrt(1.0f - uz * uz);
         offset.assign(r * icos(ang), r * isin(ang), uz * (bound.sph.r + expand));
     }
         break;
-    case k_XBOUNDTYPE_BOX | (1 << 3): {
+    case k_XBOUNDTYPE_BOX | (eParBoundRegionEdge << k_XBOUNDTYPE_SHIFT): {
         U32 pick = xrand_RandomInt32() >> 13;
         U32 side = pick % 3;
         F32 sign = (pick & 4) ? 1.0f : -1.0f;
@@ -507,7 +507,7 @@ inline xVec3 get_random_offset(const xBound& bound, F32 expand, U32 vtype)
         offset.ScaleComponents(scale);
     }
         break;
-    case k_XBOUNDTYPE_OBB | (1 << 3): {
+    case k_XBOUNDTYPE_OBB | (eParBoundRegionEdge << k_XBOUNDTYPE_SHIFT): {
         U32 pick = xrand_RandomInt32() >> 13;
         U32 side = pick % 3;
         F32 sign = (pick & 4) ? 1.0f : -1.0f;

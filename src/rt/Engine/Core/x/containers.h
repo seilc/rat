@@ -399,7 +399,7 @@ public:
         T value;
     };
 
-    static const S32 NODE_SIZE = sizeof(node_type);
+    enum { NODE_SIZE = sizeof(node_type) };
 
     void create(S32 max_size, U32 memtag, void* buffer)
     {
@@ -495,8 +495,7 @@ private:
     };
 
 public:
-    static const S32 MAX_BLOCKS = 32;
-    static const S32 FLAG_TAKEN = (1<<0);
+    enum { MAX_BLOCKS = 32, FLAG_TAKEN = (1<<0) };
 
     void init(size_t unit_size, size_t block_size, size_t max_blocks, U32 memtag)
     {

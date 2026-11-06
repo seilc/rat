@@ -655,7 +655,7 @@ void xParCmd_DampenSpeed_Update(xParCmd* c, xParGroup* ps, F32 dt)
     }
 }
 
-static const S32 NUM_SEGS = 3;
+#define NUM_SEGS 3
 
 void xParCmd_SizeInOut_Update(xParCmd* c, xParGroup* ps, F32)
 {

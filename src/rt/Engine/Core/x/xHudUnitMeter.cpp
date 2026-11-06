@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 
-static const S32 NUM_METER_MODELS = 2;
+#define NUM_METER_MODELS 2
 
 namespace xhud {
 

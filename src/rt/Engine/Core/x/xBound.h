@@ -3,11 +3,16 @@
 
 #include "xQuickCull.h"
 
-#define k_XBOUNDTYPE_NONE 0
-#define k_XBOUNDTYPE_SPHERE 1
-#define k_XBOUNDTYPE_BOX 2
-#define k_XBOUNDTYPE_CYLINDER 3
-#define k_XBOUNDTYPE_OBB 4
+enum xBoundType
+{
+    k_XBOUNDTYPE_NONE,
+    k_XBOUNDTYPE_SPHERE,
+    k_XBOUNDTYPE_BOX,
+    k_XBOUNDTYPE_CYLINDER,
+    k_XBOUNDTYPE_OBB,
+    k_XBOUNDTYPE_COUNT,
+    k_XBOUNDTYPE_SHIFT = 3
+};
 
 struct xBound
 {
