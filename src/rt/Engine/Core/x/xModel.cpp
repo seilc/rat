@@ -290,7 +290,7 @@ void xModelDebugPrintPoolUsage()
 DECOMP_FORCEACTIVE("ModelPool:", "  %dx%d", "\n");
 #endif
 
-static const U32 cFreeID = 0xFFFFFFFF;
+#define cFreeID 0xFFFFFFFF
 
 static xModelInstance* FindChild(xModelInstance* inst)
 {

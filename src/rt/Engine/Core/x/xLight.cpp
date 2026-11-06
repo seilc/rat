@@ -26,9 +26,9 @@
 
 #define LIGHT_CARD_B_TL_ID 0x5EE75CD7 // xStrHash("light_card_b_tl")
 
-static const S32 k_MAX_X_LIGHTS = 128;
-static const S32 k_MAX_TEMP_LIGHTS = 16;
-static const S32 k_MAX_LIGHT_FLASHES = 4;
+enum { k_MAX_X_LIGHTS = 128 };
+#define k_MAX_TEMP_LIGHTS 16
+#define k_MAX_LIGHT_FLASHES 4
 
 namespace {
 struct lightFlash

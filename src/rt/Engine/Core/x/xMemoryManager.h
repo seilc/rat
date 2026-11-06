@@ -21,8 +21,7 @@ do {                                                                            
 #define xMEMORYMANAGER_ASSERT_L(line, cond)
 #endif
 
-static const U32 xMEMORYOPT_ALIGN_MASK = 0x3C;
-static const U32 xMEMORYOPT_ALIGN_SHIFT = 2;
+enum { xMEMORYOPT_ALIGN_MASK = 0x3C, xMEMORYOPT_ALIGN_SHIFT = 2 };
 
 class xMemoryManager
 {
@@ -86,8 +85,8 @@ protected:
 private:
     struct DebugAllocationHeader
     {
-        static const U32 MAGIC = 0xDEADBEEF;
         static const U32 NUM_MAGIC = 1;
+        static const U32 MAGIC = 0xDEADBEEF;
 
         const char* file;
         S32 line;
@@ -101,8 +100,8 @@ private:
 
     struct DebugAllocationTrailer
     {
-        static const U32 MAGIC = 0x31173D0D;
         static const U32 NUM_MAGIC = 8;
+        static const U32 MAGIC = 0x31173D0D;
 
         U32 magic[NUM_MAGIC];
     };

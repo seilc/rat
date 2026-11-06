@@ -571,7 +571,7 @@ static F32 GetSplitVolumeSum(xJSPNodeTreeLeaf* tleaf, S32 count, S32 axis, F32 c
            (rightbox.sup.x - rightbox.inf.x) * (rightbox.sup.y - rightbox.inf.y) * (rightbox.sup.z - rightbox.inf.z);
 }
 
-static const S32 NUM_SPLIT_TESTS = 3;
+#define NUM_SPLIT_TESTS 3
 
 static S32 ChooseSplit_MeanMinSum(xJSPNodeTreeLeaf* tleaf, S32 count, S32& bestaxis, F32& bestcoord)
 {

@@ -9,7 +9,7 @@
 #include <rpworld.h>
 #include <rpptank.h>
 
-static const S32 BLOCK_SIZE = 80;
+enum { BLOCK_SIZE = 80 };
 
 enum ptank_group_type
 {

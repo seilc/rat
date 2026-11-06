@@ -53,25 +53,25 @@ static void add_tweaks(xParEmitter& emit)
 
 S32 xParInterpConvertInterpMode(xParInterp* p)
 {
-    if (p->interp < 8)
+    if (p->interp < eParInterpCount)
         return p->interp;
 
     if (p->interp == CONSTA_ID)
-        return 0;
+        return eParInterpConstA;
     if (p->interp == CONSTB_ID)
-        return 1;
+        return eParInterpConstB;
     if (p->interp == SINE_ID)
-        return 4;
+        return eParInterpSine;
     if (p->interp == COSINE_ID)
-        return 5;
+        return eParInterpCosine;
     if (p->interp == LINEAR_ID)
-        return 3;
+        return eParInterpLinear;
     if (p->interp == STEP_ID)
-        return 7;
+        return eParInterpStep;
     if (p->interp == RANDOM_ID)
-        return 2;
+        return eParInterpRandom;
 
-    return 0;
+    return eParInterpConstA;
 }
 
 void xParEmitterInit(void* b, void* tasset)
@@ -111,24 +111,24 @@ void xParEmitterInit(xBase* b, xParEmitterAsset* pea)
 
     for (S32 i = 0; i < PROP_INTERP_COUNT; i++) {
         if (prop->value[i].val[0] == prop->value[i].val[1])
-            prop->value[i].interp = 0;
+            prop->value[i].interp = eParInterpConstA;
         else
             prop->value[i].interp = xParInterpConvertInterpMode(&prop->value[i]);
     }
 
     t->rate_mode = prop->rate.interp;
 
-    if (t->rate_mode == 2) {
+    if (t->rate_mode == eParInterpRandom) {
         if (prop->rate.val[0] == prop->rate.val[1]) {
-            t->rate_mode = 0;
+            t->rate_mode = eParInterpConstA;
         }
     }
 
-    if (t->rate_mode == 2) {
+    if (t->rate_mode == eParInterpRandom) {
         prop->rate.order();
     }
 
-    t->rate = t->rate_mode == 2 ? (prop->rate.val[1] - prop->rate.val[0]) * xurand() + prop->rate.val[0] : prop->rate.val[0];
+    t->rate = t->rate_mode == eParInterpRandom ? (prop->rate.val[1] - prop->rate.val[0]) * xurand() + prop->rate.val[0] : prop->rate.val[0];
     t->rate_time = 0.0f;
     t->rate_fraction = 0.0f;
     t->rate_fraction_cull = 0.0f;
@@ -136,7 +136,7 @@ void xParEmitterInit(xBase* b, xParEmitterAsset* pea)
 
     t->emit_volume = NULL;
 
-    if (pea->emit_type == 14 || pea->emit_type == 13) {
+    if (pea->emit_type == eParRegionCircle || pea->emit_type == eParRegionCircleEdge) {
         F32 mag2 = pea->e_circle.dir.length2();
         if (mag2 < 0.001f) pea->e_circle.dir.assign(0.0f, 1.0f, 0.0f);
         else pea->e_circle.dir *= 1.0f / xsqrt(mag2);
@@ -159,7 +159,7 @@ void xParEmitterSetup(xParEmitter* t)
         t->group = t->parSys->group;
     }
 
-    if (t->tasset->attachToID && t->tasset->emit_type == 9) {
+    if (t->tasset->attachToID && t->tasset->emit_type == eParRegionOffsetPoint) {
         xEnt* ent = (xEnt*)zSceneFindObject(t->tasset->attachToID);
         xASSERT_L(275, ent);
 
@@ -169,11 +169,11 @@ void xParEmitterSetup(xParEmitter* t)
     t->attachTo = t->tasset->attachToID ? zSceneFindObject(t->tasset->attachToID) : NULL;
 
     switch (t->tasset->emit_type) {
-    case 6:
+    case eParRegionVolume:
         t->emit_volume = zSceneFindObject(t->tasset->e_volume.emit_volumeID);
         break;
-    case 15:
-    case 16:
+    case eParRegionEntBone:
+    case eParRegionEntBound:
     default:
         break;
     }
@@ -281,19 +281,19 @@ xPar* xParEmitterEmitCustom(xParEmitter* p, F32 dt, xParEmitterCustomSettings* i
 
     if (flags & 0x1000) {
         switch (p->tasset->emit_type) {
-        case 1:
-        case 2:
-        case 13:
-        case 14:
+        case eParRegionXZCircleEdge:
+        case eParRegionXZCircle:
+        case eParRegionCircleEdge:
+        case eParRegionCircle:
             p->tasset->e_circle.radius = info->radius;
             break;
-        case 7:
-        case 8:
-        case 10:
-        case 11:
+        case eParRegionSphereEdge:
+        case eParRegionSphere:
+        case eParRegionSphereEdgeUpper:
+        case eParRegionSphereEdgeLower:
             p->tasset->e_sphere.radius = info->radius;
             break;
-        case 0:
+        case eParRegionPoint:
             break;
         }
     }
@@ -338,32 +338,32 @@ F32 xParInterpCompute(S32 interp_mode, xParInterp* r, F32 time, S32 time_has_ela
     F32 val = 0.0f;
 
     switch (interp_mode) {
-    case 0:
+    case eParInterpConstA:
         val = r->val[0];
         break;
-    case 1:
+    case eParInterpConstB:
         val = r->val[1];
         break;
-    case 2:
+    case eParInterpRandom:
         if (time_has_elapsed) {
             val = (r->val[1] - r->val[0]) * xurand() + r->val[0];
         } else {
             val = lastVal;
         }
         break;
-    case 3:
+    case eParInterpLinear:
         xASSERT_FMT_L(604, (r->freq>0.0f), "Linear Interp requires non-zero 'Freq' (eg use '1')");
 
         if (r->freq < 0.00001f) val = r->val[0];
         else val = (r->val[1] - r->val[0]) * (time / r->freq) + r->val[0];
         break;
-    case 4:
+    case eParInterpSine:
         val = (r->val[1] - r->val[0]) * (0.5f * isin(2.0f * PI * (time * r->oofreq)) + 0.5f) + r->val[0];
         break;
-    case 5:
+    case eParInterpCosine:
         val = (r->val[1] - r->val[0]) * (0.5f * icos(2.0f * PI * (time * r->oofreq)) + 0.5f) + r->val[0];
         break;
-    case 7:
+    case eParInterpStep:
         if (time * r->freq >= 0.5f)
             val = r->val[1];
         else
@@ -555,7 +555,7 @@ xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
 
         const xMat4x3* bone_mat = NULL;
         xVec3 bone_vel;
-        if (a->emit_type == 15 && attach_ent) {
+        if (a->emit_type == eParRegionEntBone && attach_ent) {
             bone_mat = xParEmitterTransformEntBone(emitPosition, bone_vel, *a, *attach_ent);
             bone_vel *= par_dt;
         }
@@ -625,37 +625,37 @@ xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
                 xParEmitterEmitSetTexIdxs(p, ps);
 
                 switch (a->emit_type) {
-                case 0:
+                case eParRegionPoint:
                     xParEmitterEmitPoint(p, a, par_dt);
                     break;
-                case 1:
+                case eParRegionXZCircleEdge:
                     xParEmitterEmitCircleEdge(p, a, par_dt);
                     break;
-                case 2:
+                case eParRegionXZCircle:
                     xParEmitterEmitCircle(p, a, par_dt);
                     break;
-                case 3:
+                case eParRegionXZRectEdge:
                     xParEmitterEmitRectEdge(p, a, par_dt);
                     break;
-                case 4:
+                case eParRegionXZRect:
                     xParEmitterEmitRect(p, a, par_dt);
                     break;
-                case 5:
+                case eParRegionLine:
                     xParEmitterEmitLine(p, a, par_dt);
                     break;
-                case 7:
-                    xParEmitterEmitSphereEdge(p, a, par_dt, 7);
+                case eParRegionSphereEdge:
+                    xParEmitterEmitSphereEdge(p, a, par_dt, eParRegionSphereEdge);
                     break;
-                case 10:
-                    xParEmitterEmitSphereEdge(p, a, par_dt, 10);
+                case eParRegionSphereEdgeUpper:
+                    xParEmitterEmitSphereEdge(p, a, par_dt, eParRegionSphereEdgeUpper);
                     break;
-                case 11:
-                    xParEmitterEmitSphereEdge(p, a, par_dt, 11);
+                case eParRegionSphereEdgeLower:
+                    xParEmitterEmitSphereEdge(p, a, par_dt, eParRegionSphereEdgeLower);
                     break;
-                case 8:
+                case eParRegionSphere:
                     xParEmitterEmitSphere(p, a, par_dt);
                     break;
-                case 6:
+                case eParRegionVolume:
                 {
                     xBase* obj = pe->emit_volume;
                     if (obj) {
@@ -668,25 +668,25 @@ xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
                     }
                     break;
                 }
-                case 9:
+                case eParRegionOffsetPoint:
                     xParEmitterEmitOffsetPoint(pe, p, a, par_dt, (xEnt*)emitObj);
                     break;
-                case 12:
+                case eParRegionVCylEdge:
                     xParEmitterEmitVCylEdge(p, a, par_dt);
                     break;
-                case 13:
+                case eParRegionCircleEdge:
                     xParEmitterEmitOCircleEdge(p, a, par_dt);
                     break;
-                case 14:
+                case eParRegionCircle:
                     xParEmitterEmitOCircle(p, a, par_dt);
                     break;
-                case 15:
+                case eParRegionEntBone:
                     if (bone_mat) {
                         p->m_vel = bone_vel;
                         xParEmitterEmitEntBone(p, a, par_dt, *bone_mat);
                     }
                     break;
-                case 16:
+                case eParRegionEntBound:
                     if (attach_ent) {
                         xParEmitterEmitEntBound(p, a, par_dt, attach_ent);
                     }
@@ -897,10 +897,10 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
     strcat(prefix, "|");
 
     switch (asset.emit_type) {
-    case 0:
+    case eParRegionPoint:
         break;
-    case 1:
-    case 2:
+    case eParRegionXZCircleEdge:
+    case eParRegionXZCircle:
         zAUTOTWEAK(prefix, "Radius", &asset.e_circle.radius, 0.0f, 1e9f, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Deflection", &asset.e_circle.deflection, -1e9f, 1e9f, NULL, NULL, 2);
         if (reset) {
@@ -908,8 +908,8 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
             asset.e_circle.deflection = 0.0f;
         }
         break;
-    case 3:
-    case 4:
+    case eParRegionXZRectEdge:
+    case eParRegionXZRect:
         zAUTOTWEAK(prefix, "X Length", &asset.e_rect.x_len, 0.0f, 1e6f, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Z Length", &asset.e_rect.z_len, 0.0f, 1e6f, NULL, NULL, 2);
         if (reset) {
@@ -917,7 +917,7 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
             asset.e_rect.z_len = 1.0f;
         }
         break;
-    case 5:
+    case eParRegionLine:
         zAUTOTWEAK(prefix, "Location 1 ", &asset.e_line.pos1, 0, 0, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Location 2 ", &asset.e_line.pos2, 0, 0, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Radius", &asset.e_line.radius, 0.0f, 1e6f, NULL, NULL, 2);
@@ -927,29 +927,29 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
             asset.e_line.radius = 1.0f;
         }
         break;
-    case 6:
+    case eParRegionVolume:
         static tweak_callback cb_volume_entity = tweak_callback::create(on_change_volume_entity);
         zAUTOTWEAK_SELECT(prefix, "Entity", &asset.e_volume.emit_volumeID, all_entity_labels, all_entity_ids, all_entity_count, &cb_volume_entity, &emit, 2);
         if (reset) {
             asset.e_volume.emit_volumeID = 0;
         }
         break;
-    case 7:
-    case 8:
-    case 10:
-    case 11:
+    case eParRegionSphereEdge:
+    case eParRegionSphere:
+    case eParRegionSphereEdgeUpper:
+    case eParRegionSphereEdgeLower:
         zAUTOTWEAK(prefix, "Radius", &asset.e_sphere.radius, 0.0f, 1e9f, NULL, NULL, 2);
         if (reset) {
             asset.e_sphere.radius = 1.0f;
         }
         break;
-    case 9:
+    case eParRegionOffsetPoint:
         zAUTOTWEAK(prefix, "Location", &asset.e_offsetp.offset, 0, 0, NULL, NULL, 2);
         if (reset) {
             asset.e_offsetp.offset.assign(0.0f);
         }
         break;
-    case 12:
+    case eParRegionVCylEdge:
         zAUTOTWEAK(prefix, "Height", &asset.e_vcyl.height, -1e9f, 1e9f, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Radius", &asset.e_vcyl.radius, 0.0f, 1e9f, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Deflection", &asset.e_vcyl.deflection, -1e9f, 1e9f, NULL, NULL, 2);
@@ -958,8 +958,8 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
             asset.e_vcyl.deflection = 0.0f;
         }
         break;
-    case 13:
-    case 14:
+    case eParRegionCircleEdge:
+    case eParRegionCircle:
         zAUTOTWEAK(prefix, "Radius", &asset.e_circle.radius, 0.0f, 1e9f, NULL, NULL, 2);
         zAUTOTWEAK(prefix, "Deflection", &asset.e_circle.deflection, -1e9f, 1e9f, NULL, NULL, 2);
         static tweak_callback cb_circle_dir = tweak_callback::create(on_change_circle_dir);
@@ -970,7 +970,7 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
             asset.e_circle.dir.assign(0.0f, 1.0f, 0.0f);
         }
         break;
-    case 15:
+    case eParRegionEntBone:
     {
         static const char* type_labels[] = {
             "Point",
@@ -997,14 +997,14 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
         if (reset) {
             asset.e_entbone.bone = 0;
             asset.e_entbone.flags = 0;
-            asset.e_entbone.type = 1;
+            asset.e_entbone.type = eParBoneRegionSphere;
             asset.e_entbone.offset = 0.0f;
             asset.e_entbone.radius = 1.0f;
             asset.e_entbone.deflection = 0.0f;
         }
         break;
     }
-    case 16:
+    case eParRegionEntBound:
     {
         static const char* type_labels[] = {
             "Volume",
@@ -1016,7 +1016,7 @@ void add_region_tweaks(xParEmitter& emit, bool reset)
         zAUTOTWEAK(prefix, "Deflection", &asset.e_entbound.deflection, -1e9f, 1e9f, NULL, NULL, 2);
         if (reset) {
             asset.e_entbound.flags = 0;
-            asset.e_entbound.type = 0;
+            asset.e_entbound.type = eParBoundRegionVolume;
             asset.e_entbound.expand = 0.0f;
             asset.e_entbound.deflection = 0.0f;
         }

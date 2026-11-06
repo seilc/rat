@@ -62,7 +62,7 @@ struct holder
     U8 data[1];
 };
 
-static const U32 MAGIC_ID = 'BKAR';
+enum { MAGIC_ID = 'BKAR' };
 
 void block_allocator::create(S32 block_size, S32 max_blocks, U32 memtag)
 {

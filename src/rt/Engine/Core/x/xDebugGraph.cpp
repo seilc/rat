@@ -21,7 +21,7 @@ namespace {
         FLAG_BIND_INT = 0x8
     };
 
-    static const S32 MAX_GRAPHS = 128;
+    enum { MAX_GRAPHS = 128 };
 
     const char global_tweak_prefix[] = "Graph|\001Globals|";
 

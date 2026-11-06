@@ -15,9 +15,8 @@
 
 namespace {
 
-    static const S32 MAX_SYSTEMS = 128;
-    static const S32 MAX_SYSTEMS_PER_GROUP = 32;
-    static const S32 MAX_BLOCKS = 32;
+    enum { MAX_SYSTEMS = 128, MAX_SYSTEMS_PER_GROUP = 32 };
+#define MAX_BLOCKS 32
 
     namespace tweak {
 

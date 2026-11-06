@@ -13,9 +13,9 @@
 #include <string.h>
 
 #if DEBUG || RELEASE
-static const S32 SPHERE_NUM_PTS = 50;
-static const S32 MARKER_NUM_LINES = 7;
-static const S32 BOX_NUM_PTS = 8;
+#define SPHERE_NUM_PTS 50
+#define MARKER_NUM_LINES 7
+#define BOX_NUM_PTS 8
 
 static xColor sgDrawColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 static xVec3 g_normalXZ = { 0.0f, 1.0f, 0.0f };

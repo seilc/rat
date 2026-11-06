@@ -12,7 +12,7 @@ extern S32 xent_entent;
 extern S32 xent_nqcrejects;
 #endif
 
-static const S32 NUM_SEPERATION_AXES = 13;
+#define NUM_SEPERATION_AXES 13
 
 // UNUSED: speculative
 void xBoundMakeSphere(xBound& b, const xVec3& center, F32 radius)
@@ -169,38 +169,38 @@ void xBoundHitsBound(const xBound* a, const xBound* b, xCollis* c)
         return;
     }
 
-    switch (a->type | (b->type << 3)) {
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_SPHERE << 3):
+    switch (a->type | (b->type << k_XBOUNDTYPE_SHIFT)) {
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         xSphereHitsSphere(&a->sph, &b->sph, c);
         break;
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_OBB << 3):
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_OBB << k_XBOUNDTYPE_SHIFT):
         xBoundSphereHitsOBB(&a->sph, &b->box.box, b->mat, c);
         break;
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_BOX << 3):
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_BOX << k_XBOUNDTYPE_SHIFT):
         xSphereHitsBox(&a->sph, &b->box.box, c);
         break;
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_SPHERE << 3):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         xBoxHitsSphere(&a->box.box, &b->sph, c);
         break;
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_OBB << 3):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_OBB << k_XBOUNDTYPE_SHIFT):
         xBoxHitsObb(&a->box.box, &b->box.box, b->mat, c);
         break;
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_SPHERE << 3):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         xBoundSphereHitsOBB(&b->sph, &a->box.box, a->mat, c);
         break;
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_OBB << 3):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_OBB << k_XBOUNDTYPE_SHIFT):
         xObbHitsObb(&a->box.box, a->mat, &b->box.box, b->mat, c);
         break;
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_BOX << 3):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_BOX << k_XBOUNDTYPE_SHIFT):
         xBoxHitsObb(&b->box.box, &a->box.box, a->mat, c);
         break;
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_CYLINDER << 3):
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_CYLINDER << k_XBOUNDTYPE_SHIFT):
         xSphereHitsVCylinder(&a->sph, &b->cyl, c);
         break;
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_BOX << 3):
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_CYLINDER << 3):
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_CYLINDER << 3):
-    case k_XBOUNDTYPE_CYLINDER | (k_XBOUNDTYPE_SPHERE << 3):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_BOX << k_XBOUNDTYPE_SHIFT):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_CYLINDER << k_XBOUNDTYPE_SHIFT):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_CYLINDER << k_XBOUNDTYPE_SHIFT):
+    case k_XBOUNDTYPE_CYLINDER | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         xCylinderHitsSphere(&a->cyl, &b->sph, c);
         break;
     default:
@@ -379,24 +379,24 @@ void xBoundDraw(const xBound* b)
 
 bool xBoundHitsBound(const xBound& a, const xBound& b)
 {
-    switch (a.type | (b.type << 3)) {
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_SPHERE << 3):
+    switch (a.type | (b.type << k_XBOUNDTYPE_SHIFT)) {
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         return xSphereHitsSphere(a.sph, b.sph);
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_OBB << 3):
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_OBB << k_XBOUNDTYPE_SHIFT):
         return xSphereHitsOBB(a.sph, b.box.box, *b.mat);
-    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_BOX << 3):
+    case k_XBOUNDTYPE_SPHERE | (k_XBOUNDTYPE_BOX << k_XBOUNDTYPE_SHIFT):
         return xSphereHitsBox(a.sph, b.box.box);
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_SPHERE << 3):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         return xSphereHitsBox(b.sph, a.box.box);
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_BOX << 3):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_BOX << k_XBOUNDTYPE_SHIFT):
         return xBoxHitsBox(a.box.box, b.box.box);
-    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_OBB << 3):
+    case k_XBOUNDTYPE_BOX | (k_XBOUNDTYPE_OBB << k_XBOUNDTYPE_SHIFT):
         return xOBBHitsOBB(a.box.box, g_I3, b.box.box, *b.mat);
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_SPHERE << 3):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_SPHERE << k_XBOUNDTYPE_SHIFT):
         return xSphereHitsOBB(b.sph, a.box.box, *a.mat);
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_OBB << 3):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_OBB << k_XBOUNDTYPE_SHIFT):
         return xOBBHitsOBB(a.box.box, *a.mat, b.box.box, *b.mat);
-    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_BOX << 3):
+    case k_XBOUNDTYPE_OBB | (k_XBOUNDTYPE_BOX << k_XBOUNDTYPE_SHIFT):
         return xOBBHitsOBB(a.box.box, *a.mat, b.box.box, g_I3);
     default:
         DBprintf(DBML_DBG, "xBoundHitsBound: unsupported collision type - bound %d vs bound %d\n", a.type, b.type);

@@ -37,7 +37,7 @@ enum
     ModelInstance_ChildTransform = 0x40
 };
 
-static const S32 k_MAX_MODEL_LIGHTS = 4;
+#define k_MAX_MODEL_LIGHTS 4
 
 struct xModelInstance
 {

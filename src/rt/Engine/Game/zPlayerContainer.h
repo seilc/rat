@@ -6,7 +6,7 @@
 
 struct zPlayer;
 
-static const S32 MAX_PLAYERS_PER_SCENE = 4;
+#define MAX_PLAYERS_PER_SCENE 4
 
 class zPlayerContainer
 {
