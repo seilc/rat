@@ -20,6 +20,7 @@
 #include "zNPCCommon.h"
 #include "zPad.h"
 #include "zPlayer.h"
+#include "zScene.h"
 #include "zShrapnel.h"
 #include "zSurface.h"
 

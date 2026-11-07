@@ -15,6 +15,7 @@
 #include "zGoo.h"
 #include "zGrid.h"
 #include "zPlayer.h"
+#include "zScene.h"
 #include "zReactiveAnimation.h"
 
 #include <rpcollis.h>

@@ -2,6 +2,7 @@
 
 #include "xGlobals.h"
 #include "zPlayer.h"
+#include "zScene.h"
 
 #include <string.h>
 
