@@ -107,14 +107,13 @@ struct xAnimState
     xAnimBeforeAnimMatricesCallback BeforeAnimMatrices;
 };
 
-typedef U32(*xAnimTransitionConditionalCallback)(xAnimTransition*, xAnimSingle*, void*);
 typedef U32(*xAnimTransitionCallback)(xAnimTransition*, xAnimSingle*, void*);
 
 struct xAnimTransition
 {
     xAnimTransition* Next;
     xAnimState* Dest;
-    xAnimTransitionConditionalCallback Conditional;
+    xAnimTransitionCallback Conditional;
     xAnimTransitionCallback Callback;
     U32 Flags;
     U32 UserFlags;

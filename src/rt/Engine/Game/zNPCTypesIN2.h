@@ -3,16 +3,14 @@
 
 #include "types.h"
 
-typedef void(*zNPCTypeInfoCallback)();
-
 struct zNPCTypeInfoIN2
 {
     U32 id;
-    zNPCTypeInfoCallback scene_init;
-    zNPCTypeInfoCallback scene_enter;
-    zNPCTypeInfoCallback setup;
-    zNPCTypeInfoCallback reset;
-    zNPCTypeInfoCallback scene_exit;
+    void(*scene_init)();
+    void(*scene_enter)();
+    void(*setup)();
+    void(*reset)();
+    void(*scene_exit)();
 };
 
 const zNPCTypeInfoIN2* zNPCTypesGetInfo();
