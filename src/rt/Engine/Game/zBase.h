@@ -201,4 +201,6 @@ enum en_ZBASETYPE
     eBaseTypeCount
 };
 
+char* zBaseTypeName(S32 baseTypeIndex);
+
 #endif

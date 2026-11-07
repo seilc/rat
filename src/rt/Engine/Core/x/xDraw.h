@@ -76,6 +76,7 @@ void xDrawFrustumEdges(RwCamera* cam, bool); // UNUSED
 inline void xDrawSetColor(xColor color) {}
 inline void xDrawSetColor(U8 r, U8 g, U8 b, U8 a) {}
 inline void xDrawLine(const xVec3* a, const xVec3* b) {}
+inline void xDrawLine(F32 x1, F32 y1, F32 z1, F32 x2, F32 y2, F32 z2) {}
 inline void xDrawArrow(const xVec3* from, const xVec3* dir, bool asRay, F32 length) {}
 inline void xDrawCapsule(const xVec3* start, const xVec3* end, F32 r, U32 lod) {}
 inline void xDrawSphere(const xSphere* sph, U32 flags) {}
@@ -85,6 +86,7 @@ inline void xDrawSphere2(const xSphere* sph, U32 lod) {}
 inline void xDrawSphere2(const xVec3* pos, F32 r, U32 lod) {}
 inline void xDrawOBB(const xBox* b, const xMat4x3* m) {}
 inline void xDrawCard(RwRaster* raster, const xFRect& src_rect, const xFRect& dst_rect, bool zwrite) {}
+inline void xDrawCard(RwRaster* raster, F32 x, F32 y, F32 w, F32 h, bool zwrite) {}
 #endif
 
 S32 Im2DRenderQuad(F32 x1, F32 y1, F32 x2, F32 y2, F32 z, F32 recipCamZ, F32 uvOffset);

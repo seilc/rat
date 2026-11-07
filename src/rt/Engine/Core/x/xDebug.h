@@ -262,6 +262,7 @@ struct xStats
     S64 x3;
 };
 
+extern xStats gStats;
 extern xStats gPendingStats;
 
 #define xSTATS_BEGIN(t) iTime t = iTimeGet()

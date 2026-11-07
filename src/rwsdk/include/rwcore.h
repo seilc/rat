@@ -7,6 +7,7 @@ typedef struct RwBBox RwBBox;
 typedef struct RwCamera RwCamera;
 typedef struct RwFrame RwFrame;
 typedef struct RwFrustumPlane RwFrustumPlane;
+typedef struct RwGameCubeRasterExtension RwGameCubeRasterExtension;
 typedef struct RwImage RwImage;
 typedef struct RwObjectHasFrame RwObjectHasFrame;
 typedef struct RwRaster RwRaster;
@@ -376,6 +377,23 @@ struct RwRaster
     RwInt32 originalStride;
 };
 
+struct RwGameCubeRasterExtension
+{
+    RwUInt32 tlutObj[3];
+    RwUInt32 format;
+    RwUInt32 tlutFmt;
+    RwUInt32 flags;
+    RwUInt8* memory;
+    RwUInt8* pixels;
+    RwUInt8* palette;
+    RwUInt8* lockedPixels;
+    RwUInt8* lockedBuffer;
+    void* region;
+    RwUInt16 token;
+    RwUInt8 maxLOD;
+    RwUInt8 lockedMipLevel;
+};
+
 struct RwImage
 {
     RwInt32 flags;
@@ -564,8 +582,10 @@ struct RwCamera
 #define RwCameraSetRasterMacro(_camera, _raster) (((_camera)->frameBuffer = (_raster)), (_camera))
 #define RwCameraSetZRasterMacro(_camera, _raster) (((_camera)->zBuffer = (_raster)), (_camera))
 #define RwFrameGetMatrixMacro(_f) (&(_f)->modelling)
+#define RwGameCubeRasterGetExtensionMacro(_raster) ((RwGameCubeRasterExtension*)(((RwUInt8*)(_raster)) + _RwGameCubeRasterExtOffset))
 #define RwRasterGetFormatMacro(_raster) ((((_raster)->cFormat) & (rwRASTERFORMATMASK >> 8)) << 8)
 #define RwRasterGetHeightMacro(_raster) ((_raster)->height)
+#define RwRasterGetParentMacro(_raster) ((_raster)->parent)
 #define RwRasterGetStrideMacro(_raster) ((_raster)->stride)
 #define RwRasterGetTypeMacro(_raster) (((_raster)->cType) & rwRASTERTYPEMASK)
 #define RwRasterGetWidthMacro(_raster) ((_raster)->width)
@@ -580,6 +600,10 @@ struct RwCamera
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifndef RWDEBUG
+extern RwInt32 _RwGameCubeRasterExtOffset;
 #endif
 
 RwCamera* RwCameraBeginUpdate(RwCamera* camera);
@@ -602,6 +626,7 @@ RwFrame* RwFrameOrthoNormalize(RwFrame* frame);
 RwFrame* RwFrameRotate(RwFrame* frame, const RwV3d* axis, RwReal angle, RwOpCombineType combine);
 RwFrame* RwFrameTransform(RwFrame* frame, const RwMatrix* transform, RwOpCombineType combine);
 RwFrame* RwFrameUpdateObjects(RwFrame* frame);
+void RwGameCubeCameraTextureFlush(RwRaster* raster, RwBool boxFilter);
 void RwGameCubeSetAlphaCompare(RwInt32 comp0, RwUInt8 ref0, RwInt32 op, RwInt32 comp1, RwUInt8 ref1);
 RwBool RwIm3DEnd(void);
 RwBool RwIm3DRenderIndexedPrimitive(RwPrimitiveType primType, RwImVertexIndex* indices, RwInt32 numIndices);
@@ -641,8 +666,10 @@ RwCamera* RwCameraSetFrame(RwCamera* camera, RwFrame* frame);
 RwCamera* RwCameraSetRaster(RwCamera* camera, RwRaster* raster);
 RwCamera* RwCameraSetZRaster(RwCamera* camera, RwRaster* zRaster);
 RwMatrix* RwFrameGetMatrix(RwFrame* frame);
+RwGameCubeRasterExtension* RwGameCubeRasterGetExtension(RwRaster* raster);
 RwInt32 RwRasterGetFormat(const RwRaster* raster);
 RwInt32 RwRasterGetHeight(const RwRaster* raster);
+RwRaster* RwRasterGetParent(const RwRaster* raster);
 RwInt32 RwRasterGetStride(const RwRaster* raster);
 RwInt32 RwRasterGetType(const RwRaster* raster);
 RwInt32 RwRasterGetWidth(const RwRaster* raster);
@@ -672,8 +699,10 @@ RwTexture* RwTextureSetFilterMode(RwTexture* texture, RwTextureFilterMode filter
 #define RwCameraSetRaster(_camera, _raster) RwCameraSetRasterMacro(_camera, _raster)
 #define RwCameraSetZRaster(_camera, _raster) RwCameraSetZRasterMacro(_camera, _raster)
 #define RwFrameGetMatrix(_f) RwFrameGetMatrixMacro(_f)
+#define RwGameCubeRasterGetExtension(_raster) RwGameCubeRasterGetExtensionMacro(_raster)
 #define RwRasterGetFormat(_raster) RwRasterGetFormatMacro(_raster)
 #define RwRasterGetHeight(_raster) RwRasterGetHeightMacro(_raster)
+#define RwRasterGetParent(_raster) RwRasterGetParentMacro(_raster)
 #define RwRasterGetStride(_raster) RwRasterGetStrideMacro(_raster)
 #define RwRasterGetType(_raster) RwRasterGetTypeMacro(_raster)
 #define RwRasterGetWidth(_raster) RwRasterGetWidthMacro(_raster)

@@ -222,6 +222,7 @@ F32 xVec3Length2(const xVec3* v);
 void xVec3Inv(xVec3* o, const xVec3* v);
 void xVec3Inv(xVec3& v);
 void xVec3ScaleC(xVec3& o, F32 scale);
+void xVec3ScaleC(xVec3& o, const xVec3& v, F32 scale);
 F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 F32 xVec3Dist(const xVec3* a, const xVec3* b);
 F32 xVec3Dist2(const xVec3* a, const xVec3* b);

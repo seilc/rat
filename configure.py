@@ -638,7 +638,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xScreenWarp.cpp"),
             Object(Matching, "rt/Engine/Core/x/xScrFx.cpp"),
             Object(Matching, "rt/Engine/Core/x/xserializer.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xShadow.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xShadow.cpp"),
             Object(Matching, "rt/Engine/Core/x/xShadowSimple.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSkyDome.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSndMgr.cpp"),
