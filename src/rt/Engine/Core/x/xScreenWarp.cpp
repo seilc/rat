@@ -10,6 +10,7 @@
 #include "xutil.h"
 #include "zGlobals.h"
 #include "zPlayer.h"
+#include "zScene.h"
 #include "iMath.h"
 
 #include <stdio.h>

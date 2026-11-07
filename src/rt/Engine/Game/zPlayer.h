@@ -9,9 +9,9 @@
 #include "xJSP.h"
 #include "zNPCAttacker.h"
 #include "xEntDrive.h"
-#include "zScene.h"
 #include "zCombat.h"
 
+struct zScene;
 struct zSlideCam;
 struct xModelAssetParam;
 class zInteraction;

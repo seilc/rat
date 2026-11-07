@@ -10,6 +10,7 @@
 #include "zMenu.h"
 #include "zPad.h"
 #include "zPlayer.h"
+#include "zScene.h"
 #include "zVar.h"
 
 #include <string.h>
