@@ -77,6 +77,7 @@ struct xVec3
     }
 
     F32 up_normalize();
+    F32 at_normalize() { return safe_normalize(m_UnitAxisZ); }
     void AddScale(const xVec3& p, const xVec3& d, F32 s);
     void AddScale(const xVec3& d, F32 s);
     void Sub(const xVec3& a, const xVec3& b);

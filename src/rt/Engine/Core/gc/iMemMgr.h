@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+extern S32 the_heap;
+
 void iMemInit();
 void iMemExit();
 void iMemSet(void* addr, S32 val, unsigned long size);

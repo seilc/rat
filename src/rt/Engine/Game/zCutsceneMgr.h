@@ -1,10 +1,17 @@
 #ifndef ZCUTSCENEMGR_H
 #define ZCUTSCENEMGR_H
 
+#include "xCutsceneMgr.h"
 #include "xModelPipe.h"
 #include "xMath3.h"
 
 #include <rpworld.h>
+
+struct zCutsceneMgr : xCutsceneMgr
+{
+    U8 pausedMusic;
+    U8 sendDoneForDisabledCutscene;
+};
 
 struct zCutsceneHack
 {
