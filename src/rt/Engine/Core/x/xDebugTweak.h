@@ -10,18 +10,21 @@ struct xVec3;
 
 struct tweak_callback
 {
-    void(*on_change)(const tweak_info&);
-    void(*on_select)(const tweak_info&);
-    void(*on_unselect)(const tweak_info&);
-    void(*on_start_edit)(const tweak_info&);
-    void(*on_stop_edit)(const tweak_info&);
-    void(*on_expand)(const tweak_info&);
-    void(*on_collapse)(const tweak_info&);
-    void(*on_update)(const tweak_info&);
-    void(*convert_mem_to_tweak)(const tweak_info&, void*);
-    void(*convert_tweak_to_mem)(const tweak_info&, void*);
+    typedef void(*event_callback)(const tweak_info&);
+    typedef void(*convert_callback)(const tweak_info&, void*);
 
-    static tweak_callback create(void(*on_change)(const tweak_info&), void(*on_select)(const tweak_info&) = NULL, void(*on_unselect)(const tweak_info&) = NULL, void(*on_start_edit)(const tweak_info&) = NULL, void(*on_stop_edit)(const tweak_info&) = NULL, void(*on_expand)(const tweak_info&) = NULL, void(*on_collapse)(const tweak_info&) = NULL, void(*on_update)(const tweak_info&) = NULL, void(*convert_mem_to_tweak)(const tweak_info&, void*) = NULL, void(*convert_tweak_to_mem)(const tweak_info&, void*) = NULL)
+    event_callback on_change;
+    event_callback on_select;
+    event_callback on_unselect;
+    event_callback on_start_edit;
+    event_callback on_stop_edit;
+    event_callback on_expand;
+    event_callback on_collapse;
+    event_callback on_update;
+    convert_callback convert_mem_to_tweak;
+    convert_callback convert_tweak_to_mem;
+
+    static tweak_callback create(event_callback on_change, event_callback on_select = NULL, event_callback on_unselect = NULL, event_callback on_start_edit = NULL, event_callback on_stop_edit = NULL, event_callback on_expand = NULL, event_callback on_collapse = NULL, event_callback on_update = NULL, convert_callback convert_mem_to_tweak = NULL, convert_callback convert_tweak_to_mem = NULL)
     {
         tweak_callback cb = { on_change, on_select, on_unselect, on_start_edit, on_stop_edit,
                               on_expand, on_collapse, on_update,
@@ -29,13 +32,13 @@ struct tweak_callback
         return cb;
     }
 
-    static tweak_callback create_change(void(*on_change)(const tweak_info&))
+    static tweak_callback create_change(event_callback on_change)
     { tweak_callback cb = { on_change, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }; return cb; }
 
-    static tweak_callback create_expand(void(*on_expand)(const tweak_info&), void(*on_collapse)(const tweak_info&))
+    static tweak_callback create_expand(event_callback on_expand, event_callback on_collapse)
     { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, on_expand, on_collapse, NULL, NULL, NULL }; return cb; }
 
-    static tweak_callback create_update(void(*on_update)(const tweak_info&))
+    static tweak_callback create_update(event_callback on_update)
     { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, on_update, NULL, NULL }; return cb; }
 };
 

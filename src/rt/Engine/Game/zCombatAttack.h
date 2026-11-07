@@ -9,6 +9,8 @@ struct zShrapnelAsset;
 class zCombatAttack
 {
 public:
+    typedef void(*hitCallback)(xEnt*, const zCombatAttack*, xEnt*, const xVec3*, const xVec3*);
+
     struct hitBoneInfo
     {
         U16 bone;
@@ -69,7 +71,7 @@ public:
     ShrapnelEffectParams shrapnelEffect;
     BlurEffectParams blurEffect;
     FlashEffectParams flashEffect;
-    void(*hitCB)(xEnt*, zCombatAttack*, xEnt*, xVec3*, xVec3*);
+    hitCallback hitCB;
 
     zCombatAttack();
 };
