@@ -3,6 +3,25 @@
 
 #include "xHud.h"
 
+#include <rwcore.h>
+
+inline void VertSetXYUV(RwIm2DVertex& rVert, F32 x, F32 y, F32 u, F32 v, F32 recipZ)
+{
+    RwIm2DVertexSetScreenX(&rVert, x);
+    RwIm2DVertexSetScreenY(&rVert, y);
+    RwIm2DVertexSetU(&rVert, u, recipZ);
+    RwIm2DVertexSetV(&rVert, v, recipZ);
+}
+
+inline void SetFourVertsAlpha(RwIm2DVertex* pVerts, F32 fAlphaPercent)
+{
+    U32 uAlpha = 255.0f * fAlphaPercent;
+    RwIm2DVertexSetIntRGBA(&pVerts[0], 0xFF, 0xFF, 0xFF, uAlpha);
+    RwIm2DVertexSetIntRGBA(&pVerts[1], 0xFF, 0xFF, 0xFF, uAlpha);
+    RwIm2DVertexSetIntRGBA(&pVerts[2], 0xFF, 0xFF, 0xFF, uAlpha);
+    RwIm2DVertexSetIntRGBA(&pVerts[3], 0xFF, 0xFF, 0xFF, uAlpha);
+}
+
 namespace xhud {
 
 struct image_asset;
@@ -29,6 +48,15 @@ public:
         SPECIAL_STROBE
     };
 
+    enum LAYER_FLAGS
+    {
+        BLEND = 0x1,
+        ADDITIVE = 0x2,
+        SET_DEST_ALPHA = 0x4,
+        USE_DEST_ALPHA = 0x8,
+        BLEND_MASK = 0xF
+    };
+
     struct widget_chunk;
 
     static void load(xBase& data, xDynAsset& asset, size_t asset_size);
@@ -53,14 +81,73 @@ public:
     bool render_strobe_effect(U32 uLayer);
     bool render_special_strobe(U32 uLayer);
     bool render_random_v(U32 uLayer);
+    bool init_layers(U16 uLayers, U16 nVertsMax, U16 nIndicesMax); // UNUSED
+    bool set_layers_to_render(U16 uLayers); // UNUSED
+    bool set_layer_minmax(U32 whichLayer, F32 fMinPercent, F32 fMaxPercent); // UNUSED
+    bool set_layer_value(U32 whichLayer, F32 fVal); // UNUSED
+    F32 get_layer_value(U32 whichLayer) const; // UNUSED
+    bool set_layer_clamp_top(U32 whichLayer, F32 fPercent); // UNUSED
+    F32 get_layer_clamp_top(U32 whichLayer) const; // UNUSED
+    bool set_layer_scale(U32 whichLayer, F32 fScaleX, F32 fScaleY); // UNUSED
+    bool set_layer_offset(U32 whichLayer, F32 fOffsetX, F32 fOffsetY); // UNUSED
+    bool get_layer_offset(U32 whichLayer, F32& fOffsetX, F32& fOffsetY); // UNUSED
+    bool set_layer_alpha(U32 whichLayer, F32 fAlpha); // UNUSED
+    F32 get_layer_alpha(U32 whichLayer); // UNUSED
+    F32 get_layer_max(U32 whichLayer) const; // UNUSED
+    bool set_layer_uvs(U32 whichLayer, RwTexCoords& upperLeft, RwTexCoords& lowerRight); // UNUSED
+    bool set_layer_type(U32 whichLayer, RENDERTYPE eType, LAYER_FLAGS uBlendFlags); // UNUSED
     void set_buffer_to_layer(RENDERTYPE eType);
+#if DEBUG || RELEASE
+    void addDebugTweaks(const char* assetName, U32 whichLayer); // UNUSED
+#endif
+    bool set_layer_strobe_prop(U32 whichLayer, F32 fStrobeFreq, F32 fStrobeHeight, S32 nStrobeCount); // UNUSED
+    void set_layer_strobe(U32 whichLayer, F32 fStrobe); // UNUSED
+    F32 get_layer_strobe(U32 whichLayer); // UNUSED
+
+    void flush()
+    {
+        if (m_uVertexCount) {
+            RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRILIST, m_paVertices, m_uVertexCount, m_paIndices, m_uIndexCount);
+            m_uVertexCount = 0;
+            m_uIndexCount = 0;
+        }
+    }
 
 #if DEBUG || RELEASE
-    virtual const char* category();
+    virtual const char* category() { return "Image"; }
 #endif
 
+    F32 get_texture_width()
+    {
+        return RwRasterGetWidth(m_pRaster);
+    }
+
+    F32 get_texture_height()
+    {
+        return RwRasterGetHeight(m_pRaster);
+    }
+
 protected:
-    struct LayerInfo;
+    struct LayerInfo
+    {
+        RENDERTYPE eType;
+        U32 uFlags;
+        RwTexCoords upperLeft;
+        RwTexCoords lowerRight;
+        F32 fCurPercent;
+        F32 fMinPercent;
+        F32 fMaxPercent;
+        F32 fClampTopPercent;
+        F32 fOffsetX;
+        F32 fOffsetY;
+        F32 fScaleX;
+        F32 fScaleY;
+        F32 fAlpha;
+        F32 fStrobe;
+        F32 fStrobeFreq;
+        F32 fStrobeHeight;
+        S32 nStrobeCount;
+    };
 
     RwRaster* m_pRaster;
     LayerInfo* m_pLayers;
