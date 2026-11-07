@@ -154,6 +154,7 @@ inline void xmin3fast(F32& o, F32 a, F32 b, F32 c); // UNUSED
 inline void xmaxfast(F32& o, F32 a, F32 b); // UNUSED
 inline void xmax3fast(F32& o, F32 a, F32 b, F32 c); // UNUSED
 
+#if DEBUG
 // UNUSED: speculative
 inline F32 xinv(register F32 fVal)
 {
@@ -167,6 +168,7 @@ inline F32 xinv(register F32 fVal)
 
     return fRetVal;
 }
+#endif
 
 inline F32 xinvsqrt(register F32 fVal)
 {

@@ -1,7 +1,7 @@
 #ifndef XSTRING_H
 #define XSTRING_H
 
-#include "types.h"
+#include "xDebug.h"
 
 #include <stddef.h>
 
@@ -40,5 +40,31 @@ S32 icompare(const substr& s1, const substr& s2);
 U32 atox(const substr& s, size_t& read_size);
 const char* find_char(const substr& s, const substr& cs);
 char* ifind_string(const substr& s, const substr& key); // UNUSED
+
+#if DEBUG
+inline U32 xStrHashVerify(const char* str, U32 hash)
+{
+    U32 correct_hash = xStrHash(str);
+    xASSERT_MSG_L(78, correct_hash == hash, "XSTRHASH macro has incorrect hard-coded hash value, please fix this code.");
+    return correct_hash;
+}
+#endif
+
+inline bool is_ws(char c) { return c == ' ' || c == '\t' || c == '\n'; }
+
+inline const char* skip_ws(const char*& text, size_t& size)
+{
+    xASSERT_L(175, (size == 0) || (text != 0));
+    for (size_t i = 0; i < size && *text; i++, ++text)
+        if (!is_ws(*text)) { size -= i; break; }
+    return text;
+}
+
+inline size_t rskip_ws(const char*& text, size_t& size)
+{
+    xASSERT_L(192, text != 0);
+    while (size && is_ws(text[size - 1])) size--;
+    return size;
+}
 
 #endif

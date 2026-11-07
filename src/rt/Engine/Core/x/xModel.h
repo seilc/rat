@@ -205,6 +205,13 @@ inline void xModelSetFrame(xModelInstance* model, const xMat4x3* frame)
     xMat4x3Copy((xMat4x3*)model->Mat, frame);
 }
 
+inline xSphere* xModelGetLocalSBound(xModelInstance* model)
+{
+    xASSERT_L(867, model);
+    xASSERT_L(868, model->Data);
+    return (xSphere*)RpAtomicGetBoundingSphere(model->Data);
+}
+
 inline bool xModelAnimCollDirty(const xModelInstance& m)
 {
     return (m.Flags & 0x1800) == 0x800;

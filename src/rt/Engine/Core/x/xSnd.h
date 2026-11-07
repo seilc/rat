@@ -3,6 +3,7 @@
 
 #include "iSnd.h"
 #include "xDebugTweak.h"
+#include "xRand.h"
 #include "xMath3.h"
 #include "xSpringy.h"
 
@@ -124,6 +125,17 @@ struct xSndGlobals
 };
 
 extern xSndGlobals gSnd;
+
+inline void xSndSetListenerData(xSndListener listenerType, const xMat4x3* pMat, const xVec3& velocity)
+{
+    xASSERT_L(220, listenerType < xSndListener_MAX_TYPES);
+    gSnd.listenerMat[listenerType] = *pMat;
+    if (velocity.length2() >= xsqr(xSndGlobals::speedOfSound)) {
+        gSnd.listenerVel[listenerType] = xVec3::m_Null;
+    } else {
+        gSnd.listenerVel[listenerType] = velocity;
+    }
+}
 
 inline void xSndSelectListenerMode(xSndListener listenerMode)
 {

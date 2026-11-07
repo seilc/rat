@@ -19,6 +19,8 @@ extern void exit(int);
 
 extern int abs(int);
 
+extern int rand(void);
+
 extern void qsort(void*, size_t, size_t, int (*)(const void*, const void*));
 
 #ifdef __cplusplus

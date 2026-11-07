@@ -144,6 +144,7 @@ void xQuatFromMat(xQuat* q, const xMat3x3* m);
 void xQuatToMat(const xQuat* q, xMat3x3* m);
 void xQuatSlerp(xQuat* o, const xQuat* a, const xQuat* b, F32 t);
 void xQuatNormalize(xQuat* o, const xQuat* q);
+void xQuatMul(xQuat* o, const xQuat* a, const xQuat* b);
 
 inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
 {

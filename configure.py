@@ -557,7 +557,7 @@ config.libs = [
         "cflags": cflags_rat,
         "progress_category": "game",
         "objects": [
-            Object(NonMatching, "rt/Engine/Core/x/xAnim.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xAnim.cpp"),
             Object(Matching, "rt/Engine/Core/x/xBase.cpp"),
             Object(Matching, "rt/Engine/Core/x/xbinio.cpp"),
             Object(Matching, "rt/Engine/Core/x/xBound.cpp"),

@@ -353,6 +353,7 @@ extern "C" {
 
 RpAtomic* AtomicDefaultRenderCallBack(RpAtomic* atomic);
 RpAtomic* RpAtomicSetFrame(RpAtomic* atomic, RwFrame* frame);
+RwSphere* RpAtomicGetBoundingSphere(RpAtomic* atomic);
 RpClump* RpClumpAddAtomic(RpClump* clump, RpAtomic* atomic);
 RwBool RpClumpDestroy(RpClump* clump);
 RpClump* RpClumpForAllAtomics(RpClump* clump, RpAtomicCallBack callback, void* pData);

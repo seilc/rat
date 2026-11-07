@@ -44,6 +44,11 @@ inline F32 xrand_RandomFloat()
     return xrand_GenRandFloat();
 }
 
+inline F32 xrand_RandomUnitFloatLessThan1()
+{
+    return xrand_GenRandFloatLessThanOne();
+}
+
 inline F32 xrand_RandomBipolarUnitFloat()
 {
     return 2.0f * xrand_RandomFloat() - 1.0f;
@@ -55,10 +60,38 @@ inline F32 xrand_RandomFloatRange(F32 fMin, F32 fMax)
     return fRandUnitFloat * fMax + (1.0f - fRandUnitFloat) * fMin;
 }
 
+inline F32 xrand_RandomBipolarUnitFloatWithGap(F32 fPosGap)
+{
+    xASSERT_L(102, fPosGap <= 1.0f && fPosGap >= 0.0f);
+
+    F32 fTemp = 2.0f * fPosGap;
+    F32 fRand = xrand_RandomFloatRange(fTemp - 1.0f, 1.0f);
+    if (fRand < fPosGap)
+        fRand -= fTemp;
+
+    return fRand;
+}
+
 inline U32 xrand_RandomChoice(U32 nChoice)
 {
     xASSERT_L(124, nChoice <= 0xffff);
     return (nChoice * xrand_RandomInt16()) / 0x10000;
+}
+
+inline S32 xrand_RandomRange(S32 nMin, S32 nMax)
+{
+    xASSERT_L(134, nMax >= nMin);
+
+    F32 fRange = nMax - nMin + 1;
+    S32 nRandInt = nMin + (S32)(fRange * xrand_RandomUnitFloatLessThan1());
+
+    return nRandInt;
+}
+
+inline bool xrand_RandomChance(F32 fChanceOfSuccess)
+{
+    xASSERT_L(148, fChanceOfSuccess>=0.0f && fChanceOfSuccess<=1.0f);
+    return xrand_RandomFloat() < fChanceOfSuccess;
 }
 
 inline F32 xurand()
