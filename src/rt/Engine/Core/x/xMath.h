@@ -188,6 +188,7 @@ void xFuncPiece_ShiftPiece(xFuncPiece* shift, xFuncPiece* func, F32 newZero);
 void xFuncPiece_NewEndpointsPiece(xFuncPiece* move, xFuncPiece* func, F32 oldEnd1, F32 oldEnd2, F32 newEnd1, F32 newEnd2); // UNUSED
 
 F32 xsqrt(F32 x);
+F32 xinvsqrt(F32 fVal);
 F32 xlog(F32 x);
 F32 xexp(F32 x);
 F32 xpow(F32 x, F32 y);

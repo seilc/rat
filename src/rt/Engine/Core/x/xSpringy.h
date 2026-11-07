@@ -6,7 +6,7 @@
 class xSpringy
 {
 public:
-    void SetTension(F32 tension);
+    void SetTension(F32 tension) { mResponse = tension; }
 
 protected:
     F32 mResponse;
@@ -15,8 +15,40 @@ protected:
 class xSpringyVec3 : public xSpringy
 {
 public:
+    xSpringyVec3()
+    {
+        mResponse = 10.0f;
+        mGoal.x = mGoal.y = mGoal.z = 0.0f;
+        Reset();
+    }
+
+    void SetGoal(const xVec3& pos) { mGoal = pos; }
+
+    void Reset()
+    {
+        mCurrent = mGoal;
+        mVelocity.x = mVelocity.y = mVelocity.z = 0.0f;
+    }
+
+    void SnapGoal()
+    {
+        Reset();
+    }
+
+    void SnapTo(const xVec3& pos)
+    {
+        SetGoal(pos);
+        SnapGoal();
+    }
+
+    const xVec3& Sprung() const { return mCurrent; }
+
+    void operator=(const xVec3& v) { SetGoal(v); }
+
     void Update(F32 dt);
-    
+
+    operator const xVec3&() const { return Sprung(); }
+
 protected:
     xVec3 mVelocity;
     xVec3 mGoal;

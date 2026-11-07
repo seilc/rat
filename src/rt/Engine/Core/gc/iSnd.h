@@ -3,13 +3,14 @@
 
 #include "types.h"
 
-struct FSOUND_STREAM;
+#include <fmod.h>
 
-struct iSndHandle
+struct xSndVoiceInfo;
+
+#define ISND_MAX_VOICES (48)
+
+enum xSndHandle
 {
-private:
-    U32 voiceRef : 8;
-    U32 uniqueId : 24;
 };
 
 enum iSndGroupHandle
@@ -35,11 +36,41 @@ struct gcWavInfo
 
 struct iSndFileInfo : gcWavInfo
 {
-    bool isStreamed();
-    bool isLooping();
+    bool isStreamed() { return (uFlags >> 1) & 0x1; }
+    bool isLooping() { return uFlags & 0x1; }
 };
 
+struct iSndHandle
+{
+    void SetVoiceRef(S32 index)
+    {
+        if (index <= 0xFF)
+            voiceRef = index;
+    }
+    S32 GetVoiceRef() const { return voiceRef; }
+    void SetID(U32 ID) { uniqueId = ID; }
+    U32 GetID() { return uniqueId; }
+
+private:
+    U32 voiceRef : 8;
+    U32 uniqueId : 24;
+};
+
+void iSndInit();
+void iSndSceneExit();
+void iSndExit();
+void iSndUpdate();
+void iSndSuspendCD(U32);
+void iSndSetEnvironmentalEffect(S32 effectType);
+bool iSndPlay(xSndVoiceInfo* vp);
+xSndVoiceInfo* iSndGetFreeVoiceInfo(U32 priority, S32 flags);
+void iSndStop(xSndVoiceInfo* vp, bool bFreeRef);
+void iSndPause(xSndVoiceInfo* vp, U32 paused);
+void iSndSetVol(xSndVoiceInfo* vp, F32 xVolume);
+void iSndSetPitch(xSndVoiceInfo* pVoice, F32 xpitch);
+void iSndStartStereo(xSndHandle, xSndHandle);
 iSndFileInfo* iSndLookup(U32 id);
+bool iSndIsReady(xSndHandle);
 bool iSndGetFreeStreamInfo(U32 priority);
 void iSndSetExternalCallback(void*);
 

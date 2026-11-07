@@ -474,7 +474,8 @@ public:
         xASSERT_L(684, (it >= _buffer) && (it < (_buffer+_size)));
         _size--;
         T* tail = _buffer + _size;
-        if (it != tail) *it = *tail;
+        if (it != tail)
+            *it = *tail;
     }
 
 private:
