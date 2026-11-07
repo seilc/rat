@@ -589,7 +589,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xFMV.cpp"),
             Object(Matching, "rt/Engine/Core/x/xFog.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xFont.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xFX.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xFX.cpp"),
             Object(Matching, "rt/Engine/Core/x/xGrid.cpp"),
             Object(Matching, "rt/Engine/Core/x/xGroup.cpp"),
             Object(Matching, "rt/Engine/Core/x/xHierarchyBound.cpp"),

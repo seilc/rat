@@ -157,6 +157,7 @@ struct zSurfaceProps
     RwTexture* txtr_matFXDualMap;
 };
 
+xSurface* zSurfaceGetSurface(U32 mat_id);
 xSurface* zSurfaceGetSurface(const xCollis* coll);
 
 #endif

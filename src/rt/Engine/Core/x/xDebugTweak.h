@@ -7,6 +7,7 @@
 
 struct tweak_info;
 struct xVec3;
+typedef struct xColor_tag xColor;
 
 struct tweak_callback
 {
@@ -113,6 +114,7 @@ void xDebugAddFlagTweak(const char* name, U32* v, U32 mask, const tweak_callback
 void xDebugAddFlagTweak(const char* name, U8* v, U8 mask, const tweak_callback* cb, void* context, U32 flags);
 U32 xDebugCountChildTweaks(const tweak_info& info);
 void xDebugAddTweak(const char* name, xVec3* v, const tweak_callback* cb, void* context, U32 flags);
+void xDebugAddTweak(const char* name, xColor* v, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, bool* v, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, const char* message, const tweak_callback* cb, void* context, U32 flags);

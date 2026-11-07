@@ -510,13 +510,8 @@ public:
 
         blocks = (block_data*)xMEMALLOC_L(_max_blocks * sizeof(block_data), 0, memtag, 0, 784);
 
-        size_t i = 0;
-        size_t end = _max_blocks;
-        while (i < end) {
+        for (size_t i = 0, end = _max_blocks; i < end; i++)
             blocks[i].data = 0;
-            i++;
-        }
-
         clear();
 
         U8 arrayTempAllocs[31];
@@ -545,17 +540,17 @@ public:
 
         head = 0;
 
-        size_t imask = _max_blocks - 1;
-        size_t i = 0;
-        size_t end = _max_blocks;
-        while (i < end) {
+        for (size_t imask = _max_blocks - 1, i = 0, end = _max_blocks; i < end; i++) {
             blocks[i].prev = (i-1) & imask;
             blocks[i].next = (i+1) & imask;
+#if DEBUG
             blocks[i].flags = 0;
-            i++;
+#endif
         }
 
+#if DEBUG
         size = 0;
+#endif
     }
 
     U8 alloc_block(U32 memtag)
@@ -572,12 +567,14 @@ public:
         blocks[block.next].prev = block.prev;
 
         if (!block.data) block.data = alloc_block_data(memtag);
-        
+
+#if DEBUG
         xASSERT_L(841, size < _max_blocks);
         xASSERT_L(842, !(block.flags & FLAG_TAKEN));
         block.flags = FLAG_TAKEN;
 
         size++;
+#endif
 
         return index;
     }
@@ -597,12 +594,14 @@ public:
         blocks[block.prev].next = index;
         blocks[block.next].prev = index;
 
+#if DEBUG
         xASSERT_L(860, size > 0);
         xASSERT_L(861, block.flags & FLAG_TAKEN);
 
         block.flags = 0;
 
         size--;
+#endif
         head = index;
     }
 
@@ -620,10 +619,7 @@ private:
     size_t log2_ceil(size_t v) const
     {
         size_t power = 0;
-        while (v > 1) {
-            v >>= 1;
-            power++;
-        }
+        while (v > 1) { v >>= 1; power++; }
         return power;
     }
 
@@ -642,7 +638,9 @@ private:
     size_t _max_blocks;
     size_t _max_blocks_shift;
     U8 head;
+#if DEBUG
     U32 size;
+#endif
 };
 
 template <class T>
@@ -692,10 +690,8 @@ public:
     {
         size_t i = get_block(first);
         size_t end = wrap_block(i + get_block(alloc->block_size() + _size - 1));
-        while (i != end) {
+        for (; i != end; i = wrap_block(i+1))
             alloc->free_block(blocks[i]);
-            i = wrap_block(i+1);
-        }
         first = _size = 0;
     }
 
@@ -718,10 +714,7 @@ public:
     {
         xASSERT_L(1040, !empty());
 
-        if (_size <= 1) {
-            clear();
-            return;
-        }
+        if (_size <= 1) { clear(); return; }
 
         _size--;
 

@@ -17,15 +17,20 @@ static inline void add_tweak(const char* name, bool* v, S32, S32, const tweak_ca
 template <>
 static inline void add_tweak(const char* name, xVec3* v, S32, S32, const tweak_callback* cb, void* context, U32 flags) { xDebugAddTweak(name, v, cb, context, flags); }
 
+template <>
+static inline void add_tweak(const char* name, xColor* v, S32, S32, const tweak_callback* cb, void* context, U32 flags) { xDebugAddTweak(name, v, cb, context, flags); }
+
 }
 
 #define zAUTOTWEAK(prefix, name, v, vmin, vmax, cb, context, flags) do { char _buffer[128]; strcpy(_buffer, prefix); strcat(_buffer, name); auto_tweak::add_tweak(_buffer, v, vmin, vmax, cb, context, flags); } while (0)
 #define zAUTOTWEAK_SELECT(prefix, name, v, labels, values, labels_size, cb, context, flags) do { char _buffer[128]; strcpy(_buffer, prefix); strcat(_buffer, name); xTWEAK_SELECT(_buffer, v, labels, values, labels_size, cb, context, flags); } while (0)
 #define zAUTOTWEAK_FLAG(prefix, name, v, mask, cb, context, flags) do { char _buffer[128]; strcpy(_buffer, prefix); strcat(_buffer, name); xTWEAK_FLAG(_buffer, v, mask, cb, context, flags); } while (0)
+#define zAUTOTWEAK_MESSAGE(prefix, name, message, cb, context, flags) do { char _buffer[128]; strcpy(_buffer, prefix); strcat(_buffer, name); xTWEAK_MESSAGE(_buffer, message, cb, context, flags); } while (0)
 #else
 #define zAUTOTWEAK(prefix, name, v, vmin, vmax, cb, context, flags)
 #define zAUTOTWEAK_SELECT(prefix, name, v, labels, values, labels_size, cb, context, flags)
 #define zAUTOTWEAK_FLAG(prefix, name, v, mask, cb, context, flags)
+#define zAUTOTWEAK_MESSAGE(prefix, name, message, cb, context, flags)
 #endif
 
 #endif
