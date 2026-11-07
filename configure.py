@@ -642,7 +642,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xSkyDome.cpp"),
             Object(NonMatching, "rt/Engine/Core/x/xSndMgr.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSoundFX.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xSpacePartitionTree.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xSpacePartitionTree.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSpline.cpp"),
             Object(Matching, "rt/Engine/Core/x/xSplineAsset.cpp"),
             Object(Matching, "rt/Engine/Core/x/xstransvc.cpp"),
