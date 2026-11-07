@@ -583,6 +583,7 @@ struct RwCamera
 #define RwCameraSetZRasterMacro(_camera, _raster) (((_camera)->zBuffer = (_raster)), (_camera))
 #define RwFrameGetMatrixMacro(_f) (&(_f)->modelling)
 #define RwGameCubeRasterGetExtensionMacro(_raster) ((RwGameCubeRasterExtension*)(((RwUInt8*)(_raster)) + _RwGameCubeRasterExtOffset))
+#define RwImageGetPixelsMacro(_image) ((_image)->cpPixels)
 #define RwRasterGetFormatMacro(_raster) ((((_raster)->cFormat) & (rwRASTERFORMATMASK >> 8)) << 8)
 #define RwRasterGetHeightMacro(_raster) ((_raster)->height)
 #define RwRasterGetParentMacro(_raster) ((_raster)->parent)
@@ -667,6 +668,7 @@ RwCamera* RwCameraSetRaster(RwCamera* camera, RwRaster* raster);
 RwCamera* RwCameraSetZRaster(RwCamera* camera, RwRaster* zRaster);
 RwMatrix* RwFrameGetMatrix(RwFrame* frame);
 RwGameCubeRasterExtension* RwGameCubeRasterGetExtension(RwRaster* raster);
+RwUInt8* RwImageGetPixels(const RwImage* image);
 RwInt32 RwRasterGetFormat(const RwRaster* raster);
 RwInt32 RwRasterGetHeight(const RwRaster* raster);
 RwRaster* RwRasterGetParent(const RwRaster* raster);
@@ -700,6 +702,7 @@ RwTexture* RwTextureSetFilterMode(RwTexture* texture, RwTextureFilterMode filter
 #define RwCameraSetZRaster(_camera, _raster) RwCameraSetZRasterMacro(_camera, _raster)
 #define RwFrameGetMatrix(_f) RwFrameGetMatrixMacro(_f)
 #define RwGameCubeRasterGetExtension(_raster) RwGameCubeRasterGetExtensionMacro(_raster)
+#define RwImageGetPixels(_image) RwImageGetPixelsMacro(_image)
 #define RwRasterGetFormat(_raster) RwRasterGetFormatMacro(_raster)
 #define RwRasterGetHeight(_raster) RwRasterGetHeightMacro(_raster)
 #define RwRasterGetParent(_raster) RwRasterGetParentMacro(_raster)

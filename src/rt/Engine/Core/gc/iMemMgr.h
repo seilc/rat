@@ -17,5 +17,6 @@ void iMemPopTemp(void* pointer);
 void iMemMgrXPrintDebugInfo();
 void iMemMgrDumpActiveList();
 S32 iMemMgrGetMinFreeSpace();
+U32 iMemSniffStackUsage();
 
 #endif

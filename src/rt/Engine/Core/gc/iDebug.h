@@ -19,6 +19,10 @@ static inline void iDebugBreak()
 #endif
 
 #if DEBUG || RELEASE
+void iDebugIDEOutput(char* buf);
+void iDebugVSync();
+void iDebugUpdate();
+void iDebugStackTrace();
 void iDebugDumpEFB(char* name);
 #else
 #define iDebugDumpEFB(name)

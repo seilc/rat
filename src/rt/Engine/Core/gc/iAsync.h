@@ -20,6 +20,8 @@ inline void iAsyncUnlockRW()
     }
 }
 
+void iAsyncTerminate();
+
 struct iAsyncLockRWSentry
 {
     iAsyncLockRWSentry() { iAsyncLockRW(); }

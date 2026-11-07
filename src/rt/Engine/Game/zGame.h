@@ -4,8 +4,10 @@
 #include "types.h"
 
 extern U32 gSoak;
+extern U32 gzAsyncRenderDisable;
 extern char** soaklevels;
 
 S32 zGameIsPaused();
+void zGamePreRender();
 
 #endif

@@ -26,6 +26,8 @@ struct basic_rect
     static const basic_rect<F32> m_Null;
     static const basic_rect<F32> m_Unit;
 
+    basic_rect& assign(T x, T y, T w, T h) { this->x = x; this->y = y; this->w = w; this->h = h; return *this; }
+
     basic_rect& expand(T left, T top, T right, T bottom)
     {
         x -= left; w += left + right;
@@ -35,6 +37,7 @@ struct basic_rect
 
     basic_rect& expand(T v) { return expand(v, v, v, v); }
     basic_rect& contract(T v) { return expand(-v); }
+    basic_rect& contract(T left, T top, T right, T bottom) { return expand(-left, -top, -right, -bottom); }
 };
 
 extern const xVec2 g_O2;

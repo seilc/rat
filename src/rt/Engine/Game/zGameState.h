@@ -28,6 +28,7 @@ enum eGameMode
     eGameMode_Count
 };
 
+extern S32 gGameState;
 extern eGameMode gGameMode;
 
 S32 zGameModeGet();

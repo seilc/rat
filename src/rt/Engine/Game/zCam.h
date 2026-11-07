@@ -10,6 +10,7 @@ void zCamAdd(xCam& cam, bool force_cut);
 void zCamRemove(xCam& cam, bool force_cut);
 bool zCamGetDebugMode(xMat4x3** ppDebugCamMtx);
 xMat4x3& zCamGetMatrix();
+void zCamExitDebugCam();
 
 inline void zCamTrackGround(bool);
 

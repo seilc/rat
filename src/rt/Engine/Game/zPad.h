@@ -11,6 +11,7 @@ public:
     static const S32 ANALOG_MIN;
     static const S32 ANALOG_MAX;
 
+    void Get(F32& x, F32& y, F32& angle, F32& mag);
     void Get(F32& x, F32& y);
     F32 GetX();
     F32 GetY();
@@ -28,6 +29,7 @@ public:
 
     static zPad* GetDebugPad();
 
+    bool Active();
     bool On(U32 button);
     bool Pressed(U32 button);
 

@@ -1,6 +1,8 @@
 #ifndef XREGIONSUPPORT_H
 #define XREGIONSUPPORT_H
 
+#include "iDebug.h"
+
 #include <string.h>
 
 enum xRegion
@@ -34,6 +36,15 @@ enum xRegion
 extern char* region_array[eRegionCount];
 
 bool xRegionCodeIsValid(const char* pszRegionCode);
+
+inline char* xRegionCode(xRegion region)
+{
+    if (region < eRegionUS || region >= eRegionCount) {
+        iprintf("xRegionCode:: Invalid region %d; using US\n", region);
+        return region_array[eRegionUS];
+    }
+    return region_array[region];
+}
 
 inline xRegion xRegionString(const char* pszRegion)
 {

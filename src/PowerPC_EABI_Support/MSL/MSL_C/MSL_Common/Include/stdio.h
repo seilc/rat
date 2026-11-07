@@ -70,6 +70,9 @@ extern FILE __files[];
 #define stdout (&__files[1])
 #define stderr (&__files[2])
 
+extern FILE* fopen(const char* filename, const char* mode);
+extern int fclose(FILE* file);
+extern int fflush(FILE* file);
 extern int fprintf(FILE* stream, const char* format, ...);
 extern int sprintf(char*, const char*, ...);
 extern int sscanf(const char*, const char*, ...);

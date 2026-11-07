@@ -8,6 +8,8 @@
 
 static const basic_rect<F32> screen_bounds = { 0, 0, 1, 1 };
 
+extern bool disable_text_stats;
+
 class xfont
 {
 public:
@@ -45,6 +47,7 @@ public:
         return r;
     }
 
+    basic_rect<F32> bounds(const char* text) const;
     void start_render() const;
     void stop_render() const;
     void irender(const char* text, F32 x, F32 y) const;
@@ -135,6 +138,15 @@ public:
     F32 yextent(bool cache) const { return yextent(temp_layout(cache), 0, -1); }
     F32 yextent(const layout& l, S32 begin_jot, S32 end_jot) const { S32 size; return yextent(HUGE, size, l, begin_jot, end_jot); }
 
+#if DEBUG || RELEASE
+    static void log_layout_stats(bool log)
+    {
+        disable_text_stats = !log;
+    }
+#else
+    static void log_layout_stats(bool) {}
+#endif
+
     static xtextbox create();
 
     static xtextbox create(
@@ -171,6 +183,7 @@ private:
 };
 
 void render_fill_rect(const basic_rect<F32>& bounds, xColor color);
+void debug_mode_fontperf();
 
 inline F32 NSCREENX(F32 v)
 {

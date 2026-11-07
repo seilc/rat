@@ -96,6 +96,9 @@ struct tweak_info
 };
 
 #if DEBUG || RELEASE
+void debug_mode_tweak_begin();
+void debug_mode_tweak_end();
+void debug_mode_tweak();
 void* xDebugTweak_StaticAlloc(U32 size);
 tweak_info* xDebugGetTweak(const char* name);
 tweak_info* xDebugGetParentTweak(const tweak_info& info);

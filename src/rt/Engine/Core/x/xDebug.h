@@ -193,7 +193,48 @@ inline char* xbtoa(U32 b)
     return (char*)(b ? "true " : "false");
 }
 
+struct xSB;
+struct xVec2;
+struct xVec3;
+
+bool xDebugIDontWantYourXprintsOnMyScreen();
+void xSBCreate(xSB* sb, U32 size);
+char* xSBAppend(xSB* sb, const char* str);
+void xSBRender(xSB* sb);
+void xSBReset(xSB* sb);
+void xSBDestroy(xSB* sb);
+void DBStartup(en_VERBOSE_MSGLEVEL setlvl, char* logfile, char* errfile, void (*msgnotify)(en_VERBOSE_MSGLEVEL, const char*));
+void DBShutdown();
+en_VERBOSE_MSGLEVEL DBCurMsgLvl(); // UNUSED
+S32 DBChkMsgLvl(en_VERBOSE_MSGLEVEL msglvl);
+void xDebugVSync();
 void xprintf(const char* fmt, ...);
+void xDebugReportAssertion(const char* sfile, S32 line, const char* func, const char* expr, const char* message);
+void xDebugModeSet(S32 mode);
+void xDebugModeSetByName(const char* name);
+char* xDebugModeGetName(); // UNUSED
+void xDebugRenderLoopStart();
+void xDebugRenderLoopEnd();
+char* xDebugGetNextDumpFile();
+void xDebugAdvanceDumpFile();
+void xDebugModeService();
+void xDebugGraphUsageMsg();
+void xDebugGraphService();
+void xDebugInit();
+void xDebugUpdate();
+void xDebugExit();
+void xDebugUpdateLoadStats(U32 bytes_read, F32 sec); // UNUSED
+void xDebugReportLoadStats(char* msg, U32 flags);
+void xDebugTimestampScreen();
+void xDebugAssertStartup();
+void xDebugAssertShutdown();
+void xDebugTextureReport();
+void xDrawTextInit(U32 uBufferSize, U32 uNumLinesMax);
+void xDrawTextExit();
+void xDrawTextRender();
+void xDrawText(const xVec3& vWorld, const char* fmt, ...);
+void xDrawText(const xVec3& vWorld, F32 fWidth, F32 fHeight, const char* pszText);
+bool xDrawTextComputeScreenPt(xVec2& vUnitScreen, const xVec3& vWorldSpace);
 
 #if DEBUG || RELEASE
 void DBprintf(en_VERBOSE_MSGLEVEL msglvl, const char* fmt, ...);
@@ -205,11 +246,14 @@ U32 xDebugBoing();
 #endif
 
 S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func);
+void xDebugModeRemove(S32 mode); // UNUSED
 void xDebugModeRegisterCallback(S32 mode, xDebugModeCallback func);
 
 #if DEBUG || RELEASE
 S32 xDebugModeGet();
 void xDebugStackTrace();
+void xDebugAssertScreen(const char* str1, const char* str2, const char* pretty_str);
+void debug_mode_page();
 
 enum xScreenDump
 {
@@ -220,7 +264,39 @@ enum xScreenDump
 };
 
 extern xScreenDump gScreenDump;
+extern char gScreenDumpPath[256];
 #endif
+
+typedef struct tagBITMAPFILEHEADER
+{
+    S32 bfSize;
+    S16 bfReserved1;
+    S16 bfReserved2;
+    S32 bfOffBits;
+} BITMAPFILEHEADER;
+
+typedef struct tagBITMAPINFOHEADER
+{
+    S32 biSize;
+    S32 biWidth;
+    S32 biHeight;
+    S16 biPlanes;
+    S16 biBitCount;
+    S32 biCompression;
+    S32 biSizeImage;
+    S32 biXPelsPerMeter;
+    S32 biYPelsPerMeter;
+    S32 biClrUsed;
+    S32 biClrImportant;
+} BITMAPINFOHEADER;
+
+struct BmpMegaHeader
+{
+    char prepad[2];
+    char bfType[2];
+    BITMAPFILEHEADER bmFile;
+    BITMAPINFOHEADER bmInfo;
+};
 
 #if DEBUG || RELEASE
 struct xStats

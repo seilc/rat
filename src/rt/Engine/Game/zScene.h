@@ -67,6 +67,7 @@ bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);
 const char* zSceneGetName(xBase* b);
 void zSceneForAllBase(zSceneCallback func, S32 baseType, void* data);
 U32 zScene_ScreenAdjustMode();
+void zSceneRender();
 #if DEBUG || RELEASE
 U32 zSceneGetTextureTweakMap(const char**& labels, const U32*& ids);
 U32 zSceneGetTextureIDFromRaster(RwRaster* raster);
