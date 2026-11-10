@@ -61,6 +61,7 @@ extern U32 all_texture_count;
 #if DEBUG || RELEASE
 extern S32 g_idx_reloadTweaks;
 #endif
+extern bool gInSceneResetOrInit;
 
 xBase* zSceneFindObject(U32 gameID);
 bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);

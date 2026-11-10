@@ -26,6 +26,7 @@ U32 iModelVertCount(RpAtomic* model);
 void iModelAnimMatrices(RpAtomic* model, xQuat* quat, xVec3* tran, RwMatrix* mat);
 void iModelDrawWire(RpAtomic* model, RwMatrix* mat, xColor color);
 void iModelSetMaterialAlpha(RpAtomic* model, U8 alpha);
+void iModelSetMaterialTexture(RpAtomic* model, void* texture);
 void iModelResetMaterial(RpAtomic* model);
 void iModelMaterialMul(RpAtomic* model, F32 rm, F32 gm, F32 bm);
 U32 iModelVertEval(RpAtomic* model, U32 index, U32 count, RwMatrix* mat, xVec3* vert, xVec3* dest);

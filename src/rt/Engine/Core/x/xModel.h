@@ -121,8 +121,13 @@ struct xModelTag
 #if DEBUG
 void xModelPoolStressTestEnable(eModelPoolStressor stressor);
 void xModelPoolStressTestDisable(eModelPoolStressor stressor);
-#endif
 bool xModelPoolStressTesting();
+#else
+inline bool xModelPoolStressTesting()
+{
+    return false;
+}
+#endif
 #if DEBUG || RELEASE
 S32 xModelPipeFlagsToString(U32 flags, char* buffer, char delimeter); // UNUSED
 S32 xModelPipeToString(const xModelPipe& pipe, char* buffer, char delimeter); // UNUSED

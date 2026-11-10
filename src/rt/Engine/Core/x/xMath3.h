@@ -506,4 +506,12 @@ inline void xQuatFlip(xQuat* o, const xQuat* q)
 
 inline U32 xQuatCheck(const xQuat* q, F32 tol); // UNUSED
 
+inline void xRotCopy(xRot* o, const xRot* r)
+{
+    o->axis.x = r->axis.x;
+    o->axis.y = r->axis.y;
+    o->axis.z = r->axis.z;
+    o->angle = r->angle;
+}
+
 #endif

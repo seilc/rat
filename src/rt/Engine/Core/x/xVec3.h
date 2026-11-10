@@ -209,6 +209,8 @@ void xVec3AddTo(xVec3& a, const xVec3& b);
 void xVec3AddTo(xVec3* a, const xVec3* b);
 void xVec3Sub(xVec3* o, const xVec3* a, const xVec3* b);
 void xVec3Sub(xVec3& o, const xVec3& a, const xVec3& b);
+void xVec3SubFrom(xVec3* a, const xVec3* b);
+void xVec3SubFrom(xVec3& a, const xVec3& b);
 void xVec3SMul(xVec3* o, const xVec3* v, F32 s);
 void xVec3SMul(xVec3& o, const xVec3& v, F32 s);
 void xVec3SMulBy(xVec3* v, F32 s);

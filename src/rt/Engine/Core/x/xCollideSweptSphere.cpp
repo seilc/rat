@@ -768,16 +768,10 @@ S32 xSweptSphereToModel(xSweptSphere* sws, RpAtomic* model, const RwMatrix* mat,
 }
 
 #if DEBUG || RELEASE
-#define _xFIX_NAN_VEC3_ELEM(line, x)            \
-if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
-    xFAIL_FMT_L(line, "%s", "NAN");             \
-    (x) = 0.0f;                                 \
-}
-
 #define xFIX_NAN_VEC3_L(line, v)                \
-    _xFIX_NAN_VEC3_ELEM(line, (v).x);           \
-    _xFIX_NAN_VEC3_ELEM(line, (v).y);           \
-    _xFIX_NAN_VEC3_ELEM(line, (v).z)
+    xFIX_NAN_ELEM_L(line, (v).x);               \
+    xFIX_NAN_ELEM_L(line, (v).y);               \
+    xFIX_NAN_ELEM_L(line, (v).z)
 #else
 #define xFIX_NAN_VEC3_L(line, v)
 #endif

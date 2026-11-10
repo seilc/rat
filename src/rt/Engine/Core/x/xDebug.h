@@ -184,6 +184,18 @@ if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
 
 #define xFIX_NAN(x) xFIX_NAN_L(__LINE__, x)
 
+#if DEBUG || RELEASE
+#define xFIX_NAN_ELEM_L(line, x)                \
+if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
+    xFAIL_FMT_L(line, "%s", "NAN");             \
+    (x) = 0.0f;                                 \
+}
+#else
+#define xFIX_NAN_ELEM_L(line, x)
+#endif
+
+#define xFIX_NAN_ELEM(x) xFIX_NAN_ELEM_L(__LINE__, x)
+
 typedef void(*xDebugModeCallback)();
 
 void xDebugValidateFailed();
