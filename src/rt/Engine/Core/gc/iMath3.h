@@ -12,6 +12,8 @@ struct xIsect;
 struct xMat3x3;
 struct xMat4x3;
 
+void iMath3Init();
+void iMath3Exit(); // UNUSED
 void iSphereIsectVec(const xSphere* s, const xVec3* v, xIsect* isx);
 void iSphereIsectRay(const xSphere* s, const xRay3* r, xIsect* isx);
 void iCylinderIsectRay(const xCylinder* c, const xRay3* r, xIsect* isx); // UNUSED
