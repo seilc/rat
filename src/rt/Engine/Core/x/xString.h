@@ -50,6 +50,8 @@ inline U32 xStrHashVerify(const char* str, U32 hash)
 }
 #endif
 
+inline U32 atox(const substr& s) { size_t read_size; return atox(s, read_size); }
+
 inline bool is_ws(char c) { return c == ' ' || c == '\t' || c == '\n'; }
 
 inline const char* skip_ws(const char*& text, size_t& size)
@@ -60,11 +62,32 @@ inline const char* skip_ws(const char*& text, size_t& size)
     return text;
 }
 
+inline const char* skip_ws(substr& s) { return skip_ws(s.text, s.size); }
+
 inline size_t rskip_ws(const char*& text, size_t& size)
 {
     xASSERT_L(192, text != 0);
     while (size && is_ws(text[size - 1])) size--;
     return size;
+}
+
+inline size_t rskip_ws(substr& s) { return rskip_ws(s.text, s.size); }
+
+inline void trim_ws(const char*& text, size_t& size)
+{
+    skip_ws(text, size);
+    rskip_ws(text, size);
+}
+
+inline void trim_ws(substr& s) { trim_ws(s.text, s.size); }
+
+inline const char* find_char(const substr& s, char c)
+{
+    if (!s.text) return NULL;
+    const char* p = s.text;
+    for (S32 i = s.size; i > 0 && *p; --i, ++p)
+        if (*p == c) return p;
+    return NULL;
 }
 
 #endif

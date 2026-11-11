@@ -87,7 +87,7 @@ do {                                            \
 #define xASSERT_FMT(cond, ...) _xASSERT(__LINE__, cond, #cond, __VA_ARGS__)
 #define xASSERT_FMT_L(line, cond, ...) _xASSERT(line, cond, #cond, __VA_ARGS__)
 
-#define xFAIL_L(line) do { _xFAIL(line, "*always*", "%s", "*always*") } while (0)
+#define xFAIL_MSG_L(line, msg) do { _xFAIL(line, "*always*", "%s", msg) } while (0)
 #define xFAIL_FMT_L(line, ...) do { _xFAIL(line, "*always*", __VA_ARGS__) } while (0)
 #define xFAIL_RETURN_VALUE_L(line, retval) do { _xFAIL(line, "*always*", "%s", "*always*") return (retval); } while (0)
 
@@ -132,6 +132,15 @@ do {                                                                            
 
 #define xASSERT_EQ(a, b) _xASSERT_EQ(__LINE__, a, b, #a "==" #b)
 #define xASSERT_EQ_L(line, a, b) _xASSERT_EQ(line, a, b, #a "==" #b)
+
+#define _xASSERT_LE(line, a, b, msg)                                                              \
+do {                                                                                              \
+    size_t il = (a), ir = (b);                                                                    \
+    _xASSERT(line, il <= ir, _xSTR(il <= ir), "%s", msg);                                         \
+} while (0)
+
+#define xASSERT_LE(a, b) _xASSERT_LE(__LINE__, a, b, #a "<=" #b)
+#define xASSERT_LE_L(line, a, b) _xASSERT_LE(line, a, b, #a "<=" #b)
 #else
 #define _xFAIL(line, condstr, ...)
 #define xASSERT(cond)
@@ -140,7 +149,7 @@ do {                                                                            
 #define xASSERT_MSG_L(line, cond, msg)
 #define xASSERT_FMT(cond, ...)
 #define xASSERT_FMT_L(line, cond, ...)
-#define xFAIL_L(line)
+#define xFAIL_MSG_L(line, msg)
 #define xFAIL_FMT_L(line, ...)
 #define xFAIL_RETURN_VALUE_L(line, retval) return (retval)
 #define xFAIL_ONCE_L(line, ...)
@@ -150,11 +159,13 @@ do {                                                                            
 #define xASSERT_DESIGN_L(line, cond, ...)
 #define xASSERT_EQ(a, b)
 #define xASSERT_EQ_L(line, a, b)
+#define xASSERT_LE(a, b)
+#define xASSERT_LE_L(line, a, b)
 #endif
 
+#define xFAIL_L(line) xFAIL_MSG_L(line, "*always*")
 #define xFAIL() xFAIL_L(__LINE__)
 #define xFAIL_FMT(...) xFAIL_FMT_L(__LINE__, __VA_ARGS__)
-#define xFAIL_MSG_L(line, msg) xASSERT_FMT_L(line, (0), msg)
 #define xFAIL_MSG(msg) xFAIL_MSG_L(__LINE__, msg)
 #define xFAIL_RETURN_VALUE(retval) xFAIL_RETURN_VALUE_L(__LINE__, retval)
 #define xFAIL_ONCE(...) xFAIL_ONCE_L(__LINE__, __VA_ARGS__)
@@ -278,6 +289,8 @@ enum xScreenDump
 extern xScreenDump gScreenDump;
 extern char gScreenDumpPath[256];
 #endif
+
+extern U32 gFrameCount;
 
 typedef struct tagBITMAPFILEHEADER
 {

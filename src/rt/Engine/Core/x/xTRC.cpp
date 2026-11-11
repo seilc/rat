@@ -50,7 +50,7 @@ TRCPadInfo& xTRCPadGetNextAvailablePad()
             return gTrcPad[i];
         }
     }
-    xFAIL_MSG_L(118, "No pads available!");
+    xASSERT_FMT_L(118, (0), "No pads available!");
     return gTrcPad[0];
 }
 
@@ -60,7 +60,7 @@ S32 xTRCPadGetArrayIdx(S32 port)
         if (port == gTrcPad[i].id)
             return i;
     }
-    xFAIL_MSG_L(129, "No pad id match, return -1 !");
+    xASSERT_FMT_L(129, (0), "No pad id match, return -1 !");
     return -1;
 }
 
@@ -72,7 +72,7 @@ TRCPadInfo& xTRCPadGetPadFromID(S32 id)
             return gTrcPad[i];
         }
     }
-    xFAIL_MSG("No pad id match, return trc pad 0 !");
+    xASSERT_FMT((0), "No pad id match, return trc pad 0 !");
     return gTrcPad[0];
 }
 

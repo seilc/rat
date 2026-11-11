@@ -60,6 +60,15 @@ enum RpGeometryLockMode
 };
 typedef enum RpGeometryLockMode RpGeometryLockMode;
 
+enum RpInterpolatorFlag
+{
+    rpINTERPOLATORDIRTYINSTANCE = 0x1,
+    rpINTERPOLATORDIRTYSPHERE = 0x2,
+    rpINTERPOLATORNOFRAMEDIRTY = 0x4,
+    rpINTERPOLATORFLAGFORCEENUMSIZEINT = RWFORCEENUMSIZEINT,
+};
+typedef enum RpInterpolatorFlag RpInterpolatorFlag;
+
 enum RpAtomicFlag
 {
     rpATOMICCOLLISIONTEST = 0x1,
@@ -307,6 +316,10 @@ typedef RpMaterial* (*RpMaterialCallBack)(RpMaterial* material, void* data);
 typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* pData);
 
 #define RpGeometryGetTrianglesMacro(_geometry) ((_geometry)->triangles)
+
+#define RpAtomicGetBoundingSphereMacro(_atomic) \
+    ((((_atomic)->interpolator.flags & rpINTERPOLATORDIRTYSPHERE)? _rpAtomicResyncInterpolatedSphere(_atomic), 0: 0), &((_atomic)->boundingSphere))
+
 #define RpAtomicGetClumpMacro(_atomic) ((_atomic)->clump)
 #define RpAtomicGetFlagsMacro(_atomic) (rwObjectGetFlags(_atomic))
 #define RpAtomicGetFrameMacro(_atomic) ((RwFrame *) rwObjectGetParent(_atomic))
@@ -354,7 +367,6 @@ extern "C" {
 
 RpAtomic* AtomicDefaultRenderCallBack(RpAtomic* atomic);
 RpAtomic* RpAtomicSetFrame(RpAtomic* atomic, RwFrame* frame);
-RwSphere* RpAtomicGetBoundingSphere(RpAtomic* atomic);
 RpClump* RpClumpAddAtomic(RpClump* clump, RpAtomic* atomic);
 RwBool RpClumpDestroy(RpClump* clump);
 RpClump* RpClumpForAllAtomics(RpClump* clump, RpAtomicCallBack callback, void* pData);
@@ -378,9 +390,11 @@ RwBool RpWorldDestroy(RpWorld* world);
 RpWorld* RpWorldRemoveCamera(RpWorld* world, RwCamera* camera);
 RpWorld* RpWorldRemoveLight(RpWorld* world, RpLight* light);
 RpWorld* RwCameraGetWorld(const RwCamera* camera);
+void _rpAtomicResyncInterpolatedSphere(RpAtomic* atomic);
 RpMeshHeader* _rpMeshHeaderForAllMeshes(RpMeshHeader* meshHeader, RpMeshCallBack fpCallBack, void* pData);
 
 #if (defined(RWDEBUG) || defined(RWSUPPRESSINLINE))
+RwSphere* RpAtomicGetBoundingSphere(RpAtomic* atomic);
 RpClump* RpAtomicGetClump(const RpAtomic* atomic);
 RwUInt32 RpAtomicGetFlags(const RpAtomic* atomic);
 RwFrame* RpAtomicGetFrame(const RpAtomic* atomic);
@@ -415,6 +429,7 @@ RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #endif
 
 #if !(defined(RWDEBUG) || defined(RWSUPPRESSINLINE))
+#define RpAtomicGetBoundingSphere(_atomic) RpAtomicGetBoundingSphereMacro(_atomic)
 #define RpAtomicGetClump(_atomic) RpAtomicGetClumpMacro(_atomic)
 #define RpAtomicGetFlags(_atomic) RpAtomicGetFlagsMacro(_atomic)
 #define RpAtomicGetFrame(_atomic) RpAtomicGetFrameMacro(_atomic)

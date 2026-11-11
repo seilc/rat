@@ -6,6 +6,14 @@
 #include "xMath2.h"
 #include "xString.h"
 
+struct RwRaster;
+
+inline F32 NSCREENX(F32 v) { return 1.0f / SCREEN_WIDTH * v; }
+inline F32 NSCREENY(F32 v) { return 1.0f / SCREEN_HEIGHT * v; }
+
+inline F32 INSCREENX(F32 v) { return SCREEN_WIDTH * v; }
+inline F32 INSCREENY(F32 v) { return SCREEN_HEIGHT * v; }
+
 static const basic_rect<F32> screen_bounds = { 0, 0, 1, 1 };
 
 extern bool disable_text_stats;
@@ -47,10 +55,23 @@ public:
         return r;
     }
 
+    static xfont create() { return create(0, 0, 0, 0, g_WHITE); }
+
+    static void init();
+    static void set_render_state(RwRaster* raster);
+    static void restore_render_state();
+    basic_rect<F32> bounds(U32 c) const;
+    basic_rect<F32> bounds(char c) const;
     basic_rect<F32> bounds(const char* text) const;
+    basic_rect<F32> bounds(const char* text, size_t text_size) const;
+    basic_rect<F32> bounds(const char* text, F32 max_width, size_t& size) const; // UNUSED
+    basic_rect<F32> bounds(const char* text, size_t text_size, F32 max_width, size_t& size) const;
     void start_render() const;
+    RwRaster* get_raster() const; // UNUSED
     void stop_render() const;
+    void irender(U32 c, F32 x, F32 y) const; // UNUSED
     void irender(const char* text, F32 x, F32 y) const;
+    void irender(const char* text, size_t text_size, F32 x, F32 y) const;
 
     void render(const char* text, F32 x, F32 y) const { start_render(); irender(text, x, y); stop_render(); }
 };
@@ -59,7 +80,14 @@ class xtextbox
 {
 public:
     struct jot;
+    struct tag_entry;
+    struct tag_entry_list;
+    struct jot_line;
+    struct jot_block;
+    struct jot_line_block;
+    struct context_buffer_block;
     class layout;
+    friend class layout;
 
     struct split_tag
     {
@@ -88,37 +116,8 @@ public:
         update_callback render_update;
     };
 
-    struct jot
-    {
-        substr s;
-        struct
-        {
-            bool invisible : 1;
-            bool ethereal : 1;
-            bool merge : 1;
-            bool word_break : 1;
-            bool word_end : 1;
-            bool line_break : 1;
-            bool stop : 1;
-            bool tab : 1;
-            bool insert : 1;
-            bool dynamic : 1;
-            bool page_break : 1;
-            bool stateful : 1;
-            bool japanese_break : 1;
-            U16 dummy : 3;
-        } flag;
-        U16 context_size;
-        void* context;
-        basic_rect<F32> bounds;
-        basic_rect<F32> render_bounds;
-        const callback* cb;
-        const tag_type* tag;
-
-        void reset_flags() { *(U16*)&flag = 0; }
-    };
-
     static callback text_cb;
+    static bool japanese_word_breaking;
 
     xfont font;
     basic_rect<F32> bounds;
@@ -130,24 +129,9 @@ public:
     const callback* cb;
     void* context;
 
-    void set_text(const char* text);
-    layout& temp_layout(bool cache) const;
-    void render(layout& l, S32 begin_jot, S32 end_jot) const;
-    F32 yextent(F32 max, S32& size, const layout& l, S32 begin_jot, S32 end_jot) const;
+    static void text_render(const jot& j, const xtextbox& tb, F32 x, F32 y);
 
-    F32 yextent(bool cache) const { return yextent(temp_layout(cache), 0, -1); }
-    F32 yextent(const layout& l, S32 begin_jot, S32 end_jot) const { S32 size; return yextent(HUGE, size, l, begin_jot, end_jot); }
-
-#if DEBUG || RELEASE
-    static void log_layout_stats(bool log)
-    {
-        disable_text_stats = !log;
-    }
-#else
-    static void log_layout_stats(bool) {}
-#endif
-
-    static xtextbox create();
+    static xtextbox create() { return create(xfont::create(), screen_bounds, 0, 0, 0, 0, 0); }
 
     static xtextbox create(
         const xfont& font,
@@ -172,7 +156,35 @@ public:
         return r;
     }
 
+    void set_text(const char* text);
+    void set_text(const char* text, size_t text_size);
+    void set_text(const char** texts, size_t size);
+    void set_text(const char** texts, const size_t* text_sizes, size_t size);
+    layout& temp_layout(bool cache) const;
+    void render(layout& l, S32 begin_jot, S32 end_jot) const;
     void render(bool cache) const { render(temp_layout(cache), 0, -1); }
+    F32 yextent(F32 max, S32& size, const layout& l, S32 begin_jot, S32 end_jot) const;
+    F32 yextent(const layout& l, S32 begin_jot, S32 end_jot) const { S32 size; return yextent(HUGE, size, l, begin_jot, end_jot); }
+    F32 yextent(bool cache) const { return yextent(temp_layout(cache), 0, -1); }
+
+    static tag_entry_list read_tag(const substr& s);
+    static const tag_entry* find_entry(const tag_entry_list& el, const substr& name);
+    static size_t read_list(const tag_entry& e, F32* v, size_t vsize);
+    static size_t read_list(const tag_entry& e, S32* v, size_t vsize);
+    static void clear_layout_cache();
+    static void register_tags(const tag_type* t, size_t size);
+    static tag_type* find_format_tag(const substr& s, S32& index);
+    static tag_type* find_format_tag(const substr& s) { S32 index; return find_format_tag(s, index); }
+    static bool get_japanese_word_breaking() { return japanese_word_breaking; }
+
+#if DEBUG || RELEASE
+    static void log_layout_stats(bool log)
+    {
+        disable_text_stats = !log;
+    }
+#else
+    static void log_layout_stats(bool) {}
+#endif
 
 private:
     const char** texts;
@@ -182,27 +194,130 @@ private:
     U32 text_hash;
 };
 
+struct xtextbox::jot
+{
+    substr s;
+    struct
+    {
+        bool invisible : 1;
+        bool ethereal : 1;
+        bool merge : 1;
+        bool word_break : 1;
+        bool word_end : 1;
+        bool line_break : 1;
+        bool stop : 1;
+        bool tab : 1;
+        bool insert : 1;
+        bool dynamic : 1;
+        bool page_break : 1;
+        bool stateful : 1;
+        bool japanese_break : 1;
+        U16 dummy : 3;
+    } flag;
+    U16 context_size;
+    void* context;
+    basic_rect<F32> bounds;
+    basic_rect<F32> render_bounds;
+    const callback* cb;
+    const tag_type* tag;
+
+    void reset_flags() { *(U16*)&flag = 0; }
+    void intersect_flags(const jot& a)
+    {
+        *(U16*)&flag &= *(U16*)&a.flag;
+    }
+};
+
+struct xtextbox::tag_entry
+{
+    substr name;
+    char op;
+    substr* args;
+    size_t args_size;
+};
+
+struct xtextbox::tag_entry_list
+{
+    const tag_entry* entries;
+    size_t size;
+};
+
+struct xtextbox::jot_line
+{
+    basic_rect<F32> bounds;
+    F32 baseline;
+    size_t first;
+    size_t last;
+    bool page_break;
+};
+
+struct xtextbox::jot_block
+{
+    jot jots[16];
+    jot_block* next_block;
+    bool used;
+};
+
+struct xtextbox::jot_line_block
+{
+    jot_line jot_lines[4];
+    jot_line_block* next_block;
+    bool used;
+};
+
+struct xtextbox::context_buffer_block
+{
+    U8 context_buffer[64];
+    size_t size;
+    context_buffer_block* next_block;
+    bool used;
+};
+
+class xtextbox::layout
+{
+    friend class xtextbox;
+
+    xtextbox tb;
+    jot_block* first_jot_block;
+    size_t _jots_size;
+    jot_line_block* first_line_block;
+    size_t _lines_size;
+    context_buffer_block* first_context_buffer;
+    U16 dynamics[64];
+    size_t dynamics_size;
+
+public:
+    jot& get_jot(size_t index) const;
+    jot& get_new_jot();
+    jot_line& get_jot_line(size_t index) const;
+    jot_line& get_new_jot_line();
+    void clear_jots();
+    void clear_jot_lines();
+    void clear_context_buffers();
+    void free_unused_blocks();
+    void* add_context_data(void* data, size_t size);
+    void get_max_bounds(F32& maxWidth, F32& maxHeight) const;
+    void refresh(const xtextbox& tb, bool force);
+    void clear();
+    void refresh_end(const xtextbox& tb);
+    void trim_line(jot_line& line);
+    void erase_jots(size_t first, size_t last);
+    void merge_line(jot_line& line);
+    void bound_line(jot_line& line);
+    bool fit_line(bool isLastLine);
+    void next_line();
+    void calc(const xtextbox& ctb, size_t start_text);
+    void render(const xtextbox& ctb, S32 begin_jot, S32 end_jot);
+    F32 yextent(F32 max, S32& size, S32 begin_jot, S32 end_jot) const;
+    bool changed(const xtextbox& ctb);
+
+    bool has_data() { return first_jot_block != NULL || first_line_block != NULL || first_context_buffer != NULL; }
+};
+
 void render_fill_rect(const basic_rect<F32>& bounds, xColor color);
+S32 textstrlen(const char* string);
+char* textstrncpy(char* dest, const char* source, S32 chars, char** outDest, const char** outSource);
+void xFontPrintTopText();
 void debug_mode_fontperf();
-
-inline F32 NSCREENX(F32 v)
-{
-    return 1.0f / SCREEN_WIDTH * v;
-}
-
-inline F32 NSCREENY(F32 v)
-{
-    return 1.0f / SCREEN_HEIGHT * v;
-}
-
-inline F32 INSCREENX(F32 v)
-{
-    return SCREEN_WIDTH * v;
-}
-
-inline F32 INSCREENY(F32 v)
-{
-    return SCREEN_HEIGHT * v;
-}
 
 #endif
