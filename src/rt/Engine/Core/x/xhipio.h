@@ -3,10 +3,6 @@
 
 #include "types.h"
 
-#define MAX_OPENBLK 8
-
-struct st_FILELOADINFO;
-
 enum en_READ_ASYNC_STATUS
 {
     HIP_RDSTAT_NONE = -1,
@@ -17,28 +13,7 @@ enum en_READ_ASYNC_STATUS
     HIP_RDSTAT_NOASYNC
 };
 
-struct st_HIPLOADBLOCK
-{
-    S32 endpos;
-    U32 blk_id;
-    S32 blk_remain;
-    S32 flags;
-};
-
-struct st_HIPLOADDATA
-{
-    st_FILELOADINFO* fli;
-    S32 lockid;
-    S32 bypass;
-    S32 bypass_recover;
-    U32 base_sector;
-    S32 use_async;
-    en_READ_ASYNC_STATUS asyn_stat;
-    S32 pos;
-    S32 top;
-    S32 readTop;
-    st_HIPLOADBLOCK stk[MAX_OPENBLK];
-};
+struct st_HIPLOADDATA;
 
 struct st_HIPLOADFUNCS
 {

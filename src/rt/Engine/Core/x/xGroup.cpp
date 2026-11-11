@@ -159,10 +159,13 @@ void xGroupEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBas
                 xBase* b = g->item[i];
                 if (b) {
                     zEntEvent(b, toEvent, toParam, toParamWidget, toParamWidgetID);
-                } else {
+                }
+#if DEBUG || RELEASE
+                else {
                     xOutWarn("GROUP", "Group %s referencing ### object %08X not found!!\n",
                              zSceneGetName(g), idx[i]);
                 }
+#endif
             }
         }
         break;

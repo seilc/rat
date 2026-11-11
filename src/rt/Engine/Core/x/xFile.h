@@ -9,6 +9,8 @@
 #define XFILE_READ IFILE_READ
 #define XFILE_WRITE IFILE_WRITE
 
+#define xFileGetSectorSize iFileGetSectorSize
+
 enum XFILE_READSECTOR_STATUS
 {
     XFILE_RDSTAT_NOOP,

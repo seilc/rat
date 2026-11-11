@@ -360,4 +360,10 @@ extern xStats gPendingStats;
 #define xSTATS_END(t, stat)
 #endif
 
+#if DEBUG || RELEASE
+#define xTWEAKABLE
+#else
+#define xTWEAKABLE const
+#endif
+
 #endif

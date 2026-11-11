@@ -5,4 +5,14 @@
 
 typedef long time_t;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern char* ctime(const time_t*);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

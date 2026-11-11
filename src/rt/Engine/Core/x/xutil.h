@@ -11,6 +11,8 @@ S32 xUtilShutdown();
 char* xUtil_idtag2string(U32 srctag, S32 bufidx);
 #if DEBUG
 void xUtil_niceBufDump(char* membuf, S32 bytcnt, S32 ashex, S32 rptoff);
+#else
+#define xUtil_niceBufDump(membuf, bytcnt, ashex, rptoff)
 #endif
 U32 xUtil_crc_init();
 U32 xUtil_crc_update(U32 crc_accum, char* data, S32 datasize);

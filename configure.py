@@ -624,7 +624,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xParMgr.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParSys.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPartition.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xpkrsvc.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xpkrsvc.cpp"),
             Object(Matching, "rt/Engine/Core/x/xPtankPool.cpp"),
             Object(Matching, "rt/Engine/Core/x/xQuickCull.cpp"),
             Object(Matching, "rt/Engine/Core/x/xRand.cpp"),

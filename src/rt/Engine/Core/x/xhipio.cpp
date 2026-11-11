@@ -7,7 +7,33 @@
 
 #include <string.h>
 
+#define MAX_OPENBLK 8
 #define MAX_LOADINST 8
+
+struct st_FILELOADINFO;
+
+struct st_HIPLOADBLOCK
+{
+    S32 endpos;
+    U32 blk_id;
+    S32 blk_remain;
+    S32 flags;
+};
+
+struct st_HIPLOADDATA
+{
+    st_FILELOADINFO* fli;
+    S32 lockid;
+    S32 bypass;
+    S32 bypass_recover;
+    U32 base_sector;
+    S32 use_async;
+    en_READ_ASYNC_STATUS asyn_stat;
+    S32 pos;
+    S32 top;
+    S32 readTop;
+    st_HIPLOADBLOCK stk[MAX_OPENBLK];
+};
 
 static U32 g_loadlock = 0;
 static st_HIPLOADDATA g_hiploadinst[MAX_LOADINST] = {};

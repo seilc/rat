@@ -1,7 +1,9 @@
 #ifndef XPKRSVC_H
 #define XPKRSVC_H
 
+#include "xhipio.h"
 #include "xordarray.h"
+#include "iTime.h"
 
 #include <time.h>
 
@@ -66,7 +68,7 @@ struct PKRReadFuncs
     S32(*AssetCount)(st_PACKER_READ_DATA*, U32);
     S32(*IsAssetReady)(st_PACKER_READ_DATA*, U32);
     S32(*SetActive)(st_PACKER_READ_DATA*, en_LAYER_TYPE);
-    char*(*AssetName)(st_PACKER_READ_DATA*, U32);
+    const char*(*AssetName)(st_PACKER_READ_DATA*, U32);
     U32(*GetBaseSector)(st_PACKER_READ_DATA*);
     S32(*GetAssetInfo)(st_PACKER_READ_DATA*, U32, PKRAssetTOCInfo*);
     S32(*GetAssetInfoByType)(st_PACKER_READ_DATA*, U32, S32, PKRAssetTOCInfo*);
@@ -105,7 +107,7 @@ struct st_PACKER_ATOC_NODE
     char name[32];
 #if DEBUG
     char fullname[128];
-    S64 dbg_loadtime[4];
+    iTime dbg_loadtime[4];
 #endif
 };
 
@@ -135,7 +137,7 @@ struct st_PACKER_READ_DATA
     S32 dbg_typlodtym_done;
     F32 dbg_typlodtym[130];
     F32 dbg_typxformtym[130];
-    S64 dbg_readtime[4];
+    iTime dbg_readtime[4];
 #endif
 };
 
@@ -162,8 +164,16 @@ inline en_pkrfindmyass PKRFindMyAsset(st_PACKER_READ_DATA*, PKRAssetTOCInfo*, co
     return PKR_FIND_FAILED;
 }
 #endif
+PKRAssetType* PKR_type2typeref(U32 type, PKRAssetType* typelist);
+void PKR_alloc_chkidx();
 
 void* PKR_getmem(U32 id, S32 amount, U32 aid, S32 align, U32 memtag);
+void* PKR_getmem(U32 id, S32 amount, U32 aid, S32 align, U32 memtag, S32 isTemp, char** memtru);
 void PKR_relmem(U32 id, S32 blksize, void* memptr, U32 aid, S32 isTemp);
+
+struct st_PACKER_LTOC_NODE;
+
+void PKR_drv_guardLayer(st_PACKER_LTOC_NODE*);
+en_READ_ASYNC_STATUS PKR_drv_guardVerify(st_PACKER_LTOC_NODE*);
 
 #endif

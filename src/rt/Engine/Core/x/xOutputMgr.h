@@ -76,11 +76,11 @@ void xOutBabble(U32 hval, const char* fmt, ...); // UNUSED
 #define xOutEnable(name)
 #define xOutEnabled 0
 #define xOutTrumps 0
-#define xOutCrit(name, ...)
-#define xOutErr(name, ...)
-#define xOutWarn(name, ...)
+#define xOutCrit
+#define xOutErr
+#define xOutWarn
 #define xOutInfo
-#define xOutBabble(name, ...)
+#define xOutBabble
 #endif
 
 #define xTRACE_FUNCTION(name) xTRACE_FUNCTION_L(__LINE__, name)
