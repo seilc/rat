@@ -306,6 +306,7 @@ typedef RpAtomic* (*RpAtomicCallBack)(RpAtomic* atomic, void* data);
 typedef RpMaterial* (*RpMaterialCallBack)(RpMaterial* material, void* data);
 typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* pData);
 
+#define RpGeometryGetTrianglesMacro(_geometry) ((_geometry)->triangles)
 #define RpAtomicGetClumpMacro(_atomic) ((_atomic)->clump)
 #define RpAtomicGetFlagsMacro(_atomic) (rwObjectGetFlags(_atomic))
 #define RpAtomicGetFrameMacro(_atomic) ((RwFrame *) rwObjectGetParent(_atomic))
@@ -395,6 +396,7 @@ RwInt32 RpGeometryGetNumMaterials(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumTexCoordSets(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumTriangles(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumVertices(const RpGeometry* geometry);
+RpTriangle* RpGeometryGetTriangles(const RpGeometry* geometry);
 RwTexCoords* RpGeometryGetVertexTexCoords(const RpGeometry* geometry, RwTextureCoordinateIndex uvIndex);
 RpGeometry* RpGeometrySetFlags(RpGeometry* geometry, RwUInt32 flags);
 RwFrame* RpLightGetFrame(const RpLight* light);
@@ -428,6 +430,7 @@ RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #define RpGeometryGetNumTexCoordSets(_geometry) RpGeometryGetNumTexCoordSetsMacro(_geometry)
 #define RpGeometryGetNumTriangles(_geometry) RpGeometryGetNumTrianglesMacro(_geometry)
 #define RpGeometryGetNumVertices(_geometry) RpGeometryGetNumVerticesMacro(_geometry)
+#define RpGeometryGetTriangles(_geometry) RpGeometryGetTrianglesMacro(_geometry)
 
 #define RpGeometryGetVertexTexCoords(_geometry, _uvIndex) \
     RpGeometryGetVertexTexCoordsMacro(_geometry, _uvIndex)

@@ -165,5 +165,6 @@ struct zSurfaceProps
 
 xSurface* zSurfaceGetSurface(U32 mat_id);
 xSurface* zSurfaceGetSurface(const xCollis* coll);
+U32 zSurfaceGetStandOn(const xSurface* surf);
 
 #endif

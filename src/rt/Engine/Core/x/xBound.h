@@ -69,6 +69,21 @@ inline void xBoundFromSphere(xBound& bound, const xVec3& c, F32 r)
 
 inline void xBoundFromSphere(xBound& bound, const xSphere& o) { xBoundFromSphere(bound, o.center, o.r); }
 
+inline void xBoundFromOBB(xBound& bound, const xVec3& lower, const xVec3& upper, xMat4x3* mat)
+{
+    bound.type = k_XBOUNDTYPE_OBB;
+    bound.box.box.lower = lower;
+    bound.box.box.upper = upper;
+    bound.box.center.x = 0.5f * (upper.x + lower.x);
+    bound.box.center.y = 0.5f * (upper.y + lower.y);
+    bound.box.center.z = 0.5f * (upper.z + lower.z);
+    bound.mat = mat;
+    xMat4x3ToWorld(&bound.box.center, bound.mat, &bound.box.center);
+    xQuickCullForBound(&bound.qcd, &bound);
+}
+
+inline void xBoundFromOBB(xBound& bound, const xBox& box, xMat4x3* mat) { xBoundFromOBB(bound, box.lower, box.upper, mat); }
+
 inline bool xSphereHitsBound(const xSphere& o, const xBound& b) { return xSphereHitsBound(o.center, o.r, b); }
 
 #endif

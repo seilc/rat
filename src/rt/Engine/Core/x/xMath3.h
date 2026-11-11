@@ -346,6 +346,13 @@ inline void xMat4x3ToLocal(xVec3* o, const xMat4x3* m, const xVec3* v)
     xMat3x3Tolocal(o, m, o);
 }
 
+// UNUSED: speculative
+inline void xMat4x3ToLocal(xVec3* o, const xMat3x3* m, const xVec3* pos, const xVec3* v)
+{
+    o->x = v->x - pos->x, o->y = v->y - pos->y, o->z = v->z - pos->z;
+    xMat3x3Tolocal(o, m, o);
+}
+
 inline void xBoxFromCapsule(xBox& box, const xVec3& s, const xVec3& e, F32 r)
 {
     xVec3& l = box.lower;

@@ -567,7 +567,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xClimate.cpp"),
             Object(Matching, "rt/Engine/Core/x/xClumpColl.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCM.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xCollide.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xCollide.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCollideFast.cpp"),
             Object(Matching, "rt/Engine/Core/x/xColor.cpp"),
             Object(Matching, "rt/Engine/Core/x/xCounter.cpp"),
