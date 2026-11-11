@@ -782,7 +782,7 @@ static char* PKR_LayerMemReserve(st_PACKER_READ_DATA* pr, st_PACKER_LTOC_NODE* l
     loaddest = PKR_layerLoadDest(layer->laytyp);
     switch (loaddest) {
     case PKR_LDDEST_SKIP:
-        xFAIL_FMT_L(1853, "%s", "Huh?");
+        xFAIL_MSG_L(1853, "Huh?");
         break;
     case PKR_LDDEST_KEEPSTATIC:
         mem = (char*)PKR_getmem('LYR\0', layer->laysize, 0x8000 + layer->laytyp, 64, PKR_lookupMemtag(layer->laytyp));
@@ -796,7 +796,7 @@ static char* PKR_LayerMemReserve(st_PACKER_READ_DATA* pr, st_PACKER_LTOC_NODE* l
         mem = (char*)PKR_getmem('LYR\0', layer->laysize, 0x8000 + layer->laytyp, 64, PKR_lookupMemtag(layer->laytyp));
         break;
     default:
-        xFAIL_FMT_L(1913, "%s", "Unknown layer allocate type");
+        xFAIL_MSG_L(1913, "Unknown layer allocate type");
         break;
     }
 
@@ -827,7 +827,7 @@ static void PKR_LayerMemRelease(st_PACKER_READ_DATA*, st_PACKER_LTOC_NODE* layer
         layer->laytru = NULL;
         break;
     default:
-        xFAIL_FMT_L(2002, "%s", "Unknown layer load dest type");
+        xFAIL_MSG_L(2002, "Unknown layer load dest type");
         break;
     }
 }
@@ -2317,7 +2317,7 @@ PKRAssetType* PKR_type2typeref(U32 type, PKRAssetType* typelist)
     xVALIDATE_L(4741, da_type);
     if (!da_type) {
         xOutErr("PACKER", "PKR: Unknown asset type '%s'\n", xUtil_idtag2string(type, 0));
-        xFAIL_FMT_L(4744, "%s", "Unknown Asset Type detected");
+        xFAIL_MSG_L(4744, "Unknown Asset Type detected");
     }
 
     return da_type;

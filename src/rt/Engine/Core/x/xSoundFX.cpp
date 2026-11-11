@@ -168,7 +168,7 @@ static bool xSoundFXEnsureFreeAudioStream(bool willingToStopMainGameMusic)
         return true;
     }
 
-    xFAIL_FMT_L(369, "%s", "No streamed voice available. Some audio may not play.");
+    xFAIL_MSG_L(369, "No streamed voice available. Some audio may not play.");
     return false;
 }
 

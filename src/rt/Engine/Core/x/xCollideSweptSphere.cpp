@@ -847,7 +847,7 @@ S32 xSweptSphereToBound(xSweptSphere* sws, const xBound* bound)
     case k_XBOUNDTYPE_OBB:
         return xSweptSphereToOBB(sws, &bound->box.box, bound->mat);
     default:
-        xFAIL_FMT_L(1558, "%s", "unsupported bound type");
+        xFAIL_MSG_L(1558, "unsupported bound type");
         return FALSE;
     }
 }
@@ -1027,7 +1027,7 @@ S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
         }
             break;
         case k_XBOUNDTYPE_CYLINDER:
-            xFAIL_FMT_L(1830, "%s", "Unsupported bound type!!!");
+            xFAIL_MSG_L(1830, "Unsupported bound type!!!");
             break;
         }
 
@@ -1074,7 +1074,7 @@ S32 xSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
             }
             break;
         case k_XBOUNDTYPE_CYLINDER:
-            xFAIL_FMT_L(1884, "%s", "Unsupported bound type!!!");
+            xFAIL_MSG_L(1884, "Unsupported bound type!!!");
             break;
         }
     }
@@ -1149,7 +1149,7 @@ S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
         }
             break;
         case k_XBOUNDTYPE_CYLINDER:
-            xFAIL_FMT_L(1977, "%s", "Unsupported bound type!!!");
+            xFAIL_MSG_L(1977, "Unsupported bound type!!!");
             break;
         }
 
@@ -1196,7 +1196,7 @@ S32 xNPCSweptSphereToEnt(xSweptSphere* sws, xEnt* ent, xRay3* ray)
             }
             break;
         case k_XBOUNDTYPE_CYLINDER:
-            xFAIL_FMT_L(2031, "%s", "Unsupported bound type!!!");
+            xFAIL_MSG_L(2031, "Unsupported bound type!!!");
             break;
         }
     }

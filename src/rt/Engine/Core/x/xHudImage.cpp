@@ -417,7 +417,7 @@ bool image_widget::render_counter_clockwise(U32 uLayer)
         VertSetXYUV(m_pVertices[m_uVertexCount], fCenterX, fCenterY, fCenterU, fCenterV, m_fRecipZ);
         break;
     default:
-        xFAIL_FMT_L(513, "%s", "Invalid case reached");
+        xFAIL_MSG_L(513, "Invalid case reached");
     }
 
     SetFourVertsAlpha(&m_pVertices[m_uVertexCount], rc.a);
@@ -727,7 +727,7 @@ bool image_widget::render_offset_pie(U32 uLayer)
         VertSetXYUV(m_pVertices[m_uVertexCount], fCenterX, fCenterY, fCenterU, fCenterV, m_fRecipZ);
         break;
     default:
-        xFAIL_FMT_L(821, "%s", "Invalid case reached");
+        xFAIL_MSG_L(821, "Invalid case reached");
     }
 
     SetFourVertsAlpha(&m_pVertices[m_uVertexCount], rc.a);

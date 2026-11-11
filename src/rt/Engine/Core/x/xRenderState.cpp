@@ -117,8 +117,8 @@ RwBool xRenderStateCheckBlendModes(RwBlendFunction desiredSrcBlend, RwBlendFunct
 RwBool xRenderStateCheckState(RwRenderState state, void* desiredValue)
 {
     if (state == rwRENDERSTATESRCBLEND || state == rwRENDERSTATEDESTBLEND) {
-        xFAIL_FMT_L(1478, "%s", "Please do not use RwRenderStateSet for SRCBLEND, DESTBLEND.\n"
-                                       "Use xRenderStateCheckBlendModes.");
+        xFAIL_MSG_L(1478, "Please do not use RwRenderStateSet for SRCBLEND, DESTBLEND.\n"
+                          "Use xRenderStateCheckBlendModes.");
         return TRUE;
     }
 
@@ -146,8 +146,8 @@ void RwRenderStateSetWrapper(RwRenderState state, void* value)
         state == rwRENDERSTATEDESTBLEND ||
         state == rwRENDERSTATEZWRITEENABLE ||
         state == rwRENDERSTATEZTESTENABLE) {
-        xFAIL_FMT_L(1606, "%s", "Please do not use RwRenderStateSet for SRCBLEND, DESTBLEND, ZWRITE and ZTEST.\n"
-                                       "Use xRenderStateBlendModesSet, xRenderStateZModesSet or xRenderStateBlendAndZModesSet.");
+        xFAIL_MSG_L(1606, "Please do not use RwRenderStateSet for SRCBLEND, DESTBLEND, ZWRITE and ZTEST.\n"
+                          "Use xRenderStateBlendModesSet, xRenderStateZModesSet or xRenderStateBlendAndZModesSet.");
         return;
     }
 
@@ -160,8 +160,8 @@ void RwRenderStateSetWrapper(RwRenderState state, void* value)
 RwBool RwRenderStateGetWrapper(RwRenderState state, void* value)
 {
     if (state == rwRENDERSTATESRCBLEND || state == rwRENDERSTATEDESTBLEND) {
-        xFAIL_FMT_L(1630, "%s", "Please do not use RwRenderStateGet for SRCBLEND and DESTBLEND.\n"
-                                       "Use xRenderStateBlendModesGet.");
+        xFAIL_MSG_L(1630, "Please do not use RwRenderStateGet for SRCBLEND and DESTBLEND.\n"
+                          "Use xRenderStateBlendModesGet.");
         return FALSE;
     }
 

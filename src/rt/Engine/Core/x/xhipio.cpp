@@ -400,7 +400,7 @@ static en_READ_ASYNC_STATUS HIPLPollRead(st_HIPLOADDATA* lddata)
         break;
     default:
         DBprintf(DBML_WARN, "Unknown Bin I/O async read status %d\n", pollstat);
-        xFAIL_FMT_L(700, "%s", "Unknown state - this probably means a request failed");
+        xFAIL_MSG_L(700, "Unknown state - this probably means a request failed");
         lddata->asyn_stat = HIP_RDSTAT_NONE;
         break;
     }

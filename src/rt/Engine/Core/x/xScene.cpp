@@ -136,7 +136,7 @@ void xSceneAddEnt(xScene* sc, xEnt* ent)
     case 0x30:
         break;
     default:
-        xFAIL_FMT_L(225, "%s", "unrecognized entity type!");
+        xFAIL_MSG_L(225, "unrecognized entity type!");
     }
 
     xASSERT_ONCE_L(230, ent->baseType != eBaseTypeUnknown);

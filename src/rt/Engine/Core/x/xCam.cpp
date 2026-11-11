@@ -76,7 +76,7 @@ void xCam::refresh_mat(xMat4x3& mat, const xCamSpatialInfo& spatial)
         coord_to_world(mat.pos, spatial.coord.sphere);
         break;
     default:
-        xFAIL_FMT_L(102, "%s", "Uninitialized coordinate type.");
+        xFAIL_MSG_L(102, "Uninitialized coordinate type.");
     }
 
     switch (orient_type) {
@@ -87,7 +87,7 @@ void xCam::refresh_mat(xMat4x3& mat, const xCamSpatialInfo& spatial)
         orient_to_world(mat, spatial.orient.euler);
         break;
     default:
-        xFAIL_FMT_L(114, "%s", "Uninitialized orientation type.");
+        xFAIL_MSG_L(114, "Uninitialized orientation type.");
     }
 }
 

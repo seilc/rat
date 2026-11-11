@@ -63,7 +63,7 @@ void xBoundGetBox(xBox& box, const xBound& bound)
     }
         break;
     default:
-        xFAIL_FMT_L(81, "%s", "Unsupported bound type.");
+        xFAIL_MSG_L(81, "Unsupported bound type.");
     }
 }
 
@@ -97,7 +97,7 @@ void xBoundGetCylinder(xCylinder& o, const xBound& bound)
     case k_XBOUNDTYPE_CYLINDER:
         o = bound.cyl;
     default:
-        xFAIL_FMT_L(120, "%s", "Unsupported bound type.");
+        xFAIL_MSG_L(120, "Unsupported bound type.");
     }
 }
 
@@ -120,7 +120,7 @@ void xBoundGetSphere(xSphere& o, const xBound& bound)
         break;
     }
     default:
-        xFAIL_FMT_L(149, "%s", "Unsupported bound type.");
+        xFAIL_MSG_L(149, "Unsupported bound type.");
     }
 }
 
@@ -144,7 +144,7 @@ void xBoundGetSphere2(xSphere& o, const xBound& bound)
         break;
     }
     default:
-        xFAIL_FMT("%s", "Unsupported bound type.");
+        xFAIL_MSG("Unsupported bound type.");
     }
 }
 
@@ -463,7 +463,7 @@ void xBoundGetCenter(const xBound* b, xVec3* center)
         *center = b->cyl.center;
         break;
     default:
-        xFAIL_FMT_L(697, "%s", "Unsupported type");
+        xFAIL_MSG_L(697, "Unsupported type");
     }
 }
 

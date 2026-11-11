@@ -104,7 +104,7 @@ do {                                                                            
 do {                                            \
     static bool done = false;                   \
     if (!done && !(cond)) {                     \
-        xFAIL_FMT_L(line, "%s", condstr);       \
+        xFAIL_MSG_L(line, condstr);             \
         done = true;                            \
     }                                           \
 } while (0)
@@ -187,7 +187,7 @@ do {                                                                            
 if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
     static bool done = false;                   \
     if (!done) {                                \
-        xFAIL_FMT_L(line, "%s", "NAN");         \
+        xFAIL_MSG_L(line, "NAN");               \
         done = true;                            \
     }                                           \
     (x) = 0.0f;                                 \
@@ -198,7 +198,7 @@ if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
 #if DEBUG || RELEASE
 #define xFIX_NAN_ELEM_L(line, x)                \
 if ((x) && !((x) > 0.0f) && !((x) < 0.0f)) {    \
-    xFAIL_FMT_L(line, "%s", "NAN");             \
+    xFAIL_MSG_L(line, "NAN");                   \
     (x) = 0.0f;                                 \
 }
 #else

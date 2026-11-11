@@ -233,7 +233,7 @@ namespace {
         for (ptank_context* it = head; it < end; ++it, ++group.size) {
             it->ptank = create_ptank(group.create_flags);
             if (!it->ptank) {
-                xFAIL_FMT_L(470, "%s", "Ran out of memory allocating PTank");
+                xFAIL_MSG_L(470, "Ran out of memory allocating PTank");
                 break;
             }
 

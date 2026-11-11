@@ -276,7 +276,7 @@ void xEntMotionReset(xEntMotion* motion, xScene* sc)
             asset_scale = !motion->owner->asset->scale.z ? 1.0f : motion->owner->asset->scale.z;
             break;
         default:
-            xFAIL_FMT_L(443, "%s", "UNKNOWN SLIDE AXIS !");
+            xFAIL_MSG_L(443, "UNKNOWN SLIDE AXIS !");
         }
         scale /= asset_scale * model_scale;
 

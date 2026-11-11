@@ -324,7 +324,7 @@ void xTextureManager::reload(xTextureHandle* pHandle)
 
     S32 result = iFileReadAsync(pFile, pNode->pAssetMemory, size, fileCallback, 0);
     if (result == -1) {
-        xFAIL_FMT_L(476, "%s", "Async read has failed probably because there are too many streams at once.");
+        xFAIL_MSG_L(476, "Async read has failed probably because there are too many streams at once.");
         pNode->state = xInternalTextureNode::UNLOADED;
         RwFree(pNode->pAssetMemory);
         m_currentPoolSize -= size;

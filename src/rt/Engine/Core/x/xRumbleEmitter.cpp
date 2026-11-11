@@ -270,12 +270,12 @@ void FreezableObjectEffect::Init(U32 sphereEmitterID)
 {
     mDefaultSphericalEmitterAsset = (sphericalEmitterAsset*)xSTFindAsset(sphereEmitterID, NULL);
     if (!mDefaultSphericalEmitterAsset) {
-        xFAIL_FMT("%s", "Unable to find FREEZABLE_OBJECT_RUMBLE_EMIT. Please repack BOOT.SDF");
+        xFAIL_MSG("Unable to find FREEZABLE_OBJECT_RUMBLE_EMIT. Please repack BOOT.SDF");
         return;
     }
     pEffectAsset = (effectAsset*)xSTFindAsset(mDefaultSphericalEmitterAsset->effectID, NULL);
     if (!pEffectAsset) {
-        xFAIL_FMT("%s", "Unable to find FREEZABLE_OBJECT_RUMBLE. Please repack BOOT.SDF");
+        xFAIL_MSG("Unable to find FREEZABLE_OBJECT_RUMBLE. Please repack BOOT.SDF");
         return;
     }
     xBaseInit(this, mDefaultSphericalEmitterAsset);

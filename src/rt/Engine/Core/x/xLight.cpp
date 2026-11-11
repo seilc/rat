@@ -266,7 +266,7 @@ xLight* xLightCreateTempInternal(bool useLightCard)
         return &sTempLights[i];
     }
 
-    xFAIL_FMT_L(319, "%s", "Can't create temporary light.  Too many temp lights!!");
+    xFAIL_MSG_L(319, "Can't create temporary light.  Too many temp lights!!");
     return NULL;
 }
 

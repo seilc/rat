@@ -1916,7 +1916,7 @@ xEnt* xEntCollCheckOneEntNoDepen(xEnt* ent, xScene*, void* data)
                 xModelInstance* collModel = ent->collModel ? ent->collModel : ent->model;
                 ncolls = xSphereHitsModel3(&p->bound.sph, collModel, coll, 15 - p->collis->idx, PI / 4.0f);
             } else {
-                xFAIL_FMT_L(3415, "%s", "Expecting bound to be sphere or box");
+                xFAIL_MSG_L(3415, "Expecting bound to be sphere or box");
             }
 
 #if DEBUG || RELEASE
@@ -1954,7 +1954,7 @@ xEnt* xEntCollCheckOneEntNoDepen(xEnt* ent, xScene*, void* data)
                 coll->hdng.y = -1.0f;
                 coll->hdng.z = 0.0f;
             } else {
-                xFAIL_FMT_L(3478, "%s", "whatup?!");
+                xFAIL_MSG_L(3478, "whatup?!");
             }
         }
     }

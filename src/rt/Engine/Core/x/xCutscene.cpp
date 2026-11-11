@@ -74,7 +74,7 @@ void xCutscene_InitTOC(void* toc)
     sCutTocInfo[sCutTocMax] = (xCutsceneInfo*)((U32*)toc + 1);
     sCutTocMax++;
     if (sCutTocMax == MAX_CUTSCENE_TABLES) {
-        xFAIL_FMT_L(147, "%s", "Cutscene table overflow - increase MAX_CUTSCENE_TABLES");
+        xFAIL_MSG_L(147, "Cutscene table overflow - increase MAX_CUTSCENE_TABLES");
         sCutTocMax--;
     }
 }

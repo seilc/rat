@@ -788,7 +788,7 @@ void xModelBucket_RenderOpaque(S32 maxLayer)
 #endif
 
             if (minst == minst->BucketNext) {
-                xFAIL_FMT_L(1573, "%s", "BucketNext is the same as minst.!!\nModel may be added twice. Please look at:\nminst->BucketNext = bucket->List;\nbucket->List = minst;\nin xModelBucket_Add");
+                xFAIL_MSG_L(1573, "BucketNext is the same as minst.!!\nModel may be added twice. Please look at:\nminst->BucketNext = bucket->List;\nbucket->List = minst;\nin xModelBucket_Add");
             }
             minst = minst->BucketNext;
         }

@@ -37,7 +37,7 @@ void xCamTransition::Init(const xCamTransitionAsset& asset)
     mTransitionVolume = NULL;
 
     if (baseType == eBaseTypeCamTransitionPath) {
-        xFAIL_FMT_L(81, "%s", "Got curve based transition in non-curve init function!");
+        xFAIL_MSG_L(81, "Got curve based transition in non-curve init function!");
     }
 }
 
@@ -163,7 +163,7 @@ void xCamTransition::Start()
             mActive = ((zCamBinaryPOI*)destCamera)->Activate(&params, false);
             break;
         case eBaseTypeCamera:
-            xFAIL_FMT_L(221, "%s", "This kind of Transition to old cameras is not supported");
+            xFAIL_MSG_L(221, "This kind of Transition to old cameras is not supported");
             break;
         }
     } else {
@@ -371,7 +371,7 @@ bool xCamPathBias::IsActive()
 bool xCamPathBias::DidComplete()
 {
     if (!mIsActive && mBias.Goal() > 0.0f && mBias.Goal() < 1.0f) {
-        xFAIL_FMT_L(475, "%s", "WARNING: Blend incomplete. Make sure curve is completely inside volume, and ends do not double back.");
+        xFAIL_MSG_L(475, "WARNING: Blend incomplete. Make sure curve is completely inside volume, and ends do not double back.");
     }
 
     return !mIsActive;
