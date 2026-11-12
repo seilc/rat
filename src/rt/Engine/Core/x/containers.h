@@ -206,12 +206,8 @@ public:
         tail.next = 0;
         stack = buffer;
 
-        node_type* it = buffer;
-        node_type* end = it + (SIZE-1);
-        while (it != end) {
+        for (node_type* it = buffer, *end = it + (SIZE-1); it != end; it++)
             it->next = it + 1;
-            it++;
-        }
 
         buffer[SIZE-1].next = 0;
     }
@@ -228,8 +224,7 @@ public:
         node_type* n = alloc();
         n->prev = tail.prev;
         n->next = (node_type*)&tail;
-        n->next->prev = n;
-        n->prev->next = n;
+        n->next->prev = n; n->prev->next = n;
         _size++;
     }
 
@@ -259,8 +254,7 @@ public:
 
     iterator erase(iterator first, iterator last)
     {
-        node_type* n = first.n;
-        node_type* end = last.n;
+        node_type* n = first.n, *end = last.n;
         xASSERT_L(394, n->prev != 0);
         n->prev->next = end;
         end->prev = n->prev;
@@ -268,8 +262,7 @@ public:
             xASSERT_L(399, _size > 0);
             node_type* next = n->next;
             free(n);
-            _size--;
-            n = next;
+            _size--; n = next;
         }
         return last;
     }

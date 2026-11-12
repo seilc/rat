@@ -188,3 +188,8 @@ add_relocations:
 - source: .text:0x8011537C
   type: l
   target: _stack_addr
+# End-of-array pointers dtk attributes to the next object.
+- source: .sdata:0x80D5EC24
+  type: abs
+  target: HIMEM_MORE_TWEAK_BASE
+  addend: 0x200000

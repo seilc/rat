@@ -59,6 +59,7 @@ typedef enum _SDRenderState
     eRenderStateTotal = -1
 } SDRenderState;
 
+void zRenderStateBegin();
 void zRenderState(SDRenderState next);
 
 #endif

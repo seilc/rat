@@ -290,7 +290,7 @@ rt/Engine/Core/x/xDecal.cpp:
 	.text       start:0x80052138 end:0x80052330
 	.rodata     start:0x80478ED0 end:0x80479C80
 	.data       start:0x804F22A8 end:0x804F2458
-	.bss        start:0x80B5E470 end:0x80B5E980
+	.bss        start:0x80B5E470 end:0x80B5E980 align:16
 	.sdata      start:0x80D5EF08 end:0x80D5F150
 	.sbss       start:0x80D68EC8 end:0x80D68F40
 	.sdata2     start:0x80D6C948 end:0x80D6CA00

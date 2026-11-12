@@ -288,6 +288,8 @@ enum xScreenDump
 
 extern xScreenDump gScreenDump;
 extern char gScreenDumpPath[256];
+extern U32 xprintf_display;
+extern U32 xprintf_display_modes;
 #endif
 
 extern U32 gFrameCount;

@@ -24,6 +24,7 @@ extern int strcmpi(const char*, const char*);
 extern char* strchr(const char*, int);
 extern char* strrchr(const char*, int);
 extern char* strtok(char*, const char*);
+extern size_t strcspn(const char*, const char*);
 extern char* strstr(const char*, const char*);
 
 #ifdef __cplusplus
