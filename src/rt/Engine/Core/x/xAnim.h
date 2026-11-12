@@ -220,6 +220,7 @@ xAnimState* xAnimTableAddFileID(xAnimTable* table, xAnimFile* file, U32 stateID,
 xAnimState* xAnimTableGetStateID(xAnimTable* table, U32 ID);
 void xAnimTableRemoveEffectByCB(xAnimTable* table, xAnimEffectCallback callback); // UNUSED
 xAnimState* xAnimTableGetState(xAnimTable* table, const char* name);
+void EffectSingleStart_ForceEffect(xAnimSingle* single, xAnimEffect* force_effect); // UNUSED
 void xAnimPhysicsEval(xAnimPhysicsData* phys, F32 time, xVec3* disp, F32* yaw);
 void xAnimPlaySetState(xAnimSingle* single, xAnimState* state, F32 startTime);
 void xAnimPlaySetup(xAnimPlay* play, void* object, xAnimTable* table, xModelInstance* modelInst);

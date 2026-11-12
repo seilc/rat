@@ -1563,9 +1563,16 @@ void xMat4x3RMul3x3(xMat4x3* o, const xMat3x3* m3x3, const xMat4x3* m)
     }
 }
 
-#if DEBUG || RELEASE
-DECOMP_FORCEACTIVE("xQuatInit: quat not normal:\n\t")
-#endif
+// UNUSED: ported from Incredibles GC
+void xQuatInit(xQuat* q, F32 s, const xVec3* v)
+{
+    q->s = s;
+    xVec3Copy(&q->v, v);
+
+    if (xMATH3_CHECKS && !xeq(xQuatLength2(q), 1.0f, 0.001f)) {
+        xOutWarn("MATH", "xQuatInit: quat not normal:\n\t");
+    }
+}
 
 void xQuatFromMat(xQuat* q, const xMat3x3* m)
 {
@@ -1671,9 +1678,16 @@ void xQuatToMat(const xQuat* q, xMat3x3* m)
     }
 }
 
-#if DEBUG || RELEASE
-DECOMP_FORCEACTIVE("xQuatToAxisAngle: quat not normal:\n\t")
-#endif
+// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+void xQuatToAxisAngle(const xQuat* q, xVec3* a, F32* t)
+{
+    if (xMATH3_CHECKS && !xeq(xQuatLength2(q), 1.0f, 0.001f)) {
+        xOutWarn("MATH", "xQuatToAxisAngle: quat not normal:\n\t");
+    }
+
+    *t = 2.0f * xacos(q->s);
+    xVec3Normalize(a, &q->v);
+}
 
 F32 xQuatNormalize(xQuat* o, const xQuat* q)
 {

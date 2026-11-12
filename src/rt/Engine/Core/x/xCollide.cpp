@@ -1020,7 +1020,7 @@ S32 xCapsuleIsectsEnvClosestToLine(const xCapsule* c, const xEnv* env, xCollis* 
 }
 
 static const xCapsule* cb_cap;
-static S32 xcollide_docam;
+S32 xcollide_docam;
 
 // UNUSED: speculative
 void xCapsuleHitsEnt(xScene*, xRay3*, xQCData*, xEnt* ent, void* data)

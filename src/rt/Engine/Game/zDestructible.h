@@ -8,7 +8,6 @@ struct xEnt;
 struct xModelInstance;
 struct xDestructibleAsset;
 struct zDestructibleState;
-struct zDestructible;
 
 struct zDestructible
 {

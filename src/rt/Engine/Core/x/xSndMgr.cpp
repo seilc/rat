@@ -144,7 +144,7 @@ namespace
 
     void setup_faders()
     {
-        faders.create(256, eMemMgrTag_Audio);
+        faders.create(XSND_TOTAL_VOICES, eMemMgrTag_Audio);
     }
 
     void reset_faders()
@@ -1320,22 +1320,27 @@ void xSndMgrStopChildren(xEnt* pParentEnt)
     }
 }
 
-// UNUSED: speculative
+// UNUSED: ported from Incredibles GC
 xSndHandle xSndMgrFadeOn(xSndGroupHandle hSoundToPlay, F32 fadeTime, S32 uFlags, const xVec3* pPos_WS, const xVec3* pVel, xEnt* pParentEnt, const F32* pfOverrideVolume, const F32* pfOverridePitch)
 {
+    if (fadeTime <= 0.0f) {
+        return xSndMgrPlay(hSoundToPlay, uFlags, pPos_WS, pVel, pParentEnt, pfOverrideVolume, pfOverridePitch);
+    }
+
     F32 zero = 0.0f;
     xSndHandle sndUniqueID = xSndMgrPlay(hSoundToPlay, uFlags, pPos_WS, pVel, pParentEnt, &zero, pfOverridePitch);
-    if (sndUniqueID != XSNDMGR_INVALID_SND_HANDLE) {
-        faders.push_back();
-        sound_fader* fader = &faders.back();
-        U8 sound_index = xSndMgr_GetGroup(hSoundToPlay)->header.uLastSelected;
-
-        fader->handle = sndUniqueID;
-        fader->volume = 0.0f;
-        fader->end = pfOverrideVolume ? *pfOverrideVolume : xSndMgr_GetGroup(hSoundToPlay)->aSndGroupInfo[sound_index].fVolume;
-        fader->rate = (fader->end - fader->volume) / fadeTime;
+    if (sndUniqueID == XSNDMGR_INVALID_SND_HANDLE) {
+        return XSNDMGR_INVALID_SND_HANDLE;
     }
-    return sndUniqueID;
+
+    faders.push_back();
+    sound_fader* fader = &faders.back();
+    fader->handle = sndUniqueID;
+    fader->volume = 0.0f;
+    U8 sound_index = xSndMgr_GetGroup(hSoundToPlay)->header.uLastSelected;
+    fader->end = pfOverrideVolume ? *pfOverrideVolume : xSndMgr_GetGroup(hSoundToPlay)->aSndGroupInfo[sound_index].fVolume;
+    fader->rate = fader->end / fadeTime;
+    return fader->handle;
 }
 
 void xSndMgrFade(xSndHandle& hSound, F32 fadeTime, F32 startVolume, F32 destVolume)
@@ -1377,9 +1382,54 @@ void xSndMgrFade(xSndHandle& hSound, F32 fadeTime, F32 destVolume)
         xSndMgrFade(hSound, fadeTime, vp->vol, destVolume);
 }
 
-#if DEBUG || RELEASE
-DECOMP_FORCEACTIVE("vp != 0")
-#endif
+// UNUSED: ported from Incredibles GC
+void xSndMgrFadeOff(xSndHandle& hSound, F32 fadeTime)
+{
+    if (hSound == XSNDMGR_INVALID_SND_HANDLE) {
+        return;
+    }
+
+    sound_fader* fader = find_fader(hSound);
+    xSndVoiceInfo* vp;
+    F32 start;
+
+    if (fadeTime <= 0.0f) {
+        goto stop;
+    }
+
+    vp = xSndMgrGetVoice(hSound);
+    if (!vp) {
+        goto stop;
+    }
+
+    if (!fader) {
+        faders.push_back();
+        fader = &faders.back();
+        start = 1.0f;
+    } else {
+        start = fader->end;
+    }
+
+    if (start <= 0.001f) {
+        goto stop;
+    }
+
+    xASSERT(vp != 0);
+    fader->handle = hSound;
+    fader->volume = vp->vol;
+    fader->end = 0.0f;
+    fader->rate = -start / fadeTime;
+    hSound = XSNDMGR_INVALID_SND_HANDLE;
+    return;
+
+stop:
+    if (fader) {
+        faders.erase(fader);
+    }
+    if (hSound != XSNDMGR_INVALID_SND_HANDLE) {
+        xSndMgrStop(hSound);
+    }
+}
 
 U32 gCurrSoundMemoryUsed;
 U32 gHighwaterSoundMemoryUsed;

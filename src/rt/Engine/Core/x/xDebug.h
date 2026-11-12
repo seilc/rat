@@ -293,6 +293,7 @@ extern U32 xprintf_display_modes;
 #endif
 
 extern U32 gFrameCount;
+extern U32 gSceneFrameCount;
 
 typedef struct tagBITMAPFILEHEADER
 {

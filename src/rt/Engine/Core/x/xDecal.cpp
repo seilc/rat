@@ -3603,7 +3603,7 @@ void xDecalSimple::Render(xMat4x3* Mat, F32 intensity, F32 size)
         ray.dir.assign(0.0f, -1.0f, 0.0f);
         ray.min_t = 0.0f;
         ray.max_t = 4.0f;
-        ray.flags = 0x800;
+        ray.flags = XRAY3_USE_MAX;
 
         xCollis coll;
         xRayHitsScene(globals.sceneCur, &ray, &coll);
@@ -3611,7 +3611,7 @@ void xDecalSimple::Render(xMat4x3* Mat, F32 intensity, F32 size)
         renderDecal = true;
         forceRenderOnBoth = false;
         renderOnJSP = true;
-        if (coll.flags & 0x1) {
+        if (coll.flags & k_HIT_IT) {
             xEnt* ep = (xEnt*)coll.optr;
             if (ep && zGooIs(ep)) {
                 forceRenderOnBoth = true;

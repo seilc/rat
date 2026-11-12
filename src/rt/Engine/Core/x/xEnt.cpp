@@ -143,8 +143,6 @@ namespace
         }
     }
 
-    DECOMP_FORCEFLOAT(0.0f)
-
     namespace anim_coll
     {
         void reset(xEnt& ent)

@@ -1226,8 +1226,6 @@ static void EffectSingleStart(xAnimSingle* single)
     single->Effect = effect;
 }
 
-static void EffectSingleStart_ForceEffect(xAnimSingle* single, xAnimEffect* force_effect); // UNUSED
-
 static void EffectSingleDuration(xAnimSingle* single)
 {
     F32 time = single->Time;

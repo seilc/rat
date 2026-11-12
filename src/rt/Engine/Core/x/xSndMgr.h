@@ -51,6 +51,7 @@ enum xSndEffect
     xSndEffect_MAX_TYPES
 };
 
+extern xSndEffect m_eCurrentEffect;
 extern U32 gCurrSoundMemoryUsed;
 extern U32 gHighwaterSoundMemoryUsed;
 extern U32 gNumStreamsOpened;
