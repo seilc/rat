@@ -17,7 +17,7 @@ public:
         return playerArray[index];
     }
 
-    S32 size();
+    S32 size() { return numPlayers; }
     bool IsPlayer(xEnt* ptr);
 
     void PushBack(zPlayer* player)

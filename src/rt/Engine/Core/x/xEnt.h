@@ -75,6 +75,9 @@ typedef U32(*xEntCollisDepenQueryCallback)(xEnt*, xEnt*, xScene*, F32, xCollis*)
 #define k_XENT_COLLLEV_BOUND 4
 #define k_XENT_COLLLEV_MODEL 5
 
+// xEnt::moreFlags
+#define k_MORE_FLAGS_ANIM_COLL ((U8)1<<5)
+
 #define k_XENT_MAX_COLL 18
 
 struct xEntCollis
@@ -354,6 +357,12 @@ void on_select_debug_me(const tweak_info& info);
 void on_change_active_model(const tweak_info& info);
 void on_change_show_vertex(const tweak_info& info);
 #endif
+
+inline bool xEntMoves(const xEnt& ent)
+{
+    return ent.pflags & k_XENT_IS_MOVING || ent.collType & (k_XENT_COLLTYPE_DYN | k_XENT_COLLTYPE_NPC | k_XENT_COLLTYPE_PC) ||
+           ent.moreFlags & 0x108;
+}
 
 inline U32 xEntIsVisible(const xEnt* ent)
 {

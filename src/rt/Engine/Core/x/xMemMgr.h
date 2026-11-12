@@ -240,6 +240,14 @@ extern U32 scratch_mem_used;
 #define xMEMPOPTEMP(pointer) iMemPopTemp((pointer))
 
 #if DEBUG || RELEASE
+#define xMEMMGR_PUSH_TAG(tag) xMemMgrGenericMallocPushTag((tag))
+#define xMEMMGR_POP_TAG() xMemMgrGenericMallocPopTag()
+#else
+#define xMEMMGR_PUSH_TAG(tag)
+#define xMEMMGR_POP_TAG()
+#endif
+
+#if DEBUG || RELEASE
 void DebugGetHeapUsage(U32* pTotal, U32* pUsed, U32* pOverhead); // UNUSED
 #endif
 void xMemDebug_SoakLog(U32 SceneId);

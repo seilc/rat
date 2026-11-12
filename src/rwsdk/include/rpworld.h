@@ -357,6 +357,10 @@ typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* 
 
 #define RpMorphTargetGetVertexNormalsMacro(_mt) ((_mt)->normals)
 #define RpMorphTargetGetVerticesMacro(_mt) ((_mt)->verts)
+
+#define RpMorphTargetSetBoundingSphereMacro(_mt, _sphere) \
+    (RwSphereAssign(&((_mt)->boundingSphere), (_sphere)), (_mt))
+
 #define RpWorldGetMaterialMacro(_world, _num) (((_world)->matList.materials)[(_num)])
 #define RpWorldGetNumMaterialsMacro(_world) ((_world)->matList.numMaterials)
 #define RpMaterialGetTextureMacro(_material) ((_material)->texture)
@@ -366,7 +370,10 @@ extern "C" {
 #endif
 
 RpAtomic* AtomicDefaultRenderCallBack(RpAtomic* atomic);
+RpAtomic* RpAtomicCreate(void);
+RwBool RpAtomicDestroy(RpAtomic* atomic);
 RpAtomic* RpAtomicSetFrame(RpAtomic* atomic, RwFrame* frame);
+RpAtomic* RpAtomicSetGeometry(RpAtomic* atomic, RpGeometry* geometry, RwUInt32 flags);
 RpClump* RpClumpAddAtomic(RpClump* clump, RpAtomic* atomic);
 RwBool RpClumpDestroy(RpClump* clump);
 RpClump* RpClumpForAllAtomics(RpClump* clump, RpAtomicCallBack callback, void* pData);
@@ -374,15 +381,21 @@ RwInt32 RpClumpGetNumAtomics(RpClump* clump);
 RpClump* RpClumpRemoveAtomic(RpClump* clump, RpAtomic* atomic);
 RpClump* RpClumpStreamRead(RwStream* stream);
 RpClump* RpClumpStreamWrite(RpClump* clump, RwStream* stream);
+RpGeometry* RpGeometryCreate(RwInt32 numVert, RwInt32 numTriangles, RwUInt32 format);
+RwBool RpGeometryDestroy(RpGeometry* geometry);
 RpGeometry* RpGeometryForAllMaterials(RpGeometry* geometry, RpMaterialCallBack fpCallBack, void* pData);
 RpGeometry* RpGeometryLock(RpGeometry* geometry, RwInt32 lockMode);
+RpGeometry* RpGeometryTriangleSetMaterial(RpGeometry* geometry, RpTriangle* triangle, RpMaterial* material);
 RpGeometry* RpGeometryUnlock(RpGeometry* geometry);
 RpLight* RpLightCreate(RwInt32 type);
 RwBool RpLightDestroy(RpLight* light);
 RpLight* RpLightSetColor(RpLight* light, const RwRGBAReal* color);
 RpLight* RpLightSetConeAngle(RpLight* light, RwReal angle);
 RpLight* RpLightSetRadius(RpLight* light, RwReal radius);
+RpMaterial* RpMaterialCreate(void);
+RwBool RpMaterialDestroy(RpMaterial* material);
 RpMaterial* RpMaterialSetTexture(RpMaterial* material, RwTexture* texture);
+const RpMorphTarget* RpMorphTargetCalcBoundingSphere(const RpMorphTarget* morphTarget, RwSphere* boundingSphere);
 RpWorld* RpWorldAddCamera(RpWorld* world, RwCamera* camera);
 RpWorld* RpWorldAddLight(RpWorld* world, RpLight* light);
 RpWorld* RpWorldCreate(RwBBox* boundingBox);
@@ -420,6 +433,7 @@ RwTexture* RpMaterialGetTexture(const RpMaterial* material);
 RpMaterial* RpMaterialSetColor(RpMaterial* material, const RwRGBA* color);
 RwV3d* RpMorphTargetGetVertexNormals(const RpMorphTarget* morphTarget);
 RwV3d* RpMorphTargetGetVertices(const RpMorphTarget* morphTarget);
+RpMorphTarget* RpMorphTargetSetBoundingSphere(RpMorphTarget* morphTarget, const RwSphere* boundingSphere);
 RpMaterial* RpWorldGetMaterial(const RpWorld* world, RwInt32 matNum);
 RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #endif
@@ -458,6 +472,10 @@ RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #define RpMaterialSetColor(_material, _color) RpMaterialSetColorMacro(_material, _color)
 #define RpMorphTargetGetVertexNormals(_mt) RpMorphTargetGetVertexNormalsMacro(_mt)
 #define RpMorphTargetGetVertices(_mt) RpMorphTargetGetVerticesMacro(_mt)
+
+#define RpMorphTargetSetBoundingSphere(_geometry, _sphere) \
+    RpMorphTargetSetBoundingSphereMacro(_geometry, _sphere)
+
 #define RpWorldGetMaterial(_world, _num) RpWorldGetMaterialMacro(_world, _num)
 #define RpWorldGetNumMaterials(_world) RpWorldGetNumMaterialsMacro(_world)
 #endif

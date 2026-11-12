@@ -1,6 +1,7 @@
 #ifndef ZDESTRUCTIBLE_H
 #define ZDESTRUCTIBLE_H
 
+#include "zShrapnel.h"
 #include "iSnd.h"
 
 struct xEnt;

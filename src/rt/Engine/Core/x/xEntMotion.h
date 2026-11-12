@@ -181,9 +181,43 @@ inline U32 xEntERIsRetracted(const xEntMotion* motion)
     return motion->t >= motion->er.ert;
 }
 
+inline F32 xEntMPGetSpeed(const xEntMotion* motion);
+inline F32 xEntSplineGetSpeed(const xEntMotion* motion);
+
+inline F32 xEntMotionGetSpeed(const xEntMotion* motion)
+{
+    xASSERT_FMT_L(298, motion->type == k_XENTMOTIONTYPE_MP || motion->type == k_XENTMOTIONTYPE_SPLINE,
+                  "Getting the speed is not supported for this type of motion");
+    if (motion->type == k_XENTMOTIONTYPE_MP)
+        return xEntMPGetSpeed(motion);
+    else
+        return xEntSplineGetSpeed(motion);
+}
+
 inline void xEntMPSetSpeed(xEntMotion* motion, F32 speed)
 {
     motion->mp.speed_data.speed = MAX(0.0f, speed);
+}
+
+inline void xEntSpeedDataSet(xEntSpeedData* speed_data, F32 new_speed, F32 time)
+{
+    xASSERT_FMT_L(311, !xfeq0(time), "The time parameter for entity acceleration should not be 0");
+    speed_data->dest_speed = MAX(0.0f, new_speed);
+    speed_data->acceleration = (new_speed - speed_data->speed) / time;
+}
+
+inline void xEntSplineAccelerate(xEntMotion* motion, F32 new_speed, F32 time);
+inline void xEntMPAccelerate(xEntMotion* motion, F32 new_speed, F32 time);
+
+inline void xEntMotionAccelerate(xEntMotion* motion, F32 new_speed, F32 time)
+{
+    xASSERT_FMT_L(333, motion->type == k_XENTMOTIONTYPE_MP || motion->type == k_XENTMOTIONTYPE_SPLINE,
+                  "Setting the acceleration is not supported for this type of motion");
+    if (motion->type == k_XENTMOTIONTYPE_MP) {
+        xEntMPAccelerate(motion, new_speed, time);
+    } else {
+        xEntSplineAccelerate(motion, new_speed, time);
+    }
 }
 
 inline bool xEntMPAtEnd(xEntMotion* motion)
@@ -191,6 +225,31 @@ inline bool xEntMPAtEnd(xEntMotion* motion)
     xASSERT_L(367, motion->type == k_XENTMOTIONTYPE_MP);
     xEntMPData* mp = &motion->mp;
     return mp->dest == mp->src || !mp->dest;
+}
+
+inline void xEntSplineReverse(xEntMotion* motion);
+inline void xEntSplineSetSpeed(xEntMotion* motion, F32 speed);
+
+inline void xEntMotionSetSpeed(xEntMotion* motion, F32 speed)
+{
+    xASSERT_FMT_L(409, motion->type == k_XENTMOTIONTYPE_MP || motion->type == k_XENTMOTIONTYPE_SPLINE,
+                  "Setting the speed is not supported for this type of motion");
+    if (motion->type == k_XENTMOTIONTYPE_MP) {
+        xEntMPSetSpeed(motion, speed);
+    } else {
+        xEntSplineSetSpeed(motion, speed);
+    }
+}
+
+inline void xEntMotionReverse(xEntMotion* motion)
+{
+    xASSERT_FMT_L(425, motion->type == k_XENTMOTIONTYPE_MECH || motion->type == k_XENTMOTIONTYPE_SPLINE,
+                  "Setting the speed is not supported for this type of motion");
+    if (motion->type == k_XENTMOTIONTYPE_MECH) {
+        xEntMechReverse(motion);
+    } else {
+        xEntSplineReverse(motion);
+    }
 }
 
 #endif

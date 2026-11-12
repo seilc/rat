@@ -1,7 +1,7 @@
 #ifndef ZSHRAPNEL_H
 #define ZSHRAPNEL_H
 
-#include "types.h"
+#include "xSpacePartitionTree.h"
 
 struct xModelInstance;
 struct xVec3;

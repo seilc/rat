@@ -69,8 +69,6 @@
 #define GROUND_MESH_A3_ID 0xD34FF538 // xStrHash("ground_mesh_a3")
 #define FLOOR_LIVE_A2_ID 0x8E5A52C5 // xStrHash("Floor_Live_A2")
 
-#define k_MORE_FLAGS_ANIM_COLL ((U8)1<<5)
-
 #define ANIM_COLL_SETUP_L(line)                                                                   \
     xASSERT_L(line, ent.model != 0);                                                              \
     xASSERT_L(line, ent.model->Mat != 0);                                                         \

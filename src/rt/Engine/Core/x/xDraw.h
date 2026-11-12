@@ -49,8 +49,8 @@ void xDrawCircle(const xMat4x3* mat, F32 radius, U32 flags);
 void xDrawCircle3D(const xMat4x3* mat, F32 radius, U32 flags); // UNUSED
 void xDrawCylinder(F32 x, F32 y, F32 z, F32 r, F32 h); // UNUSED
 void xDrawCyl(F32 x, F32 y, F32 z, F32 r, F32 h, U32 flags); // UNUSED
-void xDrawCyl(const xVec3* draw_at, F32 r, F32 h, U32 flags);
-void xDrawCyl(const xVec3* draw_at, F32 radius, F32 height, const xVec3* orient, U32 flags);
+void xDrawCyl(const xVec3* draw_at, F32 r, F32 h, U32 flags); // UNUSED
+void xDrawCyl(const xVec3* draw_at, F32 radius, F32 height, const xVec3* orient, U32 flags); // UNUSED
 void xDrawCyl(const xCylinder* cylinder, U32 flags); // UNUSED
 void xDrawCylinder(const xVec3& start, const xVec3& end, F32 radius, S32 sides, S32 rings);
 void xDrawCone(const xVec3* origin, F32 radius, F32 height, const xVec3* orient, U32 flags); // UNUSED
@@ -85,6 +85,7 @@ inline void xDrawBox(const xBox* b) {}
 inline void xDrawSphere2(const xSphere* sph, U32 lod) {}
 inline void xDrawSphere2(const xVec3* pos, F32 r, U32 lod) {}
 inline void xDrawOBB(const xBox* b, const xMat4x3* m) {}
+inline void xDrawTri(const xVec3* a, const xVec3* b, const xVec3* c) {}
 inline void xDrawCard(RwRaster* raster, const xFRect& src_rect, const xFRect& dst_rect, bool zwrite) {}
 inline void xDrawCard(RwRaster* raster, F32 x, F32 y, F32 w, F32 h, bool zwrite) {}
 #endif

@@ -575,7 +575,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xDebug.cpp"),
             Object(Matching, "rt/Engine/Core/x/xDebugGraph.cpp"),
             Object(Matching, "rt/Engine/Core/x/xDebugTweak.cpp"),
-            Object(NonMatching, "rt/Engine/Core/x/xDecal.cpp"),
+            Object(Matching, "rt/Engine/Core/x/xDecal.cpp"),
             Object(Matching, "rt/Engine/Core/x/xDraw.cpp"),
             Object(Matching, "rt/Engine/Core/x/xEnt.cpp"),
             Object(Matching, "rt/Engine/Core/x/xEntBoulder.cpp"),

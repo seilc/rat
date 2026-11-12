@@ -15,6 +15,9 @@ template <>
 static inline void add_tweak(const char* name, bool* v, S32, S32, const tweak_callback* cb, void* context, U32 flags) { xTWEAK_BOOL(name, v, cb, context, flags); }
 
 template <>
+static inline void add_tweak(const char* name, size_t* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags) { xTWEAK(name, (U32*)v, vmin, vmax, cb, context, flags); }
+
+template <>
 static inline void add_tweak(const char* name, xVec3* v, S32, S32, const tweak_callback* cb, void* context, U32 flags) { xDebugAddTweak(name, v, cb, context, flags); }
 
 template <>

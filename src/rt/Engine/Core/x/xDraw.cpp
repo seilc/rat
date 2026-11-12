@@ -717,6 +717,61 @@ void xDrawCircle(const xMat4x3* mat, F32 radius, U32 flags)
     xMEMPOPTEMP(ptlist);
 }
 
+// UNUSED: speculative
+void xDrawCyl(const xVec3* draw_at, F32 radius, F32 height, const xVec3* orient, U32 flags)
+{
+    U32 num_cpts, num_vseg, num_totpt;
+    xVec3* ptlist, *row_cur, *pt, *row_up, *pt_up, *pt_prev;
+    F32 angper, ang, hytper, hytshft, hyt;
+    xMat3x3 xform = { 1.0f, 0.0f, 0.0f, 0, 0.0f, 1.0f, 0.0f, 0, 0.0f, 0.0f, 1.0f, 0 };
+    U32 i, j;
+
+    num_cpts = flags & 0xFF;
+    if (num_cpts < 4) num_cpts = 4;
+    num_vseg = (flags >> 8) & 0xFF;
+    if (num_vseg < 1) num_vseg = 1;
+    num_totpt = num_cpts * (num_vseg + 1);
+
+    angper = (2.0f * PI) / num_cpts;
+    hytper = height / num_vseg;
+    hytshft = -0.5f * height;
+
+    xMat3x3Euler(&xform, orient);
+
+    ptlist = (xVec3*)xMEMPUSHTEMP(num_totpt * sizeof(xVec3), 'CYLN');
+
+    for (j = 0; j <= num_vseg; j++) {
+        row_cur = &ptlist[j * num_cpts];
+        hyt = hytshft + j * hytper;
+        for (i = 0; i < num_cpts; i++) {
+            ang = i * angper;
+            pt = &row_cur[i];
+            pt->x = radius * isin(ang);
+            pt->y = hyt;
+            pt->z = radius * icos(ang);
+            xMat3x3RMulVec(pt, &xform, pt);
+            *pt += *draw_at;
+        }
+    }
+
+    for (j = 0; j <= num_vseg; j++) {
+        row_cur = &ptlist[j * num_cpts];
+        row_up = &ptlist[(j + 1) * num_cpts];
+        pt_prev = &row_cur[num_cpts - 1];
+        for (i = 0; i < num_cpts; i++) {
+            pt = &row_cur[i];
+            xDrawLine(pt_prev, pt);
+            if (j < num_vseg) {
+                pt_up = &row_up[i];
+                xDrawLine(pt, pt_up);
+            }
+            pt_prev = pt;
+        }
+    }
+
+    xMEMPOPTEMP(ptlist);
+}
+
 void xDrawCylinder(const xVec3& start, const xVec3& end, F32 radius, S32 sides, S32 rings)
 {
     xDrawCone(start, radius, end, radius, sides, rings);

@@ -117,6 +117,8 @@ public:
     template <class T>
     void intersect_line(F32 x0, F32 y0, F32 x1, F32 y1, T& cb);
 
+    entry_data* insert(void* value, S32 type, F32 x, F32 y, F32 r);
+    entry_data* insert(void* value, S32 type, F32 x0, F32 y0, F32 x1, F32 y1);
     void insert_internal(entry_data* e, F32 x0, F32 y0, F32 x1, F32 y1, F32 width);
     void erase_internal(entry_data* e);
 
@@ -145,6 +147,7 @@ private:
     S32 get_grid_shift(F32 size, F32 max_width) const;
     cell& grid_cell(S32 gx, S32 gy);
     const cell& grid_cell(S32 gx, S32 gy) const;
+    entry_data* alloc_entry();
     entry_node* alloc_node();
     void free_node(entry_node* e);
     cell* alloc_children();
@@ -182,6 +185,38 @@ private:
     cell* cell_buffer;
     S32 cell_buffer_size;
 };
+
+inline xSpacePartitionTree2D::entry_data* xSpacePartitionTree2D::insert(void* value, S32 type, F32 x, F32 y, F32 r)
+{
+    xASSERT_MSG_L(336, free_entries != 0, "Ran out of free entries");
+    entry_data* e = alloc_entry();
+    e->value = value;
+    e->type = type;
+    insert_internal(e, x - r, y - r, x + r, y + r, 2.0f * r);
+
+#if DEBUG || RELEASE
+    debug_validate();
+#endif
+
+    return e;
+}
+
+inline xSpacePartitionTree2D::entry_data* xSpacePartitionTree2D::insert(void* value, S32 type, F32 x0, F32 y0, F32 x1, F32 y1)
+{
+    xASSERT_MSG_L(349, free_entries != 0, "Ran out of free entries");
+    entry_data* e = alloc_entry();
+    e->value = value;
+    e->type = type;
+    F32 dx = x1 - x0, dy = y1 - y0;
+    xASSERT_L(354, (dx >= 0.0f) && (dy >= 0.0f));
+    insert_internal(e, x0, y0, x1, y1, MAX(dx, dy));
+
+#if DEBUG || RELEASE
+    debug_validate();
+#endif
+
+    return e;
+}
 
 template <class T>
 void xSpacePartitionTree2D::intersect_point(F32 x, F32 y, T& cb)
@@ -270,6 +305,18 @@ inline xSpacePartitionTree2D::cell& xSpacePartitionTree2D::grid_cell(S32 gx, S32
 inline const xSpacePartitionTree2D::cell& xSpacePartitionTree2D::grid_cell(S32 gx, S32 gy) const
 {
     return grid[gx + (gy << grid_shift_x)];
+}
+
+inline xSpacePartitionTree2D::entry_data* xSpacePartitionTree2D::alloc_entry()
+{
+    entry_data* e = free_entries;
+    xASSERT_L(559, (e != 0) &&"Ran out of free entries");
+    xASSERT_L(561, e->type == -1);
+    xASSERT_L(562, e->owner_size == 0);
+    for (S32 i = 0; i < MAX_OWNERS; ++i)
+        xASSERT_L(564, e->owner[i] == INVALID_INDEX);
+    free_entries = e->next_free_entry;
+    return e;
 }
 
 inline xSpacePartitionTree2D::entry_node* xSpacePartitionTree2D::alloc_node()

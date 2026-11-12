@@ -37,6 +37,7 @@ struct xShadowCache
 
 extern RwCamera* ShadowCamera;
 extern S32 SHADOW_CACHE_POLY_MAX;
+extern xVec3 gShadowObjectRadius;
 
 void xShadowInit();
 void xShadowExit(); // UNUSED
@@ -55,6 +56,7 @@ void xShadowCameraUpdate(xModelInstance* modelInst, RwV3d*, xVec3*, RwRGBA bgcol
 void xShadowCameraFlushPreRendered(void* model, void (*renderCB)(void*), xVec3* center, xVec3* radius, S32 preRenderedSlot, S32 shadowMode);
 U32 xShadowEntIsOutsideFrustum(xEnt* ent); // UNUSED
 U32 xShadowReceiveShadowSetup(xEnt* ent);
+void xShadowReceiveShadow(xEnt* ent, F32 shadowFactor, S32 shadowMode, RwMatrix* shadowMat, RwRaster* shadowRast);
 void xShadowDebug();
 void xShadow_ListAdd(xEnt* ent);
 void xShadowCameraDestroy(); // UNUSED

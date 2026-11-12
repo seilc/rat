@@ -40,6 +40,8 @@ void xFXHighDynamicRangeResetGlowClamp();
 void xFXHighDynamicRangeSetBackground(S32 glow, S32 darken, F32 time);
 void xFXHighDynamicRangeSetBackgroundDefault(S32 glow, S32 darken, bool apply);
 
+inline bool xFXHighDynamicRangeIsBright() { return HDR_brightening; }
+
 inline void xFXHighDynamicRangeBrighten(bool bright, bool force_change)
 {
     if (HDR_brightening != bright || force_change) {
