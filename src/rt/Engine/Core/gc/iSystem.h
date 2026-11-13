@@ -8,5 +8,6 @@
 extern GXRenderModeObj renderObject;
 
 void iExceptionMemCrash(const char* location, U32 size, const char* optionalString);
+void iSystemSleep(S32 milliSecondsToSleep, U32 cancelAlarmsTag);
 
 #endif
