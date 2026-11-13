@@ -851,7 +851,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zNPCBehavior.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPad.cpp"),
             Object(Matching, "rt/Engine/Game/zNPCDirectMode.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/i2dQuadBuffer.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/i2dQuadBuffer.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMeshNavigation.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMeshCollision.cpp"),
             Object(NonMatching, "rt/Engine/Game/zMeshPosition.cpp"),

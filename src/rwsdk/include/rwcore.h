@@ -655,6 +655,7 @@ RwBool RwTextureSetAutoMipmapping(RwBool enable);
 RwBool RwTextureSetMipmapping(RwBool enable);
 RwTexture* RwTextureSetRaster(RwTexture* texture, RwRaster* raster);
 RxRenderStateVector* RxRenderStateVectorLoadDriverState(RxRenderStateVector* rsvp);
+void _rw2DRenderPrimitiveInit(void);
 void _rwDlRenderStateSetZCompLoc(RwBool zBeforeTex);
 RwBool _rwFrameSyncDirty(void);
 void _rwObjectHasFrameSetFrame(void* object, RwFrame* frame);
