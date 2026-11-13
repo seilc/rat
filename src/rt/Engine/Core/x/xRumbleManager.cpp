@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xRumbleManager.h"
 
 #include "xGlobals.h"

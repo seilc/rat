@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xFilter.h"
 
 F32 xFilterCurvedInterp5(F32 in_t)

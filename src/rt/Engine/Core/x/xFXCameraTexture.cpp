@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xFXCameraTexture.h"
 
 #include "iAsync.h"

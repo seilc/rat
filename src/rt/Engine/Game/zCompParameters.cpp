@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zCompParameters.h"
 
 #include "xDebugTweak.h"

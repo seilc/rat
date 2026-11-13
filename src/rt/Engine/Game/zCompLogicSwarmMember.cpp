@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zCompLogicSwarmMember.h"
 
 #include "zICompSteering.h"

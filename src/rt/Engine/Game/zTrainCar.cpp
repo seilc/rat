@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xEnt.h"
 #include "xSpacePartitionTree.h"
 

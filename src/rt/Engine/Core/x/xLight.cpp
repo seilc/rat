@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xLight.h"
 
 #include "xLightEffect.h"

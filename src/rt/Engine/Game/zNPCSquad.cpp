@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zNPCSquad.h"
 
 zNPCSquad::zNPCSquad()

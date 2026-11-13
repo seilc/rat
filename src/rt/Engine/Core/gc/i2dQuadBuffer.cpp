@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "i2dQuadBuffer.h"
 
 bool i2dQuadBuffer::Flush()

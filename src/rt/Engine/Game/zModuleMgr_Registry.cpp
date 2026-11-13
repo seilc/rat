@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zModuleMgr_Registry.h"
 
 #if DEBUG

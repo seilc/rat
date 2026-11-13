@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zCombatAttack.h"
 
 #include <string.h>

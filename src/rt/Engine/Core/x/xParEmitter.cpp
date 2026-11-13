@@ -1,8 +1,8 @@
+#include "xCommon.h"
 #include "xParEmitter.h"
 
 #include "xCam.h"
 #include "xColor.h"
-#include "xCommon.h"
 #include "xDebugTweak.h"
 #include "xDraw.h"
 #include "xEnt.h"

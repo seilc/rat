@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xCamTransition.h"
 
 #include "xCamTransitionAsset.h"

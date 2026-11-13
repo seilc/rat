@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xFXHighDynamicRange.h"
 
 #include "xDebug.h"

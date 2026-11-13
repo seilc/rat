@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xEntDrive.h"
 
 void xEntDriveInit(xEntDrive* drv, xEnt* driven)

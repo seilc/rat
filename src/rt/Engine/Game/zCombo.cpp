@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zCombo.h"
 
 #include "xHudText.h"

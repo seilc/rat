@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xDebugLink.h"
 
 #include "xMemMgr.h"

@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xSpringy.h"
 
 void xSpringyVec3::Update(F32 dt)

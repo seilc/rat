@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zShowerSystem.h"
 
 #include "xCam.h"

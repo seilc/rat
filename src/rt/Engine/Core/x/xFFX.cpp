@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xFFX.h"
 
 #include "xDebug.h"

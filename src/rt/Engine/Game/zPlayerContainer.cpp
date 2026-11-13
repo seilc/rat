@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zPlayerContainer.h"
 
 bool zPlayerContainer::IsPlayer(xEnt* ptr)

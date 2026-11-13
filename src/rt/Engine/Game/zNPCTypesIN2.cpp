@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zNPCTypesIN2.h"
 
 const zNPCTypeInfoIN2* zNPCTypesGetInfo()

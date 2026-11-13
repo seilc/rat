@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xDebugGraph.h"
 
 #include "xColor.h"

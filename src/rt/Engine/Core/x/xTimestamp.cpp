@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xTimestamp.h"
 
 char timestamp[] =

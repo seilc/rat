@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xParEmitterType.h"
 
 #include "xEnt.h"

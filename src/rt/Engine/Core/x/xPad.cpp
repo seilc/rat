@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xPad.h"
 
 #include "xTRC.h"

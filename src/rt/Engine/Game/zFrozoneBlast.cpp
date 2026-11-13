@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zFrozoneBlast.h"
 
 #include "iMath.h"

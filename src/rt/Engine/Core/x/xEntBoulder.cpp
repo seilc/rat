@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xEntBoulder.h"
 
 #include "zMovePoint.h"

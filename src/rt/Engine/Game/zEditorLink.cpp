@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "zEditorLink.h"
 
 #include "xDebug.h"

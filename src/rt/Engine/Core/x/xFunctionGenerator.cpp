@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xFunctionGenerator.h"
 
 #include "xDebugTweak.h"

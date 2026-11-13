@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xOutputMgr.h"
 
 #include "xDebug.h"

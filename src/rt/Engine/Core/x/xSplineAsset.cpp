@@ -1,3 +1,4 @@
+#include "xCommon.h"
 #include "xSplineAsset.h"
 
 #include "xRenderState.h"
