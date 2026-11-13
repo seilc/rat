@@ -22,6 +22,7 @@ static inline void iDebugBreak()
 void iDebugIDEOutput(char* buf);
 void iDebugVSync();
 void iDebugUpdate();
+void iDebugWriteProfile();
 void iDebugStackTrace();
 void iDebugDumpEFB(char* name);
 #else
