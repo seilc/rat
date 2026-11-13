@@ -22,7 +22,9 @@ inline float floorf(float x) { return floor(x); }
 inline float fmodf(float x, float y) { return fmod(x, y); }
 inline float logf(float x) { return log(x); }
 inline float powf(float x, float y) { return pow(x, y); }
+inline float sinf(float x) { return sin(x); }
 inline float sinhf(float x) { return sinh(x); }
+inline float tanf(float x) { return tan(x); }
 inline float tanhf(float x) { return tanh(x); }
 
 }
