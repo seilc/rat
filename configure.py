@@ -420,6 +420,7 @@ cflags_rttilerd = [
 # Game-specific flags
 cflags_rat_base = [
     *cflags_base,
+    "-lang=c++",
     "-pool off",
     "-schedule on",
     "-char signed",
@@ -500,7 +501,7 @@ config.precompiled_headers = [
     {
         "source": "prefix.pch++",
         "mw_version": config.linker_version,
-        "cflags": ["-lang=c++", *(f for f in cflags_rat if f != "-prefix prefix.mch")],
+        "cflags": [f for f in cflags_rat if f != "-prefix prefix.mch"],
     }
 ]
 # decomp.me contexts read the prefix header itself (scratches can't use the .mch).
@@ -821,7 +822,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/water/fxmain.c"),
             Object(NonMatching, "rt/Engine/Core/gc/water/texcache.c"),
             Object(NonMatching, "rt/Engine/Core/gc/water/texconv.c"),
-            Object(NonMatching, "rt/Engine/Core/gc/water/textures.c"),
+            Object(Matching, "rt/Engine/Core/gc/water/textures.c"),
             Object(Matching, "rt/Engine/Game/zEnergyStream.cpp"),
             Object(Matching, "rt/Engine/Game/zWireFrameAsset.cpp"),
             Object(NonMatching, "rt/Engine/Game/zJSPExtraData.cpp"),
