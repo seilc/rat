@@ -182,10 +182,6 @@ namespace {
     warper warp_lists[MAX_TYPE];
     warper* warp_stack;
     bool render_this_frame;
-#if DEBUG || RELEASE
-    F32 debug_emit_time;
-    warper* debug_warp;
-#endif
 
     warper* alloc_warp(type_enum type)
     {
@@ -383,6 +379,9 @@ namespace {
         tweak::heat::dycos0 = icos(dthetay);
         tweak::heat::dysin0 = isin(dthetay);
     }
+
+    F32 debug_emit_time;
+    warper* debug_warp;
 
     void random_sphere_offset(xVec3& offset, F32 radius)
     {

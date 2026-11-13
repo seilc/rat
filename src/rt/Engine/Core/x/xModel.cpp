@@ -43,10 +43,6 @@ xModelPipeLookup* xModelLookupList;
 S32 xModelInstStaticAlloc;
 S32 xModelBucketEnabled;
 S32 xModelAlphaBucketEnabled = TRUE;
-#if DEBUG || RELEASE
-bool prelit_and_thats_the_way_we_likes_it;
-U32 xModel_LastModelID;
-#endif
 
 #if DEBUG
 U32 xModelPoolStressDisable = 1 << eModelPoolStressor_MainLoop;
@@ -473,6 +469,11 @@ void xModelEval(xModelInstance* modelInst)
 
     xSTATS_END(t0, anim);
 }
+
+#if DEBUG || RELEASE
+bool prelit_and_thats_the_way_we_likes_it;
+U32 xModel_LastModelID;
+#endif
 
 void xModelRenderSingle(xModelInstance* modelInst)
 {

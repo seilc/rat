@@ -496,6 +496,9 @@ void widget::cb_dispatch(xBase* from, xBase* to, U32 event, const F32* argf, xBa
 }
 
 #if DEBUG || RELEASE
+static const tweak_callback tweakConvertX = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, normalizedToScreenX, screenToNormalizedX };
+static const tweak_callback tweakConvertY = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, normalizedToScreenY, screenToNormalizedY };
+
 void screenToNormalizedX(const tweak_info&, void* value)
 {
     F32& f = *(F32*)value;
@@ -523,9 +526,6 @@ void normalizedToScreenY(const tweak_info&, void* value)
     f = INSCREENY(f);
     f = f * FB_YRES / SCREEN_HEIGHT;
 }
-
-static const tweak_callback tweakConvertX = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, normalizedToScreenX, screenToNormalizedX };
-static const tweak_callback tweakConvertY = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, normalizedToScreenY, screenToNormalizedY };
 
 namespace {
 

@@ -230,25 +230,6 @@ namespace {
         RwIm2DVertexSetIntRGBA(&vert, color.r, color.g, color.b, color.a);
     }
 
-}
-
-S32 hdr_dump_efb;
-xTWEAKABLE S32 hdr_use_raster = 1;
-void* texData[MAX_TEXDATA];
-U16 sizes[9][2] = {
-    { 256, 240 },
-    { 128, 128 },
-    { 64, 64 },
-    { 32, 32 },
-    { 16, 16 },
-    { 8, 8 },
-    { 4, 4 },
-    { 2, 2 },
-    { 1, 1 }
-};
-
-namespace {
-
 #if DEBUG || RELEASE
     void add_global_tweaks()
     {
@@ -337,6 +318,21 @@ void xFXHighDynamicRangeStartRender()
     _rwDlRenderStateSetZCompLoc(FALSE);
     GXSetZCompLoc(GX_FALSE);
 }
+
+S32 hdr_dump_efb;
+xTWEAKABLE S32 hdr_use_raster = 1;
+void* texData[MAX_TEXDATA];
+U16 sizes[9][2] = {
+    { 256, 240 },
+    { 128, 128 },
+    { 64, 64 },
+    { 32, 32 },
+    { 16, 16 },
+    { 8, 8 },
+    { 4, 4 },
+    { 2, 2 },
+    { 1, 1 }
+};
 
 static void set_sample_offsets(U16 curSizeX, U16 curSizeY)
 {

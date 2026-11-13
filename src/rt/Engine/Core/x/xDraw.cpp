@@ -18,8 +18,6 @@
 #define BOX_NUM_PTS 8
 
 static xColor sgDrawColor = { 0xFF, 0xFF, 0xFF, 0xFF };
-static xVec3 g_normalXZ = { 0.0f, 1.0f, 0.0f };
-static xVec3 g_normalXY = { 0.0f, 0.0f, 1.0f };
 static F32 sph2_yaw;
 
 void xDrawBegin()
@@ -134,6 +132,9 @@ void xDrawArrow(const xVec3* a, const xVec3* b, const xVec3* n, bool asRay, F32 
     xVec3Sub(&newB, &base, &mod);
     xDrawLine(b, &newB);
 }
+
+static xVec3 g_normalXZ = { 0.0f, 1.0f, 0.0f };
+static xVec3 g_normalXY = { 0.0f, 0.0f, 1.0f };
 
 void xDrawArrow(const xVec3* from, const xVec3* dir, bool asRay, F32 length)
 {

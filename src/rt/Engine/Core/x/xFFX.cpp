@@ -7,12 +7,6 @@
 static U32 psize;
 static xFFX* pool;
 static xFFX* alist;
-static U32 shake_psize;
-static xFFXShakeState* shake_pool;
-static xFFXShakeState* shake_alist;
-static U32 rot_match_psize;
-static xFFXRotMatchState* rot_match_pool;
-static xFFXRotMatchState* rot_match_alist;
 
 void xFFXPoolInit(U32 num_ffx)
 {
@@ -128,6 +122,10 @@ void xFFXShakeUpdateEnt(xEnt* ent, xScene* sc, F32 dt, void* fdata)
     ss->tmr = tnext;
 }
 
+static U32 shake_psize;
+static xFFXShakeState* shake_pool;
+static xFFXShakeState* shake_alist;
+
 void xFFXShakePoolInit(U32 num)
 {
     xASSERT_L(296, num);
@@ -177,6 +175,10 @@ DECOMP_FORCEACTIVE(
     RELEASE ? "o != a && o != b" : 0,
     RELEASE ? "Sorry, but the input vector can't be the same as the output vector. You'll get the wrong answer" : 0
 )
+
+static U32 rot_match_psize;
+static xFFXRotMatchState* rot_match_pool;
+static xFFXRotMatchState* rot_match_alist;
 
 void xFFXRotMatchPoolInit(U32 num)
 {

@@ -6,9 +6,6 @@
 
 const S32 NURBS_DRAW_MAX = 256;
 
-static RwIm3DVertex gSectionVerts[NURBS_DRAW_MAX];
-static S32 gTotalSectionVerts;
-
 F32 xNurbs::approximate_length(S32 divisions) const
 {
     F32 division_size = (end() - start()) / divisions;
@@ -312,6 +309,9 @@ void xNurbs::getBoundBox(xBox& box) const
         iBoxBoundVec(&box, &box, &control[i]);
     }
 }
+
+static RwIm3DVertex gSectionVerts[NURBS_DRAW_MAX];
+static S32 gTotalSectionVerts;
 
 void xNurbs::AddCrossSectionPos(xVec3& lastPos, xVec3& centerLinePos, F32 halfWidth) const
 {

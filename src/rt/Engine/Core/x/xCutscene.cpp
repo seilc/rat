@@ -43,6 +43,7 @@ namespace {
 
 }
 
+xCutscene sActiveCutscene;
 static U32 sCutTocCount[MAX_CUTSCENE_TABLES] = { 0 };
 static xCutsceneInfo* sCutTocInfo[MAX_CUTSCENE_TABLES] = { 0 };
 static S32 sCutTocMax;
@@ -52,8 +53,6 @@ bool gCutsceneDrawLineToOrigin;
 #endif
 static xModelInstance* sCutsceneFakeModel;
 static xCutsceneModelHack* sCutsceneModelHackBuf;
-
-xCutscene sActiveCutscene;
 
 void xCutscene_InitBegin()
 {

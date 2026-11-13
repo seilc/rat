@@ -1129,10 +1129,10 @@ void xEntRestorePipeline(xSurface*, RpAtomic* model)
 #if DEBUG || RELEASE
 static void xEntRender_DebugInfo(xEnt* ent);
 
-S32 gEnt_ShowBone = -1;
-S32 gEnt_ShowVertex = -1;
 xEnt* gEnt_Debug;
 S32 gEnt_ActiveModel;
+S32 gEnt_ShowBone = -1;
+S32 gEnt_ShowVertex = -1;
 xVec3 gEnt_ShowBoneLoc;
 xVec3 gEnt_ShowVertexLoc;
 #endif
@@ -2193,6 +2193,8 @@ void xEntDebugAdd(xEnt* xent)
     xModCollAdd(xent);
 }
 
+static S32 sBoneIndex;
+
 static void xEntDebugCB()
 {
     if (dbg_idx == -1) {
@@ -2338,7 +2340,6 @@ static char* xEntBoundValStr(char* str, const xBound* b)
 #define NUM_SCOLL_NAMES 6
 
 static char scoll_name[NUM_SCOLL_NAMES][6] = { "floor", "ceil", "front", "left", "rear", "right" };
-static S32 sBoneIndex;
 
 static void xEntDebugWrite(const xEnt* xent)
 {

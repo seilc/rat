@@ -2802,8 +2802,6 @@ namespace {
     }
 }
 
-static bool hide;
-
 void debug_mode_tweak_begin()
 {
     if (xprintf_display) xprintf_display = 2;
@@ -2815,6 +2813,8 @@ void debug_mode_tweak_end()
     if (xprintf_display == 2) xprintf_display = 1;
     debug_tweak::autosave();
 }
+
+static bool hide;
 
 void debug_mode_tweak()
 {

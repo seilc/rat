@@ -56,18 +56,6 @@ static const char* ptank_render_mode_labels[3] = { "Default", "None", "All" };
 static xVec3 par_offset_right;
 static xVec3 par_offset_up;
 
-static void render_par_sprite(void* data, xParGroup* ps);
-
-static xParSysInfo sParSysInfo[] = {
-    { eParSysRenderFuncSprite, render_par_sprite },
-    { eParSysRenderFuncStreak, iParMgrRenderParSys_Streak },
-    { eParSysRenderFuncFlat, iParMgrRenderParSys_Flat },
-    { eParSysRenderFuncStatic, iParMgrRenderParSys_Static },
-    { eParSysRenderFuncGround, iParMgrRenderParSys_Ground },
-    { eParSysRenderFuncQuadStreak, iParMgrRenderParSys_QuadStreak },
-    { eParSysRenderFuncInvStreak, iParMgrRenderParSys_InvStreak },
-};
-
 inline bool using_ptank_render(const xParSysAsset& sys)
 {
 #if DEBUG || RELEASE
@@ -181,6 +169,16 @@ static void render_par_sprite(void* data, xParGroup* ps)
 
     iParMgrRenderParSys_Sprite(data, ps);
 }
+
+static xParSysInfo sParSysInfo[] = {
+    { eParSysRenderFuncSprite, render_par_sprite },
+    { eParSysRenderFuncStreak, iParMgrRenderParSys_Streak },
+    { eParSysRenderFuncFlat, iParMgrRenderParSys_Flat },
+    { eParSysRenderFuncStatic, iParMgrRenderParSys_Static },
+    { eParSysRenderFuncGround, iParMgrRenderParSys_Ground },
+    { eParSysRenderFuncQuadStreak, iParMgrRenderParSys_QuadStreak },
+    { eParSysRenderFuncInvStreak, iParMgrRenderParSys_InvStreak },
+};
 
 xParGroupRenderFunction xParSysGetRenderFunction(S32 which)
 {
