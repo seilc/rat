@@ -241,7 +241,7 @@ static void xScrFxFadeRender()
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xScrFxShake(F32)
 {
     xFAIL();
@@ -719,7 +719,7 @@ void xCameraFXZoomUpdate(cameraFX* f, F32 dt, const xMat4x3*, xMat4x3* m)
 static const F32 SHAKE_FOREVER = FLT_MAX;
 
 #if DEBUG || RELEASE
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xCameraFXShakeParams::AddTweaks(const char* prefix)
 {
     xAUTOTWEAK(prefix, "maxTime", &maxTime, 0.0f, 1000.0f, NULL, NULL, 0, true);

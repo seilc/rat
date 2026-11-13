@@ -120,7 +120,7 @@ U32 xMemoryManager::GetBlockSize(void* pointer) const
     return DoGetBlockSize(pointer) - debugDataSize;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 bool xMemoryManager::InActiveList(const void* pointer, U32) const
 {
     DebugAllocationHeader* list = activeList;

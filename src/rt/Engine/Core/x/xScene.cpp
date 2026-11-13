@@ -691,7 +691,7 @@ namespace {
         }
     };
 
-    // UNUSED: ported from RotU GC
+    // UNUSED: needed to match (code from RotU GC)
     struct cbSphereHitsEnt
     {
         const xSphere* sphere;
@@ -796,7 +796,7 @@ void xRayHitsSceneFlags(xScene* sc, const xRay3* r, xCollis* coll, U8 collType, 
     }
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 void xSphereHitsScene(xScene* sc, const xSphere* sphere, xCollis* coll, U8 collType, U8 chk)
 {
     coll->dist = 1e38f;

@@ -814,7 +814,7 @@ F32 xSndMixerGetOutputVolume(S16 eSoundCategory)
     return outputVolume;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 U32 xSndMgrGetGroupId(xSndGroupHandle hSound)
 {
     if (hSound == ISND_INVALID_SND_GROUP_HANDLE) {
@@ -1280,7 +1280,7 @@ void xSndMgrSetVolume(xSndHandle& hSound, F32 fVolume, bool assetRelative)
     }
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 void xSndMgrSetPitch(xSndHandle& hSound, F32 fPitch)
 {
     if (hSound == XSNDMGR_INVALID_SND_HANDLE) {
@@ -1320,7 +1320,7 @@ void xSndMgrStopChildren(xEnt* pParentEnt)
     }
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 xSndHandle xSndMgrFadeOn(xSndGroupHandle hSoundToPlay, F32 fadeTime, S32 uFlags, const xVec3* pPos_WS, const xVec3* pVel, xEnt* pParentEnt, const F32* pfOverrideVolume, const F32* pfOverridePitch)
 {
     if (fadeTime <= 0.0f) {
@@ -1382,7 +1382,7 @@ void xSndMgrFade(xSndHandle& hSound, F32 fadeTime, F32 destVolume)
         xSndMgrFade(hSound, fadeTime, vp->vol, destVolume);
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 void xSndMgrFadeOff(xSndHandle& hSound, F32 fadeTime)
 {
     if (hSound == XSNDMGR_INVALID_SND_HANDLE) {

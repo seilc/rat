@@ -717,7 +717,7 @@ void xDrawCircle(const xMat4x3* mat, F32 radius, U32 flags)
     xMEMPOPTEMP(ptlist);
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xDrawCyl(const xVec3* draw_at, F32 radius, F32 height, const xVec3* orient, U32 flags)
 {
     U32 num_cpts, num_vseg, num_totpt;

@@ -945,7 +945,7 @@ void xEntReset(xEnt* ent, const xVec3& pos, const xVec3& ang)
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xEntLoadModelFromDisk(xEnt* ent, const char* filename, xMemPool*)
 {
     char fullfilename[80];

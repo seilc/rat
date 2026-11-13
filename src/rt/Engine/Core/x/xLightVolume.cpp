@@ -90,7 +90,7 @@ void xLightVolume::deactivate()
     activity = 0;
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 void xLightVolumeModel::create()
 {
     model = 0;
@@ -101,7 +101,7 @@ void xLightVolumeModel::create()
     xLightVolume::create();
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 void xLightVolumeModel::render()
 {
     xASSERT(model != 0);
@@ -121,7 +121,7 @@ void xLightVolumeModel::render()
     }
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 void xLightVolumeModel::render_single(xModelInstance* model, U32 stencil_pass)
 {
     RpAtomic* atomic = model->Data;

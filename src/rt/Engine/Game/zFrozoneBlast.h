@@ -6,7 +6,7 @@
 
 struct xLight;
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 class zFrozoneBlast
 {
 public:

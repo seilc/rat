@@ -14,7 +14,7 @@ extern S32 xent_nqcrejects;
 
 #define NUM_SEPERATION_AXES 13
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xBoundMakeSphere(xBound& b, const xVec3& center, F32 radius)
 {
     b.type = k_XBOUNDTYPE_SPHERE;
@@ -124,7 +124,7 @@ void xBoundGetSphere(xSphere& o, const xBound& bound)
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xBoundGetSphere2(xSphere& o, const xBound& bound)
 {
     switch (bound.type) {
@@ -310,7 +310,7 @@ void xSphereHitsBound(const xSphere* o, const xBound* b, xCollis* c)
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xSphereHitsBound(const xSphere* o, const xQCData* q, const xBound* b, xCollis* c)
 {
     xASSERT(q != 0);
@@ -419,7 +419,7 @@ bool xSphereHitsBound(const xVec3& c, F32 r, const xBound& b)
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 bool xVecHitsBound(const xVec3& v, const xBound& b)
 {
     switch (b.type) {

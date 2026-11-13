@@ -3,7 +3,7 @@
 static S32 OrdTest_infotype(const void* vkey, void* vitem); // UNUSED
 static S32 OrdComp_infotype(void* vkey, void* vitem); // UNUSED
 
-// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: needed to match (code from Incredibles GC, TSSM GC, BFBB GC)
 xFactoryInst* xFactory::CreateItem(S32 typeID, void* userdata, RyzMemGrow* callerzgrow)
 {
     S32 idx;
@@ -47,7 +47,7 @@ xFactoryInst* xFactory::CreateItem(S32 typeID, void* userdata, RyzMemGrow* calle
     return item;
 }
 
-// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: needed to match (code from Incredibles GC, TSSM GC, BFBB GC)
 void xFactory::DestroyAll()
 {
     while (products) {
@@ -55,7 +55,7 @@ void xFactory::DestroyAll()
     }
 }
 
-// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: needed to match (code from Incredibles GC, TSSM GC, BFBB GC)
 void xFactory::DestroyItem(xFactoryInst* item)
 {
     S32 idx;
@@ -88,7 +88,7 @@ void xFactory::DestroyItem(xFactoryInst* item)
     }
 }
 
-// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: needed to match (code from Incredibles GC, TSSM GC, BFBB GC)
 static S32 OrdTest_infotype(const void* vkey, void* vitem)
 {
     S32 rc = 0;
@@ -106,7 +106,7 @@ static S32 OrdTest_infotype(const void* vkey, void* vitem)
     return rc;
 }
 
-// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: needed to match (code from Incredibles GC, TSSM GC, BFBB GC)
 static S32 OrdComp_infotype(void* vkey, void* vitem)
 {
     S32 rc = 0;

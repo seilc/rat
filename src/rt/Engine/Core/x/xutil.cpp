@@ -461,7 +461,7 @@ void quicksort_istr(void* base, size_t num, size_t width, size_t key_offset)
     quicksort(base, num, width, sort_istr_functor(key_offset));
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void isort_int(void* base, size_t num, size_t width, size_t key_offset)
 {
     xASSERT((key_offset & 3) == 0);
@@ -474,7 +474,7 @@ void isort_float(void* base, size_t num, size_t width, size_t key_offset)
     isort(base, num, width, sort_float_functor(key_offset));
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void isort_istr(void* base, size_t num, size_t width, size_t key_offset)
 {
     xASSERT((key_offset & 3) == 0);

@@ -316,7 +316,7 @@ void xCutscene_SetSpeed(xCutscene* csn, F32 speed)
     csn->PlaybackSpeed = speed;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xCutscene_SetCameraMatrix(xCutscene* csn, xMat4x3* mat)
 {
     xASSERT(csn);

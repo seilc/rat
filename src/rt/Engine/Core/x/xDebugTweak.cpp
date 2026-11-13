@@ -1156,7 +1156,7 @@ namespace {
             refresh_changed();
         }
 
-        // UNUSED: speculative
+        // UNUSED: needed to match (speculative code)
         void render_backgrounds()
         {
             basic_rect<F32> r = help_box.bounds;

@@ -596,7 +596,7 @@ void xModelRender(xModelInstance* modelInst)
     xSTATS_END(t0, model_render);
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xModelRender2D(xModelInstance* modelInst, basic_rect<F32>* sr, xVec3* from, xVec3* to, F32)
 {
     RwCamera* camera;

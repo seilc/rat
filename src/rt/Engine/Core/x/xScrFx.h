@@ -118,7 +118,7 @@ void xScrFxLensFlare_Add(const xVec3* pos, const xVec3* at, F32 intensity, U32 s
 void xScrFxLensFlare_Reset();
 void xScrFxLensFlare_Render(RwCamera* cam);
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 inline cameraFX* xCameraFXShake(const xCameraFXShakeParams& shakeParams, const xVec3* epicenter, const xVec3* player)
 {
     return xCameraFXShake(shakeParams.maxTime, shakeParams.magnitude, shakeParams.cycleMax, shakeParams.rotateMagnitude, shakeParams.radius, epicenter, player, shakeParams.shakeY);

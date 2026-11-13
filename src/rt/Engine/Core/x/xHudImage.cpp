@@ -893,7 +893,7 @@ bool image_widget::render_random_v(U32 uLayer)
     return true;
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 bool image_widget::set_layer_uvs(U32 whichLayer, RwTexCoords& upperLeft, RwTexCoords& lowerRight)
 {
     xASSERT(m_pLayers);

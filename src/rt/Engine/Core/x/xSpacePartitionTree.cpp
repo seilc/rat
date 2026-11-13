@@ -241,14 +241,14 @@ struct cb_accum_wrapper
 
 } // namespace
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xSpacePartitionTree2D::intersect_point(F32 x, F32 y, intersect_callback cb, void* context)
 {
     cb_fp_wrapper fp_wrapper(cb, context);
     intersect_point(x, y, fp_wrapper);
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 S32 xSpacePartitionTree2D::intersect_point(entry_data** results, S32 max_results, F32 x, F32 y)
 {
     cb_accum_wrapper accum_wrapper(results, max_results);

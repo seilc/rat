@@ -2074,7 +2074,7 @@ namespace
 #endif
 
 #if DEBUG || RELEASE
-    // UNUSED: speculative
+    // UNUSED: needed to match (speculative code)
     void render_subset(U32 owner)
     {
         if (!decals_sorted) {
@@ -3543,7 +3543,7 @@ void xDecalSimple::Setup(U32 textureID)
     numFrameSkipCount = MAX_FRAMES_TO_SKIP;
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 void xDecalSimple::CastDecal(xMat4x3* Mat, F32 intensity, F32 size, bool castOnJSP, bool castOnEnts)
 {
     xVec3 center;
@@ -3590,7 +3590,7 @@ void xDecalSimple::CastDecal(xMat4x3* Mat, F32 intensity, F32 size, bool castOnJ
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xDecalSimple::Render(xMat4x3* Mat, F32 intensity, F32 size)
 {
     static xTWEAKABLE S32 num_frameSkipCount = 10;

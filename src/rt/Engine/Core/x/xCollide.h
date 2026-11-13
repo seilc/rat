@@ -161,7 +161,7 @@ inline bool xSphereHitsOBB(const xSphere& o, const xBox& b, const xMat4x3& mat)
     return xSphereHitsOBB(o.center, o.r, b, mat);
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 inline bool xVecHitsSphere(const xVec3& v, const xVec3& c, F32 r)
 {
     F32 dx = v.x - c.x;
@@ -170,20 +170,20 @@ inline bool xVecHitsSphere(const xVec3& v, const xVec3& c, F32 r)
     return dx * dx + dy * dy + dz * dz <= r * r;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 inline bool xVecHitsSphere(const xVec3& v, const xSphere& o)
 {
     return xVecHitsSphere(v, o.center, o.r);
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 inline bool xVecHitsBox(const xVec3& v, const xBox& b)
 {
     return v.x >= b.lower.x && v.y >= b.lower.y && v.z >= b.lower.z &&
            v.x <= b.upper.x && v.y <= b.upper.y && v.z <= b.upper.z;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 inline bool xVecHitsOBB(const xVec3& v, const xBox& b, const xMat4x3& mat)
 {
     xVec3 loc;

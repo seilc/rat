@@ -98,7 +98,7 @@ static RpAtomic* ListAtomicCB(RpAtomic* atomic, void* data)
     return atomic;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 xJSPHeader* xJSP_StreamRead(RwStream* stream, U32)
 {
     RpClump* clump;
@@ -842,7 +842,7 @@ void xJSP_ClearLocalLight(xJSPHeader* jsp)
     }
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 xVec3* xJSP_GetTriangleVertData(xJSPHeader* jsp, xClumpCollBSPTriangle* tri, xColor* color, xVec3* normal, F32* uv)
 {
     xASSERT_ONCE((tri >= jsp->colltree->triangles) && (tri < jsp->colltree->triangles+jsp->colltree->numTriangles));

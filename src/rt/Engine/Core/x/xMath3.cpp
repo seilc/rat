@@ -998,7 +998,7 @@ void xBoxInitBoundCapsule(xBox* b, const xCapsule* c)
     }
 }
 
-// UNUSED: ported from TSSM GC, BFBB GC
+// UNUSED: needed to match (code from TSSM GC, BFBB GC)
 void xBoxFromCone(xBox& box, const xVec3& center, const xVec3& dir, F32 dist, F32 r1, F32 r2)
 {
     xBox temp;
@@ -1563,7 +1563,7 @@ void xMat4x3RMul3x3(xMat4x3* o, const xMat3x3* m3x3, const xMat4x3* m)
     }
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 void xQuatInit(xQuat* q, F32 s, const xVec3* v)
 {
     q->s = s;
@@ -1678,7 +1678,7 @@ void xQuatToMat(const xQuat* q, xMat3x3* m)
     }
 }
 
-// UNUSED: ported from Incredibles GC, TSSM GC, BFBB GC
+// UNUSED: needed to match (code from Incredibles GC, TSSM GC, BFBB GC)
 void xQuatToAxisAngle(const xQuat* q, xVec3* a, F32* t)
 {
     if (xMATH3_CHECKS && !xeq(xQuatLength2(q), 1.0f, 0.001f)) {
@@ -1713,7 +1713,7 @@ F32 xQuatNormalize(xQuat* o, const xQuat* q)
     return len;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xQuatInv(xQuat* o, const xQuat* q)
 {
     F32 len2 = xQuatLength2(q);

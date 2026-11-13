@@ -78,7 +78,7 @@ inline F32 xasin(F32 x)
     return std::asinf(x);
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 inline F32 xatan(F32 x)
 {
     return std::atanf(x);
@@ -143,7 +143,7 @@ inline void xsinhfast(F32& o, F32 x); // UNUSED
 inline void xtanhfast(F32& o, F32 x); // UNUSED
 inline void xatan2fast(F32& o, F32 y, F32 x); // UNUSED
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 inline void xabsfast(F32& o, F32 x)
 {
     o = std::fabsf(x);
@@ -155,7 +155,7 @@ inline void xmaxfast(F32& o, F32 a, F32 b); // UNUSED
 inline void xmax3fast(F32& o, F32 a, F32 b, F32 c); // UNUSED
 
 #if DEBUG
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 inline F32 xinv(register F32 fVal)
 {
     register F32 fRetVal;

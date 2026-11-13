@@ -788,7 +788,7 @@ void xParEmitterUpdate(xBase* to, xScene*, F32 dt)
     }
 }
 
-// UNUSED: ported from BFBB GC, TSSM GC
+// UNUSED: needed to match (code from BFBB GC, TSSM GC)
 void xParEmitterDestroy()
 {
     xTWEAK_REMOVE("Particle Emitters");
@@ -1075,7 +1075,7 @@ void add_interp_tweak(const char* cat, const char* title, xParInterp& pi)
 void verify_tables()
 {
 #if DEBUG
-    // UNUSED: speculative
+    // UNUSED: needed to match (speculative code)
     if (0) {
         static bool verified = false;
 

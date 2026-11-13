@@ -851,7 +851,7 @@ void xLightSetRadius(xLight* xl, F32 radius)
     iLightSetRadius(&xl->light, radius);
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 void xLightSetLightCardScale(xLight* xl, F32 scale)
 {
     xASSERT(scale >= 0);

@@ -64,7 +64,7 @@ S32 xTRCPadGetArrayIdx(S32 port)
     return -1;
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 TRCPadInfo& xTRCPadGetPadFromID(S32 id)
 {
     for (S32 i = 0; i < k_MAX_TRC_PADS; i++) {
@@ -572,7 +572,7 @@ void xTRCDisk(TRCState state)
 }
 
 #if DEBUG
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xTRCStateToStr(TRCState state, char* txt)
 {
     switch (state) {
@@ -606,7 +606,7 @@ void xTRCStateToStr(TRCState state, char* txt)
     }
 }
 
-// UNUSED: speculative
+// UNUSED: needed to match (speculative code)
 void xTRCDebugCB()
 {
     char txt[64];

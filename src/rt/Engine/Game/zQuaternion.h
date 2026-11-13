@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-// UNUSED: ported from RotU GC, Incredibles GC
+// UNUSED: needed to match (code from RotU GC, Incredibles GC)
 class zQuat
 {
 public:
@@ -59,25 +59,25 @@ public:
     F32 z;
 };
 
-// UNUSED: ported from RotU GC, Incredibles GC
+// UNUSED: needed to match (code from RotU GC, Incredibles GC)
 static zQuat operator+(const zQuat& q1, const zQuat& q2)
 {
     return zQuat(zQuat(q1.w + q2.w, q1.x + q2.x, q1.y + q2.y, q1.z + q2.z));
 }
 
-// UNUSED: ported from RotU GC, Incredibles GC
+// UNUSED: needed to match (code from RotU GC, Incredibles GC)
 static zQuat operator*(const zQuat& v, const F32& s)
 {
     return zQuat(zQuat(v.w * s, v.x * s, v.y * s, v.z * s));
 }
 
-// UNUSED: ported from RotU GC, Incredibles GC
+// UNUSED: needed to match (code from RotU GC, Incredibles GC)
 static F32 DotQuat(const zQuat& q1, const zQuat& q2)
 {
     return q1.w * q2.w + q1.x * q2.x + q1.y * q2.y + q1.z * q2.z;
 }
 
-// UNUSED: ported from RotU GC, Incredibles GC
+// UNUSED: needed to match (code from RotU GC, Incredibles GC)
 static zQuat CrossQuat(const zQuat& q1, const zQuat& q2)
 {
     zQuat q;
@@ -88,7 +88,7 @@ static zQuat CrossQuat(const zQuat& q1, const zQuat& q2)
     return q;
 }
 
-// UNUSED: ported from RotU GC, Incredibles GC
+// UNUSED: needed to match (code from RotU GC, Incredibles GC)
 static void QRotationOperator(zQuat& q, const zQuat& v, const zQuat& q1)
 {
     q = v * (2.0f * q1.w * q1.w - q1.LenSq()) + q1 * 2.0f * DotQuat(q1, v) + CrossQuat(q1, v) * 2.0f * q1.w;

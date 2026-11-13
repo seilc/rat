@@ -567,7 +567,7 @@ inline void xCam::blend3(F32& o, F32 i0, F32 i1, F32 i2, F32 s)
     o = i1 + s * (s >= 0.0f ? i2 - i1 : i1 - i0);
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 inline void xCam::blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3& i2, F32 s)
 {
     blend3(o.x, i0.x, i1.x, i2.x, s);
@@ -575,7 +575,7 @@ inline void xCam::blend3(xVec3& o, const xVec3& i0, const xVec3& i1, const xVec3
     blend3(o.z, i0.z, i1.z, i2.z, s);
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 inline void xCam::blend3(xCamConfigFollow::zone_data& o, const xCamConfigFollow::zone_data& i0,
                          const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s)
 {

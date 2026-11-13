@@ -243,7 +243,7 @@ void sphericalEmitter::UpdatePosition(const xVec3& playerPos) const
     pAsset->position = playerPos;
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 F32 sphericalEmitter::GetTimeLeft()
 {
     F32 timeLeft = 0.0f;
@@ -257,7 +257,7 @@ F32 sphericalEmitter::GetTimeLeft()
     return timeLeft;
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 FreezableObjectEffect::FreezableObjectEffect()
     : emitterBase()
 {
@@ -265,7 +265,7 @@ FreezableObjectEffect::FreezableObjectEffect()
     pEffectAsset = NULL;
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 void FreezableObjectEffect::Init(U32 sphereEmitterID)
 {
     mDefaultSphericalEmitterAsset = (sphericalEmitterAsset*)xSTFindAsset(sphereEmitterID, NULL);
@@ -284,7 +284,7 @@ void FreezableObjectEffect::Init(U32 sphereEmitterID)
     mRadiusSqrd = xsqr(mModifiableAsset.radius);
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 bool FreezableObjectEffect::GetIntensity(const xVec3& position, F32& intensity) const
 {
     intensity = 0.0f;
@@ -316,7 +316,7 @@ bool FreezableObjectEffect::GetIntensity(const xVec3& position, F32& intensity) 
     return true;
 }
 
-// UNUSED: ported from RotU GC
+// UNUSED: needed to match (code from RotU GC)
 void FreezableObjectEffect::UpdatePosition(xVec3& newPosition)
 {
     mModifiableAsset.position = newPosition;

@@ -37,7 +37,7 @@ void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount)
     context.format = format;
 }
 
-// UNUSED: ported from Incredibles GC
+// UNUSED: needed to match (code from Incredibles GC)
 void xIMLock(xIMLockContext& context, xIMFormat format, S32 vertCount, const xIMLockParameters& params)
 {
     xASSERT(vertCount > 0);
