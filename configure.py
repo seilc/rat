@@ -436,12 +436,14 @@ cflags_rat_base = [
     "-i src/rt/Engine/Game",
     "-i src/rwsdk/include",
     "-i src/dolphin/include",
+    "-i src/revolution/include",
     "-i src/bink/bink",
     "-i src/fmod/include",
     "-DDEBUG=0",
     "-DRELEASE=0",
     "-DMASTERDEBUG=0",
     "-DMASTER=0",
+    "-DGRC=0",
     "-prefix prefix.mch",
 ]
 cflags_rat_d = [
@@ -458,6 +460,7 @@ cflags_rat_d = [
 cflags_rat_r = [
     *cflags_rat_base,
     "-DRELEASE=1",
+    "-DGRC=1",
     r'-DBUILDNUM="\"135\""',
     r'-D__DATE__="\"Jan 18 2006\""',
     r'-D__TIME__="\"15:52:40\""',
@@ -676,7 +679,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/iMemMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iModel.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iMorph.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iPad.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iPad.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iParMgr.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/isavegame.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iScrFX.cpp"),

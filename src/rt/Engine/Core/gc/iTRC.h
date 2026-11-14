@@ -41,4 +41,10 @@ public:
 
 #define iTRC_CHECK() iTRC_CHECK_L(__LINE__)
 
+class ResetButton
+{
+public:
+    static void ResetSystem();
+};
+
 #endif
