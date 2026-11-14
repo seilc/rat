@@ -821,7 +821,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/water/fxembm.c"),
             Object(Matching, "rt/Engine/Core/gc/water/fxmain.c"),
             Object(Matching, "rt/Engine/Core/gc/water/texcache.c"),
-            Object(NonMatching, "rt/Engine/Core/gc/water/texconv.c"),
+            Object(Matching, "rt/Engine/Core/gc/water/texconv.c"),
             Object(Matching, "rt/Engine/Core/gc/water/textures.c"),
             Object(Matching, "rt/Engine/Game/zEnergyStream.cpp"),
             Object(Matching, "rt/Engine/Game/zWireFrameAsset.cpp"),

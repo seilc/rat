@@ -583,7 +583,10 @@ struct RwCamera
 #define RwCameraSetZRasterMacro(_camera, _raster) (((_camera)->zBuffer = (_raster)), (_camera))
 #define RwFrameGetMatrixMacro(_f) (&(_f)->modelling)
 #define RwGameCubeRasterGetExtensionMacro(_raster) ((RwGameCubeRasterExtension*)(((RwUInt8*)(_raster)) + _RwGameCubeRasterExtOffset))
+#define RwImageGetDepthMacro(_image) ((_image)->depth)
+#define RwImageGetHeightMacro(_image) ((_image)->height)
 #define RwImageGetPixelsMacro(_image) ((_image)->cpPixels)
+#define RwImageGetWidthMacro(_image) ((_image)->width)
 #define RwRasterGetFormatMacro(_raster) ((((_raster)->cFormat) & (rwRASTERFORMATMASK >> 8)) << 8)
 #define RwRasterGetHeightMacro(_raster) ((_raster)->height)
 #define RwRasterGetParentMacro(_raster) ((_raster)->parent)
@@ -678,7 +681,10 @@ RwCamera* RwCameraSetRaster(RwCamera* camera, RwRaster* raster);
 RwCamera* RwCameraSetZRaster(RwCamera* camera, RwRaster* zRaster);
 RwMatrix* RwFrameGetMatrix(RwFrame* frame);
 RwGameCubeRasterExtension* RwGameCubeRasterGetExtension(RwRaster* raster);
+RwInt32 RwImageGetDepth(const RwImage* image);
+RwInt32 RwImageGetHeight(const RwImage* image);
 RwUInt8* RwImageGetPixels(const RwImage* image);
+RwInt32 RwImageGetWidth(const RwImage* image);
 RwInt32 RwRasterGetFormat(const RwRaster* raster);
 RwInt32 RwRasterGetHeight(const RwRaster* raster);
 RwRaster* RwRasterGetParent(const RwRaster* raster);
@@ -713,7 +719,10 @@ RwTexture* RwTextureSetFilterMode(RwTexture* texture, RwTextureFilterMode filter
 #define RwCameraSetZRaster(_camera, _raster) RwCameraSetZRasterMacro(_camera, _raster)
 #define RwFrameGetMatrix(_f) RwFrameGetMatrixMacro(_f)
 #define RwGameCubeRasterGetExtension(_raster) RwGameCubeRasterGetExtensionMacro(_raster)
+#define RwImageGetDepth(_image) RwImageGetDepthMacro(_image)
+#define RwImageGetHeight(_image) RwImageGetHeightMacro(_image)
 #define RwImageGetPixels(_image) RwImageGetPixelsMacro(_image)
+#define RwImageGetWidth(_image) RwImageGetWidthMacro(_image)
 #define RwRasterGetFormat(_raster) RwRasterGetFormatMacro(_raster)
 #define RwRasterGetHeight(_raster) RwRasterGetHeightMacro(_raster)
 #define RwRasterGetParent(_raster) RwRasterGetParentMacro(_raster)
