@@ -30,11 +30,13 @@ void iLightGetColor(iLight* light, xFColor& col);
 void iLightSetPos(iLight* light, const xVec3& pos);
 void iLightGetPos(iLight* light, xVec3& pos);
 void iLightSetRadius(iLight* light, F32 radius);
+void iLightSetConeAngle(iLight* light, F32 coneAngle); // UNUSED
 xSphere* iLightGetBoundingSphere(iLight* light);
 void iLightDestroy(iLight* light);
 void iLightAddForModel(xModelInstance* minst, iLight** lights, S32 numLights);
 void iLightRemoveFromModel(xModelInstance* minst, iLight** lights, S32 numLights);
 void iLightEnv(iLight* light, S32 env);
+F32 iLightGetLuminance(iLight* light); // UNUSED
 void iLightJSPPreRender(xEnv* env, iLight* light);
 void iLightJSPPostRender(xEnv* env);
 #if DEBUG || RELEASE

@@ -753,6 +753,9 @@ struct RwObject
 #define rwLinkListInitialize(list) \
     ( (list)->link.next = ((RwLLLink *)(list)), (list)->link.prev = ((RwLLLink *)(list)) )
 
+#define rwLinkListRemoveLLLink(linkvar) \
+    ( ((linkvar)->prev)->next = (linkvar)->next, ((linkvar)->next)->prev = (linkvar)->prev )
+
 #define RwObjectGetType(o) (((const RwObject *)(o))->type)
 #define RwIm2DGetFarScreenZMacro() (RWSRCGLOBAL(dOpenDevice).zBufferFar)
 #define RwIm2DGetNearScreenZMacro() (RWSRCGLOBAL(dOpenDevice).zBufferNear)
@@ -794,6 +797,7 @@ struct RwObject
 #define RWPLUGINOFFSET(_type, _base, _offset) ((_type *)((RwUInt8 *)(_base) + (_offset)))
 #define rwObjectGetFlags(o) (((const RwObject *)(o))->flags)
 #define rwObjectGetParent(object) (((const RwObject *)(object))->parent)
+#define rwObjectSetFlags(o, f) (((RwObject *)(o))->flags) = (RwUInt8)(f)
 #define RwRGBAAssign(_target, _source) ( *(_target) = *(_source) )
 #define RwSphereAssign(_target, _source) ( *(_target) = *(_source) )
 #define _RW_S2 ( (float) 8.3333337680e-03 )

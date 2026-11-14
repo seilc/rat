@@ -49,6 +49,8 @@ void iEnvFree(iEnv* env);
 void iEnvDefaultLighting(iEnv*);
 void iEnvSetup(iEnv* env);
 void iEnvRender(iEnv* env, bool alpha);
+void iEnvLightPreRender(iEnv* env, RpLight* light);
+void iEnvLightPostRender(iEnv* env);
 
 inline bool iEnvIsJSPActive(const iEnv* env, S32 which)
 {
