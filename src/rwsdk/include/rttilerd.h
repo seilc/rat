@@ -3,8 +3,8 @@
 
 #include "rwcore.h"
 
-typedef RwCamera* (*RtTileRenderCallBack)(RwCamera* camera, RwInt32 x, RwInt32 y, void* pData);
 typedef RwImage* (*RtTileArchiveCallBack)(RwImage* image, RwInt32 x, RwInt32 y, void* pData);
+typedef RwCamera* (*RtTileRenderCallBack)(RwCamera* camera, RwInt32 x, RwInt32 y, void* pData);
 
 #ifdef __cplusplus
 extern "C" {
