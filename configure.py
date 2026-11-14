@@ -888,7 +888,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zParticleSystemEarthDust.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXScreenDecal.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomMissionSelect.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iDebugLink.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iDebugLink.cpp"),
             Object(Matching, "rt/Engine/Core/x/xDebugLink.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNavigationMesh.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemPop.cpp"),

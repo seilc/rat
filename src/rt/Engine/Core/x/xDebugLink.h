@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define xDebugLinkPrintf
+
 class xDebugLink;
 
 enum eError

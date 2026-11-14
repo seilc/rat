@@ -19,8 +19,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define xDebugLinkPrintf
-
 char xDebugLink::mBuffer[2048];
 
 xDebugLink::xDebugLink()
