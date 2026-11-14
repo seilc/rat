@@ -818,7 +818,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zLoadingScreen.cpp"),
             Object(Matching, "rt/Engine/Core/x/xModelBlur.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iWater.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/water/fxembm.c"),
+            Object(Matching, "rt/Engine/Core/gc/water/fxembm.c"),
             Object(Matching, "rt/Engine/Core/gc/water/fxmain.c"),
             Object(Matching, "rt/Engine/Core/gc/water/texcache.c"),
             Object(Matching, "rt/Engine/Core/gc/water/texconv.c"),
