@@ -605,6 +605,7 @@ struct RwCamera
 #define RwImageGetHeightMacro(_image) ((_image)->height)
 #define RwImageGetPixelsMacro(_image) ((_image)->cpPixels)
 #define RwImageGetWidthMacro(_image) ((_image)->width)
+#define RwRasterGetDepthMacro(_raster) ((_raster)->depth)
 #define RwRasterGetFormatMacro(_raster) ((((_raster)->cFormat) & (rwRASTERFORMATMASK >> 8)) << 8)
 #define RwRasterGetHeightMacro(_raster) ((_raster)->height)
 #define RwRasterGetParentMacro(_raster) ((_raster)->parent)
@@ -712,6 +713,7 @@ RwInt32 RwImageGetDepth(const RwImage* image);
 RwInt32 RwImageGetHeight(const RwImage* image);
 RwUInt8* RwImageGetPixels(const RwImage* image);
 RwInt32 RwImageGetWidth(const RwImage* image);
+RwInt32 RwRasterGetDepth(const RwRaster* raster);
 RwInt32 RwRasterGetFormat(const RwRaster* raster);
 RwInt32 RwRasterGetHeight(const RwRaster* raster);
 RwRaster* RwRasterGetParent(const RwRaster* raster);
@@ -751,6 +753,7 @@ RwUInt16 _rwDlTokenGetCurrent(void);
 #define RwImageGetHeight(_image) RwImageGetHeightMacro(_image)
 #define RwImageGetPixels(_image) RwImageGetPixelsMacro(_image)
 #define RwImageGetWidth(_image) RwImageGetWidthMacro(_image)
+#define RwRasterGetDepth(_raster) RwRasterGetDepthMacro(_raster)
 #define RwRasterGetFormat(_raster) RwRasterGetFormatMacro(_raster)
 #define RwRasterGetHeight(_raster) RwRasterGetHeightMacro(_raster)
 #define RwRasterGetParent(_raster) RwRasterGetParentMacro(_raster)

@@ -3,9 +3,10 @@
 
 #include "xpkrsvc.h"
 #include "xFile.h"
-#include "iFMV.h"
 
 #include <rwcore.h>
+
+struct MOVIE;
 
 const U32 maxStreamingTextures = 192;
 const U32 maxStreamingMovies = 4;

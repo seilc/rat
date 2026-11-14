@@ -5,6 +5,8 @@
 
 #include <dolphin.h>
 
+struct RwCamera;
+
 #if DEBUG || RELEASE
 #define iprintf OSReport
 #else
@@ -19,11 +21,16 @@ static inline void iDebugBreak()
 #endif
 
 #if DEBUG || RELEASE
-void iDebugIDEOutput(char* buf);
-void iDebugVSync();
+void iDebugEventStart(U8); // UNUSED
+void iDebugEventEnd(U8); // UNUSED
+void iDebugInit();
 void iDebugUpdate();
 void iDebugWriteProfile();
+void iDebugDrawScreen(char* txt, S32 x, S32 y); // UNUSED
+void iDebugVSync();
 void iDebugStackTrace();
+void iDebugIDEOutput(char* buf);
+void iDebugScreenDump(RwCamera* camera);
 void iDebugDumpEFB(char* name);
 #else
 #define iDebugDumpEFB(name)
