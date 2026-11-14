@@ -669,7 +669,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/iEnv.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iFile.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iFMV.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iFX.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iFX.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iLight.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iMath.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iMath3.cpp"),

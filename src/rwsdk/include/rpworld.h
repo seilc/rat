@@ -20,7 +20,15 @@ typedef struct RpTriangle RpTriangle;
 typedef struct RpVertexNormal RpVertexNormal;
 typedef struct RpWorld RpWorld;
 typedef struct RpWorldSector RpWorldSector;
+typedef struct RxGameCubeDisplayList RxGameCubeDisplayList;
 typedef struct RxGameCubePipeData RxGameCubePipeData;
+typedef struct RxGameCubeVertexAttr RxGameCubeVertexAttr;
+typedef struct RxGameCubeVertexBuffer RxGameCubeVertexBuffer;
+
+typedef struct RpGameCubeVtxFmt RpGameCubeVtxFmt;
+
+typedef void* (*RxGameCubeAllInOneCallBack)(void* object, RxGameCubePipeData* pipeData);
+typedef void (*RxGameCubeMatFunc)(RwRGBAReal* ambientColor, RwRGBA* materialColor, RwReal ambientCoef);
 
 enum RpGeometryFlag
 {
@@ -312,6 +320,12 @@ struct RpWorld
     RxPipeline* pipeline;
 };
 
+struct RxGameCubeDisplayList
+{
+    void* displayList;
+    RwUInt32 size;
+};
+
 struct RxGameCubePipeData
 {
     RwResEntry* resEntry;
@@ -324,11 +338,36 @@ struct RxGameCubePipeData
     void* nodeData;
 };
 
+struct RxGameCubeVertexAttr
+{
+    void* array;
+    RwUInt8 attr;
+    RwUInt8 stride;
+    RwUInt8 indexType;
+    RwUInt8 pad[1];
+};
+
+struct RxGameCubeVertexBuffer
+{
+    RwUInt16 token;
+    RwUInt16 serialNumber;
+    RwUInt32 flags;
+    RwUInt32 numAttrArrays;
+    RxGameCubeVertexAttr attr[1];
+};
+
 typedef RpAtomic* (*RpAtomicCallBack)(RpAtomic* atomic, void* data);
 typedef RpMaterial* (*RpMaterialCallBack)(RpMaterial* material, void* data);
 typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* pData);
 
 #define RpGeometryGetTrianglesMacro(_geometry) ((_geometry)->triangles)
+#define rpATOMIC 1
+
+#define RpGameCubeGeometryGetVtxFmtMacro(_geometry) \
+    (*RWPLUGINOFFSET(RpGameCubeVtxFmt *, (_geometry), _rpDlGeomVtxFmtOffset))
+
+#define RpGameCubeWorldGetVtxFmtMacro(_world) \
+    (*RWPLUGINOFFSET(RpGameCubeVtxFmt *, (_world), _rpDlWorldVtxFmtOffset))
 
 #define RpAtomicGetBoundingSphereMacro(_atomic) \
     ((((_atomic)->interpolator.flags & rpINTERPOLATORDIRTYSPHERE)? _rpAtomicResyncInterpolatedSphere(_atomic), 0: 0), &((_atomic)->boundingSphere))
@@ -382,6 +421,11 @@ typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* 
 extern "C" {
 #endif
 
+#ifndef RWDEBUG
+extern RwInt32 _rpDlGeomVtxFmtOffset;
+extern RwInt32 _rpDlWorldVtxFmtOffset;
+#endif
+
 RpAtomic* AtomicDefaultRenderCallBack(RpAtomic* atomic);
 RpAtomic* RpAtomicCreate(void);
 RwBool RpAtomicDestroy(RpAtomic* atomic);
@@ -416,8 +460,12 @@ RwBool RpWorldDestroy(RpWorld* world);
 RpWorld* RpWorldRemoveCamera(RpWorld* world, RwCamera* camera);
 RpWorld* RpWorldRemoveLight(RpWorld* world, RpLight* light);
 RpWorld* RwCameraGetWorld(const RwCamera* camera);
+void RxGameCubeAllInOneSetRenderCallBack(RxPipelineNode* node, RxGameCubeAllInOneCallBack callback);
+RxNodeDefinition* RxNodeDefinitionGetGameCubeAtomicAllInOne(void);
 void _rpAtomicResyncInterpolatedSphere(RpAtomic* atomic);
 RpMeshHeader* _rpMeshHeaderForAllMeshes(RpMeshHeader* meshHeader, RpMeshCallBack fpCallBack, void* pData);
+RxGameCubeMatFunc _rwDlObjectRenderSetup(RwUInt32 flags, RwUInt32 lightMask, RwInt32 ambient, RwBool prelightAlpha);
+void _rwDlVtxFmtSetup(RpGameCubeVtxFmt* fmt, RxGameCubePipeData* pipeData);
 
 #if (defined(RWDEBUG) || defined(RWSUPPRESSINLINE))
 RwSphere* RpAtomicGetBoundingSphere(RpAtomic* atomic);
@@ -429,6 +477,8 @@ RpAtomicCallBackRender RpAtomicGetRenderCallBack(const RpAtomic* atomic);
 RpAtomic* RpAtomicRender(RpAtomic* atomic);
 void RpAtomicSetRenderCallBack(RpAtomic* atomic, RpAtomicCallBackRender callback);
 RwFrame* RpClumpGetFrame(const RpClump* clump);
+RpGameCubeVtxFmt* RpGameCubeGeometryGetVtxFmt(RpGeometry* geometry);
+RpGameCubeVtxFmt* RpGameCubeWorldGetVtxFmt(RpWorld* world);
 RwUInt32 RpGeometryGetFlags(const RpGeometry* geometry);
 RpMaterial* RpGeometryGetMaterial(const RpGeometry* geometry, RwInt32 matNum);
 RpMorphTarget* RpGeometryGetMorphTarget(const RpGeometry* geometry, RwInt32 morphTarget);
@@ -465,6 +515,8 @@ RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #define RpAtomicRender(_atomic) RpAtomicRenderMacro(_atomic)
 #define RpAtomicSetRenderCallBack(_atomic, _callback) RpAtomicSetRenderCallBackMacro(_atomic, _callback)
 #define RpClumpGetFrame(_clump) RpClumpGetFrameMacro(_clump)
+#define RpGameCubeGeometryGetVtxFmt(_geometry) RpGameCubeGeometryGetVtxFmtMacro(_geometry)
+#define RpGameCubeWorldGetVtxFmt(_world) RpGameCubeWorldGetVtxFmtMacro(_world)
 #define RpGeometryGetFlags(_geometry) RpGeometryGetFlagsMacro(_geometry)
 #define RpGeometryGetMaterial(_geometry, _num) RpGeometryGetMaterialMacro(_geometry, _num)
 #define RpGeometryGetMorphTarget(_geometry, _index) RpGeometryGetMorphTargetMacro(_geometry, _index)

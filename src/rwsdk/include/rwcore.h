@@ -36,6 +36,7 @@ typedef struct rxHeapSuperBlockDescriptor rxHeapSuperBlockDescriptor;
 
 typedef RxObjSpace3DVertex RxObjSpace3DLitVertex;
 typedef RxObjSpace3DLitVertex RwIm3DVertex;
+typedef RxPipeline RxLockedPipe;
 
 enum RwRasterLockMode
 {
@@ -68,6 +69,21 @@ enum RwRasterType
     rwRASTERTYPEFORCEENUMSIZEINT = RWFORCEENUMSIZEINT,
 };
 typedef enum RwRasterType RwRasterType;
+
+enum RxGeometryFlag
+{
+    rxGEOMETRY_TRISTRIP = 0x1,
+    rxGEOMETRY_POSITIONS = 0x2,
+    rxGEOMETRY_TEXTURED = 0x4,
+    rxGEOMETRY_PRELIT = 0x8,
+    rxGEOMETRY_NORMALS = 0x10,
+    rxGEOMETRY_LIGHT = 0x20,
+    rxGEOMETRY_MODULATE = 0x40,
+    rxGEOMETRY_TEXTURED2 = 0x80,
+    rxGEOMETRY_COLORED = 0x100,
+    rxGEOMETRYFLAGFORCEENUMSIZEINT = RWFORCEENUMSIZEINT,
+};
+typedef enum RxGeometryFlag RxGeometryFlag;
 
 enum RxRenderStateFlag
 {
@@ -566,6 +582,8 @@ struct RwCamera
     }                                     \
     MACRO_STOP
 
+#define RxPipelineDestroy(_ppln) (_rxPipelineDestroy(_ppln), TRUE)
+#define _rwDlTokenGetCurrentMacro() (_RwDlTokenCurrent)
 #define RwCameraGetCurrentCameraMacro() ((RwCamera *)RWSRCGLOBAL(curCamera))
 #define RwCameraGetFarClipPlaneMacro(_camera) ((_camera)->farPlane)
 #define RwCameraGetFogDistanceMacro(_camera) ((_camera)->fogPlane)
@@ -614,6 +632,7 @@ extern "C" {
 #endif
 
 #ifndef RWDEBUG
+extern RwUInt16 _RwDlTokenCurrent;
 extern RwInt32 _RwGameCubeRasterExtOffset;
 #endif
 
@@ -657,11 +676,19 @@ RwBool RwTextureDestroy(RwTexture* texture);
 RwBool RwTextureSetAutoMipmapping(RwBool enable);
 RwBool RwTextureSetMipmapping(RwBool enable);
 RwTexture* RwTextureSetRaster(RwTexture* texture, RwRaster* raster);
+RxLockedPipe* RxLockedPipeAddFragment(RxLockedPipe* pipeline, RwUInt32* firstIndex, RxNodeDefinition* nodeDef0, ...);
+RxPipeline* RxLockedPipeUnlock(RxLockedPipe* pipeline);
+RxPipeline* RxPipelineCreate(void);
+RxPipelineNode* RxPipelineFindNodeByName(RxPipeline* pipeline, const RwChar* name, RxPipelineNode* start, RwInt32* nodeIndex);
+RxLockedPipe* RxPipelineLock(RxPipeline* pipeline);
 RxRenderStateVector* RxRenderStateVectorLoadDriverState(RxRenderStateVector* rsvp);
 void _rw2DRenderPrimitiveInit(void);
 void _rwDlRenderStateSetZCompLoc(RwBool zBeforeTex);
+void _rwDlTextureSet(RwTexture* texture, RwInt32 index);
+void _rwDlTransformSetup(RwMatrix* ltm, RwBool normals);
 RwBool _rwFrameSyncDirty(void);
 void _rwObjectHasFrameSetFrame(void* object, RwFrame* frame);
+void _rxPipelineDestroy(RxPipeline* Pipeline);
 
 #if (defined(RWDEBUG) || defined(RWSUPPRESSINLINE))
 RwCamera* RwCameraGetCurrentCamera(void);
@@ -695,6 +722,7 @@ RwChar* RwTextureGetName(RwTexture* texture);
 RwRaster* RwTextureGetRaster(const RwTexture* texture);
 RwTexture* RwTextureSetAddressing(RwTexture* texture, RwTextureAddressMode addressing);
 RwTexture* RwTextureSetFilterMode(RwTexture* texture, RwTextureFilterMode filtering);
+RwUInt16 _rwDlTokenGetCurrent(void);
 #endif
 
 #ifdef __cplusplus
@@ -733,6 +761,7 @@ RwTexture* RwTextureSetFilterMode(RwTexture* texture, RwTextureFilterMode filter
 #define RwTextureGetRaster(_tex) RwTextureGetRasterMacro(_tex)
 #define RwTextureSetAddressing(_tex, _addressing) RwTextureSetAddressingMacro(_tex, _addressing)
 #define RwTextureSetFilterMode(_tex, _filtering) RwTextureSetFilterModeMacro(_tex, _filtering)
+#define _rwDlTokenGetCurrent() _rwDlTokenGetCurrentMacro()
 #endif
 
 #endif
