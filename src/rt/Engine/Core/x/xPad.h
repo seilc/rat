@@ -6,6 +6,8 @@
 #include "xDebug.h"
 
 #define k_XPAD_MAX 4
+#define k_XPAD_BUTTON_MAX 22
+#define k_XPAD_ANALOG_MAX 2
 
 typedef struct _tagPadAnalog
 {
@@ -30,8 +32,8 @@ typedef struct _tagxPad
         F32 ang;
     };
 
-    U8 value[22];
-    U8 last_value[22];
+    U8 value[k_XPAD_BUTTON_MAX];
+    U8 last_value[k_XPAD_BUTTON_MAX];
     U32 on;
     U32 pressed;
     U32 released;
@@ -45,9 +47,9 @@ typedef struct _tagxPad
     F32 al2d_timer;
     F32 ar2d_timer;
     F32 d_timer;
-    F32 up_tmr[22];
-    F32 down_tmr[22];
-    analog_data analog[2];
+    F32 up_tmr[k_XPAD_BUTTON_MAX];
+    F32 down_tmr[k_XPAD_BUTTON_MAX];
+    analog_data analog[k_XPAD_ANALOG_MAX];
 } xPad;
 
 extern xPad mPad[k_XPAD_MAX];

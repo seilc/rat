@@ -3,13 +3,11 @@
 
 #include "xMemory.h"
 
-#include <dolphin.h>
-
 #if DEBUG || RELEASE
 #define _xMEMORYMANAGER_ASSERT(line, cond, condstr)                                               \
 do {                                                                                              \
     if (!(cond)) {                                                                                \
-        OSReport("assert: %d (%s#%d)\n", condstr, __FILE__, (line));                              \
+        iprintf("assert: %d (%s#%d)\n", condstr, __FILE__, (line));                               \
         while (1);                                                                                \
     }                                                                                             \
 } while (0)
@@ -32,10 +30,7 @@ public:
     void* GetArenaStart() const;
     void* GetArenaEnd() const;
 
-    bool IsDebugging() const
-    {
-        return debugDataSize != 0;
-    }
+    bool IsDebugging() const { return debugDataSize != 0; }
 
     U32 GetBlockSize(void* pointer) const;
     bool InActiveList(const void* pointer, U32) const; // UNUSED

@@ -15,6 +15,7 @@ struct xGroup : xBase
     S32 flg_group;
 };
 
+// xGroup::flg_group
 #define XGRP_FLG_HASWIDGET (1<<1)
 #define XGRP_FLG_HASASSET (1<<2)
 

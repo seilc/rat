@@ -65,7 +65,7 @@ struct xFXBubbleParams
 
 RpAtomicCallBackRender gAtomicRenderCallBack;
 RpLight* MainLight;
-U8 ReportUVProb = 1;
+bool ReportUVProb = true;
 static U32 num_fx_atomics;
 static RwFrame* g_matfx_frame;
 #if DEBUG || RELEASE

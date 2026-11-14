@@ -4,6 +4,7 @@
 #include "xVec3.h"
 
 #define XPAR_POOL_MAX 500
+#define XPAR_ROTDEG_MAX 3
 
 struct xParEmitterAsset;
 
@@ -20,7 +21,7 @@ struct xPar
     U8 m_flag;
     U8 m_mode;
     U8 m_texIdx[2];
-    U8 m_rotdeg[3];
+    U8 m_rotdeg[XPAR_ROTDEG_MAX];
     U8 pad8;
     F32 totalLifespan;
     xParEmitterAsset* m_asset;

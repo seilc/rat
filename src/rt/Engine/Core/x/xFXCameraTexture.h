@@ -126,14 +126,14 @@ public:
     void end_render();
     void set_source(RwRaster*, tcc_type, tfx_type, filter_type);
     void set_destination(RwRaster* dst, U32 fbmsk);
-    void texflush(); // UNUSED
-    void set_blend_mode(blend_mode mode, F32 fixed_alpha); // UNUSED
+    static void texflush(); // UNUSED
+    static void set_blend_mode(blend_mode mode, F32 fixed_alpha); // UNUSED
     void fill(xColor color); // UNUSED
     void blit_scaled(F32 u, F32 v, xColor color); // UNUSED
-    void set_texa(S32 ta0, S32 aem, S32 ta1); // UNUSED
-    void set_prmode(bool prmodecont, U32 prmode); // UNUSED
-    void set_clamp(S32 wms, S32 wmt, S32 minu, S32 maxu, S32 minv, S32 maxv); // UNUSED
-    void set_scissor(S32 scax0, S32 scax1, S32 scay0, S32 scay1); // UNUSED
+    static void set_texa(S32 ta0, S32 aem, S32 ta1); // UNUSED
+    static void set_prmode(bool prmodecont, U32 prmode); // UNUSED
+    static void set_clamp(S32 wms, S32 wmt, S32 minu, S32 maxu, S32 minv, S32 maxv); // UNUSED
+    static void set_scissor(S32 scax0, S32 scax1, S32 scay0, S32 scay1); // UNUSED
 
 private:
     RwRaster* src;

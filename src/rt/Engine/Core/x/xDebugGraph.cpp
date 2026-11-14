@@ -127,7 +127,7 @@ namespace {
         return common_colors[namehash % ARRAY_LENGTH(common_colors)];
     }
 
-    char* get_tweak_prefix(const char* name)
+    const char* get_tweak_prefix(const char* name)
     {
         static char buffer[128];
         const char* sep = strrchr(name, '|');
@@ -135,7 +135,7 @@ namespace {
             sprintf(buffer, "Graph|%s|", name);
             return buffer;
         } else {
-            return (char*)name;
+            return name;
         }
     }
 

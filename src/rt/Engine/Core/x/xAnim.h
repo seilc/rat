@@ -21,17 +21,20 @@ struct xAnimTable;
 struct xAnimSingle;
 struct xAnimPlay;
 
+// xAnimFile::FileFlags
 enum
 {
     AnimFile_Reverse = 0x1000,
     AnimFile_BackAndForth = 0x2000
 };
 
+// xAnimState::Flags
 enum
 {
     AnimState_TempUsed = 0x80000000
 };
 
+// xAnimTransition::Flags
 enum
 {
     AnimTransition_TempUsed = 0x80000000

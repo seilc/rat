@@ -76,7 +76,7 @@ void padInfo::FindNewExclusive()
     m_currentExclusive = NULL;
 
     U32 maxPriority = 0;
-    for (U32 i = 0; i < 16; i++) {
+    for (U32 i = 0; i < k_XRUMBLE_MAX_EFFECTS; i++) {
         if (m_effects[i].pEmitter && (m_effects[i].rumbleForever || m_effects[i].timeToLive > 0.0f)) {
             U32 currentPriority = m_effects[i].pEmitter->pEffectAsset->priority;
             if (currentPriority > maxPriority) {
@@ -152,7 +152,7 @@ bool Manager::Add(xPad* pad, emitterBase* pEmitter)
     }
 
     effectInternal* freeEffect = NULL;
-    for (U32 i = 0; i < 16; i++) {
+    for (U32 i = 0; i < k_XRUMBLE_MAX_EFFECTS; i++) {
         if (pEmitter->pEffectAsset->id != 0 &&
             pInfo->m_effects[i].pEmitter &&
             pEmitter->pEffectAsset->id == pInfo->m_effects[i].pEmitter->pEffectAsset->id) {
@@ -173,7 +173,7 @@ bool Manager::Add(xPad* pad, emitterBase* pEmitter)
 bool Manager::Stop(xPad* pad, emitterBase* pEmitter)
 {
     padInfo* pInfo = &m_padInfo[pad->port];
-    for (U32 i = 0; i < 16; i++) {
+    for (U32 i = 0; i < k_XRUMBLE_MAX_EFFECTS; i++) {
         if (pInfo->m_effects[i].pEmitter && pEmitter->pEffectAsset == pInfo->m_effects[i].pEmitter->pEffectAsset) {
             pInfo->m_effects[i].timeToLive = 0.0f;
             pInfo->m_effects[i].rumbleForever = false;
@@ -190,7 +190,7 @@ void Manager::Update(xPad* pad, const xVec3& playerPos, F32 timeElapsed, bool bP
     }
 
     padInfo* pInfo = &m_padInfo[pad->port];
-    for (U32 i = 0; i < 16; i++) {
+    for (U32 i = 0; i < k_XRUMBLE_MAX_EFFECTS; i++) {
         if (pInfo->m_effects[i].pEmitter &&
             (!bPauseState || pInfo->m_effects[i].pEmitter->pEffectAsset->rumbleInPause) &&
             pInfo->m_effects[i].timeToLive >= 0.0f) {
@@ -214,7 +214,7 @@ void Manager::Update(xPad* pad, const xVec3& playerPos, F32 timeElapsed, bool bP
             }
         }
     } else {
-        for (U32 i = 0; i < 16; i++) {
+        for (U32 i = 0; i < k_XRUMBLE_MAX_EFFECTS; i++) {
             if (pInfo->m_effects[i].rumbleForever || pInfo->m_effects[i].timeToLive > 0.0f) {
                 if (!bPauseState || pInfo->m_effects[i].pEmitter->pEffectAsset->rumbleInPause)
                     intensity += pInfo->m_effects[i].GetIntensity(playerPos);
@@ -261,7 +261,7 @@ void Manager::StopRumbling()
 void Manager::StopCameraShake(S32 padNum)
 {
     padInfo* pInfo = &m_padInfo[padNum];
-    for (U32 j = 0; j < 16; j++) {
+    for (U32 j = 0; j < k_XRUMBLE_MAX_EFFECTS; j++) {
         if (pInfo->m_effects[j].cameraEffect) {
             pInfo->m_effects[j].EndCameraShake();
         }

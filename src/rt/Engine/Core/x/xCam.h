@@ -219,8 +219,8 @@ private:
     S32 group_flags;
     xCamBlend* blender;
 
-#if DEBUG || RELEASE
 public:
+#if DEBUG || RELEASE
     struct
     {
         S32 flags;
@@ -233,6 +233,9 @@ public:
 
     void add_tweaks_common(const char* prefix);
     void add_tweaks_config_follow(const char* prefix);
+#else
+    void debug_render() {}
+    void add_tweaks(const char*) {}
 #endif
 };
 

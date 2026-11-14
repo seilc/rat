@@ -276,14 +276,14 @@ S32 xDebugLink::CmdToArgv(char* str, char** argv, S32 maxargs)
     return argc;
 }
 
-char* xDebugLink::GetDevkitName() const
+const char* xDebugLink::GetDevkitName() const
 {
-    return (char*)mDevkitName;
+    return mDevkitName;
 }
 
-char* xDebugLink::GetConnectedComputerName() const
+const char* xDebugLink::GetConnectedComputerName() const
 {
-    return (char*)mConnectedComputer;
+    return mConnectedComputer;
 }
 
 bool xDebugLink::IsConnected() const

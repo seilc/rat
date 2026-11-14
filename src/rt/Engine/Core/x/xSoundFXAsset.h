@@ -3,14 +3,14 @@
 
 #include "xBaseAsset.h"
 #include "xVec3.h"
-#include "iSnd.h"
+#include "xSnd.h"
 
 struct xSoundFXAsset : xBaseAsset
 {
     union
     {
         U32 soundAssetID;
-        iSndGroupHandle soundAsset;
+        xSndGroupHandle soundAsset;
     };
     U32 attachID;
     xVec3 pos;

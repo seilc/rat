@@ -788,7 +788,7 @@ void xParEmitterUpdate(xBase* to, xScene*, F32 dt)
     }
 }
 
-// UNUSED: needed to match (code from BFBB GC, TSSM GC)
+// UNUSED: needed to match (code from TSSM GC, BFBB GC)
 void xParEmitterDestroy()
 {
     xTWEAK_REMOVE("Particle Emitters");
@@ -838,10 +838,10 @@ const char* render_type_names[] = {
     "InvStreak"
 };
 
-char* get_asset_name(xParEmitterAsset* asset)
+const char* get_asset_name(xParEmitterAsset* asset)
 {
     const char* name = xSTAssetName(asset);
-    if (name && *name) return (char*)name;
+    if (name && *name) return name;
     else {
         static char buffer[16];
         sprintf(buffer, "0x%08X", asset->id);

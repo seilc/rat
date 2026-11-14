@@ -72,7 +72,7 @@ public:
     virtual bool isAttackState();
     virtual void preRender();
     virtual void render();
-    virtual bool runnable();
+    virtual bool runnable(F32);
     virtual bool disableTargetTest();
     virtual void beforeAnimMatrices(xAnimPlay* play, xQuat* quat, xVec3* tran, S32 boneCount);
     virtual bool grabbable(GrabType grabType);

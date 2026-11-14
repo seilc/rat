@@ -2,7 +2,7 @@
 #define ZDESTRUCTIBLE_H
 
 #include "zShrapnel.h"
-#include "iSnd.h"
+#include "xSnd.h"
 
 struct xEnt;
 struct xModelInstance;
@@ -26,7 +26,7 @@ struct zDestructible
     U32 launch_flag;
     U32 behaviour;
     U32 base_modelID;
-    iSndGroupHandle sg_handle_idle;
+    xSndGroupHandle sg_handle_idle;
     xSndHandle sh_handle_idle;
     xModelInstance* base_model;
     xModelInstance* base_collision;

@@ -105,7 +105,7 @@ void xSceneAddEnt(xScene* sc, xEnt* ent)
     xASSERT_L(178, ent);
 
     switch (ent->collType) {
-    case 0x1:
+    case k_XENT_COLLTYPE_TRIG:
         xASSERT_L(184, sc->numTrigs < sc->numTrigsAllocd);
 
         xTriggerAsset* triggerAsset = (xTriggerAsset*)(ent->asset + 1);
@@ -119,22 +119,22 @@ void xSceneAddEnt(xScene* sc, xEnt* ent)
             sc->numTrigs++;
         }
         break;
-    case 0x2:
-    case 0x20:
+    case k_XENT_COLLTYPE_STAT:
+    case k_XENT_COLLTYPE_INHIBIT:
         xASSERT_L(204, sc->numStats < sc->numStatsAllocd);
         sc->stats[sc->numStats++] = ent;
         break;
-    case 0x4:
+    case k_XENT_COLLTYPE_DYN:
         xASSERT_L(209, sc->numDyns < sc->numDynsAllocd);
         sc->dyns[sc->numDyns++] = ent;
         break;
-    case 0x8:
+    case k_XENT_COLLTYPE_NPC:
         xASSERT_L(214, sc->numNpcs < sc->numNpcsAllocd);
         sc->npcs[sc->numNpcs++] = ent;
         break;
-    case 0x0:
-    case 0x10:
-    case 0x30:
+    case k_XENT_COLLTYPE_NONE:
+    case k_XENT_COLLTYPE_PC:
+    case k_XENT_COLLTYPE_PC | k_XENT_COLLTYPE_INHIBIT:
         break;
     default:
         xFAIL_MSG_L(225, "unrecognized entity type!");
@@ -594,7 +594,7 @@ void xRayHitsEntFlags(xScene*, xRay3* r, xCollis* coll, xQCData* qcr, xEnt* ent,
         return;
     }
 
-    if (ent->collLev == 5) {
+    if (ent->collLev == k_XENT_COLLLEV_MODEL) {
         if (ent->collModel)
             xRayHitsModel(r, ent->collModel, &c);
         else
@@ -652,20 +652,20 @@ namespace {
             }
 
             xCollis tempColl;
-            tempColl.flags = ent.collLev == 5 ? 0x100 : hitCalc;
+            tempColl.flags = ent.collLev == k_XENT_COLLLEV_MODEL ? 0x100 : hitCalc;
             xRayHitsBound(ray, &ent.bound, &tempColl);
 
             if (!(tempColl.flags & k_HIT_IT)) {
                 return true;
             }
 
-            if (tempColl.dist > coll->dist && !(tempColl.flags & 0x10) && ent.collLev == 5) {
+            if (tempColl.dist > coll->dist && !(tempColl.flags & 0x10) && ent.collLev == k_XENT_COLLLEV_MODEL) {
                 return true;
             }
 
             xModelInstance* collModel = ent.collModel ? ent.collModel : ent.model;
 
-            if (ent.collLev == 5) {
+            if (ent.collLev == k_XENT_COLLLEV_MODEL) {
                 if (xModelIsPreinstanced(collModel)) {
                     xASSERT_DESIGN_L(1201, !xModelIsPreinstanced(collModel), "cbRayHitsEnt: Entity is using pre-instanced model: %s", xSTAssetNameOrID(ent.id));
                     return true;
@@ -720,7 +720,7 @@ namespace {
             }
 
             xCollis tempColl;
-            tempColl.flags = ent.collLev == 5 ? 0x100 : hitCalc;
+            tempColl.flags = ent.collLev == k_XENT_COLLLEV_MODEL ? 0x100 : hitCalc;
             xSphereHitsBound(sphere, &ent.bound, &tempColl);
 
             if (!(tempColl.flags & k_HIT_IT)) {
@@ -731,7 +731,7 @@ namespace {
                 return true;
             }
 
-            if (ent.collLev == 5) {
+            if (ent.collLev == k_XENT_COLLLEV_MODEL) {
                 tempColl.flags = hitCalc;
 
                 if (ent.collModel) {
@@ -1093,7 +1093,7 @@ static S32 gridNearestFloorCB(xEnt* ent, void* cbdata)
         return TRUE;
     }
 
-    if (ent->collLev == 5) {
+    if (ent->collLev == k_XENT_COLLLEV_MODEL) {
         sTestOPtr = ent;
         sTestMPtr = ent->collModel ? ent->collModel : ent->model;
 

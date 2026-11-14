@@ -10,11 +10,14 @@
 struct xEnt;
 struct xSndGroup;
 
+typedef iSndGroupHandle xSndGroupHandle;
+
 #define XSND_MAX_VOICES (ISND_MAX_VOICES)
 #define XSND_MAX_VIRTUAL_VOICES (208)
 #define XSND_TOTAL_VOICES (XSND_MAX_VOICES +XSND_MAX_VIRTUAL_VOICES )
 #define XSND_TOTAL_REFS (XSND_TOTAL_VOICES)
 
+// xSndVoiceInfo::flags
 enum
 {
     xSnd_ACTIVE = 0x1,
@@ -41,7 +44,7 @@ struct xSndVoiceInfo
     union
     {
         xSndGroup* soundGroup;
-        iSndGroupHandle soundGroupHandle;
+        xSndGroupHandle soundGroupHandle;
     };
     U32 assetID;
     union

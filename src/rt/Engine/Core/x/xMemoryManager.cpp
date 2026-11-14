@@ -137,7 +137,7 @@ bool xMemoryManager::IsValidPointer(const void* pointer) const
 {
     DebugAllocationHeader* list = activeList;
     while (list) {
-        if (xMEMADVANCE(pointer, -(S32)sizeof(DebugAllocationHeader)) == list)
+        if (xMEMADVANCE(pointer, (S32)-sizeof(DebugAllocationHeader)) == list)
             return true;
         list = list->next;
     }

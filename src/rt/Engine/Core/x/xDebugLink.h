@@ -51,8 +51,8 @@ public:
     virtual eError SendEntEvent(char** argv, S32 argc, void*);
     virtual eError ReadyForAssetData(char**, S32, void*) = 0;
     virtual eError HeartBeatResponse(char** argv, S32 argc, void*) = 0;
-    virtual char* GetDevkitName() const;
-    virtual char* GetConnectedComputerName() const;
+    virtual const char* GetDevkitName() const;
+    virtual const char* GetConnectedComputerName() const;
     virtual bool IsConnected() const;
     virtual void Update(F32);
 

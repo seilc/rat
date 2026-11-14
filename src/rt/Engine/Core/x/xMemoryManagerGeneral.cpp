@@ -240,7 +240,7 @@ void* xMemoryManagerGeneral::DoAllocate(U32 size, U32 options, const char*, cons
     }
 #endif
 
-    AllocatedNode* allocatedNode = dir == Up ? (AllocatedNode*)node : (AllocatedNode*)xMEMADVANCE(node, -(S32)nodeSize);
+    AllocatedNode* allocatedNode = dir == Up ? (AllocatedNode*)node : (AllocatedNode*)xMEMADVANCE(node, (S32)-nodeSize);
     allocatedNode->size = nodeSize;
 
 #if DEBUG || RELEASE
@@ -402,7 +402,7 @@ void* xMemoryManagerGeneral::DoReallocate(void* pointer, U32 size, U32 options, 
         if (afterNode && (FreeNode*)xMEMADVANCE(allocatedNode + 1, nodeSize) == afterNode)
             sizeAfterNode = afterNode->size;
     } else {
-        if (beforeNode && (FreeNode*)xMEMADVANCE(allocatedNode + 1, nodeSize) == xMEMADVANCE(beforeNode, -(S32)beforeNode->size)) {
+        if (beforeNode && (FreeNode*)xMEMADVANCE(allocatedNode + 1, nodeSize) == xMEMADVANCE(beforeNode, (S32)-beforeNode->size)) {
             sizeBeforeNode = beforeNode->size;
         }
         if (afterNode && afterNode + 1 == (FreeNode*)allocatedNode) {
@@ -487,9 +487,9 @@ void* xMemoryManagerGeneral::DoReallocate(void* pointer, U32 size, U32 options, 
         if (neededSize < working->size) {
             working->size -= neededSize;
             newSpace = neededSize;
-            newAllocatedNode = xMEMADVANCE(allocatedNode, -(S32)neededSize);
+            newAllocatedNode = xMEMADVANCE(allocatedNode, (S32)-neededSize);
             if (dir == Down) {
-                FreeNode* newNode = xMEMADVANCE(working, -(S32)neededSize);
+                FreeNode* newNode = xMEMADVANCE(working, (S32)-neededSize);
                 *newNode = *working;
                 if (newNode->next)
                     newNode->next->prev = newNode;
@@ -513,7 +513,7 @@ void* xMemoryManagerGeneral::DoReallocate(void* pointer, U32 size, U32 options, 
             if (dir == Up)
                 newAllocatedNode = (AllocatedNode*)working;
             else
-                newAllocatedNode = (AllocatedNode*)xMEMADVANCE(working, -(S32)working->size);
+                newAllocatedNode = (AllocatedNode*)xMEMADVANCE(working, (S32)-working->size);
 #if DEBUG || RELEASE
             freeElements--;
 #endif

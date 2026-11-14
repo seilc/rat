@@ -316,14 +316,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 if (fS < 0.0f) {
                     if (fT < 0.0f) {
                         xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                            tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                            tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                         fS = 0.0f;
 
                         xLine3LineMinDist(p1, p2, V0, V1, fR0, fS0);
-                        tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                        tp2x = V0->x * (1.0f - fS0) + V1->x * fS0, tp2y = V0->y * (1.0f - fS0) + V1->y * fS0, tp2z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                            tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                        tp2x = V0->x * (1.0f - fS0) + V1->x * fS0, tp2y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp2z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                         fT0 = 0.0f;
                         if (fSqrDist0 < fSqrDist) {
@@ -334,7 +338,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                         }
 
                         xTri3VecMinDist(V0, V1, V2, p1, fS0, fT0);
-                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                         tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                         xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -347,13 +352,16 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                         }
                     } else {
                         xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                            tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                            tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                         fS = 0.0f;
 
                         xTri3VecMinDist(V0, V1, V2, p1, fS0, fT0);
-                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                         tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                         xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -368,13 +376,16 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 }
                 else if (fT < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V1, fR, fS);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS, tp2z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp2z = V0->z * (1.0f - fS) + V1->z * fS;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fT = 0.0f;
 
                     xTri3VecMinDist(V0, V1, V2, p1, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -387,7 +398,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
                 } else {
                     xTri3VecMinDist(V0, V1, V2, p1, fS, fT);
-                    tp1x = V0->x * (1.0f - fS) + V1->x * fS, tp1y = V0->y * (1.0f - fS) + V1->y * fS, tp1z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = V0->x * (1.0f - fS) + V1->x * fS, tp1y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp1z = V0->z * (1.0f - fS) + V1->z * fS;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT, tp1y += tp2y * fT, tp1z += tp2z * fT;
                     xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist);
@@ -396,14 +408,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
             } else {
                 if (fS < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                        tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fS = 0.0f;
 
                     xLine3LineMinDist(p1, p2, V1, V2, fR0, fT0);
-                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0, tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
+                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                        tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0,
+                        tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                     fS0 = 1.0f - fT0;
                     if (fSqrDist0 < fSqrDist) {
@@ -414,7 +430,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
 
                     xTri3VecMinDist(V0, V1, V2, p1, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -428,14 +445,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 }
                 else if (fT < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V1, fR, fS);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS, tp2z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp2z = V0->z * (1.0f - fS) + V1->z * fS;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fT = 0.0f;
 
                     xLine3LineMinDist(p1, p2, V1, V2, fR0, fT0);
-                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0, tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
+                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                        tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0,
+                        tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                     fS0 = 1.0f - fT0;
                     if (fSqrDist0 < fSqrDist) {
@@ -446,7 +467,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
 
                     xTri3VecMinDist(V0, V1, V2, p1, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -459,13 +481,16 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
                 } else {
                     xLine3LineMinDist(p1, p2, V1, V2, fR, fT);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V1->x * (1.0f - fT) + V2->x * fT, tp2y = V1->y * (1.0f - fT) + V2->y * fT, tp2z = V1->z * (1.0f - fT) + V2->z * fT;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V1->x * (1.0f - fT) + V2->x * fT, tp2y = V1->y * (1.0f - fT) + V2->y * fT,
+                        tp2z = V1->z * (1.0f - fT) + V2->z * fT;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fS = 1.0f - fT;
 
                     xTri3VecMinDist(V0, V1, V2, p1, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p1->x, p1->y, p1->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -484,14 +509,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 if (fS < 0.0f) {
                     if (fT < 0.0f) {
                         xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                            tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                            tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                         fS = 0.0f;
 
                         xLine3LineMinDist(p1, p2, V0, V1, fR0, fS0);
-                        tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                        tp2x = V0->x * (1.0f - fS0) + V1->x * fS0, tp2y = V0->y * (1.0f - fS0) + V1->y * fS0, tp2z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                            tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                        tp2x = V0->x * (1.0f - fS0) + V1->x * fS0, tp2y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp2z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                         fT0 = 0.0f;
                         if (fSqrDist0 < fSqrDist) {
@@ -502,16 +531,20 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                         }
                     } else {
                         xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                            tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                            tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                         fS = 0.0f;
                     }
                 }
                 else if (fT < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V1, fR, fS);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS, tp2z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp2z = V0->z * (1.0f - fS) + V1->z * fS;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fT = 0.0f;
                 } else {
@@ -520,14 +553,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
             } else {
                 if (fS < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                        tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fS = 0.0f;
 
                     xLine3LineMinDist(p1, p2, V1, V2, fR0, fT0);
-                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0, tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
+                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                        tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0,
+                        tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                     fS0 = 1.0f - fT0;
                     if (fSqrDist0 < fSqrDist) {
@@ -539,14 +576,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 }
                 else if (fT < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V1, fR, fS);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS, tp2z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp2z = V0->z * (1.0f - fS) + V1->z * fS;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fT = 0.0f;
 
                     xLine3LineMinDist(p1, p2, V1, V2, fR0, fT0);
-                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0, tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
+                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                        tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0,
+                        tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                     fS0 = 1.0f - fT0;
                     if (fSqrDist0 < fSqrDist) {
@@ -557,8 +598,10 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
                 } else {
                     xLine3LineMinDist(p1, p2, V1, V2, fR, fT);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V1->x * (1.0f - fT) + V2->x * fT, tp2y = V1->y * (1.0f - fT) + V2->y * fT, tp2z = V1->z * (1.0f - fT) + V2->z * fT;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V1->x * (1.0f - fT) + V2->x * fT, tp2y = V1->y * (1.0f - fT) + V2->y * fT,
+                        tp2z = V1->z * (1.0f - fT) + V2->z * fT;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fS = 1.0f - fT;
                 }
@@ -568,14 +611,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 if (fS < 0.0f) {
                     if (fT < 0.0f) {
                         xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                            tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                            tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                         fS = 0.0f;
 
                         xLine3LineMinDist(p1, p2, V0, V1, fR0, fS0);
-                        tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                        tp2x = V0->x * (1.0f - fS0) + V1->x * fS0, tp2y = V0->y * (1.0f - fS0) + V1->y * fS0, tp2z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                            tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                        tp2x = V0->x * (1.0f - fS0) + V1->x * fS0, tp2y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp2z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                         fT0 = 0.0f;
                         if (fSqrDist0 < fSqrDist) {
@@ -586,7 +633,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                         }
 
                         xTri3VecMinDist(V0, V1, V2, p2, fS0, fT0);
-                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                         tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                         xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -599,13 +647,16 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                         }
                     } else {
                         xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                        tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                            tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                        tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                            tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                         xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                         fS = 0.0f;
 
                         xTri3VecMinDist(V0, V1, V2, p2, fS0, fT0);
-                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                        tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                            tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                         tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                         tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                         xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -620,13 +671,16 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 }
                 else if (fT < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V1, fR, fS);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS, tp2z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp2z = V0->z * (1.0f - fS) + V1->z * fS;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fT = 0.0f;
 
                     xTri3VecMinDist(V0, V1, V2, p2, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -639,7 +693,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
                 } else {
                     xTri3VecMinDist(V0, V1, V2, p2, fS, fT);
-                    tp1x = V0->x * (1.0f - fS) + V1->x * fS, tp1y = V0->y * (1.0f - fS) + V1->y * fS, tp1z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = V0->x * (1.0f - fS) + V1->x * fS, tp1y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp1z = V0->z * (1.0f - fS) + V1->z * fS;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT, tp1y += tp2y * fT, tp1z += tp2z * fT;
                     xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist);
@@ -648,14 +703,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
             } else {
                 if (fS < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V2, fR, fT);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT, tp2z = V0->z * (1.0f - fT) + V2->z * fT;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fT) + V2->x * fT, tp2y = V0->y * (1.0f - fT) + V2->y * fT,
+                        tp2z = V0->z * (1.0f - fT) + V2->z * fT;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fS = 0.0f;
 
                     xLine3LineMinDist(p1, p2, V1, V2, fR0, fT0);
-                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0, tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
+                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                        tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0,
+                        tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                     fS0 = 1.0f - fT0;
                     if (fSqrDist0 < fSqrDist) {
@@ -666,7 +725,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
 
                     xTri3VecMinDist(V0, V1, V2, p2, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -680,14 +740,18 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                 }
                 else if (fT < 0.0f) {
                     xLine3LineMinDist(p1, p2, V0, V1, fR, fS);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS, tp2z = V0->z * (1.0f - fS) + V1->z * fS;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V0->x * (1.0f - fS) + V1->x * fS, tp2y = V0->y * (1.0f - fS) + V1->y * fS,
+                        tp2z = V0->z * (1.0f - fS) + V1->z * fS;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fT = 0.0f;
 
                     xLine3LineMinDist(p1, p2, V1, V2, fR0, fT0);
-                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0, tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
-                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0, tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
+                    tp1x = p1->x * (1.0f - fR0) + p2->x * fR0, tp1y = p1->y * (1.0f - fR0) + p2->y * fR0,
+                        tp1z = p1->z * (1.0f - fR0) + p2->z * fR0;
+                    tp2x = V1->x * (1.0f - fT0) + V2->x * fT0, tp2y = V1->y * (1.0f - fT0) + V2->y * fT0,
+                        tp2z = V1->z * (1.0f - fT0) + V2->z * fT0;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist0);
                     fS0 = 1.0f - fT0;
                     if (fSqrDist0 < fSqrDist) {
@@ -698,7 +762,8 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
 
                     xTri3VecMinDist(V0, V1, V2, p2, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist0);
@@ -711,13 +776,16 @@ void xLine3TriMinDist(const xVec3* p1, const xVec3* p2, const xVec3* V0, const x
                     }
                 } else {
                     xLine3LineMinDist(p1, p2, V1, V2, fR, fT);
-                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR, tp1z = p1->z * (1.0f - fR) + p2->z * fR;
-                    tp2x = V1->x * (1.0f - fT) + V2->x * fT, tp2y = V1->y * (1.0f - fT) + V2->y * fT, tp2z = V1->z * (1.0f - fT) + V2->z * fT;
+                    tp1x = p1->x * (1.0f - fR) + p2->x * fR, tp1y = p1->y * (1.0f - fR) + p2->y * fR,
+                        tp1z = p1->z * (1.0f - fR) + p2->z * fR;
+                    tp2x = V1->x * (1.0f - fT) + V2->x * fT, tp2y = V1->y * (1.0f - fT) + V2->y * fT,
+                        tp2z = V1->z * (1.0f - fT) + V2->z * fT;
                     xDIST2(tp1x, tp1y, tp1z, tp2x, tp2y, tp2z, fSqrDist);
                     fS = 1.0f - fT;
 
                     xTri3VecMinDist(V0, V1, V2, p2, fS0, fT0);
-                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0, tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
+                    tp1x = V0->x * (1.0f - fS0) + V1->x * fS0, tp1y = V0->y * (1.0f - fS0) + V1->y * fS0,
+                        tp1z = V0->z * (1.0f - fS0) + V1->z * fS0;
                     tp2x = V2->x - V0->x, tp2y = V2->y - V0->y, tp2z = V2->z - V0->z;
                     tp1x += tp2x * fT0, tp1y += tp2y * fT0, tp1z += tp2z * fT0;
                     xDIST2(p2->x, p2->y, p2->z, tp1x, tp1y, tp1z, fSqrDist0);

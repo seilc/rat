@@ -95,6 +95,8 @@ struct tweak_info
     };
 };
 
+typedef bool(*xDebugRemoveTweaksCallback)(const tweak_info&, void*);
+
 #if DEBUG || RELEASE
 void xDebugTweak_StaticReset();
 void* xDebugTweak_StaticAlloc(U32 size);
@@ -188,8 +190,6 @@ extern const tweak_callback cb_tweak_convert_cos;
 extern const char* tweak_blend_mode_labels[11];
 extern const U32 tweak_blend_mode_values[11];
 
-typedef bool(*xDebugRemoveTweaksCallback)(const tweak_info&, void*);
-
 void xDebugRemoveTweak(const substr& name);
 void xDebugRemoveTweaks(const substr& name, xDebugRemoveTweaksCallback cb, void* context);
 
@@ -251,6 +251,7 @@ inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, c
 inline void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags) {}
 
 inline void xDebugRemoveTweak(const char* name) {}
+inline void xDebugRemoveTweaks(const char*, xDebugRemoveTweaksCallback, void*) {}
 
 #define xTWEAK(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
 #define xTWEAK_SELECT(name, v, labels, values, labels_size, cb, context, flags)

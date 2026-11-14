@@ -7,7 +7,7 @@
 #include "zDestructible.h"
 #include "zEnt.h"
 #include "zEntSimpleObj.h"
-#include "iSnd.h"
+#include "xSnd.h"
 
 struct xMovePoint;
 struct zPlatFMRunTime;
@@ -29,8 +29,8 @@ struct zPlatform : zEnt, zEntAnimData
     zDestructible* destructible;
     F32 elapsedTime;
     xEntOpacity opacity;
-    iSndGroupHandle soundGroupTeeterCreak;
-    iSndGroupHandle soundGroupTeeterEnd;
+    xSndGroupHandle soundGroupTeeterCreak;
+    xSndGroupHandle soundGroupTeeterEnd;
     xSndHandle soundTeeterCreak;
     xSndHandle soundTeeterEnd;
     xSndHandle sndID;

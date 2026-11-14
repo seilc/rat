@@ -11,6 +11,7 @@
 #include "xScrFx.h"
 #include "xSpacePartitionTree.h"
 #include "xstransvc.h"
+#include "xutil.h"
 #include "iMath.h"
 #include "zBomb.h"
 #include "zFXRibbonPool.h"
@@ -201,7 +202,7 @@ namespace {
 xLightKit* GetGlobalLightKit()
 {
     zEnv* zen = globals.sceneCur->zen;
-    if (globals.sceneCur->sceneID != 'MNUS') {
+    if (globals.sceneCur->sceneID != IDTAG('M','N','U','S')) {
         xASSERT(zen->easset);
         return (xLightKit*)xSTFindAsset(zen->easset->objectLightKit, NULL);
     }

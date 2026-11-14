@@ -155,7 +155,7 @@ F32 xDangleClamp(F32 a)
 static void xBinomInit()
 {
     binom_triangle[0] = 1;
-    S32* row0 = binom_triangle, *row1 = binom_triangle + 1;
+    S32 *row0 = binom_triangle, *row1 = binom_triangle + 1;
 
     for (S32 i = 1; i < 32; i++) {
         row1[0] = row1[i] = 1;

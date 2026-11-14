@@ -51,7 +51,7 @@ void xPadRumbleEnable(S32 idx, S32 enable)
 {
     xPad* p = &mPad[idx];
 
-    if (p->state != 1) {
+    if (p->state != ePad_Enabled) {
         enable = FALSE;
     }
 
@@ -137,7 +137,7 @@ S32 xPadUpdate(S32 idx, F32 time_passed)
     p->released = p->on & ~new_on;
     p->on = new_on;
     
-    for (S32 i = 0; i < 22; i++) {
+    for (S32 i = 0; i < k_XPAD_BUTTON_MAX; i++) {
         if (p->pressed & (1<<i)) {
             p->down_tmr[i] = 0.0f;
         } else if (p->released & (1<<i)) {
@@ -219,7 +219,7 @@ void SubMapAll(S32* neuon, xPad* xp)
 void xPadNormalizeAnalog(xPad& pad, S32 inner_zone, S32 outer_zone)
 {
     const PadAnalog* src = &pad.analog1;
-    for (S32 i = 0; i < 2; i++) {
+    for (S32 i = 0; i < k_XPAD_ANALOG_MAX; i++) {
         pad.analog[i].offset.x = normalize_analog(src[i].x, -outer_zone, outer_zone, 0, -inner_zone, inner_zone);
         pad.analog[i].offset.y = normalize_analog(src[i].y, -outer_zone, outer_zone, 0, -inner_zone, inner_zone);
         if (pad.analog[i].offset.x == 0.0f && pad.analog[i].offset.y == 0.0f) {

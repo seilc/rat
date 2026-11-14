@@ -2,9 +2,9 @@
 #define ZCONVERSATION_H
 
 #include "xBase.h"
-#include "iSnd.h"
+#include "xSnd.h"
 
 bool zConversationIsConversing();
-void zConversationPlay(iSndGroupHandle soundGroup, const xBase* otherSpeakerBase);
+void zConversationPlay(xSndGroupHandle soundGroup, const xBase* otherSpeakerBase);
 
 #endif

@@ -4,8 +4,6 @@
 #include "xMath.h"
 #include "xDebug.h"
 
-#include <dolphin.h>
-
 RwReal old_near_plane = -HUGE;
 RwReal old_far_plane = -HUGE;
 

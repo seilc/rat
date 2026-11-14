@@ -9,6 +9,7 @@
 #include "xRenderState.h"
 #include "xstransvc.h"
 #include "xTRC.h"
+#include "xutil.h"
 #include "zEvent.h"
 #include "zGame.h"
 #include "zGlobals.h"
@@ -572,7 +573,7 @@ void xCMupdate(F32 dt)
     }
 
     S32 port = -1;
-    if (globals.sceneCur->sceneID != 'MNUS') {
+    if (globals.sceneCur->sceneID != IDTAG('M','N','U','S')) {
         port = zUIGetPadPortInitiatedPause();
     }
 
@@ -635,7 +636,7 @@ void xCMstop()
     credits_data = NULL;
 
     if (credits_parentID) {
-        if (globals.sceneCur->sceneID == 'MNUS')
+        if (globals.sceneCur->sceneID == IDTAG('M','N','U','S'))
             zEntEvent(credits_parentID, eEventCreditsEndedBackToMainMenu);
         else if (!zGameIsPaused())
             zEntEvent(credits_parentID, eEventCreditsEnded);

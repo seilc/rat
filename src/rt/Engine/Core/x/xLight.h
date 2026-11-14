@@ -9,6 +9,7 @@ struct xModelInstance;
 struct xEnv;
 class xLightEffectBase;
 
+// xLight::flags
 #define f_XLIGHT_ON (1u<<0)
 #define f_XLIGHT_USED (1u<<1)
 

@@ -90,7 +90,7 @@ void xSGGameSet(st_XSAVEGAME_DATA* xsgdata, S32 gidx);
 S32 xSGGameIsEmpty(st_XSAVEGAME_DATA* xsgdata, S32 gidx);
 S32 xSGGameSize(st_XSAVEGAME_DATA* xsgdata, S32 gidx);
 char* xSGGameModDate(st_XSAVEGAME_DATA* xsgdata, S32 gidx);
-char* xSGGameLabel(st_XSAVEGAME_DATA* xsgdata, S32 gidx);
+const char* xSGGameLabel(st_XSAVEGAME_DATA* xsgdata, S32 gidx);
 S64 xSGGamePlayTime(st_XSAVEGAME_DATA* xsgdata, S32 gidx); // UNUSED
 char* xSGMakeName(const char* base, S32 index); // UNUSED
 S32 xSGGameThumbIndex(st_XSAVEGAME_DATA* xsgdata, S32 gidx);

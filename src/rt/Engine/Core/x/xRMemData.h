@@ -6,6 +6,8 @@
 #include <stddef.h>
 
 #define RMEM_GROWSTUB_SIZE 32
+
+// RyzMemGrow::flg_grow
 #define RMEM_GROW_ENABLED (1<<0)
 
 struct xBase;

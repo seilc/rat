@@ -24,6 +24,7 @@ enum ptank_group_type
 
 struct ptank_pool
 {
+    // render_state::flags
     enum
     {
         FLAG_NOZTEST = 0x1,

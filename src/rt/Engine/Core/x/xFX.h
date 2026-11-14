@@ -32,7 +32,7 @@ struct xFXRing
 };
 
 extern RpAtomicCallBackRender gAtomicRenderCallBack;
-extern U8 ReportUVProb;
+extern bool ReportUVProb;
 
 #if DEBUG || RELEASE
 void xFXDebugSetSurfaceFlags(U32 flags);

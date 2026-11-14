@@ -32,6 +32,7 @@ enum eModelPoolStressor
     eModelPoolStressor_NumStressors
 };
 
+// xModelInstance::Flags
 enum
 {
     ModelInstance_ChildTransform = 0x40

@@ -70,6 +70,17 @@
 #define GROUND_MESH_A3_ID 0xD34FF538 // xStrHash("ground_mesh_a3")
 #define FLOOR_LIVE_A2_ID 0x8E5A52C5 // xStrHash("Floor_Live_A2")
 
+struct xEnt::anim_coll_data
+{
+    U32 flags;
+    U32 bones;
+    xMat4x3 old_mat;
+    xMat4x3 new_mat;
+    size_t verts_size;
+    xVec3* verts;
+    xVec3* normals;
+};
+
 #define ANIM_COLL_SETUP_L(line)                                                                   \
     xASSERT_L(line, ent.model != 0);                                                              \
     xASSERT_L(line, ent.model->Mat != 0);                                                         \
@@ -240,7 +251,7 @@ static void xEntAddHittableFlag(xEnt* ent)
     if (ent->baseType == eBaseTypeNPCEntity || ent->baseType == eBaseTypeNPC || ent->baseType == eBaseTypeDestructObj ||
         ent->baseType == eBaseTypeButton || ent->baseType == eBaseTypeBoulder ||
         (ent->baseType == eBaseTypePlatform && ent->subType == 12)) {
-        ent->moreFlags |= 0x10;
+        ent->moreFlags |= k_MORE_FLAGS_HITTABLE;
         return;
     }
 
@@ -251,7 +262,7 @@ static void xEntAddHittableFlag(xEnt* ent)
             ent->link[i].srcEvent == eEventHit_PatrickSlam || ent->link[i].srcEvent == eEventHit_Throw ||
             ent->link[i].srcEvent == eEventHit_PaddleLeft || ent->link[i].srcEvent == eEventHit_PaddleRight ||
             ent->link[i].srcEvent == UNUSED_eEventHit_Cartwheel) {
-            ent->moreFlags |= 0x10;
+            ent->moreFlags |= k_MORE_FLAGS_HITTABLE;
             return;
         }
     }
@@ -381,7 +392,7 @@ void xEntInitForType(xEnt* ent)
     case k_XENT_COLLTYPE_TRIG:
         ent->pflags &= ~(k_XENT_IS_MOVING | k_XENT_HAS_VELOCITY);
         ent->chkby = k_XENT_COLLTYPE_NPC | k_XENT_COLLTYPE_PC;
-        ent->penby = 0;
+        ent->penby = k_XENT_COLLTYPE_NONE;
         break;
     case k_XENT_COLLTYPE_STAT:
         ent->pflags &= ~(k_XENT_IS_MOVING | k_XENT_HAS_VELOCITY);
@@ -410,8 +421,8 @@ void xEntInitForType(xEnt* ent)
         ent->frame = (xEntFrame*)xMEMALLOC_L(sizeof(xEntFrame), 0, eMemMgrTag_Player, 0, 815);
         memset(ent->frame, 0, sizeof(xEntFrame));
         ent->pflags |= k_XENT_HAS_VELOCITY;
-        ent->chkby = 0;
-        ent->penby = 0;
+        ent->chkby = k_XENT_COLLTYPE_NONE;
+        ent->penby = k_XENT_COLLTYPE_NONE;
         ent->collis = (xEntCollis*)xMEMALLOC_L(sizeof(xEntCollis), 0, eMemMgrTag_Player, 0, 823);
         ent->collis->chk = k_XENT_COLLTYPE_TRIG | k_XENT_COLLTYPE_STAT | k_XENT_COLLTYPE_DYN | k_XENT_COLLTYPE_NPC | k_XENT_COLLTYPE_ENV;
         ent->collis->pen = k_XENT_COLLTYPE_STAT | k_XENT_COLLTYPE_DYN | k_XENT_COLLTYPE_NPC | k_XENT_COLLTYPE_ENV;
@@ -1107,7 +1118,7 @@ void xEntSetupPipeline(xSurface* surf, RpAtomic* model)
                     sprintf(err, "The surface (%s) doesn't have a model ", xSTAssetName(surf->id));
                 }
 
-                ReportUVProb = 0;
+                ReportUVProb = false;
             }
 #endif
         }

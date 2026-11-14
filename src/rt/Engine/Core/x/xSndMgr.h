@@ -10,8 +10,6 @@ struct xEnt;
 
 #define XSNDMGR_INVALID_SND_HANDLE ((xSndHandle)0xFFFFFFFF)
 
-typedef iSndGroupHandle xSndGroupHandle;
-
 enum xSndMixerFaderName
 {
     xSndMixerFader_NONE = -1,
