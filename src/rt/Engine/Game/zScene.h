@@ -63,6 +63,7 @@ extern S32 g_idx_reloadTweaks;
 #endif
 extern bool gInSceneResetOrInit;
 
+bool zSceneIsLoadingPackFile();
 xBase* zSceneFindObject(U32 gameID);
 bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);
 const char* zSceneGetName(xBase* b);
