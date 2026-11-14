@@ -770,7 +770,7 @@ config.libs = [
         "cflags": cflags_rat_dbg,
         "progress_category": "game",
         "objects": [
-            Object(NonMatching, "rt/Engine/Core/gc/screenshot.c"),
+            Object(Matching, "rt/Engine/Core/gc/screenshot.c", extra_cflags=["-sym off"]),
             Object(Matching, "rt/Engine/Core/x/xCollideSpherePolygon.cpp"),
             Object(NonMatching, "rt/Engine/Game/zAsync.cpp"),
             Object(Matching, "rt/Engine/Core/x/xParticleBatch.cpp"),
