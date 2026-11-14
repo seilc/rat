@@ -665,7 +665,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/gc/iAsync.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iCutscene.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iDebug.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iDraw.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iDraw.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iEnv.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iFile.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iFMV.cpp"),

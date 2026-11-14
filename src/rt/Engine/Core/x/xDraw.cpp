@@ -669,7 +669,7 @@ void xDrawOBBShaded(const xBox* b, const xMat4x3* m)
         xMat4x3ToWorld(&wverts[i], m, &lverts[i]);
     }
 
-    for (S32 cullmode = rwCULLMODECULLBACK; cullmode >= rwCULLMODECULLNONE; cullmode--) {
+    for (S32 cullmode = IDRAW_CULL_FRONT; cullmode >= IDRAW_CULL_BACK; cullmode--) {
         iDrawShadedQuad(sgDrawColor, NULL, &wverts[3], &wverts[2], &wverts[1], &wverts[0], cullmode);
         iDrawShadedQuad(sgDrawColor, NULL, &wverts[4], &wverts[5], &wverts[6], &wverts[7], cullmode);
         iDrawShadedQuad(sgDrawColor, NULL, &wverts[0], &wverts[1], &wverts[5], &wverts[4], cullmode);

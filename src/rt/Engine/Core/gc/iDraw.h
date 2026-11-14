@@ -20,4 +20,14 @@ inline U32 iDrawGetFBMSK()
     return lastSetFBMSK;
 }
 
+// iDrawShadedQuad, iDrawShadedTri: cullmode
+#define IDRAW_CULL_BACK 1
+#define IDRAW_CULL_FRONT 2
+
+void iDrawSetDisplayOffset(F32 x, F32 y);
+void iDrawBillboard(xVec3* pos, U32 count, F32 dx, F32 dy, RwRaster* raster); // UNUSED
+void iDrawShadedTri(xColor color, RwMatrix* mat, xVec3* v1, xVec3* v2, xVec3* v3, S32 cullmode); // UNUSED
+void iXFBinit();
+void iXFBflip(); // UNUSED
+
 #endif
