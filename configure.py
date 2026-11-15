@@ -953,7 +953,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zCombatSystem.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCineFX.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCineFXShared.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCineFXTableSceneUT11.cpp"),
+            Object(Matching, "rt/Engine/Game/zCineFXTableSceneUT11.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCineFXTableTest.cpp"),
             Object(NonMatching, "rt/Engine/Game/zHud.cpp"),
             Object(NonMatching, "rt/Engine/Game/zContextObject.cpp"),
