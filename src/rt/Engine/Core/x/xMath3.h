@@ -66,6 +66,15 @@ struct xRay3
     S32 flags;
 };
 
+// xIsect::flags
+#define XISECT_YCODE_SHIFT 4
+#define XISECT_ZCODE_SHIFT 8
+#define XISECT_REGION_SHIFT 24
+#define XISECT_REGION_MASK 0x1F000000
+#define XISECT_FACE 0x20000000
+#define XISECT_EDGE 0x40000000
+#define XISECT_CORNER 0x80000000
+
 struct xIsect
 {
     U32 flags;
@@ -406,6 +415,8 @@ do {                                            \
     xVec3Add((o), &(b)->lower, &(b)->upper);    \
     xVec3SMul((o), (o), 0.5f);                  \
 } while (0)
+
+inline void xRay3Eval(xVec3* o, const xRay3* r, F32 t); // UNUSED
 
 #define xLine3FromRay(ln, r)                                                                                                                        \
 do {                                                                                                                                                \

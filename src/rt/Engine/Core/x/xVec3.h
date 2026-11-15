@@ -100,6 +100,11 @@ struct xVec3
     void Average(const xVec3& a, const xVec3& b, const xVec3& c);
 };
 
+#define xVec3AddMacro(o, a, b) ((o)->x = (a)->x + (b)->x, (o)->y = (a)->y + (b)->y, (o)->z = (a)->z + (b)->z)
+#define xVec3SubMacro(o, a, b) ((o)->x = (a)->x - (b)->x, (o)->y = (a)->y - (b)->y, (o)->z = (a)->z - (b)->z)
+#define xVec3AddToMacro(a, b) ((a)->x += (b)->x, (a)->y += (b)->y, (a)->z += (b)->z)
+#define xVec3SMulByMacro(v, s) ((v)->x *= (s), (v)->y *= (s), (v)->z *= (s))
+
 #define xVec3AddScaleMacro(o, a, b, s)          \
 {                                               \
     (o)->x = (a)->x + (s) * (b)->x;             \
