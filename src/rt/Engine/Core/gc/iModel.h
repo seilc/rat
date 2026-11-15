@@ -18,6 +18,7 @@ RpAtomic* iModelFile_RWMultiAtomic(RpAtomic* model);
 RpHAnimHierarchy* iModelGetHierarchy(RpAtomic* imodel);
 void iModelInit();
 void iModelDeInit();
+RpAtomic* iModelFileNew(void* buffer, U32 size);
 U32 iModelNumBones(RpAtomic* model);
 void iModelRender(RpAtomic* model, RwMatrix* mat);
 xSphere* iModelWorldBoundSphere(RpAtomic* model, RwMatrix* mat, xSphere* sphere);

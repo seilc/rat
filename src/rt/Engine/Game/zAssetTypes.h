@@ -3,6 +3,10 @@
 
 #include "types.h"
 
+#if DEBUG || RELEASE
+extern U32 gModelReadAssetIDDebug;
+#endif
+
 void* Spline_Read(void*, U32, void* indata, U32 insize, U32* outsize);
 void* RWTX_Read(void*, U32, void* indata, U32 insize, U32* outsize);
 void TextureRW3_Unload(void* userdata, U32);
