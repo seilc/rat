@@ -162,11 +162,11 @@ void xBoundHitsBound(const xBound* a, const xBound* b, xCollis* c)
 
     if (!xQuickCullIsects(&a->qcd, &b->qcd)) {
         c->flags &= ~k_HIT_IT;
-#if DEBUG || RELEASE
         if (xent_entent) {
+#if DEBUG || RELEASE
             xent_nqcrejects++;
-        }
 #endif
+        }
         return;
     }
 
