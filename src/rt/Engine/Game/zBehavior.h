@@ -45,7 +45,7 @@ public:
     virtual bool isAnimStateStopped(const char* state, xModelInstance* model) const;
     virtual bool isAnimStateStopped(U32 stateID, xModelInstance* model) const;
     virtual U32 getThrowAnimCode();
-    virtual const char* getName();
+    virtual const char* getName() { return "behavior"; }
     virtual void setOwner(xEnt* new_owner);
     virtual xEnt* getOwner();
     virtual bool systemEvent(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID);
