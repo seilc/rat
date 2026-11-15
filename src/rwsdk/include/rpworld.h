@@ -406,6 +406,7 @@ typedef RpMesh* (*RpMeshCallBack)(RpMesh* mesh, RpMeshHeader* meshHeader, void* 
 #define RpGeometryGetNumTexCoordSetsMacro(_geometry) ((_geometry)->numTexCoordSets)
 #define RpGeometryGetNumTrianglesMacro(_geometry) ((_geometry)->numTriangles)
 #define RpGeometryGetNumVerticesMacro(_geometry) ((_geometry)->numVertices)
+#define RpGeometryGetPreLightColorsMacro(_geometry) ((_geometry)->preLitLum)
 #define RpGeometryGetVertexTexCoordsMacro(_geometry, _uvIndex) ((_geometry)->texCoords[(_uvIndex) - 1])
 #define RpGeometrySetFlagsMacro(_geometry, _flags) (((_geometry)->flags = (_flags)), (_geometry))
 #define RpLightGetFrameMacro(_light) ((RwFrame *)rwObjectGetParent((_light)))
@@ -470,6 +471,8 @@ RwBool RpWorldDestroy(RpWorld* world);
 RwBool RpWorldPluginAttach(void);
 RpWorld* RpWorldRemoveCamera(RpWorld* world, RwCamera* camera);
 RpWorld* RpWorldRemoveLight(RpWorld* world, RpLight* light);
+RpWorld* RpWorldRender(RpWorld* world);
+RwBool RpWorldValidatePlugins(RpWorld* world);
 RpWorld* RwCameraGetWorld(const RwCamera* camera);
 void RxGameCubeAllInOneSetRenderCallBack(RxPipelineNode* node, RxGameCubeAllInOneCallBack callback);
 RxNodeDefinition* RxNodeDefinitionGetGameCubeAtomicAllInOne(void);
@@ -497,6 +500,7 @@ RwInt32 RpGeometryGetNumMaterials(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumTexCoordSets(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumTriangles(const RpGeometry* geometry);
 RwInt32 RpGeometryGetNumVertices(const RpGeometry* geometry);
+RwRGBA* RpGeometryGetPreLightColors(const RpGeometry* geometry);
 RpTriangle* RpGeometryGetTriangles(const RpGeometry* geometry);
 RwTexCoords* RpGeometryGetVertexTexCoords(const RpGeometry* geometry, RwTextureCoordinateIndex uvIndex);
 RpGeometry* RpGeometrySetFlags(RpGeometry* geometry, RwUInt32 flags);
@@ -536,6 +540,7 @@ RwInt32 RpWorldGetNumMaterials(const RpWorld* world);
 #define RpGeometryGetNumTexCoordSets(_geometry) RpGeometryGetNumTexCoordSetsMacro(_geometry)
 #define RpGeometryGetNumTriangles(_geometry) RpGeometryGetNumTrianglesMacro(_geometry)
 #define RpGeometryGetNumVertices(_geometry) RpGeometryGetNumVerticesMacro(_geometry)
+#define RpGeometryGetPreLightColors(_geometry) RpGeometryGetPreLightColorsMacro(_geometry)
 #define RpGeometryGetTriangles(_geometry) RpGeometryGetTrianglesMacro(_geometry)
 
 #define RpGeometryGetVertexTexCoords(_geometry, _uvIndex) \

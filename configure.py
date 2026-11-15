@@ -669,7 +669,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/gc/iCutscene.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iDebug.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iDraw.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iEnv.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iEnv.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iFile.cpp"),
             Object(NonMatching, "rt/Engine/Core/gc/iFMV.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iFX.cpp"),
