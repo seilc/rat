@@ -18,6 +18,7 @@ extern S32 GCN_DEMO_PARAM;
 
 char* zStealthDebugGetAssertionHeader();
 char* zStealthDebugGetAssertionInfo();
+void zMainShowProgressBar(S32 percentage);
 
 inline bool zMainIsPAL() { return gVidMode == eGameVidModePAL; }
 

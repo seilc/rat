@@ -138,6 +138,11 @@ void debugSndRender(); // UNUSED
 inline xSndGroup* xSndMgr_GetGroup(xSndGroupHandle hHandle) { return (xSndGroup*)hHandle; }
 inline xSndGroupHandle xSndMgr_GetHandle(xSndGroup* pSnd) { return (xSndGroupHandle)pSnd; }
 
+inline void xSndMgrSetDialogPlaying(bool bPlaying)
+{
+    bPlaying ? (gSnd.m_uSndMgrFlags |= k_XSNDMGR_DIALOG_PLAYING) : (gSnd.m_uSndMgrFlags &= ~k_XSNDMGR_DIALOG_PLAYING);
+}
+
 inline bool xSndMgrIsDialogPlaying()
 {
     return (gSnd.m_uSndMgrFlags >> 1) & 0x1;
