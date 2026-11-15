@@ -686,7 +686,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Core/gc/iSnd.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iSystem.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iTime.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iTRC.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iTRC.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iAnim.cpp"),
             Object(NonMatching, "rt/Engine/Game/zActionLine.cpp"),
             Object(NonMatching, "rt/Engine/Game/zAnimCache.cpp"),
