@@ -16,6 +16,7 @@
 #include "xEnt.h"
 #include "xDraw.h"
 #include "xMath.h"
+#include "zHashes.h"
 #include "zGlobals.h"
 #include "zScene.h"
 #include "zEvent.h"
@@ -24,8 +25,6 @@
 
 #include <stdio.h>
 #include <string.h>
-
-#define LIGHT_CARD_B_TL_ID 0x5EE75CD7 // xStrHash("light_card_b_tl")
 
 enum { k_MAX_X_LIGHTS = 128 };
 #define k_MAX_TEMP_LIGHTS 16
@@ -197,7 +196,7 @@ void xLightInit(xBase* b, xLightAsset* tasset)
 
 void xLightInitTempLights()
 {
-    RpAtomic* lightCardModel = (RpAtomic*)xSTFindAsset(LIGHT_CARD_B_TL_ID, NULL);
+    RpAtomic* lightCardModel = (RpAtomic*)xSTFindAsset(HASH_light_card_b_tl, NULL);
     for (S32 i = 0; i < k_MAX_TEMP_LIGHTS; i++) {
         xBaseInit(&sTempLights[i], &sTempLightAssets[i]);
 
@@ -219,7 +218,7 @@ void xLightInitTempLights()
         if (lightCardModel) {
             sTempLights[i].lightCardScale = 1.0f;
             sTempLightCards[i] = xModelInstanceAlloc(lightCardModel, &sTempLights[i], 0, 0, NULL);
-            xASSERT_FMT_L(267, (sTempLightCards[i] || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", xSTAssetName(LIGHT_CARD_B_TL_ID)); sTempLightCards[i]->modelID = LIGHT_CARD_B_TL_ID;
+            xASSERT_FMT_L(267, (sTempLightCards[i] || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", xSTAssetName(HASH_light_card_b_tl)); sTempLightCards[i]->modelID = HASH_light_card_b_tl;
         } else {
             sTempLightCards[i] = NULL;
         }

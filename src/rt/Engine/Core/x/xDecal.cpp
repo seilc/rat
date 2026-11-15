@@ -28,6 +28,7 @@
 #include "xString.h"
 #include "xutil.h"
 #include "xVec3.h"
+#include "zHashes.h"
 #include "zAutoTweak.h"
 #include "zEntSimpleObj.h"
 #include "zGlobals.h"
@@ -48,16 +49,6 @@
 #include <rpskin.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define S04_BREAKAWAY_FLOOR_01_ID 0x5F4CCE7E // xStrHash("S04_BREAKAWAY_FLOOR_01")
-#define S09_BLOCKER_SIMP_ID 0x8F775F81 // xStrHash("S09_BLOCKER_SIMP")
-#define S09_MACH_COL_SIMP_ID 0xC16208FF // xStrHash("S09_MACH_COL_SIMP")
-#define S09_CONTROL_BOX_COL_SIMP_ID 0xD6A5F0A9 // xStrHash("S09_CONTROL_BOX_COL_SIMP")
-#define S04_LASER_WALL_COL_SIMP_01_ID 0x3C82F5E3 // xStrHash("S04_LASER_WALL_COL_SIMP_01")
-#define S03_LASER_WALL_SIMP_01_ID 0x3D30722F // xStrHash("S03_LASER_WALL_SIMP_01")
-#define S03_LASER_WALL_SIMP_02_ID 0x3D307230 // xStrHash("S03_LASER_WALL_SIMP_02")
-#define S03_LASER_WALL_SIMP_03_ID 0x3D307231 // xStrHash("S03_LASER_WALL_SIMP_03")
-#define S02_PLAT_INVISO_COL_SIMP_13_ID 0x53BB7F9C // xStrHash("S02_PLAT_INVISO_COL_SIMP_13")
 
 using namespace xDecal;
 
@@ -1945,27 +1936,27 @@ namespace
             switch (globals.sceneCur->sceneID) {
             case IDTAG('B','B','0','1'):
                 switch (ent.id) {
-                case S04_BREAKAWAY_FLOOR_01_ID:
+                case HASH_S04_BREAKAWAY_FLOOR_01:
                     return true;
                 }
             case IDTAG('U','T','0','1'):
                 switch (ent.id) {
-                case S09_BLOCKER_SIMP_ID:
+                case HASH_S09_BLOCKER_SIMP:
                     return true;
                 }
             case IDTAG('M','T','0','1'):
                 switch (ent.id) {
-                case S09_MACH_COL_SIMP_ID:
-                case S09_CONTROL_BOX_COL_SIMP_ID:
+                case HASH_S09_MACH_COL_SIMP:
+                case HASH_S09_CONTROL_BOX_COL_SIMP:
                     return true;
                 }
             case IDTAG('C','C','0','1'):
                 switch (ent.id) {
-                case S04_LASER_WALL_COL_SIMP_01_ID:
-                case S03_LASER_WALL_SIMP_01_ID:
-                case S03_LASER_WALL_SIMP_02_ID:
-                case S03_LASER_WALL_SIMP_03_ID:
-                case S02_PLAT_INVISO_COL_SIMP_13_ID:
+                case HASH_S04_LASER_WALL_COL_SIMP_01:
+                case HASH_S03_LASER_WALL_SIMP_01:
+                case HASH_S03_LASER_WALL_SIMP_02:
+                case HASH_S03_LASER_WALL_SIMP_03:
+                case HASH_S02_PLAT_INVISO_COL_SIMP_13:
                     return true;
                 }
             }

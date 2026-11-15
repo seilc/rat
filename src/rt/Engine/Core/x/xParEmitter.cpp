@@ -15,6 +15,7 @@
 #include "xstransvc.h"
 #include "xutil.h"
 #include "xVolume.h"
+#include "zHashes.h"
 #include "zAutoTweak.h"
 #include "zCam.h"
 #include "zEvent.h"
@@ -28,14 +29,6 @@
 #include <rpworld.h>
 #include <stdio.h>
 #include <string.h>
-
-#define CONSTA_ID 0x48E48E7A // xStrHash("ConstA")
-#define CONSTB_ID 0x48E48E7B // xStrHash("ConstB")
-#define SINE_ID 0x0B326F01 // xStrHash("Sine")
-#define COSINE_ID 0x498D7119 // xStrHash("Cosine")
-#define LINEAR_ID 0xB7353B79 // xStrHash("Linear")
-#define STEP_ID 0x0B354BD4 // xStrHash("Step")
-#define RANDOM_ID 0x0FE111BF // xStrHash("Random")
 
 #define PROP_INTERP_COUNT 14
 
@@ -56,19 +49,19 @@ S32 xParInterpConvertInterpMode(xParInterp* p)
     if (p->interp < eParInterpCount)
         return p->interp;
 
-    if (p->interp == CONSTA_ID)
+    if (p->interp == HASH_ConstA)
         return eParInterpConstA;
-    if (p->interp == CONSTB_ID)
+    if (p->interp == HASH_ConstB)
         return eParInterpConstB;
-    if (p->interp == SINE_ID)
+    if (p->interp == HASH_Sine)
         return eParInterpSine;
-    if (p->interp == COSINE_ID)
+    if (p->interp == HASH_Cosine)
         return eParInterpCosine;
-    if (p->interp == LINEAR_ID)
+    if (p->interp == HASH_Linear)
         return eParInterpLinear;
-    if (p->interp == STEP_ID)
+    if (p->interp == HASH_Step)
         return eParInterpStep;
-    if (p->interp == RANDOM_ID)
+    if (p->interp == HASH_Random)
         return eParInterpRandom;
 
     return eParInterpConstA;

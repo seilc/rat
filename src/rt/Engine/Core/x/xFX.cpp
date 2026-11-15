@@ -18,6 +18,7 @@
 #include "xSurface.h"
 #include "xutil.h"
 #include "iFX.h"
+#include "zHashes.h"
 #include "zAutoTweak.h"
 #include "zFX.h"
 #include "zPlayer.h"
@@ -29,9 +30,6 @@
 
 #include <string.h>
 #include <rpmatfx.h>
-
-#define GLOSS_EDGE_ID 0xB8C2351E // xStrHash("gloss_edge")
-#define RAINBOWFILM_SMOOTH32_ID 0x741B0566 // xStrHash("rainbowfilm_smooth32")
 
 #define MAX_RINGS 8
 #define MAX_CURVE_NODES 32
@@ -213,7 +211,7 @@ static void xFXRingUpdate(F32 dt)
     }
 }
 
-static xFXBubbleParams defaultBFX[1] = { { 1, 1, 1, 0, 0, 0, 0xC0, 0xFFFFFFFF, GLOSS_EDGE_ID, 0.75f, RAINBOWFILM_SMOOTH32_ID, 0.5f } };
+static xFXBubbleParams defaultBFX[1] = { { 1, 1, 1, 0, 0, 0, 0xC0, 0xFFFFFFFF, HASH_gloss_edge, 0.75f, HASH_rainbowfilm_smooth32, 0.5f } };
 static xFXBubbleParams* BFX = defaultBFX;
 
 #if DEBUG

@@ -5,12 +5,10 @@
 #include "xString.h"
 #include "xOutputMgr.h"
 #include "xstransvc.h"
+#include "zHashes.h"
 #include "zScene.h"
 #include "zEnt.h"
 #include "zEvent.h"
-
-#define THIS_PLYR_ID 0x6F7EC01E // xStrHash("THIS_PLYR")
-#define THIS_CAM_TARGET_ID 0xB3BB6012 // xStrHash("THIS_CAM_TARGET")
 
 #if DEBUG || RELEASE
 #define MAX_REENTRANT_COUNT 32
@@ -121,7 +119,7 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
             if (toEvent != idx->srcEvent) continue;
             if (idx->chkAssetID && (!from || idx->chkAssetID != from->id)) continue;
 
-            if (idx->dstAssetID == THIS_PLYR_ID) {
+            if (idx->dstAssetID == HASH_THIS_PLYR) {
                 sendTo = zSceneFindObject(gThisPlayer);
             } else {
                 sendTo = zSceneFindObject(idx->dstAssetID);
@@ -130,7 +128,7 @@ void zEntEvent(xBase* from, U32 fromEvent, xBase* to, U32 toEvent, const F32* to
 
             xBase* b = NULL;
             if (idx->paramWidgetAssetID) {
-                if (idx->paramWidgetAssetID == THIS_CAM_TARGET_ID) {
+                if (idx->paramWidgetAssetID == HASH_THIS_CAM_TARGET) {
                     b = zSceneFindObject(gThisCameraTarget);
                 } else {
                     b = zSceneFindObject(idx->paramWidgetAssetID);

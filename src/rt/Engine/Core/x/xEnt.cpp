@@ -34,41 +34,13 @@
 #include "iTime.h"
 #include "zPad.h"
 #include "xDebugTweak.h"
+#include "zHashes.h"
 
 #include "decomp.h"
 
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#define TURRET_HOLDABLE_DEATH_SIMP_ID 0x3159B667 // xStrHash("TURRET_HOLDABLE_DEATH_SIMP")
-#define S08_TURRET_HOLDABLE_DEATH_SIMP_ID 0x36A1171F // xStrHash("S08_TURRET_HOLDABLE_DEATH_SIMP")
-#define LID_DD_MINF_ID 0xE71A065E // xStrHash("lid_dd.MINF")
-#define BRIDGE_DD_DEST_ID 0xAC1BEE23 // xStrHash("bridge_dd_dest")
-#define PLATFORM_RISE_B1_MINF_ID 0x1B80E759 // xStrHash("platform_rise_b1.MINF")
-#define FLOOR_ICE_BSP01_ID 0x1E373895 // xStrHash("floor_ice_bsp01")
-#define FLOOR_ICE_BSP02_ID 0x1E373896 // xStrHash("floor_ice_bsp02")
-#define FLOOR_ICE_BSP03_ID 0x1E373897 // xStrHash("floor_ice_bsp03")
-#define GRATE_CIRCULAR_ROOM_BB_ID 0x216EE348 // xStrHash("grate_circular_room_bb")
-#define GRATE_ROTATING_TOWER_BB_ID 0x64F7DEF5 // xStrHash("grate_rotating_tower_bb")
-#define FLOOR_ICE_BREAK_BB_MINF_ID 0xB3BBCA7F // xStrHash("floor_ice_break_bb.MINF")
-#define BB01_BRIDGE_DESTRUCTABLE_ID 0xF07B67B4 // xStrHash("bb01_bridge_destructable")
-#define BB01_FROZONE_BRIDGE_TEMP_ID 0x634D1A8C // xStrHash("bb01_frozone_bridge_temp")
-#define PLATFORM_GRILL_LARGE_MM_ID 0x9C3DF2C1 // xStrHash("platform_grill_large_mm")
-#define PLATFORM_GRILL_SMALL_MM_ID 0xFD512D69 // xStrHash("platform_grill_small_mm")
-#define SNOW_DRIFT_MM_ID 0x86770A6E // xStrHash("snow_drift_mm")
-#define BRIDGE_METAL_RF_ID 0xF72C1A2A // xStrHash("bridge_metal_rf")
-#define PLATFORM_METAL_RF_ID 0x39BA103C // xStrHash("platform_metal_rf")
-#define PLATFORM_METAL_BEND_RF_ID 0xBFFC0A5E // xStrHash("platform_metal_bend_rf")
-#define PLATFORM_METAL_BEND_B_RF_ID 0xB474D3BB // xStrHash("platform_metal_bend_b_rf")
-#define PLATFORM_METAL_BATTERY_RF_ID 0x97B0D79E // xStrHash("platform_metal_battery_rf")
-#define ARM_COLLAPSE_RF_ID 0x37B476EF // xStrHash("arm_collapse_rf")
-#define ELEVATOR_PLATFORM_UW_ID 0xF3E92A2D // xStrHash("elevator_platform_UW")
-#define PLATFORM_GOO_MESH_UW_ID 0xABAD2140 // xStrHash("platform_goo_mesh_UW")
-#define ELEVATOR_ROTATE_COVERED_UW_ID 0xE683650E // xStrHash("elevator_rotate_covered_UW")
-#define ELEVATOR_ROTATE_UW_ID 0x2F70CD39 // xStrHash("elevator_rotate_UW")
-#define GROUND_MESH_A3_ID 0xD34FF538 // xStrHash("ground_mesh_a3")
-#define FLOOR_LIVE_A2_ID 0x8E5A52C5 // xStrHash("Floor_Live_A2")
 
 struct xEnt::anim_coll_data
 {
@@ -147,7 +119,7 @@ namespace
 {
     inline void HackHoldableTurret(xEnt* ent)
     {
-        if (ent->id == TURRET_HOLDABLE_DEATH_SIMP_ID || ent->id == S08_TURRET_HOLDABLE_DEATH_SIMP_ID) {
+        if (ent->id == HASH_TURRET_HOLDABLE_DEATH_SIMP || ent->id == HASH_S08_TURRET_HOLDABLE_DEATH_SIMP) {
             ent->moreFlags &= (U16)~k_MORE_FLAGS_ANIM_COLL;
             ent->collLev = k_XENT_COLLLEV_OBB;
             ent->bound.box.box.upper.assign(1.6f, 8.0f, 1.3f);
@@ -271,35 +243,35 @@ static void xEntAddHittableFlag(xEnt* ent)
 static void hack_receive_shadow(xEnt* ent)
 {
     static U32 receive_models[29] = {
-        LID_DD_MINF_ID,
-        BRIDGE_DD_DEST_ID,
-        PLATFORM_RISE_B1_MINF_ID,
+        HASH_lid_dd_MINF,
+        HASH_bridge_dd_dest,
+        HASH_platform_rise_b1_MINF,
         0x93582686,
         0xAC696C27,
-        FLOOR_ICE_BSP01_ID,
-        FLOOR_ICE_BSP02_ID,
-        FLOOR_ICE_BSP03_ID,
-        GRATE_CIRCULAR_ROOM_BB_ID,
-        GRATE_ROTATING_TOWER_BB_ID,
-        FLOOR_ICE_BREAK_BB_MINF_ID,
+        HASH_floor_ice_bsp01,
+        HASH_floor_ice_bsp02,
+        HASH_floor_ice_bsp03,
+        HASH_grate_circular_room_bb,
+        HASH_grate_rotating_tower_bb,
+        HASH_floor_ice_break_bb_MINF,
         0x557CB1CA,
-        BB01_BRIDGE_DESTRUCTABLE_ID,
-        BB01_FROZONE_BRIDGE_TEMP_ID,
-        PLATFORM_GRILL_LARGE_MM_ID,
-        PLATFORM_GRILL_SMALL_MM_ID,
-        SNOW_DRIFT_MM_ID,
-        BRIDGE_METAL_RF_ID,
-        PLATFORM_METAL_RF_ID,
-        PLATFORM_METAL_BEND_RF_ID,
-        PLATFORM_METAL_BEND_B_RF_ID,
-        PLATFORM_METAL_BATTERY_RF_ID,
-        ARM_COLLAPSE_RF_ID,
-        ELEVATOR_PLATFORM_UW_ID,
-        PLATFORM_GOO_MESH_UW_ID,
-        ELEVATOR_ROTATE_COVERED_UW_ID,
-        ELEVATOR_ROTATE_UW_ID,
-        GROUND_MESH_A3_ID,
-        FLOOR_LIVE_A2_ID,
+        HASH_bb01_bridge_destructable,
+        HASH_bb01_frozone_bridge_temp,
+        HASH_platform_grill_large_mm,
+        HASH_platform_grill_small_mm,
+        HASH_snow_drift_mm,
+        HASH_bridge_metal_rf,
+        HASH_platform_metal_rf,
+        HASH_platform_metal_bend_rf,
+        HASH_platform_metal_bend_b_rf,
+        HASH_platform_metal_battery_rf,
+        HASH_arm_collapse_rf,
+        HASH_elevator_platform_UW,
+        HASH_platform_goo_mesh_UW,
+        HASH_elevator_rotate_covered_UW,
+        HASH_elevator_rotate_UW,
+        HASH_ground_mesh_a3,
+        HASH_Floor_Live_A2,
     };
 
     const U32* end_receive_models = receive_models + ARRAY_LENGTH(receive_models);
