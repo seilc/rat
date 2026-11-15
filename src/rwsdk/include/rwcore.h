@@ -31,6 +31,7 @@ typedef struct RxPipelineNodeParam RxPipelineNodeParam;
 typedef struct RxPipelineNodeTopSortData RxPipelineNodeTopSortData;
 typedef struct RxPipelineRequiresCluster RxPipelineRequiresCluster;
 typedef struct RxRenderStateVector RxRenderStateVector;
+typedef struct _rwDlNBTDataTag _rwDlNBTDataTag;
 typedef struct rxHeapBlockHeader rxHeapBlockHeader;
 typedef struct rxHeapFreeBlock rxHeapFreeBlock;
 typedef struct rxHeapSuperBlockDescriptor rxHeapSuperBlockDescriptor;
@@ -38,6 +39,7 @@ typedef struct rxHeapSuperBlockDescriptor rxHeapSuperBlockDescriptor;
 typedef RxObjSpace3DVertex RxObjSpace3DLitVertex;
 typedef RxObjSpace3DLitVertex RwIm3DVertex;
 typedef RxPipeline RxLockedPipe;
+typedef struct _rwDlNBTDataTag _rwDlNBTData;
 
 enum RwRasterLockMode
 {
@@ -541,6 +543,21 @@ struct RwGameCubeDeviceConfig
     RwUInt32 fifoSize;
 };
 
+struct _rwDlNBTDataTag
+{
+    void* pos0;
+    void* pos1;
+    void* pos2;
+    void* nrm0;
+    void* tex0;
+    void* tex1;
+    void* tex2;
+    RwUInt8 posCompSize;
+    RwUInt8 nrmCompSize;
+    RwUInt8 texCompSize;
+    RwUInt8 pad;
+};
+
 typedef RwTexture* (*RwTextureCallBackRead)(const RwChar* name, const RwChar* maskName);
 
 #define RwIm3DVertexSetNormal(_vert, _imx, _imy, _imz)  \
@@ -673,6 +690,7 @@ extern RwInt32 _RwGameCubeRasterExtOffset;
 
 RwCamera* RwCameraBeginUpdate(RwCamera* camera);
 RwCamera* RwCameraClear(RwCamera* camera, RwRGBA* color, RwInt32 clearMode);
+RwCamera* RwCameraClone(RwCamera* camera);
 RwCamera* RwCameraCreate(void);
 RwBool RwCameraDestroy(RwCamera* camera);
 RwCamera* RwCameraEndUpdate(RwCamera* camera);
