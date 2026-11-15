@@ -664,7 +664,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xutil.cpp"),
             Object(Matching, "rt/Engine/Core/x/xVec3.cpp"),
             Object(Matching, "rt/Engine/Core/x/xVolume.cpp"),
-            Object(NonMatching, "rt/Engine/Core/gc/iAnimSKB.cpp"),
+            Object(Matching, "rt/Engine/Core/gc/iAnimSKB.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iAsync.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iCutscene.cpp"),
             Object(Matching, "rt/Engine/Core/gc/iDebug.cpp"),
