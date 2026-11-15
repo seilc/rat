@@ -56,4 +56,14 @@ struct RtAnimInterpolator
     void (*keyFrameAddCB)(void*, void*, void*);
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void RtAnimInterpolatorDestroy(RtAnimInterpolator* anim);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif
