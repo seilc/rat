@@ -33,6 +33,7 @@ typedef unsigned long long RwUInt64;
 #define MACRO_STOP while (0)
 
 typedef struct RwDevice RwDevice;
+typedef struct RwEngineOpenParams RwEngineOpenParams;
 typedef struct RwFreeList RwFreeList;
 typedef struct RwGlobals RwGlobals;
 typedef struct RwLLLink RwLLLink;
@@ -96,6 +97,14 @@ enum RwMatrixFlag
     rwMATRIXFLAGFORCEENUMSIZEINT = RWFORCEENUMSIZEINT,
 };
 typedef enum RwMatrixFlag RwMatrixFlag;
+
+enum RwEngineInitFlag
+{
+    rwENGINEINITFREELISTS,
+    rwENGINEINITNOFREELISTS,
+    rwENGINEINITFLAGFORCEENUMSIZEINT = RWFORCEENUMSIZEINT,
+};
+typedef enum RwEngineInitFlag RwEngineInitFlag;
 
 enum RwCorePluginID
 {
@@ -502,6 +511,11 @@ enum RwPrimitiveType
 };
 typedef enum RwPrimitiveType RwPrimitiveType;
 
+struct RwEngineOpenParams
+{
+    void* displayID;
+};
+
 typedef RwBool (*RwSystemFunc)(RwInt32 nOption, void* pOut, void* pInOut, RwInt32 nIn);
 typedef RwBool (*RwRenderStateSetFunction)(RwRenderState nState, void* pParam);
 typedef RwBool (*RwRenderStateGetFunction)(RwRenderState nState, void* pParam);
@@ -684,6 +698,20 @@ struct RwObject
 #endif
 #define RwFree(p) ((RWSRCGLOBAL(memoryFuncs).rwfree)((p)))
 
+#define _RWSTRING(x) x
+#define RWSTRING(x) _RWSTRING(x)
+
+#ifdef RWDEBUG
+#define RwDebugSendMessage(type, funcName, message) \
+    _rwDebugSendMessage(type, RWSTRING(__FILE__), __LINE__, funcName, message)
+#define RwDebugSendMessage_L(type, funcName, message, line) \
+    _rwDebugSendMessage(type, RWSTRING(__FILE__), line, funcName, message)
+#else
+#define RwDebugSetHandler(handler)
+#define RwDebugSendMessage(type, funcName, message)
+#define RwDebugSendMessage_L(type, funcName, message, line)
+#endif
+
 #define GETCOORD(vect,y) (*(RwReal *)(((RwUInt8 *)(&((vect).x)))+(RwInt32)(y)))
 #define RWRGBALONG(r,g,b,a) ((RwUInt32) (((a) << 24) | ((r) << 16) | ((g) << 8) | (b)))
 
@@ -834,17 +862,29 @@ extern void* RwEngineInstance;
 #ifdef RWDEBUG
 extern const RwChar* _rwMemoryLastAllocFile;
 extern RwUInt32 _rwMemoryLastAllocLine;
+RwDebugHandler RwDebugSetHandler(RwDebugHandler handler);
+void _rwDebugSendMessage(RwDebugType type, const RwChar* fileName, const RwInt32 line, const RwChar* funcName, const RwChar* message);
 #endif
 
+RwBool RwEngineClose(void);
 RwInt32 RwEngineGetCurrentVideoMode(void);
 RwVideoMode* RwEngineGetVideoModeInfo(RwVideoMode* modeinfo, RwInt32 modeIndex);
+RwBool RwEngineInit(const RwMemoryFunctions* memFuncs, RwUInt32 initFlags, RwUInt32 resArenaSize);
+RwBool RwEngineOpen(RwEngineOpenParams* initParams);
+RwBool RwEngineStart(void);
+RwBool RwEngineStop(void);
+RwBool RwEngineTerm(void);
 RwMatrix* RwMatrixInvert(RwMatrix* dst, const RwMatrix* src);
 RwMatrix* RwMatrixMultiply(RwMatrix* dst, const RwMatrix* src1, const RwMatrix* src2);
 RwMatrix* RwMatrixScale(RwMatrix* matrix, const RwV3d* scale, RwOpCombineType combineOp);
 RwMatrix* RwMatrixTranslate(RwMatrix* matrix, const RwV3d* translation, RwOpCombineType combineOp);
 RwMatrix* RwMatrixUpdate(RwMatrix* matrix);
 void* RwMemNative32(void* mem, RwUInt32 size);
+RwResEntry* RwResourcesAllocateResEntry(void* owner, RwResEntry** ownerRef, RwInt32 size, RwResEntryDestroyNotify destroyNotify);
 RwBool RwResourcesFreeResEntry(RwResEntry* entry);
+RwInt32 RwResourcesGetArenaSize(void);
+RwInt32 RwResourcesGetArenaUsage(void);
+RwBool RwResourcesSetArenaSize(RwUInt32 size);
 RwBool RwStreamClose(RwStream* stream, void* pData);
 RwBool RwStreamFindChunk(RwStream* stream, RwUInt32 type, RwUInt32* lengthOut, RwUInt32* versionOut);
 RwStream* RwStreamOpen(RwStreamType type, RwStreamAccessType accessType, const void* pData);

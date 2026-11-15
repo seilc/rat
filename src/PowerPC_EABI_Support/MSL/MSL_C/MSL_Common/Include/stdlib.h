@@ -4,6 +4,7 @@
 #include <size_t.h>
 
 #ifdef __cplusplus
+namespace std {
 extern "C" {
 #endif
 
@@ -25,6 +26,18 @@ extern void qsort(void*, size_t, size_t, int (*)(const void*, const void*));
 
 #ifdef __cplusplus
 }
+}
+
+using std::atof;
+using std::atoi;
+using std::calloc;
+using std::free;
+using std::malloc;
+using std::realloc;
+using std::exit;
+using std::abs;
+using std::rand;
+using std::qsort;
 #endif
 
 #endif

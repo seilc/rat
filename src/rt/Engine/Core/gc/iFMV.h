@@ -21,5 +21,8 @@ struct MOVIE
 
 MOVIE* iFMVOpen(PKRAssetTOCInfo& rAssetInfo);
 void iFMVClose(MOVIE*& pMovie);
+void iFMVSuspend();
+void iFMVResume();
+void iFMVKill();
 
 #endif

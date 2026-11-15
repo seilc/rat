@@ -1440,6 +1440,8 @@ U32 gNumStreamsClosed;
 void xSndMgrDebugRender()
 {
 #if DEBUG || RELEASE
+    extern S32 the_heap;
+
     if (xSndMgrGetEffect() == xSndEffect_CAVE)
         xprintf("Echo   ON\n");
     else
