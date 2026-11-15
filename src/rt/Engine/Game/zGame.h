@@ -11,5 +11,6 @@ extern char** soaklevels;
 
 S32 zGameIsPaused();
 void zGamePreRender();
+void zGameDemoText(F32 fTime);
 
 #endif
