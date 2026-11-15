@@ -246,11 +246,11 @@ inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmi
 #define xTEMPTWEAKS_END }
 
 #else
-inline void xDebugAddTweak(const char* name, const U32* v, U32 vmin, U32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
-inline void xDebugAddTweak(const char* name, const F32* v, F32 vmin, F32 vmax, const tweak_callback* cb, void* context, U32 flags) {}
-inline void xDebugAddBranchTweak(const char* name, const tweak_callback* cb, void* context, U32 flags) {}
+inline void xDebugAddTweak(const char*, const U32*, U32, U32, const tweak_callback*, void*, U32) {}
+inline void xDebugAddTweak(const char*, const F32*, F32, F32, const tweak_callback*, void*, U32) {}
+inline void xDebugAddBranchTweak(const char*, const tweak_callback*, void*, U32) {}
 
-inline void xDebugRemoveTweak(const char* name) {}
+inline void xDebugRemoveTweak(const char*) {}
 inline void xDebugRemoveTweaks(const char*, xDebugRemoveTweaksCallback, void*) {}
 
 #define xTWEAK(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)

@@ -12,6 +12,7 @@
 #include "xRand.h"
 #include "xSpacePartitionTree.h"
 #include "xShadow.h"
+#include "xSurface.h"
 #include "xUpdateCull.h"
 #include "zCollGeom.h"
 #include "zEntButton.h"
@@ -57,7 +58,7 @@ void xEntBoulder_FitToModel(xEntBoulder* ent)
 void xEntBoulder_Render(xEnt* ent)
 {
     xModelInstance* model = ent->model;
-    if (!model || !xEntIsVisible(ent) || (model->Flags & 0x400)) {
+    if (!model || !xEntIsVisible(ent) || (model->Flags & ModelInstance_NoRender)) {
         return;
     }
 
@@ -149,7 +150,7 @@ void xEntBoulder_InitNoEntInit(xEntBoulder* ent, xEntAsset* asset)
     }
 #endif
 
-    ent->baseFlags |= (U16)0x20;
+    ent->baseFlags |= k_XBASE_IS_ENTITY;
 
     if (basset->uSoundGroupHash)
         basset->soundID = xSndMgrGetSoundGroup(basset->uSoundGroupHash);
@@ -262,7 +263,7 @@ void xEntBoulder_Update(xEntBoulder* ent, xScene* sc, F32 dt)
     xSweptSpherePrepare(&sws, &oldPos, &ent->bound.sph.center, ent->bound.sph.r, 0);
     if (sweptDistSqr > xsqr(penAllowed)) {
         definitelyBounce = true;
-        if (xSweptSphereToScene(&sws, globals.sceneCur, ent, 0x10, 0)) {
+        if (xSweptSphereToScene(&sws, globals.sceneCur, ent, k_XENT_COLLTYPE_PC, 0)) {
             F32 pen = sws.dist - sws.curdist;
             if (pen > penAllowed) {
                 F32 scaleBack = (penAllowed + sws.curdist) / sws.dist - 1.0f;
@@ -381,7 +382,7 @@ void xEntBoulder_Update(xEntBoulder* ent, xScene* sc, F32 dt)
 
     zPlayer* player;
     sws.radius *= 0.95f;
-    if (xSweptSphereToPlayer(&sws, globals.sceneCur, ent, &player, 0x4, 0x4)) {
+    if (xSweptSphereToPlayer(&sws, globals.sceneCur, ent, &player, k_XENT_COLLTYPE_DYN, k_XENT_COLLTYPE_DYN)) {
         if (boulder->basset->flags & 0x2) {
             player->Damage(zCombatDamageInfo(boulder, boulder->basset->hitpoints, zHS_PROJECTILE, zHT_GENERAL, xVec3::m_Null, xVec3::m_Null, xVec3::m_Null, 0));
         } else {

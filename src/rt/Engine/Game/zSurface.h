@@ -3,11 +3,11 @@
 
 #include "xBaseAsset.h"
 #include "xVec3.h"
-#include "xSurface.h"
 #include "zHitParameters.h"
 
 struct xCollis;
 struct RwTexture;
+struct xSurface;
 
 struct zSurfMatFX
 {

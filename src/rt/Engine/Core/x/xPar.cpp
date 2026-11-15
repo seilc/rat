@@ -89,7 +89,7 @@ void xParInit(xPar* p)
     p->m_c[3] = 255;
     p->m_flag = 0;
 
-    for (S32 i = 0; i < XPAR_ROTDEG_MAX; i++) {
+    for (S32 i = 0; i < 3; i++) {
         p->m_rotdeg[i] = 0;
     }
 

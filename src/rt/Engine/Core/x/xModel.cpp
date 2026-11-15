@@ -221,7 +221,7 @@ xModelInstance* xModelInstanceAllocReuse(RpAtomic* data, void* object, U16 flags
     dude->Anim = NULL;
     dude->Data = data;
     dude->Object = object;
-    dude->Flags = flags | 0x1 | 0x2;
+    dude->Flags = flags | ModelInstance_Render | 0x2;
     dude->BoneCount = boneCount;
     dude->BoneIndex = boneIndex;
     dude->BoneRemap = boneRemap;
@@ -440,7 +440,7 @@ void xModelEvalSingle(xModelInstance* modelInst, xBox* combinedAnimBound)
         }
     }
 
-    if ((flags & 0x1) && modelInst->BoneCount) {
+    if ((flags & ModelInstance_Render) && modelInst->BoneCount) {
         RwMatrix* modelMat = modelInst->Mat;
         if (modelInst->Scale.x != 0.0f) {
             xMat4x3& mat = *(xMat4x3*)modelMat;
@@ -486,7 +486,7 @@ void xModelRenderSingle(xModelInstance* modelInst)
     }
 #endif
 
-    if ((modelInst->Flags & 0x401) == 0x1) {
+    if ((modelInst->Flags & (ModelInstance_Render | ModelInstance_NoRender)) == ModelInstance_Render) {
         bool reset = false;
         xMat3x3 tmpmat;
 
@@ -1034,11 +1034,7 @@ outside:
     return TRUE;
 }
 
-#if DEBUG || RELEASE
-S32 BoxEnable = TRUE;
-#else
-static const S32 BoxEnable = TRUE;
-#endif
+xTWEAKABLE S32 BoxEnable = TRUE;
 
 S32 xModelCullGroup(xModelInstance* minst)
 {

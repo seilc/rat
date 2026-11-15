@@ -130,7 +130,7 @@ void xScrFxDrawBox(F32 x1, F32 y1, F32 x2, F32 y2, U8 red, U8 green, U8 blue, U8
 
         xRenderStateZModesSet(TRUE, FALSE);
 
-        RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, v, ARRAY_LENGTH(v), indices, ARRAY_LENGTH(indices));
+        RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, v, 4, indices, 4);
 
         xRenderStateZModesSet(old_z_write, FALSE);
     } else {
@@ -143,7 +143,7 @@ void xScrFxDrawBox(F32 x1, F32 y1, F32 x2, F32 y2, U8 red, U8 green, U8 blue, U8
 
         xRenderStateZModesSet(TRUE, FALSE);
 
-        RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, v, ARRAY_LENGTH(v), indices, ARRAY_LENGTH(indices));
+        RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, v, 4, indices, 4);
     }
 }
 
@@ -551,7 +551,7 @@ void xScrFXGlareRender(const xMat4x3& mat)
 
                     RwRenderStateSet(rwRENDERSTATETEXTURERASTER, g->raster);
 
-                    xIMRenderLegacy(sStripVert, ARRAY_LENGTH(sStripVert), NULL, rwPRIMTYPETRISTRIP);
+                    xIMRenderLegacy(sStripVert, 4, NULL, rwPRIMTYPETRISTRIP);
                 }
             }
         }
@@ -600,7 +600,7 @@ void xScrFxDrawBox(F32 x1, F32 y1, F32 x2, F32 y2, U8 red, U8 green, U8 blue, U8
     RwIm2DVertexSetU(&v[3], 1.0f + ushift, oocameraNearClipPlane);
     RwIm2DVertexSetV(&v[3], 1.0f + vshift, oocameraNearClipPlane);
 
-    RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, v, ARRAY_LENGTH(v), indices, ARRAY_LENGTH(indices));
+    RwIm2DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, v, 4, indices, 4);
 }
 
 static xMat4x3 sCameraFXMatOld;
@@ -1255,9 +1255,9 @@ static void xScrFxLensFlare_RenderElements(RwRaster*, RwFrame* frame, U8 vCol, v
             RwMatrixTranslate(&tmp, &position, rwCOMBINEPOSTCONCAT);
             RwMatrixMultiply(&transform, &tmp, matrix);
 
-            RwIm3DTransform(verts, ARRAY_LENGTH(verts), &transform, rwIM3D_VERTEXUV | rwIM3D_ALLOPAQUE | rwIM3D_VERTEXXYZ | rwIM3D_VERTEXRGBA);
+            RwIm3DTransform(verts, 4, &transform, rwIM3D_VERTEXUV | rwIM3D_ALLOPAQUE | rwIM3D_VERTEXXYZ | rwIM3D_VERTEXRGBA);
 
-            RwIm3DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, indices, ARRAY_LENGTH(indices));
+            RwIm3DRenderIndexedPrimitive(rwPRIMTYPETRISTRIP, indices, 4);
             RwIm3DEnd();
         } else if ((ep->mode & 0xFF) == 1) {
             F32 uadj = 0.5f / RwRasterGetWidth(RwTextureGetRaster(gxFlareTexture));

@@ -23,7 +23,7 @@ void iScrFxBegin();
 void iScrFxEnd();
 void iCameraMotionBlurActivate(U32 activate);
 void iCameraSetBlurriness(F32 amount); // UNUSED
-void iScrFxCruiseDistortSetFactor(F32 factor); // UNUSED
+inline void iScrFxCruiseDistortSetFactor(F32 factor); // UNUSED
 void iScrFxCameraCreated(RwCamera* pCamera);
 void iScrFxCameraEndScene(RwCamera* pCamera);
 S32 iScrFxMotionBlurOpen(RwCamera* camera);

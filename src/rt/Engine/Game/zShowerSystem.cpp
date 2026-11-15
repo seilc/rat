@@ -80,8 +80,10 @@ void zShowerParticle::Exit()
     model = NULL;
 }
 
+typedef pool_list<zShowerParticle> particle_list;
+
 // UNUSED: needed to match (code from RotU GC)
-void zShowerParticle::Update(pool_list<zShowerParticle>& list, xEnt* owner, zShowerCBInterface* collideCallback, F32 dt)
+void zShowerParticle::Update(particle_list& list, xEnt* owner, zShowerCBInterface* collideCallback, F32 dt)
 {
     if (time >= TIMEOUT) {
         alive = false;
@@ -101,8 +103,8 @@ void zShowerParticle::Update(pool_list<zShowerParticle>& list, xEnt* owner, zSho
                 sws.start.y = collisionStartY;
             }
 
-            S32 result = xSweptSphereToScene(&sws, globals.sceneCur, NULL, 0x10, 0);
-            result |= xSweptSphereToPlayer(&sws, globals.sceneCur, NULL, 0x10, 0);
+            S32 result = xSweptSphereToScene(&sws, globals.sceneCur, NULL, k_XENT_COLLTYPE_PC, 0);
+            result |= xSweptSphereToPlayer(&sws, globals.sceneCur, NULL, k_XENT_COLLTYPE_PC, 0);
             if (result) {
                 xSweptSphereGetResults(&sws);
 
@@ -145,7 +147,7 @@ void zShowerParticle::Update(pool_list<zShowerParticle>& list, xEnt* owner, zSho
         }
     } else if (!ribbon || ribbon->empty()) {
         zFXRibbonPoolDelete(ribbon);
-        pool_list<zShowerParticle>::node_type* itr = list.get_iterator(this);
+        particle_list::node_type* itr = list.get_iterator(this);
         list.erase(itr);
     }
 }
@@ -185,8 +187,8 @@ void zShowerSystem::Setup(xEnt* moveOwner, const ConfigType* cfg)
 
     particleList.create(config->maxParticles, eMemMgrTag_Shower, NULL);
 
-    pool_list<zShowerParticle>::node_type* currentNode = particleList.get_buffer();
-    pool_list<zShowerParticle>::node_type* const endNode = currentNode + particleList.max_size();
+    particle_list::node_type* currentNode = particleList.get_buffer();
+    particle_list::node_type* const endNode = currentNode + particleList.max_size();
     while (currentNode != endNode) {
         currentNode->value.Setup(&config->particleConfig, globalLightKit);
         currentNode++;
@@ -270,9 +272,9 @@ void zShowerSystem::Update(F32 dt)
         }
     }
 
-    pool_list<zShowerParticle>::node_type* itr = particleList.begin();
-    pool_list<zShowerParticle>::node_type* end = particleList.end();
-    pool_list<zShowerParticle>::node_type* itrNext;
+    particle_list::node_type* itr = particleList.begin();
+    particle_list::node_type* end = particleList.end();
+    particle_list::node_type* itrNext;
     for (; itr != end; itr = itrNext) {
         itrNext = itr->next;
         itr->value.Update(particleList, owner, collideCallback, dt);
@@ -282,8 +284,8 @@ void zShowerSystem::Update(F32 dt)
 // UNUSED: needed to match (code from RotU GC)
 void zShowerSystem::Render()
 {
-    pool_list<zShowerParticle>::node_type* itr = particleList.begin();
-    pool_list<zShowerParticle>::node_type* end = particleList.end();
+    particle_list::node_type* itr = particleList.begin();
+    particle_list::node_type* end = particleList.end();
     for (; itr != end; itr = itr->next) {
         itr->value.Render();
     }
@@ -292,8 +294,8 @@ void zShowerSystem::Render()
 // UNUSED: needed to match (code from RotU GC)
 void zShowerSystem::Exit()
 {
-    pool_list<zShowerParticle>::node_type* currentNode = particleList.get_buffer();
-    pool_list<zShowerParticle>::node_type* const endNode = currentNode + particleList.max_size();
+    particle_list::node_type* currentNode = particleList.get_buffer();
+    particle_list::node_type* const endNode = currentNode + particleList.max_size();
     while (currentNode != endNode) {
         currentNode->value.Exit();
         currentNode++;

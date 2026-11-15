@@ -16,7 +16,6 @@
 #if DEBUG || RELEASE
 #define SPHERE_NUM_PTS 50
 #define MARKER_NUM_LINES 7
-#define BOX_NUM_PTS 8
 
 static xColor sgDrawColor = { 0xFF, 0xFF, 0xFF, 0xFF };
 static F32 sph2_yaw;
@@ -84,7 +83,7 @@ void xDrawLine(const xVec3* a, const xVec3* b)
     verts[0] = a->m_RwV3d;
     verts[1] = b->m_RwV3d;
 
-    iQueueLineList(sgDrawColor, verts, indices, NULL, ARRAY_LENGTH(verts), ARRAY_LENGTH(indices));
+    iQueueLineList(sgDrawColor, verts, indices, NULL, 2, 2);
 }
 
 void xDrawLine(F32 x1, F32 y1, F32 z1, F32 x2, F32 y2, F32 z2)
@@ -101,7 +100,7 @@ void xDrawLine(F32 x1, F32 y1, F32 z1, F32 x2, F32 y2, F32 z2)
     verts[1].y = y2;
     verts[1].z = z2;
 
-    iQueueLineList(sgDrawColor, verts, indices, NULL, ARRAY_LENGTH(verts), ARRAY_LENGTH(indices));
+    iQueueLineList(sgDrawColor, verts, indices, NULL, 2, 2);
 }
 
 void xDrawArrow(const xVec3* a, const xVec3* b, const xVec3* n, bool asRay, F32 length)
@@ -204,7 +203,7 @@ void xDrawLine2D(F32 x1, F32 y1, F32 x2, F32 y2)
     RwRenderStateSet(rwRENDERSTATETEXTURERASTER, NULL);
     RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, (void*)FALSE);
 
-    RwIm2DRenderLine(vtx, ARRAY_LENGTH(vtx), 0, 1);
+    RwIm2DRenderLine(vtx, 2, 0, 1);
 
     RwRenderStateSet(rwRENDERSTATETEXTURERASTER, raster);
     RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, (void*)vae);
@@ -284,7 +283,7 @@ void xDrawSphere(const xVec3* center, F32 r, U32 flags)
 
 void xDrawBox(const xBox* b)
 {
-    static xVec3 v[BOX_NUM_PTS];
+    static xVec3 v[8];
 
     const xVec3* min = &b->lower;
     const xVec3* max = &b->upper;
@@ -292,7 +291,7 @@ void xDrawBox(const xBox* b)
     for (S32 i = 0; i < 4; i++) {
         v[i] = *min;
     }
-    for (S32 i = 4; i < BOX_NUM_PTS; i++) {
+    for (S32 i = 4; i < 8; i++) {
         v[i] = *max;
     }
 
@@ -328,7 +327,7 @@ void xDrawBox(const xBox* b)
 
 void xDrawBox(const xBox* b, const xMat4x3* mat)
 {
-    static xVec3 v[BOX_NUM_PTS];
+    static xVec3 v[8];
 
     xVec3 min = b->lower;
     xVec3 max = b->upper;
@@ -336,7 +335,7 @@ void xDrawBox(const xBox* b, const xMat4x3* mat)
     for (S32 i = 0; i < 4; i++) {
         v[i] = min;
     }
-    for (S32 i = 4; i < BOX_NUM_PTS; i++) {
+    for (S32 i = 4; i < 8; i++) {
         v[i] = max;
     }
 
@@ -354,7 +353,7 @@ void xDrawBox(const xBox* b, const xMat4x3* mat)
 
     v[7].x = min.x;
 
-    for (S32 i = 0; i < BOX_NUM_PTS; i++) {
+    for (S32 i = 0; i < 8; i++) {
         xMat3x3RMulVec(&v[i], mat, &v[i]);
         v[i] += mat->pos;
     }
@@ -611,8 +610,8 @@ void xDrawOBB(const xBox* b, const xMat4x3* m)
         { 0, 4 }, { 1, 5 }, { 2, 6 }, { 3, 7 },
         { 4, 5 }, { 5, 6 }, { 6, 7 }, { 7, 4 }
     };
-    xVec3 lverts[BOX_NUM_PTS];
-    RwV3d wverts[BOX_NUM_PTS];
+    xVec3 lverts[8];
+    RwV3d wverts[8];
     lverts[0].x = b->lower.x;
     lverts[0].y = b->lower.y;
     lverts[0].z = b->lower.z;
@@ -638,21 +637,21 @@ void xDrawOBB(const xBox* b, const xMat4x3* m)
     lverts[7].y = b->upper.y;
     lverts[7].z = b->lower.z;
 
-    for (S32 i = 0; i < BOX_NUM_PTS; i++) {
+    for (S32 i = 0; i < 8; i++) {
         xMat4x3ToWorld((xVec3*)&wverts[i], m, &lverts[i]);
     }
 
-    iQueueLineList(sgDrawColor, wverts, (U32*)idxs, NULL, ARRAY_LENGTH(wverts), 2 * ARRAY_LENGTH(idxs));
+    iQueueLineList(sgDrawColor, wverts, (U32*)idxs, NULL, 8, 24);
 }
 
 void xDrawOBBShaded(const xBox* b, const xMat4x3* m)
 {
     S32 i;
-    xVec3 lverts[BOX_NUM_PTS];
+    xVec3 lverts[8];
     for (i = 0; i < 4; i++) {
         lverts[i] = b->lower;
     }
-    for (i = 4; i < BOX_NUM_PTS; i++) {
+    for (i = 4; i < 8; i++) {
         lverts[i] = b->upper;
     }
     lverts[1].x = b->upper.x;
@@ -664,8 +663,8 @@ void xDrawOBBShaded(const xBox* b, const xMat4x3* m)
     lverts[5].y = b->lower.y;
     lverts[7].x = b->lower.x;
 
-    xVec3 wverts[BOX_NUM_PTS];
-    for (i = 0; i < BOX_NUM_PTS; i++) {
+    xVec3 wverts[8];
+    for (i = 0; i < 8; i++) {
         xMat4x3ToWorld(&wverts[i], m, &lverts[i]);
     }
 
@@ -960,7 +959,7 @@ void xDrawCard(RwRaster* raster, const xFRect& src_rect, const xFRect& dst_rect,
     set_vert(vert[1], x0, y1, u0, v1, rcz, nsz);
     set_vert(vert[2], x1, y0, u1, v0, rcz, nsz);
     set_vert(vert[3], x1, y1, u1, v1, rcz, nsz);
-    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vert, ARRAY_LENGTH(vert));
+    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vert, 4);
 
     RwRenderStateSet(rwRENDERSTATETEXTUREFILTER, (void*)old_filter);
     RwRenderStateSet(rwRENDERSTATETEXTUREADDRESS, (void*)old_wrap);
@@ -1014,7 +1013,7 @@ S32 Im2DRenderQuad(F32 x1, F32 y1, F32 x2, F32 y2, F32 z, F32 recipCamZ, F32 uvO
     RwIm2DVertexSetU(&vx[3], 1.0f + uvOffset, recipCamZ);
     RwIm2DVertexSetV(&vx[3], 1.0f + uvOffset, recipCamZ);
 
-    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vx, ARRAY_LENGTH(vx));
+    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vx, 4);
 
     return TRUE;
 }
@@ -1052,7 +1051,7 @@ S32 Im2DRenderQuadAlpha(F32 x1, F32 y1, F32 x2, F32 y2, F32 alpha, F32 z, F32 re
     RwIm2DVertexSetU(&vx[3], 1.0f + uvOffset, recipCamZ);
     RwIm2DVertexSetV(&vx[3], 1.0f + uvOffset, recipCamZ);
 
-    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vx, ARRAY_LENGTH(vx));
+    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vx, 4);
 
     return TRUE;
 }

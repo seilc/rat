@@ -8,6 +8,8 @@
 #include <rwcore.h>
 #include <rpworld.h>
 
+#define XJSP_MAX_NODE_LIGHTS 8
+
 struct xJSPNodeInfo
 {
     S32 originalMatIndex;
@@ -53,7 +55,7 @@ struct xJSPNodeLight
     S32 lightCount;
     RpTie dummyTie;
     RpWorldSector dummySector;
-    xJSPMiniLightTie dummyLightTie[8];
+    xJSPMiniLightTie dummyLightTie[XJSP_MAX_NODE_LIGHTS];
 };
 
 struct xJSPHeader

@@ -69,7 +69,7 @@ void xSkyDome_AddEntity(xEnt* ent, S32 sortorder, S32 lockY, S32 lockXZ, S32 ZRe
         sSkyList[i].zReadWrite = ZReadWrite;
         sSkyCount++;
         ent->user_data = (void*)i;
-        ent->model->Flags &= (U16)~0x1;
+        ent->model->Flags &= (U16)~ModelInstance_Render;
     }
 
     ent->render = xSkyDome_EmptyRender;
@@ -99,7 +99,7 @@ void xSkyDome_Render()
         S32 useZBuf = FALSE;
         for (S32 i = 0; i < sSkyCount; i++) {
             xEnt* ent = sSkyList[i].ent;
-            ent->model->Flags &= (U16)~0x1;
+            ent->model->Flags &= (U16)~ModelInstance_Render;
 
             if (!ent->model || !xEntIsVisible(ent)) continue;
 

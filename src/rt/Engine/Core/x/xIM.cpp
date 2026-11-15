@@ -3,7 +3,6 @@
 
 #include "xDebug.h"
 #include "xMemMgr.h"
-#include "xutil.h"
 
 #include "decomp.h"
 
@@ -171,5 +170,5 @@ void xIM2DRenderQuad(F32 x1, F32 y1, F32 x2, F32 y2, F32 uMax, F32 vMax, U32 alp
     RwIm2DVertexSetU(&vx[3], uMax, recipCamZ);
     RwIm2DVertexSetV(&vx[3], vMax, recipCamZ);
 
-    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vx, ARRAY_LENGTH(vx));
+    RwIm2DRenderPrimitive(rwPRIMTYPETRISTRIP, vx, 4);
 }

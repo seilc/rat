@@ -916,7 +916,7 @@ void xEntReset(xEnt* ent, const xVec3& pos, const xVec3& ang)
         combinedAnimBound->upper.x = -1e38f;
         while (minst) {
             U16 old_flags = minst->Flags;
-            minst->Flags |= 0x1;
+            minst->Flags |= ModelInstance_Render;
             xModelEvalSingle(minst, combinedAnimBound);
             minst->Flags = old_flags;
             minst = minst->Next;
@@ -1158,7 +1158,7 @@ void xEntRender(xEnt* ent)
     if (!xEntIsVisible(ent))
         return;
 
-    if (ent->model->Flags & 0x400) {
+    if (ent->model->Flags & ModelInstance_NoRender) {
         return;
     }
 
@@ -1746,8 +1746,6 @@ void xEntCollCheckEnv(xEnt* p, xScene* sc)
     p->collis->env_eidx = p->collis->idx;
 }
 
-#define NUM_CELL_OFFS 3
-
 static void xEntCollCheckOneGrid(xEnt* p, xScene* sc, xEntCollCheckCallback hitIt, xGrid* grid)
 {
     xGridIterator it;
@@ -1765,7 +1763,7 @@ static void xEntCollCheckOneGrid(xEnt* p, xScene* sc, xEntCollCheckCallback hitI
         cell = xGridIterNextCell(it);
     }
 
-    static S32 offs[4][NUM_CELL_OFFS][2] = {
+    static S32 offs[4][3][2] = {
         { { -1, 0 }, { -1, -1 }, { 0, -1 } },
         { { 0, -1 }, { 1, -1 }, { 1, 0 } },
         { { 1, 0 }, { 1, 1 }, { 0, 1 } },
@@ -1794,7 +1792,7 @@ static void xEntCollCheckOneGrid(xEnt* p, xScene* sc, xEntCollCheckCallback hitI
         }
     }
 
-    for (S32 i = 0; i < NUM_CELL_OFFS; i++) {
+    for (S32 i = 0; i < 3; i++) {
         S32 _x = px + offs[k][i][1];
         S32 _z = pz + offs[k][i][0];
         cell = xGridIterFirstCell(grid, _x, _z, it);

@@ -5,7 +5,6 @@
 #include "xIM.h"
 #include "xstransvc.h"
 #include "xRenderState.h"
-#include "xutil.h"
 
 #include <cmath>
 
@@ -250,7 +249,7 @@ namespace {
         vert++;
         
         RwRenderStateSet(rwRENDERSTATETEXTURERASTER, (void*)g->raster);
-        xIMRenderLegacy(sStripVert, ARRAY_LENGTH(sStripVert), NULL, rwPRIMTYPETRISTRIP);
+        xIMRenderLegacy(sStripVert, 4, NULL, rwPRIMTYPETRISTRIP);
     }
 
 }

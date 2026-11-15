@@ -26,7 +26,7 @@ void xInternalTextureNode::FreeMemory()
         xTextureManager::Get().freeNode(this);
     } else if (Loading()) {
         S32 zeroIndex = -1;
-        for (U32 i = 0; i < 4; i++) {
+        for (U32 i = 0; i < XTEXMGR_MAX_CLEAR_IDS; i++) {
             if (xTextureManager::Get().m_clearIDs[i] == 0) {
                 zeroIndex = i;
             } else if (xTextureManager::Get().m_clearIDs[i] == info.aid) {
@@ -184,7 +184,7 @@ void fileCallback(xFile* file)
     xFileSetUserData(file, NULL);
     iFileClose(file);
 
-    for (U32 i = 0; i < 4; i++) {
+    for (U32 i = 0; i < XTEXMGR_MAX_CLEAR_IDS; i++) {
         if (pNode->info.aid == xTextureManager::Get().m_clearIDs[i]) {
             xTextureManager::Get().m_clearIDs[i] = 0;
             RwFree(pNode->pAssetMemory);
@@ -212,7 +212,7 @@ xTextureManager::xTextureManager()
     m_currentPoolSize = 0;
     m_maxPoolSize = 0x60000;
 
-    for (U32 i = 0; i < 4; i++) {
+    for (U32 i = 0; i < XTEXMGR_MAX_FILES; i++) {
         xFileSetUserData(&m_files[i], NULL);
     }
     memset(m_texture_nodes, 0, sizeof(m_texture_nodes));
@@ -286,7 +286,7 @@ void xTextureManager::reload(xTextureHandle* pHandle)
     xASSERT_FMT_L(419, pHandle && pHandle->m_pNode && !pHandle->m_pNode->pTexture && pHandle->m_pNode->state != xInternalTextureNode::LOADED, "This node is ready or not dynamic, so why reload it?");
 
     xFile* pFile = NULL;
-    for (U32 i = 0; i < 4; i++) {
+    for (U32 i = 0; i < XTEXMGR_MAX_FILES; i++) {
         if (!xFileGetUserData(&m_files[i])) {
             pFile = &m_files[i];
             break;

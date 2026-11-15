@@ -803,7 +803,7 @@ static S32 JSPApplyLightCB(xJSPHeader* jsp, xJSPNodeTreeLeaf* leaf, RwBBox* box,
         if (box->sup.x >= leaf[i].box.inf.x && box->sup.y >= leaf[i].box.inf.y && box->sup.z >= leaf[i].box.inf.z &&
             box->inf.x <= leaf[i].box.sup.x && box->inf.y <= leaf[i].box.sup.y && box->inf.z <= leaf[i].box.sup.z) {
             nlight = &jsp->nodelight[leaf[i].nodeIndex];
-            if (nlight->lightCount < 8) {
+            if (nlight->lightCount < XJSP_MAX_NODE_LIGHTS) {
                 nlight->dummyLightTie[nlight->lightCount].light = (RpLight*)data;
                 rwLinkListAddLLLink(&nlight->dummySector.lightsInWorldSector, &nlight->dummyLightTie[nlight->lightCount].lightInWorldSector);
                 nlight->lightCount++;

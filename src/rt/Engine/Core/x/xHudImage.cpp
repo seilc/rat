@@ -126,7 +126,7 @@ void image_widget::render()
     }
 #endif
 
-    if (rc.a >= -0.00001f && rc.a <= 0.00001f) {
+    if (xfeq0(rc.a)) {
         return;
     }
 

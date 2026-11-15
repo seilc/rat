@@ -15,6 +15,7 @@
 #include "xScene.h"
 #include "xString.h"
 #include "xstransvc.h"
+#include "xSurface.h"
 #include "xutil.h"
 #include "iFX.h"
 #include "zAutoTweak.h"

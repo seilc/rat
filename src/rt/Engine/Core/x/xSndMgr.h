@@ -162,7 +162,7 @@ inline bool xSndMgrIsStream(xSndGroupHandle hSound)
     return ip->isStreamed();
 }
 
-template <S32 unknown>
+template <S32 SIZE>
 class sound_queue
 {
 public:
@@ -180,20 +180,20 @@ public:
 
         S32 begin = head;
         S32 end = tail+1;
-        if (end <= begin) end += unknown+1;
+        if (end <= begin) end += SIZE+1;
 
         S32 len = end - begin;
-        if (len > unknown) {
+        if (len > SIZE) {
             xSndMgrStop(_playing[begin]);
             begin++;
-            head = begin % (unknown+1);
+            head = begin % (SIZE+1);
         }
 
-        tail = end % (unknown+1);
+        tail = end % (SIZE+1);
     }
 
 private:
-    xSndHandle _playing[unknown+1];
+    xSndHandle _playing[SIZE+1];
     S32 head;
     S32 tail;
 };

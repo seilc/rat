@@ -23,11 +23,7 @@ void xRenderStateSetZBias(RwReal bias)
     xASSERT_L(184, cam != 0);
     if (!cam) return;
 
-#if DEBUG || RELEASE
-    static RwReal bias_scale = 0.005f;
-#else
-    static const RwReal bias_scale = 0.005f;
-#endif
+    static xTWEAKABLE RwReal bias_scale = 0.005f;
     bias *= bias_scale;
 
     old_near_plane = RwCameraGetNearClipPlane(cam);

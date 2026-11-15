@@ -18,7 +18,6 @@
 #include "xSndMgr.h"
 #include "xstransvc.h"
 #include "xSubTitles.h"
-#include "xutil.h"
 #include "iAnim.h"
 #include "iCutscene.h"
 #include "iModel.h"
@@ -348,7 +347,7 @@ void xCutscene_SetCameraMatrix(xCutscene* csn, xMat4x3* mat)
             }
             invlerp = 1.0f - lerp;
 
-            for (i = 0; i < ARRAY_LENGTH(quats); i++) {
+            for (i = 0; i < 2; i++) {
                 tmpMat.right.x = -keys[i].matrix[0];
                 tmpMat.right.y = -keys[i].matrix[1];
                 tmpMat.right.z = -keys[i].matrix[2];
@@ -821,7 +820,7 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
                                         sCutsceneFakeModel[fakeCount].Data = model;
                                         sCutsceneFakeModel[fakeCount].BoneCount = iModelNumBones(model);
                                         memcpy(sCutsceneFakeModel[fakeCount].Mat, animMat, sizeof(animMat));
-                                        sCutsceneFakeModel[fakeCount].Flags = 0x1;
+                                        sCutsceneFakeModel[fakeCount].Flags = ModelInstance_Render;
                                         sCutsceneFakeModel[fakeCount].FadeStart = 100.0f;
                                         sCutsceneFakeModel[fakeCount].FadeEnd = 100.0f;
                                         sCutsceneFakeModel[fakeCount].Bucket[0]->Data = model;
@@ -889,7 +888,7 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
                                 sCutsceneFakeModel[fakeCount].Data = model;
                                 sCutsceneFakeModel[fakeCount].BoneCount = iModelNumBones(model);
                                 memcpy(sCutsceneFakeModel[fakeCount].Mat, animMat, sizeof(animMat));
-                                sCutsceneFakeModel[fakeCount].Flags = 0x1;
+                                sCutsceneFakeModel[fakeCount].Flags = ModelInstance_Render;
                                 sCutsceneFakeModel[fakeCount].FadeStart = 1000.0f;
                                 sCutsceneFakeModel[fakeCount].FadeEnd = 1000.0f;
                                 sCutsceneFakeModel[fakeCount].Bucket[0]->Data = model;
@@ -1094,7 +1093,7 @@ namespace {
                     }
                     invlerp = 1.0f - lerp;
 
-                    for (i = 0; i < ARRAY_LENGTH(quats); i++) {
+                    for (i = 0; i < 2; i++) {
                         tmpMat.right.x = -keys[i].matrix[0];
                         tmpMat.right.y = -keys[i].matrix[1];
                         tmpMat.right.z = -keys[i].matrix[2];

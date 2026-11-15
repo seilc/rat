@@ -351,7 +351,7 @@ void xShadowSimple_CacheInit(xShadowSimpleCache* cache, xEnt* ent, U8 alpha)
         if (raster)
             break;
     }
-    
+
     if (!raster || raster == (RwRaster*)0xDEADBEEF) {
         raster = sShadRaster;
     }
@@ -411,7 +411,7 @@ void xShadowSimple_Render()
     xRenderStateBlendAndZModesSet(rwBLENDSRCALPHA, rwBLENDINVSRCALPHA, FALSE, TRUE);
     RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, (void*)TRUE);
     RwRenderStateSet(rwRENDERSTATESHADEMODE, (void*)rwSHADEMODEGOURAUD);
-    
+
     for (U32 i = 0, j; i < sShadVertCount; i = j) {
         RwRaster* raster = sShadRasters[i / 6];
 
@@ -421,7 +421,7 @@ void xShadowSimple_Render()
         RwRenderStateSet(rwRENDERSTATETEXTURERASTER, (void*)raster);
         xIMRenderLegacy(sShadVert + i, j - i, NULL, rwPRIMTYPETRILIST);
     }
-    
+
     xRenderStateBlendAndZModesSet(xrsv.SrcBlend, xrsv.DestBlend, (xrsv.Flags & rxRENDERSTATEFLAG_ZWRITEENABLE) ? TRUE : FALSE, TRUE);
     RwRenderStateSet(rwRENDERSTATESHADEMODE, (void*)xrsv.ShadeMode);
 
@@ -474,7 +474,7 @@ inline void XSSC_Add_NudgeItAndFudgeIt(xShadowSimpleCache* cache, const xMat4x3*
             break;
         }
     }
-    
+
     cache->shadowHeight =
         cache->dydx * (mat_owner->pos.x - vert->x) +
         vert->y +
@@ -527,7 +527,7 @@ inline S32 XSSC_Add_ShoveIntoQueue(xShadowSimpleCache* cache, const xMat4x3* mat
             return TRUE;
         }
     }
-    
+
     return FALSE;
 }
 

@@ -42,11 +42,11 @@ public:
     bool forcehdr;
     bool restoreFocus;
 
-    zUIAsset* GetAsset() const;
+    zUIAsset* GetAsset() const { return (zUIAsset*)asset; }
     
     virtual U32 GetSortKey() const = 0;
     virtual bool Blends() const;
-    virtual bool IsUIText();
+    virtual bool IsUIText() { return false; }
     virtual bool IsForcePreUpdate();
     virtual bool IsForceHDR();
     virtual bool IsRestoreFocus();

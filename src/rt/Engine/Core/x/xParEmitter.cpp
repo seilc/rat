@@ -611,7 +611,7 @@ xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
                 p->m_rotdeg[1] = pe->rot[1];
                 p->m_rotdeg[2] = pe->rot[2];
 
-                for (S32 c = 0; c < (S32)ARRAY_LENGTH(prop->color_birth); c++) {
+                for (S32 c = 0; c < 4; c++) {
                     F32 fc1 = xParInterpCompute(prop->color_birth[c].interp, &prop->color_birth[c], pe->rate_time, TRUE, 0.0f);
                     F32 fc2 = xParInterpCompute(prop->color_death[c].interp, &prop->color_death[c], pe->rate_time, TRUE, 0.0f);
 
