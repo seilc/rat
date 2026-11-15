@@ -29,14 +29,14 @@ public:
     U32 GetFreeSpace() const;
     void DumpAllocatedHeap() const;
 
-    U32 GetAllocatedElements() const;
-    U32 GetAllocatedSpace() const;
-    U32 GetFreeElements() const;
-    U32 GetOverheadSpace() const;
-    U32 GetReallocShrinks() const;
-    U32 GetReallocGrows() const;
-    U32 GetReallocMisses() const;
-    U32 GetReallocNOPs() const;
+    U32 GetAllocatedElements() const { return allocatedElements; }
+    U32 GetAllocatedSpace() const { return allocatedSpace; }
+    U32 GetFreeElements() const { return freeElements; }
+    U32 GetOverheadSpace() const { return allocatedElements * sizeof(AllocatedNode) + freeElements * sizeof(FreeNode) + extraOverheadSpace; }
+    U32 GetReallocShrinks() const { return reallocShrinks; }
+    U32 GetReallocGrows() const { return reallocGrows; }
+    U32 GetReallocMisses() const { return reallocMisses; }
+    U32 GetReallocNOPs() const { return reallocNOPs; }
 #endif
 
 protected:

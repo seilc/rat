@@ -13,9 +13,15 @@ public:
 
     xMemoryManagerFixed() {}
 
+    U32 GetElements() const { return elements; }
+
 #if DEBUG || RELEASE
+    U32 GetElementSize() const { return elementSize - GetDebugOverhead(); }
+    U32 GetAllocatedElements() const { return allocatedElements; }
     void SetOrigSize(void* pointer, U32 size) const;
     U32 GetOrigSize(void* pointer) const;
+#else
+    U32 GetElementSize() const { return elementSize; }
 #endif
 
     void Init(void* start, U32 size, U32 elementSize, UseAbsoluteSizeType, bool debugging); // UNUSED

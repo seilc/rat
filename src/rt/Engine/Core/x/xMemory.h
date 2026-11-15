@@ -20,6 +20,12 @@ inline U32 xALIGN(U32 base, U32 align)
     return (base + align - 1) & ~(align - 1);
 }
 
+template <class T>
+inline T* xMEMALIGN(T* base, U32 align)
+{
+    return (T*)xALIGN((U32)base, align);
+}
+
 inline void xMemorySetV32A32(void* memory, U32 value, U32 count)
 {
     xASSERT_L(141, count % 4 == 0 && (U32)memory % 4 == 0);

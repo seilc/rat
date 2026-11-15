@@ -26,10 +26,20 @@ class xMemoryManager
 public:
     xMemoryManager() {}
 
-    bool Owns(const void* pointer) const;
-    void* GetArenaStart() const;
-    void* GetArenaEnd() const;
+    bool Owns(const void* pointer) const { return pointer >= arenaStart && pointer < arenaEnd; }
 
+    void* GetArenaStart() const { return arenaStart; }
+    void* GetArenaEnd() const { return arenaEnd; }
+    U32 GetSize() const { return size; }
+
+#if DEBUG || RELEASE
+    U32 GetCallsToAllocate() const { return callsToAllocate; }
+    U32 GetCallsToReallocate() const { return callsToReallocate; }
+    U32 GetCallsToFree() const { return callsToFree; }
+    U32 GetDebugOverhead() const { return debugOverhead; }
+#endif
+
+    U32 GetDebugDataSize() const { return debugDataSize; }
     bool IsDebugging() const { return debugDataSize != 0; }
 
     U32 GetBlockSize(void* pointer) const;
