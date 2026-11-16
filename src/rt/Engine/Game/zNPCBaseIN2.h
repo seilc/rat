@@ -2,22 +2,11 @@
 #define ZNPCBASEIN2_H
 
 #include "xEnt.h"
-#include "xDynAsset.h"
+#include "zNPCAssetIN2.h"
 #include "zNPC.h"
 #include "zAnimFx.h"
 
 namespace zNPC {
-
-struct zNPCAssetIN2 : xDynAsset
-{
-    xEntAsset ent_asset;
-    U32 navigation_mesh_id;
-    U32 npcFlags;
-    U32 respawnCounterID;
-    U32 settingsHashID;
-    U32 interestPointerGroupID;
-    U32 lightKitID;
-};
 
 class zNPCBaseIN2 : public xEnt
 {

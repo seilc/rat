@@ -1289,7 +1289,7 @@ void dump_log(log_stream& os)
 {
     S32 log_size = MIN(render_log_size, MAX_RENDER_LOG);
 
-    render_output_entry* output_entry_buffer = (render_output_entry*)RwMallocL((log_size + 1) * sizeof(render_output_entry), 0, 2337);
+    render_output_entry* output_entry_buffer = (render_output_entry*)RwMallocL((log_size + 1) * sizeof(render_output_entry), rwMEMHINTDUR_NADURATION, 2337);
     render_output_entry* output_entries = output_entry_buffer + 1;
 
     switch (render_log_sort_by) {

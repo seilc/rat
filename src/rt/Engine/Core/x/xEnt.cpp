@@ -940,7 +940,7 @@ void xEntLoadModelFromDisk(xEnt* ent, const char* filename, xMemPool*)
     imodel = (RpAtomic*)xSTFindAsset(modelID, NULL);
 
     ent->model = xModelInstanceAlloc(imodel, ent, 0, 0, NULL);
-    xASSERT_FMT((ent->model || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", fullfilename);
+    xModelInstanceCheckAlloc(ent->model, fullfilename);
 
     while (imodel = iModelFile_RWMultiAtomic(imodel)) {
         xModelInstanceAttach(xModelInstanceAlloc(imodel, ent, 0x8, 0, NULL), ent->model);

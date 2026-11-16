@@ -612,7 +612,7 @@ xModelInstance* load_model(U32 id)
 
     xModelInstance* loaded_model = NULL;
     loaded_model = xModelInstanceAlloc(imodel, NULL, 0, 0, NULL);
-    xASSERT_FMT_L(850, (loaded_model || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", xSTAssetName(modelID)); loaded_model->modelID = modelID;
+    xModelInstanceCheckAlloc_L(850, loaded_model, xSTAssetName(modelID)); loaded_model->modelID = modelID;
     return loaded_model;
 }
 

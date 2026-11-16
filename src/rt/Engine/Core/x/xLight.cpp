@@ -143,7 +143,7 @@ void xLightInit(xBase* b, xLightAsset* tasset)
         RpAtomic* imodel = (RpAtomic*)xSTFindAsset(light->tasset->lightCardID, NULL);
         if (imodel) {
             light->lightCard = xModelInstanceAlloc(imodel, light, 0, 0, NULL);
-            xASSERT_FMT_L(181, (light->lightCard || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", xSTAssetName(light->tasset->lightCardID)); light->lightCard->modelID = light->tasset->lightCardID;
+            xModelInstanceCheckAlloc_L(181, light->lightCard, xSTAssetName(light->tasset->lightCardID)); light->lightCard->modelID = light->tasset->lightCardID;
         }
     }
 
@@ -218,7 +218,7 @@ void xLightInitTempLights()
         if (lightCardModel) {
             sTempLights[i].lightCardScale = 1.0f;
             sTempLightCards[i] = xModelInstanceAlloc(lightCardModel, &sTempLights[i], 0, 0, NULL);
-            xASSERT_FMT_L(267, (sTempLightCards[i] || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", xSTAssetName(HASH_light_card_b_tl)); sTempLightCards[i]->modelID = HASH_light_card_b_tl;
+            xModelInstanceCheckAlloc_L(267, sTempLightCards[i], xSTAssetName(HASH_light_card_b_tl)); sTempLightCards[i]->modelID = HASH_light_card_b_tl;
         } else {
             sTempLightCards[i] = NULL;
         }
@@ -930,7 +930,7 @@ void xLightDebugReset(xLight* light)
         RpAtomic* imodel = (RpAtomic*)xSTFindAsset(light->tasset->lightCardID, NULL);
         if (imodel) {
             light->lightCard = xModelInstanceAlloc(imodel, light, 0, 0, NULL);
-            xASSERT_FMT_L(1142, (light->lightCard || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", xSTAssetName(light->tasset->lightCardID)); light->lightCard->modelID = light->tasset->lightCardID;
+            xModelInstanceCheckAlloc_L(1142, light->lightCard, xSTAssetName(light->tasset->lightCardID)); light->lightCard->modelID = light->tasset->lightCardID;
         }
     }
 

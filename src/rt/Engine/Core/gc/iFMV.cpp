@@ -49,13 +49,13 @@ static void* BigMovieAlloc(U32 uNumBytes)
         if (uNumBytes <= amt) {
             addr = iARAMTmpMalloc('ANIM', uNumBytes);
             if ((U32)addr == 0xBEEEEEEF)
-                addr = RwMallocL(uNumBytes, 0, 85);
+                addr = RwMallocL(uNumBytes, rwMEMHINTDUR_NADURATION, 85);
             else
                 amt -= uNumBytes;
         } else
-            addr = RwMallocL(uNumBytes, 0, 93);
+            addr = RwMallocL(uNumBytes, rwMEMHINTDUR_NADURATION, 93);
     } else {
-        addr = RwMallocL(uNumBytes, 0, 95);
+        addr = RwMallocL(uNumBytes, rwMEMHINTDUR_NADURATION, 95);
     }
 
     return addr;

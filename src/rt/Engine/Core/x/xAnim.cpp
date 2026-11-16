@@ -1645,7 +1645,7 @@ static void SingleUpdate(xAnimSingle* single, F32 timeDelta)
             single->BlendFactor += timeDelta;
         }
 
-        if ((single->State->Flags & 0x70) == 0x10) {
+        if ((single->State->Flags & 0x70) == AnimState_Loop) {
             LoopUpdate(single);
         } else {
             StopUpdate(single);
@@ -1655,7 +1655,7 @@ static void SingleUpdate(xAnimSingle* single, F32 timeDelta)
 
         if (bl) {
             bl->Time += timeDelta * bl->CurrentSpeed;
-            if ((bl->State->Flags & 0x70) == 0x10) {
+            if ((bl->State->Flags & 0x70) == AnimState_Loop) {
                 LoopUpdate(bl);
             } else {
                 StopUpdate(bl);

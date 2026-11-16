@@ -5,6 +5,8 @@
 #include "zMiniGameTypes.h"
 #include "zMiniGameAsset.h"
 
+struct xMat4x3;
+
 enum eMiniGameState
 {
     GAMESTATE_GAME_START,

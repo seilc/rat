@@ -254,7 +254,7 @@ void ROMFont::InitFont()
     }
     RwResEntry* fontRes = RwResourcesAllocateResEntry(NULL, NULL, fontDataSize, NULL);
     if (!fontRes) {
-        mFontDataUnaligned = RwMallocL(fontDataSize, 0, 273);
+        mFontDataUnaligned = RwMallocL(fontDataSize, rwMEMHINTDUR_NADURATION, 273);
         mFontMalloced = true;
         xASSERT_FMT_L(275, mFontDataUnaligned, "Double Crap! Malloc can't get enough space for the font stuff!");
         iprintf("ROMFont: Getting memory from xMalloc - 0x%X to 0x%X\n", (U32)mFontDataUnaligned, (U32)mFontDataUnaligned + fontDataSize);
@@ -265,7 +265,7 @@ void ROMFont::InitFont()
     void* fontTemp;
     fontRes = RwResourcesAllocateResEntry(NULL, NULL, fontTempSize, NULL);
     if (!fontRes) {
-        fontTemp = RwMallocL(fontTempSize, 0, 289);
+        fontTemp = RwMallocL(fontTempSize, rwMEMHINTDUR_NADURATION, 289);
         xASSERT_FMT_L(290, fontTemp, "Double Crap! Malloc can't get enough space for the font stuff!");
         iprintf("ROMFont: Getting memory from xMalloc - 0x%X to 0x%X\n", (U32)fontTemp, (U32)fontTemp + fontTempSize);
     } else {

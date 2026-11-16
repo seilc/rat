@@ -245,7 +245,7 @@ S32 iCSLoadStep(xCutscene* csn)
 
                 if (csn->GotData) {
                     if (csn->Data[csn->DataLoading].DataType == 6) {
-                        csn->Data[csn->DataLoading].DataPtr = RwMallocL(csn->Data[csn->DataLoading].ChunkSize, 0, 334);
+                        csn->Data[csn->DataLoading].DataPtr = RwMallocL(csn->Data[csn->DataLoading].ChunkSize, rwMEMHINTDUR_NADURATION, 334);
                         xASSERT_L(335, csn->Data[csn->DataLoading].DataPtr);
                         memcpy(csn->Data[csn->DataLoading].DataPtr, csn->AlignBuf, csn->Data[csn->DataLoading].ChunkSize);
                     } else {

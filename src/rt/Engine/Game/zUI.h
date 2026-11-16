@@ -47,9 +47,9 @@ public:
     virtual U32 GetSortKey() const = 0;
     virtual bool Blends() const;
     virtual bool IsUIText() { return false; }
-    virtual bool IsForcePreUpdate();
-    virtual bool IsForceHDR();
-    virtual bool IsRestoreFocus();
+    virtual bool IsForcePreUpdate() { return forcepreupdate; }
+    virtual bool IsForceHDR() { return forcehdr; }
+    virtual bool IsRestoreFocus() { return restoreFocus; }
     virtual void DoInit();
     virtual void DoSetup();
     virtual void DoReset();

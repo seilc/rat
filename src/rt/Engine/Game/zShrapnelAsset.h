@@ -1,0 +1,22 @@
+#ifndef ZSHRAPNELASSET_H
+#define ZSHRAPNELASSET_H
+
+#include "types.h"
+
+struct xModelInstance;
+struct xVec3;
+struct zFrag;
+struct zFragAsset;
+struct zShrapnelAsset;
+
+typedef void (*zShrapnelFragCallback)(zFrag*, zFragAsset*);
+typedef void (*zShrapnelInitCallback)(zShrapnelAsset*, xModelInstance*, xVec3*, xVec3*, zShrapnelFragCallback);
+
+struct zShrapnelAsset
+{
+    S32 fassetCount;
+    U32 shrapnelID;
+    zShrapnelInitCallback initCB;
+};
+
+#endif

@@ -31,6 +31,7 @@ enum
 // xAnimState::Flags
 enum
 {
+    AnimState_Loop = 0x10,
     AnimState_TempUsed = 0x80000000
 };
 

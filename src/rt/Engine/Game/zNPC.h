@@ -5,6 +5,7 @@
 #include "xVec3.h"
 
 struct xModelAssetInfo;
+struct zNPCAssetIN2;
 
 struct zStoredSpawn
 {
@@ -20,7 +21,6 @@ struct zStoredSpawn
 namespace zNPC {
 
 class zNPCBaseIN2;
-struct zNPCAssetIN2;
 
 class zNPCInstance : public xBase
 {

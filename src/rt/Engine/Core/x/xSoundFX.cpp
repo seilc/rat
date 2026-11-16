@@ -148,7 +148,7 @@ static bool xSoundFXEnsureFreeAudioStream(bool willingToStopMainGameMusic)
         return true;
     }
 
-    xSndMgrStopPausedSounds(2);
+    xSndMgrStopPausedSounds(xSndCat_DIALOG);
     if (haveFreeStreamedVoice = iSndGetFreeStreamInfo(0)) {
         iprintf("Cancelled Dialog to get a streamed voice\n");
         return true;
@@ -163,7 +163,7 @@ static bool xSoundFXEnsureFreeAudioStream(bool willingToStopMainGameMusic)
         return true;
     }
 
-    xSndMgrStopPausedSounds(3);
+    xSndMgrStopPausedSounds(xSndCat_DIALOG_3D);
     if (haveFreeStreamedVoice = iSndGetFreeStreamInfo(0)) {
         iprintf("Cancelled 3D Dialog to get a streamed voice\n");
         return true;
@@ -178,7 +178,7 @@ static void xSoundFXPlay(xSoundFX* t)
     xASSERT_L(376, xSoundFXIsSoundFXPlaying(t->asset));
 
     if (t->sndHandle != XSNDMGR_INVALID_SND_HANDLE) {
-        if (!zGameIsPaused() || !xSndMgrIsDialogPlaying() || xSndMgr_GetGroup(t->asset->soundAsset)->header.eSoundCategory != 2) {
+        if (!zGameIsPaused() || !xSndMgrIsDialogPlaying() || xSndMgr_GetGroup(t->asset->soundAsset)->header.eSoundCategory != xSndCat_DIALOG) {
             xSndMgrStop(t->sndHandle);
         }
     }
@@ -194,7 +194,7 @@ static void xSoundFXPlay(xSoundFX* t)
             t->sndHandle = xSndMgrPlay(t->asset->soundAsset, sndFlags, xEntGetPos(ent), NULL, ent, NULL, NULL);
         }
     } else if (t->asset->soundAsset != ISND_INVALID_SND_GROUP_HANDLE) {
-        if (!zGameIsPaused() || !xSndMgrIsDialogPlaying() || xSndMgr_GetGroup(t->asset->soundAsset)->header.eSoundCategory != 2) {
+        if (!zGameIsPaused() || !xSndMgrIsDialogPlaying() || xSndMgr_GetGroup(t->asset->soundAsset)->header.eSoundCategory != xSndCat_DIALOG) {
             if (!zGameIsPaused() || !xSndMgrIsStream(t->asset->soundAsset) || xSoundFXEnsureFreeAudioStream(true)) {
                 t->sndHandle = xSndMgrPlay(t->asset->soundAsset, sndFlags, &t->asset->pos, NULL, NULL, NULL, NULL);
             }

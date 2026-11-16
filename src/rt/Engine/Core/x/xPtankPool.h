@@ -91,7 +91,7 @@ struct ptank_pool__color_mat_uv2 : ptank_pool
 
     void next()
     {
-        if (used >= 80) {
+        if (used >= BLOCK_SIZE) {
             if (valid()) {
                 unlock_block();
             }
@@ -138,7 +138,7 @@ struct ptank_pool__pos_color_size : ptank_pool
 
     void next()
     {
-        if (used >= 80) {
+        if (used >= BLOCK_SIZE) {
             if (valid()) {
                 unlock_block();
             }
@@ -187,7 +187,7 @@ struct ptank_pool__pos_color_size_uv2 : ptank_pool
 
     void next()
     {
-        if (used >= 80) {
+        if (used >= BLOCK_SIZE) {
             if (valid()) {
                 unlock_block();
             }
@@ -260,7 +260,7 @@ struct ptank_pool__pos_color_size_rot_uv2 : ptank_pool
 
     void next()
     {
-        if (used >= 80) {
+        if (used >= BLOCK_SIZE) {
             if (valid()) {
                 unlock_block();
             }

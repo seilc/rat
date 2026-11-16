@@ -29,25 +29,25 @@ void xFMVPauseSound(bool doPause)
 static void DefaultFMVPauseSoundCB(bool doPause)
 {
     if (zGameIsPaused()) {
-        xSndMgrPauseSounds(6, doPause, true);
+        xSndMgrPauseSounds(xSndCat_UI, doPause, true);
 
         if (globals.sceneCur && globals.sceneCur->sceneID == IDTAG('M','N','U','S')) {
             if (zMenuRunning()) {
-                xSndMgrPauseSounds(-3, doPause, true);
+                xSndMgrPauseSounds(xSndCat_ALL, doPause, true);
             }
         }
 
         if (doPause) {
-            xSndMgrStopSounds(2, true, false);
+            xSndMgrStopSounds(xSndCat_DIALOG, true, false);
         }
     } else {
-        xSndMgrPauseSounds(-3, doPause, true);
+        xSndMgrPauseSounds(xSndCat_ALL, doPause, true);
     }
 }
 
 S32 xFMVGetBinkCompliantVolume()
 {
-    S32 volume = (S32)(32768.0f * xSndMixerGetOutputVolume(5) * sFMVVolumeScale);
+    S32 volume = (S32)(32768.0f * xSndMixerGetOutputVolume(xSndCat_CUTSCENE) * sFMVVolumeScale);
     return volume;
 }
 

@@ -11,6 +11,7 @@
 #include "zThrowable.h"
 #include "zHitParameters.h"
 
+struct xGroup;
 class zNPCNavigate;
 struct zNPCBlurInstance;
 class zSwitchLever;
@@ -34,6 +35,15 @@ struct zDebugStoredAnimChanges
     char animName[256];
 };
 #endif
+
+enum en_npctyp
+{
+    NPC_TYPE_UNKNOWN,
+    NPC_TYPE_THIEF,
+    NPC_TYPE_CHEF,
+    NPC_TYPE_COUNT,
+    NPC_TYPE_FORCE_INT = FORCEENUMSIZEINT
+};
 
 namespace zNPC {
 
@@ -221,6 +231,8 @@ public:
 #endif
 
 protected:
+    static ezHitReaction hitReactionTable[NPC_TYPE_COUNT][zHRS_Total][zHS_COUNT];
+
     bool off_during_cinematic;
     F32 NPCFXdt;
     F32 near_target_radius;

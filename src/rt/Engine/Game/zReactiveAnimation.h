@@ -1,6 +1,7 @@
 #ifndef ZREACTIVEANIMATION_H
 #define ZREACTIVEANIMATION_H
 
+#include "zBase.h"
 #include "zEntSimpleObj.h"
 #include "zHitParameters.h"
 

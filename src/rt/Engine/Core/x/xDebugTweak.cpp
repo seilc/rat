@@ -3378,4 +3378,17 @@ const char* tweak_blend_mode_labels[11] =
     "SRCALPHASAT"
 };
 
-const U32 tweak_blend_mode_values[11] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+const U32 tweak_blend_mode_values[11] =
+{
+    rwBLENDZERO,
+    rwBLENDONE,
+    rwBLENDSRCCOLOR,
+    rwBLENDINVSRCCOLOR,
+    rwBLENDSRCALPHA,
+    rwBLENDINVSRCALPHA,
+    rwBLENDDESTALPHA,
+    rwBLENDINVDESTALPHA,
+    rwBLENDDESTCOLOR,
+    rwBLENDINVDESTCOLOR,
+    rwBLENDSRCALPHASAT
+};

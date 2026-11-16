@@ -131,6 +131,11 @@ inline bool xModelPoolStressTesting()
     return false;
 }
 #endif
+
+#define xModelInstanceCheckAlloc(m, name) xModelInstanceCheckAlloc_L(__LINE__, m, name)
+#define xModelInstanceCheckAlloc_L(line, m, name)                                                 \
+    xASSERT_FMT_L(line, (m || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", name)
+
 #if DEBUG || RELEASE
 S32 xModelPipeFlagsToString(U32 flags, char* buffer, char delimeter); // UNUSED
 S32 xModelPipeToString(const xModelPipe& pipe, char* buffer, char delimeter); // UNUSED

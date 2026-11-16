@@ -34,6 +34,8 @@ public:
     virtual void DamagedBy(xEnt* damagedByEnt);
 
 protected:
+    static S32 completeUpdateCount;
+
     zNPC::zNPCCommon* owner;
     zNPCPerceptionTarget target[4];
     S32 totalTargets;
