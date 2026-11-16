@@ -85,6 +85,7 @@
 #define HASH_simple_shadow_table                0x98A3F56C // xStrHash("simple shadow table")
 #define HASH_Sine                               0x0B326F01 // xStrHash("Sine")
 #define HASH_snow_drift_mm                      0x86770A6E // xStrHash("snow_drift_mm")
+#define HASH_snowflakes                         0x97FB0169 // xStrHash("snowflakes")
 #define HASH_sound_info                         0x7AB6743A // xStrHash("sound_info")
 #define HASH_Step                               0x0B354BD4 // xStrHash("Step")
 #define HASH_THIS_CAM_TARGET                    0xB3BB6012 // xStrHash("THIS_CAM_TARGET")

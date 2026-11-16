@@ -882,7 +882,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zFXGoo.cpp"),
             Object(NonMatching, "rt/Engine/Game/zGoo.cpp"),
             Object(NonMatching, "rt/Engine/Game/zScreenWarp.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zFXPunchSnow.cpp"),
+            Object(Matching, "rt/Engine/Game/zFXPunchSnow.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFXPunchStars.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomJoinScreenManager.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCMove.cpp"),

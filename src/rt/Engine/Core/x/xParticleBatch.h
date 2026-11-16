@@ -42,9 +42,11 @@ void xParticleBatchPreRender();
 #if DEBUG || RELEASE
 S32 xParticleBatchAddSystem(const xParticleBatchSystem& system, const char* dbgFile, S32 dbgLine);
 #define xPARTICLEBATCHADDSYSTEM_L(system, line) xParticleBatchAddSystem((system), __FILE__, (line))
+#define xPARTICLEBATCHADDSYSTEM_NAMED(system, name) xParticleBatchAddSystem((system), (name), 0)
 #else
 S32 xParticleBatchAddSystem(const xParticleBatchSystem& system);
 #define xPARTICLEBATCHADDSYSTEM_L(system, line) xParticleBatchAddSystem((system))
+#define xPARTICLEBATCHADDSYSTEM_NAMED(system, name) xParticleBatchAddSystem((system))
 #endif
 
 #define xPARTICLEBATCHADDSYSTEM(system) xPARTICLEBATCHADDSYSTEM_L(system, __LINE__)
