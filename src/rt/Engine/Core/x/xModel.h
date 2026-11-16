@@ -225,6 +225,15 @@ inline xSphere* xModelGetLocalSBound(xModelInstance* model)
     return (xSphere*)RpAtomicGetBoundingSphere(model->Data);
 }
 
+inline void xModelSetScale(xModelInstance* model, F32 scale)
+{
+    for (; model; model = model->Next) {
+        model->Scale.x = scale;
+        model->Scale.y = scale;
+        model->Scale.z = scale;
+    }
+}
+
 inline bool xModelAnimCollDirty(const xModelInstance& m)
 {
     return (m.Flags & 0x1800) == 0x800;

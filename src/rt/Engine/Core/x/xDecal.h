@@ -79,9 +79,9 @@ namespace xDecal
         xVec2 uv[2];
         const xResponseCurve* curve;
         void* context;
-        void (*emitAtomicCB)(RpAtomic*, xMat4x3*, xEnt*, void*);
+        void (*emitAtomicCB)(RpAtomic*, const xMat4x3*, const xEnt*, void*);
         void (*destAtomicCB)(RpAtomic*, void*);
-        void (*emitVertListCB)(xVec3*, U16*, S32, xMat4x3*, xEnt*, void*);
+        void (*emitVertListCB)(const xVec3*, const U16*, S32, const xMat4x3*, const xEnt*, void*);
     };
 
     void scene_enter();
