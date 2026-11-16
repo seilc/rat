@@ -708,7 +708,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zEntSimpleObj.cpp"),
             Object(NonMatching, "rt/Engine/Game/zEntTrigger.cpp"),
             Object(NonMatching, "rt/Engine/Game/zEnv.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zEvent.cpp"),
+            Object(Matching, "rt/Engine/Game/zEvent.cpp"),
             Object(NonMatching, "rt/Engine/Game/zExplosion.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFire.cpp"),
             Object(NonMatching, "rt/Engine/Game/zFlameEmitter.cpp"),

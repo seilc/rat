@@ -1117,4 +1117,7 @@ enum en_xEventTags
     eEventCount
 };
 
+const char* zEventName(U32 eventEnum);
+U32 zEventID(const char* name); // UNUSED
+
 #endif

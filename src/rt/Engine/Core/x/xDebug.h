@@ -141,6 +141,15 @@ do {                                                                            
 
 #define xASSERT_LE(a, b) _xASSERT_LE(__LINE__, a, b, #a "<=" #b)
 #define xASSERT_LE_L(line, a, b) _xASSERT_LE(line, a, b, #a "<=" #b)
+
+#define _xASSERT_LT(line, a, b, msg)                                                              \
+do {                                                                                              \
+    size_t il = (a), ir = (b);                                                                    \
+    _xASSERT(line, il < ir, _xSTR(il < ir), "%s", msg);                                           \
+} while (0)
+
+#define xASSERT_LT(a, b) _xASSERT_LT(__LINE__, a, b, #a "<" #b)
+#define xASSERT_LT_L(line, a, b) _xASSERT_LT(line, a, b, #a "<" #b)
 #else
 #define _xFAIL(line, condstr, ...)
 #define xASSERT(cond)
@@ -161,6 +170,8 @@ do {                                                                            
 #define xASSERT_EQ_L(line, a, b)
 #define xASSERT_LE(a, b)
 #define xASSERT_LE_L(line, a, b)
+#define xASSERT_LT(a, b)
+#define xASSERT_LT_L(line, a, b)
 #endif
 
 #define xFAIL_L(line) xFAIL_MSG_L(line, "*always*")
