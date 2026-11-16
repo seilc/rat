@@ -1,6 +1,8 @@
 #ifndef ZBASE_H
 #define ZBASE_H
 
+#include "types.h"
+
 enum en_ZBASETYPE
 {
     eBaseTypeUnknown,
@@ -201,6 +203,6 @@ enum en_ZBASETYPE
     eBaseTypeCount
 };
 
-char* zBaseTypeName(S32 baseTypeIndex);
+const char* zBaseTypeName(S32 baseTypeIndex);
 
 #endif
