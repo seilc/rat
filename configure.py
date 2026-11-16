@@ -1059,7 +1059,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zCompSteeringGeneric.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCInstaKill.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompPerception.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zCompPerceptionParams.cpp"),
+            Object(Matching, "rt/Engine/Game/zCompPerceptionParams.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompLogicInstaKill.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSweptCircle.cpp"),
             Object(NonMatching, "rt/Engine/Game/zCompLogicAlarmer.cpp"),
