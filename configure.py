@@ -968,7 +968,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zUICustomSaveLoad.cpp"),
             Object(NonMatching, "rt/Engine/Game/zParticleSystemPuffer.cpp"),
             Object(NonMatching, "rt/Engine/Game/zNPCOneLiner.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zUICustomConditionallyDisabled.cpp"),
+            Object(Matching, "rt/Engine/Game/zUICustomConditionallyDisabled.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomMissionCompleteManager.cpp"),
             Object(NonMatching, "rt/Engine/Game/zUICustomOptionsManager.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPlayerActionWallRun.cpp"),

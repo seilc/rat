@@ -60,6 +60,7 @@ public:
     virtual void DoExit();
     virtual void DoInitMotion();
     virtual void DoApplyMotionFrame(const zUIMotionFrame* frame);
+    void AutoMenu(U32 zUIAsset::*item, U32 event);
     virtual void FocusOn();
     virtual void FocusOff();
     virtual void Select();
@@ -69,6 +70,9 @@ public:
 #if DEBUG || RELEASE
     virtual void DoAddTweaks(const char* baseName);
 #endif
+
+    static bool bAllowInput;
+    static bool bAllowSelectInput;
 
 private:
     zUIMotionAsset* motion;
