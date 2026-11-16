@@ -194,8 +194,9 @@ config.reconfig_deps = []
 # Can be overridden in libraries or objects
 config.scratch_preset_id = None
 
-# xParSys includes "xPTankPool.h": __FILE__ needs that exact file (wibo resolves case)
-if config.use_wibo() and sys.platform == "linux":
+# xParSys includes "xPTankPool.h": __FILE__ needs that exact file. Made on Linux with any wrapper: wibo resolves file
+# names case-insensitively, so without it __FILE__ is "xPtankPool.h"
+if sys.platform == "linux":
     ptank_alias = Path("src/rt/Engine/Core/x/xPTankPool.h")
     if not ptank_alias.is_symlink():
         ptank_alias.symlink_to("xPtankPool.h")
