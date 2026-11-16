@@ -804,7 +804,7 @@ config.libs = [
             Object(Matching, "rt/Engine/Core/x/xProjectedTexture.cpp"),
             Object(NonMatching, "rt/Engine/Game/zSpotlight.cpp"),
             Object(NonMatching, "rt/Engine/Game/zPickup.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zNPCGroup.cpp"),
+            Object(Matching, "rt/Engine/Game/zNPCGroup.cpp"),
             Object(NonMatching, "rt/Engine/Game/zThrowableSystem.cpp"),
             Object(Matching, "rt/Engine/Game/zUIController.cpp"),
             Object(Matching, "rt/Engine/Core/x/xLightVolume.cpp"),
