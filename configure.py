@@ -721,7 +721,7 @@ config.libs = [
             Object(NonMatching, "rt/Engine/Game/zGrapple.cpp"),
             Object(NonMatching, "rt/Engine/Game/zGrid.cpp"),
             Object(NonMatching, "rt/Engine/Game/zHangable.cpp"),
-            Object(NonMatching, "rt/Engine/Game/zHitParameters.cpp"),
+            Object(Matching, "rt/Engine/Game/zHitParameters.cpp"),
             Object(NonMatching, "rt/Engine/Game/zLaserBeam.cpp"),
             Object(NonMatching, "rt/Engine/Game/zLightning.cpp"),
             Object(NonMatching, "rt/Engine/Game/zLightWeight.cpp"),
