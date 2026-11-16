@@ -21,6 +21,7 @@ typedef struct CARDFileInfo {
     s32 offset;
     s32 length;
     u16 iBlock;
+    u16 __padding;
 } CARDFileInfo;
 
 typedef struct CARDDir {
@@ -114,6 +115,7 @@ typedef struct CARDStat {
     /* 0x28 */ u8 gameName[4];
     /* 0x2C */ u8 company[2];
     /* 0x2E */ u8 bannerFormat;
+    /* 0x2F */ u8 __padding;
     /* 0x30 */ u32 iconAddr;
     /* 0x34 */ u16 iconFormat;
     /* 0x36 */ u16 iconSpeed;

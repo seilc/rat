@@ -92,9 +92,33 @@ add_relocations:
   type: sda21
   target: "@1394!.sbss2:0x803C93C0"
   addend: -4
+- source: .text:0x80086C50
+  type: sda21
+  target: "@1885!.sbss2:0x803C93F0"
+  addend: -4
 - source: .text:0x80086CC8
   type: sda21
   target: "@1894!.sdata2:0x803C4430"
+  addend: -4
+- source: .text:0x80086CEC
+  type: sda21
+  target: "@1895!.sdata2:0x803C4450"
+  addend: -4
+- source: .text:0x80086F74
+  type: sda21
+  target: "@1953!.sbss2:0x803C9410"
+  addend: -4
+- source: .text:0x80087234
+  type: sda21
+  target: "@2022!.sbss2:0x803C9438"
+  addend: -4
+- source: .text:0x800872AC
+  type: sda21
+  target: "@2031!.sdata2:0x803C4470"
+  addend: -4
+- source: .text:0x800872D0
+  type: sda21
+  target: "@2032!.sdata2:0x803C4490"
   addend: -4
 - source: .text:0x800AE00C
   type: sda21
