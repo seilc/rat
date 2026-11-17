@@ -1,0 +1,58 @@
+#include "xCommon.h"
+#include "zCameraRBand.h"
+
+#include "xEnt.h"
+#include "xGlobals.h"
+#include "zCam.h"
+#include "zEvent.h"
+#include "zPlayer.h"
+#include "zSlideCamera.h"
+
+zSlideCam* rbCam;
+bool zRBAND_CAMERA_ACTIVE;
+
+void zCameraRBandAsset_Init(xBase& data, xDynAsset& asset, size_t)
+{
+    zCameraRBandAsset_Init((zCameraRBandObject*)&data, (zCameraRBandAsset*)&asset);
+}
+
+void zCameraRBandAsset_Init(zCameraRBandObject* object, zCameraRBandAsset* asset)
+{
+    xBaseInit(object, asset);
+    object->eventFunc = zCameraRBandAsset_EventCB;
+    object->asset = asset;
+
+    rbCam = new (eMemStaticType_0, eMemMgrTag_Camera) zSlideCam;
+    rbCam->create();
+    rbCam->add_tweaks("Camera|RBand|");
+
+    rbCam->cfg.spring_len = asset->spring_len;
+    rbCam->cfg.spring_const = asset->spring_const;
+    rbCam->cfg.damp_const = asset->damp_const;
+    rbCam->cfg.vertical_offset = asset->vertical_offset;
+}
+
+void zCameraRBandAsset_EventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
+{
+    switch (toEvent) {
+    case eEventRBandCameraStart:
+    {
+        const zCameraRBandObject* scamera = (const zCameraRBandObject*)to;
+        const zCameraRBandAsset* asset = scamera->asset;
+
+        if (!zRBAND_CAMERA_ACTIVE) {
+            zRBAND_CAMERA_ACTIVE = true;
+            rbCam->target = xEntGetFrame(CURPLAYERS[0]);
+            rbCam->setCurrTgtPos(rbCam->target->pos, rbCam->target->up);
+            rbCam->setPrevTgtPos(rbCam->target->pos, rbCam->target->up);
+            rbCam->cam_pos = rbCam->curr_tgt_pos;
+            zCamAdd(*rbCam, false);
+        }
+        break;
+    }
+    case eEventRBandCameraEnd:
+        zRBAND_CAMERA_ACTIVE = false;
+        zCamRemove(*rbCam, false);
+        break;
+    }
+}
