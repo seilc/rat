@@ -60,6 +60,7 @@ public:
     virtual void DoExit();
     virtual void DoInitMotion();
     virtual void DoApplyMotionFrame(const zUIMotionFrame* frame);
+    void Signal(xBase* from, U32 event);
     void AutoMenu(U32 zUIAsset::*item, U32 event);
     virtual void FocusOn();
     virtual void FocusOff();
