@@ -44,6 +44,8 @@ private:
 public:
     xVec3* GetPosition();
     xVec3* GetHeading();
+    xEntFrame* GetFrame() { return frame; }
+    xModelInstance* GetModel() { return model; }
 };
 
 #endif

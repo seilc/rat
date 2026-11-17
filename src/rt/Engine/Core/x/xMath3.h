@@ -244,6 +244,14 @@ inline void xMat3x3Copy(xMat3x3* o, const xMat3x3* m)
     *o = *m;
 }
 
+inline void xMat3x3SMul(xMat3x3* o, const xMat3x3* m, F32 s)
+{
+    xVec3SMul(&o->right, &m->right, s);
+    xVec3SMul(&o->up, &m->up, s);
+    xVec3SMul(&o->at, &m->at, s);
+    o->flags = 0;
+}
+
 inline void xMat3x3Identity(xMat3x3* m)
 {
     xMat3x3Copy(m, &g_I3);
@@ -338,6 +346,12 @@ void xMat4x3LMul3x3(xMat4x3* o, const xMat4x3* m, const xMat3x3* m3x3); // UNUSE
 void xMat4x3RMul3x3(xMat4x3* o, const xMat3x3* m3x3, const xMat4x3* m);
 
 inline void xMat4x3From3x3(xMat4x3* m, const xMat3x3* m3x3); // UNUSED
+
+inline void xMat4x3SMul(xMat4x3* o, const xMat4x3* m, F32 s)
+{
+    xMat3x3SMul(o, m, s);
+    xVec3SMul(&o->pos, &m->pos, s);
+}
 
 inline void xMat4x3Identity(xMat4x3* m)
 {
