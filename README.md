@@ -1,9 +1,14 @@
 Ratatouille (Jan 18, 2006 prototype)  
-[![Build Status]][actions] <!--[![Code Progress]][progress] [![Data Progress]][progress]--> [![Discord Badge]][discord]
+[![Build Status]][actions] [![DEBUG Progress]][treemap] [![RELEASE Progress]][treemap] [![MASTERDEBUG Progress]][treemap] [![MASTER Progress]][treemap] <!--[![Code Progress]][progress] [![Data Progress]][progress]--> [![Discord Badge]][discord]
 =============
 
 [Build Status]: https://github.com/seilc/rat/actions/workflows/build.yml/badge.svg
 [actions]: https://github.com/seilc/rat/actions/workflows/build.yml
+[DEBUG Progress]: https://img.shields.io/endpoint?url=https%3A%2F%2Fseilc.github.io%2Frat%2FDEBUG.json
+[RELEASE Progress]: https://img.shields.io/endpoint?url=https%3A%2F%2Fseilc.github.io%2Frat%2FRELEASE.json
+[MASTERDEBUG Progress]: https://img.shields.io/endpoint?url=https%3A%2F%2Fseilc.github.io%2Frat%2FMASTERDEBUG.json
+[MASTER Progress]: https://img.shields.io/endpoint?url=https%3A%2F%2Fseilc.github.io%2Frat%2FMASTER.json
+[treemap]: https://seilc.github.io/rat/treemap.png
 <!--
 decomp.dev progress badges (hidden until the project is registered on decomp.dev)
 See https://decomp.dev/api for an API overview.
@@ -15,6 +20,8 @@ See https://decomp.dev/api for an API overview.
 [discord]: https://discord.gg/dVbGFdYU6A
 
 A work-in-progress decompilation of [Ratatouille (Jan 18, 2006 prototype)](https://hiddenpalace.org/Disney-Pixar_Ratatouille_(Jan_18,_2006_prototype)).
+
+![Progress treemap][treemap]
 
 This repository does **not** contain any game assets or assembly whatsoever. An existing copy of the game is required.
 
