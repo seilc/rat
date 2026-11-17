@@ -429,12 +429,12 @@ bool init_font_data(font_data& fd)
 
         if (a.flags & 0x1) {
             if (c >= 'A' && c <= 'Z')
-                fd.char_index[c + ('a' - 'A')] = i;
+                fd.char_index[c - 'A' + 'a'] = i;
             else if (c >= 0xC0 && c <= 0xDF)
                 fd.char_index[c + 0x20] = i;
         } else if (a.flags & 0x2) {
             if (c >= 'a' && c <= 'z')
-                fd.char_index[c - ('a' - 'A')] = i;
+                fd.char_index[c - 'a' + 'A'] = i;
             else if (c >= 0xE0 && c <= 0xFE)
                 fd.char_index[c - 0x20] = i;
         }
@@ -1238,17 +1238,17 @@ void load_tex_args(tex_args& ta, const substr& s)
 
     e = xtextbox::find_entry(el, substr::create("src", 3));
     if (e && e->op == '=' && e->args_size == 4) {
-        xtextbox::read_list(*e, &ta.src.x, 4);
+        xtextbox::read_list(*e, (F32*)&ta.src, 4);
     }
 
     e = xtextbox::find_entry(el, substr::create("dst", 3));
     if (e && e->op == '=' && e->args_size == 4) {
-        xtextbox::read_list(*e, &ta.dst.x, 4);
+        xtextbox::read_list(*e, (F32*)&ta.dst, 4);
     }
 
     e = xtextbox::find_entry(el, substr::create("off", 3));
     if (e && e->op == '=' && e->args_size == 2) {
-        xtextbox::read_list(*e, &ta.off.x, 2);
+        xtextbox::read_list(*e, (F32*)&ta.off, 2);
     }
 
     e = xtextbox::find_entry(el, substr::create("scale", 5));
@@ -1323,17 +1323,17 @@ void load_model_args(model_args& ma, const substr& s)
 
     e = xtextbox::find_entry(el, substr::create("rot", 3));
     if (e && e->op == '=' && e->args_size == 3) {
-        xtextbox::read_list(*e, &ma.rot.x, 3);
+        xtextbox::read_list(*e, (F32*)&ma.rot, 3);
     }
 
     e = xtextbox::find_entry(el, substr::create("dst", 3));
     if (e && e->op == '=' && e->args_size == 4) {
-        xtextbox::read_list(*e, &ma.dst.x, 4);
+        xtextbox::read_list(*e, (F32*)&ma.dst, 4);
     }
 
     e = xtextbox::find_entry(el, substr::create("off", 3));
     if (e && e->op == '=' && e->args_size == 2) {
-        xtextbox::read_list(*e, &ma.off.x, 2);
+        xtextbox::read_list(*e, (F32*)&ma.off, 2);
     }
 
     e = xtextbox::find_entry(el, substr::create("scale", 5));

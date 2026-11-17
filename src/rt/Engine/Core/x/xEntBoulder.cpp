@@ -525,7 +525,7 @@ void xEntBoulder_Update(xEntBoulder* ent, xScene* sc, F32 dt)
     }
     else if (numDepens) {
         if (ent->rollingID) {
-            ent->currSndFX = xSndMgrPlay(xSndMgrGetSoundGroup(ent->rollingID), 0x800, NULL, NULL, ent, NULL, NULL);
+            ent->currSndFX = xSndMgrPlay(xSndMgrGetSoundGroup(ent->rollingID), xSnd_FOLLOW, NULL, NULL, ent, NULL, NULL);
         }
     }
 

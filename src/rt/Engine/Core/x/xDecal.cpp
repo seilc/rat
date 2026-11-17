@@ -3148,8 +3148,7 @@ void xDecalEmitter::emit(const xMat4x3& mat, const xVec3& scale, S32 texture_ind
 
 void xDecalEmitter::update(F32 dt)
 {
-    size_t il = FLAG_NOZTEST, ir = ptank_pool::FLAG_NOZTEST;
-    xASSERT_MSG_L(3915, il == ir, "FLAG_NOZTEST==ptank_pool::FLAG_NOZTEST");
+    xASSERT_EQ_L(3915, FLAG_NOZTEST, ptank_pool::FLAG_NOZTEST);
     xASSERT_L(3916, valid());
 
     debug_update(dt);

@@ -970,7 +970,7 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align)
         return NULL;
     }
 
-    for (i = 0; i < XMEM_MAX_HEAPS; i++) {
+    for (i = 0; i < ARRAY_LENGTH(heap->opp_heap); i++) {
 #if DEBUG || RELEASE
         S16 idx = heap->opp_heap[i];
         if (idx != -1) {

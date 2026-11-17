@@ -234,7 +234,7 @@ xSndGroup* xSndMgr_AllocGroup(U8 nSoundAssets)
     pRetGroup->header.uLastSelected = 0;
     pRetGroup->header.uSetBits = 0;
     pRetGroup->header.nMaxPlays = 0;
-    pRetGroup->header.eSoundCategory = 0;
+    pRetGroup->header.eSoundCategory = xSndCat_GAME_3D;
     pRetGroup->header.uPriority = XSND_DEFAULT_PRIORITY;
     pRetGroup->header.uFlags = 0;
     pRetGroup->header.fInnerRadius = 25.0f;

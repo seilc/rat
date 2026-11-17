@@ -190,7 +190,7 @@ static void xSoundFXPlay(xSoundFX* t)
         if (!ent) {
             xFAIL_FMT_L(394, "SoundFX '%s' can't find entity %X", xSTAssetName(t->id), t->asset->attachID);
         } else {
-            sndFlags |= 0x800;
+            sndFlags |= xSnd_FOLLOW;
             t->sndHandle = xSndMgrPlay(t->asset->soundAsset, sndFlags, xEntGetPos(ent), NULL, ent, NULL, NULL);
         }
     } else if (t->asset->soundAsset != ISND_INVALID_SND_GROUP_HANDLE) {

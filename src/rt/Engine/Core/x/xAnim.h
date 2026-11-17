@@ -31,7 +31,11 @@ enum
 // xAnimState::Flags
 enum
 {
+    AnimState_ModeMask = 0x70,
     AnimState_Loop = 0x10,
+    AnimState_EndTransition = 0x20,
+    AnimState_BlendOut = 0x30,
+    AnimState_EndTransitionSelf = 0x40,
     AnimState_TempUsed = 0x80000000
 };
 
