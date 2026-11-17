@@ -42,6 +42,8 @@ private:
     U8 accUpdated;
 
 public:
+    void SetAnimState(U32 new_stateID, F32 blend, xModelInstance* model);
+    bool IsAnimationStopped(U32 AnimationID);
     xVec3* GetPosition();
     xVec3* GetHeading();
     xEntFrame* GetFrame() { return frame; }
