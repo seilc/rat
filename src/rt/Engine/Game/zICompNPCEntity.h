@@ -41,6 +41,7 @@ class zICompNPCEntity : public zIComponent<zNPCBase>, public xEnt
     U8 accUpdated;
 
 public:
+    void Render();
     void SetAnimState(U32 new_stateID, F32 blend, xModelInstance* model);
     void SetAnimState(const char* new_state, F32 blend, xModelInstance* model);
     bool IsAnimationStopped(U32 AnimationID);

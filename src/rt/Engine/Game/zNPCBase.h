@@ -38,23 +38,40 @@ protected:
     U32 pad : 26;
 
 public:
+#if RELEASE
+    virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
+    virtual void UpdateNPCBaseData();
+    virtual void Load(eNPCType type, const xModelAssetInfo* modelAsset, zNPCAssetRATS* npcAsset, U32 npcAssetSize);
+#endif
     virtual bool Activate() = 0;
+#if RELEASE
+    virtual void Deactivate();
+#else
     virtual void Deactivate() = 0;
-    virtual void Spawn();
-    virtual bool Kill();
+#endif
+    virtual void Spawn() {}
+    virtual bool Kill() { return true; }
     virtual void Update(xScene* xscn, F32 dt) = 0;
     virtual void Render() = 0;
+#if !RELEASE
     virtual void UpdateNPCBaseData();
     virtual void SceneEnter();
     virtual void SceneReset();
     virtual void SceneExit();
     virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
     virtual void Load(eNPCType type, const xModelAssetInfo* modelAsset, zNPCAssetRATS* npcAsset, U32 npcAssetSize);
+#endif
     virtual void Reset();
 
     void GetChildren(zNPCBase** children, S32* number);
-    zICompNPCEntity* GetEntityComponent();
+    zICompLogic* GetLogicComponent() { return npcLogicComp; }
+    zICompNPCEntity* GetEntityComponent() { return npcEntityComp; }
     zICompSteering* GetSteeringComponent();
+
+    void PreUpdateAllComponents(xScene* xscn, F32 dt);
+    void PostUpdateAllComponents(xScene* xscn, F32 dt);
+    void DebugRenderAllComponents();
+    void DetachAllComponents();
 
 protected:
     zICompLogic* npcLogicComp;

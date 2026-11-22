@@ -25,6 +25,18 @@ public:
     virtual void PostUpdate(xScene* xscn, F32 dt) {}
     virtual void DebugRender() {}
     virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id) { return false; }
+
+    void Attach(T* owner, zCompParameters* parameters)
+    {
+        xASSERT_L(DEBUG ? 70 : 72, !this->owner);
+        if (!this->owner) {
+            this->owner = owner;
+            if (parameters) {
+                SetParameters(parameters);
+            }
+            Attached();
+        }
+    }
 };
 
 #endif
