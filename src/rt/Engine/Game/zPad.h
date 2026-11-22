@@ -27,6 +27,7 @@ public:
     static const S32 MAX_PORTS;
     static const S32 MAX_PADS;
 
+    static zPad* GetUnusedPad(bool isAI);
     static zPad* GetDebugPad();
 
     bool Active();

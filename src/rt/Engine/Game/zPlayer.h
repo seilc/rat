@@ -102,6 +102,8 @@ struct zPlayer : zEnt
     virtual void TakeIncrediPower(F32);
     virtual bool IsSwimming() const;
 
+    zPlayerInput& GetPlayerInput() { return playerInput; }
+
     bool CollisionOn() const { return Get_collisionOn(); }
 
     virtual bool FindShortestCollision(xSweptSphere& sws, U32& collisionFlags, S32 penby, bool);

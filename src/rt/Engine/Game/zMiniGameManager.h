@@ -14,6 +14,8 @@ public:
         currentGame = game;
     }
 
+    S32 GetUserSetPlayerCount() { return userSetPlayerCount; }
+
     bool IsMiniGamePaused()
     {
         if (currentGame) {
