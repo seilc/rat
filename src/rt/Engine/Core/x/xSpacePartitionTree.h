@@ -125,6 +125,7 @@ public:
 #if DEBUG || RELEASE
     void debug_update(F32);
     void debug_render(F32) const; // UNUSED
+    void debug_validate() const;
 #endif
 
 private:
@@ -138,7 +139,6 @@ private:
     bool intersect_line_setup(F32 x0, F32 y0, F32 x1, F32 y1, S32& ix, S32& iy, S32& dix, S32& diy, S32& end_ix, S32& end_iy, S32& a, F32& tx0, F32& ty0, F32& tx1, F32& ty1, F32& dtx, F32& dty);
 
 #if DEBUG || RELEASE
-    void debug_validate() const;
     bool any_layer_empty(const cell* c) const;
     void debug_validate_cell(const cell* c) const;
     void debug_intersect_cell(const cell* c) const;
