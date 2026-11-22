@@ -10,6 +10,13 @@ enum eCamCurveCam
     eCamCurveCam_NumCam
 };
 
+enum eCamCurve
+{
+    eCamCurve_Player,
+    eCamCurve_Camera,
+    eCamCurve_NumCurve
+};
+
 struct zCameraCurveAsset : xBaseAsset
 {
 private:

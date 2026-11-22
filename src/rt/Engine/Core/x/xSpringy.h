@@ -6,6 +6,7 @@
 class xSpringy
 {
 public:
+    void SetResponsiveness(F32 response) { mResponse = response; }
     void SetTension(F32 tension) { mResponse = tension; }
 
 protected:
