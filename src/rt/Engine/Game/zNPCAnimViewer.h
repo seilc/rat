@@ -6,13 +6,13 @@
 class zNPCAnimViewer : public zNPCBase
 {
 public:
-    bool Activate();
-    void Deactivate();
+    virtual bool Activate();
+    virtual void Deactivate();
 #if !RELEASE
-    void SceneExit();
+    virtual void SceneExit();
 #endif
-    void Update(xScene* xscn, F32 dt);
-    void Render();
+    virtual void Update(xScene* xscn, F32 dt);
+    virtual void Render();
 
     static bool IsPresent() { return mIsPresent; }
 
