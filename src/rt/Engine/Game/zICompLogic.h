@@ -11,9 +11,9 @@ struct xEnt;
 class zICompLogic : public zIComponent<zNPCBase>
 {
 public:
-    virtual bool InteractionCheck(const SphereCollisionResults& results);
-    virtual void NPCGetsDamage(const zCombatDamageInfo&);
-    virtual void NPCGivesDamage(xEnt*, const zCombatDamageInfo&);
+    virtual bool InteractionCheck(const SphereCollisionResults& results) { return false; }
+    virtual void NPCGetsDamage(const zCombatDamageInfo&) {}
+    virtual void NPCGivesDamage(xEnt*, const zCombatDamageInfo&) {}
 };
 
 #endif
