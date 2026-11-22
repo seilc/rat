@@ -265,7 +265,6 @@ public:
     F32 originalScale;
     bool ourDeathHasBeenRegistered;
 
-// ???
 #if DEBUG || RELEASE
 protected:
 #endif
