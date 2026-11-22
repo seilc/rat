@@ -7,6 +7,13 @@
 class zMiniGameManager : public zLightweightSystemBase
 {
 public:
+    bool IsMiniGameRunning() const { return currentGame != NULL; }
+
+    void RegisterMiniGame(zMiniGameBase* game)
+    {
+        currentGame = game;
+    }
+
     bool IsMiniGamePaused()
     {
         if (currentGame) {

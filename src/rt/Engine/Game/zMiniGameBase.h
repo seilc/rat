@@ -7,17 +7,18 @@
 
 struct xMat4x3;
 
-enum eMiniGameState
-{
-    GAMESTATE_GAME_START,
-    GAMESTATE_STAGE_START,
-    GAMESTATE_GAME_PLAY,
-    GAMESTATE_STAGE_END,
-    GAMESTATE_GAME_END
-};
-
 class zMiniGameBase : public xBase
 {
+public:
+    enum eMiniGameState
+    {
+        GAMESTATE_GAME_START,
+        GAMESTATE_STAGE_START,
+        GAMESTATE_GAME_PLAY,
+        GAMESTATE_STAGE_END,
+        GAMESTATE_GAME_END
+    };
+
 protected:
     ezMiniGameTypes gameType;
     zMiniGameAsset* asset;
@@ -27,35 +28,45 @@ protected:
     eMiniGameState gameState;
 
 public:
+    zMiniGameBase(zMiniGameAsset* a);
+
     virtual void SwitchGameState(eMiniGameState newState);
-    virtual void GameStartUpdate(F32);
-    virtual void GameStartEnter();
-    virtual void GameStartExit();
-    virtual void StageStartUpdate(F32);
-    virtual void StageStartEnter();
-    virtual void StageStartExit();
-    virtual void GamePlayUpdate(F32);
-    virtual void GamePlayEnter();
-    virtual void GamePlayExit();
-    virtual void StageEndUpdate(F32);
-    virtual void StageEndEnter();
-    virtual void StageEndExit();
-    virtual void GameEndUpdate(F32);
-    virtual void GameEndEnter();
-    virtual void GameEndExit();
-    virtual bool IsGameDone();
-    virtual bool ShouldUpdatePlayer();
-    virtual bool ShouldRenderPlayer();
+
+    virtual void GameStartUpdate(F32) {}
+    virtual void GameStartEnter() {}
+    virtual void GameStartExit() {}
+
+    virtual void StageStartUpdate(F32) {}
+    virtual void StageStartEnter() {}
+    virtual void StageStartExit() {}
+
+    virtual void GamePlayUpdate(F32) {}
+    virtual void GamePlayEnter() {}
+    virtual void GamePlayExit() {}
+
+    virtual void StageEndUpdate(F32) {}
+    virtual void StageEndEnter() {}
+    virtual void StageEndExit() {}
+
+    virtual void GameEndUpdate(F32) {}
+    virtual void GameEndEnter() {}
+    virtual void GameEndExit() {}
+
+    virtual bool IsGameDone() { return gameDone; }
+    virtual bool ShouldUpdatePlayer() { return true; }
+    virtual bool ShouldRenderPlayer() { return true; }
     virtual bool IsPaused() { return false; }
     virtual void SceneSetup();
     virtual void Reset();
     virtual void Update(F32 dt);
     virtual void Render();
-    virtual void PostRender2d() const;
-    virtual void PostRender3d() const;
-    virtual void Exit();
-    virtual void SetRespawnPosition(xMat4x3*);
+    virtual void PostRender2d() const {}
+    virtual void PostRender3d() const {}
+    virtual void Exit() {}
+    virtual void SetRespawnPosition(xMat4x3*) {}
+#if DEBUG || RELEASE
     virtual void AddTweaks(const char*);
+#endif
 
     static zMiniGameBase* currentMiniGame;
 };

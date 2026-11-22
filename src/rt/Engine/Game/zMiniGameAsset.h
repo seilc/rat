@@ -3,6 +3,8 @@
 
 #include "xDynAsset.h"
 
+#define ZMINIGAME_TYPE_PREFIX "MiniGame"
+
 struct zMiniGameAsset : xDynAsset
 {
     U32 dispatcherID;
