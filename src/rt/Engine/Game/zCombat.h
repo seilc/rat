@@ -68,6 +68,7 @@ struct zCombat
     zCombatEffects::PunchEffect punchEffect;
     U32 effectParam;
 
+    S32 Setup(const xHierarchyBoundInitData* initHierarchy, U32 boundsNumber);
     void Init(const xHierarchyBoundInitData* initHierarchy, F32 masterRadius, const zCombatAttack* stateTable,
               U16 stateTableSize, S32 hitPoints, F32 scale, const char* baseName, const char** boneNames, S32 boneCount);
     void PreUpdate(xEnt*, F32);

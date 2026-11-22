@@ -49,6 +49,10 @@ public:
     xVec3* GetHeading() { return &frame->mat.at; }
     xEntFrame* GetFrame() { return frame; }
     xModelInstance* GetModel() { return model; }
+    F32 GetModelScale() { return Params()->modelScale; }
+
+private:
+    const zICompNPCEntityParams* Params() { return parameters; }
 };
 
 #endif
