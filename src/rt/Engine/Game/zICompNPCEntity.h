@@ -30,7 +30,6 @@ public:
 
 class zICompNPCEntity : public zIComponent<zNPCBase>, public xEnt
 {
-private:
     xEntDrive* npcDrive;
     F32 shadowRadius;
     eNPCType type;

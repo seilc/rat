@@ -158,7 +158,6 @@ public:
     virtual void activate_visible();
     virtual void deactivate_visible();
 
-public:
     xVec3 bound_offset;
     F32 move_speed_multiply;
     xEntDrive npcDrive;

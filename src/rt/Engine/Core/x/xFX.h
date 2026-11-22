@@ -82,7 +82,6 @@ void xFXanimUVDestroy(); // UNUSED
 
 struct xFXRibbon
 {
-public:
     struct joint_data
     {
         S32 flags;

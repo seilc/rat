@@ -52,7 +52,6 @@ namespace {
 
 struct xPulseGlareMgr
 {
-public:
     void init();
     S32 get_next_idx(); // UNUSED
     xPulseGlare& get(U32 i); // UNUSED

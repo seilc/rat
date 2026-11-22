@@ -39,11 +39,9 @@ struct zPlayerCheckPoint
 
 struct zPlayer : zEnt
 {
-public:
     zPlayerActionManager actionManager;
     S32 index;
     
-public:
     zPad* GetPad()
     {
         return pad;
@@ -149,7 +147,6 @@ public:
     virtual F32 InitialDepenetrationVelocity();
     virtual void ReactiveAnimationCollided();
 
-public:
     xEntDrive* GetDrive()
     {
         return &drv;

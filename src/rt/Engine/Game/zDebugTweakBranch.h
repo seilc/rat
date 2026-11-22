@@ -7,7 +7,6 @@ typedef void(*zDebugTweakBranchCallback)(const char*);
 
 class zDebugTweakBranch
 {
-private:
     tweak_callback tweakCB;
     zDebugTweakBranchCallback addTweaksFunction;
 

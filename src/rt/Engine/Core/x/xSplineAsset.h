@@ -6,7 +6,6 @@
 
 class xNurbs : public xBaseAsset
 {
-private:
     S32 degree;
     S32 knotMaxIndex;
     S32 controlMaxIndex;

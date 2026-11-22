@@ -7,7 +7,6 @@ struct xAnimTable;
 
 class zCompLogicPourNSwirl : public zICompLogic
 {
-private:
     U32 whichPot;
     U32 targetPot;
     F32 stirringAccum;

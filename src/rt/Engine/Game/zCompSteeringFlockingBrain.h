@@ -5,7 +5,6 @@
 
 class zCompSteeringFlockingBrain : public zICompSteering
 {
-private:
     xVec3 flockingCenter;
     xVec3 flockingAlignment;
 

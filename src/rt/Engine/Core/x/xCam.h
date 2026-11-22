@@ -127,7 +127,6 @@ struct xCamTransitionParams : xCamConfigCommon
 
 struct xCam
 {
-public:
     xMat4x3 mat;
     xMat4x3 coll_mat;
     F32 fov;
@@ -243,7 +242,6 @@ public:
 
 struct xCamGroup
 {
-public:
     void create();
     void destroy();
     void reset();
