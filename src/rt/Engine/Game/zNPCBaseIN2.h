@@ -49,6 +49,9 @@ public:
     virtual xSndHandle play_sound(zAnimFxSoundGroup* sound);
     virtual void destroy();
     virtual void kill();
+
+    U32 get_type() const { return inst->get_type(); }
+
     virtual void set_instance(zNPCInstance* inPtr);
     virtual bool CanBeTargeted();
     virtual void ExitingSpawnState();

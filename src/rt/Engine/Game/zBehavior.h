@@ -172,6 +172,11 @@ protected:
     U32 enteredBehavior;
 
 public:
+    behavior* getCurrentBehavior()
+    {
+        if (transientTotal <= 0) return behaviorCurrentNonTransient; return transientBehavior[transientTotal - 1].transient;
+    }
+
     virtual bool TestForJumpBehaviorChange(F32);
     virtual bool TestForShieldBehaviorChange(F32);
     virtual bool TestForDeathVolumeBehaviorChange(F32);

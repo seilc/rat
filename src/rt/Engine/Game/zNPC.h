@@ -59,6 +59,8 @@ public:
 
     zStoredSpawn storedSpawn;
 
+    U32 get_type() const { return type; }
+
     zNPCAssetIN2* get_npc_asset() const
     {
         return npc_asset;
