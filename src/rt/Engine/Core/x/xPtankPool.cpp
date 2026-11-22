@@ -360,6 +360,7 @@ void xPTankPoolRender()
     }
 
     if ((render_flags & ptank_pool::FLAG_NOZTEST) || (render_flags & ptank_pool::FLAG_ZWRITE)) {
+        // BUG: should restore ZWrite off, ZTest on
         xRenderStateZModesSet(render_flags & ptank_pool::FLAG_NOZTEST, !(render_flags & ptank_pool::FLAG_ZWRITE));
     }
 
