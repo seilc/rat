@@ -1,6 +1,7 @@
 #ifndef ZHASHES_H
 #define ZHASHES_H
 
+#define HASH_ACTIONLINES                        0x7830BF69 // xStrHash("ACTIONLINES")
 #define HASH_arm_collapse_rf                    0x37B476EF // xStrHash("arm_collapse_rf")
 #define HASH_bb01_bridge_destructable           0xF07B67B4 // xStrHash("bb01_bridge_destructable")
 #define HASH_bb01_frozone_bridge_temp           0x634D1A8C // xStrHash("bb01_frozone_bridge_temp")

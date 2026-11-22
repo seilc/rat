@@ -602,12 +602,26 @@ typedef RwTexture* (*RwTextureCallBackRead)(const RwChar* name, const RwChar* ma
     }                                               \
     MACRO_STOP
 
+#define RwIm3DVertexSetU(_vert, _u)  \
+    MACRO_START                      \
+    {                                \
+        (_vert)->u = _u;             \
+    }                                \
+    MACRO_STOP
+
 #define RwIm3DVertexSetUV(_vert, _u, _v)  \
     MACRO_START                           \
     {                                     \
         (_vert)->u = _u;                  \
         (_vert)->v = _v;                  \
     }                                     \
+    MACRO_STOP
+
+#define RwIm3DVertexSetV(_vert, _v)  \
+    MACRO_START                      \
+    {                                \
+        (_vert)->v = _v;             \
+    }                                \
     MACRO_STOP
 
 #define RxPipelineDestroy(_ppln) (_rxPipelineDestroy(_ppln), TRUE)
