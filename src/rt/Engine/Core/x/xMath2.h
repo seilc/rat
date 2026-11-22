@@ -2,6 +2,7 @@
 #define XMATH2_H
 
 #include "xMath.h"
+#include "xVec3.h"
 
 struct xVec2
 {
@@ -17,6 +18,41 @@ struct xVec2
     F32 dot(const xVec2& c) const { return x * c.x + y * c.y; }
     F32 length() const { return xsqrt(length2()); }
     F32 length2() const { return x * x + y * y; }
+
+    F32 SafeNormalize()
+    {
+        F32 length = x * x + y * y;
+        if (length < 0.0000001f) {
+            return 0.0f;
+        }
+        length = xsqrt(length);
+        Scale(1.0f / length);
+        return length;
+    }
+
+    void Scale(F32 s)
+    {
+        x *= s;
+        y *= s;
+    }
+
+    void AddScale(const xVec2& p, const xVec2& d, F32 s)
+    {
+        x = p.x + d.x * s;
+        y = p.y + d.y * s;
+    }
+
+    void Sub(const xVec2& a, const xVec2& b)
+    {
+        x = a.x - b.x;
+        y = a.y - b.y;
+    }
+
+    void Sub(const xVec3& a, const xVec3& b)
+    {
+        x = a.x - b.x;
+        y = a.z - b.z;
+    }
 };
 
 typedef struct _xMat3x2
