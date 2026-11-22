@@ -6,6 +6,7 @@
 #include "xMath3.h"
 #include "xParEmitter.h"
 #include "xParGroup.h"
+#include "xParSys.h"
 #include "xRand.h"
 #include "xString.h"
 #include "xutil.h"

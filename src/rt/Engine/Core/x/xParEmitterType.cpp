@@ -6,6 +6,7 @@
 #include "xMath3.h"
 #include "xPar.h"
 #include "xParEmitter.h"
+#include "xParSys.h"
 #include "xRand.h"
 #include "xstransvc.h"
 #include "xVolume.h"

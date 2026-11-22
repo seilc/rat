@@ -4,8 +4,10 @@
 #include "xBase.h"
 #include "xParEmitterAsset.h"
 #include "xModel.h"
-#include "xParSys.h"
 
+struct xPar;
+struct xParGroup;
+struct xParSys;
 struct xSerial;
 struct xScene;
 

@@ -11,6 +11,7 @@
 #include "xMath.h"
 #include "xMovePoint.h"
 #include "xParEmitterType.h"
+#include "xParSys.h"
 #include "xRand.h"
 #include "xstransvc.h"
 #include "xutil.h"
