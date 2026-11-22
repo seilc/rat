@@ -82,6 +82,8 @@ private:
 #endif
 };
 
+void zCombatDamage(xEnt* ent, const zCombatDamageInfo& damageInfo);
+
 inline zCombat* zCombatGetFrom(xEnt* ent)
 {
     if (xSkyDome_EntityIsSkyDome(ent)) {
