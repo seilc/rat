@@ -208,6 +208,7 @@ public:
                        const xCamConfigFollow::zone_data& i1, const xCamConfigFollow::zone_data& i2, F32 s); // UNUSED
     static void spring_interp(F32& s, F32& v, F32 s0, F32 s1, F32 dt, F32 speed, F32 e);
     static void spring_interp(xVec3& s, F32& v, const xVec3& s0, const xVec3& s1, F32 dt, F32 speed, F32 e);
+    static inline void spring_interp(xVec3& s, xVec3& v, const xVec3& s0, const xVec3& s1, F32 dt, F32 speed, F32 e); // UNUSED
     static void spring_interp(xQuat& s, F32& v, const xQuat& s0, const xQuat& s1, F32 dt, F32 speed, F32 e);
     template <class T, class U>
     static void spring_interp(T& s, U& v, const T& s0, const T& s1, F32 dt, F32 speed);
