@@ -21,6 +21,10 @@ public:
 #endif
 
     void setup_textbox(xtextbox& tb, const zUITextAsset* asset) const;
+    void SetText(const char* text)
+    {
+        this->text = text;
+    }
 
 private:
     xColor shadowColor;

@@ -60,7 +60,14 @@ public:
     virtual void DoExit();
     virtual void DoInitMotion();
     virtual void DoApplyMotionFrame(const zUIMotionFrame* frame);
+    void HandleEvent(xBase* from, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID)
+    {
+        if (!custom || custom->HandleEvent(from, toEvent, toParam, toParamWidget, toParamWidgetID)) {
+            DoHandleEvent(from, toEvent, toParam, toParamWidget, toParamWidgetID);
+        }
+    }
     void Signal(xBase* from, U32 event);
+    void Signal(U32 event) { Signal(this, event); }
     void AutoMenu(U32 zUIAsset::*item, U32 event);
     virtual void FocusOn();
     virtual void FocusOff();
@@ -84,5 +91,6 @@ private:
 
 S32 zUIGetPadPortInitiatedPause();
 void zUI_Init(zUI* text, zUIAsset* asset);
+void* zUIAllocStaticMemory(U32 size);
 
 #endif
