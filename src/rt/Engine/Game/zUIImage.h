@@ -18,7 +18,7 @@ public:
     ImageState currentImage;
     ImageState startMovementImage;
 
-    zUIImageAsset* GetAsset() const;
+    zUIImageAsset* GetAsset() const { return (zUIImageAsset*)zUI::GetAsset(); }
     xTextureHandle& GetTexture() const;
     void SetTexture(U32 id, bool clearPrev);
     void PlayMovie(U32 id, bool loop, bool stopFrame, U32 startFrame, U32 endFrame);
