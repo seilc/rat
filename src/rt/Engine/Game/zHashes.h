@@ -93,5 +93,6 @@
 #define HASH_THIS_CAM_TARGET                    0xB3BB6012 // xStrHash("THIS_CAM_TARGET")
 #define HASH_THIS_PLYR                          0x6F7EC01E // xStrHash("THIS_PLYR")
 #define HASH_TURRET_HOLDABLE_DEATH_SIMP         0x3159B667 // xStrHash("TURRET_HOLDABLE_DEATH_SIMP")
+#define HASH_UI_MISSION_COUNTER                 0x3AF23364 // xStrHash("UI MISSION COUNTER")
 
 #endif
