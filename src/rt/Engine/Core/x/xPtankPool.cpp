@@ -208,15 +208,15 @@ namespace {
         S32 noztest = context.flags & ptank_pool::FLAG_NOZTEST;
         S32 zwrite = context.flags & ptank_pool::FLAG_ZWRITE;
 
-        if (xor_flags & 0x1) {
-            render_flags = (render_flags & ~0x1) | noztest;
+        if (xor_flags & ptank_pool::FLAG_NOZTEST) {
+            render_flags = (render_flags & ~ptank_pool::FLAG_NOZTEST) | noztest;
         }
 
-        if (xor_flags & 0x2) {
-            render_flags = (render_flags & ~0x2) | zwrite;
+        if (xor_flags & ptank_pool::FLAG_ZWRITE) {
+            render_flags = (render_flags & ~ptank_pool::FLAG_ZWRITE) | zwrite;
         }
 
-        if ((xor_flags & 0x1) || (xor_flags & 0x2)) {
+        if ((xor_flags & ptank_pool::FLAG_NOZTEST) || (xor_flags & ptank_pool::FLAG_ZWRITE)) {
             xRenderStateZModesSet(zwrite, !noztest);
         }
 
@@ -359,8 +359,8 @@ void xPTankPoolRender()
             render_ptank(*ptank, render_flags);
     }
 
-    if ((render_flags & 0x1) || (render_flags & 0x2)) {
-        xRenderStateZModesSet(render_flags & 0x1, !(render_flags & 0x2));
+    if ((render_flags & ptank_pool::FLAG_NOZTEST) || (render_flags & ptank_pool::FLAG_ZWRITE)) {
+        xRenderStateZModesSet(render_flags & ptank_pool::FLAG_NOZTEST, !(render_flags & ptank_pool::FLAG_ZWRITE));
     }
 
     xMEMPOPTEMP(ptanks);
