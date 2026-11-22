@@ -215,6 +215,7 @@ public:
 private:
     friend struct xCamGroup;
     friend struct xCamBlend;
+    friend class zCamPoolBase;
 
     S32 group_flags;
     xCamBlend* blender;
