@@ -573,22 +573,22 @@ void xSpacePartitionTree2D::debug_update(F32)
 
     if (tweak::cast_player_point > 0) {
         for (S32 i = 0; i < tweak::cast_player_point; ++i) {
-            const xVec3& player_loc = xEntGetFrame(xglobals->players[0])->pos;
+            const xVec3& player_loc = xEntGetFrame(CURPLAYERS[0])->pos;
             intersect_point(player_loc.x, player_loc.z, cb);
         }
     }
 
     if (tweak::cast_player_sphere > 0) {
         for (S32 i = 0; i < tweak::cast_player_sphere; ++i) {
-            const xSphere& player_bound = xglobals->players[0]->bound.sph;
+            const xSphere& player_bound = CURPLAYERS[0]->bound.sph;
             intersect_circle(player_bound.center.x, player_bound.center.z, player_bound.r, cb);
         }
     }
 
     if (tweak::cast_player_line > 0) {
         for (S32 i = 0; i < tweak::cast_player_line; ++i) {
-            const xVec3& player_loc = xEntGetFrame(xglobals->players[0])->pos;
-            const xVec3& player_dir = xEntGetFrame(xglobals->players[0])->at;
+            const xVec3& player_loc = xEntGetFrame(CURPLAYERS[0])->pos;
+            const xVec3& player_dir = xEntGetFrame(CURPLAYERS[0])->at;
             xVec3 v0 = player_loc, v1;
             v1.AddScale(v0, player_dir, tweak::cast_line_length);
             xDrawSetColor(g_GREEN);
@@ -702,7 +702,7 @@ void xSpacePartitionTree2D::debug_intersect_cell(const cell* c) const
     if (tweak::render_intersect && (tweak::render_empty || c->entries != INVALID_INDEX)) {
         F32 x, z, r;
         S32 depth = get_cell_bound(c, x, z, r);
-        F32 y = xEntGetFrame(xglobals->players[0])->pos.y;
+        F32 y = xEntGetFrame(CURPLAYERS[0])->pos.y;
         xDrawSetColor(box_colors[depth]);
         xDrawBox(x, y - 0.5f * r, z, x + r, y + 0.5f * r, z + r);
     }

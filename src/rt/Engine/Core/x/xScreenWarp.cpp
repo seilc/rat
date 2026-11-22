@@ -397,7 +397,7 @@ namespace {
     void test_emit()
     {
         xVec3 center;
-        center = xEntGetFrame(xglobals->players[0])->pos;
+        center = xEntGetFrame(CURPLAYERS[0])->pos;
         center.y += tweak::test::emit_height;
         xVec3 offset;
         random_sphere_offset(offset, tweak::test::emit_random_offset);
@@ -418,7 +418,7 @@ namespace {
     {
         if (tweak::test_infinite::on) {
             xVec3 center;
-            center = xEntGetFrame(xglobals->players[0])->pos;
+            center = xEntGetFrame(CURPLAYERS[0])->pos;
             center.y += tweak::test::emit_height;
             if (debug_warp == NULL) {
                 debug_warp = emit(center, tweak::test_infinite::radius, tweak::test_infinite::duration, (type_enum)tweak::test_infinite::type, tweak::test_infinite::intensity, tweak::test_infinite::freq, FLAG_INFINITE);

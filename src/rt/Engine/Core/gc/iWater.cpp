@@ -652,7 +652,7 @@ void iWaterUpdate(F32)
 
     if (override_width) {
         if (globals.sceneCur->sceneID == IDTAG('M','T','0','1')) {
-            xVec3 playerPos = *xEntGetPos(xglobals->players[0]);
+            xVec3 playerPos = *xEntGetPos(CURPLAYERS[0]);
             F32 dist2 = xVec3Dist2(&playerPos, xEntGetPos(water2));
             F32 dist3 = xVec3Dist2(&playerPos, xEntGetPos(water3));
             F32 dist4 = xVec3Dist2(&playerPos, xEntGetPos(water4));

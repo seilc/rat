@@ -3452,7 +3452,7 @@ void xDecalEmitter::create_test_curve(size_t size)
 
 void xDecalEmitter::move_spiral_to_player()
 {
-    const xMat4x3& mat = *(xMat4x3*)xglobals->players[0]->model->Mat;
+    const xMat4x3& mat = *(xMat4x3*)CURPLAYERS[0]->model->Mat;
     debug->spiral.center = mat.pos;
 }
 

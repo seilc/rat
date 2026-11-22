@@ -478,7 +478,7 @@ namespace
         }
 
         xSphere* spheres[5];
-        S32 count = xglobals->players[0]->GetCollisionSpheres((const xSphere**)spheres);
+        S32 count = CURPLAYERS[0]->GetCollisionSpheres((const xSphere**)spheres);
         S32 i;
         for (i = 0; i < count; i++) {
             xBound b;
@@ -494,7 +494,7 @@ namespace
             zEntEvent(&ent, eEventHit, 1000000.0f, 0.0f, 0.0f, 0.0f);
             loc = ((xMat4x3*)ent.model->Mat)->pos;
             loc.y -= coll.dist - lower_bound_extent;
-            hit = xglobals->players[0];
+            hit = CURPLAYERS[0];
             return true;
         }
 
@@ -1211,7 +1211,7 @@ static void xEntRender_DebugInfo(xEnt* ent)
                 xModelGetBoneMat(mat_bone, *active_model, gEnt_ShowBone);
                 xDrawAxis(&mat_bone, 1.0f);
                 xDrawSetColor(g_MAGENTA);
-                xDrawLine(&gEnt_ShowBoneLoc, &((xMat4x3*)xglobals->players[0]->model->Mat)->pos);
+                xDrawLine(&gEnt_ShowBoneLoc, &((xMat4x3*)CURPLAYERS[0]->model->Mat)->pos);
             } else
                 gEnt_ShowBoneLoc = 0.0f;
 
@@ -1220,7 +1220,7 @@ static void xEntRender_DebugInfo(xEnt* ent)
                 xDrawSetColor(g_RED);
                 xDrawSphere2(&gEnt_ShowVertexLoc, 0.5f, 12);
                 xDrawSetColor(g_YELLOW);
-                xDrawLine(&gEnt_ShowVertexLoc, &((xMat4x3*)xglobals->players[0]->model->Mat)->pos);
+                xDrawLine(&gEnt_ShowVertexLoc, &((xMat4x3*)CURPLAYERS[0]->model->Mat)->pos);
             } else
                 gEnt_ShowVertexLoc = 0.0f;
         }

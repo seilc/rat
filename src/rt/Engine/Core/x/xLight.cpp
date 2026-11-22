@@ -699,16 +699,16 @@ void xLightPrepLocal()
             }
 
             if (xlight->tasset->lightFlags & 0x2) {
-                for (S32 i = 0; i < xglobals->players.size(); i++) {
+                for (S32 i = 0; i < CURPLAYERS.size(); i++) {
                     xSphere* extra_spheres[10];
-                    S32 numSpheres = xglobals->players[i]->GetCollisionSpheres((const xSphere**)extra_spheres);
+                    S32 numSpheres = CURPLAYERS[i]->GetCollisionSpheres((const xSphere**)extra_spheres);
 
                     for (S32 j = 0; j < numSpheres; j++) {
                         xCollis coll;
                         coll.flags = 0;
                         xSphereHitsSphere(lightSphere, extra_spheres[j], &coll);
                         if (coll.flags & 0x1) {
-                            static_callback(*xglobals->players[i]);
+                            static_callback(*CURPLAYERS[i]);
                             break;
                         }
                     }

@@ -1363,7 +1363,7 @@ void xFXRibbon::create_test_curve(S32 size)
 
 void xFXRibbon::move_spiral_to_player()
 {
-    const xMat4x3& mat = *(xMat4x3*)xglobals->players[0]->model->Mat;
+    const xMat4x3& mat = *(xMat4x3*)CURPLAYERS[0]->model->Mat;
     debug->spiral.center.Add(mat.pos, debug->spiral.offset);
 }
 

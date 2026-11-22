@@ -314,8 +314,8 @@ void xTRCPadReOrder()
 
 S32 xTRCPadGetPort_Player1()
 {
-    if (xglobals->players.size() >= 1) {
-        zPad* pad = xglobals->players[0]->GetPad();
+    if (CURPLAYERS.size() >= 1) {
+        zPad* pad = CURPLAYERS[0]->GetPad();
         if (pad)
             return pad->GetPadPort();
     }
@@ -324,8 +324,8 @@ S32 xTRCPadGetPort_Player1()
 
 S32 xTRCPadGetPort_Player2()
 {
-    if (xglobals->players.size() >= 2) {
-        zPad* pad = xglobals->players[1]->GetPad();
+    if (CURPLAYERS.size() >= 2) {
+        zPad* pad = CURPLAYERS[1]->GetPad();
         if (pad)
             return pad->GetPadPort();
     }

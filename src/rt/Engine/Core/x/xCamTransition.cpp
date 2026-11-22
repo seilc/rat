@@ -172,7 +172,7 @@ void xCamTransition::Start()
         xASSERT_FMT_L(231, followCam, "Trying to transition to the follow camera, but it is missing");
 
         if (mType == 0 && params.blend_time == 0.0f) {
-            xMat4x3 frame = *xEntGetFrame(xglobals->players[0]);
+            xMat4x3 frame = *xEntGetFrame(CURPLAYERS[0]);
             followCam->set_start_theta(xClampAngle0_2PI(PI + xatan2(frame.at.x, frame.at.z)));
         }
 
