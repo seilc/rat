@@ -1137,11 +1137,6 @@ void iSndSetExternalCallback(void*)
 {
 }
 
-// UNUSED
-void iSndDelayFrame()
-{
-}
-
 void iSndSuspendCD(U32)
 {
 }
