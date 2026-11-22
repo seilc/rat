@@ -1274,8 +1274,8 @@ namespace
     inline void set_vert(RwIm3DVertex& vert, const xVec3& loc, F32 u, F32 v, xColor color)
     {
         RwIm3DVertexSetPos(&vert, loc.x, loc.y, loc.z);
-        vert.u = u;
-        vert.v = v;
+        RwIm3DVertexSetU(&vert, u);
+        RwIm3DVertexSetV(&vert, v);
         RwIm3DVertexSetRGBA(&vert, color.r, color.g, color.b, color.a);
     }
 

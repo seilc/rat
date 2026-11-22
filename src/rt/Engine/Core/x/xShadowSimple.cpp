@@ -282,12 +282,12 @@ void xShadowSimple_Init()
 
     memset(sShadVert, 0, sizeof(sShadVert));
     for (U32 i = 0; i < MAX_SHAD_QUADS; i++) {
-        sShadVert[i * 6 + 1].u = 1.0f;
-        sShadVert[i * 6 + 2].v = 1.0f;
-        sShadVert[i * 6 + 3].u = 1.0f;
-        sShadVert[i * 6 + 4].v = 1.0f;
-        sShadVert[i * 6 + 5].u = 1.0f;
-        sShadVert[i * 6 + 5].v = 1.0f;
+        RwIm3DVertexSetU(&sShadVert[i * 6 + 1], 1.0f);
+        RwIm3DVertexSetV(&sShadVert[i * 6 + 2], 1.0f);
+        RwIm3DVertexSetU(&sShadVert[i * 6 + 3], 1.0f);
+        RwIm3DVertexSetV(&sShadVert[i * 6 + 4], 1.0f);
+        RwIm3DVertexSetU(&sShadVert[i * 6 + 5], 1.0f);
+        RwIm3DVertexSetV(&sShadVert[i * 6 + 5], 1.0f);
 
         RwIm3DVertexSetNormal(&sShadVert[i * 6 + 0], 0.0f, 1.0f, 0.0f);
         RwIm3DVertexSetNormal(&sShadVert[i * 6 + 1], 0.0f, 1.0f, 0.0f);

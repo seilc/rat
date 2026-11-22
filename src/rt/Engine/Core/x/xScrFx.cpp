@@ -523,26 +523,26 @@ void xScrFXGlareRender(const xMat4x3& mat)
                     RwIm3DVertex* vert = sStripVert;
 
                     RwIm3DVertexSetPos(vert, g->pos.x - w.x - h.x, g->pos.y - w.y - h.y, g->pos.z - w.z - h.z);
-                    vert->u = 0.0f;
-                    vert->v = 0.0f;
+                    RwIm3DVertexSetU(vert, 0.0f);
+                    RwIm3DVertexSetV(vert, 0.0f);
                     RwIm3DVertexSetRGBA(vert, g->col.red, g->col.green, g->col.blue, g->col.alpha * val);
                     vert++;
 
                     RwIm3DVertexSetPos(vert, g->pos.x - w.x + h.x, g->pos.y - w.y + h.y, g->pos.z - w.z + h.z);
-                    vert->u = 0.0f;
-                    vert->v = 1.0f;
+                    RwIm3DVertexSetU(vert, 0.0f);
+                    RwIm3DVertexSetV(vert, 1.0f);
                     RwIm3DVertexSetRGBA(vert, g->col.red, g->col.green, g->col.blue, g->col.alpha * val);
                     vert++;
 
                     RwIm3DVertexSetPos(vert, g->pos.x + w.x - h.x, g->pos.y + w.y - h.y, g->pos.z + w.z - h.z);
-                    vert->u = 1.0f;
-                    vert->v = 0.0f;
+                    RwIm3DVertexSetU(vert, 1.0f);
+                    RwIm3DVertexSetV(vert, 0.0f);
                     RwIm3DVertexSetRGBA(vert, g->col.red, g->col.green, g->col.blue, g->col.alpha * val);
                     vert++;
 
                     RwIm3DVertexSetPos(vert, g->pos.x + w.x + h.x, g->pos.y + w.y + h.y, g->pos.z + w.z + h.z);
-                    vert->u = 1.0f;
-                    vert->v = 1.0f;
+                    RwIm3DVertexSetU(vert, 1.0f);
+                    RwIm3DVertexSetV(vert, 1.0f);
                     RwIm3DVertexSetRGBA(vert, g->col.red, g->col.green, g->col.blue, g->col.alpha * val);
                     vert++;
 

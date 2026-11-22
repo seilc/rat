@@ -901,8 +901,8 @@ static inline void set_vert(RwIm3DVertex& vert, F32 x, F32 y, F32 z, xColor colo
 
 static inline void set_vert_uv(RwIm3DVertex& vert, F32 u, F32 v)
 {
-    vert.u = u;
-    vert.v = v;
+    RwIm3DVertexSetU(&vert, u);
+    RwIm3DVertexSetV(&vert, v);
 }
 
 void xFXRibbon::get_normal(xVec3& norm, const xVec3& dir, F32 orient)

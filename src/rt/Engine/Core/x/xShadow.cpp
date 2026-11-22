@@ -506,12 +506,12 @@ void xShadowReceiveShadow(xEnt* ent, F32 shadowFactor, S32 shadowMode, RwMatrix*
                                 RwIm3DVertexSetPos(&imv[1], v1->x + c.x, v1->y + c.y, v1->z + c.z);
                                 RwIm3DVertexSetPos(&imv[2], v2->x + c.x, v2->y + c.y, v2->z + c.z);
 
-                                imv[0].u = vShad[0].x;
-                                imv[1].u = vShad[1].x;
-                                imv[2].u = vShad[2].x;
-                                imv[0].v = vShad[0].y;
-                                imv[1].v = vShad[1].y;
-                                imv[2].v = vShad[2].y;
+                                RwIm3DVertexSetU(&imv[0], vShad[0].x);
+                                RwIm3DVertexSetU(&imv[1], vShad[1].x);
+                                RwIm3DVertexSetU(&imv[2], vShad[2].x);
+                                RwIm3DVertexSetV(&imv[0], vShad[0].y);
+                                RwIm3DVertexSetV(&imv[1], vShad[1].y);
+                                RwIm3DVertexSetV(&imv[2], vShad[2].y);
 
                                 RwIm3DVertexSetRGBA(&imv[0], val, val, val, val);
                                 RwIm3DVertexSetRGBA(&imv[1], val, val, val, val);
@@ -896,13 +896,13 @@ static void ShadowRenderCachePolys(ProjectionParam* param, xShadowPoly* poly, S3
         RwIm3DVertexSetPos(&imv[1], poly->vert[1].x + cx, poly->vert[1].y + cy, poly->vert[1].z + cz);
         RwIm3DVertexSetPos(&imv[2], poly->vert[2].x + cx, poly->vert[2].y + cy, poly->vert[2].z + cz);
 
-        imv[0].u = vShad[0].x;
-        imv[1].u = vShad[1].x;
-        imv[2].u = vShad[2].x;
+        RwIm3DVertexSetU(&imv[0], vShad[0].x);
+        RwIm3DVertexSetU(&imv[1], vShad[1].x);
+        RwIm3DVertexSetU(&imv[2], vShad[2].x);
 
-        imv[0].v = vShad[0].y;
-        imv[1].v = vShad[1].y;
-        imv[2].v = vShad[2].y;
+        RwIm3DVertexSetV(&imv[0], vShad[0].y);
+        RwIm3DVertexSetV(&imv[1], vShad[1].y);
+        RwIm3DVertexSetV(&imv[2], vShad[2].y);
 
         U8 val = param->shadowValue;
         RwIm3DVertexSetRGBA(&imv[0], val, val, val, val);
