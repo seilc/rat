@@ -140,5 +140,7 @@ void zCinFX_BoneProbe_AR(const zCutsceneMgr*, NCINEntry* fxrec, RpAtomic* model,
 #if DEBUG || RELEASE
 void zCinFX_BoneProbe_Twk(const char* prefix_root, NCINEntry* fxrec);
 #endif
+void zCinFX_EntityBonePar_AR(const zCutsceneMgr*, NCINEntry* fxrec, RpAtomic* model, RwMatrix* animMat,
+                             U32 animIndex, U32, U32&);
 
 #endif
