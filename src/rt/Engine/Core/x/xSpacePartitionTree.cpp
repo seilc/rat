@@ -552,7 +552,6 @@ bool xSpacePartitionTree2D::intersect_line_setup(F32 x0, F32 y0, F32 x1, F32 y1,
 }
 
 #if DEBUG || RELEASE
-
 struct cb_test_intersect
 {
     S32& count;
@@ -707,5 +706,4 @@ void xSpacePartitionTree2D::debug_intersect_cell(const cell* c) const
         xDrawBox(x, y - 0.5f * r, z, x + r, y + 0.5f * r, z + r);
     }
 }
-
 #endif

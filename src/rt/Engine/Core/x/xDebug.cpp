@@ -151,7 +151,6 @@ static char xStatsFieldName[35][32] = {
     "x2",
     "x3"
 };
-
 #endif
 
 U32 gFrameCount;
@@ -172,7 +171,6 @@ static S32 mapVirtualIDToRealID(S32 virtualID)
             return i;
     return -1;
 }
-
 #endif
 
 void xDebugValidateFailed()
@@ -370,7 +368,6 @@ void xDebugVSync()
 {
     iDebugVSync();
 }
-
 #endif
 
 void xprintf(const char* fmt, ...)
@@ -535,7 +532,6 @@ U32 xDebugBoing()
     }
     return 0;
 }
-
 #endif
 
 S32 xDebugModeAdd(const char* debugModeName, xDebugModeCallback func)
@@ -621,7 +617,6 @@ void xDebugModeSetByName(const char* name)
             break;
         }
 }
-
 #endif
 
 void xDebugModeRegisterCallback(S32 mode, xDebugModeCallback func)
@@ -1596,7 +1591,6 @@ void xDebugGraphService()
         xDebugGraphSort();
     }
 }
-
 #endif
 
 void xDebugInit()
@@ -1665,7 +1659,6 @@ void xDebugReportLoadStats(char* msg, U32 flags)
         gReadTime = 0.0f;
     }
 }
-
 #endif
 
 void xDebugTimestampScreen()

@@ -485,7 +485,6 @@ MACRO_START                                                                     
 MACRO_STOP
 
 #ifdef RWDEBUG
-
 inline void _rpCollSectorCapsuleItInitMacro(RpCollSectorCapsuleIt* _it, RpCollTree* _tree, RwLine* _line, RwReal _radius)
 {
     RwReal pa = 0.0f, pb = 1.0f;
@@ -568,7 +567,6 @@ inline void _rpCollSectorCapsuleItFindNextEntriesMacro(RpCollSectorCapsuleIt* _i
 }
 
 #else
-
 #define _rpCollCapsuleItStepMacro(_it, _axis, _left, _right, _leftHi, _rightLo)                   \
 MACRO_START                                                                                       \
 {                                                                                                 \
@@ -653,7 +651,6 @@ MACRO_START                                                                     
     }                                                                                             \
 }                                                                                                 \
 MACRO_STOP
-
 #endif
 
 void RpCollTreeForAllCapsuleIntsec(RpCollTree* tree, RwLine* line, RwReal radius, RpCollTreeLeafCB callBack, void* data)

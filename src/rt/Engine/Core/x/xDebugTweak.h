@@ -266,7 +266,6 @@ inline void xDebugRemoveTweaks(const char*, xDebugRemoveTweaksCallback, void*) {
 #define xAUTOTWEAK_SELECT(prefix, name, v, labels, values, labels_size, cb, context, flags, process)
 #define xAUTOTWEAK_FLAG(prefix, name, v, mask, cb, context, flags)
 #define xAUTOTWEAK_MESSAGE(prefix, name, message, cb, context, flags, process)
-
 #endif
 
 #endif
