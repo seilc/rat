@@ -2,10 +2,11 @@
 """Draw a treemap of the Game units as a PNG, for the Discord progress post and the README.
 
 Usage: treemap.py CUR_DIR OUT.png [PREV_DIR]
-Every Game unit of the first version, grouped by folder and sized by code bytes (tiny units raised to a minimum box):
-green is complete, grey has nothing matched, and blue is partly matched, brighter the more is matched. With PREV_DIR,
-units whose match changed in any version get an outline, or a yellow fill when too small for one. Wide and short, with
-folder headings only, to stay readable on a phone without filling the screen.
+Every Game unit of every version, each from the first version with code for it, including units only later versions
+have, grouped by folder and sized by code bytes (tiny units raised to a minimum box): green is complete, grey has
+nothing matched, and blue is partly matched, brighter the more is matched. With PREV_DIR, units whose match changed in
+any version get an outline, or a yellow fill when too small for one. Wide and short, with folder headings only, to stay
+readable on a phone without filling the screen.
 Each directory holds <VERSION>_report/report.json, as for progress.py. Needs Pillow; progress.py doesn't, so a failure
 here only costs the post its image.
 """
@@ -147,10 +148,13 @@ def color(unit):
 def main():
     cur_dir, out, prev_dir = sys.argv[1], sys.argv[2], (sys.argv[3] if len(sys.argv) > 3 else None)
     changed = changed_units(cur_dir, prev_dir)
-    groups = {}
-    for key, unit in load(cur_dir, VERSIONS[0]).items():
-        code = int(unit.get("measures", {}).get("total_code", 0))
-        if code:
+    groups, seen = {}, set()
+    for ver in VERSIONS:
+        for key, unit in (load(cur_dir, ver) or {}).items():
+            code = int(unit.get("measures", {}).get("total_code", 0))
+            if not code or key in seen:
+                continue
+            seen.add(key)
             parts = key.split("/")[1:]  # without the game's source folder
             folder = "/".join([p for p in parts[:-1] if p != "Engine"][:2]) or "(top)"
             groups.setdefault(folder, []).append((code, key, unit))
