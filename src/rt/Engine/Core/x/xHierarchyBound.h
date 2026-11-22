@@ -2,11 +2,11 @@
 #define XHIERARCHYBOUND_H
 
 #include "xMath3.h"
-#include "xCollideSweptSphere.h"
 
 struct xBound;
 struct xSphereList;
 struct xSphereListInitData;
+struct xSweptSphere;
 
 struct xHierarchTweakInfo
 {
