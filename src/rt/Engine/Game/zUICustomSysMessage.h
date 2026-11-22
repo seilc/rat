@@ -18,6 +18,7 @@ public:
     virtual void PreUpdate(F32 dt);
     void ShowSystemMessage(xBaseEventCallback cb, U32, U32 _toCBEvent, const F32* _toCBParams, xBase* _toCBto,
                            xBase* _toCBParamWidget, U32 _toCBParamWidgetID, const char* sys_message);
+    S32 GetPortInititatedSystemMessage() const { return padPortInitiatedSystemMessage; }
 
     xBaseEventCallback cb_function;
     U32 toCBEvent;

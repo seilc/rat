@@ -21,6 +21,7 @@ struct Scene
 };
 
 U32 zUIIncrediblesGetNumScenes();
+void zUIIncrediblesSetSceneCurrent(U32 value);
 U32 zUIIncrediblesGetSceneCurrent();
 U32 zUIIncrediblesGetCurrentSceneNumber();
 Scene* zUIIncrediblesGetScene(U32 level);
