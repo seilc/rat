@@ -1055,7 +1055,7 @@ config.libs = [
             GameObject(Matching, "rt/Engine/Game/zCompPerceptionParams.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zCompLogicInstaKill.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zSweptCircle.cpp", sym="on"),
-            GameObject(NonMatching, "rt/Engine/Game/zCompLogicAlarmer.cpp", sym="on"),
+            GameObject(Matching, "rt/Engine/Game/zCompLogicAlarmer.cpp", sym="on"),
         ],
     },
     {

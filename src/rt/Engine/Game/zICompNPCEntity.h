@@ -43,7 +43,9 @@ private:
 
 public:
     void SetAnimState(U32 new_stateID, F32 blend, xModelInstance* model);
+    void SetAnimState(const char* new_state, F32 blend, xModelInstance* model);
     bool IsAnimationStopped(U32 AnimationID);
+    bool IsAnimationTranstitionFinished(U32 AnimationID);
     xVec3* GetPosition();
     xVec3* GetHeading();
     xEntFrame* GetFrame() { return frame; }
