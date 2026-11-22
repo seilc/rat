@@ -741,7 +741,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zPlayer.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zPlayerBase.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zPortal.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zReference.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zReference.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zRenderState.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zSaveLoad.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zScene.cpp"),

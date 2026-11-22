@@ -41,6 +41,9 @@ struct tweak_callback
 
     static tweak_callback create_update(event_callback on_update)
     { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, on_update, NULL, NULL }; return cb; }
+
+    static tweak_callback create_converter(convert_callback convert_mem_to_tweak, convert_callback convert_tweak_to_mem)
+    { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, convert_mem_to_tweak, convert_tweak_to_mem }; return cb; }
 };
 
 struct tweak_info
