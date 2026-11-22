@@ -124,4 +124,9 @@ static const zFMVFile zFMVFileTable[] = {
     { eFMVFile_Bonus12, "FMV\\Promo14", 0 }
 };
 
+const zFMVFile* zFMVFileGetFile(eFMVFile fmvId);
+const char* zFMVFileGetName(eFMVFile fmvId);
+U32 zFMVPlay(const char* name, U32 buttons, F32 time, U32 uSubtitlesAID, bool skippable, bool lockController,
+             bool displayDemoBlink);
+
 #endif

@@ -4,5 +4,6 @@
 #include "types.h"
 
 S32 zMenuRunning();
+void zMenuPause(bool bPause);
 
 #endif
