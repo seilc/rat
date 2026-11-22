@@ -26,6 +26,7 @@ public:
     static F32 skipTimeFlythrough;
     static F32 FLY_FRAMERATE;
 
+private:
     xCam* mPreviousCam;
     zFlyKey* mKeyFrames;
     S32 mNumKeys;
