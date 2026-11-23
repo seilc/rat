@@ -11,6 +11,7 @@ class zCompSteeringFlockingBrain : public zICompSteering
 public:
     void AllAttached();
     void PreUpdate(xScene*, F32);
+    xVec3* GetFlockingCenter() { return &flockingCenter; }
     void ApplySteering(zICompNPCEntity*, F32) {}
     void SetAttractor(xEnt*) {}
     void SetRepeller(xEnt*) {}
