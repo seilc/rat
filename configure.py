@@ -768,7 +768,7 @@ config.libs = [
             GameObject(Matching, "rt/Engine/Game/zZipLine.cpp"),
             GameObject(Matching, "rt/Engine/Core/gc/screenshot.c", sym="off"),
             GameObject(Matching, "rt/Engine/Core/x/xCollideSpherePolygon.cpp", sym="on"),
-            GameObject(NonMatching, "rt/Engine/Game/zAsync.cpp", sym="on"),
+            GameObject(Matching, "rt/Engine/Game/zAsync.cpp", sym="on"),
             GameObject(Matching, "rt/Engine/Core/x/xParticleBatch.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zSmoke.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zSplash.cpp", sym="on"),

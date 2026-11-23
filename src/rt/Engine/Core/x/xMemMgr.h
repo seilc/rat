@@ -335,6 +335,11 @@ inline void* xMemPushTemp(U32 amt)
 }
 #endif
 
+inline bool xMemScratchInUse()
+{
+    return scratch_mem_used != 0;
+}
+
 inline void* operator new(size_t size, xMemStaticType, U32 tag, U32 assetID = 0)
 {
     return xMEMALLOC_L(size, 0, tag, assetID, 650);
