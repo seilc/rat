@@ -14,6 +14,7 @@ struct zAnimCacheEntry
     U16 bone;
 };
 
+void zAnimCacheClear();
 void zAnimCacheCreateData(zCombatAttack* attackTableStates, U32 attackTableCount, xAnimPlay* animPlay);
 
 #endif
