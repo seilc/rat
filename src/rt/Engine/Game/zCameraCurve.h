@@ -49,6 +49,8 @@ public:
         BeadInfo mInfo;
     };
 
+    void Start(xCam&);
+    void Stop(xCam&);
     bool Activate(const xCamTransitionParams* transition, bool forceRestart);
 
 private:
