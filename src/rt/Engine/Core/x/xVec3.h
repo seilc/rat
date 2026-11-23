@@ -214,6 +214,7 @@ void xVec3Init(xVec3* v, F32 _x, F32 _y, F32 _z);
 void xVec3Init(xVec3& v, F32 _x, F32 _y, F32 _z);
 void xVec3AddC(xVec3* o, const xVec3* a, F32 _x, F32 _y, F32 _z);
 void xVec3Add(xVec3* o, const xVec3* a, const xVec3* b);
+void xVec3Add(xVec3& o, const xVec3& a);
 void xVec3AddTo(xVec3& a, const xVec3& b);
 void xVec3AddTo(xVec3* a, const xVec3* b);
 void xVec3AddScaled(xVec3* a, const xVec3* b, F32 scale);
