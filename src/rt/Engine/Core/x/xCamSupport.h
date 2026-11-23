@@ -19,7 +19,7 @@ public:
     config cfg;
 
 #if DEBUG || RELEASE
-    // xCamSupportPath::debug_flags
+    // debug_flags
     enum
     {
         DEBUG_FLAG_RENDER = 0x1

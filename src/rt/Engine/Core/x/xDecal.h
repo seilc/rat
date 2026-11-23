@@ -46,7 +46,7 @@ namespace xDecal
 
     struct emit_context
     {
-        // emit_context::flags
+        // flags
         enum
         {
             FLAG_NO_MOUNT = 0x1,

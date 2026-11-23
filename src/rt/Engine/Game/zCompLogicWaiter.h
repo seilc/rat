@@ -14,7 +14,7 @@ class zCompLogicWaiter : public zICompLogic
     static const U32 MAX_COLLISIONS = 12;
     static const S32 NUM_BOUNDS = 1;
 
-    // zCompLogicWaiter::collisionUserFlags
+    // collisionUserFlags
     static const U32 zCOLLISION_NEEDS_REFLECTION = 0x1;
     static const U32 zCOLLISION_NEEDS_DEPEN_OUTER_BOUND = 0x2;
     static const U32 zCOLLISION_NEEDS_DEPEN_INNER_BOUND;
