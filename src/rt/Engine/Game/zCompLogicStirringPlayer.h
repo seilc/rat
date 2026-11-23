@@ -3,8 +3,6 @@
 
 #include "zICompLogic.h"
 
-struct xAnimTable;
-
 class zCompLogicStirringPlayer : public zICompLogic
 {
     U32 whichPot;
@@ -15,15 +13,6 @@ class zCompLogicStirringPlayer : public zICompLogic
     F32 potRate[4];
     bool youLose;
     F32 maxMoveSpeed;
-
-public:
-    static void CreateAnimTable(xAnimTable* table);
-#if DEBUG || RELEASE
-    static void AddStaticTweaks();
-#endif
-
-    virtual void Update(xScene*, F32 dt);
-    virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
 };
 
 #endif
