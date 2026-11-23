@@ -13,7 +13,7 @@ class zCompLogicPourNSwirl : public zICompLogic
     F32 potTemp[4];
     F32 potPos[4];
     F32 potRate[4];
-    U8 youLose;
+    bool youLose;
     F32 maxMoveSpeed;
 
 public:

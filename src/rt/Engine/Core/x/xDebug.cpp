@@ -62,7 +62,7 @@ struct DebugModeData
     S32 virtualID;
 };
 
-static U8 gInRenderLoop;
+static bool gInRenderLoop;
 #if DEBUG || RELEASE
 static S32 g_STFU;
 static void (*g_msgnotify)(en_VERBOSE_MSGLEVEL, const char*);
@@ -630,12 +630,12 @@ void xDebugModeRegisterCallback(S32 mode, xDebugModeCallback func)
 
 void xDebugRenderLoopStart()
 {
-    gInRenderLoop = 1;
+    gInRenderLoop = true;
 }
 
 void xDebugRenderLoopEnd()
 {
-    gInRenderLoop = 0;
+    gInRenderLoop = false;
 }
 
 #if DEBUG || RELEASE
@@ -666,7 +666,7 @@ static char* sScreenCaptureNames[15];
 static char sScreenCaptureNamesBuffer[210];
 static U32 sScreenCaptureMode;
 static S32 sDumpFileNumber;
-static U8 sDumpFileValid;
+static bool sDumpFileValid;
 static char sDumpFile[512];
 char gScreenDumpPath[256];
 xScreenDump gScreenDump;
@@ -681,7 +681,7 @@ char* xDebugGetNextDumpFile()
             if (iFileOpen(sDumpFile, 0x11, &file) != 0) break;
             iFileClose(&file);
         }
-        sDumpFileValid = 1;
+        sDumpFileValid = true;
     }
 
     return sDumpFile;
@@ -689,7 +689,7 @@ char* xDebugGetNextDumpFile()
 
 void xDebugAdvanceDumpFile()
 {
-    sDumpFileValid = 0;
+    sDumpFileValid = false;
 }
 
 struct gMassiveDumpParams
@@ -955,7 +955,7 @@ void xDebugModeService()
             num = gSceneFrameCount;
         }
 
-        sDumpFileValid = 1;
+        sDumpFileValid = true;
 
         sprintf(sDumpFile, "%smovie%05d.bmp", gScreenDumpPath, num);
 

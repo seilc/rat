@@ -267,7 +267,7 @@ static U32 RWAttachPlugins()
 }
 
 #if DEBUG
-static U8 debugMemoryDoAsserts = 1;
+static bool debugMemoryDoAsserts = true;
 static S32 debugMallocBlockCount;
 static void* debugBlockArray[10000];
 static U32 debugBlockSizeArray[10000];
@@ -294,7 +294,7 @@ void debugMallocSave()
 void debugMallocDiff()
 {
     for (U32 j = 0; j < debugMallocBlockCount; j++) {
-        U8 found = 0;
+        bool found = false;
         for (U32 i = 0; i < debugMallocBlockCountSave; i++) {
             if (debugBlockArray[j] == debugBlockArraySave[i]) {
                 found = debugBlockSizeArray[j] == debugBlockSizeArraySave[i];
@@ -390,7 +390,7 @@ static U32 iRenderWareInit2()
     RwInt32 idx = RwEngineGetCurrentVideoMode();
     RwEngineGetVideoModeInfo(&sVideoMode, idx);
 #if DEBUG
-    debugMemoryDoAsserts = 0;
+    debugMemoryDoAsserts = false;
 #endif
     if (!RwEngineStart()) {
         RwEngineClose();
@@ -400,7 +400,7 @@ static U32 iRenderWareInit2()
         return 1;
     }
 #if DEBUG
-    debugMemoryDoAsserts = 1;
+    debugMemoryDoAsserts = true;
 #endif
     RwGameCubeGetXFBs(&xfb1, &xfb2);
     RwTextureSetReadCallBack(TextureRead);
