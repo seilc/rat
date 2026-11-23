@@ -57,15 +57,18 @@ public:
     virtual bool ShouldRenderPlayer() { return true; }
     virtual bool IsPaused() { return false; }
     virtual void SceneSetup();
-    virtual void Reset();
+    virtual void Reset()
+    {
+        gameDone = false; SwitchGameState(GAMESTATE_GAME_START);
+    }
     virtual void Update(F32 dt);
-    virtual void Render();
+    virtual void Render() {}
     virtual void PostRender2d() const {}
     virtual void PostRender3d() const {}
     virtual void Exit() {}
     virtual void SetRespawnPosition(xMat4x3*) {}
 #if DEBUG || RELEASE
-    virtual void AddTweaks(const char*);
+    virtual void AddTweaks(const char*) {}
 #endif
 
     static zMiniGameBase* currentMiniGame;

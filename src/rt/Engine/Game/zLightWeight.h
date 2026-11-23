@@ -7,12 +7,12 @@ class zLightweightSystemBase
 {
 public:
     virtual void SceneSetup() {}
-    inline virtual void Reset();
-    inline virtual void Update(F32);
-    inline virtual void Render();
+    virtual void Reset() {}
+    virtual void Update(F32) {}
+    virtual void Render() {}
     virtual void PostRender2d() const {}
     virtual void PostRender3d() const {}
-    inline virtual void Exit();
+    virtual void Exit() {}
 };
 
 #define MAX_LIGHTWEIGHT_SYSTEMS 10
