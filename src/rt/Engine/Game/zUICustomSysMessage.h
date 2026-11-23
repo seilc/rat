@@ -19,6 +19,7 @@ public:
     void ShowSystemMessage(xBaseEventCallback cb, U32, U32 _toCBEvent, const F32* _toCBParams, xBase* _toCBto,
                            xBase* _toCBParamWidget, U32 _toCBParamWidgetID, const char* sys_message);
     S32 GetPortInititatedSystemMessage() const { return padPortInitiatedSystemMessage; }
+    void SetInfoTimer(F32 value) { infoTimer = value; }
 
     xBaseEventCallback cb_function;
     U32 toCBEvent;
@@ -49,6 +50,8 @@ private:
     F32 infoTimer;
 };
 
+extern bool gSysMessageManager_active;
+extern bool gPassAnyActveController;
 extern zUI* pSysMessageManager;
 extern zUICustom* pSysMessageManager_Custom;
 
