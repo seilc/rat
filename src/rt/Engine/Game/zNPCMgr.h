@@ -13,6 +13,8 @@ struct zSurroundedBy
     xVec3 moveToPos;
 };
 
+void zNPCMgr_switchedNavmeshes();
+
 extern zSurroundedBy gSurroundedBy[32];
 extern S32 gSurroundedByTotal;
 
