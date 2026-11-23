@@ -709,8 +709,8 @@ static S32 xSG_cb_leader_svproc(void* cltdata, st_XSAVEGAME_DATA* original_xsgda
     st_XSAVEGAME_LEADER leader = { 0 };
     char fundata[] = "--TakeMeToYourLeader--";
 
-    strncpy(leader.gameLabel, xsg->label, sizeof(leader.gameLabel));
-    leader.gameLabel[sizeof(leader.gameLabel) - 1] = '\0';
+    strncpy(leader.gameLabel, xsg->label, XSG_MAXLEN_LABEL);
+    leader.gameLabel[XSG_MAXLEN_LABEL - 1] = '\0';
     leader.gametime = xsg->playtime;
     leader.progress = xsg->progress;
     leader.thumbIconIdx = xsg->thumbIconIdx;
