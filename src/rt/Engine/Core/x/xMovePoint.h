@@ -48,4 +48,6 @@ inline xMovePoint* xMovePointGetPoint(const xMovePoint* m, U16 n)
     return m->nodes[n];
 }
 
+inline F32 xMovePointGetDelay(const xMovePoint* m); // UNUSED
+
 #endif
