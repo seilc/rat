@@ -10,6 +10,8 @@ struct xEntDrive;
 class zICompNPCEntityParams : public zCompParameters
 {
 public:
+    zICompNPCEntityParams() { SetDefaults(); }
+
     F32 shadowRadiusPar;
     F32 shadowRadiusRatio;
     F32 modelScale;
@@ -24,8 +26,26 @@ public:
     bool complexShadow : 1;
     bool useBoundingBox : 1;
     bool useShadowRadiusRatio : 1;
-    
-    virtual void SetDefaults();
+
+    virtual void SetDefaults()
+    {
+        shadowRadiusPar = 1.0f;
+        shadowRadiusRatio = 1.25f;
+        modelScale = 1.0f;
+        boundScale = 1.0f;
+        boundBone = -1;
+        boundRadius = 0.0f;
+        shadowStrength = 0.3f;
+
+        boundOffset = xVec3::m_Null;
+
+        hasCollision = true;
+        noAttackDuringCinematic = true;
+        castShadow = true;
+        complexShadow = false;
+        useBoundingBox = false;
+        useShadowRadiusRatio = true;
+    }
 };
 
 class zICompNPCEntity : public zIComponent<zNPCBase>, public xEnt
