@@ -107,7 +107,7 @@ void iDebugScreenDump(RwCamera* camera)
     xDebugAdvanceDumpFile();
     OSReport("Dumping frame buffer to '%s'\n", fname);
 
-    if (iFileOpen(fname, 0x9E, &file) != 0) {
+    if (iFileOpen(fname, IFILE_WRITE | IFILE_FULLPATH | IFILE_HOST_IO | 0xC, &file) != 0) {
         xASSERT_MSG_L(622, false, ("Cannot open file %s - is your path correct?", fname));
         return;
     }
@@ -184,7 +184,7 @@ void iDebugDumpEFB(char* name)
 
     strcpy(filename, name);
     strcat(filename, ".raw");
-    iFileOpen(filename, 0x8E, &file);
+    iFileOpen(filename, IFILE_WRITE | IFILE_HOST_IO | 0xC, &file);
 
     for (y = 0; y < 528; y++) {
         U8* bp = buf;

@@ -1403,7 +1403,7 @@ void xModelRenderLogEnd()
     }
 
     if (render_log_output_to_file) {
-        S32 flags = 0xE;
+        S32 flags = IFILE_WRITE | 0xC;
         xFile file;
 
         if (iFileOpen(render_log_output_file, flags, &file))

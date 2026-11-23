@@ -2107,7 +2107,7 @@ namespace {
         void save_tweaks(filter_mode filter)
         {
             xFile file;
-            S32 flags = 0x8E;
+            S32 flags = IFILE_WRITE | IFILE_HOST_IO | 0xC;
             char buffer[128];
 
             if (iFileOpen(dump_file, flags, &file)) return;
@@ -2286,7 +2286,7 @@ namespace {
             bool opened;
             U32 fsize;
 
-            opened = iFileOpen(dump_file, 0x81, &file) == 0;
+            opened = iFileOpen(dump_file, IFILE_READ | IFILE_HOST_IO, &file) == 0;
             refresh_dump_file();
             if (!opened) {
                 goto done;
@@ -2399,7 +2399,7 @@ namespace {
 
             char fname[] = "automenu.ini";
             xFile file;
-            S32 flags = 0x8E;
+            S32 flags = IFILE_WRITE | IFILE_HOST_IO | 0xC;
             char buffer[256], write_buffer[512];
 
             if (iFileOpen(fname, flags, &file)) {
@@ -2445,7 +2445,7 @@ namespace {
             bool opened; U32 fsize;
             char name[256];
 
-            opened = iFileOpen(fname, 0x81, &file) == 0;
+            opened = iFileOpen(fname, IFILE_READ | IFILE_HOST_IO, &file) == 0;
             if (!opened) {
                 goto done;
             }

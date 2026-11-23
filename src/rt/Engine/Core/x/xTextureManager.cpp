@@ -319,7 +319,7 @@ void xTextureManager::reload(xTextureHandle* pHandle)
 
     const char* pHipFilename = xST_xAssetID_HIPFullPath(pNode->info.aid);
     xASSERT_L(464, pHipFilename);
-    U32 res = iFileOpen(pHipFilename, 0x41, pFile);
+    U32 res = iFileOpen(pHipFilename, IFILE_READ | 0x40, pFile);
     xASSERT_L(469, !res &&"error opening file");
     iFileSeek(pFile, pNode->info.sector * iFileGetSectorSize(XFILE_DRIVE_CDVD), 0);
 

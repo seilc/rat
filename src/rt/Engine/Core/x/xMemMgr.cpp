@@ -122,7 +122,7 @@ void xMemDebug_SoakLog(U32 SceneId)
     if (!DBSSoakLogOpen) {
         DBSSoakLogOpen = true;
         iprintf(DBSFileName);
-        iFileOpen(DBSFileName, 0x8E, &DBSSoakLogFile);
+        iFileOpen(DBSFileName, IFILE_WRITE | IFILE_HOST_IO | 0xC, &DBSSoakLogFile);
         sprintf(soakbuf, "GC\r\n");
         iFileWrite(&DBSSoakLogFile, soakbuf, strlen(soakbuf));
         DBSLastSceneId = SceneId;
@@ -472,7 +472,7 @@ void xMemMgrUsageTrackerSetDumpFile(char* filename)
 void xMemMgrUsageTrackerDumpLog(char* fmt, ...)
 {
     if (!sMemMgrTrckLogIsOpen) {
-        iFileOpen(xglobals->MemTrackLogFileName, 0x18E, &sMemMgrTrckLog);
+        iFileOpen(xglobals->MemTrackLogFileName, IFILE_WRITE | IFILE_HOST_IO | IFILE_TEXT | 0xC, &sMemMgrTrckLog);
         sMemMgrTrckLogIsOpen = true;
     }
     char logfilebuf[2048];

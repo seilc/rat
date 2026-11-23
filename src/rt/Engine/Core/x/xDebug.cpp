@@ -417,14 +417,14 @@ void xDebugReportAssertion(const char* sfile, S32 line, const char* func, const 
     static bool first = true;
 
     if (first) {
-        result = iFileOpen("Assert.log", 0x86, &file);
+        result = iFileOpen("Assert.log", IFILE_WRITE | IFILE_HOST_IO | 0x4, &file);
         if (result == 0) {
             sprintf(workingBuffer, "%s\tPLATFORM\tREGION\tFILE\tLINE\tFUNC\tMESSAGE\r\n", zStealthDebugGetAssertionHeader());
             iFileWrite(&file, workingBuffer, strlen(workingBuffer));
             first = false;
         }
     } else {
-        result = iFileOpen("Assert.log", 0x281, &file);
+        result = iFileOpen("Assert.log", IFILE_READ | IFILE_HOST_IO | IFILE_APPEND, &file);
     }
 
     if (result != 0) {
@@ -678,7 +678,7 @@ char* xDebugGetNextDumpFile()
             xFile file;
             sprintf(sDumpFile, "%sdump%05d.bmp", gScreenDumpPath, sDumpFileNumber);
             sDumpFileNumber++;
-            if (iFileOpen(sDumpFile, 0x11, &file) != 0) break;
+            if (iFileOpen(sDumpFile, IFILE_READ | IFILE_FULLPATH, &file) != 0) break;
             iFileClose(&file);
         }
         sDumpFileValid = true;
@@ -756,7 +756,7 @@ static bool xDebugCreateBMP(const char* fname, S32 width, S32 height, xFile* fil
     mhdr.bmInfo.biClrUsed = 0;
     mhdr.bmInfo.biClrImportant = 0;
 
-    if (iFileOpen(fname, 0x9E, file) != 0) {
+    if (iFileOpen(fname, IFILE_WRITE | IFILE_FULLPATH | IFILE_HOST_IO | 0xC, file) != 0) {
         xASSERT_MSG_L(1410, false, fname);
         return false;
     }
