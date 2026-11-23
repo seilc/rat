@@ -765,7 +765,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zUIMgr.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zUIModel.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zUIText.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zUIUserString.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zUIUserString.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zVar.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zVolume.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zWaterhose.cpp"),
