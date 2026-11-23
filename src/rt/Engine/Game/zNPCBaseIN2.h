@@ -14,7 +14,27 @@ protected:
     zNPCInstance* inst;
 
 public:
-    virtual void change_instance(zNPCInstance* new_inst);
+    virtual void change_instance(zNPCInstance* new_inst)
+    {
+        if (inst) {
+            inst->surrender_data();
+        }
+
+        inst = new_inst;
+        reset();
+
+        if (inst->get_flags().visibilityCull) {
+            xEntVisibilityCullOn(this);
+        } else {
+            xEntVisibilityCullOff(this);
+        }
+
+        if (!inst->get_flags().living || !inst->get_flags().activated) {
+            deactivate();
+        } else {
+            activate();
+        }
+    }
     virtual ~zNPCBaseIN2();
     virtual void init(zNPCInstance* init_inst);
     virtual void timestep(xScene* xscn, F32 dt);

@@ -59,6 +59,14 @@ public:
 
     zStoredSpawn storedSpawn;
 
+    zNPCBaseIN2* surrender_data()
+    {
+        zNPCBaseIN2* old_data = npc_data;
+        npc_data = NULL;
+        return old_data;
+    }
+
+    instance_flags get_flags() const { return flags; }
     U32 get_type() const { return type; }
 
     zNPCAssetIN2* get_npc_asset() const

@@ -37,6 +37,8 @@ protected:
 public:
     typedef bool(*testFunc)(xEnt*, behavior*, behavior*);
 
+    behavior();
+
     virtual bool inAnimState(const char* state, F32 look_ahead, xModelInstance* model) const;
     virtual bool inAnimState(U32 stateID, F32 look_ahead, xModelInstance* model) const;
     virtual bool inAnimStateRange(U32 stateIDstart, U32 stateIDend, F32 look_ahead, xModelInstance* model) const;
@@ -45,7 +47,7 @@ public:
     virtual bool isAnimStateStopped(const char* state, xModelInstance* model) const;
     virtual bool isAnimStateStopped(U32 stateID, xModelInstance* model) const;
     virtual U32 getThrowAnimCode();
-    inline virtual const char* getName();
+    virtual const char* getName() { return "behavior"; }
     virtual void setOwner(xEnt* new_owner);
     virtual xEnt* getOwner();
     virtual bool systemEvent(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID);
@@ -130,6 +132,27 @@ public:
     U32 behaviorFlags;
 };
 
+template <class T>
+class zBehaviorImplementation : public behavior
+{
+protected:
+    T* owner;
+
+public:
+    virtual void setOwner(xEnt* new_owner)
+    {
+        owner = (T*)new_owner;
+        behavior::setOwner(new_owner);
+    }
+
+    virtual void enterBehavior(const behavior* prev_behavior)
+    {
+        enterBehavior((const zBehaviorImplementation<T>*)prev_behavior);
+    }
+
+    virtual void enterBehavior(const zBehaviorImplementation<T>* prev_behavior) {}
+};
+
 struct behavior_node
 {
     S32 priority;
@@ -206,6 +229,16 @@ public:
     virtual void debugRender();
     virtual void addTweaks(const char*);
 #endif
+
+    void createTransientStack(S32 inMax);
+    void addBehavior(behavior* new_behavior, S32 priority);
+
+    template <class T>
+    void addBehavior(zBehaviorImplementation<T>* new_behavior, T* owner, S32 priority)
+    {
+        new_behavior->setOwner(owner);
+        addBehavior(new_behavior, priority);
+    }
 };
 
 #endif
