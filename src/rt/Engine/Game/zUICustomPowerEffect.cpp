@@ -2,6 +2,7 @@
 #include "zUICustomPowerEffect.h"
 
 #include "xDebugTweak.h"
+#include "xFont.h"
 #include "xRand.h"
 #include "xRenderState.h"
 #include "xString.h"
