@@ -194,12 +194,16 @@ config.reconfig_deps = []
 # Can be overridden in libraries or objects
 config.scratch_preset_id = None
 
-# xParSys includes "xPTankPool.h": __FILE__ needs that exact file. Made on Linux with any wrapper: wibo resolves file
-# names case-insensitively, so without it __FILE__ is "xPtankPool.h"
+# xParSys includes "xPTankPool.h", zToss.h "zlightweight.h": __FILE__ needs each exact file. Made on Linux with any
+# wrapper: wibo resolves file names case-insensitively, so without them __FILE__ is the file's own name
 if sys.platform == "linux":
-    ptank_alias = Path("src/rt/Engine/Core/x/xPTankPool.h")
-    if not ptank_alias.is_symlink():
-        ptank_alias.symlink_to("xPtankPool.h")
+    for alias, target in (
+        ("src/rt/Engine/Core/x/xPTankPool.h", "xPtankPool.h"),
+        ("src/rt/Engine/Game/zlightweight.h", "zLightWeight.h"),
+    ):
+        alias = Path(alias)
+        if not alias.is_symlink():
+            alias.symlink_to(target)
 
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
@@ -835,7 +839,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zUICustomSysMessage.cpp", sym="on"),
             GameObject(Matching, "rt/Engine/Core/gc/iARAMTmp.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zSparkEmitter.cpp", sym="on"),
-            GameObject(NonMatching, "rt/Engine/Game/zToss.cpp", sym="on"),
+            GameObject(Matching, "rt/Engine/Game/zToss.cpp", sym="on"),
             GameObject(Matching, "rt/Engine/Core/x/xIM.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zParticleCustom.cpp", sym="on"),
             GameObject(NonMatching, "rt/Engine/Game/zShrapnelEmitter.cpp", sym="on"),

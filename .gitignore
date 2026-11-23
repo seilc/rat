@@ -26,8 +26,9 @@ build.ninja
 ctx.*
 *.ctx
 
-# Include-spelling alias (configure.py)
+# Include-spelling aliases (configure.py)
 /src/rt/Engine/Core/x/xPTankPool.h
+/src/rt/Engine/Game/zlightweight.h
 
 # Generated configs
 objdiff.json
