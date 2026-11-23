@@ -31,8 +31,11 @@ public:
     static zPad* GetDebugPad();
 
     bool Active();
+    void Clear();
     bool On(U32 button);
     bool Pressed(U32 button);
+    bool Released(U32 button);
+    bool Enabled();
 
     S32 GetPadPort()
     {
