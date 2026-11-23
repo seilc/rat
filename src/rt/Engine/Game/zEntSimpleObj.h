@@ -51,4 +51,10 @@ struct zEntSimpleObj : zEnt, zEntAnimData
     xEntOpacity opacity;
 };
 
+void zEntSimpleObj_Init(zEntSimpleObj* ent, xEntAsset* asset, bool physparams, bool candestroy);
+void zEntSimpleObj_Setup(zEntSimpleObj* ent);
+void zEntSimpleObj_Reset(zEntSimpleObj* ent, xScene*);
+void zEntSimpleObjEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget,
+                          U32 toParamWidgetID);
+
 #endif
