@@ -2162,8 +2162,8 @@ namespace {
                     if (min_key_len < v.name.size) min_key_len = v.name.size;
                 }
             min_key_len++;
-            if (min_key_len > ARRAY_LENGTH(whitespace_buffer) - 1) {
-                min_key_len = ARRAY_LENGTH(whitespace_buffer) - 1;
+            if (min_key_len > sizeof(whitespace_buffer) - 1) {
+                min_key_len = sizeof(whitespace_buffer) - 1;
             }
 
             U16 parent = INVALID_INDEX;
@@ -2188,8 +2188,8 @@ namespace {
                 if (min_key_len < v.name.size) min_key_len = v.name.size;
             }
             min_key_len++;
-            if (min_key_len > ARRAY_LENGTH(whitespace_buffer) - 1) {
-                min_key_len = ARRAY_LENGTH(whitespace_buffer) - 1;
+            if (min_key_len > sizeof(whitespace_buffer) - 1) {
+                min_key_len = sizeof(whitespace_buffer) - 1;
             }
 
             U16 parent = INVALID_INDEX;
@@ -3056,24 +3056,24 @@ ADD_FLAG_TWEAK_L(U8, 3767)
 void xDebugAddTweak(const char* name, xVec3* v, const tweak_callback* cb, void* context, U32 flags)
 {
     char buffer[128];
-    sprintf(buffer, "%.*sX", ARRAY_LENGTH(buffer) - 2, name);
+    sprintf(buffer, "%.*sX", sizeof(buffer) - 2, name);
     xDebugAddTweak(buffer, &v->x, -1000000000.0f, 1000000000.0f, cb, context, flags | DTF_BUFFER);
-    sprintf(buffer, "%.*sY", ARRAY_LENGTH(buffer) - 2, name);
+    sprintf(buffer, "%.*sY", sizeof(buffer) - 2, name);
     xDebugAddTweak(buffer, &v->y, -1000000000.0f, 1000000000.0f, cb, context, flags | DTF_BUFFER);
-    sprintf(buffer, "%.*sZ", ARRAY_LENGTH(buffer) - 2, name);
+    sprintf(buffer, "%.*sZ", sizeof(buffer) - 2, name);
     xDebugAddTweak(buffer, &v->z, -1000000000.0f, 1000000000.0f, cb, context, flags | DTF_BUFFER);
 }
 
 void xDebugAddTweak(const char* name, xColor* v, const tweak_callback* cb, void* context, U32 flags)
 {
     char buffer[128];
-    sprintf(buffer, "%.*s\001Red", ARRAY_LENGTH(buffer) - 6, name);
+    sprintf(buffer, "%.*s\001Red", sizeof(buffer) - 6, name);
     xDebugAddTweak(buffer, &v->r, 0, 255, cb, context, flags | DTF_BUFFER);
-    sprintf(buffer, "%.*s\002Green", ARRAY_LENGTH(buffer) - 6, name);
+    sprintf(buffer, "%.*s\002Green", sizeof(buffer) - 6, name);
     xDebugAddTweak(buffer, &v->g, 0, 255, cb, context, flags | DTF_BUFFER);
-    sprintf(buffer, "%.*s\003Blue", ARRAY_LENGTH(buffer) - 6, name);
+    sprintf(buffer, "%.*s\003Blue", sizeof(buffer) - 6, name);
     xDebugAddTweak(buffer, &v->b, 0, 255, cb, context, flags | DTF_BUFFER);
-    sprintf(buffer, "%.*sAlpha", ARRAY_LENGTH(buffer) - 6, name);
+    sprintf(buffer, "%.*sAlpha", sizeof(buffer) - 6, name);
     xDebugAddTweak(buffer, &v->a, 0, 255, cb, context, flags | DTF_BUFFER);
 }
 
