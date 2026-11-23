@@ -98,6 +98,7 @@ struct xVec3
     void Combine(const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
     void AddCombine(const xVec3& v, const xVec3& a, F32 scale0, const xVec3& b, F32 scale1);
     void Average(const xVec3& a, const xVec3& b, const xVec3& c);
+    inline F32 NormalizeSafe(); // UNUSED
 };
 
 #define xVec3AddMacro(o, a, b) ((o)->x = (a)->x + (b)->x, (o)->y = (a)->y + (b)->y, (o)->z = (a)->z + (b)->z)

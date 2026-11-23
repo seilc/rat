@@ -17,6 +17,8 @@ public:
     virtual bool have_arrived() const;
 
     bool is_stuck() const;
+    bool PickRandomPos(const xVec3&, F32, F32, xVec3&) const; // UNUSED
+    inline bool PickRandomPos(const xVec3& center, F32 radius, xVec3& pos) const; // UNUSED
 
 private:
     xVec3 last_destination;

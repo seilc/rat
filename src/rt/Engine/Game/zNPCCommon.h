@@ -51,6 +51,13 @@ enum en_npctyp
         addBehavior((state), -1);                                                                 \
     }
 
+#if DEBUG || RELEASE
+#define zNPC_STORE_EVENT(from, to, to_event, to_param, to_param_widget)                           \
+    StoreEvent((from), (to), (to_event), (F32*)(to_param), (to_param_widget))
+#else
+#define zNPC_STORE_EVENT(from, to, to_event, to_param, to_param_widget)
+#endif
+
 namespace zNPC {
 
 class zNPCCommonMoveToTransient;
@@ -79,6 +86,10 @@ public:
     {
         manager.addBehavior(new_behavior, this, priority);
     }
+
+#if DEBUG || RELEASE
+    void StoreEvent(xBase* from, xBase* to, U32 to_event, F32* to_param, xBase* to_param_widget);
+#endif
 
     virtual ~zNPCCommon();
     virtual void init(zNPCInstance* init_inst);
