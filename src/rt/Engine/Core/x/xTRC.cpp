@@ -459,9 +459,7 @@ static void render_message(const char* s)
     tb.render(true);
 }
 
-#define MAX_MESSAGE_LEN 256
-
-static char composed_message_text[MAX_MESSAGE_LEN];
+static char composed_message_text[256];
 static const char* message_text;
 
 void xTRCClearPadMsg()
@@ -509,7 +507,7 @@ static S32 DisplayMessage(S32 port, TRCState state)
         }
         message_text = k_CONTROLLER_MISSING_MESSAGE;
         U32 len_message_text = strlen(message_text);
-        if (len_message_text < MAX_MESSAGE_LEN) {
+        if (len_message_text < sizeof(composed_message_text)) {
             const char* msg = message_text;
             char c;
             while ((c = *msg++) != '\0' && c != '<') {}
