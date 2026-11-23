@@ -9,6 +9,12 @@
 #include <rpworld.h>
 #include <rpptank.h>
 
+#define xIF_SPHERE_VISIBLE(c, r)                \
+    RwSphere worldsph;                          \
+    worldsph.center = (c);                      \
+    worldsph.radius = (r);                      \
+    if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph) != rwSPHEREOUTSIDE)
+
 enum { BLOCK_SIZE = 80 };
 
 enum ptank_group_type

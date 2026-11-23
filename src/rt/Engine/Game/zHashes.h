@@ -25,6 +25,7 @@
 #define HASH_fx_streak2                         0x9F681A2B // xStrHash("fx_streak2")
 #define HASH_gc_water_lightkit                  0x01092433 // xStrHash("gc_water_lightkit")
 #define HASH_gc_wbump                           0xBE266DB6 // xStrHash("gc_wbump")
+#define HASH_glare_hit_64                       0x68726BF6 // xStrHash("glare_hit_64")
 #define HASH_gloss_edge                         0xB8C2351E // xStrHash("gloss_edge")
 #define HASH_grate_circular_room_bb             0x216EE348 // xStrHash("grate_circular_room_bb")
 #define HASH_grate_rotating_tower_bb            0x64F7DEF5 // xStrHash("grate_rotating_tower_bb")
