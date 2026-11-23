@@ -75,6 +75,7 @@ typedef enum _xCollsIdx
 
 // xCollis::flags
 #define k_HIT_IT ((U32)(1 << 0))
+#define k_HIT_CALC_TOHIT ((U32)(1 << 10))
 #define k_HIT_CALC_HDNG ((U32)(1 << 12))
 #define k_HIT_CALC_TRI ((U32)(1 << 13))
 
