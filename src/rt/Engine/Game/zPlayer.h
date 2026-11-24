@@ -167,6 +167,11 @@ struct zPlayer : zEnt
     virtual F32 InitialDepenetrationVelocity();
     virtual void ReactiveAnimationCollided();
 
+    zCombat* GetCombat()
+    {
+        return zCombatGetFrom(this);
+    }
+
     struct mblur_data
     {
         xModelBlur::config_data cfg;

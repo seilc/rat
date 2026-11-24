@@ -698,7 +698,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zAnimList.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zAssetTypes.cpp"),
             GameObject(Matching, "rt/Engine/Game/zBase.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zCheat.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zCheat.cpp"),
             GameObject(Matching, "rt/Engine/Game/zCollGeom.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zCommonPlayer.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zConditional.cpp"),
