@@ -101,7 +101,7 @@ void bound_damage(xBound& bound, xEnt* fromEnt, S32 player_damage, S32 obj_damag
                 continue;
             }
 
-            const xSphere* player_spheres[5];
+            const xSphere* player_spheres[zPlayer::MAX_EXTRA_SPHERES];
             S32 num_spheres = CURPLAYERS[i]->GetCollisionSpheres(player_spheres);
             for (S32 j = 0; j < num_spheres; j++) {
                 xBound test_bound;

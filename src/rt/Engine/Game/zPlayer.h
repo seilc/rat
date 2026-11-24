@@ -43,6 +43,8 @@ struct zPlayerCheckPoint
 
 struct zPlayer : zEnt
 {
+    static const S32 MAX_EXTRA_SPHERES = 5;
+
     zPlayerActionManager actionManager;
     S32 index;
 
@@ -178,7 +180,7 @@ struct zPlayer : zEnt
     eBrainType brain_id;
     xVec3 floor_pos;
     xVec3 floor_normal;
-    xSphere extraSpheres[5];
+    xSphere extraSpheres[MAX_EXTRA_SPHERES];
     S32 numExtraSpheres;
     S32 zPlayerFlags;
     F32 collision_underneath_height;

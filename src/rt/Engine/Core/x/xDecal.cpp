@@ -2546,7 +2546,7 @@ void xDecal::sphere_emit(const emit_context& ec, const xVec3& center, F32 radius
             coll.dist = HUGE;
             coll.flags = 0x1100;
 
-            const xSphere* extra_spheres[5];
+            const xSphere* extra_spheres[zPlayer::MAX_EXTRA_SPHERES];
             S32 num_spheres = CURPLAYERS[i]->GetCollisionSpheres(extra_spheres);
             for (S32 j = 0; j < num_spheres; j++) {
                 xBound tempBound;

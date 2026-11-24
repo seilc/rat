@@ -478,7 +478,7 @@ namespace
             return true;
         }
 
-        xSphere* spheres[5];
+        xSphere* spheres[zPlayer::MAX_EXTRA_SPHERES];
         S32 count = CURPLAYERS[0]->GetCollisionSpheres((const xSphere**)spheres);
         S32 i;
         for (i = 0; i < count; i++) {
