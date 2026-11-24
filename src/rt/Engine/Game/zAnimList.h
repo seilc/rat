@@ -5,6 +5,8 @@
 
 struct xAnimTable;
 
+void zAnimListInit();
+void zAnimListExit();
 xAnimTable* zAnimListGetTable(U32 id);
 S32 zAnimListGetNumUsed(U32 id);
 
