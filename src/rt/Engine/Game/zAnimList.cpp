@@ -71,7 +71,7 @@ void zAnimListInit()
                 xAnimFile* afile = xAnimFileNew(buf, "", 0, NULL);
                 xASSERT_L(113, afile);
 
-                xAnimTableNewState(atbl, "idle", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, xAnimDefaultBeforeEnter, NULL, NULL);
+                xAnimTableNewState(atbl, "idle", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, xAnimDefaultBeforeEnter, NULL, NULL);
                 xAnimTableAddFile(atbl, afile, "idle");
 
                 anused[i]++;
@@ -95,7 +95,7 @@ void zAnimListInit()
 
                         xAnimTableAddFile(atbl, afile, astnames[j]);
 
-                        xAnimTableNewState(atbl, astnames[j + 10], AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, xAnimDefaultBeforeEnter, NULL, NULL);
+                        xAnimTableNewState(atbl, astnames[j + 10], AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, xAnimDefaultBeforeEnter, NULL, NULL);
                         xAnimTableAddFile(atbl, afile, astnames[j + 10]);
 
                         anused[i]++;

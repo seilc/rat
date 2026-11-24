@@ -23,7 +23,7 @@ struct rgba_node
 
 void zCompLogicStirringPlayer::CreateAnimTable(xAnimTable* table)
 {
-    xAnimTableNewState(table, "STIRRINGPLAYER_L_MOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "STIRRINGPLAYER_L_MOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 
     zICompLogic::CreateAnimTable(table);
 }

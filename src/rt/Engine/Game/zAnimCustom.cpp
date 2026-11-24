@@ -140,9 +140,9 @@ void zAnimCustomPlay(U32 id, xModelInstance* model, U32 outStateID, bool loopAni
             state.Next = NULL;
             state.Name = sCustomStateName;
             state.ID = id;
-            state.Flags = AnimState_TempCopy;
+            state.Flags = AnimState_CopyOnWrite;
             if (loopAnim)
-                state.Flags |= AnimState_Loop;
+                state.Flags |= AnimState_EndLoop;
             else
                 state.Flags |= outStateID ? AnimState_EndTransition : AnimState_EndStop;
 

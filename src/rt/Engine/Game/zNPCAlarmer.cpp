@@ -36,14 +36,14 @@ void zNPCAlarmer::CompParametersInit()
 
 void zNPCAlarmer::CreateAnimTable(xAnimTable* table)
 {
-    xAnimTableNewState(table, "TEMP03_L_IDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_IDLECROUCH01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_MOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_ALARMIDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_IDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_IDLECROUCH01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_MOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_ALARMIDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
     xAnimTableNewState(table, "TEMP03_L_ALARMREADY01", AnimState_EndStop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 
-    xAnimTableNewState(table, "TEMP03_L_CARRYIDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_CARRYMOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_CARRYIDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_CARRYMOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
     xAnimTableNewState(table, "TEMP03_L_TAKE", AnimState_EndStop, 0x4000000, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 
     zICompLogic::CreateAnimTable(table);
@@ -123,14 +123,14 @@ void zNPCAlarmer::Render()
 #if !RELEASE
 void zNPCAlarmer::CreateAnimTable(xAnimTable* table)
 {
-    xAnimTableNewState(table, "TEMP03_L_IDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_IDLECROUCH01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_MOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_ALARMIDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_IDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_IDLECROUCH01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_MOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_ALARMIDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
     xAnimTableNewState(table, "TEMP03_L_ALARMREADY01", AnimState_EndStop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 
-    xAnimTableNewState(table, "TEMP03_L_CARRYIDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
-    xAnimTableNewState(table, "TEMP03_L_CARRYMOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_CARRYIDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "TEMP03_L_CARRYMOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
     xAnimTableNewState(table, "TEMP03_L_TAKE", AnimState_EndStop, 0x4000000, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 
     zICompLogic::CreateAnimTable(table);

@@ -18,7 +18,7 @@ xTWEAKABLE F32 PLAYER_TOLERANCE_DISTANCE2 = xsqr(PLAYER_TOLERANCE_DISTANCE);
 
 void zNPCChefIdle::create_anim_table(xAnimTable* table)
 {
-    xAnimTableNewState(table, "CHEF_IDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "CHEF_IDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 }
 
 void zNPCChefIdle::enterBehavior(const zNPCCommonBehavior*)
@@ -39,7 +39,7 @@ void zNPCChefIdle::debugRender()
 
 void zNPCChefRun::create_anim_table(xAnimTable* table)
 {
-    xAnimTableNewState(table, "CHEF_MOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "CHEF_MOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 }
 
 // UNUSED: needed to match (speculative code)

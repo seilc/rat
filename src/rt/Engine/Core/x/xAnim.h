@@ -29,15 +29,15 @@ enum
 };
 
 // xAnimState::Flags
-enum
+enum exAnimStateFlags
 {
-    AnimState_ModeMask = 0x70,
     AnimState_EndStop = 0x0,
-    AnimState_Loop = 0x10,
+    AnimState_EndLoop = 0x10,
     AnimState_EndTransition = 0x20,
-    AnimState_BlendOut = 0x30,
-    AnimState_EndTransitionSelf = 0x40,
-    AnimState_TempCopy = 0x400,
+    AnimState_EndFadeOut = 0x30,
+    AnimState_EndTranToSelf = 0x40,
+    AnimState_EndMask = 0x70,
+    AnimState_CopyOnWrite = 0x400,
     AnimState_TempUsed = 0x80000000
 };
 

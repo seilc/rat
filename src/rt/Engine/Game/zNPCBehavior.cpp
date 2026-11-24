@@ -137,7 +137,7 @@ void move::add_tweaks(const char* prefix)
 // UNUSED: needed to match (speculative code)
 void take_damage::create_anim_table(xAnimTable* table)
 {
-    xAnimTableNewState(table, "TD_T_Hit01", AnimState_TempCopy | AnimState_EndTransition, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, zCombatHitChooser, NULL, NULL);
+    xAnimTableNewState(table, "TD_T_Hit01", AnimState_CopyOnWrite | AnimState_EndTransition, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, zCombatHitChooser, NULL, NULL);
     xAnimTableNewState(table, "TD_T_HitMelee01", AnimState_EndTransition, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 }
 

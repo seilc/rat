@@ -18,7 +18,7 @@ xTWEAKABLE F32 RUN_GET_NEW_DEST_TIME = 8.0f;
 
 void zNPCThiefIdle::create_anim_table(xAnimTable* table)
 {
-    xAnimTableNewState(table, "THIEF_L_IDLE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "THIEF_L_IDLE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 }
 
 void zNPCThiefIdle::enterBehavior(const zNPCCommonBehavior*)
@@ -38,7 +38,7 @@ void zNPCThiefIdle::debugRender()
 
 void zNPCThiefRun::create_anim_table(xAnimTable* table)
 {
-    xAnimTableNewState(table, "THIEF_L_MOVE01", AnimState_Loop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+    xAnimTableNewState(table, "THIEF_L_MOVE01", AnimState_EndLoop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
 }
 
 // UNUSED: needed to match (speculative code)
