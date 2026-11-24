@@ -101,7 +101,7 @@ void zAnimCustomAdd(U32 id, xAnimFile* data, bool hasPhysics)
     }
 
     if (hasPhysics) {
-        data->FileFlags |= 0x50000;
+        data->FileFlags |= AnimFile_PhysicsX | AnimFile_PhysicsZ;
         xAnimCalcPhysicsData(data, data);
     }
 

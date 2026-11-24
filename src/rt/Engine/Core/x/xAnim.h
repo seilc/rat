@@ -25,7 +25,11 @@ struct xAnimPlay;
 enum
 {
     AnimFile_Reverse = 0x1000,
-    AnimFile_BackAndForth = 0x2000
+    AnimFile_BackAndForth = 0x2000,
+    AnimFile_PhysicsX = 0x10000,
+    AnimFile_PhysicsY = 0x20000,
+    AnimFile_PhysicsZ = 0x40000,
+    AnimFile_PhysicsYaw = 0x80000
 };
 
 // xAnimState::Flags
