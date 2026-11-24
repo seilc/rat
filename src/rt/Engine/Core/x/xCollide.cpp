@@ -147,7 +147,7 @@ U32 xSphereHitsBox(const xSphere* a, const xBox* b, xCollis* coll)
 
     coll->dist = isx.dist;
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         xVec3Copy(&coll->tohit, &isx.norm);
     }
 
@@ -196,7 +196,7 @@ U32 xSphereHitsOBB(const xSphere* a, const xBox* b, const xMat4x3* m, xCollis* c
         xMat3x3RMulVec(&coll->depen, m, &coll->depen);
     }
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         xMat3x3RMulVec(&coll->tohit, m, &coll->tohit);
     }
 
@@ -242,7 +242,7 @@ U32 xSphereHitsOBB_nu(const xSphere* s, const xBox* b, const xMat4x3* m, xCollis
         xMat3x3RMulVec(&coll->depen, &mnormal, &coll->depen);
     }
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         xMat3x3RMulVec(&coll->tohit, &mnormal, &coll->tohit);
     }
 
@@ -431,7 +431,7 @@ static RpCollisionTriangle* sphereHitsEnvCB(RpIntersection* isx, RpWorldSector* 
         xVec3Copy(&coll->norm, (xVec3*)&tri->normal);
     }
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         xVec3Copy(&coll->tohit, &tohit);
     }
 
@@ -493,7 +493,7 @@ U32 xSphereHitsModel(const xSphere* b, const xModelInstance* m, xCollis* coll)
     coll->dist = HUGE;
 
     if (coll->flags & k_HIT_CALC_TRI) {
-        coll->flags |= 0x400;
+        coll->flags |= k_HIT_CALC_TOHIT;
     }
 
     RpAtomicForAllIntersections(m->Data, &isx, sphereHitsModelCB, &context);
@@ -502,7 +502,7 @@ U32 xSphereHitsModel(const xSphere* b, const xModelInstance* m, xCollis* coll)
         xCollideCalcTri(coll->tri, *m, *(xVec3*)&context.localx.t.sphere.center, coll->tohit);
     }
 
-    if (coll->flags & 0x400)
+    if (coll->flags & k_HIT_CALC_TOHIT)
         xMat3x3RMulVec(&coll->tohit, mat, &coll->tohit);
 
     if (coll->flags & 0x800)
@@ -1092,7 +1092,7 @@ U32 xBoxHitsSphere(const xBox* a, const xSphere* b, xCollis* coll)
 
     coll->dist = isx.dist;
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         xVec3Copy(&coll->tohit, &isx.norm);
     }
 
@@ -1735,18 +1735,18 @@ U32 xSphereHitsVCylinder(const xSphere* sph, const xCylinder* cyl, xCollis* coll
     F32 max_xzdist = sr + cyl->r;
     if (xzdist2 > xsqr(max_xzdist) - 1e-5f) return FALSE;
 
-    if ((coll->flags & 0x200) || (coll->flags & 0x400) || (coll->flags & 0x800)) {
+    if ((coll->flags & 0x200) || (coll->flags & k_HIT_CALC_TOHIT) || (coll->flags & 0x800)) {
         coll->norm.Sub(sph->center, cyl->center);
         coll->norm.y = 0.0f;
         coll->norm.safe_normalize(xVec3::m_Null);
     }
 
-    if ((coll->flags & 0x100) || (coll->flags & 0x400) || (coll->flags & 0x800)) {
+    if ((coll->flags & 0x100) || (coll->flags & k_HIT_CALC_TOHIT) || (coll->flags & 0x800)) {
         F32 xzcenter_dist = xsqrt(xzdist2);
         coll->dist = max_xzdist - xzcenter_dist;
     }
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         coll->tohit.Scale(coll->norm, -(sr - coll->dist));
         if (ydist < -cyl->h) {
             coll->tohit.y = -cyl->h;
@@ -1778,18 +1778,18 @@ U32 xCylinderHitsSphere(const xCylinder* cyl, const xSphere* sph, xCollis* coll)
     F32 max_xzdist = sr + cyl->r;
     if (xzdist2 > xsqr(max_xzdist)) return FALSE;
 
-    if ((coll->flags & 0x200) || (coll->flags & 0x400) || (coll->flags & 0x800)) {
+    if ((coll->flags & 0x200) || (coll->flags & k_HIT_CALC_TOHIT) || (coll->flags & 0x800)) {
         coll->norm.Sub(cyl->center, sph->center);
         coll->norm.y = 0.0f;
         coll->norm.safe_normalize(xVec3::m_Null);
     }
 
-    if ((coll->flags & 0x100) || (coll->flags & 0x400) || (coll->flags & 0x800)) {
+    if ((coll->flags & 0x100) || (coll->flags & k_HIT_CALC_TOHIT) || (coll->flags & 0x800)) {
         F32 xzcenter_dist = xsqrt(xzdist2);
         coll->dist = max_xzdist - xzcenter_dist;
     }
 
-    if (coll->flags & 0x400) {
+    if (coll->flags & k_HIT_CALC_TOHIT) {
         coll->tohit.Scale(coll->norm, -(cyl->r - coll->dist));
         if (ydist < -cyl->h) {
             coll->tohit.y = -cyl->h;
@@ -2152,7 +2152,7 @@ U32 xRayHitsModelSingle(const xRay3* r, const xModelInstance* m, xCollis* coll)
     coll->flags &= ~k_HIT_IT;
     coll->dist = HUGE;
     if (coll->flags & k_HIT_CALC_TRI) {
-        coll->flags |= 0x400;
+        coll->flags |= k_HIT_CALC_TOHIT;
     }
 
     RpAtomicForAllIntersections(m->Data, &isx, rayHitsModelCB, coll);
@@ -2422,7 +2422,7 @@ static RpCollisionTriangle* sphereHitsEnv3CB(RpIntersection* isx, RpWorldSector*
         xVec3Copy(&colls[idx].norm, (xVec3*)&tri->normal);
     }
 
-    if (colls->flags & 0x400) {
+    if (colls->flags & k_HIT_CALC_TOHIT) {
         xVec3Copy(&colls[idx].tohit, &tohit);
     }
 
@@ -2480,7 +2480,7 @@ S32 xSphereHitsModel3(const xSphere* b, const xModelInstance* m, xCollis* colls,
 
     for (i = 0; i < ncolls; i++)
         if (colls[i].flags & k_HIT_CALC_TRI)
-            colls[i].flags |= 0x400;
+            colls[i].flags |= k_HIT_CALC_TOHIT;
 
     isx.type = rpINTERSECTSPHERE;
     memcpy(&isx.t.sphere, b, sizeof(RwSphere));
