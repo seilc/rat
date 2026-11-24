@@ -2,8 +2,6 @@
 #include "zMiniGameCongaLine.h"
 
 #include "containers.h"
-#include "xCam.h"
-#include "xPTankPool.h"
 #include "zGlobals.h"
 #include "zPlayer.h"
 #include "zScene.h"

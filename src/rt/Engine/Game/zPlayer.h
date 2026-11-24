@@ -10,6 +10,10 @@
 #include "zNPCAttacker.h"
 #include "xEntDrive.h"
 #include "zCombat.h"
+#include "containers.h"
+#include "xCam.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
 
 struct zScene;
 struct zSlideCam;

@@ -3,9 +3,9 @@
 
 #include "containers.h"
 #include "xFont.h"
+#include "xPad.h"
 #include "zEvent.h"
 #include "zGlobals.h"
-#include "zPlayer.h"
 #include "zScene.h"
 
 #include "decomp.h"
