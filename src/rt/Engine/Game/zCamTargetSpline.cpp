@@ -8,7 +8,7 @@
 void zCamTargetSpline::create()
 {
     zCam2Player::create();
-    cfg_common.priority = 0x81;
+    cfg_common.priority = 129;
 }
 
 void zCamTargetSpline::stop()

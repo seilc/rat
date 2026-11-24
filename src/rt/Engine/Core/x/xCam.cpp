@@ -454,7 +454,7 @@ xCamBlend* xCamGroup::create_blend()
     if (!cam) return NULL;
     cam->create();
     cam->owner = 'XCBL';
-    cam->cfg_common.priority = 0xff;
+    cam->cfg_common.priority = 255;
     return cam;
 }
 
