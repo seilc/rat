@@ -231,6 +231,8 @@ inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmi
 #define xTWEAK_FLAG(name, v, mask, cb, context, flags) xDebugAddFlagTweak(name, v, mask, cb, context, flags)
 #define xTWEAK_BRANCH(name, cb, context, flags) xDebugAddBranchTweak(name, cb, context, flags)
 #define xTWEAK_BOOL(name, v, cb, context, flags) xDebugAddTweak(name, v, cb, context, flags)
+#define xTWEAK_VEC3(name, v, cb, context, flags) xDebugAddTweak(name, v, cb, context, flags)
+#define xTWEAK_COLOR(name, v, cb, context, flags) xDebugAddTweak(name, v, cb, context, flags)
 #define xTWEAK_MESSAGE(name, message, cb, context, flags) xDebugAddTweak(name, message, cb, context, flags)
 #define xTWEAK_REMOVE(name) xDebugRemoveTweak(name)
 
@@ -261,6 +263,8 @@ inline void xDebugRemoveTweaks(const char*, xDebugRemoveTweaksCallback, void*) {
 #define xTWEAK_FLAG(name, v, mask, cb, context, flags)
 #define xTWEAK_BRANCH(name, cb, context, flags)
 #define xTWEAK_BOOL(name, v, cb, context, flags)
+#define xTWEAK_VEC3(name, v, cb, context, flags)
+#define xTWEAK_COLOR(name, v, cb, context, flags)
 #define xTWEAK_MESSAGE(name, message, cb, context, flags)
 #define xTWEAK_REMOVE(name) xDebugRemoveTweak(name)
 

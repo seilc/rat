@@ -174,7 +174,7 @@ void xLightInit(xBase* b, xLightAsset* tasset)
     sprintf(buffer, "%s|AttachedTo", name);
     xTWEAK_MESSAGE(buffer, light->attachedToName, NULL, NULL, 0x3);
     sprintf(buffer, "%s|AttachedOffset", name);
-    xTWEAK_BOOL(buffer, &light->attachedOffset, NULL, NULL, 0x2);
+    xTWEAK_VEC3(buffer, &light->attachedOffset, NULL, NULL, 0x2);
 
     sprintf(buffer, "%s|LightCardScale", name);
     xTWEAK(buffer, &light->lightCardScale, 0.0f, 100.0f, NULL, NULL, 0x2);

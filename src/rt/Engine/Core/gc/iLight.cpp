@@ -229,7 +229,7 @@ void iLightAddTweak(iLight* light, const char* name)
 
     char buffer[128];
     sprintf(buffer, "%s|Position", name);
-    xTWEAK_BOOL(buffer, &light->sph.center, &positionUpdateCallback, light, 0x2);
+    xTWEAK_VEC3(buffer, &light->sph.center, &positionUpdateCallback, light, 0x2);
     sprintf(buffer, "%s|Radius", name);
     xTWEAK(buffer, &light->sph.r, 0.0f, 1000.0f, &radiusUpdateCallback, light, 0x2);
     sprintf(buffer, "%s|ColorR", name);
