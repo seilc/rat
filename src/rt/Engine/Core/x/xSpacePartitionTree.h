@@ -103,6 +103,7 @@ public:
     void clear();
     void intersect_point(F32 x, F32 y, intersect_callback cb, void* context); // UNUSED
     S32 intersect_point(entry_data** results, S32 max_results, F32 x, F32 y); // UNUSED
+    inline void intersect_circle(F32 x, F32 y, F32 r, intersect_callback cb, void* context); // UNUSED
     void intersect_rect(F32 x0, F32 y0, F32 x1, F32 y1, intersect_callback cb, void* context);
     S32 intersect_rect(entry_data** results, S32 max_results, F32 x0, F32 y0, F32 x1, F32 y1);
     void intersect_line(F32 x0, F32 y0, F32 x1, F32 y1, intersect_callback cb, void* context); // UNUSED
