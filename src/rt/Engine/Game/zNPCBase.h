@@ -63,6 +63,7 @@ public:
 #endif
     virtual void Reset();
 
+    eNPCType GetNPCType() { return type; }
     void GetChildren(zNPCBase** children, S32* number);
     zICompLogic* GetLogicComponent() { return npcLogicComp; }
     zICompNPCEntity* GetEntityComponent() { return npcEntityComp; }
