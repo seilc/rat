@@ -130,22 +130,13 @@ struct zPlayer : zEnt
 
     bool Get_cutsceneReady() const { return (zPlayerFlags >> 14) & 0x1; }
 
-    bool Get_humanPlayer() const
-    {
-        return (zPlayerFlags >> 18) & 0x1;
-    }
+    bool Get_humanPlayer() const { return (zPlayerFlags >> 18) & 0x1; }
 
     void Clear_cutsceneReady() { zPlayerFlags &= ~(1 << 14); }
 
-    bool Get_floor_collision() const
-    {
-        return (zPlayerFlags >> 1) & 0x1;
-    }
+    bool Get_floor_collision() const { return (zPlayerFlags >> 1) & 0x1; }
 
-    bool Get_collisionOn() const
-    {
-        return (zPlayerFlags >> 3) & 0x1;
-    }
+    bool Get_collisionOn() const { return (zPlayerFlags >> 3) & 0x1; }
 
     zPad* GetPad()
     {
