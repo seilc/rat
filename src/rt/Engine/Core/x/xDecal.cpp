@@ -3192,11 +3192,7 @@ void xDecalEmitter::update(F32 dt)
         lerp(scale, unit.frac, node0.scale, node1.scale);
 
         (F32&)unit.mat.pad3 = unit.cull_size * scale;
-        RwSphere worldsph;
-        worldsph.center = (const RwV3d&)unit.mat.pos;
-        worldsph.radius = (const F32&)unit.mat.pad3;
-
-        if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph)) {
+        xIF_SPHERE_VISIBLE((const RwV3d&)unit.mat.pos, (const F32&)unit.mat.pad3) {
             pool.next();
             if (!pool.valid()) {
                 break;

@@ -130,33 +130,30 @@ static void par_sprite_update(xParSys& sys, xParGroup& group)
 
     xParCmdTex* tex = group.m_cmdTex;
     for (xPar* p = group.m_root; p != NULL; p = p->m_next) {
-        RwSphere worldsph;
-        worldsph.center = (RwV3d&)p->m_pos;
-        worldsph.radius = p->m_size;
-        if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph) == rwSPHEREOUTSIDE) continue;
-        
-        pool.next();
-        if (!pool.valid())
-            break;
+        xIF_SPHERE_VISIBLE((RwV3d&)p->m_pos, p->m_size) {
+            pool.next();
+            if (!pool.valid())
+                break;
 
-        xVec3& loc = *pool.pos;
-        loc = p->m_pos;
-        loc.AddScale(offset_up, p->m_size);
+            xVec3& loc = *pool.pos;
+            loc = p->m_pos;
+            loc.AddScale(offset_up, p->m_size);
 
-        pool.color->r = p->m_c[0];
-        pool.color->g = p->m_c[1];
-        pool.color->b = p->m_c[2];
-        pool.color->a = p->m_c[3] > min_alpha ? p->m_c[3] : (U8)min_alpha;
-        pool.size->assign(p->m_size, p->m_size);
+            pool.color->r = p->m_c[0];
+            pool.color->g = p->m_c[1];
+            pool.color->b = p->m_c[2];
+            pool.color->a = p->m_c[3] > min_alpha ? p->m_c[3] : (U8)min_alpha;
+            pool.size->assign(p->m_size, p->m_size);
 
-        if (tex) {
-            pool.uv[0].x = tex->x1 + p->m_texIdx[0] * tex->unit_width;
-            pool.uv[0].y = tex->y1 + p->m_texIdx[1] * tex->unit_height;
-            pool.uv[1].x = tex->x1 + (p->m_texIdx[0] + 1) * tex->unit_width;
-            pool.uv[1].y = tex->y1 + (p->m_texIdx[1] + 1) * tex->unit_height;
-        } else {
-            pool.uv[0].assign(0.0f, 0.0f);
-            pool.uv[1].assign(1.0f, 1.0f);
+            if (tex) {
+                pool.uv[0].x = tex->x1 + p->m_texIdx[0] * tex->unit_width;
+                pool.uv[0].y = tex->y1 + p->m_texIdx[1] * tex->unit_height;
+                pool.uv[1].x = tex->x1 + (p->m_texIdx[0] + 1) * tex->unit_width;
+                pool.uv[1].y = tex->y1 + (p->m_texIdx[1] + 1) * tex->unit_height;
+            } else {
+                pool.uv[0].assign(0.0f, 0.0f);
+                pool.uv[1].assign(1.0f, 1.0f);
+            }
         }
     }
 

@@ -105,11 +105,7 @@ S32 zFX::punch_snow::update(U8* mem, S32 count, ptank_pool& pool_, F32 dt, void*
 
         p->size += p->cfg->size_delta * dt;
 
-        RwSphere worldsph;
-        worldsph.center = p->pos.m_RwV3d;
-        worldsph.radius = p->size;
-
-        if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph) != rwSPHEREOUTSIDE) {
+        xIF_SPHERE_VISIBLE(p->pos.m_RwV3d, p->size) {
             pool.next();
             if (!pool.valid()) {
                 end = p;

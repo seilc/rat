@@ -236,11 +236,7 @@ S32 zFrozoneBlast::updateBlastParticles(U8* mem, S32 count, ptank_pool& apool, F
             continue;
         }
 
-        RwSphere worldsph;
-        worldsph.center = p->loc.m_RwV3d;
-        worldsph.radius = MAX(p->scaleX, p->scaleY);
-
-        if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph) != rwSPHEREOUTSIDE) {
+        xIF_SPHERE_VISIBLE(p->loc.m_RwV3d, MAX(p->scaleX, p->scaleY)) {
             pool.next();
             if (!pool.valid()) {
                 end = p;
@@ -580,11 +576,7 @@ S32 zFrozoneBlast::updateMistParticles(U8* mem, S32 count, ptank_pool& apool, F3
         p->scale += mistGrowthRate * dt;
         p->loc.AddScale(p->dir, dt);
 
-        RwSphere worldsph;
-        worldsph.center = p->loc.m_RwV3d;
-        worldsph.radius = p->scale;
-
-        if (RwCameraFrustumTestSphere(xglobals->screen->icam, &worldsph) != rwSPHEREOUTSIDE) {
+        xIF_SPHERE_VISIBLE(p->loc.m_RwV3d, p->scale) {
             pool.next();
             if (!pool.valid()) {
                 end = p;
