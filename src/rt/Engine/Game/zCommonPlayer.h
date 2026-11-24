@@ -309,6 +309,8 @@ public:
     virtual void SetUpgrade(zCommonPlayerUpgradeType forThisType, zCommonPlayerUpgradeLevel level);
 
     zCommonPlayerUpgradeLevel GetUpgradeLevel(zCommonPlayerUpgradeType forThisType);
+    void GiveExperiencePoints(U32 points);
+    U32 GetExperiencePoints() { return expPoints; }
 };
 
 #endif

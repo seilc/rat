@@ -23,6 +23,8 @@ struct AwardXP
 class zEconomics
 {
 public:
+    enum { MAX_LEVELS = 15, MAX_NPC_TYPES = 16, MAX_COMBOS = 10, MAX_UPGRADES = 12 };
+
     static void Init(xIniFile* ini);
     zEconomics();
     void ParseINI(xIniFile* ini);
@@ -44,11 +46,11 @@ public:
     static S32 lastUpgradeValue;
 
 private:
-    Threshold thresholdPointsRange[15];
-    AwardXP NPCAwardXP[16][15];
-    S32 missionCompleteBonus[15];
-    AwardXP NPCCombo[10];
-    S32 upgrades[12];
+    Threshold thresholdPointsRange[MAX_LEVELS];
+    AwardXP NPCAwardXP[MAX_NPC_TYPES][MAX_LEVELS];
+    S32 missionCompleteBonus[MAX_LEVELS];
+    AwardXP NPCCombo[MAX_COMBOS];
+    S32 upgrades[MAX_UPGRADES];
 };
 
 #endif
