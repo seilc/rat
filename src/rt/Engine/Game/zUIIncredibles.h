@@ -14,6 +14,7 @@ enum ePauseType
 
 bool zUIIncrediblesAdvanceStage();
 ePauseType zUIIncrediblesGetPauseType();
+void zUIIncrediblesSetPauseType(ePauseType type);
 U32 zUIIncrediblesGetGameProgress();
 
 #endif

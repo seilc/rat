@@ -19,6 +19,7 @@ public:
     void ShowSystemMessage(xBaseEventCallback cb, U32, U32 _toCBEvent, const F32* _toCBParams, xBase* _toCBto,
                            xBase* _toCBParamWidget, U32 _toCBParamWidgetID, const char* sys_message);
     S32 GetPortInititatedSystemMessage() const { return padPortInitiatedSystemMessage; }
+    void SetPortInititatedSystemMessage(S32 value) { padPortInitiatedSystemMessage = value; }
     void SetInfoTimer(F32 value) { infoTimer = value; }
 
     xBaseEventCallback cb_function;
