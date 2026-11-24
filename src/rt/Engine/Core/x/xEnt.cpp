@@ -822,8 +822,8 @@ void xEntReset(xEnt* ent, const xVec3& pos, const xVec3& ang)
     xBaseReset(ent, ent->asset);
 
     ent->baseFlags |= k_XBASE_IS_ENTITY;
-    ent->flags &= (U8)0x4;
-    ent->flags |= (U8)(ent->asset->flags & ~0x4);
+    ent->flags &= k_XENT_IS_VISIBILITY_CULLED;
+    ent->flags |= (U8)(ent->asset->flags & ~k_XENT_IS_VISIBILITY_CULLED);
     ent->miscflags = 0;
     ent->moreFlags = (ent->moreFlags & 0xff00) | ent->asset->moreFlags;
 

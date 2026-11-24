@@ -216,7 +216,7 @@ inline U32 xEntIsEnabled(const xEnt* ent)
 
 inline void xEntVisibilityCullOn(xEnt* ent)
 {
-    ent->flags |= (U8)0x4;
+    ent->flags |= k_XENT_IS_VISIBILITY_CULLED;
     if (ent->visUpdate) {
         ent->visUpdate(ent);
     }
@@ -224,7 +224,7 @@ inline void xEntVisibilityCullOn(xEnt* ent)
 
 inline void xEntVisibilityCullOff(xEnt* ent)
 {
-    ent->flags &= (U8)~0x4;
+    ent->flags &= (U8)~k_XENT_IS_VISIBILITY_CULLED;
     if (ent->visUpdate) {
         ent->visUpdate(ent);
     }
@@ -368,7 +368,7 @@ inline U32 xEntIsVisible(const xEnt* ent)
     }
 #endif
 
-    return (ent->flags & (k_XENT_IS_VISIBLE | 0x4 | 0x80)) == k_XENT_IS_VISIBLE;
+    return (ent->flags & (k_XENT_IS_VISIBLE | k_XENT_IS_VISIBILITY_CULLED | 0x80)) == k_XENT_IS_VISIBLE;
 }
 
 #endif
