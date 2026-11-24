@@ -38,8 +38,8 @@ public:
     virtual ~zNPCBaseIN2();
     virtual void init(zNPCInstance* init_inst);
     virtual void timestep(xScene* xscn, F32 dt);
-    virtual void activate();
-    virtual void deactivate();
+    virtual void activate() {}
+    virtual void deactivate() {}
     virtual void preupdate(F32 dt);
     virtual void reset()
     {
@@ -78,7 +78,7 @@ public:
     virtual void ProjectileCollisionOn();
     virtual void ProjectileCollisionOff();
     virtual void PastUpdateDistCleanup();
-    virtual void VisibilityCullCleanup();
+    virtual void VisibilityCullCleanup() {}
 
 #if DEBUG || RELEASE
     virtual void ForceEnterDeathState();
