@@ -1137,7 +1137,7 @@ void xFXRibbon::debug_scene_enter()
 
     static xFXRibbon dummy_ribbon;
     static config_type dummy_cfg;
-    dummy_ribbon.create(0);
+    dummy_ribbon.create(FALSE);
     load_default_config(dummy_cfg);
     dummy_ribbon.set_config(&dummy_cfg);
     dummy_ribbon.add_tweaks("Dummy", NULL, NULL, NULL);
