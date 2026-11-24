@@ -108,7 +108,7 @@ public:
     virtual void debugRender();
     virtual void addStaticTweaks();
     virtual void addTweaks(const char*);
-    virtual const char* getTweakName();
+    virtual const char* getTweakName() { return getName(); }
 #endif
 
 protected:
@@ -139,18 +139,11 @@ protected:
     T* owner;
 
 public:
-    virtual void setOwner(xEnt* new_owner)
-    {
-        owner = (T*)new_owner;
-        behavior::setOwner(new_owner);
-    }
-
-    virtual void enterBehavior(const behavior* prev_behavior)
-    {
+    virtual void enterBehavior(const zBehaviorImplementation<T>* prev_behavior) {}
+    virtual void enterBehavior(const behavior* prev_behavior) {
         enterBehavior((const zBehaviorImplementation<T>*)prev_behavior);
     }
-
-    virtual void enterBehavior(const zBehaviorImplementation<T>* prev_behavior) {}
+    virtual void setOwner(xEnt* new_owner) { owner = (T*)new_owner; behavior::setOwner(new_owner); }
 };
 
 struct behavior_node

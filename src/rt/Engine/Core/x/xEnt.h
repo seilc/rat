@@ -47,6 +47,7 @@ typedef void(*xEntCollisPostCallback)(xEnt*, xScene*, F32, xEntCollis*);
 typedef U32(*xEntCollisDepenQueryCallback)(xEnt*, xEnt*, xScene*, F32, xCollis*);
 
 // xEntFrame::mode
+#define k_XENT_SET_DPOS (1 << 1)
 #define k_XENT_SET_ROT (1 << 4)
 
 // xEnt::flags

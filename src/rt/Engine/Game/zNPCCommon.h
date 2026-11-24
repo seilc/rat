@@ -91,6 +91,8 @@ public:
     void StoreEvent(xBase* from, xBase* to, U32 to_event, F32* to_param, xBase* to_param_widget);
 #endif
 
+    bool GetParameter(const char* name, F32* value, F32 defaultValue);
+
     virtual ~zNPCCommon();
     virtual void init(zNPCInstance* init_inst);
     virtual void timestep(xScene* xscn, F32 dt);
@@ -156,6 +158,12 @@ public:
     virtual bool IsGrabbable();
     virtual F32 WeaponGetMaxRange();
     virtual bool HasRangeWeapon();
+
+    behavior* get_current_behavior()
+    {
+        return manager.getCurrentBehavior();
+    }
+
     virtual void BehaviorUpdate(F32);
     virtual void UpdateFrozen(F32 dt);
     virtual void before_anim_matrices(xAnimPlay* play, xQuat* quat, xVec3* tran, S32 boneCount);
