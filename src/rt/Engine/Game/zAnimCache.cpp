@@ -66,7 +66,7 @@ void zAnimCacheCreateData(zCombatAttack* attackTableStates, U32 attackTableCount
             continue;
         }
 
-        for (U32 j = 0; j < ARRAY_LENGTH(attackTableStates[i].effectBones); j++) {
+        for (U32 j = 0; j < MAX_EFFECT_BONES; j++) {
             attackTableStates[i].effectBones[j].positionCache = NULL;
             if (attackTableStates[i].effectBones[j].bone != 0xFFFF) {
                 zAnimCacheEntry newCacheEntry;

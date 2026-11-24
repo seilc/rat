@@ -44,6 +44,10 @@ enum
     MAX_ARGS = 32,
     MAX_RECUR = 16,
     MAX_DYNAMICS = 64,
+    MAX_CODEPAGES = 16,
+    MAX_CACHED_MODELS = 8,
+    MAX_CPU_TIMES = 1,
+    MAX_FORMAT_TAGS = 128,
     CONTEXT_BUFFER_BLOCK_SIZE = 64,
     CHAR_VERT_SIZE = 6,
     CHAR_VERT_SIZE_SHADOWED = 12,
@@ -196,7 +200,7 @@ font_asset default_font_assets[] = {
 };
 
 font_data active_fonts[MAX_FONTS];
-RwTexture* codepage_textures[16];
+RwTexture* codepage_textures[MAX_CODEPAGES];
 size_t active_fonts_size;
 size_t codepage_textures_size;
 basic_rect<F32>* codepage_tex_bounds;
@@ -673,11 +677,11 @@ struct model_cache_entry
 
 struct model_pool
 {
-    RwMatrix mat[8];
-    xModelInstance model[8];
+    RwMatrix mat[MAX_CACHED_MODELS];
+    xModelInstance model[MAX_CACHED_MODELS];
 };
 
-model_cache_entry model_cache[8];
+model_cache_entry model_cache[MAX_CACHED_MODELS];
 bool model_cache_inited;
 
 void init_model_cache()
@@ -690,7 +694,7 @@ void init_model_cache()
     model_pool& pool = *(model_pool*)data;
     memset(&pool, 0, sizeof(pool));
 
-    for (size_t i = 0; i < ARRAY_LENGTH(model_cache); i++) {
+    for (size_t i = 0; i < MAX_CACHED_MODELS; i++) {
         xModelInstance& model = pool.model[i];
         model_cache_entry& e = model_cache[i];
         e.id = e.order = 0;
@@ -709,7 +713,7 @@ xModelInstance* load_model(U32 id)
     next_order++;
 
     size_t oldest = 0;
-    for (size_t i = 0; i < ARRAY_LENGTH(model_cache); i++) {
+    for (size_t i = 0; i < MAX_CACHED_MODELS; i++) {
         model_cache_entry& e = model_cache[i];
         if (e.id == id) {
             e.order = next_order;
@@ -770,7 +774,7 @@ void xfont::init()
     char filename[20];
     sprintf(filename, "lfont_%i", codepage_textures_size);
     codepage_textures[codepage_textures_size] = (RwTexture*)xSTFindAsset(xStrHash(filename), NULL);
-    while (codepage_textures_size < ARRAY_LENGTH(codepage_textures) && codepage_textures[codepage_textures_size]) {
+    while (codepage_textures_size < MAX_CODEPAGES && codepage_textures[codepage_textures_size]) {
         RwTextureSetFilterMode(codepage_textures[codepage_textures_size], rwFILTERLINEAR);
         codepage_textures_size++;
         sprintf(filename, "lfont_%i", codepage_textures_size);
@@ -886,7 +890,7 @@ basic_rect<F32> xfont::bounds(const char* text, size_t text_size, F32 max_width,
 static bool started_rendering;
 #endif
 #if DEBUG || RELEASE
-static F32 cpu_times[1] = { 0.0f };
+static F32 cpu_times[MAX_CPU_TIMES] = { 0.0f };
 static iTime start_time;
 static F32 avg_cpu_time;
 #endif
@@ -900,7 +904,7 @@ void xfont::start_render() const
 
 #if DEBUG || RELEASE
     start_time = iTimeGet();
-    S32 index = gFrameCount % ARRAY_LENGTH(cpu_times);
+    S32 index = gFrameCount % MAX_CPU_TIMES;
     cpu_times[index] = 0;
 #endif
 
@@ -918,7 +922,7 @@ void xfont::stop_render() const
 
 #if DEBUG || RELEASE
     iTime stop_time = iTimeGet();
-    S32 index = gFrameCount % ARRAY_LENGTH(cpu_times);
+    S32 index = gFrameCount % MAX_CPU_TIMES;
     cpu_times[index] += iTimeDiffSec(start_time, stop_time);
 #endif
 }
@@ -1519,9 +1523,9 @@ xtextbox::jot& xtextbox::layout::get_jot(size_t index) const
     xASSERT_L(1978, first_jot_block);
 
     jot_block* block = first_jot_block;
-    while (block && index >= ARRAY_LENGTH(block->jots)) {
+    while (block && index >= JOT_BLOCK_SIZE) {
         block = block->next_block;
-        index -= ARRAY_LENGTH(block->jots);
+        index -= JOT_BLOCK_SIZE;
     }
 
     if (block) {
@@ -1541,8 +1545,8 @@ xtextbox::jot& xtextbox::layout::get_new_jot()
 
     jot_block* block = first_jot_block;
     size_t index = _jots_size;
-    while (index >= ARRAY_LENGTH(block->jots)) {
-        index -= ARRAY_LENGTH(block->jots);
+    while (index >= JOT_BLOCK_SIZE) {
+        index -= JOT_BLOCK_SIZE;
         if (!block->next_block) {
             block->next_block = allocate_jot_block();
         }
@@ -1557,9 +1561,9 @@ xtextbox::jot_line& xtextbox::layout::get_jot_line(size_t index) const
     xASSERT_L(2028, first_line_block);
 
     jot_line_block* block = first_line_block;
-    while (block && index >= ARRAY_LENGTH(block->jot_lines)) {
+    while (block && index >= JOT_LINE_BLOCK_SIZE) {
         block = block->next_block;
-        index -= ARRAY_LENGTH(block->jot_lines);
+        index -= JOT_LINE_BLOCK_SIZE;
     }
 
     if (block) {
@@ -1579,8 +1583,8 @@ xtextbox::jot_line& xtextbox::layout::get_new_jot_line()
 
     jot_line_block* block = first_line_block;
     size_t index = _lines_size;
-    while (index >= ARRAY_LENGTH(block->jot_lines)) {
-        index -= ARRAY_LENGTH(block->jot_lines);
+    while (index >= JOT_LINE_BLOCK_SIZE) {
+        index -= JOT_LINE_BLOCK_SIZE;
         if (!block->next_block) {
             block->next_block = allocate_jot_line_block();
         }
@@ -1619,7 +1623,7 @@ void xtextbox::layout::free_unused_blocks()
     size_t i;
 
     jot_block* j = first_jot_block;
-    for (i = _jots_size; i > ARRAY_LENGTH(j->jots); i -= ARRAY_LENGTH(j->jots))
+    for (i = _jots_size; i > JOT_BLOCK_SIZE; i -= JOT_BLOCK_SIZE)
         j = j->next_block;
 
     while (j->next_block) {
@@ -1630,7 +1634,7 @@ void xtextbox::layout::free_unused_blocks()
     }
 
     jot_line_block* jl = first_line_block;
-    for (i = _lines_size; i > ARRAY_LENGTH(jl->jot_lines); i -= ARRAY_LENGTH(jl->jot_lines))
+    for (i = _lines_size; i > JOT_LINE_BLOCK_SIZE; i -= JOT_LINE_BLOCK_SIZE)
         jl = jl->next_block;
 
     while (jl->next_block) {
@@ -2796,7 +2800,7 @@ void parse_tag_counter(xtextbox::jot& j, const xtextbox&, const xtextbox&, const
     j.context_size = strlen(buffer);
 }
 
-xtextbox::tag_type format_tags_buffer[2][128] = {
+xtextbox::tag_type format_tags_buffer[2][MAX_FORMAT_TAGS] = {
     {
         { { "", 0 }, parse_tag_open_curly, NULL, NULL },
         { { "a", 1 }, parse_tag_alpha, reset_tag_alpha, NULL },
@@ -2864,7 +2868,7 @@ size_t format_tags_size = 58;
 
 size_t count_format_tags()
 {
-    for (size_t i = 0; i < ARRAY_LENGTH(format_tags_buffer[0]); i++)
+    for (size_t i = 0; i < MAX_FORMAT_TAGS; i++)
         if (!format_tags[i].name.text) return i;
 
     xFAIL_L(3468);
@@ -3081,7 +3085,7 @@ void xFontPrintTopText()
 void debug_mode_fontperf()
 {
     avg_cpu_time = 0;
-    S32 index = ARRAY_LENGTH(cpu_times);
+    S32 index = MAX_CPU_TIMES;
     while (index--) {
         avg_cpu_time += cpu_times[index];
     }

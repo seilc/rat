@@ -289,6 +289,7 @@ namespace {
             MAX_STRINGS = 13216,
             MAX_INSERTS = 64,
             MAX_NAME = 128,
+            MAX_CHANGED_VALUES = 256,
             INVALID_INDEX = 0xFFFF
         };
 
@@ -317,7 +318,7 @@ namespace {
         bool need_relink;
         bool need_sort_stripped;
         U32 old_uint_value;
-        U16 changed_values[256];
+        U16 changed_values[MAX_CHANGED_VALUES];
         U32 changed_values_size;
         bool need_sort_changed;
         struct
@@ -1918,11 +1919,11 @@ namespace {
         void mark_unchanged(value_type& v)
         {
             if (!(v.flags & DTF_CHANGED)) return;
-            if (changed_values_size > ARRAY_LENGTH(changed_values)) {
+            if (changed_values_size > MAX_CHANGED_VALUES) {
                 changed_values_size--;
                 return;
             }
-            if (changed_values_size == ARRAY_LENGTH(changed_values)) {
+            if (changed_values_size == MAX_CHANGED_VALUES) {
                 refresh_changed();
                 return;
             }
@@ -1950,7 +1951,7 @@ namespace {
             if (v.flags & DTF_CHANGED) return;
             need_sort_changed = true;
             v.flags |= (U16)DTF_CHANGED;
-            if (changed_values_size < ARRAY_LENGTH(changed_values))
+            if (changed_values_size < MAX_CHANGED_VALUES)
                 changed_values[changed_values_size] = get_index(v);
             v.change_index = changed_values_size;
             changed_values_size++;
@@ -2117,7 +2118,7 @@ namespace {
             sprintf(buffer, "# %s\r\n# In-game tweak variables.\r\n", dump_file);
             iFileWrite(&file, buffer, strlen(buffer));
 
-            if (filter == FILTER_CHANGED && changed_values_size < ARRAY_LENGTH(changed_values))
+            if (filter == FILTER_CHANGED && changed_values_size < MAX_CHANGED_VALUES)
                 write_changed_tweaks(file, filter);
             else
                 write_all_tweaks(file, filter);

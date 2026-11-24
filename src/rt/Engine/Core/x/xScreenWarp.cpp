@@ -180,7 +180,10 @@ namespace {
     F32 uvmap_xdelta;
     F32 uvmap_ydelta;
     U32 common_warp_ids[MAX_TYPE];
-    warper warp_buffer[128];
+
+#define MAX_WARPS 128
+
+    warper warp_buffer[MAX_WARPS];
     warper warp_lists[MAX_TYPE];
     warper* warp_stack;
     bool render_this_frame;
@@ -548,7 +551,7 @@ void xScreenWarp::render(RwCamera* cam)
 void xScreenWarp::clear()
 {
     memset(warp_lists, 0, sizeof(warp_lists));
-    warper* warp = warp_buffer, *end_warp = warp + ARRAY_LENGTH(warp_buffer) - 1;
+    warper* warp = warp_buffer, *end_warp = warp + MAX_WARPS - 1;
     for (; warp != end_warp; warp++)
         warp->next = warp + 1;
     warp->next = NULL;

@@ -195,12 +195,14 @@ struct xMemBlock
 #endif
 };
 
+#define XMEM_MAX_OPP_HEAPS 2
+
 struct xMemHeap
 {
     U32 flags;
     U32 hard_base;
     U32 size;
-    S16 opp_heap[2];
+    S16 opp_heap[XMEM_MAX_OPP_HEAPS];
     xHeapState state[XMEMMAXSTACK];
     U16 state_idx;
     U16 max_blks;

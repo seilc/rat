@@ -479,7 +479,7 @@ void xDrawSphere(F32 x, F32 y, F32 z, F32 r, U32)
         vertices[i].z = z + r * sphere_pts[i].z;
     }
 
-    iQueueLineList(sgDrawColor, (RwV3d*)vertices, (U32*)sphere_segs, NULL, ARRAY_LENGTH(vertices), 2 * ARRAY_LENGTH(sphere_segs));
+    iQueueLineList(sgDrawColor, (RwV3d*)vertices, (U32*)sphere_segs, NULL, SPHERE_NUM_PTS, 2 * ARRAY_LENGTH(sphere_segs));
 }
 
 void xDrawSphere2(F32 x, F32 y, F32 z, F32 r, U32 lod)

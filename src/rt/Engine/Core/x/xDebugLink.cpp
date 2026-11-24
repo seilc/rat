@@ -296,10 +296,12 @@ bool xDebugLink::IsConnected() const
 DECOMP_FORCEACTIVE("\n", "%.2X ")
 #endif
 
+#define MAX_ARGS 10
+
 void xDebugLink::Update(F32)
 {
     char command[12], responseString[256];
-    char* argv[10];
+    char* argv[MAX_ARGS];
     char args[256];
     S32 i;
     S32 argc;
@@ -315,7 +317,7 @@ void xDebugLink::Update(F32)
 
         knownCommand = false;
         strncpy(args, mCmdBuffer[i].command + cmdPrefixLen + 12, sizeof(args));
-        argc = CmdToArgv(args, argv, ARRAY_LENGTH(argv));
+        argc = CmdToArgv(args, argv, MAX_ARGS);
 
         if (mConnected) {
             if (strcmpi(command, "__CONNECT__") == 0 && strlen(mConnectedComputer) != 0 &&
@@ -325,7 +327,7 @@ void xDebugLink::Update(F32)
                 continue;
             }
 
-            for (i = 0; i < ARRAY_LENGTH(mCommandHandlerMap); i++) {
+            for (i = 0; i < MAX_COMMAND_HANDLERS; i++) {
                 if (strcmpi(mCommandHandlerMap[i].command, command) == 0) {
                     knownCommand = true;
                     if (strcmpi(mCommandHandlerMap[i].command, "__UPDTASS__") == 0) {

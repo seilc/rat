@@ -19,7 +19,7 @@ zCombatAttack::zCombatAttack()
         hitBones[i].bone = -1;
     }
 
-    for (S32 i = 0; i < 2; i++) {
+    for (S32 i = 0; i < MAX_EFFECT_BONES; i++) {
         effectBones[i].bone = -1;
     }
 }

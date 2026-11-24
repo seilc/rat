@@ -72,7 +72,9 @@ static void iSndCloseStream(S32 idx, bool bFreeRef);
 static bool iSndPlayDone(xSndVoiceInfo* vp);
 
 #if DEBUG
-U32 gChkStreams[10] = { 0 };
+#define MAX_CHK_STREAMS 10
+
+U32 gChkStreams[MAX_CHK_STREAMS] = { 0 };
 U32* pChk = gChkStreams;
 
 static void DetectLeakStreamOpen(U32 sndID, const char* name)
@@ -82,7 +84,7 @@ static void DetectLeakStreamOpen(U32 sndID, const char* name)
 
     while (*pChk != 0) {
         pChk++;
-        if (pChk == gChkStreams + ARRAY_LENGTH(gChkStreams))
+        if (pChk == gChkStreams + MAX_CHK_STREAMS)
             pChk = gChkStreams;
     }
     *pChk = sndID;
@@ -92,7 +94,7 @@ static void DetectLeakStreamClose(U32 sndID)
 {
     gNumStreamsClosed++;
 
-    for (U32 i = 0; i < ARRAY_LENGTH(gChkStreams); i++) {
+    for (U32 i = 0; i < MAX_CHK_STREAMS; i++) {
         if (sndID == gChkStreams[i]) {
             gChkStreams[i] = 0;
             break;
@@ -100,7 +102,7 @@ static void DetectLeakStreamClose(U32 sndID)
     }
     if (gNumStreamsOpened != gNumStreamsClosed)
         OSReport("still open: ");
-    for (U32 i = 0; i < ARRAY_LENGTH(gChkStreams); i++) {
+    for (U32 i = 0; i < MAX_CHK_STREAMS; i++) {
         if (gChkStreams[i] != 0) {
             OSReport("%d ", gChkStreams[i]);
         }

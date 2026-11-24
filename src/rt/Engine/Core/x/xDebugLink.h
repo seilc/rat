@@ -42,6 +42,8 @@ struct CommandHandlerMap
     eError (xDebugLink::*handler)(char** argv, S32 argc, void*);
 };
 
+#define MAX_COMMAND_HANDLERS ((U32)16)
+
 class xDebugLink
 {
 public:
@@ -69,7 +71,7 @@ public:
 protected:
     Command mCmdBuffer[16];
     S32 mNumCmd;
-    CommandHandlerMap mCommandHandlerMap[16];
+    CommandHandlerMap mCommandHandlerMap[MAX_COMMAND_HANDLERS];
     bool mConnected;
     U32 mAssetToUpdate;
     U32 mAssetDataReceivedSize;

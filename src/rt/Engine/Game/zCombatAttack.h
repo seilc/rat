@@ -6,6 +6,8 @@
 struct zAnimCacheEntry;
 struct zShrapnelAsset;
 
+#define MAX_EFFECT_BONES 2
+
 class zCombatAttack
 {
 public:
@@ -66,7 +68,7 @@ public:
     U16 hitEffect;
     F32 effectStart;
     F32 effectEnd;
-    effectBone effectBones[2];
+    effectBone effectBones[MAX_EFFECT_BONES];
     RumbleEffectParams rumbleEffect;
     ShrapnelEffectParams shrapnelEffect;
     BlurEffectParams blurEffect;

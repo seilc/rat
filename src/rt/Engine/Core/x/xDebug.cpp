@@ -1285,13 +1285,16 @@ U32 XDG_XMAX = 620;
 U32 XDG_YHEIGHT = 400;
 F32 XDG_XSCALE;
 
+#define XDG_MAX_GRAPHS 6
+#define XDG_MAX_VALUES 101
+
 struct DGstate
 {
     U32 flags;
     U32 draw;
-    char* name[6];
+    char* name[XDG_MAX_GRAPHS];
     U32 pick;
-    S8 field[6];
+    S8 field[XDG_MAX_GRAPHS];
 };
 
 DGstate gDG;
@@ -1300,7 +1303,7 @@ struct XDG
 {
     U16 flags;
     U16 idx;
-    F32 value[101];
+    F32 value[XDG_MAX_VALUES];
     F32 scale;
     xColor graphcolor;
     F32 tickmin;
@@ -1309,9 +1312,9 @@ struct XDG
     xColor tickcolor;
 };
 
-static XDG dg[6];
-static xColor dg_color[6];
-static char dg_color_str[6][8] = { "red", "green", "blue", "yellow", "orange", "cyan" };
+static XDG dg[XDG_MAX_GRAPHS];
+static xColor dg_color[XDG_MAX_GRAPHS];
+static char dg_color_str[XDG_MAX_GRAPHS][8] = { "red", "green", "blue", "yellow", "orange", "cyan" };
 
 void xDebugGraphSetup(XDG* gp, F32 scale, xColor graphcolor, F32 tickmin, F32 tickmax, F32 tickstep, xColor tickcolor)
 {
@@ -1352,7 +1355,7 @@ void xDebugGraphUpdate(XDG* gp, F32 new_value)
 
     new_value *= gp->scale;
     gp->value[gp->idx] = new_value;
-    gp->idx = (gp->idx >= 100) ? 0 : (U16)(gp->idx + 1);
+    gp->idx = (gp->idx >= XDG_MAX_VALUES - 1) ? 0 : (U16)(gp->idx + 1);
 }
 
 void xDebugGraphRender(XDG* gp)
@@ -1360,7 +1363,7 @@ void xDebugGraphRender(XDG* gp)
     S32 i, idx;
     F32 f;
     xVec3 p0, p1;
-    xVec2 pt[101], *vp;
+    xVec2 pt[XDG_MAX_VALUES], *vp;
     xASSERT_L(2326, gp);
 
     if (gp->tickstep) {
@@ -1375,16 +1378,16 @@ void xDebugGraphRender(XDG* gp)
 
     p0.x = XDG_XMIN;
     p0.y = XDG_YHEIGHT - gp->value[gp->idx];
-    idx = (gp->idx >= 100) ? 0 : gp->idx + 1;
+    idx = (gp->idx >= XDG_MAX_VALUES - 1) ? 0 : gp->idx + 1;
     xDrawSetColor(gp->graphcolor);
 
     idx = gp->idx; vp = pt;
-    for (i = 0; i < 101; i++, vp++) {
+    for (i = 0; i < XDG_MAX_VALUES; i++, vp++) {
         vp->x = XDG_XMIN + XDG_XSCALE * i;
         vp->y = XDG_YHEIGHT - gp->value[idx];
-        idx = (idx >= 100) ? 0 : idx + 1;
+        idx = (idx >= XDG_MAX_VALUES - 1) ? 0 : idx + 1;
     }
-    xDrawPolyLine2D(pt, ARRAY_LENGTH(pt));
+    xDrawPolyLine2D(pt, XDG_MAX_VALUES);
 }
 
 void xDebugGraphInit()
@@ -1399,7 +1402,7 @@ void xDebugGraphInit()
     xColorInit(dg_color[4], 0x80, 0x40, 0, 0xFF);
     xColorInit(dg_color[5], 0, 0x80, 0x80, 0xFF);
 
-    for (i = 0; i < ARRAY_LENGTH(dg); i++) {
+    for (i = 0; i < XDG_MAX_GRAPHS; i++) {
         xDebugGraphSetup(&dg[i], FB_YRES / 16.0f / (OS_TIMER_CLOCK * (1.0f / VBLANKS_PER_SEC)), dg_color[i], 0.0f,
                          3.1f * (OS_TIMER_CLOCK * (1.0f / VBLANKS_PER_SEC)), OS_TIMER_CLOCK * (1.0f / VBLANKS_PER_SEC), gray);
     }
@@ -1527,9 +1530,9 @@ void xDebugGraphService()
         } else {
             if (zPad::GetDebugPad()->On(0x10) || zPad::GetDebugPad()->On(0x40)) {
                 scale = zPad::GetDebugPad()->On(0x10) ? 1.05f : 0.952381f;
-                for (i = 0; i < ARRAY_LENGTH(dg); i++) {
+                for (i = 0; i < XDG_MAX_GRAPHS; i++) {
                     dg[i].scale *= scale;
-                    for (j = 0; j < 101; j++)
+                    for (j = 0; j < XDG_MAX_VALUES; j++)
                         dg[i].value[j] *= scale;
                 }
             }
@@ -1568,7 +1571,7 @@ void xDebugGraphService()
     xDebugGraphUpdate(&dg[4], (U32)gStats.cpu);
 
     if (xDebugModeGet() == 9 || (gDG.flags & 0x1)) {
-        for (i = 0; i < ARRAY_LENGTH(dg); i++)
+        for (i = 0; i < XDG_MAX_GRAPHS; i++)
             if (gDG.draw & (1 << i)) {
                 if (xDebugModeGet() == 9 && (gDG.flags & 0x4)) {
                     if (i < 4) {

@@ -28,7 +28,9 @@ F32 g_rumblingThreshold;
 #if GRC
 namespace {
 
-KPADStatus kpads[PAD_MAX_CONTROLLERS][10] = {};
+#define MAX_KPAD_READS 10
+
+KPADStatus kpads[PAD_MAX_CONTROLLERS][MAX_KPAD_READS] = {};
 S32 kpad_reads;
 const char* inputSources[4] = { "Nunchaku stick", "Nunchaku tilt", "Revolution tilt", "Revolution dpad" };
 U32 sPlayerInputSource;
@@ -204,7 +206,7 @@ void iPadUpdateDataAll()
     bool spew = gFrameCount > 100;
 
     for (S32 i = 0; i < PAD_MAX_CONTROLLERS; i++) {
-        kpad_reads = KPADRead(i, kpads[i], ARRAY_LENGTH(kpads[i]));
+        kpad_reads = KPADRead(i, kpads[i], MAX_KPAD_READS);
 
         memset(&sPadData[i], 0, sizeof(sPadData[i]));
         sPadData[i].err = PAD_ERR_NO_CONTROLLER;

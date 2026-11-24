@@ -32,7 +32,9 @@ struct tempTransfer
     U32 type;
 };
 
-static tempTransfer activeTransfers[2];
+#define MAX_TEMP_TRANSFERS ((U32)2)
+
+static tempTransfer activeTransfers[MAX_TEMP_TRANSFERS];
 
 static void transferDoneCB(u32 pointerToARQRequest)
 {
@@ -57,7 +59,7 @@ U32 iARAMTmpBegin(U32 type, U32 max, bool doTRCCheck)
     }
 
     S32 which;
-    for (which = 0; which < ARRAY_LENGTH(activeTransfers); which++) {
+    for (which = 0; which < MAX_TEMP_TRANSFERS; which++) {
         if (activeTransfers[which].type == type) {
             xFAIL_MSG_L(124, "You can't begin temp transfers on the same type at the same time");
             return 0;
@@ -68,7 +70,7 @@ U32 iARAMTmpBegin(U32 type, U32 max, bool doTRCCheck)
         }
     }
 
-    if (which == ARRAY_LENGTH(activeTransfers)) {
+    if (which == MAX_TEMP_TRANSFERS) {
         xFAIL_MSG_L(135, "You are trying to exceed the limit of max temp ARAM storages... Up the limit or don't request that many");
         return 0;
     }
@@ -176,13 +178,13 @@ U32 iARAMTmpBegin(U32 type, U32 max, bool doTRCCheck)
 void* iARAMTmpMalloc(U32 type, U32 size)
 {
     S32 which;
-    for (which = 0; which < ARRAY_LENGTH(activeTransfers); which++) {
+    for (which = 0; which < MAX_TEMP_TRANSFERS; which++) {
         if (activeTransfers[which].type == type) {
             break;
         }
     }
 
-    if (which == ARRAY_LENGTH(activeTransfers)) {
+    if (which == MAX_TEMP_TRANSFERS) {
         xFAIL_MSG_L(319, "You are trying to malloc from a type of asset that hasn't been moved over to ARAM");
         return (void*)0xBEEEEEEF;
     }
@@ -216,13 +218,13 @@ void iARAMTmpFree(U32, void*)
 S32 iARAMTmpInARAMTemp(U32 type, void* ptr)
 {
     S32 which;
-    for (which = 0; which < ARRAY_LENGTH(activeTransfers); which++) {
+    for (which = 0; which < MAX_TEMP_TRANSFERS; which++) {
         if (activeTransfers[which].type == type) {
             break;
         }
     }
 
-    if (which == ARRAY_LENGTH(activeTransfers)) {
+    if (which == MAX_TEMP_TRANSFERS) {
         return FALSE;
     }
 
@@ -238,13 +240,13 @@ S32 iARAMTmpInARAMTemp(U32 type, void* ptr)
 void iARAMTmpEnd(U32 type, bool doTRCCheck)
 {
     S32 which;
-    for (which = 0; which < ARRAY_LENGTH(activeTransfers); which++) {
+    for (which = 0; which < MAX_TEMP_TRANSFERS; which++) {
         if (activeTransfers[which].type == type) {
             break;
         }
     }
 
-    if (which == ARRAY_LENGTH(activeTransfers)) {
+    if (which == MAX_TEMP_TRANSFERS) {
         xFAIL_MSG_L(395, "You are trying end an ARAMtmp for a type that isn't in ARAM...");
         return;
     }

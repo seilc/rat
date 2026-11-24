@@ -24,7 +24,7 @@
 #include <string.h>
 
 #define XMEM_GUARD_BREAK_ADDR 0x234D060
-#define MAX_ALLOC_IDENTIFIERS 4
+#define MAX_ALLOC_IDENTIFIERS ((U32)4)
 #define MAX_GENERIC_MALLOC_TAGS 8
 
 enum
@@ -187,7 +187,7 @@ void xMemInit()
 #endif
 
 #if DEBUG
-    for (S32 i = 0; i < ARRAY_LENGTH(allocList); i++) {
+    for (S32 i = 0; i < MAX_ALLOC_IDENTIFIERS; i++) {
         allocList[i].bytesAllocated = -1;
     }
     allocList[0].assetID = 'XMDL';
@@ -970,7 +970,7 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align)
         return NULL;
     }
 
-    for (i = 0; i < ARRAY_LENGTH(heap->opp_heap); i++) {
+    for (i = 0; i < XMEM_MAX_OPP_HEAPS; i++) {
 #if DEBUG || RELEASE
         S16 idx = heap->opp_heap[i];
         if (idx != -1) {
@@ -1037,14 +1037,14 @@ void* xMemAlloc(U32 heapID, U32 size, S32 align)
     }
 
     bool tallied = false;
-    for (S32 i = 0; i < ARRAY_LENGTH(allocList); i++) {
+    for (S32 i = 0; i < MAX_ALLOC_IDENTIFIERS; i++) {
         if (allocList[i].bytesAllocated > -1 && assetID == allocList[i].assetID) {
             allocList[i].bytesAllocated += size;
             tallied = true;
         }
     }
     if (!tallied) {
-        for (S32 i = 0; i < ARRAY_LENGTH(allocList); i++) {
+        for (S32 i = 0; i < MAX_ALLOC_IDENTIFIERS; i++) {
             if (allocList[i].bytesAllocated == -1) {
                 allocList[i].assetID = assetID;
                 allocList[i].bytesAllocated = size;

@@ -2047,7 +2047,9 @@ namespace
         xBox box;
     };
 
-    debug_volume_type debug_volumes[10];
+#define MAX_DEBUG_VOLUMES ((U32)10)
+
+    debug_volume_type debug_volumes[MAX_DEBUG_VOLUMES];
 
     void debug_init()
     {
@@ -2238,7 +2240,7 @@ namespace
         xColor color = g_WHITE;
         for (S32 i = 0; i < debug_volumes_size; i++) {
             xDrawSetColor(color);
-            S32 index = (debug_volumes_start + i) % ARRAY_LENGTH(debug_volumes);
+            S32 index = (debug_volumes_start + i) % MAX_DEBUG_VOLUMES;
             xDrawOBB(&debug_volumes[index].box, &debug_volumes[index].mat);
             color.r -= 20;
             color.g -= 20;
@@ -2249,12 +2251,12 @@ namespace
     {
         if (!tweak::debug::render_volume) return;
 
-        if (debug_volumes_size >= ARRAY_LENGTH(debug_volumes)) {
+        if (debug_volumes_size >= MAX_DEBUG_VOLUMES) {
             debug_volumes_size--;
-            debug_volumes_start = (debug_volumes_start + 1) % ARRAY_LENGTH(debug_volumes);
+            debug_volumes_start = (debug_volumes_start + 1) % MAX_DEBUG_VOLUMES;
         }
 
-        S32 index = (debug_volumes_start + debug_volumes_size) % ARRAY_LENGTH(debug_volumes);
+        S32 index = (debug_volumes_start + debug_volumes_size) % MAX_DEBUG_VOLUMES;
         debug_volumes[index].box = box;
         debug_volumes[index].mat = mat;
         debug_volumes_size++;
@@ -3340,7 +3342,7 @@ void xDecalEmitter::debug_update_curve()
         return;
     }
 
-    if (curve_size > ARRAY_LENGTH(debug->curve)) curve_size = ARRAY_LENGTH(debug->curve);
+    if (curve_size > MAX_CURVE_NODES) curve_size = MAX_CURVE_NODES;
     memcpy(debug->curve, curve, curve_size * sizeof(curve_node));
     curve = debug->curve;
     update_curve_tweaks();
@@ -3363,7 +3365,7 @@ void xDecalEmitter::add_tweaks(const char* prefix)
     zAUTOTWEAK_SELECT(prefix, "blend_dst", &cfg.blend_dst, tweak_blend_mode_labels, tweak_blend_mode_values, ARRAY_LENGTH(tweak_blend_mode_labels), &cb_config, this, 0x2);
 
     static tweak_callback cb_curve = tweak_callback::create_change(on_change_curve);
-    zAUTOTWEAK(prefix, "Curv\001e Size", &curve_size, (U32)2, (U32)ARRAY_LENGTH(debug->curve), &cb_curve, this, 0x2);
+    zAUTOTWEAK(prefix, "Curv\001e Size", &curve_size, (U32)2, (U32)MAX_CURVE_NODES, &cb_curve, this, 0x2);
 
     static tweak_callback cb_change_texture = tweak_callback::create_change(on_change_texture);
     zAUTOTWEAK_SELECT(prefix, "texture|\001asset", &debug->texture, all_texture_labels, all_texture_ids, all_texture_count, &cb_change_texture, this, 0x2);
@@ -3410,7 +3412,7 @@ void xDecalEmitter::update_curve_tweaks()
     char* tail = prefix + strlen(prefix);
     curve_node* curve = debug->curve;
 
-    for (size_t i = 0; i < ARRAY_LENGTH(debug->curve); i++) {
+    for (size_t i = 0; i < MAX_CURVE_NODES; i++) {
         sprintf(tail, "%02d", i);
         if (i < curve_size) {
             if (xDebugGetTweak(prefix)) continue;
@@ -3429,7 +3431,7 @@ void xDecalEmitter::update_curve_tweaks()
 void xDecalEmitter::create_test_curve(size_t size)
 {
     if (size < 2) size = 2;
-    else if (size > ARRAY_LENGTH(debug->curve)) size = ARRAY_LENGTH(debug->curve);
+    else if (size > MAX_CURVE_NODES) size = MAX_CURVE_NODES;
 
     curve_size = size;
     curve_node* curve = debug->curve;

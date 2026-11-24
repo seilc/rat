@@ -251,16 +251,20 @@ struct xtextbox::jot_line
     bool page_break;
 };
 
+#define JOT_BLOCK_SIZE 16
+
 struct xtextbox::jot_block
 {
-    jot jots[16];
+    jot jots[JOT_BLOCK_SIZE];
     jot_block* next_block;
     bool used;
 };
 
+#define JOT_LINE_BLOCK_SIZE 4
+
 struct xtextbox::jot_line_block
 {
-    jot_line jot_lines[4];
+    jot_line jot_lines[JOT_LINE_BLOCK_SIZE];
     jot_line_block* next_block;
     bool used;
 };

@@ -144,7 +144,7 @@ void xCamSupportPath::smooth(S32 start, S32 size)
 
     static path_node prev_path[33];
 
-    path_node* pp = prev_path + ARRAY_LENGTH(prev_path) - 1, *end_pp = pp - cfg.smooth_passes - 1;
+    path_node* pp = prev_path + 33 - 1, *end_pp = pp - cfg.smooth_passes - 1;
     S32 r = start + front, end_r = front;
     for (; pp > end_pp; --pp, --r) {
         if (r < end_r)

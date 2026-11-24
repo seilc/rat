@@ -278,7 +278,7 @@ xModelInstance* xModelInstanceAllocReuse(RpAtomic* data, void* object, U16 flags
 void xModelDebugPrintPoolUsage()
 {
     xprintf("ModelInst Pool Usage\n\n");
-    for (U32 i = 0; i < ARRAY_LENGTH(poolSize); i++) {
+    for (U32 i = 0; i < IANIM_MAX_BONES + 1; i++) {
         if (poolSize[i]) {
             xprintf("    Bones:%d   %d/%d\n", i, poolUsed[i], poolSize[i]);
         }

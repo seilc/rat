@@ -220,14 +220,14 @@ void xCam::add_tweaks_config_follow(const char* prefix)
 
 void xCamGroup::create()
 {
-    for (xCamBlend** it = blend_cam, **end = it + ARRAY_LENGTH(blend_cam); it != end; it++)
+    for (xCamBlend** it = blend_cam, **end = it + MAX_BLEND_CAMS; it != end; it++)
         *it = create_blend();
 }
 
 void xCamGroup::destroy()
 {
     primary = NULL;
-    for (xCamBlend** it = blend_cam, **end = it + ARRAY_LENGTH(blend_cam); it != end; it++)
+    for (xCamBlend** it = blend_cam, **end = it + MAX_BLEND_CAMS; it != end; it++)
         (*it)->destroy();
 }
 
@@ -318,7 +318,7 @@ void xCamGroup::remove(xCam& cam, bool)
 
 xCamBlend* xCamGroup::grab_blend_cam()
 {
-    for (xCamBlend** it = blend_cam, **end = it + ARRAY_LENGTH(blend_cam); it != end; it++) {
+    for (xCamBlend** it = blend_cam, **end = it + MAX_BLEND_CAMS; it != end; it++) {
         if (!(*it)->group)
             return *it;
     }

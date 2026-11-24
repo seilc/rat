@@ -219,11 +219,13 @@ struct xDecalEmitter
 };
 
 #if DEBUG || RELEASE
+#define MAX_CURVE_NODES 32
+
 struct xDecalEmitter::debug_info
 {
     const char* name;
     char prefix[128];
-    curve_node curve[32];
+    curve_node curve[MAX_CURVE_NODES];
     U32 texture;
     U32 rendered;
     struct
