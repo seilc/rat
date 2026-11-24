@@ -4,7 +4,11 @@
 #include "xDynAsset.h"
 #include "zCompParameters.h"
 
+#if RELEASE
+class zCompPerceptionParams : public zCompParameters, public xDynAsset
+#else
 class zCompPerceptionParams : public xDynAsset, public zCompParameters
+#endif
 {
 public:
     U32 perceivedEntity;
@@ -34,13 +38,17 @@ public:
     U32 detectionAction;
     U32 lostAction;
 
+#if !RELEASE
     static const zCompPerceptionParams* spNPCGenericDefault;
     static const zCompPerceptionParams* spNPCInstaKillDefault;
     static zCompPerceptionParams sNPCGenericDefault;
     static zCompPerceptionParams sNPCInstaKillDefault;
+#endif
 
     zCompPerceptionParams();
+#if !RELEASE
     static void InitializeDefaults();
+#endif
     static zCompPerceptionParams* GetParamsFromAsset(U32 aid);
 };
 
