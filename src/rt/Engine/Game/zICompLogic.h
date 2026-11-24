@@ -18,7 +18,7 @@ public:
 
     static void CreateAnimTable(xAnimTable* table)
     {
-        xAnimTableNewState(table, "ERROR", 0, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
+        xAnimTableNewState(table, "ERROR", AnimState_EndStop, 0, 1.0f, NULL, NULL, 0.0f, NULL, NULL, NULL, NULL, NULL);
         xAnimTableNewTransition(table, "*", "ERROR", NULL, AnimationErrorStateCB, AnimTransition_Default, 0, 0.0f, 0.0f, 0, 0, 0.1f, NULL);
     }
 

@@ -338,7 +338,7 @@ xAnimState* xAnimTempStateAlloc(const xAnimState* source)
     else
         memset(state, 0, sizeof(xAnimState));
     state->Next = NULL;
-    state->Flags |= 0x800;
+    state->Flags |= AnimState_Temp;
 #if DEBUG || RELEASE
     state->Flags &= ~AnimState_TempUsed;
 #endif
@@ -487,7 +487,7 @@ static inline void SetTransition(xAnimTransition*& dest, xAnimTransition* tran)
 
 static inline void SetState(xAnimState*& dest, xAnimState* state)
 {
-    if (state && (state->Flags & 0x400)) {
+    if (state && (state->Flags & AnimState_CopyOnWrite)) {
         state = xAnimTempStateAlloc(state);
     }
 
@@ -497,11 +497,11 @@ static inline void SetState(xAnimState*& dest, xAnimState* state)
 
     xASSERT_L(635, state == NULL || !(state->Flags & AnimState_TempUsed));
 
-    if (dest && (dest->Flags & 0x800))
+    if (dest && (dest->Flags & AnimState_Temp))
         xMemPoolFree(&sxAnimTempStatePool, dest);
     dest = state;
 #if DEBUG || RELEASE
-    if (state && (state->Flags & 0x800))
+    if (state && (state->Flags & AnimState_Temp))
         state->Flags |= AnimState_TempUsed;
 #endif
 }
@@ -537,7 +537,7 @@ static void TransitionTimeInit(xAnimSingle* single, xAnimTransition* tran)
         break;
     }
     default:
-        single->Time = (tran->Dest->Flags & 0x100) && tran->DestTime == 0.0f ? single->State->Data->Duration * xurand() : tran->DestTime;
+        single->Time = (tran->Dest->Flags & AnimState_Randomize) && tran->DestTime == 0.0f ? single->State->Data->Duration * xurand() : tran->DestTime;
     }
 
     single->LastTime = single->Time;
@@ -1130,9 +1130,9 @@ xAnimState* xAnimTableAddFileID(xAnimTable* table, xAnimFile* file, U32 stateID,
         }
 
         if (file->FileFlags & 0x8000) {
-            table->MorphIndex |= 1 << (state->Flags & 0xF);
+            table->MorphIndex |= 1 << (state->Flags & AnimState_IndexMask);
         } else {
-            table->AnimIndex |= 1 << (state->Flags & 0xF);
+            table->AnimIndex |= 1 << (state->Flags & AnimState_IndexMask);
         }
 
         xASSERT_L(1569, (table->MorphIndex & table->AnimIndex) == 0);
@@ -1412,7 +1412,7 @@ void xAnimPlaySetState(xAnimSingle* single, xAnimState* state, F32 startTime)
         return;
     }
 
-    single->Time = (state->Flags & 0x100) && startTime == 0.0f ? state->Data->Duration * xurand() : startTime;
+    single->Time = (state->Flags & AnimState_Randomize) && startTime == 0.0f ? state->Data->Duration * xurand() : startTime;
     single->CurrentSpeed = state->Speed;
     single->BilinearLerp[0] = 0.0f;
     single->BilinearLerp[1] = 0.0f;
@@ -1668,7 +1668,7 @@ static void SingleUpdate(xAnimSingle* single, F32 timeDelta)
     } while (foundBlendstop || foundTransition);
 
     if (single->Tran == NULL && single->BlendFactor == 0.0f && (single->State->Flags & AnimState_EndMask) == AnimState_EndFadeOut) {
-        if (single->State->Flags & 0x200) {
+        if (single->State->Flags & AnimState_FadeAtEnd) {
             if (single->Time >= duration)
                 single->BlendFactor = 1e-7f;
         } else {
@@ -1761,7 +1761,7 @@ void xAnimPlayChooseTransition(xAnimPlay* play)
             while (curr && (play->Single[i].Sync == NULL || curr->T->Priority > play->Single[i].Sync->QueuePriority)) {
                 xASSERT_L(2525, curr->T->Conditional);
                 if (curr->T->Conditional(curr->T, &play->Single[i], object)) {
-                    U32 index = curr->T->Dest->Flags & 0xF;
+                    U32 index = curr->T->Dest->Flags & AnimState_IndexMask;
 
                     xASSERT_L(2530, index < play->NumSingle);
                     found[index] = curr->T;
@@ -1783,7 +1783,7 @@ void xAnimPlayStartTransition(xAnimPlay* play, xAnimTransition* transition)
 {
     xASSERT_L(2549, transition->Dest);
 
-    U32 index = transition->Dest->Flags & 0xF;
+    U32 index = transition->Dest->Flags & AnimState_IndexMask;
 
     xASSERT_L(2553, index < play->NumSingle);
 
