@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "zUICustomPauseScreenManager.h"
 
+#include "containers.h"
+#include "xPad.h"
 #include "xString.h"
 #include "xTextAsset.h"
 #include "xTextureManager.h"

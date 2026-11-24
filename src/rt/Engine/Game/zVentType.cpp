@@ -1,7 +1,10 @@
 #include "xCommon.h"
 #include "zVentType.h"
 
+#include "containers.h"
+#include "xPad.h"
 #include "zBase.h"
+#include "zPlayerContainer.h"
 #include "zScene.h"
 
 #include <string.h>

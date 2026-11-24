@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zHitParameters.h"
 
+#include "xRand.h"
 #include "xString.h"
 
 const zHitSourceMapEntry zHitSourceMap[zHS_COUNT + 1] = {

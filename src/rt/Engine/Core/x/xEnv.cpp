@@ -1,8 +1,10 @@
 #include "xCommon.h"
 #include "xEnv.h"
 
+#include "xBase.h"
 #include "xDebug.h"
 #include "xDebugTweak.h"
+#include "xModel.h"
 #include "xstransvc.h"
 
 #include <stdio.h>

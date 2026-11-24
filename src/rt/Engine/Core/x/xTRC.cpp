@@ -2,6 +2,7 @@
 #include "xTRC.h"
 
 #include "xDebug.h"
+#include "xFile.h"
 #include "xFont.h"
 #include "xPad.h"
 #include "xTextAsset.h"

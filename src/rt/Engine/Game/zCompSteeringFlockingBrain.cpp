@@ -1,7 +1,11 @@
 #include "xCommon.h"
 #include "zCompSteeringFlockingBrain.h"
 
+#include "containers.h"
+#include "xPad.h"
+#include "xPtankPool.h"
 #include "zICompNPCEntity.h"
+#include "zPlayerContainer.h"
 
 void zCompSteeringFlockingBrain::AllAttached()
 {

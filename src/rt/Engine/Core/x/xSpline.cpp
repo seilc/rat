@@ -2,6 +2,7 @@
 #include "xSpline.h"
 
 #include "xMemMgr.h"
+#include "xMemory.h"
 
 #include "decomp.h"
 

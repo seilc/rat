@@ -2,6 +2,7 @@
 #include "xFog.h"
 
 #include "iCamera.h"
+#include "xRand.h"
 #include "zBase.h"
 #include "zEvent.h"
 

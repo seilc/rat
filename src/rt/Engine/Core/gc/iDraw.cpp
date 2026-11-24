@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "iDraw.h"
 
+#include "containers.h"
 #include "xCam.h"
 #include "xDebug.h"
 #include "xMath.h"

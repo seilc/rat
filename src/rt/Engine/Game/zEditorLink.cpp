@@ -1,12 +1,15 @@
 #include "xCommon.h"
 #include "zEditorLink.h"
 
+#include "containers.h"
 #include "xDebug.h"
+#include "xEnt.h"
 #include "xFile.h"
 #include "xString.h"
 #include "xstransvc.h"
 #include "xTRC.h"
 #include "zPad.h"
+#include "zPlayerContainer.h"
 
 void zEditorLinkInit()
 {

@@ -5,6 +5,7 @@
 #include "xDraw.h"
 #include "xEnt.h"
 #include "xMemMgr.h"
+#include "xMemory.h"
 #include "xRand.h"
 #include "xRenderState.h"
 #include "xString.h"

@@ -3,6 +3,7 @@
 
 #include "xFile.h"
 #include "xPad.h"
+#include "xRand.h"
 #include "xString.h"
 #include "xTRC.h"
 #include "xutil.h"

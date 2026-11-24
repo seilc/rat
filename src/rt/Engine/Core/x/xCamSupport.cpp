@@ -13,6 +13,7 @@
 #include "xGrid.h"
 #include "xMath.h"
 #include "xMemMgr.h"
+#include "xPtankPool.h"
 #include "xQuickCull.h"
 #include "xScene.h"
 #include "xutil.h"

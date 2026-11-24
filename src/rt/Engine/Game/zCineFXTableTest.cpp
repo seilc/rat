@@ -1,10 +1,12 @@
 #include "xCommon.h"
 #include "zCineFXTableTest.h"
 
+#include "xPad.h"
 #include "zCineFX.h"
 #include "zCineFXShared.h"
 #include "zCutsceneMgr.h"
 #include "zParEmitter.h"
+#include "zPlayerContainer.h"
 
 #define DEFINE_CINFX_PAR_UPD_L(name, emitname, line)                                                                                                \
     static void zCinFX_Par_##name##_Upd(const zCutsceneMgr*, NCINEntry* fxrec, S32 killit)                                                          \

@@ -1,7 +1,11 @@
 #include "xCommon.h"
 #include "zNPCOneLiner.h"
 
+#include "containers.h"
 #include "xCam.h"
+#include "xEntMotion.h"
+#include "xHud.h"
+#include "xPtankPool.h"
 #include "xRand.h"
 #include "xSndMgr.h"
 #include "zConversation.h"

@@ -12,6 +12,7 @@
 #include "xMemory.h"
 #include "xModel.h"
 #include "xOutputMgr.h"
+#include "xPad.h"
 #include "xSpacePartitionTree.h"
 #include "xSurface.h"
 #include "xTriggerAsset.h"

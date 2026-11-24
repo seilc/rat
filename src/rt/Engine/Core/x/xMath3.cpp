@@ -3,6 +3,7 @@
 
 #include "xMath.h"
 #include "xOutputMgr.h"
+#include "xRand.h"
 
 #include "decomp.h"
 

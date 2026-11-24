@@ -1,7 +1,9 @@
 #include "xCommon.h"
 #include "iParMgr.h"
 
+#include "containers.h"
 #include "xCam.h"
+#include "xFile.h"
 #include "xRenderBuffer.h"
 #include "xRenderState.h"
 #include "xstransvc.h"

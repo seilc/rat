@@ -2,6 +2,7 @@
 #include "iTime.h"
 
 #include "iDebug.h"
+#include "xFile.h"
 
 iTime sStartupTime;
 

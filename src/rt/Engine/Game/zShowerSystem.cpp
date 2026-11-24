@@ -7,6 +7,7 @@
 #include "xFX.h"
 #include "xMath.h"
 #include "xModel.h"
+#include "xPtankPool.h"
 #include "xRand.h"
 #include "xScrFx.h"
 #include "xSpacePartitionTree.h"

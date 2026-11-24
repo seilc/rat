@@ -1,9 +1,11 @@
 #include "xCommon.h"
 #include "xSkyDome.h"
 
+#include "xPad.h"
 #include "zBase.h"
 #include "zEvent.h"
 #include "iCamera.h"
+#include "zPlayerContainer.h"
 #include "zRenderState.h"
 
 #include "decomp.h"

@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xsavegame.h"
 
+#include "xRand.h"
 #include "xsavegamepv.h"
 #include "xDebug.h"
 #include "xMemMgr.h"

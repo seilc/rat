@@ -1,6 +1,11 @@
 #include "xCommon.h"
 #include "zUIController.h"
 
+#include "containers.h"
+#include "xEnt.h"
+#include "xPad.h"
+#include "zPlayerContainer.h"
+
 #include <new>
 
 void zUIController::DoInit()

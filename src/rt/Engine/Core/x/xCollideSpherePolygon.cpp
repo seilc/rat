@@ -1,6 +1,12 @@
 #include "xCommon.h"
 #include "xCollideSpherePolygon.h"
 
+#include "containers.h"
+#include "xEnt.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
+
 #include "decomp.h"
 
 static bool PolygonTestSphereOnPlane(const xPlane& surface, const xCollideProcessedTri::xEdge* edges, S32 num_edges, const xSweptSphere& sphere, xCollideSphereToPolygonResults& results, F32 vertical_d0);

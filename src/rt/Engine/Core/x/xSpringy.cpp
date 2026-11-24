@@ -1,6 +1,9 @@
 #include "xCommon.h"
 #include "xSpringy.h"
 
+#include "xRand.h"
+#include "xString.h"
+
 void xSpringyVec3::Update(F32 dt)
 {
     F32 e = xDampSpringCoeff(dt, mResponse);

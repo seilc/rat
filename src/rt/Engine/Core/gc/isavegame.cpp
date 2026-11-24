@@ -1,7 +1,10 @@
 #include "xCommon.h"
 #include "isavegame.h"
 
+#include "containers.h"
+#include "xFile.h"
 #include "xMath.h"
+#include "xPad.h"
 #include "xRegionSupport.h"
 #include "xstransvc.h"
 #include "xSndMgr.h"

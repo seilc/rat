@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xScreenFade.h"
 
+#include "xPad.h"
 #include "zGlobals.h"
 #include "zBase.h"
 #include "zGame.h"

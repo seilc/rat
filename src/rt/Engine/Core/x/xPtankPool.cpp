@@ -9,6 +9,8 @@
 #include "xFXHighDynamicRange.h"
 #include "xGlobals.h"
 #include "xMemMgr.h"
+#include "xMemory.h"
+#include "xPad.h"
 #include "xRenderState.h"
 #include "xutil.h"
 #include "zRenderState.h"

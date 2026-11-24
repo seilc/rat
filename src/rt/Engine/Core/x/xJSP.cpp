@@ -3,6 +3,7 @@
 
 #include "xDebug.h"
 #include "xGlobals.h"
+#include "xPad.h"
 #include "xString.h"
 #include "xScene.h"
 #include "iAsync.h"

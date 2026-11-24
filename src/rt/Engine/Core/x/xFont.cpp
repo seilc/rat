@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xFont.h"
 
+#include "containers.h"
+#include "i2dQuadBuffer.h"
 #include "xCam.h"
 #include "xDebug.h"
 #include "xDebugTweak.h"

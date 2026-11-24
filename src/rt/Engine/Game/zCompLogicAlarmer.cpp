@@ -1,7 +1,10 @@
 #include "xCommon.h"
 #include "zCompLogicAlarmer.h"
 
+#include "xEntMotion.h"
 #include "xGlobals.h"
+#include "xHud.h"
+#include "zCompStateMachine.h"
 #include "zICompNPCEntity.h"
 #include "zPlayer.h"
 

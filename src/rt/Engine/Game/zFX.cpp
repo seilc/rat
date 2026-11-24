@@ -1,11 +1,16 @@
 #include "xCommon.h"
 #include "zFX.h"
 
+#include "xBase.h"
+#include "xCam.h"
+#include "xEnt.h"
+#include "xPtankPool.h"
 #include "zFXShockwave.h"
 #include "zFXScreenDecal.h"
 #include "zFXGoo.h"
 #include "zNPCProjectileGrubFX.h"
 #include "zParSysSnowsplosion.h"
+#include "zPlayerContainer.h"
 
 U32 gFXSurfaceFlags = 0;
 

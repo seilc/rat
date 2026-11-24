@@ -2,6 +2,7 @@
 #include "xBase.h"
 
 #include "xDebug.h"
+#include "xRand.h"
 #include "xserializer.h"
 
 void xBaseInit(xBase* xb, const xBaseAsset* asset)

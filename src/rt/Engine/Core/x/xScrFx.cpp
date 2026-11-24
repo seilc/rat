@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xScrFx.h"
 
+#include "containers.h"
 #include "xDebugTweak.h"
 #include "xEnt.h"
 #include "xGroup.h"

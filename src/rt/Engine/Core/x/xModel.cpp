@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xModel.h"
 
+#include "containers.h"
+#include "iAsync.h"
 #include "xDebug.h"
 #include "xDebugTweak.h"
 #include "xEnt.h"
@@ -14,6 +16,7 @@
 #include "xMemMgr.h"
 #include "xMemory.h"
 #include "xMorph.h"
+#include "xPad.h"
 #include "xString.h"
 #include "xstransvc.h"
 #include "xutil.h"

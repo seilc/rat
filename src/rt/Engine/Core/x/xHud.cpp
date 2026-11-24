@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xHud.h"
 
+#include "containers.h"
+#include "i2dQuadBuffer.h"
 #include "xHudAsset.h"
 #include "xHudFontMeter.h"
 #include "xHudImage.h"

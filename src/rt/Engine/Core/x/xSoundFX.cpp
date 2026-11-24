@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xSoundFX.h"
 
+#include "xPad.h"
 #include "zEvent.h"
 #include "xstransvc.h"
 #include "xRand.h"

@@ -3,6 +3,8 @@
 
 #include "xDebug.h"
 #include "iModel.h"
+#include "xFile.h"
+#include "xRand.h"
 
 #include "decomp.h"
 

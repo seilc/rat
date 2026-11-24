@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zCompLogicSwarmMember.h"
 
+#include "xEnt.h"
 #include "zICompSteering.h"
 
 void zCompLogicSwarmMember::Update(xScene*, F32 dt)

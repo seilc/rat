@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xpkrsvc.h"
 #include "xDebug.h"
+#include "xEnt.h"
+#include "xPad.h"
 #include "xhipio.h"
 #include "xMemMgr.h"
 #include "xOutputMgr.h"
@@ -9,6 +11,7 @@
 #include "iTime.h"
 #include "zHashes.h"
 #include "zMain.h"
+#include "zPlayerContainer.h"
 
 #include "decomp.h"
 

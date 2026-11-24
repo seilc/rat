@@ -1,7 +1,12 @@
 #include "xCommon.h"
 #include "xNavigationMeshAsset.h"
 
+#include "containers.h"
 #include "xEnt.h"
+#include "xEntMotion.h"
+#include "xHud.h"
+#include "xPad.h"
+#include "xPtankPool.h"
 #include "zScene.h"
 #include "xGlobals.h"
 #include "zNPCCommon.h"

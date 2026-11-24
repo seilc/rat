@@ -2,9 +2,11 @@
 #include "xstransvc.h"
 
 #include "xDebug.h"
+#include "xFile.h"
 #include "xGlobals.h"
 #include "xMemMgr.h"
 #include "xOutputMgr.h"
+#include "xPad.h"
 #include "xutil.h"
 #include "iFile.h"
 #include "iTRC.h"

@@ -1,7 +1,12 @@
 #include "xCommon.h"
 #include "xCollideSphereBox.h"
 
+#include "containers.h"
 #include "xCollideSpherePolygon.h"
+#include "xEnt.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
 
 namespace {
     struct xBoxFace

@@ -1,6 +1,10 @@
 #include "xCommon.h"
 #include "zCineFXTableSceneUT11.h"
 
+#include "xBase.h"
+#include "xFile.h"
+#include "xPad.h"
+#include "xRand.h"
 #include "zCineFX.h"
 #include "zCineFXShared.h"
 #include "zFrozoneIce.h"

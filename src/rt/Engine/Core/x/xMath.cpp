@@ -3,6 +3,7 @@
 
 #include "xDebug.h"
 #include "xDebugTweak.h"
+#include "xRand.h"
 
 #include "decomp.h"
 

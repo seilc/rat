@@ -1,7 +1,11 @@
 #include "xCommon.h"
 #include "xTextureManager.h"
 
+#include "xBase.h"
 #include "xDebug.h"
+#include "xMemory.h"
+#include "xPad.h"
+#include "xRand.h"
 #include "xstransvc.h"
 #include "xbinio.h"
 #include "iFile.h"

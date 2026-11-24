@@ -1,10 +1,14 @@
 #include "xCommon.h"
 #include "iLight.h"
 
+#include "xBase.h"
 #include "xDebugTweak.h"
+#include "xEnt.h"
 #include "xEnv.h"
 #include "xModel.h"
 #include "iEnv.h"
+#include "xPad.h"
+#include "zPlayerContainer.h"
 
 #include <stdio.h>
 

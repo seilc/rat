@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xFactory.h"
 
+#include "xRand.h"
+
 static S32 OrdTest_infotype(const void* vkey, void* vitem); // UNUSED
 static S32 OrdComp_infotype(void* vkey, void* vitem); // UNUSED
 

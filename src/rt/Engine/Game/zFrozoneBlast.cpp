@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zFrozoneBlast.h"
 
+#include "containers.h"
 #include "iMath.h"
 #include "xCam.h"
 #include "xColor.h"

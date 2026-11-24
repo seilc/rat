@@ -2,6 +2,8 @@
 #include "iAsync.h"
 
 #include "iSystem.h"
+#include "xPad.h"
+#include "xRand.h"
 #include "xutil.h"
 
 #include <rwcore.h>

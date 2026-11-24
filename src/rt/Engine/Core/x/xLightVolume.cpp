@@ -1,9 +1,13 @@
 #include "xCommon.h"
 #include "xLightVolume.h"
 
+#include "containers.h"
+#include "xEnt.h"
 #include "xMemMgr.h"
 #include "xDebug.h"
 #include "iModel.h"
+#include "xPad.h"
+#include "zPlayerContainer.h"
 
 #define MAX_ACTIVE 64
 

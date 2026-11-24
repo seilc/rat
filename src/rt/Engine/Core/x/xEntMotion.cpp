@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xEntMotion.h"
 
+#include "containers.h"
 #include "xCam.h"
 #include "xDebug.h"
 #include "xDraw.h"

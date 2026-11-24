@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xHudModel.h"
 
+#include "xEnt.h"
 #include "xHudAsset.h"
 
 #include "decomp.h"

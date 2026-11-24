@@ -2,6 +2,7 @@
 #include "xFunctionGenerator.h"
 
 #include "xDebugTweak.h"
+#include "xPad.h"
 #include "xScene.h"
 #include "xGlobals.h"
 #include "zEvent.h"

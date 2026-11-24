@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zEvent.h"
 
+#include "xstransvc.h"
 #include "xutil.h"
 
 #include "decomp.h"

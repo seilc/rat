@@ -1,6 +1,9 @@
 #include "xCommon.h"
 #include "zParEmitter.h"
 
+#include "containers.h"
+#include "xMovePoint.h"
+#include "xPad.h"
 #include "xParSys.h"
 #include "zGlobals.h"
 #include "zScene.h"

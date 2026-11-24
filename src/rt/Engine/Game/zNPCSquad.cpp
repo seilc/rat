@@ -1,6 +1,9 @@
 #include "xCommon.h"
 #include "zNPCSquad.h"
 
+#include "xBase.h"
+#include "xRand.h"
+
 zNPCSquad::zNPCSquad()
     : totalMembers(0)
 {

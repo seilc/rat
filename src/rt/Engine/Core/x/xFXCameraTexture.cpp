@@ -2,6 +2,7 @@
 #include "xFXCameraTexture.h"
 
 #include "iAsync.h"
+#include "xPad.h"
 #include "zGlobals.h"
 #include "xLightKit.h"
 #include "iDraw.h"

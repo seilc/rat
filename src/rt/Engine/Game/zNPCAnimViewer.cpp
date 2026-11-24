@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zNPCAnimViewer.h"
 
+#include "zCompStateMachine.h"
 #include "zComponentPool.h"
 #include "zCompLogicAnimViewer.h"
 #include "zICompNPCEntity.h"

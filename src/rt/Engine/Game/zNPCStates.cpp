@@ -1,8 +1,12 @@
 #include "xCommon.h"
 #include "zNPCStates.h"
 
+#include "containers.h"
+#include "xMovePoint.h"
+#include "xPad.h"
 #include "xString.h"
 #include "zICompNPCEntity.h"
+#include "zPlayerContainer.h"
 
 // UNUSED: needed to match (speculative code)
 void zTimerState::Setup(S32 nextStateEnum, F32 time)

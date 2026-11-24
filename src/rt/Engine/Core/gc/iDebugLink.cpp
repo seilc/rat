@@ -2,6 +2,7 @@
 #include "iDebugLink.h"
 
 #include "xGlobals.h"
+#include "xPad.h"
 #include "xstransvc.h"
 #include "xEvent.h"
 #include "zScene.h"

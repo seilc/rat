@@ -1,7 +1,10 @@
 #include "xCommon.h"
 #include "xDebugLink.h"
 
+#include "containers.h"
+#include "xFile.h"
 #include "xMemMgr.h"
+#include "xPad.h"
 #include "xstransvc.h"
 #include "xutil.h"
 #include "xEvent.h"

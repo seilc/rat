@@ -1,5 +1,6 @@
 #include "xCommon.h"
 #include "xEnt.h"
+#include "xFile.h"
 #include "xMemMgr.h"
 #include "xDebug.h"
 #include "xMath3.h"

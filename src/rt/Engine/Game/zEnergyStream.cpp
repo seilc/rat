@@ -1,6 +1,12 @@
 #include "xCommon.h"
 #include "xFX.h"
 
+#include "xBase.h"
+#include "xCam.h"
+#include "xEnt.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
+
 #include "decomp.h"
 
 DECOMP_FORCEBLOCK((xFXRibbon* r) {

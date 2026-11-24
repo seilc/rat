@@ -1,6 +1,10 @@
 #include "xCommon.h"
 #include "zActionLine.h"
 
+#include "xBase.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "xRand.h"
 #include "xRenderState.h"
 #include "xstransvc.h"
 #include "zHashes.h"

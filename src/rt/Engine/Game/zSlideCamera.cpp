@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zSlideCamera.h"
 
+#include "xEnt.h"
 #include "zAutoTweak.h"
 
 void zSlideCam::create()

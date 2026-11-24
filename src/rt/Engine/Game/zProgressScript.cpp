@@ -2,6 +2,9 @@
 #include "zProgressScript.h"
 
 #include "xMemMgr.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "xRand.h"
 #include "zBase.h"
 #include "zEvent.h"
 

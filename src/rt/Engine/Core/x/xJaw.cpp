@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xJaw.h"
 
+#include "xRand.h"
 #include "xstransvc.h"
 #include "xDebug.h"
 

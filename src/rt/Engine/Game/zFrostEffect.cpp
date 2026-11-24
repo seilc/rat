@@ -5,10 +5,12 @@
 #include "xEnt.h"
 #include "xFont.h"
 #include "xModel.h"
+#include "xPad.h"
 #include "xRand.h"
 #include "xstransvc.h"
 #include "xutil.h"
 #include "zHashes.h"
+#include "zPlayerContainer.h"
 
 #include "decomp.h"
 

@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xFXHighDynamicRange.h"
 
+#include "containers.h"
 #include "xDebug.h"
 #include "xDebugTweak.h"
 #include "xColor.h"
@@ -8,6 +9,8 @@
 #include "xMath.h"
 #include "xMath3.h"
 #include "xMemMgr.h"
+#include "xPad.h"
+#include "xPtankPool.h"
 #include "xRenderState.h"
 #include "iDebug.h"
 #include "iDraw.h"

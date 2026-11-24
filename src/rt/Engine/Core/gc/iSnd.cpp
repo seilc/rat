@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "iSnd.h"
 
+#include "containers.h"
+#include "xPad.h"
 #include "xSnd.h"
 #include "xSndMgr.h"
 #include "xstransvc.h"

@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xFMV.h"
 
+#include "xPad.h"
 #include "xSndMgr.h"
 #include "zGame.h"
 #include "zGlobals.h"

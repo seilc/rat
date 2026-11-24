@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xTimer.h"
 
+#include "xPad.h"
 #include "xRand.h"
 #include "xserializer.h"
 #include "zBase.h"

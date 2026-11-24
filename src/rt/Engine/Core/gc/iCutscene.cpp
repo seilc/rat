@@ -1,13 +1,17 @@
 #include "xCommon.h"
 #include "iCutscene.h"
 
+#include "xBase.h"
 #include "xCutscene.h"
+#include "xEnt.h"
+#include "xPad.h"
 #include "xstransvc.h"
 #include "xSndMgr.h"
 #include "iDebug.h"
 #include "iFile.h"
 #include "iModel.h"
 #include "zAssetTypes.h"
+#include "zPlayerContainer.h"
 
 #include <string.h>
 

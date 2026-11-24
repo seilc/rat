@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xShadow.h"
 
+#include "containers.h"
 #include "xDebug.h"
 #include "xClumpColl.h"
 #include "xCollide.h"
@@ -15,6 +16,7 @@
 #include "xGrid.h"
 #include "xJSP.h"
 #include "xMath.h"
+#include "xPtankPool.h"
 #include "xutil.h"
 #include "xIM.h"
 #include "xLightKit.h"

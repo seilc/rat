@@ -7,6 +7,7 @@
 #include "xMemMgr.h"
 #include "xDebug.h"
 #include "xOutputMgr.h"
+#include "xPad.h"
 
 #include "decomp.h"
 

@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "iFX.h"
 
+#include "xEnt.h"
 #include "xFX.h"
 
 #include <rpworld.h>

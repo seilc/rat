@@ -6,6 +6,7 @@
 #include "xDebugTweak.h"
 #include "xDraw.h"
 #include "xMath2.h"
+#include "xRand.h"
 #include "xString.h"
 #include "xutil.h"
 #include "zMain.h"

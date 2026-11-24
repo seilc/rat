@@ -1,7 +1,12 @@
 #include "xCommon.h"
 #include "zCombo.h"
 
+#include "containers.h"
+#include "xEnt.h"
 #include "xHudText.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
 
 #include "decomp.h"
 

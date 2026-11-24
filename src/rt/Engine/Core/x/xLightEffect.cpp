@@ -2,6 +2,7 @@
 #include "xLightEffect.h"
 
 #include "xLight.h"
+#include "xPad.h"
 #include "zBase.h"
 #include "xGlobals.h"
 #include "xScene.h"

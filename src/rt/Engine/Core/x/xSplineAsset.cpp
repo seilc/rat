@@ -2,6 +2,7 @@
 #include "xSplineAsset.h"
 
 #include "xRenderState.h"
+#include "xString.h"
 
 #include "decomp.h"
 

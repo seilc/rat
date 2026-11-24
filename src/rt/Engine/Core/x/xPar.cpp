@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xPar.h"
 
+#include "i2dQuadBuffer.h"
 #include "xDebug.h"
 
 xPar gParPool[XPAR_POOL_MAX];

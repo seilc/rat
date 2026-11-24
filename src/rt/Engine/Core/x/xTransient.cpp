@@ -1,6 +1,9 @@
 #include "xCommon.h"
 #include "xTransient.h"
 
+#include "xBase.h"
+#include "xRand.h"
+
 namespace xTransient {
 
 xSpacePartitionTree2D space_tree;

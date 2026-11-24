@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xHudImage.h"
 
+#include "xEnt.h"
 #include "xHudAsset.h"
 #include "xDebugTweak.h"
 #include "xFont.h"

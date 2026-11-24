@@ -1,9 +1,14 @@
 #include "xCommon.h"
 #include "xHierarchyBound.h"
 
+#include "xBase.h"
 #include "xCollideSweptSphere.h"
 #include "xDebugTweak.h"
 #include "xDraw.h"
+#include "xEnt.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
 
 #include "decomp.h"
 

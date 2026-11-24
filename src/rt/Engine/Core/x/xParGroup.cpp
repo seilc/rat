@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xParGroup.h"
 
+#include "i2dQuadBuffer.h"
 #include "xDebug.h"
 
 #include "decomp.h"

@@ -1,6 +1,12 @@
 #include "xCommon.h"
 #include "xCollideSpherePolygonUnprocessed.h"
 
+#include "containers.h"
+#include "xEnt.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
+
 namespace xCollideSpherePolygonUnprocessed {
 static F32 normalize(xVec3& v)
 {

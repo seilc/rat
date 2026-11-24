@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "zFXPunchSnow.h"
 
+#include "containers.h"
 #include "xCam.h"
 #include "xGlobals.h"
 #include "xMath.h"

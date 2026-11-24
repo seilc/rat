@@ -2,10 +2,12 @@
 #include "iModel.h"
 
 #include "xDebug.h"
+#include "xFX.h"
 #include "xFont.h"
 #include "xMath3.h"
 #include "xMemMgr.h"
 #include "xModel.h"
+#include "xPad.h"
 #include "xVec3.h"
 #include "xGlobals.h"
 #include "xstransvc.h"

@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "xModelBlur.h"
 
+#include "containers.h"
 #include "xFXCameraTexture.h"
 #include "xDebugTweak.h"
 #include "xModel.h"
@@ -10,6 +11,7 @@
 #include "xDraw.h"
 #include "xMath.h"
 #include "xMemMgr.h"
+#include "xPad.h"
 #include "xRenderState.h"
 #include "iDraw.h"
 #include "zGlobals.h"

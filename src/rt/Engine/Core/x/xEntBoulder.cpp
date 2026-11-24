@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xEntBoulder.h"
 
+#include "xEntMotion.h"
+#include "xFX.h"
 #include "zMovePoint.h"
 #include "xCam.h"
 #include "xCollideSweptSphere.h"

@@ -4,6 +4,7 @@
 #include "iAsync.h"
 #include "iScrFx.h"
 #include "iMemMgr.h"
+#include "xPad.h"
 #include "zGameState.h"
 #include "xGlobals.h"
 #include "xShadow.h"

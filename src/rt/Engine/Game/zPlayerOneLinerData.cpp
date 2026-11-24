@@ -3,6 +3,8 @@
 
 #include "iTime.h"
 #include "xDebugTweak.h"
+#include "xEntMotion.h"
+#include "xHud.h"
 #include "xMath.h"
 #include "zNPCCommon.h"
 #include "zNPCMgr.h"

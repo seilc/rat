@@ -1,7 +1,10 @@
 #include "xCommon.h"
 #include "zCamTargetSpline.h"
 
+#include "containers.h"
 #include "xDraw.h"
+#include "xMovePoint.h"
+#include "xPtankPool.h"
 #include "zGlobals.h"
 #include "zPlayerConstrainer.h"
 

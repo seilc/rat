@@ -2,6 +2,8 @@
 #include "iAnim.h"
 
 #include "iAnimSKB.h"
+#include "xFile.h"
+#include "xRand.h"
 
 #include <rtslerp.h>
 #include <rwcore.h>

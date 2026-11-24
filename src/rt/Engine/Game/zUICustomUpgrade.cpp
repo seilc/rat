@@ -1,7 +1,10 @@
 #include "xCommon.h"
 #include "zUICustomUpgrade.h"
 
+#include "xEntMotion.h"
 #include "xEvent.h"
+#include "xFile.h"
+#include "xHud.h"
 #include "xString.h"
 #include "xTextAsset.h"
 #include "zCommonPlayer.h"

@@ -1,6 +1,7 @@
 #include "xCommon.h"
 #include "iScrFx.h"
 
+#include "xBase.h"
 #include "xMath.h"
 #include "xRenderState.h"
 #include "xScrFx.h"

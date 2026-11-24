@@ -1,10 +1,12 @@
 #include "xCommon.h"
 #include "iDebug.h"
 
+#include "containers.h"
 #include "iFile.h"
 #include "iSystem.h"
 #include "iTime.h"
 #include "xGlobals.h"
+#include "xPad.h"
 #include "xString.h"
 #include "zScene.h"
 #include "zUIImage.h"

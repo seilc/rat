@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xserializer.h"
 
+#include "xRand.h"
+#include "xString.h"
 #include "xordarray.h"
 #include "xDebug.h"
 #include "xMemMgr.h"

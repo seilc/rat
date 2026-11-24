@@ -7,6 +7,7 @@
 #include "xGlobals.h"
 #include "xIM.h"
 #include "xJSP.h"
+#include "xPad.h"
 #include "xRenderState.h"
 #include "xScene.h"
 #include "xstransvc.h"

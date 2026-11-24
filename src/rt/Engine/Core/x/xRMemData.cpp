@@ -5,6 +5,7 @@
 #include "xMemMgr.h"
 #include "xDebug.h"
 #include "xOutputMgr.h"
+#include "xRand.h"
 
 #include "decomp.h"
 

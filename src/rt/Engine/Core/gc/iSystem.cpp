@@ -1,7 +1,9 @@
 #include "xCommon.h"
 #include "iSystem.h"
 
+#include "xEnt.h"
 #include "xFX.h"
+#include "xFile.h"
 #include "xMath.h"
 #include "xPad.h"
 #include "xRenderState.h"

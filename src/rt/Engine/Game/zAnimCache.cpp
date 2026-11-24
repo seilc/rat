@@ -3,10 +3,13 @@
 
 #include "xAnim.h"
 #include "xModel.h"
+#include "xPad.h"
+#include "xPtankPool.h"
 #include "xutil.h"
 #include "iAnim.h"
 #include "iModel.h"
 #include "zCombatAttack.h"
+#include "zPlayerContainer.h"
 
 #include <cmath>
 

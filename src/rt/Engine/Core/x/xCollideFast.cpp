@@ -1,8 +1,10 @@
 #include "xCommon.h"
 #include "xCollideFast.h"
 
+#include "xBase.h"
 #include "xDebug.h"
 #include "xBound.h"
+#include "xRand.h"
 
 U32 xRayHitsSphereFast(const xRay3* r, const xSphere* s)
 {

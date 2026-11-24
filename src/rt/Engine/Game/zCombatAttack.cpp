@@ -1,6 +1,10 @@
 #include "xCommon.h"
 #include "zCombatAttack.h"
 
+#include "xCam.h"
+#include "xPtankPool.h"
+#include "zPlayerContainer.h"
+
 #include <string.h>
 
 zCombatAttack::zCombatAttack()

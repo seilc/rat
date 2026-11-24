@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "xFilter.h"
 
+#include "xBase.h"
+
 F32 xFilterCurvedInterp5(F32 in_t)
 {
     F32 in_t2 = in_t * in_t;

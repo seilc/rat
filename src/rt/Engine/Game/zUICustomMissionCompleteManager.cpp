@@ -1,6 +1,8 @@
 #include "xCommon.h"
 #include "zUICustomMissionCompleteManager.h"
 
+#include "xPad.h"
+#include "xPtankPool.h"
 #include "xString.h"
 #include "xTextAsset.h"
 #include "zEvent.h"

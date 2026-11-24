@@ -3,8 +3,11 @@
 
 #include "iAsync.h"
 #include "xDebug.h"
+#include "xEnt.h"
 #include "xMath.h"
 #include "xModel.h"
+#include "xPad.h"
+#include "zPlayerContainer.h"
 
 #include "decomp.h"
 

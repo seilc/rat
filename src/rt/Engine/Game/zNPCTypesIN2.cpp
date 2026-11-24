@@ -1,6 +1,12 @@
 #include "xCommon.h"
 #include "zNPCTypesIN2.h"
 
+#include "xBase.h"
+#include "xEntMotion.h"
+#include "xPad.h"
+#include "xPtankPool.h"
+#include "xRand.h"
+
 const zNPCTypeInfoIN2* zNPCTypesGetInfo()
 {
     static const zNPCTypeInfoIN2 info[] = {

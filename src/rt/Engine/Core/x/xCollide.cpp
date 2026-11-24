@@ -10,6 +10,7 @@
 #include "xJSP.h"
 #include "xMath.h"
 #include "xOutputMgr.h"
+#include "xPad.h"
 #include "zGrid.h"
 #include "zScene.h"
 #include "zSurface.h"

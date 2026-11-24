@@ -1,9 +1,11 @@
 #include "xCommon.h"
 #include "xCM.h"
 
+#include "containers.h"
 #include "xDebug.h"
 #include "xDraw.h"
 #include "xEvent.h"
+#include "xFile.h"
 #include "xFont.h"
 #include "xPad.h"
 #include "xRenderState.h"

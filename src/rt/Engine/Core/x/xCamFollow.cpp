@@ -1,12 +1,14 @@
 #include "xCommon.h"
 #include "xCamFollow.h"
 
+#include "containers.h"
 #include "xCollideFast.h"
 #include "xCollideSweptSphere.h"
 #include "xDebug.h"
 #include "xEnt.h"
 #include "xPtankPool.h"
 #include "xScene.h"
+#include "zPlayerContainer.h"
 
 extern xGrid colls_grid;
 extern xGrid colls_oso_grid;
