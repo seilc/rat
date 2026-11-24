@@ -13,11 +13,6 @@
 
 #define STRAN_MAX_SCENES 32
 
-#define XST_OPTS_HIP (1<<0)
-#define XST_OPTS_HOP (2<<0)
-#define XST_OPTS_LOCAL (3<<0)
-#define XST_OPTS_MASKHH (3<<0)
-
 struct st_STRAN_SCENE
 {
     U32 scnid;

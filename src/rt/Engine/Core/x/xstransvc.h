@@ -6,6 +6,11 @@
 
 #include <stdio.h>
 
+#define XST_OPTS_HIP (1<<0)
+#define XST_OPTS_HOP (2<<0)
+#define XST_OPTS_LOCAL (3<<0)
+#define XST_OPTS_MASKHH (3<<0)
+
 bool xSTIsLoaded();
 S32 xSTStartup(PKRAssetType* handlers);
 S32 xSTShutdown();
