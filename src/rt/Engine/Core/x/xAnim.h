@@ -32,6 +32,7 @@ enum
 enum
 {
     AnimState_ModeMask = 0x70,
+    AnimState_EndStop = 0x0,
     AnimState_Loop = 0x10,
     AnimState_EndTransition = 0x20,
     AnimState_BlendOut = 0x30,
