@@ -3,6 +3,10 @@
 
 #include "zNPCAsset.h"
 
+// zNPCAssetSwarm::flags
+#define k_ZNPCASSETSWARM_SEEK_CHECK_OBJECT_USAGE 0x1
+#define k_ZNPCASSETSWARM_FLEE_CHECK_OBJECT_USAGE 0x2
+
 struct zNPCAssetSwarm : zNPCAssetRATS
 {
     S32 memberNumber;

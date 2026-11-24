@@ -64,10 +64,12 @@ public:
     virtual void Reset();
 
     eNPCType GetNPCType() { return type; }
-    void GetChildren(zNPCBase** children, S32* number);
+    zNPCAssetRATS* GetNPCAsset() { return npcAsset; }
+    void GetChildren(zNPCBase** children, S32* number) { *children = this->children; *number = numChildren; }
     zICompLogic* GetLogicComponent() { return npcLogicComp; }
     zICompNPCEntity* GetEntityComponent() { return npcEntityComp; }
-    zICompSteering* GetSteeringComponent();
+    zICompSteering* GetSteeringComponent() { return npcSteeringComp; }
+    zICompSound* GetSoundComponent() { return npcSoundComp; }
 
     void PreUpdateAllComponents(xScene* xscn, F32 dt);
     void PostUpdateAllComponents(xScene* xscn, F32 dt);

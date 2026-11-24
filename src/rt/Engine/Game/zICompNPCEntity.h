@@ -63,6 +63,8 @@ public:
     void Render();
     void SetAnimState(U32 new_stateID, F32 blend, xModelInstance* model);
     void SetAnimState(const char* new_state, F32 blend, xModelInstance* model);
+    void SetAnimState(const char* new_state, F32 blend, F32 dest_time, xModelInstance* model);
+    F32 GetAnimDuration();
     bool IsAnimationStopped(U32 AnimationID);
     bool IsAnimationTranstitionFinished(U32 AnimationID);
     xVec3* GetPosition() { return &frame->mat.pos; }
@@ -70,6 +72,7 @@ public:
     xEntFrame* GetFrame() { return frame; }
     xModelInstance* GetModel() { return model; }
     F32 GetModelScale() { return Params()->modelScale; }
+    F32 GetDistance2(const xVec3* v) { return v->Distance2(frame->mat.pos); }
 
 private:
     const zICompNPCEntityParams* Params() { return parameters; }

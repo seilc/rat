@@ -8,6 +8,8 @@ class zCompSteeringFlockingBrain;
 class zCompSteeringFlockingParams : public zCompSteeringBasicParams
 {
 public:
+    zCompSteeringFlockingParams() { SetDefaults(); }
+
     F32 seperationMultiplier;
     F32 seperationNeighbourRadius;
     F32 playerAvoidenceMultiplier;
@@ -15,6 +17,24 @@ public:
     F32 playerAvoidenceForceLimit;
     F32 alignmentMultiplier;
     F32 cohesionMultiplier;
+
+#if DEBUG
+    void AddTweaks(const char* name);
+#endif
+    virtual void SetDefaults()
+    {
+        seperationMultiplier = 8.0f;
+        seperationNeighbourRadius = 2.0f;
+
+        playerAvoidenceMultiplier = 10.0f;
+        playerAvoidenceRadius = 3.0f;
+        playerAvoidenceForceLimit = 30.0f;
+
+        alignmentMultiplier = 3.0f;
+
+        cohesionMultiplier = 0.7f;
+        zCompSteeringBasicParams::SetDefaults();
+    }
 };
 
 class zCompSteeringFlocking : public zCompSteeringBasic

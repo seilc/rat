@@ -22,6 +22,8 @@ public:
 class zCompSteeringBasicParams : public zCompParameters
 {
 public:
+    zCompSteeringBasicParams() { SetDefaults(); }
+
     F32 maxForce;
     F32 maxSpeed;
     F32 turnSpringK;
@@ -59,7 +61,45 @@ public:
     bool lookAtPosition;
     bool lookAtDirection;
 
-    virtual void SetDefaults();
+    virtual void SetDefaults()
+    {
+        maxForce = 20.0f;
+        maxSpeed = 8.0f;
+        turnSpringK = 10.0f;
+        mass = 1.0f;
+        wallAvoidenceMultiplier = 1.0f;
+        wallAvoidenceForceMax = 40.0f;
+        wallFeelerLength = 2.0f;
+        sphereAvoidenceMultiplier = 10.0f;
+        sphereAvoidenceRange = 2.0f;
+        sphereAvoidenceBreakRatio = 0.0f;
+        wanderMultiplier = 1.0f;
+        wanderJitterPerSec = 20.0f;
+        wanderRadius = 2.2f;
+        wanderDist = 3.0f;
+        seekMultiplier = 1.0f;
+        seekRadius = 500.0f;
+        fleeMultiplier = 1.0f;
+        fleeRadius = 500.0f;
+        arriveMultiplier = 2.0f;
+        arriveRadius = 500.0f;
+        lookPosition = NULL;
+        lookDirection = NULL;
+        frictionK = 1.0f;
+        wallAvoidenceOn = true;
+        sphereAvoidenceOn = true;
+        wanderOn = true;
+        seekOn = true;
+        fleeOn = true;
+        arriveOn = true;
+        gravityOn = false;
+        frictionOn = false;
+        seekCheckObjectUsage = false;
+        fleeCheckObjectUsage = false;
+        arriveCheckObjectUsage = false;
+        lookAtPosition = false;
+        lookAtDirection = false;
+    }
 };
 
 class zCompSteeringBasic : public zICompSteering
@@ -72,6 +112,8 @@ public:
     virtual void Update(xScene* xscn, F32 dt);
     virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
     virtual void ApplySteering(zICompNPCEntity* npcEnt, F32 dt);
+
+    xEnt* GetRepellerEnt() { return Repeller; }
 
 private:
     void CalculateForce(xVec3& force, zSteeringBasicDynamics& steeringDynamics, F32 dt);
