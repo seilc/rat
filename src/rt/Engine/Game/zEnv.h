@@ -9,4 +9,8 @@ typedef struct _zEnv : xBase
     xEnvAsset* easset;
 } zEnv;
 
+struct xLightKit;
+
+xLightKit* zEnvGetGlobalObjectLightKit();
+
 #endif
