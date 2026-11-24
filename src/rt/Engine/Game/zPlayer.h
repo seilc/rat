@@ -120,10 +120,16 @@ struct zPlayer : zEnt
 
     bool CanSayOneLiner(); // UNUSED
 
+    void Set_cutsceneReady() { zPlayerFlags |= (1 << 14); }
+
+    bool Get_cutsceneReady() const { return (zPlayerFlags >> 14) & 0x1; }
+
     bool Get_humanPlayer() const
     {
         return (zPlayerFlags >> 18) & 0x1;
     }
+
+    void Clear_cutsceneReady() { zPlayerFlags &= ~(1 << 14); }
 
     bool Get_floor_collision() const
     {

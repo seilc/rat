@@ -66,6 +66,7 @@ extern bool gInSceneResetOrInit;
 bool zSceneIsLoadingPackFile();
 void zSceneSwitch(zPortal* p, S32 forceSameScene, bool sameScene, S32 playerNum);
 xBase* zSceneFindObject(U32 gameID);
+bool zSceneLoadPackFile(U32 id, S32 options, bool noLocalized, const char* filename);
 bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);
 const char* zSceneGetName(xBase* b);
 void zSceneForAllBase(zSceneCallback func, S32 baseType, void* data);

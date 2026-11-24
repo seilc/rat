@@ -18,6 +18,12 @@ public:
     }
 
     S32 size() { return numPlayers; }
+
+    void empty()
+    {
+        numPlayers = 0;
+    }
+
     bool IsPlayer(xEnt* ptr);
 
     void PushBack(zPlayer* player)

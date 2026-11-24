@@ -743,7 +743,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zPendulum.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zPlatform.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zPlayer.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zPlayerBase.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zPlayerBase.cpp"),
             GameObject(Matching, "rt/Engine/Game/zPortal.cpp"),
             GameObject(Matching, "rt/Engine/Game/zReference.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zRenderState.cpp"),

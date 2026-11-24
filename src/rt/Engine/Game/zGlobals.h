@@ -4,6 +4,7 @@
 #include "xGlobals.h"
 #include "xSndMgr.h"
 #include "zBrainTypes.h"
+#include "zConfiguration.h"
 #include "zMiniGameManager.h"
 
 struct zGlobalSettings
@@ -44,7 +45,7 @@ struct zGlobals : xGlobals
 {
     zGlobalSettings settings;
     zCheckPoint checkPoint;
-    U32 playerTag[9];
+    U32 playerTag[PLAYER_COUNT];
     bool playerLoaded;
     bool invertJoystick;
     F32 timeMultiplier;
