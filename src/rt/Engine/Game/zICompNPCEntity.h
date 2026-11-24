@@ -4,8 +4,7 @@
 #include "zIComponent.h"
 #include "zNPCBase.h"
 #include "xEnt.h"
-
-struct xEntDrive;
+#include "xEntDrive.h"
 
 class zICompNPCEntityParams : public zCompParameters
 {
