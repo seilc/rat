@@ -1525,7 +1525,7 @@ void xEntApplyPhysics(xEnt* ent, xScene* sc, F32 dt)
 
     if (dposvel.y < 0.0f) {
         F32 dposXZ = xsqrt(xsqr(dposvel.x) + xsqr(dposvel.z));
-        F32 scaleXZ = (dposXZ > 0.00001f) ? (0.63f * (30.0f * dt)) / dposXZ : 0.0f;
+        F32 scaleXZ = (dposXZ > EPSILON) ? (0.63f * (30.0f * dt)) / dposXZ : 0.0f;
         F32 scaleY = (0.63f * (30.0f * dt)) / xabs(dposvel.y);
         if (scaleXZ < 1.0f) {
             dposvel.x *= scaleXZ;
@@ -2646,7 +2646,7 @@ static void xModCollCB()
     xModCollRec* mc;
     S32 i;
 
-    F32 poo = MAX(0.00001f, (F32)mctime);
+    F32 poo = MAX(EPSILON, (F32)mctime);
     F32 scale = 1.0f / poo;
 
     for (i = 0, mc = mcrecs; i < num_mcrecs; i++, mc++) {

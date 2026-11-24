@@ -214,11 +214,11 @@ void xRayHitsGrid(xGrid* grid, xScene* sc, xRay3* r, xRayEntCallback rentcb, xQC
     S32 sz, ez, x, z;
     F32 dxdz;
 
-    if (xabs(r->dir.z) <= 0.00001f) {
+    if (xabs(r->dir.z) <= EPSILON) {
         if (r->dir.z >= 0.0f) {
-            r->dir.z = 0.00001f;
+            r->dir.z = EPSILON;
         } else {
-            r->dir.z = -0.00001f;
+            r->dir.z = -EPSILON;
         }
     }
 

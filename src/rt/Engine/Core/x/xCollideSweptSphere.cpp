@@ -478,8 +478,8 @@ MACRO_START                                                                     
     (_it)->recip.z = ((_it)->delta.z != 0.0f) ? (1.0f / (_it)->delta.z) : 0.0f;                   \
     (_it)->radius = (_radius);                                                                    \
     (_it)->stack[0].sector = (_root);                                                             \
-    (_it)->stack[0].pa = (_pa) - 0.00001f;                                                        \
-    (_it)->stack[0].pb = (_pb) + 0.00001f;                                                        \
+    (_it)->stack[0].pa = (_pa) - EPSILON;                                                         \
+    (_it)->stack[0].pb = (_pb) + EPSILON;                                                         \
     (_it)->curr = (_it)->stack + 1;                                                               \
 }                                                                                                 \
 MACRO_STOP
@@ -522,11 +522,11 @@ inline void _rpCollCapsuleItStepMacro(RpCollSectorCapsuleIt* _it, RwUInt32 _axis
             _it->curr->pa = (_it->curr - 1)->pa;
             _it->curr->pb = (_it->curr - 1)->pb;
             if (_leftHi < end) {
-                _it->curr->pb += rec * (_leftHi - end) + 0.00001f;
+                _it->curr->pb += rec * (_leftHi - end) + EPSILON;
             }
             (_it->curr - 1)->sector = _right;
             if (_rightLo > sta) {
-                (_it->curr - 1)->pa += rec * (_rightLo - sta) - 0.00001f;
+                (_it->curr - 1)->pa += rec * (_rightLo - sta) - EPSILON;
             }
         }
     } else {
@@ -542,11 +542,11 @@ inline void _rpCollCapsuleItStepMacro(RpCollSectorCapsuleIt* _it, RwUInt32 _axis
             _it->curr->pa = (_it->curr - 1)->pa;
             _it->curr->pb = (_it->curr - 1)->pb;
             if (_rightLo > end) {
-                _it->curr->pb += rec * (_rightLo - end) + 0.00001f;
+                _it->curr->pb += rec * (_rightLo - end) + EPSILON;
             }
             (_it->curr - 1)->sector = _left;
             if (_leftHi < sta) {
-                (_it->curr - 1)->pa += rec * (_leftHi - sta) - 0.00001f;
+                (_it->curr - 1)->pa += rec * (_leftHi - sta) - EPSILON;
             }
         }
     }
@@ -590,11 +590,11 @@ MACRO_START                                                                     
             (_it)->curr->pa = ((_it)->curr - 1)->pa;                                              \
             (_it)->curr->pb = ((_it)->curr - 1)->pb;                                              \
             if ((_leftHi) < end) {                                                                \
-                (_it)->curr->pb += rec * ((_leftHi) - end) + 0.00001f;                            \
+                (_it)->curr->pb += rec * ((_leftHi) - end) + EPSILON;                             \
             }                                                                                     \
             ((_it)->curr - 1)->sector = (_right);                                                 \
             if ((_rightLo) > sta) {                                                               \
-                ((_it)->curr - 1)->pa += rec * ((_rightLo) - sta) - 0.00001f;                     \
+                ((_it)->curr - 1)->pa += rec * ((_rightLo) - sta) - EPSILON;                      \
             }                                                                                     \
         }                                                                                         \
     } else {                                                                                      \
@@ -609,11 +609,11 @@ MACRO_START                                                                     
             (_it)->curr->pa = ((_it)->curr - 1)->pa;                                              \
             (_it)->curr->pb = ((_it)->curr - 1)->pb;                                              \
             if ((_rightLo) > end) {                                                               \
-                (_it)->curr->pb += rec * ((_rightLo) - end) + 0.00001f;                           \
+                (_it)->curr->pb += rec * ((_rightLo) - end) + EPSILON;                            \
             }                                                                                     \
             ((_it)->curr - 1)->sector = (_left);                                                  \
             if ((_leftHi) < sta) {                                                                \
-                ((_it)->curr - 1)->pa += rec * ((_leftHi) - sta) - 0.00001f;                      \
+                ((_it)->curr - 1)->pa += rec * ((_leftHi) - sta) - EPSILON;                       \
             }                                                                                     \
         }                                                                                         \
     }                                                                                             \
@@ -1208,7 +1208,7 @@ MACRO_START                                                                     
     xVec3Copy(&(ray).origin, &(sws)->start);                                                      \
     xVec3Sub(&(ray).dir, &(sws)->end, &(sws)->start);                                             \
     (ray).max_t = xVec3Length(&(ray).dir);                                                        \
-    F32 one_len = 1.0f / MAX((ray).max_t, 0.00001f);                                              \
+    F32 one_len = 1.0f / MAX((ray).max_t, EPSILON);                                               \
     xVec3SMul(&(ray).dir, &(ray).dir, one_len);                                                   \
     (ray).flags = XRAY3_USE_MAX;                                                                  \
 }                                                                                                 \
@@ -1252,7 +1252,7 @@ S32 xSweptSphereToNonMoving(xSweptSphere* sws, xScene* sc, xEnt* mover, U8 collT
 
     xVec3 diff;
     diff.Sub(sws->end, sws->start);
-    if (diff.length() <= 0.00001f) {
+    if (diff.length() <= EPSILON) {
         iprintf("The start and end positions of the swept sphere are the same. Returning no collision.");
         return envcollfound;
     }

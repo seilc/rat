@@ -53,7 +53,7 @@ bool xSweptSphereToLineSement(const xSweptSphere& sphere, const xVec3& segment_s
     shear.norm.cross(sphere.dir, segment_dir);
 
     F32 shear_normal_len2 = shear.norm.length2();
-    if (shear_normal_len2 < 0.00001f) {
+    if (shear_normal_len2 < EPSILON) {
         return false;
     }
 
@@ -155,7 +155,7 @@ bool xSweptSphereToLineSement(const xSweptSphere& sphere, const xVec3& segment_s
 
     if (proj_center_above_seg_d0 > 0.0f) {
         F32 travel_total = proj_center_above_seg_d0 - proj_center_above_seg_de;
-        if (travel_total < 0.00001f) {
+        if (travel_total < EPSILON) {
             return false;
         }
 
@@ -170,7 +170,7 @@ bool xSweptSphereToLineSement(const xSweptSphere& sphere, const xVec3& segment_s
         return true;
     } else {
         F32 travel_total = proj_center_above_seg_de - proj_center_above_seg_d0;
-        if (travel_total < 0.00001f) {
+        if (travel_total < EPSILON) {
             return false;
         }
 

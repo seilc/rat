@@ -10,7 +10,7 @@ void zSweptCircle::PrepareXZ(const xVec3& start, F32 radius, const xVec3& dir, F
     end.AddScale(start, dir, dist);
     this->end.assign(end.x, end.z);
 
-    if (dir.y < 0.00001f) {
+    if (dir.y < EPSILON) {
         this->dir.assign(dir.x, dir.z);
         this->dist = dist;
     } else {
@@ -54,7 +54,7 @@ bool zSweptCircle::SweptCircleToPoint(xVec2& point)
         return true;
     }
 
-    F32 backDist = radius - xsqrt(radius * radius - distAway * distAway + 0.00001f);
+    F32 backDist = radius - xsqrt(radius * radius - distAway * distAway + EPSILON);
     if (startAlong < curDist + radius - backDist) {
         curDist = startAlong + backDist - radius;
         curEnd.AddScale(start, dir, curDist);

@@ -1243,7 +1243,7 @@ void xFXRibbon::debug_update(F32 dt)
     F32 so = isin(orient), co = icos(orient);
     xVec3 onorm = { norm.x * co, so, norm.z * co };
     insert(loc, onorm, 1.0f, 1.0f, insert_flags);
-    if (!xeq(old_orient / orient, 1.0f, 0.00001f)) debug->spiral.orient = (180.0f / PI) * orient;
+    if (!xeq(old_orient / orient, 1.0f, EPSILON)) debug->spiral.orient = (180.0f / PI) * orient;
 }
 
 void xFXRibbon::debug_refresh_config()

@@ -261,7 +261,7 @@ S32 xCutscene_Update(xCutscene* csn, F32 dt)
 
     csn->CamTime = xCutsceneConvertBreak(csn->Time, csn->BreakList, csn->Info->BreakCount, -1);
 
-    if (csn->Time > 0.00001f + csn->Play->EndTime || csn->BadReadPause) {
+    if (csn->Time > EPSILON + csn->Play->EndTime || csn->BadReadPause) {
         if (csn->PlayIndex == csn->Info->NumTime - 1) {
             csn->Time = csn->Play->EndTime;
             if (sLastFrame) {

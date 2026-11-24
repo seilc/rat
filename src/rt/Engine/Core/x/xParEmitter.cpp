@@ -348,7 +348,7 @@ F32 xParInterpCompute(S32 interp_mode, xParInterp* r, F32 time, S32 time_has_ela
     case eParInterpLinear:
         xASSERT_FMT_L(604, (r->freq>0.0f), "Linear Interp requires non-zero 'Freq' (eg use '1')");
 
-        if (r->freq < 0.00001f) val = r->val[0];
+        if (r->freq < EPSILON) val = r->val[0];
         else val = (r->val[1] - r->val[0]) * (time / r->freq) + r->val[0];
         break;
     case eParInterpSine:
@@ -724,7 +724,7 @@ xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
 
                 p->m_vel.Lerp(p->m_vel, pe->last_emit_velocity, u);
 
-                if (initial_length > 0.00001f)
+                if (initial_length > EPSILON)
                     p->m_vel /= initial_length;
                 p->m_vel *= initial_length * (1.0f - u) + u * pe->last_emit_velocity.length();
 

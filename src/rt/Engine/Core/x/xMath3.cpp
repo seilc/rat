@@ -55,7 +55,7 @@ void xLine3VecDist2(const xVec3* p1, const xVec3* p2, const xVec3* v, xIsect* is
     }
 }
 
-static F32 gs_fTolerance = 1e-05f;
+static F32 gs_fTolerance = EPSILON;
 
 void xLine3LineMinDist(const xVec3* p1, const xVec3* p2, const xVec3* q1, const xVec3* q2, F32& t, F32& u)
 {
@@ -1184,7 +1184,7 @@ F32 xMat3x3LookVec(xMat3x3* m, const xVec3* at)
 
     xVec3Inv(&m->at, &m->at);
 
-    if (xabs(1.0f + m->at.y) < 0.00001f) {
+    if (xabs(1.0f + m->at.y) < EPSILON) {
         m->right.x = 1.0f;
         m->right.y = 0.0f;
         m->right.z = 0.0f;
@@ -1197,7 +1197,7 @@ F32 xMat3x3LookVec(xMat3x3* m, const xVec3* at)
         return vec_len;
     }
 
-    if (xabs(1.0f - m->at.y) < 0.00001f) {
+    if (xabs(1.0f - m->at.y) < EPSILON) {
         m->right.x = -1.0f;
         m->right.y = 0.0f;
         m->right.z = 0.0f;
@@ -1210,7 +1210,7 @@ F32 xMat3x3LookVec(xMat3x3* m, const xVec3* at)
         return vec_len;
     }
 
-    if (xabs(at->z) < 0.00001f && xabs(at->x) < 0.00001f) {
+    if (xabs(at->z) < EPSILON && xabs(at->x) < EPSILON) {
         m->right.x = 1.0f;
         m->right.y = 0.0f;
         m->right.z = 0.0f;
@@ -1242,57 +1242,57 @@ void xMat3x3LookVec2(xMat3x3* m, const xVec3* at)
 {
     xMat3x3LookVec(m, at);
 
-    if (xabs(m->right.x) < 0.00001f) {
+    if (xabs(m->right.x) < EPSILON) {
         m->right.x = 0.0f;
-    } else if (xabs(m->right.x - 1.0f) < 0.00001f) {
+    } else if (xabs(m->right.x - 1.0f) < EPSILON) {
         m->right.x = 1.0f;
     }
 
-    if (xabs(m->right.y) < 0.00001f) {
+    if (xabs(m->right.y) < EPSILON) {
         m->right.y = 0.0f;
-    } else if (xabs(m->right.y - 1.0f) < 0.00001f) {
+    } else if (xabs(m->right.y - 1.0f) < EPSILON) {
         m->right.y = 1.0f;
     }
 
-    if (xabs(m->right.z) < 0.00001f) {
+    if (xabs(m->right.z) < EPSILON) {
         m->right.z = 0.0f;
-    } else if (xabs(m->right.z - 1.0f) < 0.00001f) {
+    } else if (xabs(m->right.z - 1.0f) < EPSILON) {
         m->right.z = 1.0f;
     }
 
-    if (xabs(m->up.x) < 0.00001f) {
+    if (xabs(m->up.x) < EPSILON) {
         m->up.x = 0.0f;
-    } else if (xabs(m->up.x - 1.0f) < 0.00001f) {
+    } else if (xabs(m->up.x - 1.0f) < EPSILON) {
         m->up.x = 1.0f;
     }
 
-    if (xabs(m->up.y) < 0.00001f) {
+    if (xabs(m->up.y) < EPSILON) {
         m->up.y = 0.0f;
-    } else if (xabs(m->up.y - 1.0f) < 0.00001f) {
+    } else if (xabs(m->up.y - 1.0f) < EPSILON) {
         m->up.y = 1.0f;
     }
 
-    if (xabs(m->up.z) < 0.00001f) {
+    if (xabs(m->up.z) < EPSILON) {
         m->up.z = 0.0f;
-    } else if (xabs(m->up.z - 1.0f) < 0.00001f) {
+    } else if (xabs(m->up.z - 1.0f) < EPSILON) {
         m->up.z = 1.0f;
     }
 
-    if (xabs(m->at.x) < 0.00001f) {
+    if (xabs(m->at.x) < EPSILON) {
         m->at.x = 0.0f;
-    } else if (xabs(m->at.x - 1.0f) < 0.00001f) {
+    } else if (xabs(m->at.x - 1.0f) < EPSILON) {
         m->at.x = 1.0f;
     }
 
-    if (xabs(m->at.y) < 0.00001f) {
+    if (xabs(m->at.y) < EPSILON) {
         m->at.y = 0.0f;
-    } else if (xabs(m->at.y - 1.0f) < 0.00001f) {
+    } else if (xabs(m->at.y - 1.0f) < EPSILON) {
         m->at.y = 1.0f;
     }
 
-    if (xabs(m->at.z) < 0.00001f) {
+    if (xabs(m->at.z) < EPSILON) {
         m->at.z = 0.0f;
-    } else if (xabs(m->at.z - 1.0f) < 0.00001f) {
+    } else if (xabs(m->at.z - 1.0f) < EPSILON) {
         m->at.z = 1.0f;
     }
 }
@@ -1671,7 +1671,7 @@ void xQuatFromMat(xQuat* q, const xMat3x3* m)
         S32 j = nxt[i], k = nxt[j];
 
         root = xsqrt(1.0f + (mp[i * 5] - mp[j * 5] - mp[k * 5]));
-        if (xabs(root) < 0.00001f) {
+        if (xabs(root) < EPSILON) {
             xQuatCopy(q, &g_IQ);
             return;
         }

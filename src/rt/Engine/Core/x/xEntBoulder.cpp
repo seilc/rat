@@ -477,7 +477,7 @@ void xEntBoulder_Update(xEntBoulder* ent, xScene* sc, F32 dt)
         xVec3Normalize(&newRotVec, &newRotVec);
         xVec3SMulBy(&ent->rotVec, 1.0f - ent->basset->stickiness);
         ent->rotVec.AddScale(newRotVec, ent->basset->stickiness);
-        if (xVec3Normalize(&ent->rotVec, &ent->rotVec) < 0.00001f) {
+        if (xVec3Normalize(&ent->rotVec, &ent->rotVec) < EPSILON) {
             ent->angVel = 0.0f;
         } else {
             F32 newAngVel = ent->fOOSphRadius * xVec3Length(&ent->vel);
@@ -824,7 +824,7 @@ void xBoulderGenerator_Init(xBoulderGenerator* bg, xBoulderGeneratorAsset* asset
     bg->initaxis.z = bg->bgasset->rotation.z;
     bg->angvel = (PI/180.0f) * xVec3Normalize(&bg->initaxis, &bg->initaxis);
     bg->lengthOfInitVel = xVec3Length(&bg->bgasset->initvel);
-    if (bg->lengthOfInitVel > 0.00001f) {
+    if (bg->lengthOfInitVel > EPSILON) {
         bg->perp1.x = bg->bgasset->initvel.z - bg->bgasset->initvel.y;
         bg->perp1.y = bg->bgasset->initvel.x - bg->bgasset->initvel.z;
         bg->perp1.z = bg->bgasset->initvel.y - bg->bgasset->initvel.x;
@@ -1061,11 +1061,11 @@ void xBoulderGenerator_GenBoulder(xBoulderGenerator* bg)
         b->angVel = bg->angvel;
     }
 
-    if (bg->lengthOfInitVel > 0.00001f && bg->bgasset->velAngleRand > 0.00001f) {
+    if (bg->lengthOfInitVel > EPSILON && bg->bgasset->velAngleRand > EPSILON) {
         F32 p1c = xurand() - 0.5f;
         F32 p2c = xurand() - 0.5f;
         F32 nf = 1.0f / xsqrt(xsqr(p1c) + xsqr(p2c));
-        if (nf < 0.00001f) {
+        if (nf < EPSILON) {
             p1c = 1.0f;
             p2c = 0.0f;
         } else {
@@ -1086,8 +1086,8 @@ void xBoulderGenerator_GenBoulder(xBoulderGenerator* bg)
         xVec3Copy(&b->vel, &bg->bgasset->initvel);
     }
 
-    if (bg->bgasset->velMagRand > 0.00001f) {
-        if (bg->lengthOfInitVel > 0.00001f) {
+    if (bg->bgasset->velMagRand > EPSILON) {
+        if (bg->lengthOfInitVel > EPSILON) {
             F32 sclMag = bg->bgasset->velMagRand * xurand() + 1.0f;
             xVec3SMulBy(&b->vel, sclMag);
         } else {

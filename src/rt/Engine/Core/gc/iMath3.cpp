@@ -123,7 +123,7 @@ void iSphereInitBoundVec(xSphere* s, const xVec3* v)
     xASSERT_L(249, v);
 
     xVec3Copy(&s->center, v);
-    s->r = 0.00001f;
+    s->r = EPSILON;
 }
 
 void iSphereInitBoundOBB(xSphere* s, const xBox* b, const xMat4x3* m)

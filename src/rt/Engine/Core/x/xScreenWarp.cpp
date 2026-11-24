@@ -770,7 +770,7 @@ namespace {
                 F32 xoff = x - loc.x;
                 F32 yoff = y - loc.y;
                 F32 dist2 = xoff * xoff + yoff * yoff;
-                if (dist2 >= r2 || dist2 <= 0.00001f) continue;
+                if (dist2 >= r2 || dist2 <= EPSILON) continue;
 
                 F32 dist = xsqrt(dist2);
                 F32 t = dist * ir;

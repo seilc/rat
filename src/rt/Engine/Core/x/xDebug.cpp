@@ -1638,7 +1638,7 @@ void xDebugExit()
 
 #if DEBUG || RELEASE
 static U32 gReadBytes;
-static F32 gReadTime = 0.00001f;
+static F32 gReadTime = EPSILON;
 
 void xDebugReportLoadStats(char* msg, U32 flags)
 {

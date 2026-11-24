@@ -71,7 +71,7 @@ struct xVec3
     F32 safe_normalize(const xVec3& safety)
     {
         F32 len = length();
-        if (len < 0.00001f)
+        if (len < EPSILON)
             *this = safety;
         else
             *this *= 1.0f / len;
@@ -161,12 +161,12 @@ do {                                                                            
     F32 dy__ = (b)->y - (a)->y;                                                                   \
     F32 dz__ = (b)->z - (a)->z;                                                                   \
     F32 dist2 = dx__*dx__ + dy__*dy__ + dz__*dz__;                                                \
-    if (xeq(dist2, 1.0f, 0.00001f)) {                                                             \
+    if (xeq(dist2, 1.0f, EPSILON)) {                                                              \
         (o)->x = dx__;                                                                            \
         (o)->y = dy__;                                                                            \
         (o)->z = dz__;                                                                            \
         *(outlen) = 1.0f;                                                                         \
-    } else if (xeq(dist2, 0.0f, 0.00001f)) {                                                      \
+    } else if (xeq(dist2, 0.0f, EPSILON)) {                                                       \
         (o)->x = 0.0f;                                                                            \
         (o)->y = 1.0f;                                                                            \
         (o)->z = 0.0f;                                                                            \

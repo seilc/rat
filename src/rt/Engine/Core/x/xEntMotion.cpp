@@ -68,7 +68,7 @@ void xEntMotionInit(xEntMotion* motion, xEnt* owner, xEntMotionAsset* asset)
         xVec3Copy(&motion->orb.c, &asset->orb.center);
         motion->orb.a = asset->orb.w;
         motion->orb.b = asset->orb.h;
-        if (asset->orb.period <= 0.00001f) {
+        if (asset->orb.period <= EPSILON) {
             DBprintf(DBML_DBG, "xEntMotionInit: orb.period too small; adjusting [asset] ...\n");
             asset->orb.period = 1.0f;
         }
@@ -78,7 +78,7 @@ void xEntMotionInit(xEntMotion* motion, xEnt* owner, xEntMotionAsset* asset)
     else if (motion->type == k_XENTMOTIONTYPE_MP) {
     } else if (motion->type == k_XENTMOTIONTYPE_SPLINE) {
     } else if (motion->type == k_XENTMOTIONTYPE_PEN) {
-        if (asset->pen.period <= 0.00001f) {
+        if (asset->pen.period <= EPSILON) {
             asset->pen.period = 1.0f;
         }
         motion->pen.w = 2.0f * PI / asset->pen.period;
@@ -86,16 +86,16 @@ void xEntMotionInit(xEntMotion* motion, xEnt* owner, xEntMotionAsset* asset)
     else if (motion->type == k_XENTMOTIONTYPE_MECH) {
         xEntMotionMechData* mkasst = &asset->mech;
 
-        if (mkasst->sld_tm < 0.00001f) {
+        if (mkasst->sld_tm < EPSILON) {
             mkasst->sld_tm = 1.0f;
         }
         if (mkasst->sld_acc_tm + mkasst->sld_dec_tm > mkasst->sld_tm) {
             mkasst->sld_dec_tm = mkasst->sld_acc_tm = 0.5f * mkasst->sld_tm;
         }
-        if (mkasst->rot_tm < 0.00001f) {
+        if (mkasst->rot_tm < EPSILON) {
             mkasst->rot_tm = 1.0f;
         }
-        if (mkasst->scale_duration < 0.00001f) {
+        if (mkasst->scale_duration < EPSILON) {
             mkasst->scale_duration = 1.0f;
         }
         if (mkasst->type == k_XENTMOTIONMECH_SLIDE_ROT) {
@@ -929,19 +929,19 @@ static U32 xEntSldMove(xEntMotion* motion, xScene*, F32 dt, xEntFrame* frame)
     } else {
         F32 speed;
         if (mech->state == k_XENTMECHSTATE_SLIDE_FORTH || (mech->state == k_XENTMECHSTATE_SCALE_FORTH && mkasst->type == k_XENTMOTIONMECH_SLIDE_SCALE)) {
-            if (tmradj < mkasst->sld_acc_tm && mkasst->sld_acc_tm > 0.00001f) {
+            if (tmradj < mkasst->sld_acc_tm && mkasst->sld_acc_tm > EPSILON) {
                 speed = mech->sliding_speed * tmradj / mkasst->sld_acc_tm;
             }
-            else if (tmradj > mech->sliding_forth_decel_time && mkasst->sld_dec_tm > 0.00001f) {
+            else if (tmradj > mech->sliding_forth_decel_time && mkasst->sld_dec_tm > EPSILON) {
                 speed = mech->sliding_speed * rem / mkasst->sld_dec_tm;
             } else {
                 speed = mech->sliding_speed;
             }
         } else {
-            if (tmradj < mkasst->sld_dec_tm && mkasst->sld_dec_tm > 0.00001f) {
+            if (tmradj < mkasst->sld_dec_tm && mkasst->sld_dec_tm > EPSILON) {
                 speed = mech->sliding_speed * tmradj / mkasst->sld_dec_tm;
             }
-            else if (tmradj > mech->sliding_back_decel_time && mkasst->sld_acc_tm > 0.00001f) {
+            else if (tmradj > mech->sliding_back_decel_time && mkasst->sld_acc_tm > EPSILON) {
                 speed = mech->sliding_speed * rem / mkasst->sld_acc_tm;
             } else {
                 speed = mech->sliding_speed;
@@ -1005,19 +1005,19 @@ static U32 xEntRotMove(xEntMotion* motion, xScene*, F32 dt, xEntFrame* frame)
     } else {
         F32 speed;
         if (mech->state == k_XENTMECHSTATE_ROT_FORTH || (mkasst->type == k_XENTMOTIONMECH_SLIDE_ROT && mech->state == k_XENTMECHSTATE_SLIDE_FORTH)) {
-            if (tmradj < mkasst->rot_acc_tm && mkasst->rot_acc_tm > 0.00001f) {
+            if (tmradj < mkasst->rot_acc_tm && mkasst->rot_acc_tm > EPSILON) {
                 speed = mech->rotation_speed * tmradj / mkasst->rot_acc_tm;
             }
-            else if (tmradj > mech->rotation_forth_decel_time && mkasst->rot_dec_tm > 0.00001f) {
+            else if (tmradj > mech->rotation_forth_decel_time && mkasst->rot_dec_tm > EPSILON) {
                 speed = mech->rotation_speed * rem / mkasst->rot_dec_tm;
             } else {
                 speed = mech->rotation_speed;
             }
         } else {
-            if (tmradj < mkasst->rot_dec_tm && mkasst->rot_dec_tm > 0.00001f) {
+            if (tmradj < mkasst->rot_dec_tm && mkasst->rot_dec_tm > EPSILON) {
                 speed = mech->rotation_speed * tmradj / mkasst->rot_dec_tm;
             }
-            else if (tmradj > mech->rotating_back_decel_time && mkasst->rot_acc_tm > 0.00001f) {
+            else if (tmradj > mech->rotating_back_decel_time && mkasst->rot_acc_tm > EPSILON) {
                 speed = mech->rotation_speed * rem / mkasst->rot_acc_tm;
             } else {
                 speed = mech->rotation_speed;

@@ -25,7 +25,7 @@ inline F32 xsqrt(register F32 x)
         fmuls rsqrt, nwork0, nwork1
     }
 
-    if (rsqrt > 0.00001f) {
+    if (rsqrt > EPSILON) {
         return 1.0f / rsqrt;
     }
 
