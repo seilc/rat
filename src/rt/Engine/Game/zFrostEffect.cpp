@@ -23,7 +23,7 @@ namespace
     xTWEAKABLE F32 DECAL_MAX_SIZE = 2.0f;
     xTWEAKABLE F32 DECAL_MIN_SIZE = 0.5f;
 
-    F32 sEmitTimer = 1e38f;
+    F32 sEmitTimer = HUGE;
 }
 
 static zFrostEffect sFrostEmitter;

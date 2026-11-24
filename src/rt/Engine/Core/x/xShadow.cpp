@@ -1444,7 +1444,7 @@ void xShadowVertical_FillCache(xShadowCache* cache, xVec3* pos, F32 r, F32 depth
     cache->entCount = 0;
     cache->polyCount = 0;
     for (i = 0; i < 5; i++) {
-        cache->polyRayDepth[i] = -1e38f;
+        cache->polyRayDepth[i] = -HUGE;
     }
 
     xEnv* env = xglobals->sceneCur->env;
@@ -1513,19 +1513,19 @@ void xShadowVertical_FillCache(xShadowCache* cache, xVec3* pos, F32 r, F32 depth
 #endif
 
         if (drawLinesToEnvContacts) {
-            if (cache->polyRayDepth[0] != -1e38f) {
+            if (cache->polyRayDepth[0] != -HUGE) {
                 xDrawLine(pos->x, pos->y, pos->z, pos->x, cache->polyRayDepth[0], pos->z);
             }
-            if (cache->polyRayDepth[1] != -1e38f) {
+            if (cache->polyRayDepth[1] != -HUGE) {
                 xDrawLine(pos->x + 0.5f * r, pos->y, pos->z, pos->x + 0.5f * r, cache->polyRayDepth[1], pos->z);
             }
-            if (cache->polyRayDepth[2] != -1e38f) {
+            if (cache->polyRayDepth[2] != -HUGE) {
                 xDrawLine(pos->x - 0.5f * r, pos->y, pos->z, pos->x - 0.5f * r, cache->polyRayDepth[2], pos->z);
             }
-            if (cache->polyRayDepth[3] != -1e38f) {
+            if (cache->polyRayDepth[3] != -HUGE) {
                 xDrawLine(pos->x, pos->y, pos->z + 0.5f * r, pos->x, cache->polyRayDepth[3], pos->z + 0.5f * r);
             }
-            if (cache->polyRayDepth[4] != -1e38f) {
+            if (cache->polyRayDepth[4] != -HUGE) {
                 xDrawLine(pos->x, pos->y, pos->z - 0.5f * r, pos->x, cache->polyRayDepth[4], pos->z - 0.5f * r);
             }
         }
@@ -1542,7 +1542,7 @@ void xShadowVertical_FillCache(xShadowCache* cache, xVec3* pos, F32 r, F32 depth
         }
 
         objMaxDepth = sortRayDepth[2];
-        if (objMaxDepth == -1e38f) {
+        if (objMaxDepth == -HUGE) {
             objMaxDepth = pos->y - depth;
         }
         if (objMaxDepth > pos->y - 0.001f) {

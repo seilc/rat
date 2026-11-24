@@ -532,7 +532,7 @@ void xRayHitsScene(xScene* sc, xRay3* r, xCollis* coll)
     xscRayscNchks++;
 #endif
 
-    coll->dist = 1e38f;
+    coll->dist = HUGE;
 
     xASSERT_FMT_L(920, r->max_t <= 10000.0f, "Due to floating point precision, using a value that is very large for maxT can get incorrect collisions");
 
@@ -561,7 +561,7 @@ void xRayHitsScene(xScene* sc, xRay3* r, xCollis* coll)
         DBprintf(DBML_VDBG, "xRayHitsScene: origin enclosed.  anyone care?\n");
     }
 
-    if (coll->dist < 1e38f) {
+    if (coll->dist < HUGE) {
         coll->flags |= k_HIT_IT;
 
         if (coll->flags & 0x200) {
@@ -764,7 +764,7 @@ void xRayHitsSceneFlags(xScene* sc, const xRay3* r, xCollis* coll, U8 collType, 
 {
     xASSERT_FMT_L(1277, r->max_t <= 10000.0f, "Due to floating point precision, using a value that is very large for maxT can get incorrect collisions");
 
-    coll->dist = 1e38f;
+    coll->dist = HUGE;
     coll->flags = coll->flags & ~k_HIT_IT | 0x100;
 
     cbRayHitsEnt cb(*r, *coll, collType, chk);
@@ -787,7 +787,7 @@ void xRayHitsSceneFlags(xScene* sc, const xRay3* r, xCollis* coll, U8 collType, 
     if (chk & k_XENT_COLLTYPE_ENV) {
         xCollis tempColl;
         tempColl.flags = coll->flags;
-        tempColl.dist = 1e38f;
+        tempColl.dist = HUGE;
         xRayHitsEnv(r, sc->env, &tempColl);
 
         if (tempColl.dist < coll->dist) {
@@ -801,7 +801,7 @@ void xRayHitsSceneFlags(xScene* sc, const xRay3* r, xCollis* coll, U8 collType, 
 // UNUSED: needed to match (code from RotU GC)
 void xSphereHitsScene(xScene* sc, const xSphere* sphere, xCollis* coll, U8 collType, U8 chk)
 {
-    coll->dist = 1e38f;
+    coll->dist = HUGE;
     coll->flags = coll->flags & ~k_HIT_IT | 0x100;
 
     cbSphereHitsEnt cb(*sphere, *coll, collType, chk);
@@ -823,7 +823,7 @@ void xSphereHitsScene(xScene* sc, const xSphere* sphere, xCollis* coll, U8 collT
     if (chk & k_XENT_COLLTYPE_ENV) {
         xCollis tempColl;
         tempColl.flags = coll->flags;
-        tempColl.dist = 1e38f;
+        tempColl.dist = HUGE;
         xSphereHitsEnv(sphere, sc->env, &tempColl);
 
         if (tempColl.dist < coll->dist) {
@@ -1131,7 +1131,7 @@ U32 xSceneNearestFloorPoly(xScene* sc, xNearFloorPoly* nfpoly, U8 collType, U8 c
     sSphereIsx.t.sphere.radius = xsqrt(0.25f * (xsqr(isx.t.box.sup.x - isx.t.box.inf.x) + xsqr(isx.t.box.sup.y - isx.t.box.inf.y) + xsqr(isx.t.box.sup.z - isx.t.box.inf.z)));
     sSphereIsx.t.sphere.center = *(RwV3d*)&sNearestBound.box.center;
 
-    nfpoly->neardist = 1e38f;
+    nfpoly->neardist = HUGE;
     nfpoly->center = sNearestBound.box.center;
 
     nfpoly->oid = 0;
@@ -1169,7 +1169,7 @@ U32 xSceneNearestFloorPoly(xScene* sc, xNearFloorPoly* nfpoly, U8 collType, U8 c
         sUseJSP = false;
     }
 
-    if (nfpoly->neardist != 1e38f) {
+    if (nfpoly->neardist != HUGE) {
         nfpoly->neardist = xsqrt(nfpoly->neardist);
         return TRUE;
     }

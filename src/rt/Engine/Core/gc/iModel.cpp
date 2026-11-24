@@ -1056,12 +1056,12 @@ void iModelAnimBoundWorld(xBox* box, xBox* combinedBox, RpAtomic* model, RwMatri
     F32 scaleZ = xsqr(mat->at.x) + xsqr(mat->at.y) + xsqr(mat->at.z);
     maxscale = xsqrt(MAX3(scaleX, scaleY, scaleZ));
 
-    box->upper.x = -1e38f;
-    box->upper.y = -1e38f;
-    box->upper.z = -1e38f;
-    box->lower.x = 1e38f;
-    box->lower.y = 1e38f;
-    box->lower.z = 1e38f;
+    box->upper.x = -HUGE;
+    box->upper.y = -HUGE;
+    box->upper.z = -HUGE;
+    box->lower.x = HUGE;
+    box->lower.y = HUGE;
+    box->lower.z = HUGE;
 
     for (i = 0; i < numbones; i++) {
         xVec3 sphcenter;
@@ -1082,7 +1082,7 @@ void iModelAnimBoundWorld(xBox* box, xBox* combinedBox, RpAtomic* model, RwMatri
     }
 
     if (combinedBox) {
-        if (combinedBox->upper.x == -1e38f) {
+        if (combinedBox->upper.x == -HUGE) {
             *combinedBox = *box;
         } else {
             combinedBox->upper.x = MAX(combinedBox->upper.x, box->upper.x);

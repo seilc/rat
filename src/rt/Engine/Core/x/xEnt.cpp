@@ -885,7 +885,7 @@ void xEntReset(xEnt* ent, const xVec3& pos, const xVec3& ang)
 
         minst = ent->model;
         xBox* combinedAnimBound = &minst->combinedAnimBound;
-        combinedAnimBound->upper.x = -1e38f;
+        combinedAnimBound->upper.x = -HUGE;
         while (minst) {
             U16 old_flags = minst->Flags;
             minst->Flags |= ModelInstance_Render;
@@ -1645,7 +1645,7 @@ void xEntBeginCollide(xEnt* ent, xScene*, F32)
         coll->flags = 0x1f00;
         coll->optr = NULL;
         coll->mptr = NULL;
-        coll->dist = 1e38f;
+        coll->dist = HUGE;
     }
 
     ent->collis->idx = 6;
@@ -2394,7 +2394,7 @@ static void xEntDebugWrite(const xEnt* xent)
                         xprintf("no %s", scoll_name[i]);
                     }
 
-                    if (scoll->dist < 1e38f) {
+                    if (scoll->dist < HUGE) {
                         xprintf("   %.3f", scoll->dist);
                         xprintf(" <%.3f %.3f %.3f>\n", scoll->hdng.x, scoll->hdng.y, scoll->hdng.z);
                         xprintf("%s-oid:  %u", scoll_name[i], scoll->oid);

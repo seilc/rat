@@ -136,7 +136,7 @@ void xParEmitterInit(xBase* b, xParEmitterAsset* pea)
         else pea->e_circle.dir *= 1.0f / xsqrt(mag2);
     }
 
-    t->last_attach_loc = 1e38f;
+    t->last_attach_loc = HUGE;
 
     t->sortID = 0;
 

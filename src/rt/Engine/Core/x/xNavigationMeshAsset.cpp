@@ -301,7 +301,7 @@ bool xNavigationMeshAsset::GetTriangle(const xVec3& position, S32 subMeshGuess, 
 // UNUSED: needed to match (code from RotU GC)
 void xNavigationMeshAsset::GetClosestEdgePoint(const xVec3& anyPosition, S32& subMeshIndex, S32& triangleIndex, xVec3& pointOnMesh)
 {
-    F32 smallest_distance2 = 1e38f;
+    F32 smallest_distance2 = HUGE;
 
     for (S32 m = 0; m < numSubMeshes; m++) {
         xNavigationMeshAssetSubMesh* sub_mesh = &subMeshes[m];

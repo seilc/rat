@@ -648,9 +648,9 @@ void xCutscene_Render(xCutscene* csn, xEnt**, S32*, F32*)
             }
 
             xBox combinedAnimBound = { 0 };
-            combinedAnimBound.upper.x = -1e38f;
-            combinedAnimBound.upper.y = -1e38f;
-            combinedAnimBound.upper.z = -1e38f;
+            combinedAnimBound.upper.x = -HUGE;
+            combinedAnimBound.upper.y = -HUGE;
+            combinedAnimBound.upper.z = -HUGE;
 
             U32 tempSize;
             if (!model) {
