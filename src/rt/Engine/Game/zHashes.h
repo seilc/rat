@@ -40,6 +40,7 @@
 #define HASH_lid_dd_MINF                        0xE71A065E // xStrHash("lid_dd.MINF")
 #define HASH_light_card_b_tl                    0x5EE75CD7 // xStrHash("light_card_b_tl")
 #define HASH_Linear                             0xB7353B79 // xStrHash("Linear")
+#define HASH_LOADING_SCREEN                     0x7F67BBC4 // xStrHash("LOADING SCREEN")
 #define HASH_PAUSE_TIMER                        0xCB3F6340 // xStrHash("PAUSE_TIMER")
 #define HASH_PAUSE_TIMER0                       0x016FC9F0 // xStrHash("PAUSE_TIMER0")
 #define HASH_PAUSE_TIMER00                      0xBC345600 // xStrHash("PAUSE_TIMER00")
@@ -99,6 +100,10 @@
 #define HASH_THIS_CAM_TARGET                    0xB3BB6012 // xStrHash("THIS_CAM_TARGET")
 #define HASH_THIS_PLYR                          0x6F7EC01E // xStrHash("THIS_PLYR")
 #define HASH_TURRET_HOLDABLE_DEATH_SIMP         0x3159B667 // xStrHash("TURRET_HOLDABLE_DEATH_SIMP")
+#define HASH_ui_box                             0x8C2D107D // xStrHash("ui:box")
+#define HASH_ui_controller                      0xE8753BAE // xStrHash("ui:controller")
+#define HASH_ui_image                           0x337BCB31 // xStrHash("ui:image")
 #define HASH_UI_MISSION_COUNTER                 0x3AF23364 // xStrHash("UI MISSION COUNTER")
+#define HASH_ui_text                            0xBD7646D7 // xStrHash("ui:text")
 
 #endif

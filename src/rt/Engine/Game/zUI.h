@@ -66,6 +66,35 @@ public:
             DoHandleEvent(from, toEvent, toParam, toParamWidget, toParamWidgetID);
         }
     }
+    void Render() const
+    {
+        if (custom) {
+            if (!custom->PreRender()) {
+                return;
+            }
+        }
+        DoRender();
+        if (custom) {
+            custom->PostRender();
+        }
+    }
+    void Update(F32 dt)
+    {
+        if (custom) {
+            custom->PreUpdate(dt);
+        }
+        DoUpdate(dt);
+        if (custom) {
+            custom->PostUpdate(dt);
+        }
+    }
+    void Exit()
+    {
+        if (custom) {
+            custom->Exit();
+        }
+        DoExit();
+    }
     void Signal(xBase* from, U32 event);
     void Signal(U32 event) { Signal(this, event); }
     void AutoMenu(U32 zUIAsset::*item, U32 event);
@@ -93,5 +122,11 @@ S32 zUIGetActivePlayersAtInitiatedPause();
 S32 zUIGetPadPortInitiatedPause();
 void zUI_Init(zUI* text, zUIAsset* asset);
 void* zUIAllocStaticMemory(U32 size);
+
+typedef void* (*zUICustomStaticAllocator)(U32, void*);
+typedef void (*zUICustomSignalHandler)(zUI*, U32, U32, const F32*, xBase*, U32, void*);
+
+void zUISetCustomStaticAllocator(zUICustomStaticAllocator allocator, void* user);
+void zUISetCustomSignalHandler(zUICustomSignalHandler handler, void* user);
 
 #endif

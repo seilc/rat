@@ -31,4 +31,6 @@ private:
     U8 clearLayoutCache;
 };
 
+void zUIText_Init(xBase& data, xDynAsset& asset, size_t);
+
 #endif
