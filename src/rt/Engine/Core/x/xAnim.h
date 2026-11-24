@@ -43,6 +43,7 @@ enum
 // xAnimTransition::Flags
 enum
 {
+    AnimTransition_Default = 0x10,
     AnimTransition_TempUsed = 0x80000000
 };
 
