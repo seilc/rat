@@ -28,11 +28,74 @@ enum eGameMode
     eGameMode_Count
 };
 
+enum eGameState
+{
+    eGameState_FirstTime,
+    eGameState_Play,
+    eGameState_LoseChance,
+    eGameState_GameOver,
+    eGameState_GameStats,
+    eGameState_SceneSwitch,
+    eGameState_Dead,
+    eGameState_Exit,
+    eGameState_Count
+};
+
+enum ePauseState
+{
+    ePauseState_Pause,
+    ePauseState_Options,
+    ePauseState_Count
+};
+
+enum eSaveState
+{
+    eSaveState_SelectMemCard,
+    eSaveState_SelectSlot,
+    eSaveState_Saving,
+    eSaveState_Count
+};
+
+enum eOptionsState
+{
+    eOptionsState_Options,
+    eOptionsState_Count
+};
+
+enum eLoadState
+{
+    eLoadState_SelectMemCard,
+    eLoadState_SelectSlot,
+    eLoadState_Loading,
+    eLoadState_Count
+};
+
+enum eTitleState
+{
+    eTitleState_Start,
+    eTitleState_Attract,
+    eTitleState_Count
+};
+
+enum eIntroState
+{
+    eIntroState_Sony,
+    eIntroState_Publisher,
+    eIntroState_Developer,
+    eIntroState_License,
+    eIntroState_Count
+};
+
 extern S32 gGameState;
 extern eGameMode gGameMode;
 
+S32 zGameStateGet();
 S32 zGameModeGet();
 eGameOstrich zGameGetOstrich();
 void zGameSetOstrich(eGameOstrich o);
+S32 zGameStateFindEvent(U32* array, S32 size, S32 mode, S32 event, S32* ret_mode, S32* ret_state);
+void zGameStateSwitchEvent(S32 event);
+void zGameStateSwitch(S32 theNewState);
+void zGameModeSwitch(eGameMode modeNew);
 
 #endif

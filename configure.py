@@ -722,7 +722,7 @@ config.libs = [
             GameObject(Matching, "rt/Engine/Game/zFXRibbonPool.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zGame.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zGameExtras.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zGameState.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zGameState.cpp"),
             GameObject(Matching, "rt/Engine/Game/zGrapple.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zGrid.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zHangable.cpp"),
