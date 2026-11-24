@@ -702,7 +702,7 @@ config.libs = [
             GameObject(Matching, "rt/Engine/Game/zCollGeom.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zCommonPlayer.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zConditional.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zConfiguration.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zConfiguration.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zCutsceneMgr.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zDestructible.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zDispatcher.cpp"),
