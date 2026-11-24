@@ -89,6 +89,7 @@ private:
     bool motionLoop;
 };
 
+S32 zUIGetActivePlayersAtInitiatedPause();
 S32 zUIGetPadPortInitiatedPause();
 void zUI_Init(zUI* text, zUIAsset* asset);
 void* zUIAllocStaticMemory(U32 size);
