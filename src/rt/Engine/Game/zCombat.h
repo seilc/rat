@@ -56,7 +56,7 @@ struct zCombat
     U8 hitting;
     U8 hitEnv;
     U8 hitObject;
-    U8 forceReset;
+    bool forceReset;
     U8 hitObjectCount;
     xEnt* hitObjects[MAX_HIT_OBJECTS];
     S16 currentDamage;

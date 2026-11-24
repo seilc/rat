@@ -28,7 +28,7 @@ private:
     xColor shadowColor;
     const char* text;
     U8 cached;
-    U8 clearLayoutCache;
+    bool clearLayoutCache;
 };
 
 void zUIText_Init(xBase& data, xDynAsset& asset, size_t);

@@ -28,7 +28,7 @@ public:
     xBase* toCBto;
     xBase* toCBParamWidget;
     U32 toCBParamWidgetID;
-    U8 enablePrevScreenHandler;
+    bool enablePrevScreenHandler;
     U8 infoNoPressTriangle;
     zUI* fromUI;
     zUIText* itemOk;
