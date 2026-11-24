@@ -351,6 +351,7 @@ void xTRCUpdate(S32 i)
         case TRC_PadInserted:
             switch (gTrcPad[i].padstate) {
             case TRC_PadStateMissingDuringGameplay:
+            {
                 gTrcPad[i].state = TRC_PadActive;
                 gTrcPad[i].padstate = TRC_PadStatePresent;
                 mPad[gTrcPad[i].id].pressed = 0;
@@ -385,6 +386,7 @@ void xTRCUpdate(S32 i)
                     }
                 }
                 break;
+            }
             case TRC_PadStatePresent:
                 break;
             }
@@ -502,6 +504,7 @@ static S32 DisplayMessage(S32 port, TRCState state)
     case TRC_PadMissing:
     case TRC_PadInserted:
     case TRC_PadPreInserted:
+    {
         if (!pad_message_valid()) {
             return FALSE;
         }
@@ -520,6 +523,7 @@ static S32 DisplayMessage(S32 port, TRCState state)
             composed_message_text[len_message_text - 2] = '\0';
         }
         break;
+    }
     case TRC_PadInvalidType:
         message_text = k_CONTROLLER_INVALID_MESSAGE;
         break;

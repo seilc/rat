@@ -154,6 +154,7 @@ U32 xrand_RandomChoice(U32& randomChoiceData, U8& randomChoiceDataSize, U32 maxC
         choice = xrand_RandomChoice(maxCount);
         break;
     case xRandomChoiceRule_ANY_NOT_CHOSEN:
+    {
         xASSERT_FMT_L(298, maxCount < 32, "xRandomChoiceRule_ANY_NOT_CHOSEN only works for sets that have 32 elements or less in them. Only first 32 will work!");
         if (maxCount >= 32)
             maxCount = 32;
@@ -181,6 +182,7 @@ U32 xrand_RandomChoice(U32& randomChoiceData, U8& randomChoiceDataSize, U32 maxC
             }
         }
         break;
+    }
     case xRandomChoiceRule_IN_ORDER:
         choice = randomChoiceData;
         if (choice >= maxCount)
