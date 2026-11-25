@@ -141,7 +141,7 @@ struct zCommonPlayer : zPlayer
         xVec3 objScale;
         xVec3 physicsTranslation;
         F32 radius;
-        U8 orientToPlayer;
+        bool orientToPlayer;
         U8 destroyed;
         F32 targetRot;
         F32 startRot;
@@ -164,7 +164,7 @@ struct zCommonPlayer : zPlayer
     bool has_grabbed_zipline;
 #if DEBUG || RELEASE
     xLight* light;
-    U8 lightOn;
+    bool lightOn;
 #endif
     F32 stickFlickMinTimer;
     F32 stickFlickMaxTimer;

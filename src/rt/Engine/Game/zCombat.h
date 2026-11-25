@@ -50,7 +50,7 @@ struct zCombat
     const zCombatAttack* runningAttack;
     F32 runningAttackTimer;
     xEnt* lastNPCDamaged;
-    U8 disableMovement;
+    bool disableMovement;
     U8 runningEffect;
     U8 runningBlur;
     U8 hitting;

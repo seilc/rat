@@ -10,7 +10,7 @@
 struct zCutsceneMgr : xCutsceneMgr
 {
     U8 pausedMusic;
-    U8 sendDoneForDisabledCutscene;
+    bool sendDoneForDisabledCutscene;
 };
 
 struct zCutsceneHack
