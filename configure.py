@@ -740,7 +740,7 @@ config.libs = [
             GameObject(Matching, "rt/Engine/Game/zNPCNavigationMesh.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zParCmd.cpp"),
             GameObject(Matching, "rt/Engine/Game/zParEmitter.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zPendulum.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zPendulum.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zPlatform.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zPlayer.cpp"),
             GameObject(Matching, "rt/Engine/Game/zPlayerBase.cpp"),
