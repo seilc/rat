@@ -136,6 +136,16 @@ inline bool xModelPoolStressTesting()
 #define xModelInstanceCheckAlloc_L(line, m, name)                                                 \
     xASSERT_FMT_L(line, (m || xModelPoolStressTesting()), "xModelInstanceAlloc fn couldn't allocate pool space for Model %s !", name)
 
+#define xModelInstanceSetID(m, id) xModelInstanceSetID_L(__LINE__, m, id)
+#define xModelInstanceSetID_L(line, m, id)                                                        \
+    xModelInstanceCheckAlloc_L(line, m, xSTAssetName(id));                                        \
+    (m)->modelID = (id)
+
+#define xModelInstanceSetIDSafe(m, id) xModelInstanceSetIDSafe_L(__LINE__, m, id)
+#define xModelInstanceSetIDSafe_L(line, m, id)                                                    \
+    xModelInstanceCheckAlloc_L(line, m, xSTAssetName(id));                                        \
+    if (m) (m)->modelID = (id)
+
 #if DEBUG || RELEASE
 S32 xModelPipeFlagsToString(U32 flags, char* buffer, char delimeter); // UNUSED
 S32 xModelPipeToString(const xModelPipe& pipe, char* buffer, char delimeter); // UNUSED

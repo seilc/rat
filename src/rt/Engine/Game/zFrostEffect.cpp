@@ -167,8 +167,7 @@ void zFrostIcicle::Init()
 
     for (S32 i = 0; i < MAX_ICICLES; i++) {
         icicleList[i].model = imodel ? xModelInstanceAlloc(imodel, NULL, 0, 0, NULL) : NULL;
-        xModelInstanceCheckAlloc(icicleList[i].model, xSTAssetName(HASH_iced_foe_iceblooms));
-        icicleList[i].model->modelID = HASH_iced_foe_iceblooms;
+        xModelInstanceSetID(icicleList[i].model, HASH_iced_foe_iceblooms);
         icicleList[i].lifetime = 0.0f;
     }
 

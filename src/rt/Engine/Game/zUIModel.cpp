@@ -52,7 +52,7 @@ void zUIModel::InitModel()
     RpAtomic* imodel = (RpAtomic*)xSTFindAsset(asset->model, NULL);
     if (imodel) {
         model = xModelInstanceAlloc(imodel, this, 0, 0, NULL);
-        xModelInstanceCheckAlloc_L(66, model, xSTAssetName(asset->model)); model->modelID = asset->model;
+        xModelInstanceSetID_L(66, model, asset->model);
 
         while (imodel = iModelFile_RWMultiAtomic(imodel))
             xModelInstanceAttach(xModelInstanceAlloc(imodel, this, 0x8, 0, NULL), model);

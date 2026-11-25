@@ -34,7 +34,7 @@ void zMiniGamePickupController::SetAvailablePickup(S32 idx)
     RpAtomic* imodel = (RpAtomic*)xSTFindAsset(modelID, NULL);
     if (imodel) {
         available.modelInstance = xModelInstanceAlloc(imodel, NULL, 0, 0, NULL);
-        xModelInstanceCheckAlloc_L(42, available.modelInstance, xSTAssetName(modelID)); if (available.modelInstance) available.modelInstance->modelID = modelID;
+        xModelInstanceSetIDSafe_L(42, available.modelInstance, modelID);
         xModelSetLightKit(available.modelInstance, zEnvGetGlobalObjectLightKit(), 0.0f);
     }
 

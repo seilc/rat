@@ -614,7 +614,7 @@ xModelInstance* load_model(U32 id)
 
     xModelInstance* loaded_model = NULL;
     loaded_model = xModelInstanceAlloc(imodel, NULL, 0, 0, NULL);
-    xModelInstanceCheckAlloc_L(850, loaded_model, xSTAssetName(modelID)); loaded_model->modelID = modelID;
+    xModelInstanceSetID_L(850, loaded_model, modelID);
     return loaded_model;
 }
 
