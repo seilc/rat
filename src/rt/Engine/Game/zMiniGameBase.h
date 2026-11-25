@@ -5,7 +5,9 @@
 #include "zMiniGameTypes.h"
 #include "zMiniGameAsset.h"
 
+struct xMat3x3;
 struct xMat4x3;
+struct xVec3;
 
 class zMiniGameBase : public xBase
 {
@@ -29,6 +31,8 @@ protected:
 
 public:
     zMiniGameBase(zMiniGameAsset* a);
+
+    static zMiniGameBase* GetGame();
 
     virtual void SwitchGameState(eMiniGameState newState);
 
@@ -73,5 +77,31 @@ public:
 
     static zMiniGameBase* currentMiniGame;
 };
+
+struct zMiniGameAssetType1 : zMiniGameAsset
+{
+    enum { VERSION = 1 };
+
+    S32 num;
+};
+
+class zMiniGameType1 : public zMiniGameBase
+{
+public:
+    zMiniGameType1(zMiniGameAsset* a);
+
+    static void Init(xBase& data, xDynAsset& asset, size_t asset_size);
+    zMiniGameAssetType1* GetAsset() const { return (zMiniGameAssetType1*)asset; }
+
+    virtual void SceneSetup();
+    virtual void Update(F32);
+    virtual void Render();
+
+private:
+    S32 yourWorth;
+};
+
+F32 GetAngleDiff(const xVec3* startDir, const xVec3* endDir);
+F32 ApplyAngleDiff(xMat3x3* mat, F32 angle_difference, F32 dt, F32 turning_speed);
 
 #endif
