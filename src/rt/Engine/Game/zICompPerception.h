@@ -6,6 +6,11 @@
 
 class zICompPerception : public zIComponent<zNPCBase>
 {
+#if RELEASE
+public:
+    virtual bool IsPerceived() = 0;
+    virtual bool IsRemembered() = 0;
+#endif
 };
 
 #endif

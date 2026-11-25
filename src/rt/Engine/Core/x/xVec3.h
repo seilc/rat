@@ -92,6 +92,7 @@ struct xVec3
     void Scale(const xVec3& a, F32 scalar);
     F32 Distance(const xVec3& other) const;
     F32 Distance2(const xVec3& other) const;
+    F32 Distance2XZ(const xVec3& other) const;
     void Negate();
     void Negate(const xVec3& a);
     void SubAdd(const xVec3& a, const xVec3& b, const xVec3& c);
@@ -327,6 +328,12 @@ inline F32 xVec3::Distance2(const xVec3& other) const
     xVec3 diff;
     diff.Sub(other, *this);
     return diff.length2();
+}
+
+inline F32 xVec3::Distance2XZ(const xVec3& other) const
+{
+    xVec3 diff = { other.x - x, 0.0f, other.z - z };
+    return diff.x * diff.x + diff.z * diff.z;
 }
 
 inline void xVec3::Negate()

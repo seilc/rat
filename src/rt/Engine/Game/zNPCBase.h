@@ -69,6 +69,7 @@ public:
     zICompLogic* GetLogicComponent() { return npcLogicComp; }
     zICompNPCEntity* GetEntityComponent() { return npcEntityComp; }
     zICompSteering* GetSteeringComponent() { return npcSteeringComp; }
+    zICompPerception* GetPerceptionComponent() { return npcPerceptionComp; }
     zICompSound* GetSoundComponent() { return npcSoundComp; }
 
     void PreUpdateAllComponents(xScene* xscn, F32 dt);
