@@ -216,8 +216,8 @@ protected:
     U32 floor_oid;
     xSurface* floor_surface;
     U32 collisionFlags;
-    U8 currentIsNearLedge;
-    U8 currentIsNearLedgeValid;
+    bool currentIsNearLedge;
+    bool currentIsNearLedgeValid;
     F32 fallingTime;
     F32 idleAnimationTimer;
     U32 lorezModelID;
@@ -248,7 +248,7 @@ private:
 #if DEBUG || RELEASE
     struct
     {
-        U8 debugging;
+        bool debugging;
         xVec3 positions[180];
         xVec3 startPos;
         xVec3 endPos;

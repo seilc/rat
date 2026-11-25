@@ -40,7 +40,7 @@ public:
     static void (*mMovieKillFunction)();
     static S32 mWasResetButtonPressed;
     static bool mResetEnabled;
-    static U8 mDelayedReset;
+    static bool mDelayedReset;
     static bool mDiscIded;
 };
 

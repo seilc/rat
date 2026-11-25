@@ -64,7 +64,7 @@ struct xEntSplineData
     xEntSpeedData speed_data;
     xNurbs* spline;
     F32 u;
-    U8 arrived;
+    bool arrived;
     F32 position_blend_v;
     F32 orient_blend_v;
     xQuat current_orient;

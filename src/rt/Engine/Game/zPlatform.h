@@ -34,8 +34,8 @@ struct zPlatform : zEnt, zEntAnimData
     xSndHandle soundTeeterCreak;
     xSndHandle soundTeeterEnd;
     xSndHandle sndID;
-    U8 hasStoppedRotating;
-    U8 hasReachedEnd;
+    bool hasStoppedRotating;
+    bool hasReachedEnd;
 };
 
 #endif

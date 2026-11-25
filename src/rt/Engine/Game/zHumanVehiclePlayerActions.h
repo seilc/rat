@@ -18,19 +18,19 @@ protected:
     };
 
     F32 steeringPosition;
-    U8 initCameraPending;
-    U8 isSliding;
+    bool initCameraPending;
+    bool isSliding;
     F32 scalarVel;
-    U8 started;
-    U8 smHitReactPending;
-    U8 lgHitReactPending;
+    bool started;
+    bool smHitReactPending;
+    bool lgHitReactPending;
     driveSurfaceDescriptor* pCurrentSurface;
     S32 numCollisions;
     xCollis collisions[18];
     U32 collisionUserFlags[18];
     xBound bound[5];
     S32 currBound;
-    U8 inGroundContact;
+    bool inGroundContact;
     U8 collisionTypes[4];
     U8 controllerInput;
 

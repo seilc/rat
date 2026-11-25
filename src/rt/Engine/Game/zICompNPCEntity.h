@@ -57,7 +57,7 @@ class zICompNPCEntity : public zIComponent<zNPCBase>, public xEnt
     xVec3 acc;
     xVec3 oldAcc;
     U8 old_chkby;
-    U8 accUpdated;
+    bool accUpdated;
 
 public:
     void Render();

@@ -198,7 +198,7 @@ void xEntMotionReset(xEntMotion* motion, xScene* sc)
         }
         xEntSpeedDataReset(&motion->spl.speed_data);
         motion->spl.speed_data.speed = motion->asset->spl.speed;
-        motion->spl.arrived = 0;
+        motion->spl.arrived = false;
         motion->spl.position_blend_v = 0.0f;
         motion->spl.orient_blend_v = 0.0f;
         if (motion->spl.spline) {
@@ -610,7 +610,7 @@ static void xEntMPMove(xEntMotion* motion, xScene* sc, F32 dt, xEntFrame* frame)
 static void xEntSplineMove(xEntMotion* motion, xScene*, F32 dt, xEntFrame* frame)
 {
     xEntSplineData* spline_data = &motion->spl;
-    if (spline_data->arrived == 1) {
+    if (spline_data->arrived == true) {
         return;
     }
 
@@ -622,7 +622,7 @@ static void xEntSplineMove(xEntMotion* motion, xScene*, F32 dt, xEntFrame* frame
         if (motion->asset->ent_motion_flags & k_XENTMOTION_LOOP) {
             spline_data->u = spline_data->spline->start();
         } else {
-            spline_data->arrived = 1;
+            spline_data->arrived = true;
         }
     }
 
@@ -631,7 +631,7 @@ static void xEntSplineMove(xEntMotion* motion, xScene*, F32 dt, xEntFrame* frame
 
     frame->mode |= k_XENT_SET_DPOS;
 
-    if (spline_data->arrived == 1) {
+    if (spline_data->arrived == true) {
         frame->setDpos().Sub(target_position, frame->mat.pos);
     } else {
         xVec3 new_position;

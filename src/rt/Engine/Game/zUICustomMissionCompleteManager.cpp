@@ -145,7 +145,7 @@ void zUICustomMissionCompleteManager::PreUpdate(F32 dt)
         strHash = xStrHash("UI TXT MISSCOMP MESSAGE");
         xASSERT_L(167, strHash);
         pSysMessageManager->Signal(ui, eEventUISysMessageWaitConfirm);
-        ((zUICustomSysMessageManager*)pSysMessageManager_Custom)->infoNoPressTriangle = 0;
+        ((zUICustomSysMessageManager*)pSysMessageManager_Custom)->infoNoPressTriangle = false;
         ((zUICustomSysMessageManager*)pSysMessageManager_Custom)->ShowSystemMessage(
             zSystemMessageCB, eEventUISysMessageWaitConfirm, eEventSys_Nope, NULL, NULL, NULL, 0,
             xTextFindString(strHash, NULL));

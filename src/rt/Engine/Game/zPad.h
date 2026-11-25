@@ -53,9 +53,9 @@ public:
     }
 
 private:
-    U8 used;
+    bool used;
     bool enable;
-    U8 triggered;
+    bool triggered;
     U32 key1;
     U32 key2;
     U32 key3;

@@ -50,9 +50,9 @@ struct zCommonPlayer : zPlayer
         LedgeState state;
         struct
         {
-            U8 hasGrabbedLedge : 1;
-            U8 inLedgeAnim : 1;
-            U8 foundValidLedge : 1;
+            bool hasGrabbedLedge : 1;
+            bool inLedgeAnim : 1;
+            bool foundValidLedge : 1;
             U32 pad : 27;
         } flags;
         F32 delay;
@@ -74,7 +74,7 @@ struct zCommonPlayer : zPlayer
         struct zFootstepDetect
         {
             xVec3 last_emit_position;
-            U8 was_lifted;
+            bool was_lifted;
         };
 
         class zDecalEmitterList;
@@ -115,7 +115,7 @@ struct zCommonPlayer : zPlayer
     {
         Point points[3];
         U8 pointsInitialized[3];
-        U8 verified_init;
+        bool verified_init;
         U32 num_segments;
         F32 cur_time;
         F32 cur_supression;
@@ -142,7 +142,7 @@ struct zCommonPlayer : zPlayer
         xVec3 physicsTranslation;
         F32 radius;
         bool orientToPlayer;
-        U8 destroyed;
+        bool destroyed;
         F32 targetRot;
         F32 startRot;
         U32 grabTarget;

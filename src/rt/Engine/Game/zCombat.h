@@ -51,11 +51,11 @@ struct zCombat
     F32 runningAttackTimer;
     xEnt* lastNPCDamaged;
     bool disableMovement;
-    U8 runningEffect;
-    U8 runningBlur;
-    U8 hitting;
-    U8 hitEnv;
-    U8 hitObject;
+    bool runningEffect;
+    bool runningBlur;
+    bool hitting;
+    bool hitEnv;
+    bool hitObject;
     bool forceReset;
     U8 hitObjectCount;
     xEnt* hitObjects[MAX_HIT_OBJECTS];
