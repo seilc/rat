@@ -229,6 +229,10 @@ template <>
 inline void _t_auto_tweak(const char* prefix, const char* name, bool* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process)
 { _auto_tweak(prefix, name, v, cb, context, flags, process); }
 
+template <>
+inline void _t_auto_tweak(const char* prefix, const char* name, xVec3* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags, bool process)
+{ _auto_tweak(prefix, name, v, cb, context, flags, process); }
+
 #define xTWEAK(name, v, vmin, vmax, cb, context, flags) xDebugAddTweak(name, v, vmin, vmax, cb, context, flags)
 #define xTWEAK_SELECT(name, v, labels, values, labels_size, cb, context, flags) xDebugAddSelectTweak(name, v, labels, values, labels_size, cb, context, flags)
 #define xTWEAK_FLAG(name, v, mask, cb, context, flags) xDebugAddFlagTweak(name, v, mask, cb, context, flags)
