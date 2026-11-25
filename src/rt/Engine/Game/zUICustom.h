@@ -36,10 +36,16 @@ public:
 
     zUI* GetUI() const { return ui; }
 
+    static void* operator new(size_t size);
+    static void operator delete(void*); // UNUSED
+
 protected:
     zUI* ui;
 };
 
+zUICustom* zUICustomAllocate(U32 hashID, zUI* ui);
+bool zUIIsPressStartEqualtoPressX(S32 pauseType); // UNUSED
+bool zUIIsPressBackEqualtoPressB(S32 pauseType); // UNUSED
 void zSendUIEvent(const char* widgetName, U32 event);
 void zUIAutoScreenManagerFocusOnSelect();
 void zUIAutoScreenManagerFocusOffUnselect();
