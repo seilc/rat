@@ -78,5 +78,6 @@ void zSceneRender();
 U32 zSceneGetTextureTweakMap(const char**& labels, const U32*& ids);
 U32 zSceneGetTextureIDFromRaster(RwRaster* raster);
 #endif
+void zSceneSetLastSceneID(U32 value);
 
 #endif
