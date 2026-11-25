@@ -64,7 +64,9 @@ extern S32 g_idx_reloadTweaks;
 extern bool gInSceneResetOrInit;
 
 bool zSceneIsLoadingPackFile();
+void zSceneSet(xBase* b, S32 idx);
 void zSceneSwitch(zPortal* p, S32 forceSameScene, bool sameScene, S32 playerNum);
+void zSceneObjHashtableAdd(U32 id, xBase* base);
 xBase* zSceneFindObject(U32 gameID);
 bool zSceneLoadPackFile(U32 id, S32 options, bool noLocalized, const char* filename);
 bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);

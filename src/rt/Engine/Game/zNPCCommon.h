@@ -10,6 +10,7 @@
 #include "zNPCOneLiner.h"
 #include "zThrowable.h"
 #include "zHitParameters.h"
+#include "zNPCTypes.h"
 
 struct xGroup;
 class zNPCNavigate;
@@ -35,15 +36,6 @@ struct zDebugStoredAnimChanges
     char animName[256];
 };
 #endif
-
-enum en_npctyp
-{
-    NPC_TYPE_UNKNOWN,
-    NPC_TYPE_THIEF,
-    NPC_TYPE_CHEF,
-    NPC_TYPE_COUNT,
-    NPC_TYPE_FORCE_INT = FORCEENUMSIZEINT
-};
 
 #define zNPC_ADD_BEHAVIOR(state, type)                                                            \
     if (!(state)) {                                                                               \
