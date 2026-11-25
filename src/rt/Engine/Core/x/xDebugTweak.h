@@ -36,6 +36,9 @@ struct tweak_callback
     static tweak_callback create_change(event_callback on_change)
     { tweak_callback cb = { on_change, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL }; return cb; }
 
+    static tweak_callback create_edit(event_callback on_start_edit, event_callback on_stop_edit)
+    { tweak_callback cb = { NULL, NULL, NULL, on_start_edit, on_stop_edit, NULL, NULL, NULL, NULL, NULL }; return cb; }
+
     static tweak_callback create_expand(event_callback on_expand, event_callback on_collapse)
     { tweak_callback cb = { NULL, NULL, NULL, NULL, NULL, on_expand, on_collapse, NULL, NULL, NULL }; return cb; }
 

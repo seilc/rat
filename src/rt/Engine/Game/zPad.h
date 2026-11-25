@@ -30,6 +30,7 @@ public:
     static zPad* GetUnusedPad(bool isAI);
     static zPad* GetDebugPad();
 
+    void DisablePad();
     bool Active();
     void Clear();
     bool On(U32 button);

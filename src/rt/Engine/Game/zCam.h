@@ -3,6 +3,7 @@
 
 #include "zCamPlayer.h"
 
+void zCamSetCamera(U32 cameraID, bool forceRestart);
 xVec3& zCamTransitionTarget();
 zCamPlayer* zCamGetDefault();
 xCam* zCamGetPrimary();
