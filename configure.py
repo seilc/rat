@@ -730,7 +730,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zLaserBeam.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zLightning.cpp"),
             GameObject(Matching, "rt/Engine/Game/zLightWeight.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zLOD.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zLOD.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zMain.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zMenu.cpp"),
             GameObject(Matching, "rt/Engine/Game/zMovePoint.cpp"),

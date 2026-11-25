@@ -45,6 +45,7 @@ struct zDestructible
     S32 baseChildrenCount;
 };
 
+void zDestructibleAsset_CopyLODDistances(xEnt* ent, zDestructible* destructible);
 zDestructible* zDestructibleGetFromEntity(xEnt* ent);
 
 #endif
