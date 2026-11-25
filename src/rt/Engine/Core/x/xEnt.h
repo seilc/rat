@@ -59,6 +59,7 @@ typedef U32(*xEntCollisDepenQueryCallback)(xEnt*, xEnt*, xScene*, F32, xCollis*)
 #define k_XENT_IS_VISIBLE ((U8)(1 << 0))
 #define k_XENT_IS_STACKED ((U8)(1 << 1))
 #define k_XENT_IS_VISIBILITY_CULLED ((U8)(1 << 2))
+#define k_XENT_NO_SHADOW ((U8)(1 << 5))
 
 // xEnt::pflags
 #define k_XENT_IS_MOVING ((U8)(1 << 0))
