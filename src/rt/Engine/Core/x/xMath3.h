@@ -144,9 +144,17 @@ public:
         d = norm.dot(pt);
     }
 
-    void Init(const xVec3& normal, const xVec3& pt);
+    void Init(const xVec3& normal, const xVec3& pt)
+    {
+        norm = normal;
+        d = norm.dot(pt);
+    }
 
-    F32 Dist(const xVec3& pt) const;
+    F32 Dist(const xVec3& pt) const
+    {
+        return norm.dot(pt) - d;
+    }
+
     void Project(xVec3& proj, const xVec3& pt, F32 dist_above) const;
 };
 

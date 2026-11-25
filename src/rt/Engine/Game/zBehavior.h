@@ -83,7 +83,7 @@ public:
     virtual bool DamageCanBeDealt();
     virtual bool EscapeNoEnterTransitionAllowable();
     virtual bool JumpTransitionAllowable();
-    virtual bool CoverTransitionAllowable();
+    virtual bool CoverTransitionAllowable() { return true; }
     virtual bool DodgeTransitionAllowable();
     virtual bool TreatNoEnterAsCollision();
     virtual void NoEnterCollision(zEntTrigger*);
