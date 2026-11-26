@@ -84,6 +84,7 @@ public:
 #endif
 
     bool GetParameter(const char* name, F32* value, F32 defaultValue);
+    zCombat* get_combat();
 
     virtual ~zNPCCommon();
     virtual void init(zNPCInstance* init_inst);

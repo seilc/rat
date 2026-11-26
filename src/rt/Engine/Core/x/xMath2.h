@@ -18,6 +18,7 @@ struct xVec2
     F32 dot(const xVec2& c) const { return x * c.x + y * c.y; }
     F32 length() const { return xsqrt(length2()); }
     F32 length2() const { return x * x + y * y; }
+    xVec2& normalize() { *this *= xinvsqrt(length2()); return *this; }
 
     F32 SafeNormalize()
     {

@@ -64,11 +64,40 @@ public:
     void update_stuck(F32 dt);
     void InvalidateMeshPosition();
 
+    bool have_arrived() const { return arrived; }
+    inline bool stopped_on_edge() const; // UNUSED
+
+    void set_arrived(bool we_have_arrived)
+    {
+        arrived = we_have_arrived;
+    }
+
+    zMeshCircle* get_circle() { return &my_circle; }
+
+    // UNUSED: needed to match (code from RotU GC)
+    void dont_apply_dpos() { dpos_apply = false; }
+
     void reset_stuck()
     {
         stuck = reported_stuck = false;
         stuck_timer = 0.0f;
     }
+
+    void set_destination(const xVec3& destination)
+    {
+        last_destination = &destination;
+    }
+
+    // UNUSED: needed to match (speculative code)
+    const xVec3& get_destination() { return *last_destination; }
+
+    void set_move_away(bool should_move_away)
+    {
+        move_away = should_move_away;
+    }
+
+    // UNUSED: needed to match (speculative code)
+    bool get_move_away() { return move_away; }
 
     zMeshPosition& GetMeshPosition() { return *meshPosition; }
 };
