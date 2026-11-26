@@ -95,7 +95,7 @@ struct xPkrSvcMemMgrTagLookup
 };
 
 #if DEBUG || RELEASE
-static xPkrSvcMemMgrTagLookup xPkrSvcMemMgrTagLookupTable[] = {
+static xPkrSvcMemMgrTagLookup xPkrSvcMemMgrTagLookupTable[PKR_LTYPE_NOMORE] = {
     { PKR_LTYPE_DEFAULT, eMemMgrTag_PackerDefault },
     { PKR_LTYPE_TEXTURE, eMemMgrTag_Texture },
     { PKR_LTYPE_TEXTURE_STRM, eMemMgrTag_TextureStream },
@@ -114,7 +114,7 @@ static U32 PKR_lookupMemtag(en_LAYER_TYPE laytyp)
 {
     S32 memtag = -1;
 
-    for (U32 i = 0; i < ARRAY_LENGTH(xPkrSvcMemMgrTagLookupTable); i++) {
+    for (U32 i = 0; i < PKR_LTYPE_NOMORE; i++) {
         if (laytyp == xPkrSvcMemMgrTagLookupTable[i].laytype) {
             memtag = xPkrSvcMemMgrTagLookupTable[i].memtag;
             break;

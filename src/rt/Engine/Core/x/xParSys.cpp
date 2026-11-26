@@ -52,7 +52,7 @@ static ptank_render_mode_enum ptank_render_mode = PTANK_RENDER_ALL;
 
 #if DEBUG || RELEASE
 static bool ptank_render_mode_registered = false;
-static const char* ptank_render_mode_labels[3] = { "Default", "None", "All" };
+static const char* ptank_render_mode_labels[MAX_PTANK_RENDER] = { "Default", "None", "All" };
 #endif
 
 static xVec3 par_offset_right;
@@ -67,7 +67,7 @@ inline bool using_ptank_render(const xParSysAsset& sys)
             "Particle Emitters|\1Debug|PTank Render Mode",
             (U32*)&ptank_render_mode, ptank_render_mode_labels,
             NULL,
-            ARRAY_LENGTH(ptank_render_mode_labels),
+            MAX_PTANK_RENDER,
             NULL, 
             NULL,
             0);

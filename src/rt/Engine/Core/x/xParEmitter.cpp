@@ -823,7 +823,7 @@ const char* interp_type_names[] = {
     "Step"
 };
 
-const char* render_type_names[] = {
+const char* render_type_names[eParSysRenderFuncCount] = {
     "Sprite",
     "Streak",
     "Flat",
@@ -1083,7 +1083,7 @@ void verify_tables()
             for (S32 i = 0; i < ARRAY_LENGTH(interp_type_names); i++) {
                 xASSERT(interp_type_names[i]);
             }
-            for (S32 i = 0; i < ARRAY_LENGTH(render_type_names); i++) {
+            for (S32 i = 0; i < eParSysRenderFuncCount; i++) {
                 xASSERT(render_type_names[i]);
             }
         }
@@ -1208,7 +1208,7 @@ static void explode_tweaks(xParEmitter& emit)
         zAUTOTWEAK_SELECT(prefix, "Blend: Destination", &asys.renderDstBlendMode, tweak_blend_mode_labels, NULL, ARRAY_LENGTH(tweak_blend_mode_labels), NULL, NULL, 2);
         static tweak_callback cb_render_type = tweak_callback::create_change(on_change_render_type);
 
-        zAUTOTWEAK_SELECT(prefix, "Render Type", &asys.renderFunc, render_type_names, NULL, ARRAY_LENGTH(render_type_names), &cb_render_type, &sys, 2);
+        zAUTOTWEAK_SELECT(prefix, "Render Type", &asys.renderFunc, render_type_names, NULL, eParSysRenderFuncCount, &cb_render_type, &sys, 2);
         zAUTOTWEAK_FLAG(prefix, "Pivot \001Left", &asys.parFlags, 0x8, NULL, NULL, 2);
         zAUTOTWEAK_FLAG(prefix, "Pivot \002Top", &asys.parFlags, 0x10, NULL, NULL, 2);
         zAUTOTWEAK_FLAG(prefix, "Pivot \003Right", &asys.parFlags, 0x20, NULL, NULL, 2);

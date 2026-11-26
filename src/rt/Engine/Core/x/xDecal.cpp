@@ -3376,8 +3376,8 @@ void xDecalEmitter::add_tweaks(const char* prefix)
     zAUTOTWEAK(prefix, "texture|\001uv1_v", &cfg.texture.uv[1].y, 0.0f, 1.0f, &cb_config, this, 0x2);
     zAUTOTWEAK(prefix, "texture|\002\001rows", &cfg.texture.rows, 1, 128, &cb_config, this, 0x2);
     zAUTOTWEAK(prefix, "texture|\002cols", &cfg.texture.cols, 1, 128, &cb_config, this, 0x2);
-    static char* tm_labels[] = { "Explicit", "Random", "Cycle" };
-    zAUTOTWEAK_SELECT(prefix, "texture|\003mode", (U32*)&cfg.texture.mode, (const char**)tm_labels, (const U32*)NULL, ARRAY_LENGTH(tm_labels), &cb_config, this, 0x2);
+    static char* tm_labels[MAX_TM] = { "Explicit", "Random", "Cycle" };
+    zAUTOTWEAK_SELECT(prefix, "texture|\003mode", (U32*)&cfg.texture.mode, (const char**)tm_labels, (const U32*)NULL, MAX_TM, &cb_config, this, 0x2);
 
     zAUTOTWEAK(prefix, "texture|\004\001units", &texture.units, 0, 0, NULL, NULL, 0x2);
     zAUTOTWEAK(prefix, "texture|\004\002width", &texture.size.x, 0, 0, NULL, NULL, 0x2);

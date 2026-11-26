@@ -6,7 +6,7 @@
 
 #include "decomp.h"
 
-static char* sEventTable[] = {
+static char* sEventTable[eEventCount] = {
     "Unknown",
     "Enable",
     "Disable",
@@ -1118,7 +1118,7 @@ static char* sEventTable[] = {
     "*Player Detected",
 };
 
-static const size_t sEventTableCount = ARRAY_LENGTH(sEventTable);
+static const size_t sEventTableCount = eEventCount;
 
 const char* zEventName(U32 eventEnum)
 {
