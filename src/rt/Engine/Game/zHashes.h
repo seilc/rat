@@ -19,6 +19,7 @@
 #define HASH_bush_clump_NJ                      0x55BA8E2F // xStrHash("bush_clump_NJ")
 #define HASH_card_edgeburnb_ld                  0xCA8A6CAC // xStrHash("card_edgeburnb_ld")
 #define HASH_Checkpoints                        0x7D8CCF1B // xStrHash("Checkpoints")
+#define HASH_CHKPOINT_RES_SCRIPT_07             0x8F02AD77 // xStrHash("CHKPOINT_RES_SCRIPT_07")
 #define HASH_computer_blank_glow_rs             0x605BD458 // xStrHash("computer_blank_glow_rs")
 #define HASH_computer_blank_rs                  0xAEF2576C // xStrHash("computer_blank_rs")
 #define HASH_computer_blank_wide_glow_rs        0xA2A3D87E // xStrHash("computer_blank_wide_glow_rs")
