@@ -6,6 +6,8 @@
 #include "zUIText.h"
 #include "zUIImage.h"
 
+#define MAX_INVISIBLE_UI ((U32)4)
+
 class zUICustomSysMessageManager : public zUICustom
 {
 public:
@@ -21,6 +23,11 @@ public:
     S32 GetPortInititatedSystemMessage() const { return padPortInitiatedSystemMessage; }
     void SetPortInititatedSystemMessage(S32 value) { padPortInitiatedSystemMessage = value; }
     void SetInfoTimer(F32 value) { infoTimer = value; }
+    virtual bool IsSystem(zUI* ptr)
+    {
+        return ptr == itemOkExtra || ptr == itemYesExtra || ptr == itemNoExtra || ptr == itemOk || ptr == itemYes ||
+               ptr == itemNo || ptr == itemMsg;
+    }
 
     xBaseEventCallback cb_function;
     U32 toCBEvent;
@@ -42,7 +49,7 @@ public:
     zUIImage* panelLowRight;
     zUIImage* panelUpLeft;
     zUIImage* panelUpRight;
-    zUI* invisibleUI[4];
+    zUI* invisibleUI[MAX_INVISIBLE_UI];
     S32 invisibleUICount;
 
 private:
@@ -51,6 +58,7 @@ private:
     F32 infoTimer;
 };
 
+extern bool gDontAutoMenu;
 extern bool gSysMessageManager_active;
 extern bool gPassAnyActveController;
 extern zUI* pSysMessageManager;
