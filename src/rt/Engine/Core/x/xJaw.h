@@ -15,6 +15,8 @@ enum xJawFlags
     exJawFlags_Remy
 };
 
+inline xJawFlags xJawGetSpeakerFlag(xJawSpeaker speaker); // UNUSED
+
 struct xJawHeader
 {
     U32 numSamples;
@@ -28,6 +30,7 @@ public:
 
     xJawSpeaker GetIndex(S32 index, F32& value);
     xJawSpeaker Eval(F32 time, F32& jawValue);
+    inline xJawFlags GetFlags(); // UNUSED
 
 private:
     xJawHeader header;
