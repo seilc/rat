@@ -89,6 +89,8 @@ public:
 
     zCompState* GetState(S32 stateEnum) { xASSERT_L(DEBUG ? 243 : 244, stateEnum<numberOfStates); return states[stateEnum]; }
     S32 GetCurrentStateEnum();
+    void SwitchState(S32 fromStateEnum, S32 toStateEnum);
+    void SwitchLastState(S32 toStateEnum);
 };
 
 class zCompState
@@ -103,8 +105,6 @@ class zCompState
 public:
     zCompState();
 
-    void SwitchState(S32 newStateEnum);
-
     virtual void Update(zNPCBase*, F32) {}
     virtual void Enter(zNPCBase* owner) { Resume(owner); }
     virtual void Exit(zNPCBase*) {}
@@ -117,6 +117,8 @@ public:
 #endif
     virtual void DebugRender(zNPCBase*) {}
     virtual bool SystemEvent(xBase*, xBase*, U32, const F32*, xBase*, U32) { return false; }
+
+    void SwitchState(S32 newStateEnum) { stateMachine->SwitchState(stateEnum, newStateEnum); }
 };
 
 inline S32 zCompStateMachine::GetCurrentStateEnum()

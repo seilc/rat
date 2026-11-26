@@ -64,6 +64,7 @@ public:
     void SetAnimState(U32 new_stateID, F32 blend, xModelInstance* model);
     void SetAnimState(const char* new_state, F32 blend, xModelInstance* model);
     void SetAnimState(const char* new_state, F32 blend, F32 dest_time, xModelInstance* model);
+    void SetAnimSpeed(F32 speed);
     F32 GetAnimDuration();
     bool IsAnimationStopped(U32 AnimationID);
     bool IsAnimationTranstitionFinished(U32 AnimationID);
