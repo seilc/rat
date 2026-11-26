@@ -68,7 +68,20 @@ public:
     F32 GetAnimDuration();
     bool IsAnimationStopped(U32 AnimationID);
     bool IsAnimationTranstitionFinished(U32 AnimationID);
+    void ApplyAcc(xVec3& dAcc);
+    void UpdateVelocity(F32 speedLimit, F32 dt);
+    void ApplyVelConstraints(xVec3& dVel);
+    void UpdatePosition(F32 dt);
+#if RELEASE
+    void ApplyPosConstraints(xVec3& dPos, F32 velCorrectionRatio);
+#else
+    void ApplyPosConstraints(xVec3& dPos);
+#endif
+    bool TurnToFaceXZ(const xVec3* target, F32 dt, F32 turnSpringK);
     xVec3* GetPosition() { return &frame->mat.pos; }
+    xVec3* GetOldPosition() { return &frame->oldmat.pos; }
+    xVec3* GetVelocity() { return &frame->vel; }
+    xVec3* GetOldVelocity() { return &frame->oldvel; }
     xVec3* GetHeading() { return &frame->mat.at; }
     xEntFrame* GetFrame() { return frame; }
     xModelInstance* GetModel() { return model; }
