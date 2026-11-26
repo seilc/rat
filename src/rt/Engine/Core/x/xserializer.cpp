@@ -530,7 +530,8 @@ static st_SERIAL_CLIENTINFO* XSER_get_client(U32 idtag)
     if (idx < 0) {
         DBprintf(DBML_VDBG, "XSER: Adding client '%s'\n", xUtil_idtag2string(idtag, 0));
 
-        clt = xsd->cltnext; xsd->cltnext++;
+        clt = xsd->cltnext;
+        xsd->cltnext++;
 
         xVALIDATE_L(1120, clt->idtag==0);
         clt->idtag = idtag;

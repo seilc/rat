@@ -74,7 +74,8 @@ S32 iRwResourcesEmptyArena()
     RwInt32 arena_size = RwResourcesGetArenaSize();
     RwResEntry* entry = RwResourcesAllocateResEntry(NULL, NULL, arena_size, NULL);
     while (entry == NULL && arena_size > 0) {
-        arena_size -= 1024; entry = RwResourcesAllocateResEntry(NULL, NULL, arena_size, NULL);
+        arena_size -= 1024;
+        entry = RwResourcesAllocateResEntry(NULL, NULL, arena_size, NULL);
     }
     if (entry) {
         U32* p = (U32*)(entry + 1);

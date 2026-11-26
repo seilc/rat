@@ -1132,7 +1132,8 @@ static bool checkExInProgress;
 
 void CheckExCallback(s32, s32 result)
 {
-    callbackResult = result; checkExInProgress = false;
+    callbackResult = result;
+    checkExInProgress = false;
 }
 
 inline S32 iSG_CARDCheckEx(S32 chan, s32* xferBytes)
@@ -1567,7 +1568,8 @@ static S32 iSG_get_fmoddate(st_ISG_MEMCARD_DATA* mcdata, const char* fname, S32*
     if (!rc) result = 0;
     else {
         stat = &mcdata->statcache;
-        S64 biggun = stat->time; biggun = OSSecondsToTicks(biggun);
+        S64 biggun = stat->time;
+        biggun = OSSecondsToTicks(biggun);
         OSTicksToCalendarTime(biggun, &caltym);
 
         if (sec) *sec = caltym.sec;
@@ -1910,7 +1912,9 @@ static S32 iSG_mc_format(st_ISG_MEMCARD_DATA* mcdata, S32 force, S32* canRecover
             break;
 
         case CARD_RESULT_NOFILE:
-        case CARD_RESULT_FATAL_ERROR: rc = 0; break;
+        case CARD_RESULT_FATAL_ERROR:
+            rc = 0;
+            break;
         case CARD_RESULT_READY: case CARD_RESULT_BUSY: break;
         }
     }
@@ -1925,7 +1929,8 @@ static bool cardCreateInProgress;
 
 void CardCreateCallback(s32, s32 result)
 {
-    callbackResult = result; cardCreateInProgress = false;
+    callbackResult = result;
+    cardCreateInProgress = false;
 }
 
 inline S32 iSG_CARDCreate(s32 chan, const char* fileName, u32 size, CARDFileInfo* fileInfo)
@@ -2103,7 +2108,8 @@ static bool cardDeleteInProgress;
 
 void CardDeleteCallback(s32, s32 result)
 {
-    callbackResult = result; cardDeleteInProgress = false;
+    callbackResult = result;
+    cardDeleteInProgress = false;
 }
 
 inline S32 iSG_CARDDelete(s32 chan, const char* fileName)

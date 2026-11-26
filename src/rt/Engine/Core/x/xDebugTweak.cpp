@@ -1142,7 +1142,8 @@ namespace {
                 U16 parent = i - 1, prev = INVALID_INDEX;
                 while (parent != INVALID_INDEX) {
                     if (sicompare(pname, values[parent].name) == 0) break;
-                    prev = parent; parent = values[parent].parent;
+                    prev = parent;
+                    parent = values[parent].parent;
                 }
                 v.parent = parent;
                 if (prev != INVALID_INDEX) values[prev].next = i;
@@ -1151,7 +1152,8 @@ namespace {
                     U16 parent2 = i - 1, prev2;
                     while (parent2 != INVALID_INDEX) {
                         if (sicompare(pname, values[parent2].name) == 0) break;
-                        prev2 = parent2; parent2 = values[prev2].parent;
+                        prev2 = parent2;
+                        parent2 = values[prev2].parent;
                     }
                 }
             }

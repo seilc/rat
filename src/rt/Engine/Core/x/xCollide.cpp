@@ -462,7 +462,8 @@ static RpCollisionTriangle* sphereHitsEnvCB(RpIntersection* isx, RpWorldSector* 
 
 static RpCollisionTriangle* sphereHitsModelCB(RpIntersection*, RpCollisionTriangle* tri, F32 dist, void* data)
 {
-    xSphereHitsModel_context* context = (xSphereHitsModel_context*)data; return sphereHitsEnvCB(&context->localx, NULL, tri, dist, context->coll);
+    xSphereHitsModel_context* context = (xSphereHitsModel_context*)data;
+    return sphereHitsEnvCB(&context->localx, NULL, tri, dist, context->coll);
 }
 
 U32 xSphereHitsModel(const xSphere* b, const xModelInstance* m, xCollis* coll)

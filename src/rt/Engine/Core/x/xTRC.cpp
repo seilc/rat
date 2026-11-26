@@ -124,7 +124,8 @@ S32 xTRCPadCount(TRCState state)
 {
     S32 counter = 0, startidx = 0;
     while (xTRCPadFindFirst(startidx, state)) {
-        counter++; startidx++;
+        counter++;
+        startidx++;
     }
     return counter;
 }
@@ -133,7 +134,8 @@ S32 xTRCPadCount(TRCPadState padstate)
 {
     S32 counter = 0, startidx = 0;
     while (xTRCPadFindFirstPadState(startidx, padstate)) {
-        counter++; startidx++;
+        counter++;
+        startidx++;
     }
     return counter;
 }

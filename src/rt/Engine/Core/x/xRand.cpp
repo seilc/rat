@@ -70,7 +70,8 @@ inline void next_state()
     U32* p = state;
     S32 j;
 
-    left = N; next = state;
+    left = N;
+    next = state;
 
     for (j = N - M + 1; --j; p++)
         *p = p[M] ^ TWIST(p[0], p[1]);

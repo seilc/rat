@@ -1917,7 +1917,8 @@ void xtextbox::layout::merge_line(jot_line& line)
         }
     }
 
-    d++; erase_jots(d, line.last);
+    d++;
+    erase_jots(d, line.last);
     line.last = d;
 }
 

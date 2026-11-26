@@ -95,7 +95,8 @@ void zCamTargetSpline::update(xScene& scene, F32 dt)
 #if DEBUG || RELEASE
 void zCamTargetSpline::debug_mode_draw()
 {
-    if (!active()) return;
+    if (!active())
+        return;
 
     xprintf("Curve POI\n");
     xCam::debug_mode_draw();

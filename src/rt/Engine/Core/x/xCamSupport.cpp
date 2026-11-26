@@ -678,7 +678,8 @@ bool capsule_hits_scene(const xCapsule& cap, xCollis& coll)
         return true;
     }
 
-    xBox box; xQCData qcd;
+    xBox box;
+    xQCData qcd;
     xBoxFromCapsule(box, cap);
     xQuickCullForBox(&qcd, &box);
 
@@ -725,7 +726,8 @@ bool swept_sphere_hits_scene(xSweptSphere& sws, const xVec3& start, const xVec3&
         return true;
     }
 
-    xBox box; xQCData qcd;
+    xBox box;
+    xQCData qcd;
     xBoxFromCapsule(box, start, end, radius);
     xQuickCullForBox(&qcd, &box);
 

@@ -432,7 +432,8 @@ static void xEntMPGetNext(xEntMotion* motion, xMovePoint* prev, xScene*)
     xEntMPData* mp = &motion->mp;
     xVec3 tempdir;
 
-    mp->spl = NULL; mp->curdist = 0.0f;
+    mp->spl = NULL;
+    mp->curdist = 0.0f;
 
     mp->dist = xMovePointGetNext(mp->src, prev, &mp->dest, &tempdir);
     if (mp->dest == mp->src) {

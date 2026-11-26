@@ -161,7 +161,8 @@ static void xBinomInit()
     for (S32 i = 1; i < 32; i++) {
         row1[0] = row1[i] = 1;
 
-        const S32 *col00 = row0, *col01 = row0 + 1; S32 *col1 = row1 + 1, *end_col1 = row1 + i;
+        const S32 *col00 = row0, *col01 = row0 + 1;
+        S32 *col1 = row1 + 1, *end_col1 = row1 + i;
         for (; col1 < end_col1; ++col00, ++col01, ++col1)
             *col1 = *col00 + *col01;
 

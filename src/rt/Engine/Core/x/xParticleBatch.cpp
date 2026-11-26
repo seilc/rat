@@ -222,7 +222,8 @@ namespace {
             return isys.best_block;
         }
 
-        S32 most_used = -1; block_info* b = isys.block_list;
+        S32 most_used = -1;
+        block_info* b = isys.block_list;
         for (; b; b = b->next) {
             if (b->used < isys.units_per_block && most_used < b->used) {
                 isys.best_block = b;

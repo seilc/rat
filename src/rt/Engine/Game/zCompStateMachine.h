@@ -35,7 +35,8 @@ typedef zCompState* (*zCompStateNewFunc)(S32&);
 template <class T>
 zCompState* zCompState_New(S32& memAcc)
 {
-    memAcc += sizeof(T); return new (eMemStaticType_0, eMemMgrTag_Components) T;
+    memAcc += sizeof(T);
+    return new (eMemStaticType_0, eMemMgrTag_Components) T;
 }
 
 struct zCompStateMachineTable

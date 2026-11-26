@@ -533,7 +533,8 @@ xPar* xParEmitterEmit(xParEmitter* pe, F32 emit_dt, F32 par_dt)
                     break;
                 default:
                     if (!xEntValidType(attach_ent->baseType) || !attach_ent->model) {
-                        attach_ent = NULL; emitPosition = 0.0f;
+                        attach_ent = NULL;
+                        emitPosition = 0.0f;
                     } else {
                         emitPosition = *xEntGetPos(attach_ent);
                     }

@@ -2508,7 +2508,8 @@ void* PKR_getmem(U32 id, S32 amount, U32 aid, S32 align, U32 memtag, S32 isTemp,
     xASSERT_L(5065, memptr);
     if (memptr) memset(memptr, 0, amount);
 
-    g_memalloc_pair++; g_memalloc_runtot += amount;
+    g_memalloc_pair++;
+    g_memalloc_runtot += amount;
     if (g_memalloc_runtot < 0) g_memalloc_runtot = amount;
 
     if (memptr) {
@@ -2528,7 +2529,8 @@ void PKR_relmem(U32 id, S32 blksize, void* memptr, U32 aid, S32 isTemp)
     xASSERT_L(5102, memptr);
     xASSERT_L(5103, blksize>0);
 
-    g_memalloc_pair--; g_memalloc_runfree += blksize;
+    g_memalloc_pair--;
+    g_memalloc_runfree += blksize;
     if (g_memalloc_runfree < 0) g_memalloc_runfree = blksize;
 
     xOutInfo("PACKER", "PKR: MID:%s AID:0x%08X free at 0x%08X size %8d (paired #%3d)\n", xUtil_idtag2string(id, 0), aid,

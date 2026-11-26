@@ -2177,7 +2177,8 @@ void xDrawText(const xVec3& vWorld, F32 fWidth, F32 fHeight, const char* pszText
         return;
     }
 
-    xDrawTextInfo* pIn = &_pInfo[_nDrawTextInfo]; _nDrawTextInfo++;
+    xDrawTextInfo* pIn = &_pInfo[_nDrawTextInfo];
+    _nDrawTextInfo++;
     if (_nDrawTextInfo >= _nDrawTextInfoMaxLines)
         _nDrawTextInfo = _nDrawTextInfoMaxLines - 1;
     pIn->fWidth = fWidth;

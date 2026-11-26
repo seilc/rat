@@ -88,7 +88,8 @@ public:
     virtual void SceneSetup();
     virtual void Reset()
     {
-        gameDone = false; SwitchGameState(GAMESTATE_GAME_START);
+        gameDone = false;
+        SwitchGameState(GAMESTATE_GAME_START);
     }
     virtual void Update(F32 dt);
     virtual void Render() {}
