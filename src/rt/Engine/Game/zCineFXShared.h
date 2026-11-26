@@ -1,6 +1,7 @@
 #ifndef ZCINEFXSHARED_H
 #define ZCINEFXSHARED_H
 
+#include "xMath3.h"
 #include "xVec3.h"
 
 #include <rwcore.h>
@@ -103,7 +104,7 @@ struct NCINRibbon
 
 struct NCINBoneProbe
 {
-    U8 render;
+    bool render;
 };
 
 struct NCINData
@@ -122,6 +123,10 @@ struct NCINData
     };
 };
 
+// NCINEntry::flg_stat
+#define NCIN_FXF_ACTIVE (1<<0)
+#define NCIN_FXF_DONE (1<<1)
+
 struct NCINEntry
 {
     TypeInfo info;
@@ -134,6 +139,21 @@ struct NCINEntry
     S32 flg_stat;
 };
 
+#if DEBUG || RELEASE
+void zCinFX_clamp_bone_index(S32* index, RpAtomic* model);
+void zCinFX_clamp_bone_index(F32* index, RpAtomic* model); // UNUSED
+#else
+inline void zCinFX_clamp_bone_index(S32*, RpAtomic*)
+{
+}
+#endif
+void zCinFX_Generic_Upd(const zCutsceneMgr*, NCINEntry* fxrec, S32 killit); // UNUSED
+void zCinFX_GenNCINInput_Upd(const zCutsceneMgr* csnmgr, NCINEntry* fxrec, S32 killit); // UNUSED
+void zCinFX_CycleOnce_Upd(const zCutsceneMgr*, NCINEntry* fxrec, S32 killit); // UNUSED
+#if DEBUG || RELEASE
+void zCinFX_IndexInput_Twk(const char* prefix_root, NCINEntry* fxrec);
+void zCinFX_BasicInput_Twk(const char* prefix_root, NCINEntry* fxrec);
+#endif
 void zCinFX_BoneProbe_Upd(const zCutsceneMgr*, NCINEntry* fxrec, S32 killit);
 void zCinFX_BoneProbe_AR(const zCutsceneMgr*, NCINEntry* fxrec, RpAtomic* model, RwMatrix* animMat, U32 animIndex,
                          U32, U32&);
@@ -142,5 +162,14 @@ void zCinFX_BoneProbe_Twk(const char* prefix_root, NCINEntry* fxrec);
 #endif
 void zCinFX_EntityBonePar_AR(const zCutsceneMgr*, NCINEntry* fxrec, RpAtomic* model, RwMatrix* animMat,
                              U32 animIndex, U32, U32&);
+
+inline void zCinFX_get_bone_matrix(xMat4x3& mat, const RwMatrix* anim_mat, S32 bone_index)
+{
+    const xMat4x3& bone_mat = *(const xMat4x3*)&anim_mat[bone_index];
+    mat = bone_mat;
+    if (bone_index != 0) {
+        mat.pos += *(const xVec3*)&anim_mat[0].pos;
+    }
+}
 
 #endif
