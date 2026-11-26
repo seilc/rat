@@ -78,6 +78,7 @@ inline void xDrawSetColor(U8 r, U8 g, U8 b, U8 a) {}
 inline void xDrawLine(const xVec3* a, const xVec3* b) {}
 inline void xDrawLine(F32 x1, F32 y1, F32 z1, F32 x2, F32 y2, F32 z2) {}
 inline void xDrawArrow(const xVec3* from, const xVec3* dir, bool asRay, F32 length) {}
+inline void xDrawGrid(const xVec3& c1, const xVec3& c2, const xVec3& up, F32 spacing_hint) {}
 inline void xDrawCapsule(const xVec3* start, const xVec3* end, F32 r, U32 lod) {}
 inline void xDrawSphere(const xSphere* sph, U32 flags) {}
 inline void xDrawSphere(const xVec3* center, F32 r, U32 flags) {}

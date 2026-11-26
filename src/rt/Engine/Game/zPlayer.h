@@ -121,6 +121,7 @@ struct zPlayer : zEnt
     virtual F32 PredictY(F32 time) const;
 
     S32 GetCollisionSpheres(const xSphere** sphereArray);
+    S32 GetCameraFocus();
 
     virtual bool IsInteractioning();
 

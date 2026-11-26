@@ -51,6 +51,24 @@ struct xSweptSphere
     xSweptSphere(const xVec3& start, const xVec3& end, F32 radius, U16 filterFlags);
 };
 
+struct SphereCollisionResults
+{
+    xVec3 tested_dir;
+    F32 dist;
+    S32 collisionFlags;
+    xVec3 contact;
+    xVec3 normal;
+    F32 collidingSphereRadius;
+    U32 oid;
+    void* optr;
+    xModelInstance* mptr;
+    xJSPHeader* jsp;
+    xClumpCollBSPTriangle* bspTriangle;
+    xCollideSphereHitType hitTriangleType;
+    xPlane triPlane;
+    S32 sphereIndex;
+};
+
 struct xCollideLineSegment
 {
     xVec3 start;
