@@ -4,7 +4,10 @@
 #include "zCamPlayer.h"
 
 void zCamSetCamera(U32 cameraID, bool forceRestart);
+xVec3& zCamLookPlayer();
 xVec3& zCamTransitionTarget();
+bool zCamIsChangingFocus();
+F32 zCamFloorMountY();
 zCamPlayer* zCamGetDefault();
 xCam* zCamGetPrimary();
 void zCamAdd(xCam& cam, bool force_cut);

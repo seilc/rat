@@ -2,6 +2,7 @@
 #define XSPRINGY_H
 
 #include "xVec3.h"
+#include "xutil.h"
 
 class xSpringy
 {
@@ -43,6 +44,7 @@ public:
     }
 
     const xVec3& Sprung() const { return mCurrent; }
+    const xVec3& Goal() const { return mGoal; }
 
     void operator=(const xVec3& v) { SetGoal(v); }
 
@@ -123,6 +125,24 @@ protected:
 
 class xSpringyAngle : public xSpringyF32
 {
+public:
+    void Update(F32 dt)
+    {
+        F32 delta = xClampAnglePI_PI(mGoal - mCurrent);
+        if (xabs(mVelocity) > mVelocitySaveMax) {
+            mVelocitySaveMax = xabs(mVelocity);
+        }
+        if (mVelocityMax != 0.0f && xabs(mVelocity) > mVelocityMax) {
+            if (mVelocity < 0.0f)
+                mVelocity = -mVelocityMax;
+            else
+                mVelocity = mVelocityMax;
+        }
+        xDampSpring(delta, mVelocity, dt, mResponse);
+        mCurrent = xClampAngle0_2PI(mGoal - delta);
+    }
+
+    void operator=(F32 angle) { SetGoal(angle); }
 };
 
 #endif

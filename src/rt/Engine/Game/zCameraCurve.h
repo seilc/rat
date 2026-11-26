@@ -33,8 +33,10 @@ public:
     {
     public:
         void Init(const zCameraCurve& curveInfo, const xVec3& playerPos);
+        void UpdatePosition(F32 playerU);
         void UpdatePosition(const xVec3& playerPos);
         const xVec3& CameraPathPos() const { return mInfo.mCurvePos[eCamCurve_Camera]; }
+        F32 PlayerU() const { return mInfo.mCurveU[eCamCurve_Player]; }
         const BeadInfo& InterpBeadInfo(bool wantPlayerPathPosition);
         void DebugRender();
 

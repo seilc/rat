@@ -2,6 +2,7 @@
 #define XUTIL_H
 
 #include "xDebug.h"
+#include "xMath.h"
 
 #define IDTAG(a,b,c,d) (((U32)(a)<<24)|((U32)(b)<<16)|((U32)(c)<<8)|((U32)(d)))
 #define ARRAY_LENGTH(a) (sizeof(a) / sizeof(a[0]))
@@ -36,7 +37,6 @@ void xUtil_spit_flagbits(S32 flag, S32 toScreen, S32 numbytes);
 #else
 #define xUtil_spit_flagbits(...)
 #endif
-F32 xClampAngle0_2PI(F32 angle);
 void quicksort_int(void* base, size_t num, size_t width, size_t key_offset);
 void quicksort_uint(void* base, size_t num, size_t width, size_t key_offset);
 void quicksort_float(void* base, size_t num, size_t width, size_t key_offset);
@@ -156,6 +156,16 @@ void isort(void* base, size_t num, size_t width, T cmp)
             v -= width;
         }
     }
+}
+
+inline F32 xClampAngle0_2PI(F32 angle)
+{
+    return angle < 0.0f ? 2.0f * PI + angle : angle >= 2.0f * PI ? angle - 2.0f * PI : angle;
+}
+
+inline F32 xClampAnglePI_PI(F32 angle)
+{
+    return angle < -PI ? 2.0f * PI + angle : angle >= PI ? angle - 2.0f * PI : angle;
 }
 
 #endif
