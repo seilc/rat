@@ -18,7 +18,9 @@ public:
     F32 alignmentMultiplier;
     F32 cohesionMultiplier;
 
-#if DEBUG
+#if RELEASE
+    void AddTweaks(const char* parentName, const char* branchName); // UNUSED
+#elif DEBUG
     void AddTweaks(const char* name);
 #endif
     virtual void SetDefaults()
@@ -49,15 +51,20 @@ public:
     virtual void Reset();
 #endif
     virtual void Update(xScene* xscn, F32 dt);
+    virtual void SetParameters(const zCompParameters* parameters) { flockingParameters = (const zCompSteeringFlockingParams*)parameters; zCompSteeringBasic::SetParameters(parameters); }
+#if DEBUG || RELEASE
+    static void AddStaticTweaks();
+#endif
     inline xVec3* GetFlockingCenter();
     inline xVec3* GetFlockingAlignment();
 
 private:
-    void CalculateForce(xVec3& force, zSteeringBasicDynamics& steeringDynamics, F32 dt);
+    virtual void CalculateForce(xVec3& force, zSteeringBasicDynamics& steeringDynamics, F32 dt);
     void GetSeperationForce(xVec3& SeperationForce, zSteeringBasicDynamics& steeringDynamics, F32);
     void GetPlayerAvoidenceForce(xVec3& PlayerAvoidenceForce, zSteeringBasicDynamics& steeringDynamics, F32);
     void GetAlignmentForce(xVec3& AlignmentForce, zSteeringBasicDynamics& steeringDynamics, F32);
     void GetCohesionForce(xVec3& CohesionForce, zSteeringBasicDynamics& steeringDynamics, F32);
+    const zCompSteeringFlockingParams* Params() { return flockingParameters; }
 
     const zCompSteeringFlockingParams* flockingParameters;
     zCompSteeringFlockingBrain* flockingBrain;

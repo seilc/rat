@@ -1,6 +1,7 @@
 #ifndef ZCOMPSTEERINGBASIC_H
 #define ZCOMPSTEERINGBASIC_H
 
+#include "xColor.h"
 #include "zCompParameters.h"
 #include "zICompSteering.h"
 
@@ -23,6 +24,12 @@ class zCompSteeringBasicParams : public zCompParameters
 {
 public:
     zCompSteeringBasicParams() { SetDefaults(); }
+
+#if RELEASE
+    void AddTweaks(const char* parentName, const char* branchName); // UNUSED
+#elif DEBUG
+    void AddTweaks(const char* name);
+#endif
 
     F32 maxForce;
     F32 maxSpeed;
@@ -109,16 +116,32 @@ public:
 
     virtual void Attached();
     virtual void Detached();
+#if RELEASE
+    virtual void Reset();
+#endif
     virtual void Update(xScene* xscn, F32 dt);
     virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
     virtual void ApplySteering(zICompNPCEntity* npcEnt, F32 dt);
 
+    virtual void SetAttractor(xEnt* ent) { Attractor = ent; AttractorV = NULL; }
+    virtual void SetRepeller(xEnt* ent) { Repeller = ent; RepellerV = NULL; }
+    virtual void SetArriver(xEnt* ent) { Arriver = ent; ArriverV = NULL; }
+    virtual void SetAttractorV(xVec3* vec) { Attractor = NULL; AttractorV = vec; }
+    virtual void SetRepellerV(xVec3* vec) { Repeller = NULL; RepellerV = vec; }
+    virtual void SetArriverV(xVec3* vec) { Arriver = NULL; ArriverV = vec; }
+
     xEnt* GetRepellerEnt() { return Repeller; }
+    virtual void SetParameters(const zCompParameters* parameters) { steeringParameters = (const zCompSteeringBasicParams*)parameters; }
 
 private:
-    void CalculateForce(xVec3& force, zSteeringBasicDynamics& steeringDynamics, F32 dt);
-    void CalculateVelConstraints(xVec3& dVel, zSteeringBasicDynamics& steeringDynamics, F32 dt);
-    void CalculatePosConstraints(xVec3& dPos, zSteeringBasicDynamics& steeringDynamics, F32 dt);
+    virtual void CalculateForce(xVec3& force, zSteeringBasicDynamics& steeringDynamics, F32 dt);
+    virtual void CalculateVelConstraints(xVec3& dVel, zSteeringBasicDynamics& steeringDynamics, F32 dt);
+    virtual void CalculatePosConstraints(xVec3& dPos, zSteeringBasicDynamics& steeringDynamics, F32 dt);
+
+protected:
+#if DEBUG || RELEASE
+    void DebugRenderForce(const xVec3* entPos, xVec3* Force, bool render, F32 multiplier, xColor color);
+#endif
     bool AccumulateForce(xVec3& CurTotal, xVec3& ForceToAdd, F32 Scale, bool truncateIfTooBig);
     void GetWanderForce(xVec3& wanderForce, zSteeringBasicDynamics& steeringDynamics, F32 dt);
     void GetWallAvoidenceForce(xVec3& avoidenceForce, zSteeringBasicDynamics& steeringDynamics, F32);
@@ -128,6 +151,7 @@ private:
     void GetArriveForce(xVec3& arriveForce, zSteeringBasicDynamics& steeringDynamics, F32);
     void GetSweptSphereCollDPos(xVec3& collDPos, zSteeringBasicDynamics& steeringDynamics, F32);
 
+private:
     const zCompSteeringBasicParams* steeringParameters;
     xVec3 m_vWanderTarget;
     xEnt* Attractor;

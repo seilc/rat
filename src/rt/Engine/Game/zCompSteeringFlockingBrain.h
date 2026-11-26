@@ -12,6 +12,7 @@ public:
     void AllAttached();
     void PreUpdate(xScene*, F32);
     xVec3* GetFlockingCenter() { return &flockingCenter; }
+    xVec3* GetFlockingAlignment() { return &flockingAlignment; }
     void ApplySteering(zICompNPCEntity*, F32) {}
     void SetAttractor(xEnt*) {}
     void SetRepeller(xEnt*) {}
