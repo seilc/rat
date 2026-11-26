@@ -5,6 +5,7 @@
 #include "xMath3.h"
 #include "containers.h"
 
+struct xEnt;
 struct xEntFrame;
 struct zCommonPlayer;
 
@@ -46,6 +47,9 @@ public:
 
 class zContextObjectManager
 {
+public:
+    static void AddEntFX(xEnt* ent);
+
 protected:
     zContextObject::MountData mountData;
     zContextObject* currentObject;
