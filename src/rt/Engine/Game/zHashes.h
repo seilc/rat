@@ -119,6 +119,7 @@
 #define HASH_platform_metal_rf                  0x39BA103C // xStrHash("platform_metal_rf")
 #define HASH_platform_rise_b1_MINF              0x1B80E759 // xStrHash("platform_rise_b1.MINF")
 #define HASH_PowerEffect                        0xB707871E // xStrHash("PowerEffect")
+#define HASH_PunchStars                         0xAB07D593 // xStrHash("PunchStars")
 #define HASH_rainbowfilm_smooth32               0x741B0566 // xStrHash("rainbowfilm_smooth32")
 #define HASH_Random                             0x0FE111BF // xStrHash("Random")
 #define HASH_rock_cluster_ft                    0xBE1FB29D // xStrHash("rock_cluster_ft")
