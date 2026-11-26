@@ -129,6 +129,7 @@ struct zPlayer : zEnt
     void Set_cutsceneReady() { zPlayerFlags |= (1 << 14); }
 
     bool Get_cutsceneReady() const { return (zPlayerFlags >> 14) & 0x1; }
+    bool Get_defeated() const { return (zPlayerFlags >> 15) & 0x1; }
 
     bool Get_humanPlayer() const { return (zPlayerFlags >> 18) & 0x1; }
 

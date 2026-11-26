@@ -126,6 +126,8 @@ void xModelPoolStressTestEnable(eModelPoolStressor stressor);
 void xModelPoolStressTestDisable(eModelPoolStressor stressor);
 bool xModelPoolStressTesting();
 #else
+inline void xModelPoolStressTestEnable(eModelPoolStressor) {}
+inline void xModelPoolStressTestDisable(eModelPoolStressor) {}
 inline bool xModelPoolStressTesting()
 {
     return false;
