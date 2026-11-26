@@ -147,7 +147,7 @@ void take_damage::enter_state(const zNPCCommonBehavior*)
     setAnimState("TD_T_Hit01", 0.3f, NULL);
 
     xVec3 direction;
-    direction.Sub(owner->frame->mat.pos, xglobals->players[0]->frame->mat.pos);
+    direction.Sub(owner->frame->mat.pos, CURPLAYERS[0]->frame->mat.pos);
     direction.y = 0.0f;
 }
 

@@ -60,11 +60,11 @@ zCheatStatus Cheat_Smartbomb()
             globals.sceneCur->sceneID != IDTAG('N', 'I', '0', '3') &&
             globals.sceneCur->sceneID != IDTAG('H', 'S', '0', '1')) {
             sphere_damage(
-                xglobals->players[0], xglobals->players[0]->frame->mat.pos, 25.0f, 0, 1000, 5.0f, 1.0f, zHS_EXPLOSION,
+                CURPLAYERS[0], CURPLAYERS[0]->frame->mat.pos, 25.0f, 0, 1000, 5.0f, 1.0f, zHS_EXPLOSION,
                 zHT_GENERAL);
         } else {
             sphere_damage(
-                xglobals->players[0], xglobals->players[0]->frame->mat.pos, 25.0f, 0, 1, 5.0f, 1.0f, zHS_EXPLOSION,
+                CURPLAYERS[0], CURPLAYERS[0]->frame->mat.pos, 25.0f, 0, 1, 5.0f, 1.0f, zHS_EXPLOSION,
                 zHT_GENERAL);
         }
         return zCheatStatus_Ok;
@@ -104,10 +104,10 @@ zCheatStatus Cheat_InvertTurret(); // UNUSED
 zCheatStatus Cheat_KonamiCode()
 {
     if (!Violet() && !Dash()) {
-        if (xglobals->players[0]->GetCombat()->currentHitPoints > 0) {
-            xglobals->players[0]->GetCombat()->currentHitPoints = MIN(
-                xglobals->players[0]->GetCombat()->currentHitPoints + 30,
-                xglobals->players[0]->GetCombat()->maximumHitPoints);
+        if (CURPLAYERS[0]->GetCombat()->currentHitPoints > 0) {
+            CURPLAYERS[0]->GetCombat()->currentHitPoints = MIN(
+                CURPLAYERS[0]->GetCombat()->currentHitPoints + 30,
+                CURPLAYERS[0]->GetCombat()->maximumHitPoints);
         }
         return zCheatStatus_Ok;
     }
