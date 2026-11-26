@@ -243,6 +243,7 @@ void xVec3ScaleC(xVec3& o, F32 scale);
 void xVec3ScaleC(xVec3& o, const xVec3& v, F32 scale);
 F32 xVec3Hdng(xVec3* hdng, const xVec3* a, const xVec3* b);
 F32 xVec3Dist(const xVec3* a, const xVec3* b);
+F32 xVec3DistFast(const xVec3* a, const xVec3* b);
 F32 xVec3Dist2(const xVec3* a, const xVec3* b);
 void xVec3Lerp(xVec3* o, const xVec3* a, const xVec3* b, F32 f);
 F32 xVec3NormalizeSafe(xVec3& v);
