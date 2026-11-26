@@ -9,8 +9,20 @@ typedef struct _zEnv : xBase
     xEnvAsset* easset;
 } zEnv;
 
+struct xEnv;
 struct xLightKit;
+struct xSerial;
 
+void zEnvInit(void* env, void* easset);
+void zEnvInit(zEnv* env, xEnvAsset* easset);
+void zEnvSetup(zEnv* env);
+void zEnvStartingCamera(zEnv* env);
+void zEnvRender(xEnv* env);
+void zEnvSave(zEnv* ent, xSerial* s);
+void zEnvLoad(zEnv* ent, xSerial* s);
+void zEnvReset(zEnv* env);
+void zEnvEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase* toParamWidget, U32);
 xLightKit* zEnvGetGlobalObjectLightKit();
+xLightKit* zEnvGetGlobalLightKit(); // UNUSED
 
 #endif
