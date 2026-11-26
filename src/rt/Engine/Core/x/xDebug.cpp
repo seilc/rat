@@ -1188,8 +1188,8 @@ void xDebugModeService()
                         RwRenderStateSet(rwRENDERSTATETEXTURERASTER, mat->texture->raster);
 
                         size = 96.0f;
-                        dx = size * FB_XRES / 640.0f;
-                        dy = size * FB_YRES / 480.0f;
+                        dx = size * FB_XRES / SCREEN_WIDTH;
+                        dy = size * FB_YRES / SCREEN_HEIGHT;
                         x = 0.025f * FB_XRES;
                         y = 0.5f * FB_YRES - dy;
                         Im2DRenderQuad(x, y, x + dx, y + dy, RwIm2DGetNearScreenZ(), recipCamZ, 0.0f);
@@ -1242,8 +1242,8 @@ void xDebugModeService()
                     xRenderStateBlendAndZModesSet(rwBLENDSRCALPHA, rwBLENDINVSRCALPHA, TRUE, FALSE);
 
                     size = (drawsize == 0) ? 256.0f : tex->raster->width;
-                    dx = size * FB_XRES / 640.0f;
-                    dy = size * FB_YRES / 480.0f;
+                    dx = size * FB_XRES / SCREEN_WIDTH;
+                    dy = size * FB_YRES / SCREEN_HEIGHT;
                     x = 0.025f * FB_XRES;
                     y = 0.5f * FB_YRES;
 

@@ -70,10 +70,10 @@ bool zUICustomCheckpoints::PreRender()
     i2dRect uv_rect;
     i2dRect location_rect;
     for (U32 i = 0; i < effectiveCheckpoints; i++) {
-        location_rect.tlx = (ui->current.x + widthPerItem * i) * FB_XRES * (1.0f / 640.0f);
-        location_rect.tly = (ui->current.y + (i >= sceneCheckPointHit ? 0.6f * ui->current.height : 0.0f)) * FB_YRES * (1.0f / 480.0f);
-        location_rect.brx = location_rect.tlx + 0.75f * widthPerItem * FB_XRES * (1.0f / 640.0f);
-        location_rect.bry = (ui->current.y + ui->current.height) * FB_YRES * (1.0f / 480.0f);
+        location_rect.tlx = (ui->current.x + widthPerItem * i) * FB_XRES * (1.0f / SCREEN_WIDTH);
+        location_rect.tly = (ui->current.y + (i >= sceneCheckPointHit ? 0.6f * ui->current.height : 0.0f)) * FB_YRES * (1.0f / SCREEN_HEIGHT);
+        location_rect.brx = location_rect.tlx + 0.75f * widthPerItem * FB_XRES * (1.0f / SCREEN_WIDTH);
+        location_rect.bry = (ui->current.y + ui->current.height) * FB_YRES * (1.0f / SCREEN_HEIGHT);
 
         uv_rect.tlu = 0.0f;
         uv_rect.tlv = i >= sceneCheckPointHit ? 0.75f : 1.0f;

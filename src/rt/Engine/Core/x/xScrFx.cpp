@@ -259,7 +259,7 @@ void xScrFxLetterboxReset()
 
 void xScrFxLetterBoxSetSize(F32 size)
 {
-    F32 fNormalValue = size / 480.0f;
+    F32 fNormalValue = size / SCREEN_HEIGHT;
 
     sLetterBoxSize = fNormalValue * FB_YRES;
 }
