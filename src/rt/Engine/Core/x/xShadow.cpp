@@ -365,7 +365,7 @@ void xShadowReceiveShadow(xEnt* ent, F32 shadowFactor, S32 shadowMode, RwMatrix*
             xprintf("ent shadow %s type %d\n", xSTAssetName(ent->id), ent->baseType);
         }
 
-        S32 fogstate;
+        RwBool fogstate;
 
         if (shadowRast) {
             RwRenderStateSet(rwRENDERSTATETEXTURERASTER, shadowRast);
@@ -655,7 +655,7 @@ static RwCamera* ShadowCameraUpdate(RwCamera* shadowCamera, void* model, void (*
 
     RwCamera* camera = RwCameraGetCurrentCamera();
 
-    S32 fogstate;
+    RwBool fogstate;
     RwRenderStateGet(rwRENDERSTATEFOGENABLE, &fogstate);
     RwRenderStateSet(rwRENDERSTATEFOGENABLE, (void*)FALSE);
 
@@ -707,7 +707,7 @@ static RwCamera* ShadowCameraUpdatePreRendered(RwCamera* shadowCamera, void* mod
 
     RwCamera* camera = RwCameraGetCurrentCamera();
 
-    S32 fogstate;
+    RwBool fogstate;
     RwRenderStateGet(rwRENDERSTATEFOGENABLE, &fogstate);
     RwRenderStateSet(rwRENDERSTATEFOGENABLE, (void*)FALSE);
 
@@ -1602,7 +1602,7 @@ void xShadowVertical_DrawCache(xShadowCache* cache, F32 shadowFactor, F32 fadeDi
     RwMatrix* shadowMatrix;
     RwV3d scl, tr;
     xVec3 radius;
-    S32 old_zwrite, fogstate;
+    RwBool old_zwrite, fogstate;
 
     if (shadowRast) {
         RwRenderStateSet(rwRENDERSTATETEXTURERASTER, shadowRast);

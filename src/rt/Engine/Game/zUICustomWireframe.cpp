@@ -156,7 +156,7 @@ bool zUICustomWireframe::PreRender()
     }
 
     RwShadeMode oldShadeMode;
-    S32 oldAlphaEnable;
+    RwBool oldAlphaEnable;
     RwCullMode oldCullMode;
     RwRenderStateGet(rwRENDERSTATESHADEMODE, &oldShadeMode);
     RwRenderStateGet(rwRENDERSTATEVERTEXALPHAENABLE, &oldAlphaEnable);

@@ -123,7 +123,7 @@ void xScrFxDrawBox(F32 x1, F32 y1, F32 x2, F32 y2, U8 red, U8 green, U8 blue, U8
         RwIm2DVertexSetScreenZ(&v[2], farz);
         RwIm2DVertexSetScreenZ(&v[3], farz);
 
-        S32 old_z_write;
+        RwBool old_z_write;
         RwRenderStateGet(rwRENDERSTATEZWRITEENABLE, &old_z_write);
 
         xRenderStateZModesSet(TRUE, FALSE);

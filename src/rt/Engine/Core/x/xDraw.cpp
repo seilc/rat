@@ -186,7 +186,7 @@ void xDrawLine2D(F32 x1, F32 y1, F32 x2, F32 y2)
     RwReal rcz = 1.0f / RwCameraGetNearClipPlane(RwCameraGetCurrentCamera());
 
     RwRaster* raster;
-    S32 vae;
+    RwBool vae;
     RwRenderStateGet(rwRENDERSTATETEXTURERASTER, &raster);
     RwRenderStateGet(rwRENDERSTATEVERTEXALPHAENABLE, &vae);
 
@@ -920,7 +920,7 @@ namespace {
 
 void xDrawCard(RwRaster* raster, const xFRect& src_rect, const xFRect& dst_rect, bool zwrite)
 {
-    S32 old_filter, old_wrap, old_fog, old_cull, old_zwrite, old_ztest, old_vertalpha, old_shademode;
+    RwInt32 old_filter, old_wrap, old_fog, old_cull, old_zwrite, old_ztest, old_vertalpha, old_shademode;
     RwBlendFunction old_srcblend, old_destblend;
 
     RwRenderStateGet(rwRENDERSTATETEXTUREFILTER, &old_filter);

@@ -127,7 +127,7 @@ void iDrawEnd()
     if (gNumShadedVerts < 3)
         return;
 
-    S32 cullstate, ztest;
+    RwInt32 cullstate, ztest;
     RwRenderStateGet(rwRENDERSTATECULLMODE, &cullstate);
     RwRenderStateGet(rwRENDERSTATEZTESTENABLE, &ztest);
     RwRenderStateSet(rwRENDERSTATECULLMODE, (void*)rwCULLMODECULLNONE);

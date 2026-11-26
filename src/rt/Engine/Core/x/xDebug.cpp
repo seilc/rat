@@ -1706,14 +1706,14 @@ void xDebugTimestampScreen()
 #if DEBUG || RELEASE
 struct OldRenderState
 {
-    S32 fogenable;
-    S32 vertexalphaenable;
-    S32 zwriteenable;
-    S32 ztestenable;
-    S32 cullmode;
+    RwBool fogenable;
+    RwBool vertexalphaenable;
+    RwBool zwriteenable;
+    RwBool ztestenable;
+    RwInt32 cullmode;
     RwBlendFunction srcblend;
     RwBlendFunction destblend;
-    U32 shademode;
+    RwUInt32 shademode;
     RwTextureFilterMode filter;
 };
 
