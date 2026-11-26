@@ -47,6 +47,9 @@ public:
     virtual relative_ordering* get_ordering(S32& size, S32) { size = 0; return NULL; }
     virtual S32 get_asset_size() const = 0;
 
+    template <class T>
+    inline void update_generators(F32 dt);
+
 #if DEBUG || RELEASE
     zParticleSystem(S32 type, S32 need, const char* name) : type(type), need(need), name(name) {}
     virtual void add_tweaks(const char* prefix) {}
@@ -87,7 +90,7 @@ struct zParticleGenerator : xBase
     static void on_tweaked(const tweak_info& info);
     virtual void add_tweaks(const char* prefix);
     virtual void debug_render(bool all);
-    virtual void asset_tweaked(const zParticleAsset& asset);
+    virtual void asset_tweaked(const zParticleAsset& asset) {}
 
 protected:
     char tweakPrefix[128];
@@ -98,5 +101,37 @@ private:
     debug_info* debug;
 #endif
 };
+
+template <class T>
+inline void zParticleSystem::update_generators(F32 dt)
+{
+    T** it = (T**)generators, **end_it = it + generators_size;
+    for (; it != end_it; it++) {
+        T& gen = **it;
+        if (!(gen.flags & 0x1)) {
+            continue;
+        }
+
+        bool cullUpdate = gen.cullUpdate();
+        S32 isRunning = gen.flags & 0x2;
+
+        if (gen.lifetime > 0.0f) {
+            gen.lifetime -= dt;
+            if (gen.lifetime <= 0.0f) {
+                gen.deactivate(NULL);
+                continue;
+            }
+        }
+
+        if (cullUpdate && isRunning)
+            gen.pause();
+        else if (!cullUpdate && !isRunning)
+            gen.resume();
+
+        if (gen.flags & 0x2) {
+            gen.update(dt);
+        }
+    }
+}
 
 #endif

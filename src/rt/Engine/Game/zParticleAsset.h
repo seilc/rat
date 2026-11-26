@@ -21,6 +21,16 @@ struct zParticleAsset : xDynAsset
         MAX_SYSTEM
     };
 
+    enum volume_type_enum
+    {
+        VOLUME_POINT,
+        VOLUME_SPHERE,
+        VOLUME_CIRCLE,
+        VOLUME_LINE,
+        VOLUME_MODEL,
+        VOLUME_BOX
+    };
+
     struct attach_fixed_data
     {
     };

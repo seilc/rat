@@ -84,7 +84,42 @@ struct ptank_pool__color_mat : ptank_pool
     xMat4x3* mat;
     RwInt32 stride_color;
     RwInt32 stride_mat;
+
+    void next()
+    {
+        if (used >= BLOCK_SIZE) {
+            if (valid()) {
+                unlock_block();
+            }
+            grab_block(PGT_COLOR_MAT);
+            if (!valid()) {
+                return;
+            }
+            lock_block();
+        } else {
+            color = (xColor*)((U8*)color + stride_color);
+            mat = (xMat4x3*)((U8*)mat + stride_mat);
+        }
+
+        used++;
+    }
+
+    void lock_block()
+    {
+        used = 0;
+
+        RpPTankLockStruct ls_color, ls_mat;
+        RpPTankAtomicLock(ptank, &ls_color, rpPTANKLFLAGCOLOR, rpPTANKLOCKWRITE);
+        RpPTankAtomicLock(ptank, &ls_mat, rpPTANKLFLAGMATRIX, rpPTANKLOCKWRITE);
+
+        color = (xColor*)ls_color.data;
+        mat = (xMat4x3*)ls_mat.data;
+        stride_color = ls_color.stride;
+        stride_mat = ls_mat.stride;
+    }
 };
+
+#define FPTANK_FIELDS_color_mat(F) F(xColor, color) F(xMat4x3, mat)
 
 struct ptank_pool__color_mat_uv2 : ptank_pool
 {
@@ -356,6 +391,34 @@ struct ptank_pool__pos_color_size_rot_uv2 : ptank_pool
         stride_uv = ls_uv.stride;
     }
 };
+
+#define _FPTANK_BIND(T, f) T* pool_##f = _fptank_pool.f;
+#define _FPTANK_LOAD(T, f) pool_##f = _fptank_pool.f;
+#define _FPTANK_STEP(T, f) pool_##f = (T*)((U8*)pool_##f + _fptank_pool.stride_##f);
+#define _FPTANK_STORE(T, f) _fptank_pool.f = pool_##f;
+
+#define FPTANK_BEGIN(type, apool)                                                                 \
+    ptank_pool__##type& _fptank_pool = (ptank_pool__##type&)(apool);                              \
+    S32 _fptank_used = _fptank_pool.used;                                                         \
+    FPTANK_FIELDS_##type(_FPTANK_BIND)
+
+#define FPTANK_NEXT(type)                       \
+    if (_fptank_used >= BLOCK_SIZE) {           \
+        _fptank_pool.used = _fptank_used;       \
+        _fptank_pool.next();                    \
+        _fptank_used = _fptank_pool.used;       \
+        FPTANK_FIELDS_##type(_FPTANK_LOAD)      \
+        if (!_fptank_pool.valid()) {            \
+            break;                              \
+        }                                       \
+    } else {                                    \
+        _fptank_used++;                         \
+        FPTANK_FIELDS_##type(_FPTANK_STEP)      \
+    }
+
+#define FPTANK_END(type)                        \
+    _fptank_pool.used = _fptank_used;           \
+    FPTANK_FIELDS_##type(_FPTANK_STORE)
 
 void xPTankPoolSceneEnter();
 void xPTankPoolSceneExit();

@@ -34,6 +34,16 @@ public:
 #endif
 };
 
+#if DEBUG || RELEASE
+#define xPARTICLEBATCHGROUP_CREATE_SYSTEM_L(group, system, line) (group).create_system((system), __FILE__, (line))
+#define xPARTICLEBATCHGROUP_CREATE_SYSTEM_NAMED(group, system, name) (group).create_system((system), (name), 0)
+#else
+#define xPARTICLEBATCHGROUP_CREATE_SYSTEM_L(group, system, line) (group).create_system((system))
+#define xPARTICLEBATCHGROUP_CREATE_SYSTEM_NAMED(group, system, name) (group).create_system((system))
+#endif
+
+#define xPARTICLEBATCHGROUP_CREATE_SYSTEM(group, system) xPARTICLEBATCHGROUP_CREATE_SYSTEM_L(group, system, __LINE__)
+
 void xParticleBatchSceneEnter();
 void xParticleBatchSceneExit();
 void xParticleBatchReset();
