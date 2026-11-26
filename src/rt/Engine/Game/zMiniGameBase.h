@@ -8,6 +8,31 @@
 struct xMat3x3;
 struct xMat4x3;
 struct xVec3;
+struct xModelInstance;
+
+class zMiniGameObject
+{
+protected:
+    xModelInstance* model;
+    S32 objectType;
+    bool active;
+
+public:
+    zMiniGameObject* next;
+
+    virtual void Init(void* data) = 0;
+    virtual void Update(F32 dt) = 0;
+    virtual void Render() = 0;
+
+    virtual void Kill()
+    {
+        active = false;
+    }
+
+    bool IsActive() { return active; }
+
+    virtual F32 GetRadius() { return 0.0f; }
+};
 
 class zMiniGameBase : public xBase
 {

@@ -138,6 +138,10 @@ struct zPlayer : zEnt
 
     bool Get_collisionOn() const { return (zPlayerFlags >> 3) & 0x1; }
 
+    void Update_Control();
+
+    U32 GetControlOff() const { return controlOff; }
+
     zPad* GetPad()
     {
         return pad;

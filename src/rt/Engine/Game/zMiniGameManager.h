@@ -21,6 +21,8 @@ public:
         currentGame = NULL;
     }
 
+    zMiniGameBase* GetCurrentGame() const { return currentGame; }
+
     static void Startup();
     static void SceneInit();
 
