@@ -70,6 +70,7 @@ typedef U32(*xEntCollisDepenQueryCallback)(xEnt*, xEnt*, xScene*, F32, xCollis*)
 #define k_XENT_COLLTYPE_PC ((U8)(1 << (4)))
 #define k_XENT_COLLTYPE_INHIBIT ((U8)(1 << (5)))
 #define k_XENT_COLLTYPE_ENV ((U8)(1 << (6)))
+#define k_XENT_COLLTYPE_UNK_0x80 ((U8)(1 << (7)))
 
 // xEnt::collLev
 #define k_XENT_COLLLEV_FASTEST 0
