@@ -9,7 +9,9 @@ class xtextbox;
 class zUIText : public zUI
 {
 public:
-    virtual U32 GetSortKey() const;
+    zUITextAsset* GetAsset() const { return (zUITextAsset*)zUI::GetAsset(); }
+
+    virtual U32 GetSortKey() const { return GetAsset()->textID; }
     virtual bool IsUIText() { return true; }
     virtual void DoInit();
     virtual void DoReset();
@@ -27,11 +29,13 @@ public:
 
 private:
     xColor shadowColor;
-    const char* text;
-    bool cached;
-    bool clearLayoutCache;
+    mutable const char* text;
+    mutable bool cached;
+    mutable bool clearLayoutCache;
 };
 
 void zUIText_Init(xBase& data, xDynAsset& asset, size_t);
+void zUIText_Init(zUIText* text, zUITextAsset* asset);
+void zUITextInitSystem();
 
 #endif
