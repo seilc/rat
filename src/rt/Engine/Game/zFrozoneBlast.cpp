@@ -197,7 +197,7 @@ S32 zFrozoneBlast::createParticleSystem(S32 oldSystemId, U32, U32 srcBlend, U32 
     system.rs.texture = texture ? (RwTexture*)xSTFindAsset(texture, NULL) : NULL;
     system.rs.src_blend = srcBlend;
     system.rs.dst_blend = dstBlend;
-    system.rs.flags = 4;
+    system.rs.flags = ptank_pool::FLAG_ORDERED;
     system.order_group = 'HOBO';
     system.order_index = 7;
     system.stride = stride;

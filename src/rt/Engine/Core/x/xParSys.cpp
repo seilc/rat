@@ -116,14 +116,14 @@ static void par_sprite_update(xParSys& sys, xParGroup& group)
     pool.reset();
 
     if (sys.tasset->parFlags & 0x80) {
-        pool.rs.flags |= 0x4;
+        pool.rs.flags |= ptank_pool::FLAG_ORDERED;
         pool.order_index = sys.tasset->priority;
         pool.order_group = 'HOBO';
     }
 
     S32 min_alpha;
     if (sys.tasset->parFlags & 0x100) {
-        pool.rs.flags |= 0x8;
+        pool.rs.flags |= ptank_pool::FLAG_BRIGHT;
         min_alpha = xFXHighDynamicRangeGetBackgroundGlow();
     } else {
         min_alpha = 0;
