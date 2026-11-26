@@ -47,7 +47,11 @@ public:
     virtual void RenderToBuckets() {}
     virtual void RenderAlphaLayer(zLayerType) {}
     virtual void ModulePrepUse() {}
+#if DEBUG || RELEASE
     virtual void AddModuleTweaks() {}
+#else
+    void AddModuleTweaks() {}
+#endif
 
     static void Mgr_Startup();
     static void Mgr_Shutdown();
@@ -65,8 +69,14 @@ public:
     static void Mgr_RenderToBuckets();
     static void Mgr_RenderLayer(zLayerType endLayer);
     static void Mgr_RenderDone();
+
+    friend S32 OrdComp_updatePriority(void* vkey, void* vitem);
+    friend S32 OrdComp_renderPriority(void* vkey, void* vitem);
+    friend void zModuleMgr_RegisterModule(zModule* mod, S32 moduleID, const char* moduleName, enModulePriority updPriority, enModulePriority rendPriority);
 };
 
+S32 OrdComp_updatePriority(void* vkey, void* vitem);
+S32 OrdComp_renderPriority(void* vkey, void* vitem);
 void zModuleMgr_RegisterModule(zModule* mod, S32 moduleID, const char* moduleName, enModulePriority updPriority, enModulePriority rendPriority);
 
 #endif
