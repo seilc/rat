@@ -16,6 +16,11 @@ struct zCamPlayer : xCam
         F32 pitch_offset;
     };
 
+    void set_rest(const rest_config& cfg, bool lazy, F32 blend_time);
+    void set_rest_dist(F32 dist, bool lazy, F32 blend_time);
+    F32 get_rest_dist_default() const;
+    void get_rest_default(rest_config& cfg) const;
+
 private:
     struct target_traits
     {
