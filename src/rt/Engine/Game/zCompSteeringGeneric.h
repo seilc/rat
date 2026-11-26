@@ -34,6 +34,10 @@ class zCompSteeringGenericParams : public zCompParameters
 public:
     zCompSteeringGenericParams() { SetDefaults(); }
 
+#if RELEASE
+    void AddTweaks(const char* parentName, const char* branchName);
+#endif
+
     F32 maxAcc;
     F32 maxSpeed;
     F32 turnSpringK;
