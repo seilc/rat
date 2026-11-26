@@ -5,6 +5,8 @@
 
 struct zHeistDistractionObjectAsset : zTriggerInteractionAsset
 {
+    enum { VERSION = 2 };
+
     U32 enemyToDistractId;
     U32 distractionPointId;
     F32 distractionTime;

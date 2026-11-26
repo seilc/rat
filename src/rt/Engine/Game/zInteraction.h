@@ -28,15 +28,17 @@ protected:
     bool available;
 
 public:
-    inline virtual void Start(zCommonPlayer* player);
+    virtual void Start(zCommonPlayer* player) { interactingPlayer = player; }
     virtual void Stop();
-    inline virtual void Ready();
+    virtual void Ready() {}
 };
 
 class zTriggerInteraction : public zInteraction
 {
 public:
     zTriggerInteraction(zTriggerInteractionAsset* theAsset);
+    void Reset();
+    bool StartInteracting(zCommonPlayer* player);
 
 protected:
     F32 logoAlpha;
