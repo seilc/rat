@@ -59,6 +59,8 @@ public:
     void SetCurrentAction(zPlayerAction* newCurrentAction);
     void Init(U32 actionCount);
     void Add(zPlayer* player, zPlayerAction* action);
+    void Setup();
+    void Reset();
 
 protected:
     zPlayerAction** actionList;

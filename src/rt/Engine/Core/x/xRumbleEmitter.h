@@ -59,6 +59,17 @@ struct effect : emitterBase
 #endif
 };
 
+struct compositeEffect : emitterBase
+{
+    effectAsset asset;
+
+    compositeEffect()
+    {
+        pEffectAsset = &asset;
+        memset(&asset, 0, sizeof(asset));
+    }
+};
+
 struct boxEmitterAsset : xDynAsset
 {
     enum { VERSION = 1 };

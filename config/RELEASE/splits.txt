@@ -6206,7 +6206,7 @@ rt/Engine/Game/zMiniGameDefendTheBase.cpp:
 	.ctors      start:0x803A56D0 end:0x803A56D4
 	.rodata     start:0x80406910 end:0x80406D58
 	.data       start:0x80446FF0 end:0x804470A8
-	.bss        start:0x80BD0630 end:0x80BD1E30
+	.bss        start:0x80BD0630 end:0x80BD1E30 align:16
 	.sdata      start:0x80C05DC8 end:0x80C05E00
 	.sbss       start:0x80C094D8 end:0x80C09500
 	.sdata2     start:0x80C0EBA8 end:0x80C0EBB8

@@ -122,6 +122,10 @@ struct zPlayer : zEnt
 
     S32 GetCollisionSpheres(const xSphere** sphereArray);
     S32 GetCameraFocus();
+    xVec3 get_bone_world_position(S32 bone);
+    void UpdatePlayerDrive(F32 dt);
+    void CollideTrigger(xScene* sc);
+    void QuickCullMergeExtraSpheres();
 
     virtual bool IsInteractioning();
 
@@ -129,10 +133,15 @@ struct zPlayer : zEnt
 
     void Set_cutsceneReady() { zPlayerFlags |= (1 << 14); }
 
+    void Set_refract(bool bSet) { bSet ? (zPlayerFlags |= (1 << 7)) : (zPlayerFlags &= ~(1 << 7)); }
+    void Set_reflect(bool bSet) { bSet ? (zPlayerFlags |= (1 << 8)) : (zPlayerFlags &= ~(1 << 8)); }
+
     bool Get_cutsceneReady() const { return (zPlayerFlags >> 14) & 0x1; }
     bool Get_defeated() const { return (zPlayerFlags >> 15) & 0x1; }
 
     bool Get_humanPlayer() const { return (zPlayerFlags >> 18) & 0x1; }
+
+    bool Get_useBaseSphere() const { return (zPlayerFlags >> 22) & 0x1; }
 
     void Clear_cutsceneReady() { zPlayerFlags &= ~(1 << 14); }
 
@@ -222,8 +231,8 @@ protected:
     U32 floor_oid;
     xSurface* floor_surface;
     U32 collisionFlags;
-    bool currentIsNearLedge;
-    bool currentIsNearLedgeValid;
+    mutable bool currentIsNearLedge;
+    mutable bool currentIsNearLedgeValid;
     F32 fallingTime;
     F32 idleAnimationTimer;
     U32 lorezModelID;
