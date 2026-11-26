@@ -311,6 +311,7 @@ public:
     zCommonPlayerUpgradeLevel GetUpgradeLevel(zCommonPlayerUpgradeType forThisType);
     void GiveExperiencePoints(U32 points);
     U32 GetExperiencePoints() { return expPoints; }
+    F32 GetNoiseLevel();
 };
 
 #endif

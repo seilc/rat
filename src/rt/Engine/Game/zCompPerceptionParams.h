@@ -4,6 +4,13 @@
 #include "xDynAsset.h"
 #include "zCompParameters.h"
 
+// zCompPerceptionParams::flags
+#define k_ZCOMPPERCEPTIONPARAMS_SPHERE 0x1
+#define k_ZCOMPPERCEPTIONPARAMS_SOUND_SPHERE 0x2
+#define k_ZCOMPPERCEPTIONPARAMS_CYLINDER 0x4
+#define k_ZCOMPPERCEPTIONPARAMS_CONE 0x8
+#define k_ZCOMPPERCEPTIONPARAMS_TRI 0x10
+
 #if RELEASE
 class zCompPerceptionParams : public zCompParameters, public xDynAsset
 #else
