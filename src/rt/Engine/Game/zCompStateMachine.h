@@ -90,6 +90,8 @@ public:
 
     zCompState* GetState(S32 stateEnum) { xASSERT_L(DEBUG ? 243 : 244, stateEnum<numberOfStates); return states[stateEnum]; }
     S32 GetCurrentStateEnum();
+    void AddPushTest(S32 fromStateEnum, S32 toStateEnum, zCompStateTestFunc test, F32 testPeriod);
+    void AddPopTest(S32 fromStateEnum, zCompStateTestFunc test, F32 testPeriod);
     void SwitchState(S32 fromStateEnum, S32 toStateEnum);
     void SwitchLastState(S32 toStateEnum);
 };
