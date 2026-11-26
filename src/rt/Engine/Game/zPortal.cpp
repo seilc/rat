@@ -57,8 +57,8 @@ void zPortalEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*, 
     xASSERT_L(113, to);
 
     switch (toEvent) {
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         zPortalReset((zPortal*)to);
         break;
     case eEventTeleportPlayer:

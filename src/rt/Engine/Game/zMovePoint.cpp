@@ -93,8 +93,8 @@ void zMovePointEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
     case eEventOff:
         m->on = 0;
         break;
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         zMovePointReset(m);
         break;
     }

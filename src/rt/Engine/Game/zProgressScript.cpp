@@ -79,8 +79,8 @@ void zProgressScript_EventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*,
     xASSERT_L(259, to->baseType == eBaseTypeProgressScript);
 
     switch (toEvent) {
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
     case eEventScriptReset:
         zProgressScript_Reset(s);
         break;

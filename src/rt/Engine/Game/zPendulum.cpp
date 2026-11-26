@@ -147,8 +147,8 @@ void zPendulumEventCB(xBase*, xBase* to, U32 toEvent, const F32* toParam, xBase*
         xEntMotionStop(&pend->motion);
         break;
 
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         zPendulum_Reset(pend, globals.sceneCur);
         break;
 

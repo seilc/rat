@@ -150,8 +150,8 @@ void zEnvEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase* toParamWidge
 {
     xASSERT_L(344, to);
     switch (toEvent) {
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         zEnvReset((zEnv*)to);
         break;
 

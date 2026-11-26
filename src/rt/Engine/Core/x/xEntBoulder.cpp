@@ -685,8 +685,8 @@ void xEntBoulderEventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam,
     case eEventCameraCollideOff:
         zCollGeom_CamDisable(s);
         break;
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         xEntBoulder_Reset(s, globals.sceneCur);
         if (xEntIsVisible(s)) {
             s->update = (xEntUpdateCallback)xEntBoulder_Update;
@@ -1008,8 +1008,8 @@ void xBoulderGenerator_EventCB(xBase*, xBase* to, U32 toEvent, const F32* toPara
 
         xBoulderGenerator_Launch(bg, &pnt, toParam[0]);
         break;
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         xBoulderGenerator_Reset(bg);
         break;
     default:

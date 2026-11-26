@@ -196,8 +196,8 @@ void xParEmitterEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32)
     xASSERT_L(375, to);
 
     switch (toEvent) {
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         xParEmitterReset(t);
         break;
     case eEventOn:

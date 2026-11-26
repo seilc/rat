@@ -184,8 +184,8 @@ void zConditionalEventCB(xBase*, xBase* to, U32 toEvent, const F32*, xBase*, U32
     case eEventFalse:
         break;
 
-    case eEventDebugReset:
     case eEventReset:
+    case eEventDebugReset:
         zConditionalReset(t);
         break;
     }
