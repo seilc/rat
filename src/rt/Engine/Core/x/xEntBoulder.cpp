@@ -64,7 +64,7 @@ void xEntBoulder_Render(xEnt* ent)
         return;
     }
 
-    if (ent->flags & 0x20) {
+    if (ent->flags & k_XENT_NO_SHADOW) {
         xModelRender(model);
     } else {
         S32 shadowResult;

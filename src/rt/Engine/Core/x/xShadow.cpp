@@ -1954,7 +1954,7 @@ void xShadowManager_PreRender()
         sMgrList[i].preRenderedSlot = currPreRenderedSlot++;
 
         xEnt* ent = sMgrList[i].ent;
-        if (ent->flags & 0x20) {
+        if (ent->flags & k_XENT_NO_SHADOW) {
             continue;
         }
 
@@ -2113,7 +2113,7 @@ void xShadowManager_Render()
 
     for (i = 0; i < sMgrCount; i++) {
         xEnt* ent = sMgrList[i].ent;
-        if (ent->flags & 0x20) {
+        if (ent->flags & k_XENT_NO_SHADOW) {
             continue;
         }
 

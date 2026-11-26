@@ -1137,7 +1137,7 @@ void xEntRender(xEnt* ent)
 
     ent->isCulled = 0;
 
-    if (ent->baseType == eBaseTypePlayer || (ent->baseType == eBaseTypeNPCEntity && !(ent->flags & 0x20))) {
+    if (ent->baseType == eBaseTypePlayer || (ent->baseType == eBaseTypeNPCEntity && !(ent->flags & k_XENT_NO_SHADOW))) {
         S32 shadowOutside;
         xVec3 shadVec;
         shadVec.x = ((xMat4x3*)ent->model->Mat)->pos.x;
@@ -1172,7 +1172,7 @@ void xEntRender(xEnt* ent)
 #endif
 
 shadow:
-    if ((ent->baseType == eBaseTypeNPCEntity || ent->baseType == eBaseTypePlayer) && ent->entShadow && !(ent->flags & 0x20)) {
+    if ((ent->baseType == eBaseTypeNPCEntity || ent->baseType == eBaseTypePlayer) && ent->entShadow && !(ent->flags & k_XENT_NO_SHADOW)) {
         xShadow_ListAdd(ent);
     }
 }
