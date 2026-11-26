@@ -85,8 +85,8 @@ public:
     virtual bool JumpTransitionAllowable();
     virtual bool CoverTransitionAllowable() { return true; }
     virtual bool DodgeTransitionAllowable();
-    virtual bool TreatNoEnterAsCollision();
-    virtual void NoEnterCollision(zEntTrigger*);
+    virtual bool TreatNoEnterAsCollision() { return true; }
+    virtual void NoEnterCollision(zEntTrigger*) {}
     virtual bool CanBeFrozen();
     virtual bool collisionResponse(const xVec3& current_dir, const SphereCollisionResults& scene_collide, xVec3& response_dpos, bool);
     virtual void registerCollision(const SphereCollisionResults& scene_collide);

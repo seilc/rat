@@ -191,7 +191,7 @@ public:
     virtual bool punchable();
     virtual bool Freeze(F32 intensity);
     virtual void culling_changed();
-    virtual F32 GetMeshCircleRadius();
+    virtual F32 GetMeshCircleRadius() { return 1.0f; }
     virtual U8 get_target_priority() const;
     virtual zCombatDamageInfo* GetCurrentCombatInfo() const;
     virtual void SetCurrentCombatInfo(zCombatDamageInfo* info);

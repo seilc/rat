@@ -37,6 +37,11 @@ struct xEntFrame
         return dpos;
     }
 
+    void setDpos(const xVec3& val)
+    {
+        dpos = val;
+    }
+
     xVec3& setDpos()
     {
         return dpos;

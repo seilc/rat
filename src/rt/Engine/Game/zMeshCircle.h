@@ -50,10 +50,20 @@ public:
         center2.assign(position.x, position.z);
     }
 
+    void SetRadius(F32 newRadius)
+    {
+        radius = newRadius;
+        radius2 = radius * radius;
+    }
+
     const xVec3& GetCenter() const
     {
         return center;
     }
+
+    F32 GetRadius() const { return radius; }
+
+    xNavigationMeshAsset* GetMesh() const { return mesh; }
 };
 
 #endif

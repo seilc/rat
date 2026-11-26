@@ -29,6 +29,12 @@ struct zEntTrigger : zEnt
     xTriggerAsset& Asset() const;
 };
 
+class zSpecialTriggersTree
+{
+public:
+    static zEntTrigger* IntersectingSphere(const xVec3& pos, F32 radius, U16 triggerFilter, U16 entFilter);
+};
+
 #if DEBUG || RELEASE
 void zEntTriggerDebugDraw(xBase* btrig);
 #endif
