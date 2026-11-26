@@ -836,7 +836,7 @@ namespace {
             return &values[selected];
         }
 
-        U8 expanded(const char* name); // UNUSED
+        bool expanded(const char* name); // UNUSED
 
         tweak_info* get_parent(const tweak_info& info)
         {
@@ -2014,7 +2014,7 @@ namespace {
             return true;
         }
 
-        U8 is_hidden(const value_type& v); // UNUSED
+        bool is_hidden(const value_type& v); // UNUSED
 
         bool move_up()
         {

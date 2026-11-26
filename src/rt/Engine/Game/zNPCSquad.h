@@ -16,7 +16,7 @@ public:
     void Reset(); // UNUSED
     U8 Add(zNPC::zNPCCommon* addMember); // UNUSED
     U8 Delete(zNPC::zNPCCommon* delMember); // UNUSED
-    U8 IsMember(zNPC::zNPCCommon* isMember); // UNUSED
+    bool IsMember(zNPC::zNPCCommon* isMember); // UNUSED
 
 protected:
     S32 totalMembers;

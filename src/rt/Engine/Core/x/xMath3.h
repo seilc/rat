@@ -224,7 +224,7 @@ void xConicGetCenter(F32& cx, F32& cy, F32& rangex, xConic* conic); // UNUSED
 F32 xMoment_BoxSolid(xBox* box, xMat4x3* mat, F32 mass, xVec3* axis, xVec3* point); // UNUSED
 F32 xMoment_SphereSolid(xSphere* sphere, F32 mass, xVec3*, xVec3* point); // UNUSED
 bool xVec3Eq(const xVec3& a, const xVec3& b, F32 tol);
-U8 xMat4x3Eq(const xMat4x3& a, const xMat4x3& b, F32 tol); // UNUSED
+bool xMat4x3Eq(const xMat4x3& a, const xMat4x3& b, F32 tol); // UNUSED
 void xSphereRandomPointOnSphere(const xSphere* sphere, xVec3& pt); // UNUSED
 void randomPointOnSphere(xVec3& pt); // UNUSED
 

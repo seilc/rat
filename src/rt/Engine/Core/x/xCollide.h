@@ -107,14 +107,14 @@ void xCollisTranslate(xCollis* c, const xVec3* v, F32 r); // UNUSED
 void xCollisTranslate(xCollis* c, F32 x, F32 y, F32 z, F32 r); // UNUSED
 void xCollideCalcTri(xCollis::tri_data& tri, const xModelInstance& model, const xVec3& center, const xVec3& heading);
 xVec3 xCollisTriHit(const xCollis::tri_data& tri, const xModelInstance& model);
-U8 xSphereHitsCapsule(const xVec3& center, F32 radius, const xVec3& v1, const xVec3& v2, F32 width); // UNUSED
+bool xSphereHitsCapsule(const xVec3& center, F32 radius, const xVec3& v1, const xVec3& v2, F32 width); // UNUSED
 bool xSphereHitsBox(const xVec3& c, F32 r, const xBox& b);
 bool xOBBHitsOBB(const xBox& a, const xMat4x3& amat, const xBox& b, const xMat4x3& bmat);
 bool xSphereHitsVCylinder(const xVec3& sc, F32 sr, const xVec3& cc, F32 cr, F32 ch);
 U32 xSphereHitsVCylinder(const xSphere* sph, const xCylinder* cyl, xCollis* coll);
 U32 xCylinderHitsSphere(const xCylinder* cyl, const xSphere* sph, xCollis* coll);
 bool xSphereHitsVCircle(const xVec3& sc, F32 sr, const xVec3& cc, F32 cr);
-U8 xSphereHitsCone(const xVec3& scenter, F32 sradius, const xVec3& kvert, const xVec3& kaxis, F32 krsin, F32 kcos2, F32 ksin2); // UNUSED
+bool xSphereHitsCone(const xVec3& scenter, F32 sradius, const xVec3& kvert, const xVec3& kaxis, F32 krsin, F32 kcos2, F32 ksin2); // UNUSED
 bool xSphereHitsCone(const xVec3& center, F32 radius, const xVec3& kv0, F32 kr0, const xVec3& kv1, F32 kr1);
 void xBoxForTriangle(xBox& box, const xVec3& p0, const xVec3& p1, const xVec3& p2);
 void xBoxForModel(xBox& o, const xModelInstance* m, bool childModels);

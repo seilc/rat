@@ -126,7 +126,7 @@ void xDebugExpandTweak(const char* name);
 void xDebugCollapseTweak(const char* name); // UNUSED
 tweak_info* xDebugGetSelectedTweak();
 bool xDebugTweakSelected(const char* name);
-U8 xDebugTweakExpanded(const char* name); // UNUSED
+bool xDebugTweakExpanded(const char* name); // UNUSED
 
 void xDebugAddTweak(const char* name, S32* v, S32 vmin, S32 vmax, const tweak_callback* cb, void* context, U32 flags);
 void xDebugAddTweak(const char* name, S16* v, S16 vmin, S16 vmax, const tweak_callback* cb, void* context, U32 flags);
