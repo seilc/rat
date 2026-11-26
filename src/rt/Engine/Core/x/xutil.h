@@ -3,6 +3,7 @@
 
 #include "xDebug.h"
 #include "xMath.h"
+#include "xRand.h"
 
 #define IDTAG(a,b,c,d) (((U32)(a)<<24)|((U32)(b)<<16)|((U32)(c)<<8)|((U32)(d)))
 #define ARRAY_LENGTH(a) (sizeof(a) / sizeof(a[0]))
@@ -47,6 +48,44 @@ void isort_float(void* base, size_t num, size_t width, size_t key_offset);
 void isort_str(void* base, size_t num, size_t width, size_t key_offset); // UNUSED
 void isort_istr(void* base, size_t num, size_t width, size_t key_offset); // UNUSED
 void xTouchObject(void*); // UNUSED
+
+template <class T>
+static inline T xUtil_choose(const T* list, S32 cnt, const F32* wts)
+{
+    xASSERT_L(235, cnt>0);
+    xASSERT_L(236, list);
+    if (!list) {
+        return 0;
+    }
+    if (cnt < 1) {
+        return 0;
+    }
+
+    S32 idx = 0;
+    F32 pt = xurand();
+
+    if (!wts) idx = pt * cnt;
+    else {
+        F32 hi = 0.0f;
+        for (S32 i = 0; i < cnt; i++) {
+            xVALIDATE_L(251, wts[i]>0.0f);
+            F32 lo = hi;
+            hi += wts[i];
+            if (pt >= lo && pt <= hi) {
+                idx = i;
+                break;
+            }
+        }
+    }
+
+    if (idx >= cnt) {
+        idx = cnt - 1;
+    }
+    if (idx < 0) {
+        idx = 0;
+    }
+    return list[idx];
+}
 
 template <class T, class V, class C>
 T binary_find(T first, T last, const V& value, C cmp)
