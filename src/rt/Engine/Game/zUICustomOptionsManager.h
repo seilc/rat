@@ -11,6 +11,12 @@ class zUICustomOptionsManager : public zUICustom
 public:
     zUICustomOptionsManager(zUI* ui);
 
+    virtual void Init();
+    virtual bool HandleEvent(xBase* from, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID);
+    virtual void PreUpdate(F32 dt);
+
+    void AdjustScreenOnOff();
+
     F32 musicVolume;
     F32 sfxVolume;
     S32 soundMode;
@@ -24,5 +30,11 @@ protected:
     zUIBox* optionVibP1Box;
     zUIBox* optionVibP2Box;
 };
+
+extern bool inOverlayScreen;
+extern F32 inOverlayScreenExitTimer;
+
+bool zUICustomOptionsScreenIsInSystemMessage();
+void zUICustomOptionsScreenAdjust(bool value);
 
 #endif

@@ -179,4 +179,9 @@ inline void xSndSetMode(xSndMode mode)
     iSndSetMode();
 }
 
+inline S32 xSndGetMode()
+{
+    return gSnd.sndMode;
+}
+
 #endif

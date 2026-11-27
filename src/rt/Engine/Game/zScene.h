@@ -72,6 +72,9 @@ bool zSceneLoadPackFile(U32 id, S32 options, bool noLocalized, const char* filen
 bool zSceneUpdateAsset(xBase& sceneObject, void* asset, U32 assetSize);
 const char* zSceneGetName(xBase* b);
 void zSceneForAllBase(zSceneCallback func, S32 baseType, void* data);
+void zScene_ScreenAdjustMode_SetMenuOffset();
+bool zScene_ScreenAdjustMode_WasAdjusted();
+void zSceneResetScreenAdj();
 U32 zScene_ScreenAdjustMode();
 void zSceneRender();
 #if DEBUG || RELEASE
