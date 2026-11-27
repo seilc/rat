@@ -134,6 +134,7 @@ struct zPlayer : zEnt
 
     bool CanSayOneLiner(); // UNUSED
 
+    void Set_gravityDisabled() { zPlayerFlags |= (1 << 4); }
     void Set_cutsceneReady() { zPlayerFlags |= (1 << 14); }
 
     void Set_refract(bool bSet) { bSet ? (zPlayerFlags |= (1 << 7)) : (zPlayerFlags &= ~(1 << 7)); }
@@ -146,6 +147,7 @@ struct zPlayer : zEnt
 
     bool Get_useBaseSphere() const { return (zPlayerFlags >> 22) & 0x1; }
 
+    void Clear_gravityDisabled() { zPlayerFlags &= ~(1 << 4); }
     void Clear_cutsceneReady() { zPlayerFlags &= ~(1 << 14); }
 
     bool Get_floor_collision() const { return (zPlayerFlags >> 1) & 0x1; }

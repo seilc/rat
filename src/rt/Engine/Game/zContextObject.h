@@ -38,6 +38,7 @@ public:
 #endif
     static bool MoveTowardsMountPoint(xEntFrame* frame, const xVec3& mountPoint);
     static bool MatchOrientation(xEntFrame* frame, const xVec3& orientation, F32 dt, bool forward);
+    static bool MatchOrientation(xEntFrame* frame, F32 targetAngle, F32 dt);
     static F32 GetPriority(F32 distance2) { return distance2; }
 
     virtual bool Mount(zCommonPlayer* player, MountData& mountData, F32 dt) = 0;

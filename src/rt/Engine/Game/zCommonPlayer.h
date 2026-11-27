@@ -311,6 +311,9 @@ public:
     void SetModelAlpha(F32 alpha);
     void SetExternalColorControl(bool set);
     void StartFadeIn();
+    void HandleControl(F32 dt);
+    void HandleMovement(xScene*, F32 dt, xEntFrame* frame);
+    void DoCollision(F32 dt);
     zCommonPlayerUpgradeLevel GetUpgradeLevel(zCommonPlayerUpgradeType forThisType);
     void GiveExperiencePoints(U32 points);
     U32 GetExperiencePoints() { return expPoints; }
