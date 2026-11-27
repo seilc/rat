@@ -3,6 +3,8 @@
 
 #include "xMath3.h"
 
+struct ptank_pool;
+
 namespace zFX
 {
 
@@ -34,10 +36,30 @@ public:
         xVec3 velocity_dir_scale;
     };
 
+    struct particle
+    {
+        xVec3 pos;
+        F32 size;
+        xVec3 vel;
+        F32 life;
+        F32 rot;
+        F32 rot_delta;
+        S32 texture_index;
+        config* cfg;
+    };
+
+    static void setup();
+    static void scene_setup();
+    static void add_tweaks(const char* prefix, config* dust);
     static void emit(const xVec3& position, const xVec3& normal, F32& emit_remaining, const xVec3& velocity, F32 dt,
                      config* cfg, F32 velocity_scale, F32 emit_scale);
     static void emit_line(const xVec3& startPos, const xVec3& endPos, const xVec3& normal, F32& emit_remaining,
                           const xVec3& velocity, F32 dt, config* cfg); // UNUSED
+    static S32 update(U8* mem, S32 count, ptank_pool& pool_, F32 dt, void*);
+
+    static config default_config;
+    static S32 system_id;
+    static bool need_setup;
 };
 
 } // namespace zFX
