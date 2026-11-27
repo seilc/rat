@@ -24,6 +24,7 @@ public:
 
     void setup_textbox(xtextbox& tb, const zUITextAsset* asset) const;
     void SetText(const char* text) { this->text = text; }
+    void SetCached(bool value) { cached = value; }
     void SetClearLayoutCache(bool value) { clearLayoutCache = value; }
     const char* GetText() const { return text; }
 

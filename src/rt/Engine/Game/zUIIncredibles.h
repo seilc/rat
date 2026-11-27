@@ -16,5 +16,6 @@ bool zUIIncrediblesAdvanceStage();
 ePauseType zUIIncrediblesGetPauseType();
 void zUIIncrediblesSetPauseType(ePauseType type);
 U32 zUIIncrediblesGetGameProgress();
+bool zUIIncrediblesAllCompleted();
 
 #endif

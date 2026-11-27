@@ -5,6 +5,7 @@
 #include "xMath3.h"
 #include "xSnd.h"
 #include "xSndGroup.h"
+#include "xString.h"
 
 struct xEnt;
 
@@ -103,6 +104,12 @@ U32 xSndMgrGetGroupId(xSndGroupHandle hSound); // UNUSED
 U8 xSndMgrGetSoundCount(xSndGroupHandle hSound);
 U32 xSndMgrGetSoundId(xSndGroupHandle hSound, U32 uIndexOfSound);
 xSndGroupHandle xSndMgrGetSoundGroup(U32 uSoundGroupNameHash);
+
+inline xSndGroupHandle xSndMgrGetSoundGroup(char* pszSoundGroupName)
+{
+    return xSndMgrGetSoundGroup(xStrHash(pszSoundGroupName));
+}
+
 bool xSndMgrIsPlaying(xSndGroupHandle hSoundGroup);
 U8 xSndMgrGetPriority(xSndGroupHandle hSound, bool bStreaming, bool bLooping);
 xSndVoiceInfo* xSndGetFreeVoiceInfo(const xSndGroupHeader* pSnd, S32 iFlags);
