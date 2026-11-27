@@ -41,6 +41,20 @@ struct zPlayerCheckPoint
     F32 rotation;
 };
 
+// zPlayer::controlOff
+enum zControlOwner
+{
+    CONTROL_OWNER_GLOBAL = 0x1,
+    CONTROL_OWNER_EVENT = 0x2,
+    CONTROL_OWNER_OOB = 0x4,
+    CONTROL_OWNER_INTERACTION = 0x8,
+    CONTROL_OWNER_TALK_BOX = 0x10,
+    CONTROL_OWNER_BLAST_DOORS = 0x20,
+    CONTROL_OWNER_FLY_CAM = 0x200,
+    CONTROL_OWNER_TURRET = 0x800,
+    CONTROL_OWNER_REWARDANIM = 0x1000
+};
+
 struct zPlayer : zEnt
 {
     static const S32 MAX_EXTRA_SPHERES = 5;
@@ -159,6 +173,16 @@ struct zPlayer : zEnt
     bool Get_gravityDisabled() const { return (zPlayerFlags >> 4) & 0x1; }
 
     void Update_Control();
+
+    void TurnControlOn(zControlOwner owner)
+    {
+        controlOff &= ~owner;
+    }
+
+    void TurnControlOff(zControlOwner owner)
+    {
+        controlOff |= owner;
+    }
 
     U32 GetControlOff() const { return controlOff; }
 
