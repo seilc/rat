@@ -24,7 +24,7 @@ void zNPCAlarmer::CompParametersInit()
 
     sPerceptionParams.detectedUpdateFrequency = 0.0f;
     sPerceptionParams.lostUpdateFrequency = 0.0f;
-    sPerceptionParams.flags |= 0x4;
+    sPerceptionParams.flags |= k_ZCOMPPERCEPTIONPARAMS_CYLINDER;
     sPerceptionParams.cylinderR = 20.0f;
     sPerceptionParams.cylinderHUp = 10.0f;
     sPerceptionParams.cylinderHDown = 10.0f;
