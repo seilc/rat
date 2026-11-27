@@ -76,6 +76,7 @@ U32 zScene_ScreenAdjustMode();
 void zSceneRender();
 #if DEBUG || RELEASE
 U32 zSceneGetTextureTweakMap(const char**& labels, const U32*& ids);
+U32 zSceneGetAssetTweakMap(const char**& labels, const U32*& ids, U32 asset_type, U32 dyn_type);
 U32 zSceneGetTextureIDFromRaster(RwRaster* raster);
 #endif
 void zSceneSetLastSceneID(U32 value);

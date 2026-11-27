@@ -86,6 +86,9 @@ struct zPlayer : zEnt
     virtual void LoadCheckPoint();
     virtual void LoadCheckPointB(xVec3 pos, F32 ang);
     virtual void StoreCheckPoint(const zPlayerCheckPoint& theCheckPoint);
+
+    zPlayerCheckPoint& GetCheckPoint() { return checkPoint; }
+
     virtual void SetCamera();
     virtual void RenderEffects();
 
