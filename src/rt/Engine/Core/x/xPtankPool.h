@@ -392,6 +392,8 @@ struct ptank_pool__pos_color_size_rot_uv2 : ptank_pool
     }
 };
 
+#define FPTANK_FIELDS_pos_color_size_rot_uv2(F) F(xVec3, pos) F(xColor, color) F(xVec2, size) F(F32, rot) F(xVec2, uv)
+
 #define _FPTANK_BIND(T, f) T* pool_##f = _fptank_pool.f;
 #define _FPTANK_LOAD(T, f) pool_##f = _fptank_pool.f;
 #define _FPTANK_STEP(T, f) pool_##f = (T*)((U8*)pool_##f + _fptank_pool.stride_##f);
