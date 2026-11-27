@@ -754,7 +754,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zSurface.cpp"),
             GameObject(Matching, "rt/Engine/Game/zSymbol.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zTalkBox.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zTaskBox.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zTaskBox.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zTextBox.cpp"),
             GameObject(Matching, "rt/Engine/Game/zTimer.cpp"),
             GameObject(Matching, "rt/Engine/Game/zTrainCar.cpp"),
