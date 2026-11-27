@@ -188,67 +188,6 @@ struct xEnt : xBase
     void* user_data;
 };
 
-inline xVec3* xEntGetCenter(const xEnt* ent)
-{
-    return xBoundCenter(&ent->bound);
-}
-
-inline xVec3* xEntGetPos(const xEnt* ent)
-{
-    xASSERT_L(1078, ent->model);
-    return &xModelGetFrame(ent->model)->pos;
-}
-
-inline xVec3* xEntGetFacingDirection(const xEnt* ent)
-{
-    xASSERT_L(1083, ent->model);
-    return &xModelGetFrame(ent->model)->at;
-}
-
-inline xVec3* xEntGetUpDirection(const xEnt* ent)
-{
-    xASSERT_L(1088, ent->model);
-    return &xModelGetFrame(ent->model)->up;
-}
-
-inline void xEntDisable(xEnt* ent)
-{
-    xBaseDisable(ent);
-}
-
-inline U32 xEntIsEnabled(const xEnt* ent)
-{
-    return xBaseIsEnabled(ent);
-}
-
-inline void xEntVisibilityCullOn(xEnt* ent)
-{
-    ent->flags |= k_XENT_IS_VISIBILITY_CULLED;
-    if (ent->visUpdate) {
-        ent->visUpdate(ent);
-    }
-}
-
-inline void xEntVisibilityCullOff(xEnt* ent)
-{
-    ent->flags &= (U8)~k_XENT_IS_VISIBILITY_CULLED;
-    if (ent->visUpdate) {
-        ent->visUpdate(ent);
-    }
-}
-
-inline xMat4x3* xEntGetFrame(const xEnt* ent)
-{
-    xASSERT_L(1098, ent->model);
-    return xModelGetFrame(ent->model);
-}
-
-inline U32 xEntGetAnimFlags(const xEnt* ent)
-{
-    xASSERT_L(1103, ent->model != NULL && ent->model->Anim != NULL);
-    return ent->model->Anim->Single->State->UserFlags;
-}
-
 struct xEntOpacity
 {
     F32 startAlpha;
@@ -335,6 +274,67 @@ void xEntOpacityUpdate(xEntOpacity* opacity, xEnt* ent, F32 dt);
 void xEntInitShadow(xEnt& ent, xEntShadow& shadow); // UNUSED
 void xEntLoadCheckPoint();
 void xEntStoreCheckPoint();
+
+inline xVec3* xEntGetCenter(const xEnt* ent)
+{
+    return xBoundCenter(&ent->bound);
+}
+
+inline xVec3* xEntGetPos(const xEnt* ent)
+{
+    xASSERT_L(1078, ent->model);
+    return &xModelGetFrame(ent->model)->pos;
+}
+
+inline xVec3* xEntGetFacingDirection(const xEnt* ent)
+{
+    xASSERT_L(1083, ent->model);
+    return &xModelGetFrame(ent->model)->at;
+}
+
+inline xVec3* xEntGetUpDirection(const xEnt* ent)
+{
+    xASSERT_L(1088, ent->model);
+    return &xModelGetFrame(ent->model)->up;
+}
+
+inline xMat4x3* xEntGetFrame(const xEnt* ent)
+{
+    xASSERT_L(1098, ent->model);
+    return xModelGetFrame(ent->model);
+}
+
+inline U32 xEntGetAnimFlags(const xEnt* ent)
+{
+    xASSERT_L(1103, ent->model != NULL && ent->model->Anim != NULL);
+    return ent->model->Anim->Single->State->UserFlags;
+}
+
+inline void xEntDisable(xEnt* ent)
+{
+    xBaseDisable(ent);
+}
+
+inline U32 xEntIsEnabled(const xEnt* ent)
+{
+    return xBaseIsEnabled(ent);
+}
+
+inline void xEntVisibilityCullOn(xEnt* ent)
+{
+    ent->flags |= k_XENT_IS_VISIBILITY_CULLED;
+    if (ent->visUpdate) {
+        ent->visUpdate(ent);
+    }
+}
+
+inline void xEntVisibilityCullOff(xEnt* ent)
+{
+    ent->flags &= (U8)~k_XENT_IS_VISIBILITY_CULLED;
+    if (ent->visUpdate) {
+        ent->visUpdate(ent);
+    }
+}
 
 inline void xEntShow(xEnt* ent)
 {
