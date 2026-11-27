@@ -2,6 +2,7 @@
 #define ZASSETTYPES_H
 
 #include "types.h"
+#include "zBrainTypes.h"
 
 #if DEBUG || RELEASE
 extern U32 gModelReadAssetIDDebug;
@@ -10,5 +11,9 @@ extern U32 gModelReadAssetIDDebug;
 void* Spline_Read(void*, U32, void* indata, U32 insize, U32* outsize);
 void* RWTX_Read(void*, U32, void* indata, U32 insize, U32* outsize);
 void TextureRW3_Unload(void* userdata, U32);
+
+#if DEBUG || RELEASE
+const char* GetBrainName(eBrainType brainType);
+#endif
 
 #endif

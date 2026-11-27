@@ -2,6 +2,7 @@
 #define ZNPCTYPES_H
 
 #include "types.h"
+#include "zBrainTypes.h"
 
 enum en_npctyp
 {
@@ -36,5 +37,39 @@ enum eNPCType
     eNPCTypeCount,
     eNPCTypeForceInt = FORCEENUMSIZEINT
 };
+
+class zNPCBase;
+struct xAnimTable;
+struct xDynAsset;
+
+struct zNPCTypesTable
+{
+    eNPCType npcType;
+    eBrainType brainType;
+    const char* dynAssetTypeName;
+    eNPCType childrenType;
+    bool isChildNPC;
+    zNPCBase* (*allocateNPCFunction)(S32);
+    bool (*validateAssetFunction)(const xDynAsset*, U32, const char*);
+#if DEBUG || RELEASE
+    const char* name;
+#endif
+    void (*addDebugTweaksFunction)(const char*);
+    void (*createAnimTableFunction)(xAnimTable*);
+    void (*combatDamageInitFunction)();
+    void (*compParametersInitFunction)();
+    S32 (*countChildrenInAsset)(const xDynAsset*, U32, const char*);
+    void (*sceneInitFunction)();
+    void (*scenePrepareFunction)();
+    void (*sceneSetupFunction)();
+    void (*sceneResetFunction)();
+    void (*sceneExitFunction)();
+    U32 hashDynAssetTypeName;
+};
+
+zNPCTypesTable* zNPCTypes_GetTable();
+zNPCTypesTable* zNPCTypes_GetTableEntry(eNPCType npcType);
+eNPCType zNPCTypes_GetNPCType(eBrainType brainType);
+void zNPCTypes_Prepare();
 
 #endif

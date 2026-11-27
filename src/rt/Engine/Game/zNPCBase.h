@@ -74,6 +74,18 @@ public:
     zICompPerception* GetPerceptionComponent() { return npcPerceptionComp; }
     zICompSound* GetSoundComponent() { return npcSoundComp; }
 
+#if RELEASE
+    void BaseTimeStep(xVec3* cullOrigin, xScene* xscn, F32 dt);
+#else
+    void TimeStep(xVec3* cullOrigin, xScene* xscn, F32 dt);
+#endif
+    void BaseRender();
+#if RELEASE
+    void BaseReset();
+#endif
+    void SetChildren(zNPCBase* firstChildren, S32 numChildren);
+    void SetParent(zNPCBase* parent);
+
     void PreUpdateAllComponents(xScene* xscn, F32 dt);
     void PostUpdateAllComponents(xScene* xscn, F32 dt);
     void DebugRenderAllComponents();
