@@ -9,6 +9,8 @@ struct SphereCollisionResults;
 
 class zPlayerAction
 {
+    friend class zPlayerActionManager;
+
 protected:
     zPlayerActionManager* manager;
     zPlayer* player;
@@ -37,11 +39,13 @@ public:
     virtual void Render() {}
     virtual void Timestep(F32) {}
 #if DEBUG || RELEASE
-    virtual void AddTweaks();
+    virtual void AddTweaks() {}
 #endif
 
     static void AddActionTransition(xAnimTable* table, const char* source, const char* dest, xAnimTransitionCallback condition, U16 priority, F32 blend, U32 flags, U32 userFlags);
     xAnimState* NewState(xAnimTable* table, const char* name, U32 flags, U32 userFlags, F32 speed = 1.0f, F32* boneBlend = NULL, F32* timeSnap = NULL, F32 fadeRecip = 0.0f, U16* fadeOffset = NULL, xAnimBeforeEnterCallback beforeEnter = NULL, xAnimStateCallback stateCallback = NULL, xAnimBeforeAnimMatricesCallback beforeAnimMatrices = NULL);
+    void NewStateMany(xAnimTable* table, const char* name, S32 howMany, U32 flags, U32 userFlags, F32 speed, F32* boneBlend, F32* timeSnap, F32 fadeRecip, U16* fadeOffset, xAnimBeforeEnterCallback beforeEnter, xAnimStateCallback stateCallback, xAnimBeforeAnimMatricesCallback beforeAnimMatrices);
+    static U32 ActionChange(xAnimTransition* tran, xAnimSingle*, void*);
 };
 
 #define PLAYER_ACTION_CHECK_L(cls, name, line)                                                                                                      \
@@ -65,12 +69,26 @@ class zPlayerActionManager
 {
 public:
     void SetCurrentAction(zPlayerAction* newCurrentAction);
+    U32 GetCurrentActionID() const;
     void Init(U32 actionCount);
     void Add(zPlayer* player, zPlayerAction* action);
     void Setup();
     void Reset();
-    U32 GetCurrentActionID() const;
+    void BeginUpdate(F32 dt);
+    void Update(F32 dt);
+    void EndUpdate(F32 dt);
+    void Move(xScene* s, F32 dt, xEntFrame* frame);
+    void Render();
+    bool CollisionResponse(const xVec3& currentDir, const SphereCollisionResults& sceneCollide, xVec3& responseDpos);
+    void AddStates(xAnimTable* table);
+    void AddTransitions(xAnimTable* table);
+#if DEBUG || RELEASE
+    void AddTweaks();
+#endif
     void AddStandardTransitionsTo(U32 actionID, xAnimTable* table, const char* fromStates);
+    void AddTransitionsTo(U32 actionID, xAnimTable* table, const char* fromStates, U16 priority, F32 blend, U32 flags, U32 userFlags);
+    zPlayerAction* GetAction(U32 actionID);
+    zPlayerAction* GetAction(U32 actionID) const;
 
 protected:
     zPlayerAction** actionList;

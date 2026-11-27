@@ -76,7 +76,7 @@ struct zPlayer : zEnt
     virtual void EndUpdate(F32 dt);
     virtual void DefaultEndUpdate(F32 dt);
     virtual void Move(xScene* s, F32 dt, xEntFrame* frame);
-    virtual void DefaultMove(xScene* s, F32 dt, xEntFrame* frame);
+    virtual void DefaultMove(xScene*, F32, xEntFrame*) {}
     virtual void Render();
     virtual bool WasRendered() const;
     virtual void HandleEvent(xBase* from, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID);
