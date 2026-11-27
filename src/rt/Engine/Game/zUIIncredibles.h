@@ -12,7 +12,9 @@ enum ePauseType
     PAUSE_MAINMENU
 };
 
+bool zUIIncrediblesIsSceneUnlocked(S32 idx);
 bool zUIIncrediblesAdvanceStage();
+bool zUIIncrediblesAllGoalsCompleted(U32 i);
 ePauseType zUIIncrediblesGetPauseType();
 void zUIIncrediblesSetPauseType(ePauseType type);
 U32 zUIIncrediblesGetGameProgress();
