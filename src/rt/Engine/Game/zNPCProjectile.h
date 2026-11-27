@@ -18,7 +18,7 @@ class zNPCProjectile
 public:
     virtual void Freeze() = 0;
     virtual F32 GetRadius() { return 0.0f; }
-    virtual bool IsActive() const;
+    virtual bool IsActive() const { return active; }
 
 protected:
     xVec3 position;
