@@ -320,4 +320,6 @@ public:
     F32 GetNoiseLevel();
 };
 
+extern F32 CENTER_OF_MASS_HEIGHT;
+
 #endif
