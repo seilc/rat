@@ -310,6 +310,12 @@ inline void xMat3x3MulScale(xMat3x3* o, const xMat3x3* m, xVec3* s)
     return xMat3x3MulScaleC(o, m, s->x, s->y, s->z);
 }
 
+inline void xMat4x3Init(xMat4x3* m, const xVec3* _right, const xVec3* _up, const xVec3* _at, const xVec3* _pos)
+{
+    xMat3x3Init(m, _right, _up, _at);
+    xVec3Copy(&m->pos, _pos);
+}
+
 inline void xMat4x3ScaleC(xMat4x3* m, F32 x, F32 y, F32 z)
 {
     xMat3x3ScaleC(m, x, y, z);

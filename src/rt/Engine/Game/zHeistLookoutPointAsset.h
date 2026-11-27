@@ -5,6 +5,8 @@
 
 struct zHeistLookoutPointAsset : zTriggerInteractionAsset
 {
+    enum { VERSION = 3 };
+
     U32 lookAtId;
     F32 transitionTime;
     F32 fov;

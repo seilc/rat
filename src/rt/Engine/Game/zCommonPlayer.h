@@ -308,6 +308,9 @@ public:
     virtual void SavedFriend();
     virtual void SetUpgrade(zCommonPlayerUpgradeType forThisType, zCommonPlayerUpgradeLevel level);
 
+    void SetModelAlpha(F32 alpha);
+    void SetExternalColorControl(bool set);
+    void StartFadeIn();
     zCommonPlayerUpgradeLevel GetUpgradeLevel(zCommonPlayerUpgradeType forThisType);
     void GiveExperiencePoints(U32 points);
     U32 GetExperiencePoints() { return expPoints; }

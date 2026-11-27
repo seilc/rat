@@ -7,13 +7,27 @@
 #include "zInteraction.h"
 
 class zHeistManager;
+class zPad;
 
 class zHeistLookoutPoint : public zTriggerInteraction
 {
 public:
     zHeistLookoutPoint(zHeistLookoutPointAsset* theAsset);
 
+    static void Init(xBase& data, xDynAsset& asset, size_t asset_size);
+    static void UpdateHeistManager(F32 dt);
+    static void EventCB(xBase* from, xBase* to, U32 toEvent, const F32* toParam, xBase* toParamWidget, U32 toParamWidgetID);
+    void EventCB(xBase*, U32 toEvent, const F32*, xBase*, U32);
+    void Update(F32 dt);
+    static void RenderOverlays();
+    void HandleInput(zPad* currPad, F32 dt);
+    virtual void Start(zCommonPlayer* player);
+    virtual void Stop();
+    void GetLookAtVec(xVec3& inVec);
+    void GetLookFromPos(xVec3& inVec);
+
     static void SetHeistManager(zHeistManager* inManager) { heistManager = inManager; }
+    zHeistLookoutPointAsset* GetAsset() { return (zHeistLookoutPointAsset*)asset; }
 
 protected:
     static zHeistManager* heistManager;
