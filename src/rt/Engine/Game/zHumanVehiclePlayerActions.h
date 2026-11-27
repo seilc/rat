@@ -6,6 +6,20 @@
 class zHumanVehiclePlayerDrive : public zPlayerAction
 {
 public:
+    virtual void AddTransitionsFrom(xAnimTable* table, const char* fromStates, U16 priority, F32 blend, U32 flags, U32 userFlags);
+    virtual U32 GetID();
+    virtual void AddStates(xAnimTable* table);
+    virtual void AddInternalTransitions(xAnimTable* table);
+    virtual void AddActionTransitions(xAnimTable* table);
+    virtual void Reset();
+    virtual void Move(xScene* s, F32 dt, xEntFrame* frame);
+    virtual void Setup();
+    virtual void Begin();
+    virtual void End();
+#if DEBUG || RELEASE
+    virtual void AddTweaks();
+#endif
+
     static void CameraRestartHack();
 
 protected:

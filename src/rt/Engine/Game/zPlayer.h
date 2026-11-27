@@ -146,6 +146,8 @@ struct zPlayer : zEnt
     void Predict(xVec3* pos, F32 timeIntoFuture, F32 leadFactor, bool useTurn, bool useY);
     void CollideTrigger(xScene* sc);
     void QuickCullMergeExtraSpheres();
+    void GetParameterList(const char* name, F32* value, S32 count, const F32* default_value);
+    void CalcAnimSpeed(F32 mag, F32* animspeeds);
 
     virtual bool IsInteractioning();
 
@@ -154,6 +156,7 @@ struct zPlayer : zEnt
     void Set_gravityDisabled() { zPlayerFlags |= (1 << 4); }
     void Set_cutsceneReady() { zPlayerFlags |= (1 << 14); }
 
+    void Set_visible(bool bSet) { bSet ? (zPlayerFlags |= (1 << 6)) : (zPlayerFlags &= ~(1 << 6)); }
     void Set_refract(bool bSet) { bSet ? (zPlayerFlags |= (1 << 7)) : (zPlayerFlags &= ~(1 << 7)); }
     void Set_reflect(bool bSet) { bSet ? (zPlayerFlags |= (1 << 8)) : (zPlayerFlags &= ~(1 << 8)); }
 

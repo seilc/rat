@@ -43,6 +43,11 @@ public:
         return padPort;
     }
 
+    xPad* GetXPad()
+    {
+        return &mPad[padPort];
+    }
+
     zPadAnalogControl* GetAnalog1()
     {
         return &analog1;

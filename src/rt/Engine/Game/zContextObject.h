@@ -50,6 +50,7 @@ class zContextObjectManager
 {
 public:
     static void AddEntFX(xEnt* ent);
+    void Reset();
 
 protected:
     zContextObject::MountData mountData;
