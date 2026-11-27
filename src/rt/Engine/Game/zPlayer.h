@@ -114,6 +114,8 @@ struct zPlayer : zEnt
 
     zPlayerInput& GetPlayerInput() { return playerInput; }
 
+    F32 GetPredictedVelocityMag() const { return predictCurrVel; }
+
     bool CollisionOn() const { return Get_collisionOn(); }
 
     virtual bool FindShortestCollision(xSweptSphere& sws, U32& collisionFlags, S32 penby, bool);
@@ -127,6 +129,7 @@ struct zPlayer : zEnt
     S32 GetCameraFocus();
     xVec3 get_bone_world_position(S32 bone);
     void UpdatePlayerDrive(F32 dt);
+    void Predict(xVec3* pos, F32 timeIntoFuture, F32 leadFactor, bool useTurn, bool useY);
     void CollideTrigger(xScene* sc);
     void QuickCullMergeExtraSpheres();
 
@@ -153,6 +156,7 @@ struct zPlayer : zEnt
     bool Get_floor_collision() const { return (zPlayerFlags >> 1) & 0x1; }
 
     bool Get_collisionOn() const { return (zPlayerFlags >> 3) & 0x1; }
+    bool Get_gravityDisabled() const { return (zPlayerFlags >> 4) & 0x1; }
 
     void Update_Control();
 
