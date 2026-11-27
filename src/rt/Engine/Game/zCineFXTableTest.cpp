@@ -12,7 +12,7 @@
     static void zCinFX_Par_##name##_Upd(const zCutsceneMgr*, NCINEntry* fxrec, S32 killit)                                                          \
     {                                                                                                                                               \
         if (killit) {                                                                                                                               \
-            fxrec->flg_stat |= 0x2;                                                                                                                 \
+            fxrec->flg_stat |= NCIN_FXF_DONE;                                                                                                       \
             return;                                                                                                                                 \
         }                                                                                                                                           \
         if (fxrec->flg_stat & 0x4) {                                                                                                                \
@@ -24,7 +24,7 @@
             }                                                                                                                                       \
             if (!emitter) {                                                                                                                         \
                 xASSERT_FMT_L(line, false, "Could'nay find the entity bone emitter! '%s'", emitname);                                               \
-                fxrec->flg_stat |= 0x2;                                                                                                             \
+                fxrec->flg_stat |= NCIN_FXF_DONE;                                                                                                   \
             } else {                                                                                                                                \
                 if (fxrec->basic.pos_A[1].y < 0.0f) {                                                                                               \
                     fxrec->basic.pos_A[1].y = 0.1f + a->e_entbone.bone;                                                                             \
@@ -44,7 +44,7 @@ static void NCIN_upd_test(const zCutsceneMgr* csnmgr, NCINEntry* fxrec, S32 kill
     iprintf("NCIN: %8.4f Update  - 0x%08X 0x%08X %8d\n", csnmgr->csn->Time, csnmgr, fxrec, killit);
 
     if (killit) {
-        fxrec->flg_stat |= 0x2;
+        fxrec->flg_stat |= NCIN_FXF_DONE;
     }
 
     if (fxrec->flg_stat & 0x4) {
