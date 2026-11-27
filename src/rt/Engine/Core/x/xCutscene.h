@@ -114,6 +114,9 @@ struct xCutscene
     bool started;
     bool useDefaultTrack;
     U32 useDefaultTrackID;
+
+    void NoseySet(XCSNNosey* noz) { cb_nosey = noz; }
+    void NoseyClear() { NoseySet(NULL); }
 };
 
 void xCutscene_InitBegin();
