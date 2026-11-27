@@ -709,7 +709,7 @@ config.libs = [
             GameObject(Matching, "rt/Engine/Game/zEditorLink.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zEGenerator.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zEnt.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zEntButton.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zEntButton.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zEntSimpleObj.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zEntTrigger.cpp"),
             GameObject(Matching, "rt/Engine/Game/zEnv.cpp"),

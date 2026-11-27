@@ -278,6 +278,12 @@ void xEntToString(char*, const xEnt* ent); // UNUSED
 void xEntLoadModelFromDisk(xEnt* ent, const char* filename, xMemPool*); // UNUSED
 void xEntLoadAnimFromDisk(xEnt* ent, const char* animname, const char* statename, xMemPool* mempool); // UNUSED
 xModelInstance* xEntLoadModel(xEnt* ent, RpAtomic* imodel, xModelInstance* reuseInstance);
+
+inline xModelInstance* xEntLoadModel(xEnt* ent, RpAtomic* imodel)
+{
+    return xEntLoadModel(ent, imodel, NULL);
+}
+
 void xEntLoadAnim(xEnt* ent, const void* data, U32, xMemPool* pool); // UNUSED
 void xEntLoadAnimGivenTable(xEnt* ent, xMemPool* pool, xAnimTable* table); // UNUSED
 void xEntSetupPipeline(xModelInstance* model);

@@ -18,6 +18,8 @@ static inline void iDebugBreak()
 {
     asm { opword 0 }
 }
+#else
+#define iDebugBreak()
 #endif
 
 #if DEBUG || RELEASE

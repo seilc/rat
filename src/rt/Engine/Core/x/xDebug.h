@@ -121,8 +121,8 @@ do {                                                                            
     }                                                                                             \
 } while (0)
 
-#define xASSERT_DESIGN(cond, ...) _xASSERT_DESIGN(__LINE__, cond, _xSTR(cond), __VA_ARGS__)
-#define xASSERT_DESIGN_L(line, cond, ...) _xASSERT_DESIGN(line, cond, _xSTR(cond), __VA_ARGS__)
+#define xASSERT_DESIGN(cond, ...) _xASSERT_DESIGN(__LINE__, cond, #cond, __VA_ARGS__)
+#define xASSERT_DESIGN_L(line, cond, ...) _xASSERT_DESIGN(line, cond, #cond, __VA_ARGS__)
 
 #define _xASSERT_EQ(line, a, b, msg)                                                              \
 do {                                                                                              \
