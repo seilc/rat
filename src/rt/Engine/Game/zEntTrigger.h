@@ -7,6 +7,11 @@
 
 class xCamTransition;
 
+enum
+{
+    eEntTriggerTypeBox
+};
+
 struct zEntTrigger : zEnt
 {
     struct JumpTriggerExtra

@@ -66,6 +66,7 @@ public:
     eNPCType GetNPCType() { return type; }
     zNPCAssetRATS* GetNPCAsset() { return npcAsset; }
     void GetChildren(zNPCBase** children, S32* number) { *children = this->children; *number = numChildren; }
+    S32 GetNumberOfChildren() { return numChildren; }
     zNPCBase* GetParent() { return parent; }
     zICompLogic* GetLogicComponent() { return npcLogicComp; }
     zICompNPCEntity* GetEntityComponent() { return npcEntityComp; }
