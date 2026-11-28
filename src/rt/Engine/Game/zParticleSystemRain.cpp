@@ -178,7 +178,7 @@ void zParticleGeneratorRain::update(F32 dt)
     debugInfo.attemptedEmit = emit;
 #endif
 
-    while (emit > 0) {
+    for (; emit > 0;) {
         U8* mem;
         S32 have = xParticleBatchEmit(batch_id, emit, &mem);
         if (!have)
