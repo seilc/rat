@@ -88,6 +88,7 @@ public:
     xModelInstance* GetModel() { return model; }
     F32 GetModelScale() { return Params()->modelScale; }
     F32 GetDistance2(const xVec3* v) { return v->Distance2(frame->mat.pos); }
+    virtual void AllAttached() {}
 
 private:
     const zICompNPCEntityParams* Params() { return parameters; }

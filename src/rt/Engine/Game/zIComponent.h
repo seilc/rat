@@ -37,6 +37,14 @@ public:
             Attached();
         }
     }
+
+    void Detach()
+    {
+        if (owner) {
+            Detached();
+            owner = NULL;
+        }
+    }
 };
 
 #endif

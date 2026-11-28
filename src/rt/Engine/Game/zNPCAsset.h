@@ -6,6 +6,10 @@
 
 struct zScene;
 
+// zNPCAssetRATS::flags
+#define k_ZNPCASSETRATS_SPAWN_AT_START 0x1
+#define k_ZNPCASSETRATS_NO_UPDATE_DISTANCE 0x2
+
 struct zNPCAssetRATS : xDynAsset
 {
     xEntAsset ent_asset;

@@ -38,6 +38,8 @@ protected:
     U32 pad : 26;
 
 public:
+    zNPCBase();
+
 #if RELEASE
     virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
     virtual void UpdateNPCBaseData();
@@ -55,9 +57,9 @@ public:
     virtual void Render() = 0;
 #if !RELEASE
     virtual void UpdateNPCBaseData();
-    virtual void SceneEnter();
-    virtual void SceneReset();
-    virtual void SceneExit();
+    virtual void SceneEnter() {}
+    virtual void SceneReset() {}
+    virtual void SceneExit() {}
     virtual bool SystemEvent(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
     virtual void Load(eNPCType type, const xModelAssetInfo* modelAsset, zNPCAssetRATS* npcAsset, U32 npcAssetSize);
 #endif
@@ -74,6 +76,8 @@ public:
     zICompPerception* GetPerceptionComponent() { return npcPerceptionComp; }
     zICompSound* GetSoundComponent() { return npcSoundComp; }
 
+    static void EventWrapper(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
+
 #if RELEASE
     void BaseTimeStep(xVec3* cullOrigin, xScene* xscn, F32 dt);
 #else
@@ -83,13 +87,22 @@ public:
 #if RELEASE
     void BaseReset();
 #endif
+    void BaseUpdate(xScene* xscn, F32 dt);
+    bool BaseSpawn();
+    bool BaseActivate();
+    void BaseDeactivate();
     void SetChildren(zNPCBase* firstChildren, S32 numChildren);
     void SetParent(zNPCBase* parent);
 
+    void AllAttached();
     void PreUpdateAllComponents(xScene* xscn, F32 dt);
     void PostUpdateAllComponents(xScene* xscn, F32 dt);
     void DebugRenderAllComponents();
+    bool ForwardEventToComponents(xBase* from, xBase* to, U32 to_event, const F32* to_param, xBase* to_param_widget, U32 to_param_widget_id);
     void DetachAllComponents();
+#if RELEASE
+    void ResetAllComponents();
+#endif
 
 protected:
     zICompLogic* npcLogicComp;
