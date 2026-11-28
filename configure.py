@@ -734,7 +734,7 @@ config.libs = [
             GameObject(NonMatching, "rt/Engine/Game/zMain.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zMenu.cpp"),
             GameObject(Matching, "rt/Engine/Game/zMovePoint.cpp"),
-            GameObject(NonMatching, "rt/Engine/Game/zMusic.cpp"),
+            GameObject(Matching, "rt/Engine/Game/zMusic.cpp"),
             GameObject(NonMatching, "rt/Engine/Game/zNPCMgr.cpp"),
             GameObject(Matching, "rt/Engine/Game/zNPCNavigation.cpp"),
             GameObject(Matching, "rt/Engine/Game/zNPCNavigationMesh.cpp"),

@@ -18,6 +18,7 @@ inline float cosf(float x) { return cos(x); }
 inline float coshf(float x) { return cosh(x); }
 inline float expf(float x) { return exp(x); }
 inline float fabsf(float x) { return fabs(x); }
+inline float fabs(float x) { return fabsf(x); }
 inline float floorf(float x) { return floor(x); }
 inline float fmodf(float x, float y) { return fmod(x, y); }
 inline float logf(float x) { return log(x); }
