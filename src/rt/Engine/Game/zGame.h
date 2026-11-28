@@ -9,6 +9,7 @@ extern U32 gSoak;
 extern U32 gzAsyncRenderDisable;
 extern char** soaklevels;
 extern S32 enableAudioAnnihilator;
+extern bool gExitAfterPause;
 
 S32 zGameIsPaused();
 void zGamePreRender();

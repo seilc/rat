@@ -165,6 +165,7 @@
 #define HASH_snowflakes                         0x97FB0169 // xStrHash("snowflakes")
 #define HASH_sound_info                         0x7AB6743A // xStrHash("sound_info")
 #define HASH_SoundMode                          0x4EA72AAA // xStrHash("SoundMode")
+#define HASH_START                              0xBC44C2B2 // xStrHash("START")
 #define HASH_Static                             0x573021CA // xStrHash("Static")
 #define HASH_StatsManager                       0x8A36AD7E // xStrHash("StatsManager")
 #define HASH_Step                               0x0B354BD4 // xStrHash("Step")
@@ -193,6 +194,7 @@
 #define HASH_Volume_Music_                      0x0F1A2602 // xStrHash("Volume(Music)")
 #define HASH_Volume_SFX_                        0xEE46E19A // xStrHash("Volume(SFX)")
 #define HASH_wall_decals_ft                     0xCBD10856 // xStrHash("wall_decals_ft")
+#define HASH_WARP_MARKER                        0xD03C41C6 // xStrHash("WARP MARKER")
 #define HASH_Wireframe                          0x148E911C // xStrHash("Wireframe")
 
 #endif

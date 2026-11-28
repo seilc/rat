@@ -27,6 +27,11 @@ struct Scene
     char levelCode[5];
 };
 
+// Scene::flags
+static const U32 SCENEFLAGS_COMPLETED = 0x1;
+static const U32 SCENEFLAGS_UNLOCKED = 0x2;
+static const U32 SCENEFLAGS_WAS_COMPLETED = 0x80;
+
 struct SceneUnlock
 {
     U32 sceneID;
