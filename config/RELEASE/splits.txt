@@ -6841,7 +6841,7 @@ rt/Engine/Game/zCompLogicAnimViewer.cpp:
 	.ctors      start:0x803A5714 end:0x803A5718
 	.rodata     start:0x8040BC68 end:0x8040C098
 	.data       start:0x80448578 end:0x80448628
-	.bss        start:0x80BD2C40 end:0x80BD4490
+	.bss        start:0x80BD2C40 end:0x80BD4490 align:16
 	.sdata      start:0x80C06530 end:0x80C06580
 	.sbss       start:0x80C09720 end:0x80C09730
 	.sdata2     start:0x80C0EFD8 end:0x80C0F040

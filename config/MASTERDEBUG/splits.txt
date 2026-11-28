@@ -5469,7 +5469,7 @@ rt/Engine/Game/zCompLogicAnimViewer.cpp:
 	.text       start:0x801BF314 end:0x801BF314
 	.ctors      start:0x802A202C end:0x802A2030
 	.rodata     start:0x802B5288 end:0x802B5308
-	.bss        start:0x80397160 end:0x80397880
+	.bss        start:0x80397160 end:0x80397880 align:16
 	.sdata      start:0x803C0308 end:0x803C03A8
 	.sbss       start:0x803C3C18 end:0x803C3C48
 	.sdata2     start:0x803C9408 end:0x803C9468
