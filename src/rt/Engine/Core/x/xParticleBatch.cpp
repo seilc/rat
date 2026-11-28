@@ -632,9 +632,9 @@ void xParticleBatchGroup::add_tweaks(S32* system_id, const char* prefix)
     context->flags = isys.rs.flags;
 
     static const tweak_callback cb_reload = { on_reload };
-    xAUTOTWEAK_SELECT(prefix, "context-> texture", &context->texture, texture_labels, texture_ids, textures, &cb_reload, context, 0, true);
-    xAUTOTWEAK_SELECT(prefix, "context-> blend_src", &context->blend_src, tweak_blend_mode_labels, tweak_blend_mode_values, (U32)ARRAY_LENGTH(tweak_blend_mode_labels), &cb_reload, context, 0, true);
-    xAUTOTWEAK_SELECT(prefix, "context-> blend_dst", &context->blend_dst, tweak_blend_mode_labels, tweak_blend_mode_values, (U32)ARRAY_LENGTH(tweak_blend_mode_labels), &cb_reload, context, 0, true);
+    xAUTOTWEAK_SELECT_MEMBER(prefix, context->, texture, texture_labels, texture_ids, textures, &cb_reload, context, 0, true);
+    xAUTOTWEAK_SELECT_MEMBER(prefix, context->, blend_src, tweak_blend_mode_labels, tweak_blend_mode_values, (U32)ARRAY_LENGTH(tweak_blend_mode_labels), &cb_reload, context, 0, true);
+    xAUTOTWEAK_SELECT_MEMBER(prefix, context->, blend_dst, tweak_blend_mode_labels, tweak_blend_mode_values, (U32)ARRAY_LENGTH(tweak_blend_mode_labels), &cb_reload, context, 0, true);
     xAUTOTWEAK_FLAG(prefix, "Disable Z-Test", &context->flags, ptank_pool::FLAG_NOZTEST, &cb_reload, context, 0);
     xAUTOTWEAK_FLAG(prefix, "Bright", &context->flags, ptank_pool::FLAG_BRIGHT, &cb_reload, context, 0);
 }

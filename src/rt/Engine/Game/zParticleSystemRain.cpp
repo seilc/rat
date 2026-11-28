@@ -304,9 +304,9 @@ void zParticleGeneratorRain::add_tweaks(const char* prefix)
 
     zParticleSystemRain::asset_data& a = *(zParticleSystemRain::asset_data*)(asset + 1);
 
-    xAUTOTWEAK(prefix, "a. gravity", &a.gravity, 0.001f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. dropWidth", &a.dropWidth, 0.001f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. dropLength", &a.dropLength, 0.001f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., gravity, 0.001f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., dropWidth, 0.001f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., dropLength, 0.001f, 1e9f, NULL, NULL, 0, true);
     xAUTOTWEAK(prefix, "FADE_TIME", &FADE_TIME, 0.0f, 1e9f, NULL, NULL, 0, true);
     xAUTOTWEAK(prefix, "MAX_RENDER_DISTANCE", &MAX_RENDER_DISTANCE, 0.0f, 1e9f, NULL, NULL, 0, true);
     xAUTOTWEAK(prefix, "debugInfo.attemptedEmit", &debugInfo.attemptedEmit, 0.0f, 1e9f, NULL, NULL, 1, true);

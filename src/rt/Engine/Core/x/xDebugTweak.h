@@ -248,6 +248,8 @@ inline void _t_auto_tweak(const char* prefix, const char* name, xVec3* v, S32 vm
 #define xAUTOTWEAK_SELECT(prefix, name, v, labels, values, labels_size, cb, context, flags, process) _t_auto_tweak_select(prefix, name, v, labels, values, labels_size, cb, context, flags, process)
 #define xAUTOTWEAK_FLAG(prefix, name, v, mask, cb, context, flags) _t_auto_tweak_flag(prefix, name, v, mask, cb, context, flags)
 #define xAUTOTWEAK_MESSAGE(prefix, name, message, cb, context, flags, process) _auto_tweak(prefix, name, message, cb, context, flags, process)
+#define xAUTOTWEAK_MEMBER(prefix, o, m, vmin, vmax, cb, context, flags, process) xAUTOTWEAK(prefix, _xSTR(o m), &o m, vmin, vmax, cb, context, flags, process)
+#define xAUTOTWEAK_SELECT_MEMBER(prefix, o, m, labels, values, labels_size, cb, context, flags, process) xAUTOTWEAK_SELECT(prefix, _xSTR(o m), &o m, labels, values, labels_size, cb, context, flags, process)
 
 #define xTEMPTWEAKS_BEGIN(prefix_name)                                                            \
     static bool _temp_tweaks_registered = false;                                                  \
@@ -280,6 +282,8 @@ inline void xDebugRemoveTweaks(const char*, xDebugRemoveTweaksCallback, void*) {
 #define xAUTOTWEAK_SELECT(prefix, name, v, labels, values, labels_size, cb, context, flags, process)
 #define xAUTOTWEAK_FLAG(prefix, name, v, mask, cb, context, flags)
 #define xAUTOTWEAK_MESSAGE(prefix, name, message, cb, context, flags, process)
+#define xAUTOTWEAK_MEMBER(prefix, o, m, vmin, vmax, cb, context, flags, process)
+#define xAUTOTWEAK_SELECT_MEMBER(prefix, o, m, labels, values, labels_size, cb, context, flags, process)
 #endif
 
 #endif

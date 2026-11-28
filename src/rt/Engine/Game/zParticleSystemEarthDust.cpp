@@ -253,17 +253,17 @@ void zParticleGeneratorEarthDust::add_tweaks(const char* prefix)
 
     zParticleSystemEarthDust::asset_data& a = *(zParticleSystemEarthDust::asset_data*)(asset + 1);
 
-    xAUTOTWEAK(prefix, "a. gravity", &a.gravity, 0.0f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. drift", &a.drift, 0.0f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. size", &a.size, 0.001f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. rotSpeed", &a.rotSpeed, 0.0f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. lifetime", &a.lifetime, 0.0f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. birthAlpha", &a.birthAlpha, 0.0f, 255.0f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. deathAlpha", &a.deathAlpha, 0.0f, 255.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., gravity, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., drift, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., size, 0.001f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., rotSpeed, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., lifetime, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., birthAlpha, 0.0f, 255.0f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., deathAlpha, 0.0f, 255.0f, NULL, NULL, 0, true);
 
-    xAUTOTWEAK(prefix, "a. shrap.shrapEmitRate", &a.shrap.shrapEmitRate, 0.0f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. shrap.initDownVel", &a.shrap.initDownVel, 0.0f, 1e9f, NULL, NULL, 0, true);
-    xAUTOTWEAK(prefix, "a. shrap.randVel", &a.shrap.randVel, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., shrap.shrapEmitRate, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., shrap.initDownVel, 0.0f, 1e9f, NULL, NULL, 0, true);
+    xAUTOTWEAK_MEMBER(prefix, a., shrap.randVel, 0.0f, 1e9f, NULL, NULL, 0, true);
 
     xAUTOTWEAK(prefix, "debugInfo.attemptedEmit", &debugInfo.attemptedEmit, 0.0f, 1e9f, NULL, NULL, 1, true);
     xAUTOTWEAK(prefix, "debugInfo.failedEmit", &debugInfo.failedEmit, 0.0f, 1e9f, NULL, NULL, 1, true);

@@ -262,6 +262,6 @@ void zCamPreset::add_tweaks()
     memcpy(checkpoint_ids, player_ids, players * sizeof(U32));
     // BUG: copies checkpoints entries, not pointers
     memcpy(checkpoint_ids + players, pointer_ids, checkpoints * sizeof(U32));
-    xAUTOTWEAK_SELECT(prefix, "asset-> checkpoint", &asset->checkpoint, (const char**)checkpoint_labels, checkpoint_ids, checkpoints, NULL, NULL, 0, true);
+    xAUTOTWEAK_SELECT_MEMBER(prefix, asset->, checkpoint, (const char**)checkpoint_labels, checkpoint_ids, checkpoints, NULL, NULL, 0, true);
 }
 #endif
