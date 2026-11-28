@@ -49,6 +49,9 @@ public:
 class zContextObjectManager
 {
 public:
+    void Dismount(zCommonPlayer* player);
+    bool CheckObjectType(zContextObjectType objectType);
+    zContextObject* GetCurrentObject() { return currentObject; }
     static void AddEntFX(xEnt* ent);
     void Reset();
 
