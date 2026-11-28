@@ -75,7 +75,7 @@ public:
     virtual void preRender();
     virtual void render();
     virtual bool runnable(F32);
-    virtual bool disableTargetTest();
+    virtual bool disableTargetTest() { return false; }
     virtual void beforeAnimMatrices(xAnimPlay* play, xQuat* quat, xVec3* tran, S32 boneCount);
     virtual bool grabbable(GrabType grabType);
     virtual bool punchable();

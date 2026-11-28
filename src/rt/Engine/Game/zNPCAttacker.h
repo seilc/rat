@@ -7,6 +7,14 @@ namespace zNPC {
 class zNPCCommon;
 }
 
+enum ezNPCAttackerType
+{
+    ezNPCAT_Melee,
+    ezNPCAT_Range,
+    ezNPCAT_All,
+    ezNPCAT_Total
+};
+
 struct zNPCAttackerData
 {
     zNPC::zNPCCommon* npcAttacker[128];

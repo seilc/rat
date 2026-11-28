@@ -37,6 +37,7 @@ public:
     void GetAnalog1(F32& x, F32& y, F32& angle, F32& mag) const;
     void GetAnalog2(F32& x, F32& y, F32& angle, F32& mag) const; // UNUSED
     zPad* GetPad() const;
+    F32 GetActionTimer() { return mActionTimer; }
 
     AnalogStick stick1;
     AnalogStick stick2;

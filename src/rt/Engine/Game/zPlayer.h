@@ -148,6 +148,7 @@ struct zPlayer : zEnt
     void QuickCullMergeExtraSpheres();
     void GetParameterList(const char* name, F32* value, S32 count, const F32* default_value);
     void CalcAnimSpeed(F32 mag, F32* animspeeds);
+    S32 NPCAttackerGetTotal(ezNPCAttackerType inType);
 
     virtual bool IsInteractioning();
 
