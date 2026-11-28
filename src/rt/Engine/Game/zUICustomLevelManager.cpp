@@ -44,7 +44,7 @@ U32 zUIIncrediblesGetSceneCurrent()
 
 U32 zUIIncrediblesGetCurrentSceneNumber()
 {
-    if (globals.sceneCur->sceneID == IDTAG('M', 'N', 'U', 'S'))
+    if (globals.sceneCur->sceneID == IDTAG('M','N','U','S'))
         return 1;
 
     for (S32 i = 1; i < numScenes; i++) {

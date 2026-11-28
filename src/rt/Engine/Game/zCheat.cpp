@@ -55,10 +55,10 @@ zCheatStatus Cheat_Kronos(); // UNUSED
 zCheatStatus Cheat_Smartbomb()
 {
     if (MrI() || MrsI()) {
-        if (globals.sceneCur->sceneID != IDTAG('O', 'M', '0', '4') &&
-            globals.sceneCur->sceneID != IDTAG('N', 'J', '0', '3') &&
-            globals.sceneCur->sceneID != IDTAG('N', 'I', '0', '3') &&
-            globals.sceneCur->sceneID != IDTAG('H', 'S', '0', '1')) {
+        if (globals.sceneCur->sceneID != IDTAG('O','M','0','4') &&
+            globals.sceneCur->sceneID != IDTAG('N','J','0','3') &&
+            globals.sceneCur->sceneID != IDTAG('N','I','0','3') &&
+            globals.sceneCur->sceneID != IDTAG('H','S','0','1')) {
             sphere_damage(
                 CURPLAYERS[0], CURPLAYERS[0]->frame->mat.pos, 25.0f, 0, 1000, 5.0f, 1.0f, zHS_EXPLOSION,
                 zHT_GENERAL);
@@ -335,13 +335,13 @@ void zCheatRemoveAll()
 
 void zCheatReset()
 {
-    if (globals.sceneCur->sceneID == IDTAG('M', 'N', 'U', 'S')) {
+    if (globals.sceneCur->sceneID == IDTAG('M','N','U','S')) {
         zCheatRemoveAll();
     } else {
         zCheatRemoveTimed();
-        if (globals.sceneCur->sceneID == IDTAG('C', 'I', '0', '3') ||
-            globals.sceneCur->sceneID == IDTAG('F', 'T', '0', '1') ||
-            globals.sceneCur->sceneID == IDTAG('L', 'D', '0', '4')) {
+        if (globals.sceneCur->sceneID == IDTAG('C','I','0','3') ||
+            globals.sceneCur->sceneID == IDTAG('F','T','0','1') ||
+            globals.sceneCur->sceneID == IDTAG('L','D','0','4')) {
             gCheats.flamingFeet = false;
         }
     }

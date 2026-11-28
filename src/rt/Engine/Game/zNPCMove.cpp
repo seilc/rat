@@ -21,7 +21,7 @@
 void zNPCMove::setup()
 {
     if (!owner->navigation_behavior) {
-        owner->navigation_behavior = new (xMEMALLOC_L(sizeof(zNPCNavigate), 0, eMemMgrTag_Enemy, IDTAG('N', 'B', 'A', 'S'), 21)) zNPCNavigate(owner);
+        owner->navigation_behavior = new (xMEMALLOC_L(sizeof(zNPCNavigate), 0, eMemMgrTag_Enemy, IDTAG('N','B','A','S'), 21)) zNPCNavigate(owner);
     }
 
 #if DEBUG || RELEASE
